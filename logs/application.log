@@ -1,0 +1,142 @@
+2021-10-19T11:39:58.467+0530 INFO Starting LpsInspectionApplication using Java 15.0.1 on DESKTOP-TLFQ7F5 with PID 5672 (D:\Project\Cape-Electric-LPS-BackEnd\target\classes started by CAPE-SOFTWARE in D:\Project\Cape-Electric-LPS-BackEnd)
+2021-10-19T11:39:58.468+0530 DEBUG Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-10-19T11:39:58.470+0530 INFO The following profiles are active: dev
+2021-10-19T11:44:41.024+0530 INFO Starting LpsInspectionApplication using Java 15.0.1 on DESKTOP-TLFQ7F5 with PID 16152 (D:\Project\Cape-Electric-LPS-BackEnd\target\classes started by CAPE-SOFTWARE in D:\Project\Cape-Electric-LPS-BackEnd)
+2021-10-19T11:44:41.028+0530 DEBUG Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-10-19T11:44:41.030+0530 INFO No active profile set, falling back to default profiles: default
+2021-10-19T11:45:42.434+0530 INFO Starting LpsInspectionApplication using Java 15.0.1 on DESKTOP-TLFQ7F5 with PID 15640 (D:\Project\Cape-Electric-LPS-BackEnd\target\classes started by CAPE-SOFTWARE in D:\Project\Cape-Electric-LPS-BackEnd)
+2021-10-19T11:45:42.437+0530 DEBUG Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-10-19T11:45:42.437+0530 INFO No active profile set, falling back to default profiles: default
+2021-10-19T11:48:19.963+0530 INFO Starting LpsInspectionApplication using Java 15.0.1 on DESKTOP-TLFQ7F5 with PID 9240 (D:\Project\Cape-Electric-LPS-BackEnd\target\classes started by CAPE-SOFTWARE in D:\Project\Cape-Electric-LPS-BackEnd)
+2021-10-19T11:48:19.984+0530 DEBUG Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-10-19T11:48:19.985+0530 INFO No active profile set, falling back to default profiles: default
+2021-10-19T11:48:42.510+0530 DEBUG Filter 'jwtRequestFilter' configured for use
+2021-10-19T11:52:55.539+0530 INFO Starting LpsInspectionApplication using Java 15.0.1 on DESKTOP-TLFQ7F5 with PID 14464 (D:\Project\Cape-Electric-LPS-BackEnd\target\classes started by CAPE-SOFTWARE in D:\Project\Cape-Electric-LPS-BackEnd)
+2021-10-19T11:52:55.541+0530 DEBUG Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-10-19T11:52:55.541+0530 INFO No active profile set, falling back to default profiles: default
+2021-10-19T11:53:09.517+0530 DEBUG Filter 'jwtRequestFilter' configured for use
+2021-10-19T11:53:13.435+0530 INFO Started LpsInspectionApplication in 18.199 seconds (JVM running for 19.039)
+2021-10-19T14:12:37.774+0530 INFO Starting LpsInspectionApplication using Java 15.0.1 on DESKTOP-TLFQ7F5 with PID 10524 (D:\Project\Cape-Electric-LPS-BackEnd\target\classes started by CAPE-SOFTWARE in D:\Project\Cape-Electric-LPS-BackEnd)
+2021-10-19T14:12:37.795+0530 DEBUG Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-10-19T14:12:37.795+0530 INFO No active profile set, falling back to default profiles: default
+2021-10-19T14:13:53.087+0530 DEBUG Filter 'jwtRequestFilter' configured for use
+2021-10-19T14:13:57.513+0530 INFO Started LpsInspectionApplication in 80.03 seconds (JVM running for 80.999)
+2021-10-20T17:31:54.607+0530 INFO Starting LpsInspectionApplication using Java 15.0.1 on DESKTOP-TLFQ7F5 with PID 17312 (D:\Project\Cape-Electric-LPS-BackEnd\target\classes started by CAPE-SOFTWARE in D:\Project\Cape-Electric-LPS-BackEnd)
+2021-10-20T17:31:54.676+0530 DEBUG Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-10-20T17:31:54.677+0530 INFO No active profile set, falling back to default profiles: default
+2021-10-20T17:32:21.297+0530 DEBUG Filter 'jwtRequestFilter' configured for use
+2021-10-20T17:32:25.529+0530 INFO Started LpsInspectionApplication in 31.695 seconds (JVM running for 35.293)
+2021-10-20T17:33:15.229+0530 WARN JWT Token does not begin with Bearer String
+2021-10-20T17:33:15.353+0530 DEBUG Create Authenticate Token starts
+2021-10-20T17:34:54.813+0530 WARN JWT Token does not begin with Bearer String
+2021-10-20T17:35:37.985+0530 WARN JWT Token does not begin with Bearer String
+2021-10-20T17:35:51.622+0530 WARN JWT Token does not begin with Bearer String
+2021-10-20T17:36:15.150+0530 WARN JWT Token does not begin with Bearer String
+2021-10-20T17:36:31.754+0530 WARN JWT Token does not begin with Bearer String
+2021-10-20T17:40:01.443+0530 WARN JWT Token does not begin with Bearer String
+2021-10-20T17:40:12.805+0530 WARN JWT Token does not begin with Bearer String
+2021-10-20T17:40:53.187+0530 WARN JWT Token does not begin with Bearer String
+2021-10-20T17:40:53.223+0530 INFO called addRegistration function UserName : arunkumark5797@gmail.com
+2021-10-20T17:40:53.235+0530 DEBUG AddingRegistration Starts with User : arunkumark5797@gmail.com 
+2021-10-20T17:40:53.652+0530 DEBUG Sucessfully Registration Information Saved
+2021-10-20T17:44:47.051+0530 WARN JWT Token does not begin with Bearer String
+2021-10-20T17:44:47.059+0530 DEBUG called sendOtp function UserName : arunkumark5797@gmail.com, MobileNumber : +91-8072221229
+2021-10-20T17:44:53.989+0530 WARN JWT Token does not begin with Bearer String
+2021-10-20T17:44:53.994+0530 INFO called retrieveRegistration function UserName : arunkumark5797@gmail.com
+2021-10-20T17:44:53.995+0530 DEBUG RetrieveRegistration Started with User : arunkumark5797@gmail.com 
+2021-10-20T17:45:16.114+0530 WARN JWT Token does not begin with Bearer String
+2021-10-20T17:45:16.118+0530 DEBUG CreatePassword starts
+2021-10-20T17:45:16.118+0530 DEBUG createPassword Starts
+2021-10-20T17:45:16.459+0530 DEBUG Successfully Otp Verified
+2021-10-20T17:45:16.704+0530 DEBUG createPassword Ends
+2021-10-20T17:45:16.738+0530 DEBUG CreatePassword ends
+2021-10-20T17:46:50.005+0530 WARN JWT Token does not begin with Bearer String
+2021-10-20T17:46:50.008+0530 DEBUG Create Authenticate Token starts
+2021-10-20T17:46:50.486+0530 DEBUG Load User By UserName starts
+2021-10-20T17:46:50.491+0530 DEBUG Load User By UserName ends
+2021-10-20T17:46:50.598+0530 DEBUG Create Authenticate Token ends
+2021-10-20T17:46:50.759+0530 INFO called retrieveRegistration function UserName : arunkumark5797@gmail.com
+2021-10-20T17:46:50.760+0530 DEBUG RetrieveRegistration Started with User : arunkumark5797@gmail.com 
+2021-10-20T17:46:50.761+0530 DEBUG Retrieve Comments Starts UserName: arunkumark5797@gmail.com
+2021-10-20T17:46:50.784+0530 INFO called retrieveRegistration function UserName : arunkumark5797@gmail.com
+2021-10-20T17:46:50.784+0530 DEBUG RetrieveRegistration Started with User : arunkumark5797@gmail.com 
+2021-10-20T17:46:50.808+0530 DEBUG Retrieve Comments End
+2021-10-20T17:47:31.653+0530 WARN JWT Token does not begin with Bearer String
+2021-10-20T17:51:09.839+0530 WARN JWT Token does not begin with Bearer String
+2021-10-20T17:51:09.842+0530 DEBUG Create Authenticate Token starts
+2021-10-20T17:51:10.076+0530 DEBUG Load User By UserName starts
+2021-10-20T17:51:10.080+0530 DEBUG Load User By UserName ends
+2021-10-20T17:51:10.082+0530 DEBUG Create Authenticate Token ends
+2021-10-20T18:03:43.213+0530 WARN JWT Token does not begin with Bearer String
+2021-10-20T18:03:43.262+0530 DEBUG Create Authenticate Token starts
+2021-10-20T18:03:43.492+0530 DEBUG Load User By UserName starts
+2021-10-20T18:03:43.497+0530 DEBUG Load User By UserName ends
+2021-10-20T18:03:43.498+0530 DEBUG Create Authenticate Token ends
+2021-10-20T18:10:35.239+0530 INFO Starting LpsInspectionApplication using Java 15.0.1 on DESKTOP-TLFQ7F5 with PID 3772 (D:\Project\Cape-Electric-LPS-BackEnd\target\classes started by CAPE-SOFTWARE in D:\Project\Cape-Electric-LPS-BackEnd)
+2021-10-20T18:10:35.308+0530 DEBUG Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-10-20T18:10:35.308+0530 INFO No active profile set, falling back to default profiles: default
+2021-10-20T18:11:19.539+0530 DEBUG Filter 'jwtRequestFilter' configured for use
+2021-10-20T18:11:22.608+0530 INFO Started LpsInspectionApplication in 53.709 seconds (JVM running for 74.929)
+2021-10-20T18:13:29.651+0530 INFO Starting LpsInspectionApplication using Java 15.0.1 on DESKTOP-TLFQ7F5 with PID 14352 (D:\Project\Cape-Electric-LPS-BackEnd\target\classes started by CAPE-SOFTWARE in D:\Project\Cape-Electric-LPS-BackEnd)
+2021-10-20T18:13:29.654+0530 DEBUG Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-10-20T18:13:29.654+0530 INFO No active profile set, falling back to default profiles: default
+2021-10-20T18:13:48.182+0530 DEBUG Filter 'jwtRequestFilter' configured for use
+2021-10-20T18:14:07.622+0530 INFO Starting LpsInspectionApplication using Java 15.0.1 on DESKTOP-TLFQ7F5 with PID 9436 (D:\Project\Cape-Electric-LPS-BackEnd\target\classes started by CAPE-SOFTWARE in D:\Project\Cape-Electric-LPS-BackEnd)
+2021-10-20T18:14:07.628+0530 DEBUG Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-10-20T18:14:07.629+0530 INFO No active profile set, falling back to default profiles: default
+2021-10-20T18:14:27.778+0530 DEBUG Filter 'jwtRequestFilter' configured for use
+2021-10-20T18:14:29.866+0530 INFO Started LpsInspectionApplication in 22.711 seconds (JVM running for 23.665)
+2021-10-20T18:18:29.661+0530 INFO called addBasicLpsDetails function UserName : REWRW
+2021-10-20T18:22:47.905+0530 INFO called addBasicLpsDetails function UserName : arunkumark5797@gmail.com
+2021-10-20T18:25:33.812+0530 INFO called retrieveBasicLpsDetails function UserName: arunkumark5797@gmail.com, basicLpsId : 4
+2021-10-20T18:28:52.261+0530 INFO called addBasicLpsDetails function UserName : arunkumark5797@gmail.com
+2021-10-20T18:35:27.138+0530 INFO called retrieveBasicLpsDetails function UserName: arunkumark5797@gmail.com, basicLpsId : 4
+2021-10-20T18:36:57.590+0530 INFO Starting LpsInspectionApplication using Java 15.0.1 on DESKTOP-TLFQ7F5 with PID 9436 (D:\Project\Cape-Electric-LPS-BackEnd\target\classes started by CAPE-SOFTWARE in D:\Project\Cape-Electric-LPS-BackEnd)
+2021-10-20T18:36:57.590+0530 DEBUG Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-10-20T18:36:57.590+0530 INFO No active profile set, falling back to default profiles: default
+2021-10-20T18:37:16.568+0530 DEBUG Filter 'jwtRequestFilter' configured for use
+2021-10-20T18:37:17.261+0530 INFO Started LpsInspectionApplication in 19.915 seconds (JVM running for 1391.06)
+2021-10-20T18:37:19.880+0530 INFO Starting LpsInspectionApplication using Java 15.0.1 on DESKTOP-TLFQ7F5 with PID 9436 (D:\Project\Cape-Electric-LPS-BackEnd\target\classes started by CAPE-SOFTWARE in D:\Project\Cape-Electric-LPS-BackEnd)
+2021-10-20T18:37:19.880+0530 DEBUG Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-10-20T18:37:19.880+0530 INFO No active profile set, falling back to default profiles: default
+2021-10-20T18:37:49.224+0530 DEBUG Filter 'jwtRequestFilter' configured for use
+2021-10-20T18:37:49.798+0530 INFO Started LpsInspectionApplication in 29.955 seconds (JVM running for 1423.597)
+2021-10-20T18:37:56.417+0530 INFO called retrieveBasicLpsDetails function UserName: arunkumark5797@gmail.com, basicLpsId : 4
+2021-10-20T18:50:13.806+0530 INFO called retrieveBasicLpsDetails function UserName: arunkumark5797gmail.com, basicLpsId : 4
+2021-10-20T18:51:25.143+0530 INFO called retrieveBasicLpsDetails function UserName: arunkumark5797gmail.com, basicLpsId : 1
+2021-10-20T18:56:08.177+0530 INFO Starting LpsInspectionApplication using Java 15.0.1 on DESKTOP-TLFQ7F5 with PID 9436 (D:\Project\Cape-Electric-LPS-BackEnd\target\classes started by CAPE-SOFTWARE in D:\Project\Cape-Electric-LPS-BackEnd)
+2021-10-20T18:56:08.178+0530 DEBUG Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-10-20T18:56:08.178+0530 INFO No active profile set, falling back to default profiles: default
+2021-10-20T18:56:21.644+0530 DEBUG Filter 'jwtRequestFilter' configured for use
+2021-10-20T18:56:22.080+0530 INFO Started LpsInspectionApplication in 13.934 seconds (JVM running for 2535.878)
+2021-10-20T19:06:43.843+0530 INFO Starting LpsInspectionApplication using Java 15.0.1 on DESKTOP-TLFQ7F5 with PID 9436 (D:\Project\Cape-Electric-LPS-BackEnd\target\classes started by CAPE-SOFTWARE in D:\Project\Cape-Electric-LPS-BackEnd)
+2021-10-20T19:06:43.844+0530 DEBUG Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-10-20T19:06:43.844+0530 INFO No active profile set, falling back to default profiles: default
+2021-10-20T19:07:00.658+0530 DEBUG Filter 'jwtRequestFilter' configured for use
+2021-10-20T19:07:01.129+0530 INFO Started LpsInspectionApplication in 17.387 seconds (JVM running for 3174.928)
+2021-10-20T19:07:21.313+0530 INFO Starting LpsInspectionApplication using Java 15.0.1 on DESKTOP-TLFQ7F5 with PID 9436 (D:\Project\Cape-Electric-LPS-BackEnd\target\classes started by CAPE-SOFTWARE in D:\Project\Cape-Electric-LPS-BackEnd)
+2021-10-20T19:07:21.314+0530 DEBUG Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-10-20T19:07:21.314+0530 INFO No active profile set, falling back to default profiles: default
+2021-10-20T19:07:35.880+0530 DEBUG Filter 'jwtRequestFilter' configured for use
+2021-10-20T19:07:36.297+0530 INFO Started LpsInspectionApplication in 15.009 seconds (JVM running for 3210.096)
+2021-10-20T19:09:37.720+0530 INFO Starting LpsInspectionApplication using Java 15.0.1 on DESKTOP-TLFQ7F5 with PID 9436 (D:\Project\Cape-Electric-LPS-BackEnd\target\classes started by CAPE-SOFTWARE in D:\Project\Cape-Electric-LPS-BackEnd)
+2021-10-20T19:09:37.720+0530 DEBUG Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-10-20T19:09:37.720+0530 INFO No active profile set, falling back to default profiles: default
+2021-10-20T19:09:49.764+0530 DEBUG Filter 'jwtRequestFilter' configured for use
+2021-10-20T19:09:50.219+0530 INFO Started LpsInspectionApplication in 12.522 seconds (JVM running for 3344.018)
+2021-10-20T19:12:31.125+0530 INFO Starting LpsInspectionApplication using Java 15.0.1 on DESKTOP-TLFQ7F5 with PID 9436 (D:\Project\Cape-Electric-LPS-BackEnd\target\classes started by CAPE-SOFTWARE in D:\Project\Cape-Electric-LPS-BackEnd)
+2021-10-20T19:12:31.126+0530 DEBUG Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-10-20T19:12:31.126+0530 INFO No active profile set, falling back to default profiles: default
+2021-10-20T19:12:45.840+0530 DEBUG Filter 'jwtRequestFilter' configured for use
+2021-10-20T19:12:46.328+0530 INFO Started LpsInspectionApplication in 15.226 seconds (JVM running for 3520.128)
+2021-10-20T19:12:57.333+0530 INFO called addBasicLpsDetails function UserName : arunkumark5797@gmail.com
+2021-10-20T19:14:25.213+0530 INFO Starting LpsInspectionApplication using Java 15.0.1 on DESKTOP-TLFQ7F5 with PID 9436 (D:\Project\Cape-Electric-LPS-BackEnd\target\classes started by CAPE-SOFTWARE in D:\Project\Cape-Electric-LPS-BackEnd)
+2021-10-20T19:14:25.215+0530 DEBUG Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-10-20T19:14:25.215+0530 INFO No active profile set, falling back to default profiles: default
+2021-10-20T19:14:57.805+0530 DEBUG Filter 'jwtRequestFilter' configured for use
+2021-10-20T19:14:58.338+0530 INFO Started LpsInspectionApplication in 33.234 seconds (JVM running for 3652.137)
+2021-10-20T19:15:04.320+0530 INFO called addBasicLpsDetails function UserName : arunkumark5797@gmail.com
+2021-10-20T19:44:56.695+0530 INFO called addBasicLpsDetails function UserName : arunkumark5797@gmail.com
+2021-10-20T19:46:26.677+0530 INFO called retrieveBasicLpsDetails function UserName: arunkumark5797@gmail.com, basicLpsId : 4
+2021-10-20T19:48:11.404+0530 INFO called retrieveBasicLpsDetails function UserName: arunkumark5797@gmail.com, basicLpsId : 4
+2021-10-20T19:49:41.802+0530 INFO called retrieveBasicLpsDetails function UserName: arunkumark5797@gmail.com, basicLpsId : 100
