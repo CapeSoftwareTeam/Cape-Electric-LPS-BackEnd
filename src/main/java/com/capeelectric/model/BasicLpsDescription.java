@@ -47,6 +47,12 @@ public class BasicLpsDescription implements Serializable {
 	@Column(name = "DATE_OF_DESIGN_REMARKS")
 	private String designDateRemarks;
 	
+	@Column(name = "DATEOF_APPROVAL_OB")
+	private String dateOfApprovalOb;
+	
+	@Column(name = "DATEOF_APPROVAL_REM")
+	private String dateOfApprovalRem;
+
 	@Column(name = "OBSERVATION_APPROVED_BY")
 	private String approvedByObserv;
 	
@@ -174,6 +180,22 @@ public class BasicLpsDescription implements Serializable {
 
 	public String getRevisionNoObserv() {
 		return revisionNoObserv;
+	}
+
+	public String getDateOfApprovalOb() {
+		return dateOfApprovalOb;
+	}
+
+	public void setDateOfApprovalOb(String dateOfApprovalOb) {
+		this.dateOfApprovalOb = dateOfApprovalOb;
+	}
+
+	public String getDateOfApprovalRem() {
+		return dateOfApprovalRem;
+	}
+
+	public void setDateOfApprovalRem(String dateOfApprovalRem) {
+		this.dateOfApprovalRem = dateOfApprovalRem;
 	}
 
 	public void setRevisionNoObserv(String revisionNoObserv) {
