@@ -86,6 +86,28 @@ public class BasicLps implements Serializable {
 	@Column(name = "BUILDING_HEIGHT")
 	private String buildingHeight;
 	
+	@Column(name = "LEVEL_OF_PROTECTION")
+	private String levelOfProtection;
+	
+	@Column(name = "SOIL_RESISTIVITY")
+	private String soilResistivity;
+	
+	public String getLevelOfProtection() {
+		return levelOfProtection;
+	}
+
+	public void setLevelOfProtection(String levelOfProtection) {
+		this.levelOfProtection = levelOfProtection;
+	}
+
+	public String getSoilResistivity() {
+		return soilResistivity;
+	}
+
+	public void setSoilResistivity(String soilResistivity) {
+		this.soilResistivity = soilResistivity;
+	}
+
 	@Column(name = "CREATED_DATE")
 	private LocalDateTime createdDate;
 	
