@@ -24,6 +24,10 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 @Table(name = "LPSAIRDESCRIPTION_TABLE")
 
  
+@NamedQueries(value = {
+		@NamedQuery(name = "AirTerminationLpsRepository.findByUserNameAndBasicLpsId", query = "select s from BasicLps s where s.userName=:userName and s.basicLpsId=:basicLpsId"),
+		@NamedQuery(name = "AirTerminationLpsRepository.findByBasicLpsId", query = "select s from BasicLps s where s.basicLpsId=:basicLpsId")
+})
 public class LpsAirDiscription implements Serializable {
  
 	private static final long serialVersionUID = 1L;
@@ -39,15 +43,7 @@ public class LpsAirDiscription implements Serializable {
 	@Column(name = "BASIC_LPS_ID")
 	private Integer basicLpsId;
 	
-	public Integer getBasicLpsId() {
-		return basicLpsId;
-	}
-
-	public void setBasicLpsId(Integer basicLpsId) {
-		this.basicLpsId = basicLpsId;
-	}
-
-	@Column(name = "CONNECTION_MADE_BRAZINGOBSERVATION")
+    @Column(name = "CONNECTION_MADE_BRAZINGOBSERVATION")
 	private String connectionMadeBraOb;
 	
 	@Column(name = "CONNECTION_MADE_BRAZINGREMARKS")
@@ -139,6 +135,14 @@ public class LpsAirDiscription implements Serializable {
 	}
 	
 	
+	public Integer getBasicLpsId() {
+		return basicLpsId;
+	}
+
+	public void setBasicLpsId(Integer basicLpsId) {
+		this.basicLpsId = basicLpsId;
+	}
+
 	public String getUserName() {
 		return userName;
 	}
