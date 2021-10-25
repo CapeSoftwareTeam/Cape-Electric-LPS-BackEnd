@@ -1,6 +1,7 @@
 package com.capeelectric.model;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -32,35 +33,73 @@ public class LpsAirDiscription implements Serializable {
 	@Column(name = "LPSAIRDESCRIPTION_ID")
 	private Integer lpsAirDescId;
 	
+	@Column(name = "USER_NAME")
+	private String userName;
+	
+	@Column(name = "BASIC_LPS_ID")
+	private Integer basicLpsId;
+	
+	public Integer getBasicLpsId() {
+		return basicLpsId;
+	}
+
+	public void setBasicLpsId(Integer basicLpsId) {
+		this.basicLpsId = basicLpsId;
+	}
+
 	@Column(name = "CONNECTION_MADE_BRAZINGOBSERVATION")
 	private String connectionMadeBraOb;
 	
 	@Column(name = "CONNECTION_MADE_BRAZINGREMARKS")
 	private String connectionMadeBraRe;
-	
+
 	@Column(name = "ELECTRICAL_EQUIPMENT_PLACEDOBSERVATION")
 	private String electricalEquipPlacedOb;
-	
+
 	@Column(name = "ELECTRICAL_EQUIPMENT_PLACEDREMARKS")
 	private String electricalEquipPlacedRe;
 	
+	public String getCombustablePartOb() {
+		return combustablePartOb;
+	}
+
+	public void setCombustablePartOb(String combustablePartOb) {
+		this.combustablePartOb = combustablePartOb;
+	}
+
 	@Column(name = "COMBUSTABLE_PARTOBSERVATION")
-	private String combastablePartOb;
+	private String combustablePartOb;
+
 	
 	@Column(name = "COMBUSTABLE_PARTREMARKS")
-	private String combastablePartRe;
+	private String combustablePartRe;
 	
 	@Column(name = "TERMINATION_MESH_CONDUCTOROBSERVATION")
 	private String terminationMeshConductorOb;
-	
+
+
 	@Column(name = "TERMINATION_MESH_CONDUCTORREMARKS")
 	private String terminationMeshConductorRe;
 	
 	@Column(name = "BONDING_EQUIPOTENTIALOBSERVATION")
 	private String bondingEquipotentialOb;
-	
-	@Column(name = "BONDING_EQUIPOTENTIALREMARKS VARCHAR")
+
+
+	@Column(name = "BONDING_EQUIPOTENTIALREMARKS")
 	private String bondingEquipotentialRe;
+   
+	
+	@Column(name = "CREATED_DATE")
+	private LocalDateTime createdDate;
+	
+	@Column(name = "CREATED_BY")
+	private String createdBy;
+
+	@Column(name = "UPDATED_BY")
+	private String updatedBy;
+	
+	@Column(name = "UPDATED_DATE")
+	private LocalDateTime updatedDate;
 	
 	@JsonManagedReference
 	@OneToMany(mappedBy = "lpsAirDes", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -87,7 +126,6 @@ public class LpsAirDiscription implements Serializable {
 	private List<AirMeshDescription> airMeshDescription;
 
 	 
-
 	public Integer getLpsAirDescId() {
 		return lpsAirDescId;
 	}
@@ -98,6 +136,23 @@ public class LpsAirDiscription implements Serializable {
 
 	public String getConnectionMadeBraOb() {
 		return connectionMadeBraOb;
+	}
+	
+	
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getCombustablePartRe() {
+		return combustablePartRe;
+	}
+
+	public void setCombustablePartRe(String combustablePartRe) {
+		this.combustablePartRe = combustablePartRe;
 	}
 
 	public void setConnectionMadeBraOb(String connectionMadeBraOb) {
@@ -128,21 +183,7 @@ public class LpsAirDiscription implements Serializable {
 		this.electricalEquipPlacedRe = electricalEquipPlacedRe;
 	}
 
-	public String getCombastablePartOb() {
-		return combastablePartOb;
-	}
-
-	public void setCombastablePartOb(String combastablePartOb) {
-		this.combastablePartOb = combastablePartOb;
-	}
-
-	public String getCombastablePartRe() {
-		return combastablePartRe;
-	}
-
-	public void setCombastablePartRe(String combastablePartRe) {
-		this.combastablePartRe = combastablePartRe;
-	}
+ 
 
 	public String getTerminationMeshConductorOb() {
 		return terminationMeshConductorOb;
@@ -150,6 +191,40 @@ public class LpsAirDiscription implements Serializable {
 
 	public void setTerminationMeshConductorOb(String terminationMeshConductorOb) {
 		this.terminationMeshConductorOb = terminationMeshConductorOb;
+	}
+	
+	
+
+	public LocalDateTime getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(LocalDateTime createdDate) {
+		this.createdDate = createdDate;
+	}
+
+	public String getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	public String getUpdatedBy() {
+		return updatedBy;
+	}
+
+	public void setUpdatedBy(String updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+
+	public LocalDateTime getUpdatedDate() {
+		return updatedDate;
+	}
+
+	public void setUpdatedDate(LocalDateTime updatedDate) {
+		this.updatedDate = updatedDate;
 	}
 
 	public String getTerminationMeshConductorRe() {
@@ -227,5 +302,7 @@ public class LpsAirDiscription implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+
+	
 	
 }

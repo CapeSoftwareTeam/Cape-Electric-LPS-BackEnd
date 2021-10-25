@@ -15,7 +15,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
-@Table(name = "LPSAIRDESCRIPTION_TABLE")
+@Table(name = "LPSVERTICALAIRTERMINAL_TABLE")
 
 public class LpsVerticalAirTermination implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -85,7 +85,7 @@ public class LpsVerticalAirTermination implements Serializable {
 	@Column(name = "INSP_NO_REM")
 	private String inspNoRe;
 
-	@Column(name = "INSP_PASSED_NO_OBS VARCHAR")
+	@Column(name = "INSP_PASSED_NO_OBS")
 	private String inspPassedNoOb;
 
 	@Column(name = "INSP_PASSED_NO_REM")
@@ -101,7 +101,7 @@ public class LpsVerticalAirTermination implements Serializable {
 	@JsonBackReference
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "LPSAIRDESCRIPTION_ID")
-	private BasicLps lpsAirDes;
+	private LpsAirDiscription lpsAirDes;
 
 
 	public Integer getLpsVerticalAirTerminationId() {
@@ -354,15 +354,14 @@ public class LpsVerticalAirTermination implements Serializable {
 	}
 
 
-	public BasicLps getLpsAirDes() {
+	public LpsAirDiscription getLpsAirDes() {
 		return lpsAirDes;
 	}
 
 
-	public void setLpsAirDes(BasicLps lpsAirDes) {
+	public void setLpsAirDes(LpsAirDiscription lpsAirDes) {
 		this.lpsAirDes = lpsAirDes;
 	}
-
 
 	 
 

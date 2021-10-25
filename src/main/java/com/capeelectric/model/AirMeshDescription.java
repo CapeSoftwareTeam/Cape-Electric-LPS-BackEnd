@@ -56,7 +56,7 @@ public class AirMeshDescription implements Serializable {
 	@JsonBackReference
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "LPSAIRDESCRIPTION_ID")
-	private BasicLps lpsAirDes;
+	private LpsAirDiscription lpsAirDes;
 
 	public Integer getMeshDescriptionId() {
 		return meshDescriptionId;
@@ -146,12 +146,13 @@ public class AirMeshDescription implements Serializable {
 		this.heightOfConductorFlatSurfaceRe = heightOfConductorFlatSurfaceRe;
 	}
 
-	public BasicLps getLpsAirDes() {
+	public LpsAirDiscription getLpsAirDes() {
 		return lpsAirDes;
 	}
 
-	public void setLpsAirDes(BasicLps lpsAirDes) {
+	public void setLpsAirDes(LpsAirDiscription lpsAirDes) {
 		this.lpsAirDes = lpsAirDes;
 	}
+
 	
 }

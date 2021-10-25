@@ -59,8 +59,8 @@ public class AirClamps implements Serializable{
 	@Column(name = "TOTAL_CLAMPSNO_REMARKS")
 	private String totalClampsNoRe;
 	
-	@Column(name = "INSP_NO_OB")
-	private String  minimumDistanceOb;
+	@Column(name = "INSP_NO_OBS")
+	private String  inspectionNoOb;
 	
 	@Column(name = "INSP_NO_REM")
 	private String inspectionNoRe;
@@ -81,7 +81,7 @@ public class AirClamps implements Serializable{
 	@JsonBackReference
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "LPSAIRDESCRIPTION_ID")
-	private BasicLps lpsAirDes;
+	private LpsAirDiscription lpsAirDes;
 
 	public Integer getClampsId() {
 		return clampsId;
@@ -187,12 +187,14 @@ public class AirClamps implements Serializable{
 		this.totalClampsNoRe = totalClampsNoRe;
 	}
 
-	public String getMinimumDistanceOb() {
-		return minimumDistanceOb;
+	
+
+	public String getInspectionNoOb() {
+		return inspectionNoOb;
 	}
 
-	public void setMinimumDistanceOb(String minimumDistanceOb) {
-		this.minimumDistanceOb = minimumDistanceOb;
+	public void setInspectionNoOb(String inspectionNoOb) {
+		this.inspectionNoOb = inspectionNoOb;
 	}
 
 	public String getInspectionNoRe() {
@@ -235,11 +237,13 @@ public class AirClamps implements Serializable{
 		this.inspectionFailedReRe = inspectionFailedReRe;
 	}
 
-	public BasicLps getLpsAirDes() {
+	public LpsAirDiscription getLpsAirDes() {
 		return lpsAirDes;
 	}
 
-	public void setLpsAirDes(BasicLps lpsAirDes) {
+	public void setLpsAirDes(LpsAirDiscription lpsAirDes) {
 		this.lpsAirDes = lpsAirDes;
 	}
+
+
 }

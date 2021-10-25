@@ -81,6 +81,8 @@ public class AirHolderDescription implements Serializable  {
 	@Column(name = "HO_INSP_FAILED_NO_OBS")
 	private String holderInspFailedNoOb;
  
+	@Column(name = "HO_INSP_FAILED_NO_REM")
+	private String holderInspFailedNoRe;
 	 
 	@Column(name = "PH_INSP_NO_OBS")
 	private String parpetInspectionNoOb;
@@ -103,11 +105,25 @@ public class AirHolderDescription implements Serializable  {
 	@JsonBackReference
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "LPSAIRDESCRIPTION_ID")
-	private BasicLps lpsAirDes;
+	private LpsAirDiscription lpsAirDes;
 
 	public Integer getHolderDescriptionId() {
 		return holderDescriptionId;
 	}
+
+	
+	
+	public String getHolderInspFailedNoRe() {
+		return holderInspFailedNoRe;
+	}
+
+
+
+	public void setHolderInspFailedNoRe(String holderInspFailedNoRe) {
+		this.holderInspFailedNoRe = holderInspFailedNoRe;
+	}
+
+
 
 	public void setHolderDescriptionId(Integer holderDescriptionId) {
 		this.holderDescriptionId = holderDescriptionId;
@@ -310,11 +326,21 @@ public class AirHolderDescription implements Serializable  {
 		this.parpetInspectionFailedNoRe = parpetInspectionFailedNoRe;
 	}
 
-	public BasicLps getLpsAirDes() {
+	public String getHolderInspPassedNoRe() {
+		return holderInspPassedNoRe;
+	}
+
+	public void setHolderInspPassedNoRe(String holderInspPassedNoRe) {
+		this.holderInspPassedNoRe = holderInspPassedNoRe;
+	}
+
+	public LpsAirDiscription getLpsAirDes() {
 		return lpsAirDes;
 	}
 
-	public void setLpsAirDes(BasicLps lpsAirDes) {
+	public void setLpsAirDes(LpsAirDiscription lpsAirDes) {
 		this.lpsAirDes = lpsAirDes;
-	} 	
+	}
+
+		
 }

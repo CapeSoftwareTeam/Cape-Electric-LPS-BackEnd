@@ -71,7 +71,7 @@ public class AirExpansion implements Serializable {
 	@JsonBackReference
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "LPSAIRDESCRIPTION_ID")
-	private BasicLps lpsAirDes;
+	private LpsAirDiscription lpsAirDes;
 
 
 	public Integer getExpansionId() {
@@ -224,12 +224,14 @@ public class AirExpansion implements Serializable {
 	}
 
 
-	public BasicLps getLpsAirDes() {
+	public LpsAirDiscription getLpsAirDes() {
 		return lpsAirDes;
 	}
 
 
-	public void setLpsAirDes(BasicLps lpsAirDes) {
+	public void setLpsAirDes(LpsAirDiscription lpsAirDes) {
 		this.lpsAirDes = lpsAirDes;
 	}
+
+
 }
