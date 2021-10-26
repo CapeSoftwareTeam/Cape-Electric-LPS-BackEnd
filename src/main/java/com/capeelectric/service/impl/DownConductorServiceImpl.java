@@ -42,7 +42,7 @@ public class DownConductorServiceImpl implements DownConductorService{
 				&& !downConductorDesc.getUserName().isEmpty() && downConductorDesc.getBasicLpsId() != null
 				&& downConductorDesc.getBasicLpsId() != 0) {
 			Optional<DownConductorDescription> downConductorRepo = downConductorRepository
-					.findBySiteId(downConductorDesc.getBasicLpsId());
+					.findByBasicLpsId(downConductorDesc.getBasicLpsId());
 			if (!downConductorRepo.isPresent()
 					|| !downConductorRepo.get().getBasicLpsId().equals(downConductorDesc.getBasicLpsId())) {
 				

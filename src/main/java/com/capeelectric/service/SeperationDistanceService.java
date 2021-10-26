@@ -16,7 +16,7 @@ import com.capeelectric.model.SeperationDistanceDescription;
  */
 public interface SeperationDistanceService {
 
-	public void addSeperationDetails(SeperationDistanceDescription seperationDistanceDesc)
+	public void addSeperationDistance(SeperationDistanceDescription seperationDistanceDesc)
 			throws SeperationDistanceException;
 
 	public List<SeperationDistanceDescription> retrieveSeperationDetails(String userName, Integer basicLpsId)

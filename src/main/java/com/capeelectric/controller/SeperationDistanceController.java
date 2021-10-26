@@ -40,7 +40,7 @@ public class SeperationDistanceController {
 			throws SeperationDistanceException {
 		logger.info("called addSeperationDistance function UserName : {}, SiteId : {}",
 				seperationDistanceDesc.getUserName(), seperationDistanceDesc.getBasicLpsId());
-		seperationDistanceService.addSeperationDetails(seperationDistanceDesc);
+		seperationDistanceService.addSeperationDistance(seperationDistanceDesc);
 		return new ResponseEntity<String>("Seperation Distance Details Sucessfully Saved",
 				HttpStatus.CREATED);
 	}

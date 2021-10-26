@@ -35,7 +35,7 @@ public class DownConductorController {
 	@Autowired
 	private DownConductorService downConductorService;
 	
-	@PostMapping("/addCharacteristics")
+	@PostMapping("/addDownConductor")
 	public ResponseEntity<String> addDownConductors(@RequestBody  DownConductorDescription downConductorDesc)
 			throws DownConductorException {
 		logger.info("called addDownConductors function UserName : {}, SiteId : {}",

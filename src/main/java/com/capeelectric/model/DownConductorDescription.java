@@ -38,6 +38,17 @@ private static final long serialVersionUID = 1L;
 	@Column(name = "BASIC_LPS_ID")
 	private Integer basicLpsId;
 	
+	@Column(name = "USER_NAME")
+	private String userName;
+	
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
 	@Column(name = "BI_METALLICISSUE_OB")
 	private String biMetallicIssueOb;
 	

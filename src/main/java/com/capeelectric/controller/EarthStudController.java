@@ -48,7 +48,7 @@ public class EarthStudController {
 	}
 
 	@GetMapping("/retrieveEarthStud/{userName}/{basicLpsId}")
-	public ResponseEntity<List<EarthStudDescription>> retrieveEarthStud(@PathVariable String userName,
+	public ResponseEntity<List<EarthStudDescription>> retrieveEarthStudDetails(@PathVariable String userName,
 			@PathVariable Integer basicLpsId) throws EarthStudException {
 		logger.info("started retrieveEarthStud function UserName : {}, SiteId : {}", userName, basicLpsId);
 		return new ResponseEntity<List<EarthStudDescription>>(
