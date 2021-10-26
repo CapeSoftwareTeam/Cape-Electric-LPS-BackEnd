@@ -55,14 +55,6 @@ public class LpsAirDiscription implements Serializable {
 	@Column(name = "ELECTRICAL_EQUIPMENT_PLACEDREMARKS")
 	private String electricalEquipPlacedRe;
 	
-	public String getCombustablePartOb() {
-		return combustablePartOb;
-	}
-
-	public void setCombustablePartOb(String combustablePartOb) {
-		this.combustablePartOb = combustablePartOb;
-	}
-
 	@Column(name = "COMBUSTABLE_PARTOBSERVATION")
 	private String combustablePartOb;
 
@@ -122,6 +114,16 @@ public class LpsAirDiscription implements Serializable {
 	private List<AirMeshDescription> airMeshDescription;
 
 	 
+	
+	
+	public String getCombustablePartOb() {
+		return combustablePartOb;
+	}
+
+	public void setCombustablePartOb(String combustablePartOb) {
+		this.combustablePartOb = combustablePartOb;
+	}
+
 	public Integer getLpsAirDescId() {
 		return lpsAirDescId;
 	}
