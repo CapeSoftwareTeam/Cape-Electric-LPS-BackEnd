@@ -2,10 +2,17 @@ package com.capeelectric.service.impl;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.capeelectric.controller.BasicLpsController;
 import com.capeelectric.exception.BasicLpsException;
 import com.capeelectric.model.BasicLps;
+import com.capeelectric.model.Register;
 import com.capeelectric.repository.BasicLpsRepository;
 import com.capeelectric.service.BasicLpsService;
 import com.capeelectric.util.UserFullName;
@@ -19,6 +26,8 @@ import com.capeelectric.util.UserFullName;
 @Service
 public class BasicLpsServiceImpl implements BasicLpsService {
 
+	private static final Logger logger = LoggerFactory.getLogger(BasicLpsController.class);
+
 	@Autowired
 	private BasicLpsRepository basicLpsRepository;
 	
@@ -29,11 +38,20 @@ public class BasicLpsServiceImpl implements BasicLpsService {
 	public BasicLps addBasicLpsDetails(BasicLps basicLps) throws BasicLpsException {
 		
 		if (basicLps != null && basicLps.getClientName() != null ) {
-			basicLps.setCreatedDate(LocalDateTime.now());
-			basicLps.setUpdatedDate(LocalDateTime.now());
-			basicLps.setCreatedBy(userFullName.findByUserName(basicLps.getUserName()));
-			basicLps.setUpdatedBy(userFullName.findByUserName(basicLps.getUserName()));
-			return basicLpsRepository.save(basicLps);
+			Optional<BasicLps> basicLpsDetailsRepo = basicLpsRepository.findByClientName(basicLps.getClientName());
+
+				if(!basicLpsDetailsRepo.isPresent()) {
+					basicLps.setCreatedDate(LocalDateTime.now());
+					basicLps.setUpdatedDate(LocalDateTime.now());
+					basicLps.setCreatedBy(userFullName.findByUserName(basicLps.getUserName()));
+					basicLps.setUpdatedBy(userFullName.findByUserName(basicLps.getUserName()));
+					return basicLpsRepository.save(basicLps);
+				}
+				else {
+					//logger.debug("Client name already exists");
+					throw new BasicLpsException("Client name already exists");
+				}
+			
 		} else {
 			throw new BasicLpsException("Invalid Inputs");
 		}

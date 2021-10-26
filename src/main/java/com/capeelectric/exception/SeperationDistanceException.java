@@ -5,17 +5,17 @@ package com.capeelectric.exception;
  * @author capeelectricsoftware
  *
  */
-public class SeperationDistance extends Throwable {
+public class SeperationDistanceException extends Throwable {
 	
 	private static final long serialVersionUID = 1L;
 
 	private String message;
 
-	public SeperationDistance() {
+	public SeperationDistanceException() {
 
 	}
 
-	public SeperationDistance(String message) {
+	public SeperationDistanceException(String message) {
 		super();
 		this.message = message;
 	}

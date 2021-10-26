@@ -30,7 +30,8 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @NamedQueries(value = {
 		@NamedQuery(name = "BasicLpsRepository.findByUserNameAndBasicLpsId", query = "select s from BasicLps s where s.userName=:userName and s.basicLpsId=:basicLpsId"),
-		@NamedQuery(name = "BasicLpsRepository.findByBasicLpsId", query = "select s from BasicLps s where s.basicLpsId=:basicLpsId")
+		@NamedQuery(name = "BasicLpsRepository.findByBasicLpsId", query = "select s from BasicLps s where s.basicLpsId=:basicLpsId"),
+		@NamedQuery(name = "BasicLpsRepository.findByBasicLpsClientName", query = "select s from BasicLps s where s.clientName=:clientName")
 })
 public class BasicLps implements Serializable {
 	

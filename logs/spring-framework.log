@@ -443,3 +443,596 @@ Method [public org.springframework.http.ResponseEntity<java.util.List<com.capeel
 2021-10-20T19:50:40.777+0530 DEBUG Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
 2021-10-20T19:50:40.944+0530 DEBUG Writing [{timestamp=Wed Oct 20 19:50:40 IST 2021, status=500, error=Internal Server Error, trace=java.lang.Il (truncated)...]
 2021-10-20T19:50:40.966+0530 DEBUG Exiting from "ERROR" dispatch, status 500
+2021-10-21T09:55:01.331+0530 DEBUG 77 mappings in 'requestMappingHandlerMapping'
+2021-10-21T09:55:01.809+0530 DEBUG Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2021-10-21T09:55:01.965+0530 DEBUG ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-10-21T09:55:02.088+0530 DEBUG ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-10-21T09:56:31.603+0530 INFO Initializing Servlet 'dispatcherServlet'
+2021-10-21T09:56:31.604+0530 DEBUG Detected StandardServletMultipartResolver
+2021-10-21T09:56:31.604+0530 DEBUG Detected AcceptHeaderLocaleResolver
+2021-10-21T09:56:31.604+0530 DEBUG Detected FixedThemeResolver
+2021-10-21T09:56:31.606+0530 DEBUG Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@32809d64
+2021-10-21T09:56:31.607+0530 DEBUG Detected org.springframework.web.servlet.support.SessionFlashMapManager@c359d30
+2021-10-21T09:56:31.608+0530 DEBUG enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2021-10-21T09:56:31.608+0530 INFO Completed initialization in 5 ms
+2021-10-21T09:56:31.746+0530 DEBUG Mapped to com.capeelectric.controller.BasicLpsController#addBasicLpsDetails(BasicLps)
+2021-10-21T09:56:32.003+0530 DEBUG "ERROR" dispatch for POST "/error", parameters={}
+2021-10-21T09:56:32.039+0530 DEBUG Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2021-10-21T09:56:32.083+0530 DEBUG Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+2021-10-21T09:56:32.084+0530 DEBUG Writing [{timestamp=Thu Oct 21 09:56:32 IST 2021, status=401, error=Unauthorized, message=Unauthorized, path= (truncated)...]
+2021-10-21T09:56:32.172+0530 DEBUG Exiting from "ERROR" dispatch, status 401
+2021-10-21T09:56:45.803+0530 DEBUG Mapped to com.capeelectric.controller.LoginController#createAuthenticationToken(AuthenticationRequest)
+2021-10-21T09:56:45.805+0530 DEBUG POST "/api/v2/authenticate", parameters={}
+2021-10-21T09:56:45.806+0530 DEBUG Mapped to com.capeelectric.controller.LoginController#createAuthenticationToken(AuthenticationRequest)
+2021-10-21T09:56:46.118+0530 DEBUG Read "application/json;charset=UTF-8" to [com.capeelectric.request.AuthenticationRequest@6d84b36]
+2021-10-21T09:56:46.869+0530 DEBUG Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+2021-10-21T09:56:46.869+0530 DEBUG Writing [com.capeelectric.response.AuthenticationResponseRegister@4de1a3d3]
+2021-10-21T09:56:46.883+0530 DEBUG Completed 200 OK
+2021-10-21T09:57:01.969+0530 DEBUG Mapped to com.capeelectric.controller.BasicLpsController#addBasicLpsDetails(BasicLps)
+2021-10-21T09:57:01.971+0530 DEBUG "ERROR" dispatch for POST "/error", parameters={}
+2021-10-21T09:57:01.972+0530 DEBUG Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2021-10-21T09:57:01.973+0530 DEBUG Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+2021-10-21T09:57:01.973+0530 DEBUG Writing [{timestamp=Thu Oct 21 09:57:01 IST 2021, status=401, error=Unauthorized, message=Unauthorized, path= (truncated)...]
+2021-10-21T09:57:01.974+0530 DEBUG Exiting from "ERROR" dispatch, status 401
+2021-10-21T09:57:15.416+0530 DEBUG Mapped to com.capeelectric.controller.BasicLpsController#addBasicLpsDetails(BasicLps)
+2021-10-21T09:57:15.455+0530 DEBUG POST "/api/v1/addBasicLps", parameters={}
+2021-10-21T09:57:15.455+0530 DEBUG Mapped to com.capeelectric.controller.BasicLpsController#addBasicLpsDetails(BasicLps)
+2021-10-21T09:57:15.465+0530 DEBUG Read "application/json;charset=UTF-8" to [com.capeelectric.model.BasicLps@45e4a7b1]
+2021-10-21T09:57:16.163+0530 DEBUG Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+2021-10-21T09:57:16.163+0530 DEBUG Writing [com.capeelectric.model.BasicLps@45e4a7b1]
+2021-10-21T09:57:16.171+0530 DEBUG Completed 201 CREATED
+2021-10-21T09:57:35.967+0530 DEBUG Mapped to com.capeelectric.controller.BasicLpsController#addBasicLpsDetails(BasicLps)
+2021-10-21T09:57:35.977+0530 DEBUG POST "/api/v1/addBasicLps", parameters={}
+2021-10-21T09:57:35.978+0530 DEBUG Mapped to com.capeelectric.controller.BasicLpsController#addBasicLpsDetails(BasicLps)
+2021-10-21T09:57:35.980+0530 DEBUG Read "application/json;charset=UTF-8" to [com.capeelectric.model.BasicLps@5b4aa8f2]
+2021-10-21T09:57:36.160+0530 DEBUG Failed to complete request: org.springframework.dao.DataIntegrityViolationException: could not execute statement; SQL [n/a]; constraint [basic_lps_table.CLIENT_NAME]; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute statement
+2021-10-21T09:57:36.198+0530 DEBUG "ERROR" dispatch for POST "/error", parameters={}
+2021-10-21T09:57:36.198+0530 DEBUG Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2021-10-21T09:57:36.202+0530 DEBUG Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+2021-10-21T09:57:36.203+0530 DEBUG Writing [{timestamp=Thu Oct 21 09:57:36 IST 2021, status=500, error=Internal Server Error, trace=org.springfr (truncated)...]
+2021-10-21T09:57:36.206+0530 DEBUG Exiting from "ERROR" dispatch, status 500
+2021-10-21T09:59:37.485+0530 DEBUG 77 mappings in 'requestMappingHandlerMapping'
+2021-10-21T09:59:37.565+0530 DEBUG Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2021-10-21T09:59:37.633+0530 DEBUG ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-10-21T09:59:37.670+0530 DEBUG ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-10-21T10:00:07.786+0530 DEBUG 77 mappings in 'requestMappingHandlerMapping'
+2021-10-21T10:00:07.855+0530 DEBUG Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2021-10-21T10:00:07.916+0530 DEBUG ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-10-21T10:00:07.953+0530 DEBUG ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-10-21T10:00:42.018+0530 INFO Initializing Servlet 'dispatcherServlet'
+2021-10-21T10:00:42.018+0530 DEBUG Detected StandardServletMultipartResolver
+2021-10-21T10:00:42.018+0530 DEBUG Detected AcceptHeaderLocaleResolver
+2021-10-21T10:00:42.018+0530 DEBUG Detected FixedThemeResolver
+2021-10-21T10:00:42.019+0530 DEBUG Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@5549683f
+2021-10-21T10:00:42.020+0530 DEBUG Detected org.springframework.web.servlet.support.SessionFlashMapManager@4492a323
+2021-10-21T10:00:42.021+0530 DEBUG enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2021-10-21T10:00:42.021+0530 INFO Completed initialization in 3 ms
+2021-10-21T10:00:42.036+0530 DEBUG Mapped to com.capeelectric.controller.BasicLpsController#addBasicLpsDetails(BasicLps)
+2021-10-21T10:00:42.159+0530 DEBUG POST "/api/v1/addBasicLps", parameters={}
+2021-10-21T10:00:42.161+0530 DEBUG Mapped to com.capeelectric.controller.BasicLpsController#addBasicLpsDetails(BasicLps)
+2021-10-21T10:00:42.234+0530 DEBUG Read "application/json;charset=UTF-8" to [com.capeelectric.model.BasicLps@37e2d8d5]
+2021-10-21T10:01:53.703+0530 DEBUG Failed to complete request: org.springframework.dao.DataIntegrityViolationException: could not execute statement; SQL [n/a]; constraint [basic_lps_table.CLIENT_NAME]; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute statement
+2021-10-21T10:01:53.717+0530 DEBUG "ERROR" dispatch for POST "/error", parameters={}
+2021-10-21T10:01:53.722+0530 DEBUG Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2021-10-21T10:01:53.739+0530 DEBUG Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+2021-10-21T10:01:53.740+0530 DEBUG Writing [{timestamp=Thu Oct 21 10:01:53 IST 2021, status=500, error=Internal Server Error, trace=org.springfr (truncated)...]
+2021-10-21T10:01:53.763+0530 DEBUG Exiting from "ERROR" dispatch, status 500
+2021-10-23T16:47:15.753+0530 DEBUG 77 mappings in 'requestMappingHandlerMapping'
+2021-10-23T16:47:15.907+0530 DEBUG Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2021-10-23T16:47:16.011+0530 DEBUG ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-10-23T16:47:16.069+0530 DEBUG ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-10-23T16:49:18.475+0530 INFO Initializing Servlet 'dispatcherServlet'
+2021-10-23T16:49:18.476+0530 DEBUG Detected StandardServletMultipartResolver
+2021-10-23T16:49:18.476+0530 DEBUG Detected AcceptHeaderLocaleResolver
+2021-10-23T16:49:18.476+0530 DEBUG Detected FixedThemeResolver
+2021-10-23T16:49:18.478+0530 DEBUG Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@517032bd
+2021-10-23T16:49:18.479+0530 DEBUG Detected org.springframework.web.servlet.support.SessionFlashMapManager@14cf2517
+2021-10-23T16:49:18.480+0530 DEBUG enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2021-10-23T16:49:18.480+0530 INFO Completed initialization in 4 ms
+2021-10-23T16:49:18.546+0530 DEBUG Mapped to com.capeelectric.controller.LoginController#createAuthenticationToken(AuthenticationRequest)
+2021-10-23T16:49:18.575+0530 DEBUG POST "/api/v2/authenticate", parameters={}
+2021-10-23T16:49:18.578+0530 DEBUG Mapped to com.capeelectric.controller.LoginController#createAuthenticationToken(AuthenticationRequest)
+2021-10-23T16:49:18.869+0530 DEBUG Read "application/json;charset=UTF-8" to [com.capeelectric.request.AuthenticationRequest@e570a32]
+2021-10-23T16:49:19.796+0530 DEBUG Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+2021-10-23T16:49:19.797+0530 DEBUG Writing [com.capeelectric.response.AuthenticationResponseRegister@59fd6cbf]
+2021-10-23T16:49:19.838+0530 DEBUG Completed 200 OK
+2021-10-23T16:51:46.973+0530 DEBUG Mapped to com.capeelectric.controller.BasicLpsController#addBasicLpsDetails(BasicLps)
+2021-10-23T16:51:46.990+0530 DEBUG "ERROR" dispatch for POST "/error", parameters={}
+2021-10-23T16:51:47.003+0530 DEBUG Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2021-10-23T16:51:47.006+0530 DEBUG Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+2021-10-23T16:51:47.006+0530 DEBUG Writing [{timestamp=Sat Oct 23 16:51:47 IST 2021, status=401, error=Unauthorized, message=Unauthorized, path= (truncated)...]
+2021-10-23T16:51:47.009+0530 DEBUG Exiting from "ERROR" dispatch, status 401
+2021-10-23T16:52:07.215+0530 DEBUG Mapped to com.capeelectric.controller.BasicLpsController#addBasicLpsDetails(BasicLps)
+2021-10-23T16:52:07.234+0530 DEBUG POST "/api/v1/addBasicLps", parameters={}
+2021-10-23T16:52:07.234+0530 DEBUG Mapped to com.capeelectric.controller.BasicLpsController#addBasicLpsDetails(BasicLps)
+2021-10-23T16:52:07.239+0530 DEBUG Read "application/json;charset=UTF-8" to [com.capeelectric.model.BasicLps@a33547f]
+2021-10-23T16:52:07.273+0530 DEBUG Failed to complete request: org.springframework.web.util.NestedServletException: Handler dispatch failed; nested exception is java.lang.Error: Unresolved compilation problem: 
+	This method must return a result of type BasicLps
+
+2021-10-23T16:52:07.298+0530 DEBUG "ERROR" dispatch for POST "/error", parameters={}
+2021-10-23T16:52:07.298+0530 DEBUG Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2021-10-23T16:52:07.301+0530 DEBUG Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+2021-10-23T16:52:07.301+0530 DEBUG Writing [{timestamp=Sat Oct 23 16:52:07 IST 2021, status=500, error=Internal Server Error, trace=java.lang.Er (truncated)...]
+2021-10-23T16:52:07.303+0530 DEBUG Exiting from "ERROR" dispatch, status 500
+2021-10-23T16:55:17.491+0530 DEBUG 77 mappings in 'requestMappingHandlerMapping'
+2021-10-23T16:55:17.588+0530 DEBUG Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2021-10-23T16:55:17.650+0530 DEBUG ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-10-23T16:55:17.671+0530 DEBUG ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-10-23T16:55:18.041+0530 INFO Initializing Servlet 'dispatcherServlet'
+2021-10-23T16:55:18.041+0530 DEBUG Detected StandardServletMultipartResolver
+2021-10-23T16:55:18.041+0530 DEBUG Detected AcceptHeaderLocaleResolver
+2021-10-23T16:55:18.041+0530 DEBUG Detected FixedThemeResolver
+2021-10-23T16:55:18.042+0530 DEBUG Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@14dfca3d
+2021-10-23T16:55:18.043+0530 DEBUG Detected org.springframework.web.servlet.support.SessionFlashMapManager@31cf43be
+2021-10-23T16:55:18.043+0530 DEBUG enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2021-10-23T16:55:18.043+0530 INFO Completed initialization in 2 ms
+2021-10-23T16:55:18.044+0530 DEBUG Mapped to com.capeelectric.controller.BasicLpsController#addBasicLpsDetails(BasicLps)
+2021-10-23T16:55:18.079+0530 DEBUG POST "/api/v1/addBasicLps", parameters={}
+2021-10-23T16:55:18.079+0530 DEBUG Mapped to com.capeelectric.controller.BasicLpsController#addBasicLpsDetails(BasicLps)
+2021-10-23T16:55:18.093+0530 DEBUG Read "application/json;charset=UTF-8" to [com.capeelectric.model.BasicLps@2ffa43ad]
+2021-10-23T16:55:19.063+0530 DEBUG Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+2021-10-23T16:55:19.063+0530 DEBUG Writing [com.capeelectric.model.BasicLps@2ffa43ad]
+2021-10-23T16:55:19.074+0530 DEBUG Completed 201 CREATED
+2021-10-23T16:56:04.278+0530 DEBUG Mapped to com.capeelectric.controller.BasicLpsController#addBasicLpsDetails(BasicLps)
+2021-10-23T16:56:04.289+0530 DEBUG POST "/api/v1/addBasicLps", parameters={}
+2021-10-23T16:56:04.290+0530 DEBUG Mapped to com.capeelectric.controller.BasicLpsController#addBasicLpsDetails(BasicLps)
+2021-10-23T16:56:04.292+0530 DEBUG Read "application/json;charset=UTF-8" to [com.capeelectric.model.BasicLps@eb6f1aa]
+2021-10-23T16:56:04.527+0530 DEBUG Failed to complete request: org.springframework.dao.DataIntegrityViolationException: could not execute statement; SQL [n/a]; constraint [basic_lps_table.CLIENT_NAME]; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute statement
+2021-10-23T16:56:04.530+0530 DEBUG "ERROR" dispatch for POST "/error", parameters={}
+2021-10-23T16:56:04.532+0530 DEBUG Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2021-10-23T16:56:04.536+0530 DEBUG Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+2021-10-23T16:56:04.536+0530 DEBUG Writing [{timestamp=Sat Oct 23 16:56:04 IST 2021, status=500, error=Internal Server Error, trace=org.springfr (truncated)...]
+2021-10-23T16:56:04.543+0530 DEBUG Exiting from "ERROR" dispatch, status 500
+2021-10-23T17:24:29.373+0530 DEBUG 77 mappings in 'requestMappingHandlerMapping'
+2021-10-23T17:24:29.414+0530 DEBUG Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2021-10-23T17:24:29.443+0530 DEBUG ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-10-23T17:24:29.454+0530 DEBUG ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-10-23T17:24:44.500+0530 INFO Initializing Servlet 'dispatcherServlet'
+2021-10-23T17:24:44.500+0530 DEBUG Detected StandardServletMultipartResolver
+2021-10-23T17:24:44.500+0530 DEBUG Detected AcceptHeaderLocaleResolver
+2021-10-23T17:24:44.500+0530 DEBUG Detected FixedThemeResolver
+2021-10-23T17:24:44.501+0530 DEBUG Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@6078ae6c
+2021-10-23T17:24:44.501+0530 DEBUG Detected org.springframework.web.servlet.support.SessionFlashMapManager@2ce65d37
+2021-10-23T17:24:44.502+0530 DEBUG enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2021-10-23T17:24:44.502+0530 INFO Completed initialization in 2 ms
+2021-10-23T17:24:44.503+0530 DEBUG Mapped to com.capeelectric.controller.BasicLpsController#addBasicLpsDetails(BasicLps)
+2021-10-23T17:24:44.540+0530 DEBUG POST "/api/v1/addBasicLps", parameters={}
+2021-10-23T17:24:44.540+0530 DEBUG Mapped to com.capeelectric.controller.BasicLpsController#addBasicLpsDetails(BasicLps)
+2021-10-23T17:24:44.549+0530 DEBUG Read "application/json;charset=UTF-8" to [com.capeelectric.model.BasicLps@3ad29acd]
+2021-10-23T17:24:44.708+0530 DEBUG Failed to complete request: org.springframework.dao.DataIntegrityViolationException: could not execute statement; SQL [n/a]; constraint [basic_lps_table.CLIENT_NAME]; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute statement
+2021-10-23T17:24:44.713+0530 DEBUG "ERROR" dispatch for POST "/error", parameters={}
+2021-10-23T17:24:44.715+0530 DEBUG Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2021-10-23T17:24:44.719+0530 DEBUG Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+2021-10-23T17:24:44.720+0530 DEBUG Writing [{timestamp=Sat Oct 23 17:24:44 IST 2021, status=500, error=Internal Server Error, trace=org.springfr (truncated)...]
+2021-10-23T17:24:44.726+0530 DEBUG Exiting from "ERROR" dispatch, status 500
+2021-10-23T17:29:17.315+0530 DEBUG 77 mappings in 'requestMappingHandlerMapping'
+2021-10-23T17:29:17.408+0530 DEBUG Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2021-10-23T17:29:17.487+0530 DEBUG ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-10-23T17:29:17.532+0530 DEBUG ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-10-23T17:30:34.068+0530 DEBUG 77 mappings in 'requestMappingHandlerMapping'
+2021-10-23T17:30:34.162+0530 DEBUG Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2021-10-23T17:30:34.275+0530 DEBUG ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-10-23T17:30:34.339+0530 DEBUG ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-10-23T17:31:08.453+0530 INFO Initializing Servlet 'dispatcherServlet'
+2021-10-23T17:31:08.454+0530 DEBUG Detected StandardServletMultipartResolver
+2021-10-23T17:31:08.454+0530 DEBUG Detected AcceptHeaderLocaleResolver
+2021-10-23T17:31:08.454+0530 DEBUG Detected FixedThemeResolver
+2021-10-23T17:31:08.455+0530 DEBUG Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@2d509f31
+2021-10-23T17:31:08.456+0530 DEBUG Detected org.springframework.web.servlet.support.SessionFlashMapManager@56e796ba
+2021-10-23T17:31:08.456+0530 DEBUG enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2021-10-23T17:31:08.456+0530 INFO Completed initialization in 2 ms
+2021-10-23T17:31:08.482+0530 DEBUG Mapped to com.capeelectric.controller.BasicLpsController#addBasicLpsDetails(BasicLps)
+2021-10-23T17:31:08.688+0530 DEBUG POST "/api/v1/addBasicLps", parameters={}
+2021-10-23T17:31:08.690+0530 DEBUG Mapped to com.capeelectric.controller.BasicLpsController#addBasicLpsDetails(BasicLps)
+2021-10-23T17:31:08.789+0530 DEBUG Read "application/json;charset=UTF-8" to [com.capeelectric.model.BasicLps@3583e42e]
+2021-10-23T17:32:55.378+0530 DEBUG Failed to complete request: org.springframework.dao.DataIntegrityViolationException: could not execute statement; SQL [n/a]; constraint [basic_lps_table.CLIENT_NAME]; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute statement
+2021-10-23T17:33:28.335+0530 DEBUG "ERROR" dispatch for POST "/error", parameters={}
+2021-10-23T17:33:28.401+0530 DEBUG Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2021-10-23T17:33:28.836+0530 DEBUG Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+2021-10-23T17:33:28.850+0530 DEBUG Writing [{timestamp=Sat Oct 23 17:33:28 IST 2021, status=500, error=Internal Server Error, trace=org.springfr (truncated)...]
+2021-10-23T17:33:29.481+0530 DEBUG Exiting from "ERROR" dispatch, status 500
+2021-10-23T17:33:47.271+0530 DEBUG Mapped to com.capeelectric.controller.BasicLpsController#addBasicLpsDetails(BasicLps)
+2021-10-23T17:33:47.283+0530 DEBUG POST "/api/v1/addBasicLps", parameters={}
+2021-10-23T17:33:47.284+0530 DEBUG Mapped to com.capeelectric.controller.BasicLpsController#addBasicLpsDetails(BasicLps)
+2021-10-23T17:33:47.285+0530 DEBUG Read "application/json;charset=UTF-8" to [com.capeelectric.model.BasicLps@2d85aab7]
+2021-10-23T17:34:04.767+0530 DEBUG Failed to complete request: org.springframework.dao.DataIntegrityViolationException: could not execute statement; SQL [n/a]; constraint [basic_lps_table.CLIENT_NAME]; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute statement
+2021-10-23T17:34:04.770+0530 DEBUG "ERROR" dispatch for POST "/error", parameters={}
+2021-10-23T17:34:04.771+0530 DEBUG Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2021-10-23T17:34:04.773+0530 DEBUG Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+2021-10-23T17:34:04.773+0530 DEBUG Writing [{timestamp=Sat Oct 23 17:34:04 IST 2021, status=500, error=Internal Server Error, trace=org.springfr (truncated)...]
+2021-10-23T17:34:04.778+0530 DEBUG Exiting from "ERROR" dispatch, status 500
+2021-10-23T17:34:13.989+0530 DEBUG Mapped to com.capeelectric.controller.BasicLpsController#addBasicLpsDetails(BasicLps)
+2021-10-23T17:34:13.998+0530 DEBUG POST "/api/v1/addBasicLps", parameters={}
+2021-10-23T17:34:13.999+0530 DEBUG Mapped to com.capeelectric.controller.BasicLpsController#addBasicLpsDetails(BasicLps)
+2021-10-23T17:34:14.001+0530 DEBUG Read "application/json;charset=UTF-8" to [com.capeelectric.model.BasicLps@d58c954]
+2021-10-23T17:34:33.782+0530 DEBUG Failed to complete request: org.springframework.dao.DataIntegrityViolationException: could not execute statement; SQL [n/a]; constraint [basic_lps_table.CLIENT_NAME]; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute statement
+2021-10-23T17:34:33.786+0530 DEBUG "ERROR" dispatch for POST "/error", parameters={}
+2021-10-23T17:34:33.787+0530 DEBUG Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2021-10-23T17:34:33.789+0530 DEBUG Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+2021-10-23T17:34:33.789+0530 DEBUG Writing [{timestamp=Sat Oct 23 17:34:33 IST 2021, status=500, error=Internal Server Error, trace=org.springfr (truncated)...]
+2021-10-23T17:34:33.796+0530 DEBUG Exiting from "ERROR" dispatch, status 500
+2021-10-23T17:35:17.326+0530 DEBUG Mapped to com.capeelectric.controller.BasicLpsController#addBasicLpsDetails(BasicLps)
+2021-10-23T17:35:17.339+0530 DEBUG POST "/api/v1/addBasicLps", parameters={}
+2021-10-23T17:35:17.340+0530 DEBUG Mapped to com.capeelectric.controller.BasicLpsController#addBasicLpsDetails(BasicLps)
+2021-10-23T17:35:17.342+0530 DEBUG Read "application/json;charset=UTF-8" to [com.capeelectric.model.BasicLps@6d897735]
+2021-10-23T17:35:21.693+0530 DEBUG Failed to complete request: org.springframework.dao.DataIntegrityViolationException: could not execute statement; SQL [n/a]; constraint [basic_lps_table.CLIENT_NAME]; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute statement
+2021-10-23T17:35:21.697+0530 DEBUG "ERROR" dispatch for POST "/error", parameters={}
+2021-10-23T17:35:21.698+0530 DEBUG Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2021-10-23T17:35:21.700+0530 DEBUG Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+2021-10-23T17:35:21.700+0530 DEBUG Writing [{timestamp=Sat Oct 23 17:35:21 IST 2021, status=500, error=Internal Server Error, trace=org.springfr (truncated)...]
+2021-10-23T17:35:21.703+0530 DEBUG Exiting from "ERROR" dispatch, status 500
+2021-10-23T17:42:48.441+0530 DEBUG 77 mappings in 'requestMappingHandlerMapping'
+2021-10-23T17:42:48.501+0530 DEBUG Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2021-10-23T17:42:48.536+0530 DEBUG ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-10-23T17:42:48.546+0530 DEBUG ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-10-23T17:42:53.109+0530 INFO Initializing Servlet 'dispatcherServlet'
+2021-10-23T17:42:53.109+0530 DEBUG Detected StandardServletMultipartResolver
+2021-10-23T17:42:53.109+0530 DEBUG Detected AcceptHeaderLocaleResolver
+2021-10-23T17:42:53.109+0530 DEBUG Detected FixedThemeResolver
+2021-10-23T17:42:53.110+0530 DEBUG Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@3f04fe8e
+2021-10-23T17:42:53.111+0530 DEBUG Detected org.springframework.web.servlet.support.SessionFlashMapManager@2c6e51af
+2021-10-23T17:42:53.112+0530 DEBUG enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2021-10-23T17:42:53.112+0530 INFO Completed initialization in 3 ms
+2021-10-23T17:42:53.113+0530 DEBUG Mapped to com.capeelectric.controller.BasicLpsController#addBasicLpsDetails(BasicLps)
+2021-10-23T17:42:53.154+0530 DEBUG POST "/api/v1/addBasicLps", parameters={}
+2021-10-23T17:42:53.154+0530 DEBUG Mapped to com.capeelectric.controller.BasicLpsController#addBasicLpsDetails(BasicLps)
+2021-10-23T17:42:53.160+0530 DEBUG Read "application/json;charset=UTF-8" to [com.capeelectric.model.BasicLps@78aa7337]
+2021-10-23T17:42:57.817+0530 DEBUG Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+2021-10-23T17:42:57.818+0530 DEBUG Nothing to write: null body
+2021-10-23T17:42:57.818+0530 DEBUG Completed 201 CREATED
+2021-10-23T17:45:24.736+0530 DEBUG Mapped to com.capeelectric.controller.BasicLpsController#addBasicLpsDetails(BasicLps)
+2021-10-23T17:45:24.742+0530 DEBUG POST "/api/v1/addBasicLps", parameters={}
+2021-10-23T17:45:24.742+0530 DEBUG Mapped to com.capeelectric.controller.BasicLpsController#addBasicLpsDetails(BasicLps)
+2021-10-23T17:45:24.744+0530 DEBUG Read "application/json;charset=UTF-8" to [com.capeelectric.model.BasicLps@7c57e67d]
+2021-10-23T17:47:43.595+0530 DEBUG 77 mappings in 'requestMappingHandlerMapping'
+2021-10-23T17:47:43.633+0530 DEBUG Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2021-10-23T17:47:43.656+0530 DEBUG ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-10-23T17:47:43.661+0530 DEBUG ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-10-23T17:48:13.353+0530 DEBUG Failed to complete request: org.springframework.boot.context.properties.ConfigurationPropertiesBindException: Error creating bean with name 'spring.datasource-org.springframework.boot.autoconfigure.jdbc.DataSourceProperties': Could not bind properties to 'DataSourceProperties' : prefix=spring.datasource, ignoreInvalidFields=false, ignoreUnknownFields=true; nested exception is java.lang.IllegalStateException: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@1b5c374d has been closed already
+2021-10-23T17:48:26.356+0530 INFO Initializing Servlet 'dispatcherServlet'
+2021-10-23T17:48:26.357+0530 DEBUG Detected StandardServletMultipartResolver
+2021-10-23T17:48:26.357+0530 DEBUG Detected AcceptHeaderLocaleResolver
+2021-10-23T17:48:26.357+0530 DEBUG Detected FixedThemeResolver
+2021-10-23T17:48:26.358+0530 DEBUG Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@20dbc458
+2021-10-23T17:48:26.358+0530 DEBUG Detected org.springframework.web.servlet.support.SessionFlashMapManager@26797e7
+2021-10-23T17:48:26.358+0530 DEBUG enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2021-10-23T17:48:26.358+0530 INFO Completed initialization in 2 ms
+2021-10-23T17:48:26.359+0530 DEBUG Mapped to com.capeelectric.controller.BasicLpsController#addBasicLpsDetails(BasicLps)
+2021-10-23T17:48:26.389+0530 DEBUG POST "/api/v1/addBasicLps", parameters={}
+2021-10-23T17:48:26.390+0530 DEBUG Mapped to com.capeelectric.controller.BasicLpsController#addBasicLpsDetails(BasicLps)
+2021-10-23T17:48:26.394+0530 DEBUG Read "application/json;charset=UTF-8" to [com.capeelectric.model.BasicLps@4061c9bc]
+2021-10-23T17:50:31.626+0530 DEBUG Failed to complete request: java.lang.IllegalStateException: Invocation failure
+Controller [com.capeelectric.controller.BasicLpsController]
+Method [public org.springframework.http.ResponseEntity<com.capeelectric.model.BasicLps> com.capeelectric.controller.BasicLpsController.addBasicLpsDetails(com.capeelectric.model.BasicLps) throws com.capeelectric.exception.BasicLpsException] with argument values:
+ [0] [type=com.capeelectric.model.BasicLps] [value=com.capeelectric.model.BasicLps@4061c9bc] 
+2021-10-23T17:52:46.563+0530 DEBUG 77 mappings in 'requestMappingHandlerMapping'
+2021-10-23T17:52:46.596+0530 DEBUG Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2021-10-23T17:52:46.635+0530 DEBUG ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-10-23T17:52:46.657+0530 DEBUG ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-10-23T17:53:06.034+0530 INFO Initializing Servlet 'dispatcherServlet'
+2021-10-23T17:53:06.035+0530 DEBUG Detected StandardServletMultipartResolver
+2021-10-23T17:53:06.035+0530 DEBUG Detected AcceptHeaderLocaleResolver
+2021-10-23T17:53:06.035+0530 DEBUG Detected FixedThemeResolver
+2021-10-23T17:53:06.036+0530 DEBUG Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@6737acbf
+2021-10-23T17:53:06.036+0530 DEBUG Detected org.springframework.web.servlet.support.SessionFlashMapManager@744b8f4c
+2021-10-23T17:53:06.036+0530 DEBUG enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2021-10-23T17:53:06.036+0530 INFO Completed initialization in 2 ms
+2021-10-23T17:53:06.036+0530 DEBUG Mapped to com.capeelectric.controller.BasicLpsController#addBasicLpsDetails(BasicLps)
+2021-10-23T17:53:06.064+0530 DEBUG POST "/api/v1/addBasicLps", parameters={}
+2021-10-23T17:53:06.064+0530 DEBUG Mapped to com.capeelectric.controller.BasicLpsController#addBasicLpsDetails(BasicLps)
+2021-10-23T17:53:06.070+0530 DEBUG Read "application/json;charset=UTF-8" to [com.capeelectric.model.BasicLps@d5ca289]
+2021-10-23T17:54:08.884+0530 DEBUG Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+2021-10-23T17:54:08.885+0530 DEBUG Writing [com.capeelectric.model.BasicLps@d5ca289]
+2021-10-23T17:54:08.893+0530 DEBUG Completed 201 CREATED
+2021-10-23T17:54:17.833+0530 DEBUG Mapped to com.capeelectric.controller.BasicLpsController#addBasicLpsDetails(BasicLps)
+2021-10-23T17:54:17.841+0530 DEBUG POST "/api/v1/addBasicLps", parameters={}
+2021-10-23T17:54:17.842+0530 DEBUG Mapped to com.capeelectric.controller.BasicLpsController#addBasicLpsDetails(BasicLps)
+2021-10-23T17:54:17.844+0530 DEBUG Read "application/json;charset=UTF-8" to [com.capeelectric.model.BasicLps@28cf8736]
+2021-10-23T17:55:23.110+0530 DEBUG Failed to complete request: java.lang.IllegalStateException: Invocation failure
+Controller [com.capeelectric.controller.BasicLpsController]
+Method [public org.springframework.http.ResponseEntity<com.capeelectric.model.BasicLps> com.capeelectric.controller.BasicLpsController.addBasicLpsDetails(com.capeelectric.model.BasicLps) throws com.capeelectric.exception.BasicLpsException] with argument values:
+ [0] [type=com.capeelectric.model.BasicLps] [value=com.capeelectric.model.BasicLps@28cf8736] 
+2021-10-23T17:55:54.704+0530 DEBUG "ERROR" dispatch for POST "/error", parameters={}
+2021-10-23T17:55:54.705+0530 DEBUG Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2021-10-23T17:55:54.709+0530 DEBUG Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+2021-10-23T17:55:54.709+0530 DEBUG Writing [{timestamp=Sat Oct 23 17:55:54 IST 2021, status=500, error=Internal Server Error, trace=java.lang.Il (truncated)...]
+2021-10-23T17:55:54.711+0530 DEBUG Exiting from "ERROR" dispatch, status 500
+2021-10-23T17:58:55.715+0530 DEBUG Mapped to com.capeelectric.controller.BasicLpsController#retrieveBasicLpsDetails(String, Integer)
+2021-10-23T17:58:55.722+0530 DEBUG "ERROR" dispatch for GET "/error", parameters={}
+2021-10-23T17:58:55.723+0530 DEBUG Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2021-10-23T17:58:55.725+0530 DEBUG Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+2021-10-23T17:58:55.725+0530 DEBUG Writing [{timestamp=Sat Oct 23 17:58:55 IST 2021, status=401, error=Unauthorized, message=Unauthorized, path= (truncated)...]
+2021-10-23T17:58:55.728+0530 DEBUG Exiting from "ERROR" dispatch, status 401
+2021-10-23T17:59:26.879+0530 DEBUG Mapped to com.capeelectric.controller.BasicLpsController#retrieveBasicLpsDetails(String, Integer)
+2021-10-23T17:59:26.890+0530 DEBUG GET "/api/v1/retrieveBasicLps/arunkumark5797@gmail.com/100", parameters={}
+2021-10-23T17:59:26.891+0530 DEBUG Mapped to com.capeelectric.controller.BasicLpsController#retrieveBasicLpsDetails(String, Integer)
+2021-10-23T17:59:37.258+0530 DEBUG Failed to complete request: java.lang.IllegalStateException: Invocation failure
+Controller [com.capeelectric.controller.BasicLpsController]
+Method [public org.springframework.http.ResponseEntity<java.util.List<com.capeelectric.model.BasicLps>> com.capeelectric.controller.BasicLpsController.retrieveBasicLpsDetails(java.lang.String,java.lang.Integer) throws com.capeelectric.exception.BasicLpsException] with argument values:
+ [0] [type=java.lang.String] [value=arunkumark5797@gmail.com],
+[1] [type=java.lang.Integer] [value=100] 
+2021-10-23T17:59:37.261+0530 DEBUG "ERROR" dispatch for GET "/error", parameters={}
+2021-10-23T17:59:37.261+0530 DEBUG Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2021-10-23T17:59:37.262+0530 DEBUG Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+2021-10-23T17:59:37.263+0530 DEBUG Writing [{timestamp=Sat Oct 23 17:59:37 IST 2021, status=500, error=Internal Server Error, trace=java.lang.Il (truncated)...]
+2021-10-23T17:59:37.264+0530 DEBUG Exiting from "ERROR" dispatch, status 500
+2021-10-23T18:06:53.907+0530 DEBUG 77 mappings in 'requestMappingHandlerMapping'
+2021-10-23T18:06:53.951+0530 DEBUG Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2021-10-23T18:06:53.975+0530 DEBUG ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-10-23T18:06:53.981+0530 DEBUG ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-10-23T18:06:57.753+0530 INFO Initializing Servlet 'dispatcherServlet'
+2021-10-23T18:06:57.753+0530 DEBUG Detected StandardServletMultipartResolver
+2021-10-23T18:06:57.753+0530 DEBUG Detected AcceptHeaderLocaleResolver
+2021-10-23T18:06:57.754+0530 DEBUG Detected FixedThemeResolver
+2021-10-23T18:06:57.755+0530 DEBUG Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@216c3642
+2021-10-23T18:06:57.755+0530 DEBUG Detected org.springframework.web.servlet.support.SessionFlashMapManager@2645f3fb
+2021-10-23T18:06:57.755+0530 DEBUG enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2021-10-23T18:06:57.755+0530 INFO Completed initialization in 2 ms
+2021-10-23T18:06:57.756+0530 DEBUG Mapped to com.capeelectric.controller.BasicLpsController#retrieveBasicLpsDetails(String, Integer)
+2021-10-23T18:06:57.777+0530 DEBUG GET "/api/v1/retrieveBasicLps/arunkumark5797@gmail.com/100", parameters={}
+2021-10-23T18:06:57.778+0530 DEBUG Mapped to com.capeelectric.controller.BasicLpsController#retrieveBasicLpsDetails(String, Integer)
+2021-10-23T18:07:16.184+0530 DEBUG Failed to complete request: java.lang.IllegalStateException: Invocation failure
+Controller [com.capeelectric.controller.BasicLpsController]
+Method [public org.springframework.http.ResponseEntity<java.util.List<com.capeelectric.model.BasicLps>> com.capeelectric.controller.BasicLpsController.retrieveBasicLpsDetails(java.lang.String,java.lang.Integer) throws com.capeelectric.exception.BasicLpsException] with argument values:
+ [0] [type=java.lang.String] [value=arunkumark5797@gmail.com],
+[1] [type=java.lang.Integer] [value=100] 
+2021-10-23T18:07:16.187+0530 DEBUG "ERROR" dispatch for GET "/error", parameters={}
+2021-10-23T18:07:16.187+0530 DEBUG Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2021-10-23T18:07:16.192+0530 DEBUG Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+2021-10-23T18:07:16.192+0530 DEBUG Writing [{timestamp=Sat Oct 23 18:07:16 IST 2021, status=500, error=Internal Server Error, trace=java.lang.Il (truncated)...]
+2021-10-23T18:07:16.195+0530 DEBUG Exiting from "ERROR" dispatch, status 500
+2021-10-23T18:07:23.723+0530 DEBUG Mapped to com.capeelectric.controller.BasicLpsController#addBasicLpsDetails(BasicLps)
+2021-10-23T18:07:23.729+0530 DEBUG POST "/api/v1/addBasicLps", parameters={}
+2021-10-23T18:07:23.729+0530 DEBUG Mapped to com.capeelectric.controller.BasicLpsController#addBasicLpsDetails(BasicLps)
+2021-10-23T18:07:23.738+0530 DEBUG Read "application/json;charset=UTF-8" to [com.capeelectric.model.BasicLps@1dac7616]
+2021-10-23T18:07:37.870+0530 DEBUG Failed to complete request: org.springframework.web.util.NestedServletException: Handler dispatch failed; nested exception is java.lang.IllegalAccessError: class com.capeelectric.service.impl.BasicLpsServiceImpl (in unnamed module @0x62bc09a7) cannot access class com.sun.tools.sjavac.Log (in module jdk.compiler) because module jdk.compiler does not export com.sun.tools.sjavac to unnamed module @0x62bc09a7
+2021-10-23T18:07:37.875+0530 DEBUG "ERROR" dispatch for POST "/error", parameters={}
+2021-10-23T18:07:37.875+0530 DEBUG Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2021-10-23T18:07:37.876+0530 DEBUG Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+2021-10-23T18:07:37.876+0530 DEBUG Writing [{timestamp=Sat Oct 23 18:07:37 IST 2021, status=500, error=Internal Server Error, trace=java.lang.Il (truncated)...]
+2021-10-23T18:07:37.877+0530 DEBUG Exiting from "ERROR" dispatch, status 500
+2021-10-23T18:09:12.461+0530 DEBUG 77 mappings in 'requestMappingHandlerMapping'
+2021-10-23T18:09:12.482+0530 DEBUG Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2021-10-23T18:09:12.526+0530 DEBUG ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-10-23T18:09:12.532+0530 DEBUG ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-10-23T18:11:11.111+0530 DEBUG 77 mappings in 'requestMappingHandlerMapping'
+2021-10-23T18:11:11.133+0530 DEBUG Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2021-10-23T18:11:11.151+0530 DEBUG ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-10-23T18:11:11.157+0530 DEBUG ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-10-23T18:11:15.315+0530 INFO Initializing Servlet 'dispatcherServlet'
+2021-10-23T18:11:15.316+0530 DEBUG Detected StandardServletMultipartResolver
+2021-10-23T18:11:15.316+0530 DEBUG Detected AcceptHeaderLocaleResolver
+2021-10-23T18:11:15.316+0530 DEBUG Detected FixedThemeResolver
+2021-10-23T18:11:15.317+0530 DEBUG Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@1f6dc888
+2021-10-23T18:11:15.317+0530 DEBUG Detected org.springframework.web.servlet.support.SessionFlashMapManager@c6e1177
+2021-10-23T18:11:15.317+0530 DEBUG enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2021-10-23T18:11:15.317+0530 INFO Completed initialization in 1 ms
+2021-10-23T18:11:15.318+0530 DEBUG Mapped to com.capeelectric.controller.BasicLpsController#addBasicLpsDetails(BasicLps)
+2021-10-23T18:11:15.339+0530 DEBUG POST "/api/v1/addBasicLps", parameters={}
+2021-10-23T18:11:15.339+0530 DEBUG Mapped to com.capeelectric.controller.BasicLpsController#addBasicLpsDetails(BasicLps)
+2021-10-23T18:11:15.343+0530 DEBUG Read "application/json;charset=UTF-8" to [com.capeelectric.model.BasicLps@2fffe6dd]
+2021-10-23T18:11:24.710+0530 DEBUG Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+2021-10-23T18:11:24.710+0530 DEBUG Writing [com.capeelectric.model.BasicLps@30622e9d]
+2021-10-23T18:11:24.711+0530 DEBUG Completed 201 CREATED
+2021-10-23T18:16:33.435+0530 DEBUG 77 mappings in 'requestMappingHandlerMapping'
+2021-10-23T18:16:33.462+0530 DEBUG Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2021-10-23T18:16:33.481+0530 DEBUG ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-10-23T18:16:33.487+0530 DEBUG ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-10-23T18:22:00.746+0530 DEBUG 77 mappings in 'requestMappingHandlerMapping'
+2021-10-23T18:22:00.767+0530 DEBUG Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2021-10-23T18:22:00.784+0530 DEBUG ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-10-23T18:22:00.788+0530 DEBUG ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-10-23T18:23:20.783+0530 DEBUG 77 mappings in 'requestMappingHandlerMapping'
+2021-10-23T18:23:20.826+0530 DEBUG Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2021-10-23T18:23:20.868+0530 DEBUG ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-10-23T18:23:20.875+0530 DEBUG ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-10-23T18:23:56.036+0530 DEBUG 77 mappings in 'requestMappingHandlerMapping'
+2021-10-23T18:23:56.062+0530 DEBUG Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2021-10-23T18:23:56.087+0530 DEBUG ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-10-23T18:23:56.094+0530 DEBUG ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-10-23T18:25:09.598+0530 DEBUG 77 mappings in 'requestMappingHandlerMapping'
+2021-10-23T18:25:09.622+0530 DEBUG Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2021-10-23T18:25:09.640+0530 DEBUG ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-10-23T18:25:09.645+0530 DEBUG ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-10-23T18:33:21.206+0530 DEBUG 77 mappings in 'requestMappingHandlerMapping'
+2021-10-23T18:33:21.236+0530 DEBUG Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2021-10-23T18:33:21.256+0530 DEBUG ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-10-23T18:33:21.264+0530 DEBUG ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-10-23T18:34:06.507+0530 DEBUG 77 mappings in 'requestMappingHandlerMapping'
+2021-10-23T18:34:06.529+0530 DEBUG Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2021-10-23T18:34:06.566+0530 DEBUG ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-10-23T18:34:06.574+0530 DEBUG ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-10-23T18:35:33.387+0530 INFO Initializing Servlet 'dispatcherServlet'
+2021-10-23T18:35:33.387+0530 DEBUG Detected StandardServletMultipartResolver
+2021-10-23T18:35:33.387+0530 DEBUG Detected AcceptHeaderLocaleResolver
+2021-10-23T18:35:33.387+0530 DEBUG Detected FixedThemeResolver
+2021-10-23T18:35:33.388+0530 DEBUG Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@63566c9d
+2021-10-23T18:35:33.388+0530 DEBUG Detected org.springframework.web.servlet.support.SessionFlashMapManager@621def12
+2021-10-23T18:35:33.388+0530 DEBUG enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2021-10-23T18:35:33.388+0530 INFO Completed initialization in 1 ms
+2021-10-23T18:35:33.389+0530 DEBUG Mapped to com.capeelectric.controller.BasicLpsController#addBasicLpsDetails(BasicLps)
+2021-10-23T18:35:33.412+0530 DEBUG POST "/api/v1/addBasicLps", parameters={}
+2021-10-23T18:35:33.413+0530 DEBUG Mapped to com.capeelectric.controller.BasicLpsController#addBasicLpsDetails(BasicLps)
+2021-10-23T18:35:33.419+0530 DEBUG Read "application/json;charset=UTF-8" to [com.capeelectric.model.BasicLps@51e1c296]
+2021-10-23T18:35:41.532+0530 DEBUG Failed to complete request: org.springframework.web.util.NestedServletException: Handler dispatch failed; nested exception is java.lang.Error: Unresolved compilation problem: 
+	Type mismatch: cannot convert from Optional<BasicLps> to List<BasicLps>
+
+2021-10-23T18:35:41.535+0530 DEBUG "ERROR" dispatch for POST "/error", parameters={}
+2021-10-23T18:35:41.536+0530 DEBUG Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2021-10-23T18:35:41.539+0530 DEBUG Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+2021-10-23T18:35:41.539+0530 DEBUG Writing [{timestamp=Sat Oct 23 18:35:41 IST 2021, status=500, error=Internal Server Error, trace=java.lang.Er (truncated)...]
+2021-10-23T18:35:41.542+0530 DEBUG Exiting from "ERROR" dispatch, status 500
+2021-10-23T18:36:37.417+0530 DEBUG Mapped to com.capeelectric.controller.BasicLpsController#addBasicLpsDetails(BasicLps)
+2021-10-23T18:36:37.422+0530 DEBUG POST "/api/v1/addBasicLps", parameters={}
+2021-10-23T18:36:37.422+0530 DEBUG Mapped to com.capeelectric.controller.BasicLpsController#addBasicLpsDetails(BasicLps)
+2021-10-23T18:36:37.423+0530 DEBUG Read "application/json;charset=UTF-8" to [com.capeelectric.model.BasicLps@c5d39d5]
+2021-10-23T18:37:17.340+0530 DEBUG Failed to complete request: org.springframework.web.util.NestedServletException: Handler dispatch failed; nested exception is java.lang.Error: Unresolved compilation problem: 
+	Type mismatch: cannot convert from Optional<BasicLps> to List<BasicLps>
+
+2021-10-23T18:37:30.558+0530 DEBUG "ERROR" dispatch for POST "/error", parameters={}
+2021-10-23T18:37:30.559+0530 DEBUG Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2021-10-23T18:37:30.561+0530 DEBUG Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+2021-10-23T18:37:30.562+0530 DEBUG Writing [{timestamp=Sat Oct 23 18:37:30 IST 2021, status=500, error=Internal Server Error, trace=java.lang.Er (truncated)...]
+2021-10-23T18:37:30.566+0530 DEBUG Exiting from "ERROR" dispatch, status 500
+2021-10-23T18:41:34.144+0530 DEBUG 77 mappings in 'requestMappingHandlerMapping'
+2021-10-23T18:41:34.167+0530 DEBUG Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2021-10-23T18:41:34.185+0530 DEBUG ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-10-23T18:41:34.190+0530 DEBUG ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-10-23T18:47:19.958+0530 DEBUG 77 mappings in 'requestMappingHandlerMapping'
+2021-10-23T18:47:19.982+0530 DEBUG Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2021-10-23T18:47:20.009+0530 DEBUG ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-10-23T18:47:20.018+0530 DEBUG ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-10-23T18:47:49.952+0530 DEBUG 77 mappings in 'requestMappingHandlerMapping'
+2021-10-23T18:47:49.969+0530 DEBUG Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2021-10-23T18:47:49.986+0530 DEBUG ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-10-23T18:47:50.030+0530 DEBUG ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-10-23T18:47:58.502+0530 INFO Initializing Servlet 'dispatcherServlet'
+2021-10-23T18:47:58.502+0530 DEBUG Detected StandardServletMultipartResolver
+2021-10-23T18:47:58.502+0530 DEBUG Detected AcceptHeaderLocaleResolver
+2021-10-23T18:47:58.502+0530 DEBUG Detected FixedThemeResolver
+2021-10-23T18:47:58.503+0530 DEBUG Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@67fcf257
+2021-10-23T18:47:58.503+0530 DEBUG Detected org.springframework.web.servlet.support.SessionFlashMapManager@3e8565dc
+2021-10-23T18:47:58.503+0530 DEBUG enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2021-10-23T18:47:58.503+0530 INFO Completed initialization in 1 ms
+2021-10-23T18:47:58.504+0530 DEBUG Mapped to com.capeelectric.controller.BasicLpsController#addBasicLpsDetails(BasicLps)
+2021-10-23T18:47:58.521+0530 DEBUG POST "/api/v1/addBasicLps", parameters={}
+2021-10-23T18:47:58.521+0530 DEBUG Mapped to com.capeelectric.controller.BasicLpsController#addBasicLpsDetails(BasicLps)
+2021-10-23T18:47:58.524+0530 DEBUG Read "application/json;charset=UTF-8" to [com.capeelectric.model.BasicLps@5503e29d]
+2021-10-23T18:48:36.124+0530 DEBUG Failed to complete request: java.lang.IllegalStateException: Invocation failure
+Controller [com.capeelectric.controller.BasicLpsController]
+Method [public org.springframework.http.ResponseEntity<com.capeelectric.model.BasicLps> com.capeelectric.controller.BasicLpsController.addBasicLpsDetails(com.capeelectric.model.BasicLps) throws com.capeelectric.exception.BasicLpsException] with argument values:
+ [0] [type=com.capeelectric.model.BasicLps] [value=com.capeelectric.model.BasicLps@5503e29d] 
+2021-10-23T18:48:36.128+0530 DEBUG "ERROR" dispatch for POST "/error", parameters={}
+2021-10-23T18:48:36.129+0530 DEBUG Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2021-10-23T18:48:36.134+0530 DEBUG Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+2021-10-23T18:48:36.134+0530 DEBUG Writing [{timestamp=Sat Oct 23 18:48:36 IST 2021, status=500, error=Internal Server Error, trace=java.lang.Il (truncated)...]
+2021-10-23T18:48:36.137+0530 DEBUG Exiting from "ERROR" dispatch, status 500
+2021-10-23T18:51:49.579+0530 DEBUG Mapped to com.capeelectric.controller.BasicLpsController#addBasicLpsDetails(BasicLps)
+2021-10-23T18:51:49.589+0530 DEBUG POST "/api/v1/addBasicLps", parameters={}
+2021-10-23T18:51:49.590+0530 DEBUG Mapped to com.capeelectric.controller.BasicLpsController#addBasicLpsDetails(BasicLps)
+2021-10-23T18:51:49.591+0530 DEBUG Read "application/json;charset=UTF-8" to [com.capeelectric.model.BasicLps@5855760e]
+2021-10-23T18:51:56.462+0530 DEBUG Failed to complete request: java.lang.IllegalStateException: Invocation failure
+Controller [com.capeelectric.controller.BasicLpsController]
+Method [public org.springframework.http.ResponseEntity<com.capeelectric.model.BasicLps> com.capeelectric.controller.BasicLpsController.addBasicLpsDetails(com.capeelectric.model.BasicLps) throws com.capeelectric.exception.BasicLpsException] with argument values:
+ [0] [type=com.capeelectric.model.BasicLps] [value=com.capeelectric.model.BasicLps@5855760e] 
+2021-10-23T18:51:56.464+0530 DEBUG "ERROR" dispatch for POST "/error", parameters={}
+2021-10-23T18:51:56.465+0530 DEBUG Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2021-10-23T18:51:56.466+0530 DEBUG Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+2021-10-23T18:51:56.466+0530 DEBUG Writing [{timestamp=Sat Oct 23 18:51:56 IST 2021, status=500, error=Internal Server Error, trace=java.lang.Il (truncated)...]
+2021-10-23T18:51:56.467+0530 DEBUG Exiting from "ERROR" dispatch, status 500
+2021-10-23T18:52:24.298+0530 DEBUG Mapped to com.capeelectric.controller.BasicLpsController#addBasicLpsDetails(BasicLps)
+2021-10-23T18:52:24.304+0530 DEBUG POST "/api/v1/addBasicLps", parameters={}
+2021-10-23T18:52:24.305+0530 DEBUG Mapped to com.capeelectric.controller.BasicLpsController#addBasicLpsDetails(BasicLps)
+2021-10-23T18:52:24.309+0530 DEBUG Read "application/json;charset=UTF-8" to [com.capeelectric.model.BasicLps@5677ebf6]
+2021-10-23T18:54:51.646+0530 DEBUG 77 mappings in 'requestMappingHandlerMapping'
+2021-10-23T18:54:51.665+0530 DEBUG Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2021-10-23T18:54:51.685+0530 DEBUG ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-10-23T18:54:51.690+0530 DEBUG ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-10-23T18:55:10.040+0530 INFO Initializing Servlet 'dispatcherServlet'
+2021-10-23T18:55:10.041+0530 DEBUG Detected StandardServletMultipartResolver
+2021-10-23T18:55:10.041+0530 DEBUG Detected AcceptHeaderLocaleResolver
+2021-10-23T18:55:10.041+0530 DEBUG Detected FixedThemeResolver
+2021-10-23T18:55:10.042+0530 DEBUG Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@2f24de05
+2021-10-23T18:55:10.042+0530 DEBUG Detected org.springframework.web.servlet.support.SessionFlashMapManager@4e5cc062
+2021-10-23T18:55:10.042+0530 DEBUG enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2021-10-23T18:55:10.042+0530 INFO Completed initialization in 1 ms
+2021-10-23T18:55:10.042+0530 DEBUG Mapped to com.capeelectric.controller.BasicLpsController#addBasicLpsDetails(BasicLps)
+2021-10-23T18:55:10.062+0530 DEBUG POST "/api/v1/addBasicLps", parameters={}
+2021-10-23T18:55:10.062+0530 DEBUG Mapped to com.capeelectric.controller.BasicLpsController#addBasicLpsDetails(BasicLps)
+2021-10-23T18:55:10.066+0530 DEBUG Read "application/json;charset=UTF-8" to [com.capeelectric.model.BasicLps@48d00ffd]
+2021-10-23T18:55:39.804+0530 DEBUG Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+2021-10-23T18:55:39.804+0530 DEBUG Writing [com.capeelectric.model.BasicLps@48d00ffd]
+2021-10-23T18:55:39.808+0530 DEBUG Completed 201 CREATED
+2021-10-23T18:56:36.188+0530 DEBUG Mapped to com.capeelectric.controller.BasicLpsController#addBasicLpsDetails(BasicLps)
+2021-10-23T18:56:36.197+0530 DEBUG POST "/api/v1/addBasicLps", parameters={}
+2021-10-23T18:56:36.198+0530 DEBUG Mapped to com.capeelectric.controller.BasicLpsController#addBasicLpsDetails(BasicLps)
+2021-10-23T18:56:36.198+0530 DEBUG Read "application/json;charset=UTF-8" to [com.capeelectric.model.BasicLps@6d1a7e13]
+2021-10-23T18:56:57.262+0530 DEBUG Failed to complete request: org.springframework.boot.context.properties.ConfigurationPropertiesBindException: Error creating bean with name 'spring.datasource-org.springframework.boot.autoconfigure.jdbc.DataSourceProperties': Could not bind properties to 'DataSourceProperties' : prefix=spring.datasource, ignoreInvalidFields=false, ignoreUnknownFields=true; nested exception is java.lang.IllegalStateException: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@5a4a4deb has been closed already
+2021-10-23T18:57:31.745+0530 DEBUG Failed to complete request: java.lang.IllegalStateException: Invocation failure
+Controller [com.capeelectric.controller.BasicLpsController]
+Method [public org.springframework.http.ResponseEntity<com.capeelectric.model.BasicLps> com.capeelectric.controller.BasicLpsController.addBasicLpsDetails(com.capeelectric.model.BasicLps) throws com.capeelectric.exception.BasicLpsException] with argument values:
+ [0] [type=com.capeelectric.model.BasicLps] [value=com.capeelectric.model.BasicLps@6d1a7e13] 
+2021-10-23T18:57:31.747+0530 DEBUG "ERROR" dispatch for POST "/error", parameters={}
+2021-10-23T18:57:31.747+0530 DEBUG Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2021-10-23T18:57:31.750+0530 DEBUG Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+2021-10-23T18:57:31.750+0530 DEBUG Writing [{timestamp=Sat Oct 23 18:57:31 IST 2021, status=500, error=Internal Server Error, trace=java.lang.Il (truncated)...]
+2021-10-23T18:57:31.752+0530 DEBUG Exiting from "ERROR" dispatch, status 500
+2021-10-23T18:57:40.061+0530 DEBUG Mapped to com.capeelectric.controller.BasicLpsController#addBasicLpsDetails(BasicLps)
+2021-10-23T18:57:40.070+0530 DEBUG POST "/api/v1/addBasicLps", parameters={}
+2021-10-23T18:57:40.070+0530 DEBUG Mapped to com.capeelectric.controller.BasicLpsController#addBasicLpsDetails(BasicLps)
+2021-10-23T18:57:40.071+0530 DEBUG Read "application/json;charset=UTF-8" to [com.capeelectric.model.BasicLps@56289e70]
+2021-10-23T18:57:54.928+0530 DEBUG Failed to complete request: java.lang.IllegalStateException: Invocation failure
+Controller [com.capeelectric.controller.BasicLpsController]
+Method [public org.springframework.http.ResponseEntity<com.capeelectric.model.BasicLps> com.capeelectric.controller.BasicLpsController.addBasicLpsDetails(com.capeelectric.model.BasicLps) throws com.capeelectric.exception.BasicLpsException] with argument values:
+ [0] [type=com.capeelectric.model.BasicLps] [value=com.capeelectric.model.BasicLps@56289e70] 
+2021-10-23T18:57:54.930+0530 DEBUG "ERROR" dispatch for POST "/error", parameters={}
+2021-10-23T18:57:54.931+0530 DEBUG Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2021-10-23T18:57:54.932+0530 DEBUG Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+2021-10-23T18:57:54.932+0530 DEBUG Writing [{timestamp=Sat Oct 23 18:57:54 IST 2021, status=500, error=Internal Server Error, trace=java.lang.Il (truncated)...]
+2021-10-23T18:57:54.936+0530 DEBUG Exiting from "ERROR" dispatch, status 500
+2021-10-23T18:58:12.192+0530 DEBUG Mapped to com.capeelectric.controller.BasicLpsController#addBasicLpsDetails(BasicLps)
+2021-10-23T18:58:12.199+0530 DEBUG POST "/api/v1/addBasicLps", parameters={}
+2021-10-23T18:58:12.199+0530 DEBUG Mapped to com.capeelectric.controller.BasicLpsController#addBasicLpsDetails(BasicLps)
+2021-10-23T18:58:12.200+0530 DEBUG Read "application/json;charset=UTF-8" to [com.capeelectric.model.BasicLps@554cf07]
+2021-10-23T18:58:28.622+0530 DEBUG Failed to complete request: java.lang.IllegalStateException: Invocation failure
+Controller [com.capeelectric.controller.BasicLpsController]
+Method [public org.springframework.http.ResponseEntity<com.capeelectric.model.BasicLps> com.capeelectric.controller.BasicLpsController.addBasicLpsDetails(com.capeelectric.model.BasicLps) throws com.capeelectric.exception.BasicLpsException] with argument values:
+ [0] [type=com.capeelectric.model.BasicLps] [value=com.capeelectric.model.BasicLps@554cf07] 
+2021-10-23T18:58:28.624+0530 DEBUG "ERROR" dispatch for POST "/error", parameters={}
+2021-10-23T18:58:28.625+0530 DEBUG Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2021-10-23T18:58:28.627+0530 DEBUG Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+2021-10-23T18:58:28.627+0530 DEBUG Writing [{timestamp=Sat Oct 23 18:58:28 IST 2021, status=500, error=Internal Server Error, trace=java.lang.Il (truncated)...]
+2021-10-23T18:58:28.630+0530 DEBUG Exiting from "ERROR" dispatch, status 500
+2021-10-23T18:58:54.005+0530 DEBUG Mapped to com.capeelectric.controller.BasicLpsController#addBasicLpsDetails(BasicLps)
+2021-10-23T18:58:54.009+0530 DEBUG POST "/api/v1/addBasicLps", parameters={}
+2021-10-23T18:58:54.009+0530 DEBUG Mapped to com.capeelectric.controller.BasicLpsController#addBasicLpsDetails(BasicLps)
+2021-10-23T18:58:54.010+0530 DEBUG Read "application/json;charset=UTF-8" to [com.capeelectric.model.BasicLps@3bc40778]
+2021-10-23T18:59:04.487+0530 DEBUG Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+2021-10-23T18:59:04.487+0530 DEBUG Writing [com.capeelectric.model.BasicLps@3bc40778]
+2021-10-23T18:59:04.489+0530 DEBUG Completed 201 CREATED
+2021-10-23T18:59:28.668+0530 DEBUG Mapped to com.capeelectric.controller.BasicLpsController#addBasicLpsDetails(BasicLps)
+2021-10-23T18:59:28.673+0530 DEBUG POST "/api/v1/addBasicLps", parameters={}
+2021-10-23T18:59:28.673+0530 DEBUG Mapped to com.capeelectric.controller.BasicLpsController#addBasicLpsDetails(BasicLps)
+2021-10-23T18:59:28.673+0530 DEBUG Read "application/json;charset=UTF-8" to [com.capeelectric.model.BasicLps@3f083f08]
+2021-10-23T18:59:38.201+0530 DEBUG Failed to complete request: java.lang.IllegalStateException: Invocation failure
+Controller [com.capeelectric.controller.BasicLpsController]
+Method [public org.springframework.http.ResponseEntity<com.capeelectric.model.BasicLps> com.capeelectric.controller.BasicLpsController.addBasicLpsDetails(com.capeelectric.model.BasicLps) throws com.capeelectric.exception.BasicLpsException] with argument values:
+ [0] [type=com.capeelectric.model.BasicLps] [value=com.capeelectric.model.BasicLps@3f083f08] 
+2021-10-23T18:59:38.203+0530 DEBUG "ERROR" dispatch for POST "/error", parameters={}
+2021-10-23T18:59:38.204+0530 DEBUG Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2021-10-23T18:59:38.205+0530 DEBUG Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+2021-10-23T18:59:38.205+0530 DEBUG Writing [{timestamp=Sat Oct 23 18:59:38 IST 2021, status=500, error=Internal Server Error, trace=java.lang.Il (truncated)...]
+2021-10-23T18:59:38.206+0530 DEBUG Exiting from "ERROR" dispatch, status 500
+2021-10-23T19:01:08.569+0530 DEBUG 77 mappings in 'requestMappingHandlerMapping'
+2021-10-23T19:01:08.588+0530 DEBUG Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2021-10-23T19:01:08.606+0530 DEBUG ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-10-23T19:01:08.611+0530 DEBUG ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-10-23T19:02:30.079+0530 INFO Initializing Servlet 'dispatcherServlet'
+2021-10-23T19:02:30.080+0530 DEBUG Detected StandardServletMultipartResolver
+2021-10-23T19:02:30.080+0530 DEBUG Detected AcceptHeaderLocaleResolver
+2021-10-23T19:02:30.080+0530 DEBUG Detected FixedThemeResolver
+2021-10-23T19:02:30.081+0530 DEBUG Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@5d7bd6ea
+2021-10-23T19:02:30.081+0530 DEBUG Detected org.springframework.web.servlet.support.SessionFlashMapManager@3586099e
+2021-10-23T19:02:30.081+0530 DEBUG enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2021-10-23T19:02:30.081+0530 INFO Completed initialization in 1 ms
+2021-10-23T19:02:30.081+0530 DEBUG Mapped to com.capeelectric.controller.BasicLpsController#addBasicLpsDetails(BasicLps)
+2021-10-23T19:02:30.106+0530 DEBUG POST "/api/v1/addBasicLps", parameters={}
+2021-10-23T19:02:30.106+0530 DEBUG Mapped to com.capeelectric.controller.BasicLpsController#addBasicLpsDetails(BasicLps)
+2021-10-23T19:02:30.110+0530 DEBUG Read "application/json;charset=UTF-8" to [com.capeelectric.model.BasicLps@fdcd8c1]
+2021-10-23T19:03:11.432+0530 DEBUG Failed to complete request: java.lang.IllegalStateException: Invocation failure
+Controller [com.capeelectric.controller.BasicLpsController]
+Method [public org.springframework.http.ResponseEntity<com.capeelectric.model.BasicLps> com.capeelectric.controller.BasicLpsController.addBasicLpsDetails(com.capeelectric.model.BasicLps) throws com.capeelectric.exception.BasicLpsException] with argument values:
+ [0] [type=com.capeelectric.model.BasicLps] [value=com.capeelectric.model.BasicLps@fdcd8c1] 
+2021-10-23T19:03:11.436+0530 DEBUG "ERROR" dispatch for POST "/error", parameters={}
+2021-10-23T19:03:11.437+0530 DEBUG Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2021-10-23T19:03:11.439+0530 DEBUG Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+2021-10-23T19:03:11.439+0530 DEBUG Writing [{timestamp=Sat Oct 23 19:03:11 IST 2021, status=500, error=Internal Server Error, trace=java.lang.Il (truncated)...]
+2021-10-23T19:03:11.442+0530 DEBUG Exiting from "ERROR" dispatch, status 500
+2021-10-23T19:07:33.469+0530 DEBUG 77 mappings in 'requestMappingHandlerMapping'
+2021-10-23T19:07:33.533+0530 DEBUG Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2021-10-23T19:07:33.604+0530 DEBUG ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-10-23T19:07:33.640+0530 DEBUG ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-10-23T19:09:47.581+0530 DEBUG 77 mappings in 'requestMappingHandlerMapping'
+2021-10-23T19:09:47.624+0530 DEBUG Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2021-10-23T19:09:47.660+0530 DEBUG ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-10-23T19:09:47.668+0530 DEBUG ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
