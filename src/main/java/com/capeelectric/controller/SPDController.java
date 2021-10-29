@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.capeelectric.exception.SPDException;
-import com.capeelectric.model.SPDDescription;
+import com.capeelectric.model.SPD;
 import com.capeelectric.service.SPDService;
 
 
@@ -38,7 +38,7 @@ public class SPDController {
 	private SPDService SPDService;
 	
 	@PostMapping("/addSPDDetails")
-	public ResponseEntity<String> addSPDDetails(@RequestBody  SPDDescription SPDDesc)
+	public ResponseEntity<String> addSPDDetails(@RequestBody  SPD SPDDesc)
 			throws SPDException {
 		logger.info("called addSPDDetails function UserName : {}, SiteId : {}",
 				SPDDesc.getUserName(), SPDDesc.getBasicLpsId());
@@ -48,10 +48,10 @@ public class SPDController {
 	}
 
 	@GetMapping("/retrieveSPD/{userName}/{basicLpsId}")
-	public ResponseEntity<List<SPDDescription>> retrieveSPDDetails(@PathVariable String userName,
+	public ResponseEntity<List<SPD>> retrieveSPDDetails(@PathVariable String userName,
 			@PathVariable Integer basicLpsId) throws SPDException {
 		logger.info("started retrieveSPDDetails function UserName : {}, SiteId : {}", userName, basicLpsId);
-		return new ResponseEntity<List<SPDDescription>>(
+		return new ResponseEntity<List<SPD>>(
 				SPDService.retrieveSPDDetails(userName, basicLpsId), HttpStatus.OK);
 	}
 }

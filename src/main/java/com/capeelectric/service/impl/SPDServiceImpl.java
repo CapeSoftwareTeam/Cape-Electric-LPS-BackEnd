@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.capeelectric.exception.SPDException;
-import com.capeelectric.model.SPDDescription;
+import com.capeelectric.model.SPD;
 import com.capeelectric.repository.SPDRepository;
 import com.capeelectric.service.SPDService;
 import com.capeelectric.util.UserFullName;
@@ -34,12 +34,12 @@ public class SPDServiceImpl implements SPDService{
 	private UserFullName userFullName;
 	
 	@Override
-	public void addSPDDetails(SPDDescription spdDesc)
+	public void addSPDDetails(SPD spdDesc)
 			throws  SPDException{
 		if (spdDesc != null && spdDesc.getUserName() != null
 				&& !spdDesc.getUserName().isEmpty() && spdDesc.getBasicLpsId() != null
 				&& spdDesc.getBasicLpsId() != 0) {
-			Optional<SPDDescription> spdRepo = spdRepository
+			Optional<SPD> spdRepo = spdRepository
 					.findByBasicLpsId(spdDesc.getBasicLpsId());
 			if (!spdRepo.isPresent()
 					|| !spdRepo.get().getBasicLpsId().equals(spdDesc.getBasicLpsId())) {
@@ -61,10 +61,10 @@ public class SPDServiceImpl implements SPDService{
 	}
 	
 	@Override
-	public List<SPDDescription> retrieveSPDDetails(String userName, Integer basicLpsId)
+	public List<SPD> retrieveSPDDetails(String userName, Integer basicLpsId)
 			throws SPDException {
 		if (userName != null) {
-			List<SPDDescription> spdRepo = spdRepository.findByUserNameAndBasicLpsId(userName,
+			List<SPD> spdRepo = spdRepository.findByUserNameAndBasicLpsId(userName,
 					basicLpsId);
 			if (spdRepo != null && !spdRepo.isEmpty()) {				
 				return spdRepo;

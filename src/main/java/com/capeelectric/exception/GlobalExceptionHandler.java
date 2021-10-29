@@ -82,4 +82,10 @@ public class GlobalExceptionHandler {
     		ErrorMessage exceptionMessage = new ErrorMessage(e.getMessage(), e.getLocalizedMessage(), "404");
     		return new ResponseEntity<ErrorMessage>(exceptionMessage, new HttpHeaders(), HttpStatus.NOT_FOUND);
     }
+    
+    @ExceptionHandler({BasicLpsException.class})
+    public ResponseEntity<ErrorMessage> handleBasicLpsException(BasicLpsException e){
+            ErrorMessage exceptionMessage = new ErrorMessage(e.getMessage(), e.getLocalizedMessage(), "406");
+            return new ResponseEntity<ErrorMessage>(exceptionMessage, new HttpHeaders(), HttpStatus.NOT_ACCEPTABLE);
+    }
 }

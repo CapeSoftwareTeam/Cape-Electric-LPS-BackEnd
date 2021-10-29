@@ -8,16 +8,16 @@ import java.util.Optional;
 
 import org.springframework.data.repository.CrudRepository;
 
-import com.capeelectric.model.SPDDescription;
+import com.capeelectric.model.SPD;
 
 
 /**
  * @author CAPE-SOFTWARE
  *
  */
-public interface SPDRepository extends CrudRepository<SPDDescription, Integer>{
+public interface SPDRepository extends CrudRepository<SPD, Integer>{
 
-	public List<SPDDescription> findByUserNameAndBasicLpsId(String userName, Integer basicLpsId);
+	public List<SPD> findByUserNameAndBasicLpsId(String userName, Integer basicLpsId);
 
-	public Optional<SPDDescription> findByBasicLpsId(Integer basicLpsId);
+	public Optional<SPD> findByBasicLpsId(Integer basicLpsId);
 }
