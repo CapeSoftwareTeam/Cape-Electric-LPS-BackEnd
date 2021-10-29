@@ -23,7 +23,7 @@ public class SPD implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "SPD_ID")
-	private Integer SpdId;
+	private Integer spdId;
 	
 	@Column(name = "BASIC_LPS_ID")
 	private Integer basicLpsId;
@@ -76,10 +76,6 @@ public class SPD implements Serializable {
 	@Column(name = "FEEDINGPOWER_EQUIPMENT_REM")
 	private String feedingPowerEquipmentRem;
 	
-	@JsonManagedReference
-	@OneToMany(mappedBy = "spd", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<SpdDescription> spdDescription;
-
 	@Column(name = "CREATED_DATE")
 	private LocalDateTime createdDate;
 	
@@ -91,28 +87,20 @@ public class SPD implements Serializable {
 	
 	@Column(name = "UPDATED_DATE")
 	private LocalDateTime updatedDate;
-
-	public Integer getBasicLpsId() {
-		return basicLpsId;
-	}
 	
-	
-
-	public Integer getSpdId() {
-		return SpdId;
-	}
-
-
-
-	public void setSpdId(Integer spdId) {
-		SpdId = spdId;
-	}
-
-
+	@JsonManagedReference
+	@OneToMany(mappedBy = "spd", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<SpdDescription> spdDescription;
 
 	public String getMainsIncomingOb() {
 		return mainsIncomingOb;
 	}
+
+	public Integer getBasicLpsId() {
+		return basicLpsId;
+	}
+
+
 
 
 
@@ -300,6 +288,16 @@ public class SPD implements Serializable {
 
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+	
+	
+
+	public Integer getSpdId() {
+		return spdId;
+	}
+
+	public void setSpdId(Integer spdId) {
+		this.spdId = spdId;
 	}
 
 	public LocalDateTime getCreatedDate() {
