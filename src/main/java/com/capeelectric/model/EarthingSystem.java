@@ -14,86 +14,83 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
-
 @Entity
 @Table(name = "EARTHING_SYSTEM_TABLE")
 public class EarthingSystem implements Serializable {
 
-	
-	
-private static final long serialVersionUID = 1L;
-	
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "EARTHING_SYSTEM_ID")
 	private Integer earthingSystemId;
-	
+
 	@Column(name = "DEPTH_OF_ELECTRODEOB")
-	private String  depthOfElectrodeOb;
+	private String depthOfElectrodeOb;
 
 	@Column(name = "DEPTH_OF_ELECTRODEREM")
-	private String  depthOfElectrodeRem;
-	
+	private String depthOfElectrodeRem;
+
 	@Column(name = "EAST_OB")
-	private String  earthOb;
-	
+	private String earthOb;
+
 	@Column(name = "EAST_REM")
-	private String  earthRem;
-	
+	private String earthRem;
+
 	@Column(name = "WEST_OB")
-	private String  westOb;
-	
+	private String westOb;
+
 	@Column(name = "WEST_REM")
-	private String  westRem;
+	private String westRem;
 
 	@Column(name = "NORTH_OB")
-	private String  northOb;
-	
+	private String northOb;
+
 	@Column(name = "NORTH_REM")
-	private String  northRem;
-	
+	private String northRem;
+
 	@Column(name = "SOUTH_OB")
-	private String  southOb;
-	
+	private String southOb;
+
 	@Column(name = "SOUTH_REM")
-	private String  southRem;
-	
+	private String southRem;
+
 	@Column(name = "RINGEARTHWALL_DISTANCE_OB")
-	private String  ringEarthWallDistanceOb;
-	
+	private String ringEarthWallDistanceOb;
+
 	@Column(name = "RINGEARTHWALL_DISTANCE_REM")
-	private String  ringEarthWallDistanceRem;
-	
+	private String ringEarthWallDistanceRem;
+
 	@Column(name = "JOINTSMADE_BRAZING_OB")
-	private String  jointsMadeBrazingOb;
-	 
+	private String jointsMadeBrazingOb;
+
 	@Column(name = "JOINTSMADE_BRAZING_REM")
-	private String  jointsMadeBrazingRem;
-	
+	private String jointsMadeBrazingRem;
+
 	@Column(name = "MATERIAL_OF_EARTHELECTRODE_OB")
-	private String  materialOfEartElectrodeOb;
-	
+	private String materialOfEartElectrodeOb;
+
 	@Column(name = "MATERIAL_OF_EARTHELECTRODE_REM")
-	private String  materialOfEartElectrodeRem;
-	
+	private String materialOfEartElectrodeRem;
+
 	@Column(name = "SIZE_OFEARTHELECTRODE_OB")
-	private String  sizeOfEarthElectrodeOb;
+	private String sizeOfEarthElectrodeOb;
 
 	@Column(name = "SIZE_OFEARTHELECTRODE_REM")
-	private String  sizeOfEarthElectrodeRem;
-	
+	private String sizeOfEarthElectrodeRem;
+
 	@Column(name = "MAXIMUMDISTANCE_EARTHELECTRODEWAL_OB")
-	private String  maximumDistanceEartElectrodeWalOb;
-	
+	private String maximumDistanceEartElectrodeWalOb;
+
 	@Column(name = "MAXIMUMDISTANCE_EARTHELECTRODEWALL_REM")
-	private String  maximumDistanceEartElectrodeWalRem;
-	
+	private String maximumDistanceEartElectrodeWalRem;
+
 	@Column(name = "MINIMUMDISTANCE_EARTHELECTRODEWALL_OB")
-	private String  manimumDistanceEartElectrodeWalOb;
-	
+	private String manimumDistanceEartElectrodeWalOb;
+
 	@Column(name = "MINIMUMDISTANCE_EARTHELECTRODEWALL_REM")
-	private String  manimumDistanceEartElectrodeWalRem;
-	
+	private String manimumDistanceEartElectrodeWalRem;
+
 	@JsonBackReference
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "EARTHING_ID")
@@ -290,7 +287,5 @@ private static final long serialVersionUID = 1L;
 	public void setEarthingLpsDescription(EarthingLpsDescription earthingLpsDescription) {
 		this.earthingLpsDescription = earthingLpsDescription;
 	}
-	
-	
-	
+
 }

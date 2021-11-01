@@ -18,46 +18,43 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 @Table(name = "EARTHDESCRIPTION_TABLE")
 public class EarthingDescription implements Serializable {
 
-	
-	
-    private static final long serialVersionUID = 1L;
-	
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "EARTHDESCRIPTION_ID")
 	private Integer earthDescriptionId;
-	
-    @Column(name = "EARTHELECT_MAXIMUMDISTANCEWALLINOB")
+
+	@Column(name = "EARTHELECT_MAXIMUMDISTANCEWALLINOB")
 	private String earthelectMaxiDistWallInOb;
-	
+
 	@Column(name = "EARTHELECT_MAXIMUMDISTANCEWALLINREM")
 	private String earthelectMaxiDistWallInRem;
-	
+
 	@Column(name = "EARTHELECT_MINIMUMDISTANCEWALLINOB")
 	private String earthelectManimumDistanceWallInOb;
-	
+
 	@Column(name = "EARTHELECT_MINIMUMDISTANCEWALLINREM")
 	private String earthelectManiDistWallInRem;
-	
+
 	@Column(name = "EARTHELECT_MAXIMUMDISTANCEINOB")
 	private String earthelectMaxiDistOb;
-	
+
 	@Column(name = "EARTHELECT_MAXIMUMDISTANCEINREM")
 	private String earthelectMaxiDistRem;
-	
+
 	@Column(name = "EARTHELECT_MINIMUMDISTANCEINOB")
 	private String earthelectManiDistOb;
-	
+
 	@Column(name = "EARTHELECT_MINIMUMDISTANCEINREM")
 	private String earthelectManiDistRem;
-	
 
 	@Column(name = "TOTALNUMBER_OF_ELECTRODEINOB")
 	private String totalNumberOfElectrodeOb;
-	
+
 	@Column(name = "TOTALNUMBER_OF_ELECTRODEINREM")
 	private String totalNumberOfElectrodeRem;
-	
+
 	@JsonBackReference
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "EARTHING_ID")
@@ -70,7 +67,6 @@ public class EarthingDescription implements Serializable {
 	public void setEarthDescriptionId(Integer earthDescriptionId) {
 		this.earthDescriptionId = earthDescriptionId;
 	}
-
 
 	public String getEarthelectMaxiDistWallInOb() {
 		return earthelectMaxiDistWallInOb;
@@ -136,8 +132,6 @@ public class EarthingDescription implements Serializable {
 		this.earthelectManimumDistanceWallInOb = earthelectManimumDistanceWallInOb;
 	}
 
-	
-
 	public String getTotalNumberOfElectrodeOb() {
 		return totalNumberOfElectrodeOb;
 	}
@@ -161,6 +155,5 @@ public class EarthingDescription implements Serializable {
 	public void setEarthingLpsDescription(EarthingLpsDescription earthingLpsDescription) {
 		this.earthingLpsDescription = earthingLpsDescription;
 	}
-	
-	
+
 }
