@@ -28,8 +28,8 @@ public class EarthElectrodeChamber implements Serializable {
 	@Column(name = "PHYSICAL_INSPECTIONOB")
 	private String physicalInspeOb;
 	
-	@Column(name = "PSYSICAL_INSPECTIONREM")
-	private String psysicalInspeRem;
+	@Column(name = "PHYSICAL_INSPECTIONREM")
+	private String physicalInspeRem;
 
 	@Column(name = "CHAMBER_TYPEOB")
 	private String chamberTypeOb;
@@ -68,16 +68,16 @@ public class EarthElectrodeChamber implements Serializable {
 	private String  inspectedChamberInRem;
 	
 	@Column(name = "INSPECTED_PASSEDINOB")
-	private String  InspectionPassedInOb;
+	private String  inspectionPassedInOb;
 	
 	@Column(name = "INSPECTED_PASSEDINREM")
-	private String  InspectionPassedInRem;
+	private String  inspectionPassedInRem;
 	
 	@Column(name = "INSPECTED_FAILEDINOB")
-	private String  InspectionFailedInOb;
+	private String  inspectionFailedInOb;
 	
 	@Column(name = "INSPECTED_FAILEDINREM")
-	private String  InspectionFailedInRem;
+	private String  inspectionFailedInRem;
 
 	
 	@JsonBackReference
@@ -93,12 +93,12 @@ public class EarthElectrodeChamber implements Serializable {
 		this.earthingElectrodeChamberId = earthingElectrodeChamberId;
 	}
 
-	public String getPsysicalInspeRem() {
-		return psysicalInspeRem;
+	public String getPhysicalInspeRem() {
+		return physicalInspeRem;
 	}
 
-	public void setPsysicalInspeRem(String psysicalInspeRem) {
-		this.psysicalInspeRem = psysicalInspeRem;
+	public void setPhysicalInspeRem(String physicalInspeRem) {
+		this.physicalInspeRem = physicalInspeRem;
 	}
 
 	public String getChamberTypeOb() {
@@ -214,35 +214,36 @@ public class EarthElectrodeChamber implements Serializable {
 	}
 
 	public String getInspectionPassedInOb() {
-		return InspectionPassedInOb;
+		return inspectionPassedInOb;
 	}
 
 	public void setInspectionPassedInOb(String inspectionPassedInOb) {
-		InspectionPassedInOb = inspectionPassedInOb;
+		this.inspectionPassedInOb = inspectionPassedInOb;
 	}
 
 	public String getInspectionPassedInRem() {
-		return InspectionPassedInRem;
+		return inspectionPassedInRem;
 	}
 
 	public void setInspectionPassedInRem(String inspectionPassedInRem) {
-		InspectionPassedInRem = inspectionPassedInRem;
+		this.inspectionPassedInRem = inspectionPassedInRem;
 	}
 
 	public String getInspectionFailedInOb() {
-		return InspectionFailedInOb;
+		return inspectionFailedInOb;
 	}
 
 	public void setInspectionFailedInOb(String inspectionFailedInOb) {
-		InspectionFailedInOb = inspectionFailedInOb;
+		this.inspectionFailedInOb = inspectionFailedInOb;
 	}
 
 	public String getInspectionFailedInRem() {
-		return InspectionFailedInRem;
+		return inspectionFailedInRem;
 	}
 
 	public void setInspectionFailedInRem(String inspectionFailedInRem) {
-		InspectionFailedInRem = inspectionFailedInRem;
+		this.inspectionFailedInRem = inspectionFailedInRem;
 	}
-	
+
+		
 }
