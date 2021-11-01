@@ -16,63 +16,62 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name = "EARTHELECTRODECHAMBER_TABLE")
-public class EarthElectrodeChamber  implements Serializable{
-	
-  private static final long serialVersionUID = 1L;
-	
+public class EarthElectrodeChamber implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "EARTHELECTRODECHAMBER_ID")
 	private Integer earthingElectrodeChamberId;
-	
+
 	@Column(name = "PSYSICAL_INSPECTIONOB")
 	private String psysicalInspeOb;
-	
+
 	@Column(name = "PSYSICAL_INSPECTIONREM")
 	private String psysicalInspeRem;
-	
+
 	@Column(name = "CHAMBER_TYPEOB")
 	private String chamberTypeOb;
-	
+
 	@Column(name = "CHAMBER_TYPEREM")
 	private String chamberTypeRem;
-	
+
 	@Column(name = "CHAMBER_SIZEOB")
 	private String chamberSizeOb;
-	
+
 	@Column(name = "CHAMBER_SIZEREM")
 	private String chamberSizeRem;
-	
+
 	@Column(name = "MAXIMUMWITHSTAND_LOADOB")
 	private String maximumWithStandLoadOb;
-	
+
 	@Column(name = "MAXIMUMWITHSTAND_LOADREM")
 	private String maximumWithStandLoadRem;
 
 	@Column(name = "CHAMBER_PLACED_SOILOB")
 	private String maximumPlacedSoilOb;
-	
+
 	@Column(name = "CHAMBER_PLACED_SOILREM")
 	private String maximumPlacedSoilRem;
-	
+
 	@Column(name = "TOTAL_CHAMBERSNOOB")
 	private String totalChamberNoOb;
-	
+
 	@Column(name = "TOTAL_CHAMBERSNOREM")
 	private String totalChamberNoRem;
-	
+
 	@Column(name = "EARTH_ELECTRODEBURIEDOB")
 	private String earthElectrodeBuriedOb;
 
 	@Column(name = "EARTH_ELECTRODEBURIEDREM")
 	private String earthElectrodeBuriedRem;
-	
+
 	@JsonBackReference
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "EARTHING_ID")
 	private EarthingLpsDescription earthingLpsDescription;
 
-	
 	public Integer getEarthingElectrodeChamberId() {
 		return earthingElectrodeChamberId;
 	}
@@ -200,6 +199,5 @@ public class EarthElectrodeChamber  implements Serializable{
 	public void setEarthingLpsDescription(EarthingLpsDescription earthingLpsDescription) {
 		this.earthingLpsDescription = earthingLpsDescription;
 	}
-	
-	
+
 }

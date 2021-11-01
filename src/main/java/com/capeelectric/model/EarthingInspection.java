@@ -18,36 +18,34 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 @Table(name = "EARTHING_INSPECTION_TABLE")
 public class EarthingInspection implements Serializable {
 
-	
-	
-    private static final long serialVersionUID = 1L;
-	
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "EARTHING_INSPECTION_ID")
 	private Integer earthingInspectionId;
-	
+
 	@Column(name = "INSPECTION_TYPE")
 	private String inspectionType;
-	
+
 	@Column(name = "INSPECTED_NO_OB")
 	private String inspectedNoOb;
-	
+
 	@Column(name = "INSPECTED_NO_REM")
 	private String inspectedNoRem;
-	
+
 	@Column(name = "INSPECTIONSPASSED_NO_OB")
 	private String inspectedPassedNoOb;
-	
+
 	@Column(name = "INSPECTIONSPASSED_NO_REM")
 	private String inspectedPassedNoRem;
-	
+
 	@Column(name = "INSPECTIONFAILED_NO_OB")
 	private String inspectedFailedNo;
-	
+
 	@Column(name = "INSPECTIONFAILED_NO_REM")
 	private String inspectedFailedRem;
-	
+
 	@JsonBackReference
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "EARTHING_ID")
@@ -124,6 +122,5 @@ public class EarthingInspection implements Serializable {
 	public void setEarthingLpsDescription(EarthingLpsDescription earthingLpsDescription) {
 		this.earthingLpsDescription = earthingLpsDescription;
 	}
-	
-	
+
 }
