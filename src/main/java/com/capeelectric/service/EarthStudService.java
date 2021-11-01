@@ -21,4 +21,6 @@ public interface EarthStudService {
 
 	public List<EarthStudDescription> retrieveEarthStudDetails(String userName, Integer basicLpsId)
 			throws EarthStudException;
+	
+	public void updateEarthStudDetails(EarthStudDescription earthStudDescription) throws EarthStudException;
 }

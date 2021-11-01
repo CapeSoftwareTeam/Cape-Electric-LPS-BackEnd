@@ -16,7 +16,6 @@ import com.capeelectric.exception.DownConductorException;
 import com.capeelectric.model.DownConductorDescription;
 import com.capeelectric.repository.DownConductorRepository;
 import com.capeelectric.service.DownConductorService;
-import com.capeelectric.util.Constants;
 import com.capeelectric.util.UserFullName;
 
 /**
@@ -75,6 +74,28 @@ public class DownConductorServiceImpl implements DownConductorService{
 			}
 		} else {
 			throw new DownConductorException("Invalid Inputs");
+		}
+	}
+	
+	@Override
+	public void updateDownConductorDetails(DownConductorDescription downConductorDesc) throws DownConductorException {
+
+		if (downConductorDesc != null && downConductorDesc.getDownConduDescId() != null
+				&& downConductorDesc.getDownConduDescId() != 0 && downConductorDesc.getBasicLpsId() != null
+				&& downConductorDesc.getBasicLpsId() != 0) {
+			Optional<DownConductorDescription> downConductorRepo = downConductorRepository
+					.findById(downConductorDesc.getDownConduDescId());
+			if (downConductorRepo.isPresent()
+					&& downConductorRepo.get().getBasicLpsId().equals(downConductorDesc.getBasicLpsId())) {
+				downConductorDesc.setUpdatedDate(LocalDateTime.now());
+				downConductorDesc.setUpdatedBy(userFullName.findByUserName(downConductorDesc.getUserName()));
+				downConductorRepository.save(downConductorDesc);
+			} else {
+				throw new DownConductorException("Given BasicLpsId and Down Conductor Id is Invalid");
+			}
+
+		} else {
+			throw new DownConductorException("Invalid inputs");
 		}
 	}
 	

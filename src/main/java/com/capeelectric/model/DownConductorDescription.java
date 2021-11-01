@@ -41,14 +41,6 @@ private static final long serialVersionUID = 1L;
 	@Column(name = "USER_NAME")
 	private String userName;
 	
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
 	@Column(name = "BI_METALLICISSUE_OB")
 	private String biMetallicIssueOb;
 	
@@ -100,7 +92,7 @@ private static final long serialVersionUID = 1L;
 	
 	@JsonManagedReference
 	@OneToMany(mappedBy = "downConductorDescription", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<BridzingDescription>bridzingDescription;
+	private List<BridgingDescription>bridgingDescription;
 	
 	@JsonManagedReference
 	@OneToMany(mappedBy = "downConductorDescription", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -122,156 +114,31 @@ private static final long serialVersionUID = 1L;
 	@JsonManagedReference
 	@OneToMany(mappedBy = "downConductorDescription", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<DownConductor> downConductor;
+	
+	
 
 	public Integer getDownConduDescId() {
 		return downConduDescId;
 	}
-	
-	
-	
+
+	public void setDownConduDescId(Integer downConduDescId) {
+		this.downConduDescId = downConduDescId;
+	}
 
 	public Integer getBasicLpsId() {
 		return basicLpsId;
 	}
 
-
-
-
 	public void setBasicLpsId(Integer basicLpsId) {
 		this.basicLpsId = basicLpsId;
 	}
 
-
-
-
-	public LocalDateTime getCreatedDate() {
-		return createdDate;
+	public String getUserName() {
+		return userName;
 	}
 
-
-
-
-	public void setCreatedDate(LocalDateTime createdDate) {
-		this.createdDate = createdDate;
-	}
-
-
-
-
-	public String getCreatedBy() {
-		return createdBy;
-	}
-
-
-
-
-	public void setCreatedBy(String createdBy) {
-		this.createdBy = createdBy;
-	}
-
-
-
-
-	public String getUpdatedBy() {
-		return updatedBy;
-	}
-
-
-
-
-	public void setUpdatedBy(String updatedBy) {
-		this.updatedBy = updatedBy;
-	}
-
-
-
-
-	public LocalDateTime getUpdatedDate() {
-		return updatedDate;
-	}
-
-
-
-
-	public void setUpdatedDate(LocalDateTime updatedDate) {
-		this.updatedDate = updatedDate;
-	}
-
-
-
-
-	public List<BridzingDescription> getBridzingDescription() {
-		return bridzingDescription;
-	}
-
-
-
-
-	public void setBridzingDescription(List<BridzingDescription> bridzingDescription) {
-		this.bridzingDescription = bridzingDescription;
-	}
-
-
-
-
-	public List<Holder> getHolder() {
-		return holder;
-	}
-
-
-
-
-	public void setHolder(List<Holder> holder) {
-		this.holder = holder;
-	}
-
-
-
-
-	public List<Connectors> getConnectors() {
-		return connectors;
-	}
-
-
-
-
-	public void setConnectors(List<Connectors> connectors) {
-		this.connectors = connectors;
-	}
-
-
-
-
-	public List<LightningCounter> getLightningCounter() {
-		return lightningCounter;
-	}
-
-
-
-
-	public void setLightningCounter(List<LightningCounter> lightningCounter) {
-		this.lightningCounter = lightningCounter;
-	}
-
-
-
-
-	public List<TestingJoint> getTestingJoint() {
-		return testingJoint;
-	}
-
-
-
-
-	public void setTestingJoint(List<TestingJoint> testingJoint) {
-		this.testingJoint = testingJoint;
-	}
-
-
-
-
-	public void setDownConduDescId(Integer downConduDescId) {
-		this.downConduDescId = downConduDescId;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 	public String getBiMetallicIssueOb() {
@@ -370,6 +237,78 @@ private static final long serialVersionUID = 1L;
 		this.cobustMaterialWallRem = cobustMaterialWallRem;
 	}
 
+	public LocalDateTime getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(LocalDateTime createdDate) {
+		this.createdDate = createdDate;
+	}
+
+	public String getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	public String getUpdatedBy() {
+		return updatedBy;
+	}
+
+	public void setUpdatedBy(String updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+
+	public LocalDateTime getUpdatedDate() {
+		return updatedDate;
+	}
+
+	public void setUpdatedDate(LocalDateTime updatedDate) {
+		this.updatedDate = updatedDate;
+	}
+
+	public List<BridgingDescription> getBridgingDescription() {
+		return bridgingDescription;
+	}
+
+	public void setBridgingDescription(List<BridgingDescription> bridgingDescription) {
+		this.bridgingDescription = bridgingDescription;
+	}
+
+	public List<Holder> getHolder() {
+		return holder;
+	}
+
+	public void setHolder(List<Holder> holder) {
+		this.holder = holder;
+	}
+
+	public List<Connectors> getConnectors() {
+		return connectors;
+	}
+
+	public void setConnectors(List<Connectors> connectors) {
+		this.connectors = connectors;
+	}
+
+	public List<LightningCounter> getLightningCounter() {
+		return lightningCounter;
+	}
+
+	public void setLightningCounter(List<LightningCounter> lightningCounter) {
+		this.lightningCounter = lightningCounter;
+	}
+
+	public List<TestingJoint> getTestingJoint() {
+		return testingJoint;
+	}
+
+	public void setTestingJoint(List<TestingJoint> testingJoint) {
+		this.testingJoint = testingJoint;
+	}
+
 	public List<DownConductor> getDownConductor() {
 		return downConductor;
 	}
@@ -377,6 +316,6 @@ private static final long serialVersionUID = 1L;
 	public void setDownConductor(List<DownConductor> downConductor) {
 		this.downConductor = downConductor;
 	}
-	
+
 	
 }

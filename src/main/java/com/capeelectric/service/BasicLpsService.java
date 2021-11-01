@@ -16,4 +16,7 @@ public interface BasicLpsService {
 	public BasicLps addBasicLpsDetails(BasicLps basicLps) throws BasicLpsException;
 
 	public List<BasicLps> retrieveBasicLpsDetails(String userName, Integer basicLpsId) throws BasicLpsException;
+		
+	public void updateBasicLpsDetails(BasicLps basicLps) throws BasicLpsException;
+	
 }

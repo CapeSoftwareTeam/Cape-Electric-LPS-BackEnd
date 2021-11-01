@@ -20,5 +20,7 @@ public interface DownConductorService {
 
 	public List<DownConductorDescription> retrieveDownConductorDetails(String userName, Integer basicLpsId)
 			throws DownConductorException;
+	
+	public void updateDownConductorDetails(DownConductorDescription downConductorDesc) throws DownConductorException;
 
 }

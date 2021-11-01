@@ -21,5 +21,7 @@ public interface EarthingLpsService {
 
 	public List<EarthingLpsDescription> retrieveEarthingLpsDetails(String userName, Integer basicLpsId)
 			throws EarthingLpsException;
+	
+	public void updateEarthingLpsDetails(EarthingLpsDescription earthingLpsDesc) throws EarthingLpsException;
 
 }

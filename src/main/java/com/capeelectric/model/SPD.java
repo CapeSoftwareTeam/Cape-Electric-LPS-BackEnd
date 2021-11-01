@@ -92,191 +92,17 @@ public class SPD implements Serializable {
 	@OneToMany(mappedBy = "spd", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<SpdDescription> spdDescription;
 
-	public String getMainsIncomingOb() {
-		return mainsIncomingOb;
+	public Integer getSpdId() {
+		return spdId;
+	}
+
+	public void setSpdId(Integer spdId) {
+		this.spdId = spdId;
 	}
 
 	public Integer getBasicLpsId() {
 		return basicLpsId;
 	}
-
-
-
-
-
-	public void setMainsIncomingOb(String mainsIncomingOb) {
-		this.mainsIncomingOb = mainsIncomingOb;
-	}
-
-
-
-	public String getMainsIncomingRem() {
-		return mainsIncomingRem;
-	}
-
-
-
-	public void setMainsIncomingRem(String mainsIncomingRem) {
-		this.mainsIncomingRem = mainsIncomingRem;
-	}
-
-
-
-	public String getTotalMainsIncomingOb() {
-		return totalMainsIncomingOb;
-	}
-
-
-
-	public void setTotalMainsIncomingOb(String totalMainsIncomingOb) {
-		this.totalMainsIncomingOb = totalMainsIncomingOb;
-	}
-
-
-
-	public String getTotalMainsIncomingRem() {
-		return totalMainsIncomingRem;
-	}
-
-
-
-	public void setTotalMainsIncomingRem(String totalMainsIncomingRem) {
-		this.totalMainsIncomingRem = totalMainsIncomingRem;
-	}
-
-
-
-	public String getNoPannelSupplittingOb() {
-		return noPannelSupplittingOb;
-	}
-
-
-
-	public void setNoPannelSupplittingOb(String noPannelSupplittingOb) {
-		this.noPannelSupplittingOb = noPannelSupplittingOb;
-	}
-
-
-
-	public String getNoPannelSupplittingRem() {
-		return noPannelSupplittingRem;
-	}
-
-
-
-	public void setNoPannelSupplittingRem(String noPannelSupplittingRem) {
-		this.noPannelSupplittingRem = noPannelSupplittingRem;
-	}
-
-
-
-	public String getTotalNoOutDoorRequipmentOb() {
-		return totalNoOutDoorRequipmentOb;
-	}
-
-
-
-	public void setTotalNoOutDoorRequipmentOb(String totalNoOutDoorRequipmentOb) {
-		this.totalNoOutDoorRequipmentOb = totalNoOutDoorRequipmentOb;
-	}
-
-
-
-	public String getTotalNoOutDoorRequipmentRem() {
-		return totalNoOutDoorRequipmentRem;
-	}
-
-
-
-	public void setTotalNoOutDoorRequipmentRem(String totalNoOutDoorRequipmentRem) {
-		this.totalNoOutDoorRequipmentRem = totalNoOutDoorRequipmentRem;
-	}
-
-
-
-	public String getMainsIncomingEachPanelOb() {
-		return mainsIncomingEachPanelOb;
-	}
-
-
-
-	public void setMainsIncomingEachPanelOb(String mainsIncomingEachPanelOb) {
-		this.mainsIncomingEachPanelOb = mainsIncomingEachPanelOb;
-	}
-
-
-
-	public String getMainsIncomingEachPanelRem() {
-		return mainsIncomingEachPanelRem;
-	}
-
-
-
-	public void setMainsIncomingEachPanelRem(String mainsIncomingEachPanelRem) {
-		this.mainsIncomingEachPanelRem = mainsIncomingEachPanelRem;
-	}
-
-
-
-	public String getStreetLightPannelOb() {
-		return streetLightPannelOb;
-	}
-
-
-
-	public void setStreetLightPannelOb(String streetLightPannelOb) {
-		this.streetLightPannelOb = streetLightPannelOb;
-	}
-
-
-
-	public String getStreetLightPannelRem() {
-		return streetLightPannelRem;
-	}
-
-
-
-	public void setStreetLightPannelRem(String streetLightPannelRem) {
-		this.streetLightPannelRem = streetLightPannelRem;
-	}
-
-
-
-	public String getFeedingPowerEquipmentOb() {
-		return feedingPowerEquipmentOb;
-	}
-
-
-
-	public void setFeedingPowerEquipmentOb(String feedingPowerEquipmentOb) {
-		this.feedingPowerEquipmentOb = feedingPowerEquipmentOb;
-	}
-
-
-
-	public String getFeedingPowerEquipmentRem() {
-		return feedingPowerEquipmentRem;
-	}
-
-
-
-	public void setFeedingPowerEquipmentRem(String feedingPowerEquipmentRem) {
-		this.feedingPowerEquipmentRem = feedingPowerEquipmentRem;
-	}
-
-
-
-	public List<SpdDescription> getSpdDescription() {
-		return spdDescription;
-	}
-
-
-
-	public void setSpdDescription(List<SpdDescription> spdDescription) {
-		this.spdDescription = spdDescription;
-	}
-
-
 
 	public void setBasicLpsId(Integer basicLpsId) {
 		this.basicLpsId = basicLpsId;
@@ -289,15 +115,117 @@ public class SPD implements Serializable {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	
-	
 
-	public Integer getSpdId() {
-		return spdId;
+	public String getMainsIncomingOb() {
+		return mainsIncomingOb;
 	}
 
-	public void setSpdId(Integer spdId) {
-		this.spdId = spdId;
+	public void setMainsIncomingOb(String mainsIncomingOb) {
+		this.mainsIncomingOb = mainsIncomingOb;
+	}
+
+	public String getMainsIncomingRem() {
+		return mainsIncomingRem;
+	}
+
+	public void setMainsIncomingRem(String mainsIncomingRem) {
+		this.mainsIncomingRem = mainsIncomingRem;
+	}
+
+	public String getTotalMainsIncomingOb() {
+		return totalMainsIncomingOb;
+	}
+
+	public void setTotalMainsIncomingOb(String totalMainsIncomingOb) {
+		this.totalMainsIncomingOb = totalMainsIncomingOb;
+	}
+
+	public String getTotalMainsIncomingRem() {
+		return totalMainsIncomingRem;
+	}
+
+	public void setTotalMainsIncomingRem(String totalMainsIncomingRem) {
+		this.totalMainsIncomingRem = totalMainsIncomingRem;
+	}
+
+	public String getNoPannelSupplittingOb() {
+		return noPannelSupplittingOb;
+	}
+
+	public void setNoPannelSupplittingOb(String noPannelSupplittingOb) {
+		this.noPannelSupplittingOb = noPannelSupplittingOb;
+	}
+
+	public String getNoPannelSupplittingRem() {
+		return noPannelSupplittingRem;
+	}
+
+	public void setNoPannelSupplittingRem(String noPannelSupplittingRem) {
+		this.noPannelSupplittingRem = noPannelSupplittingRem;
+	}
+
+	public String getTotalNoOutDoorRequipmentOb() {
+		return totalNoOutDoorRequipmentOb;
+	}
+
+	public void setTotalNoOutDoorRequipmentOb(String totalNoOutDoorRequipmentOb) {
+		this.totalNoOutDoorRequipmentOb = totalNoOutDoorRequipmentOb;
+	}
+
+	public String getTotalNoOutDoorRequipmentRem() {
+		return totalNoOutDoorRequipmentRem;
+	}
+
+	public void setTotalNoOutDoorRequipmentRem(String totalNoOutDoorRequipmentRem) {
+		this.totalNoOutDoorRequipmentRem = totalNoOutDoorRequipmentRem;
+	}
+
+	public String getMainsIncomingEachPanelOb() {
+		return mainsIncomingEachPanelOb;
+	}
+
+	public void setMainsIncomingEachPanelOb(String mainsIncomingEachPanelOb) {
+		this.mainsIncomingEachPanelOb = mainsIncomingEachPanelOb;
+	}
+
+	public String getMainsIncomingEachPanelRem() {
+		return mainsIncomingEachPanelRem;
+	}
+
+	public void setMainsIncomingEachPanelRem(String mainsIncomingEachPanelRem) {
+		this.mainsIncomingEachPanelRem = mainsIncomingEachPanelRem;
+	}
+
+	public String getStreetLightPannelOb() {
+		return streetLightPannelOb;
+	}
+
+	public void setStreetLightPannelOb(String streetLightPannelOb) {
+		this.streetLightPannelOb = streetLightPannelOb;
+	}
+
+	public String getStreetLightPannelRem() {
+		return streetLightPannelRem;
+	}
+
+	public void setStreetLightPannelRem(String streetLightPannelRem) {
+		this.streetLightPannelRem = streetLightPannelRem;
+	}
+
+	public String getFeedingPowerEquipmentOb() {
+		return feedingPowerEquipmentOb;
+	}
+
+	public void setFeedingPowerEquipmentOb(String feedingPowerEquipmentOb) {
+		this.feedingPowerEquipmentOb = feedingPowerEquipmentOb;
+	}
+
+	public String getFeedingPowerEquipmentRem() {
+		return feedingPowerEquipmentRem;
+	}
+
+	public void setFeedingPowerEquipmentRem(String feedingPowerEquipmentRem) {
+		this.feedingPowerEquipmentRem = feedingPowerEquipmentRem;
 	}
 
 	public LocalDateTime getCreatedDate() {
@@ -331,6 +259,14 @@ public class SPD implements Serializable {
 	public void setUpdatedDate(LocalDateTime updatedDate) {
 		this.updatedDate = updatedDate;
 	}
-	
+
+	public List<SpdDescription> getSpdDescription() {
+		return spdDescription;
+	}
+
+	public void setSpdDescription(List<SpdDescription> spdDescription) {
+		this.spdDescription = spdDescription;
+	}
+
 	
 }

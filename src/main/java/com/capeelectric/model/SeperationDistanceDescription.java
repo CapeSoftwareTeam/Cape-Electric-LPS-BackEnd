@@ -44,6 +44,15 @@ public class SeperationDistanceDescription {
 	@Column(name = "UPDATED_DATE")
 	private LocalDateTime updatedDate;
 
+	
+	public Integer getSeperationDistanceDescId() {
+		return seperationDistanceDescId;
+	}
+
+	public void setSeperationDistanceDescId(Integer seperationDistanceDescId) {
+		this.seperationDistanceDescId = seperationDistanceDescId;
+	}
+
 	public Integer getBasicLpsId() {
 		return basicLpsId;
 	}

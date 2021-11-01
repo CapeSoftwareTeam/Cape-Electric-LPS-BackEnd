@@ -9,7 +9,6 @@ import java.util.Optional;
 import org.springframework.data.repository.CrudRepository;
 
 import com.capeelectric.model.BasicLps;
-import com.capeelectric.model.Register;
 
 
 /**

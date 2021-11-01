@@ -44,6 +44,15 @@ public class EarthStudDescription {
 	@Column(name = "UPDATED_DATE")
 	private LocalDateTime updatedDate;
 
+	
+	public Integer getEarthStudDescId() {
+		return earthStudDescId;
+	}
+
+	public void setEarthStudDescId(Integer earthStudDescId) {
+		this.earthStudDescId = earthStudDescId;
+	}
+
 	public Integer getBasicLpsId() {
 		return basicLpsId;
 	}

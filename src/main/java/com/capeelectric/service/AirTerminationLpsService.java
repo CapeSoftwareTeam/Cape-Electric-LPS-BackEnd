@@ -3,8 +3,6 @@ package com.capeelectric.service;
 import java.util.List;
 
 import com.capeelectric.exception.AirTerminationException;
-import com.capeelectric.exception.BasicLpsException;
-import com.capeelectric.model.BasicLps;
 import com.capeelectric.model.LpsAirDiscription;
 
 /**

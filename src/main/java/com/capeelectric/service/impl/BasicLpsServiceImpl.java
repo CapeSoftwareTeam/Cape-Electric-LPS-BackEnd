@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import com.capeelectric.controller.BasicLpsController;
 import com.capeelectric.exception.BasicLpsException;
 import com.capeelectric.model.BasicLps;
-import com.capeelectric.model.Register;
 import com.capeelectric.repository.BasicLpsRepository;
 import com.capeelectric.service.BasicLpsService;
 import com.capeelectric.util.UserFullName;
@@ -49,7 +48,7 @@ public class BasicLpsServiceImpl implements BasicLpsService {
 				}
 				else {
 					//logger.debug("Client name already exists");
-					throw new BasicLpsException("Client name already exists");
+					throw new BasicLpsException("Client name "+basicLps.getClientName()+" is already exists");
 				}
 			
 		} else {
@@ -73,4 +72,26 @@ public class BasicLpsServiceImpl implements BasicLpsService {
 		}
 	}
 	
+	@Override
+	public void updateBasicLpsDetails(BasicLps basicLps) throws BasicLpsException {
+
+		if (basicLps != null && basicLps.getBasicLpsId() != null && basicLps.getBasicLpsId() != 0
+				&& basicLps.getBasicLpsDescription() != null) {
+			Optional<BasicLps> basicLpsRepo = basicLpsRepository
+					.findByBasicLpsId(basicLps.getBasicLpsId());
+			if (basicLpsRepo.isPresent()
+					&& basicLpsRepo.get().getBasicLpsId().equals(basicLps.getBasicLpsId())) {
+				basicLps.setUpdatedDate(LocalDateTime.now());
+				basicLps.setUpdatedBy(userFullName.findByUserName(basicLps.getUserName()));
+				basicLpsRepository.save(basicLps);
+			} else {
+				throw new BasicLpsException("Given Basic Lps Id is Invalid");
+			}
+
+		} else {
+			throw new BasicLpsException("Invalid inputs");
+		}
+	}
+	
 }
+	

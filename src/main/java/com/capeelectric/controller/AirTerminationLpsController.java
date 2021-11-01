@@ -16,17 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.capeelectric.exception.AirTerminationException;
-import com.capeelectric.exception.BasicLpsException;
-import com.capeelectric.exception.PeriodicTestingException;
-import com.capeelectric.model.BasicLps;
 import com.capeelectric.model.LpsAirDiscription;
-import com.capeelectric.model.TestingReport;
 import com.capeelectric.service.AirTerminationLpsService;
-import com.capeelectric.service.BasicLpsService;
-import com.itextpdf.text.log.SysoCounter;
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/lps/v2")
 public class AirTerminationLpsController {
 
 	private static final Logger logger = LoggerFactory.getLogger(AirTerminationLpsController.class);

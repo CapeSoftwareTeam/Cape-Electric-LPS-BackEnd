@@ -75,4 +75,26 @@ public class SPDServiceImpl implements SPDService{
 			throw new SPDException("Invalid Inputs");
 		}
 	}
+	
+	@Override
+	public void updateSpdDetails(SPD spdDesc) throws SPDException {
+
+		if (spdDesc != null && spdDesc.getSpdId() != null
+				&& spdDesc.getSpdId() != 0 && spdDesc.getBasicLpsId() != null
+				&& spdDesc.getBasicLpsId() != 0) {
+			Optional<SPD> spdRepo = spdRepository
+					.findById(spdDesc.getSpdId());
+			if (spdRepo.isPresent()
+					&& spdRepo.get().getBasicLpsId().equals(spdDesc.getBasicLpsId())) {
+				spdDesc.setUpdatedDate(LocalDateTime.now());
+				spdDesc.setUpdatedBy(userFullName.findByUserName(spdDesc.getUserName()));
+				spdRepository.save(spdDesc);
+			} else {
+				throw new SPDException("Given BasicLpsId and SPD Id is Invalid");
+			}
+
+		} else {
+			throw new SPDException("Invalid inputs");
+		}
+	}
 }

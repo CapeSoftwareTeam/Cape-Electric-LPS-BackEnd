@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -51,5 +52,15 @@ public class DownConductorController {
 		logger.info("started retrieveDownConductor function UserName : {}, SiteId : {}", userName, basicLpsId);
 		return new ResponseEntity<List<DownConductorDescription>>(
 				downConductorService.retrieveDownConductorDetails(userName, basicLpsId), HttpStatus.OK);
+	}
+	
+	@PutMapping("/updateDownConductor")
+	public ResponseEntity<String> updateDownConductor(@RequestBody DownConductorDescription downConductorDesc)
+			throws DownConductorException {
+		logger.info("called updateDownConductor function UserName : {},BasicLpsId : {},DownConductorDescId : {}",
+				downConductorDesc.getUserName(), downConductorDesc.getBasicLpsId(),
+				downConductorDesc.getDownConduDescId());
+		downConductorService.updateDownConductorDetails(downConductorDesc);
+	   return new ResponseEntity<String>("Down Conductors Details successfully Updated", HttpStatus.OK);
 	}
 }

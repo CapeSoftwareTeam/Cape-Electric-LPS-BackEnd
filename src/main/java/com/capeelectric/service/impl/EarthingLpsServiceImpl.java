@@ -75,4 +75,26 @@ public class EarthingLpsServiceImpl implements EarthingLpsService {
 			throw new EarthingLpsException("Invalid Inputs");
 		}
 	}
+	
+	@Override
+	public void updateEarthingLpsDetails(EarthingLpsDescription earthingLpsDesc) throws EarthingLpsException {
+
+		if (earthingLpsDesc != null && earthingLpsDesc.getEarthingLpsDescId() != null
+				&& earthingLpsDesc.getEarthingLpsDescId() != 0 && earthingLpsDesc.getBasicLpsId() != null
+				&& earthingLpsDesc.getBasicLpsId() != 0) {
+			Optional<EarthingLpsDescription> earthingLpsRepo = earthingLpsRepository
+					.findById(earthingLpsDesc.getEarthingLpsDescId());
+			if (earthingLpsRepo.isPresent()
+					&& earthingLpsRepo.get().getBasicLpsId().equals(earthingLpsDesc.getBasicLpsId())) {
+				earthingLpsDesc.setUpdatedDate(LocalDateTime.now());
+				earthingLpsDesc.setUpdatedBy(userFullName.findByUserName(earthingLpsDesc.getUserName()));
+				earthingLpsRepository.save(earthingLpsDesc);
+			} else {
+				throw new EarthingLpsException("Given BasicLpsId and Earthing Lps Id is Invalid");
+			}
+
+		} else {
+			throw new EarthingLpsException("Invalid inputs");
+		}
+	}
 }

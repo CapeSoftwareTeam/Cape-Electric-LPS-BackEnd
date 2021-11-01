@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -51,5 +52,15 @@ private static final Logger logger = LoggerFactory.getLogger(EarthingLpsControll
 		logger.info("started retrieveEarthingLps function UserName : {}, SiteId : {}", userName, basicLpsId);
 		return new ResponseEntity<List<EarthingLpsDescription>>(
 				earthingLpsService.retrieveEarthingLpsDetails(userName, basicLpsId), HttpStatus.OK);
+	}
+	
+	@PutMapping("/updateEarthingLps")
+	public ResponseEntity<String> updateEarthingLps(@RequestBody EarthingLpsDescription earthingLpsDescription)
+			throws EarthingLpsException {
+		logger.info("called updateEarthingLps function UserName : {},BasicLpsId : {},EarthingLpsDescId : {}",
+				earthingLpsDescription.getUserName(), earthingLpsDescription.getBasicLpsId(),
+				earthingLpsDescription.getEarthingLpsDescId());
+		earthingLpsService.updateEarthingLpsDetails(earthingLpsDescription);
+	   return new ResponseEntity<String>("Earthing LPS Details successfully Updated", HttpStatus.OK);
 	}
 }

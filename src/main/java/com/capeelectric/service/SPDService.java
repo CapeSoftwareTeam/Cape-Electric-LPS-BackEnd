@@ -21,5 +21,7 @@ public interface SPDService {
 
 	public List<SPD> retrieveSPDDetails(String userName, Integer basicLpsId)
 			throws SPDException;
+	
+	void updateSpdDetails(SPD spdDesc) throws SPDException;
 
 }

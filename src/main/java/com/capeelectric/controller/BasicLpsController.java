@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,7 +28,7 @@ import com.capeelectric.service.BasicLpsService;
  */
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/lps/v2")
 public class BasicLpsController {
 
 	private static final Logger logger = LoggerFactory.getLogger(BasicLpsController.class);
@@ -49,6 +50,15 @@ public class BasicLpsController {
 		logger.info("called retrieveBasicLpsDetails function UserName: {}, basicLpsId : {}", userName, basicLpsId);
 		return new ResponseEntity<List<BasicLps>>(basicLpsService.retrieveBasicLpsDetails(userName, basicLpsId),
 				HttpStatus.OK);
+	}
+	
+	@PutMapping("/updateBasicLps")
+	public ResponseEntity<String> updateBasicLpsDetails(@RequestBody BasicLps basicLps)
+			throws BasicLpsException {
+		logger.info("called updateBasicLpsDetails function UserName : {},BasicLpsId : {}", basicLps.getUserName(),
+				basicLps.getBasicLpsId());
+		basicLpsService.updateBasicLpsDetails(basicLps);
+		return new ResponseEntity<String>("Basic Lps Details Updated Successfully", HttpStatus.OK);
 	}
 	
 

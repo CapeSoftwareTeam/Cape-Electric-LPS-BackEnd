@@ -44,6 +44,15 @@ public class EarthingLpsDescription {
 	@Column(name = "UPDATED_DATE")
 	private LocalDateTime updatedDate;
 
+	
+	public Integer getEarthingLpsDescId() {
+		return earthingLpsDescId;
+	}
+
+	public void setEarthingLpsDescId(Integer earthingLpsDescId) {
+		this.earthingLpsDescId = earthingLpsDescId;
+	}
+
 	public Integer getBasicLpsId() {
 		return basicLpsId;
 	}

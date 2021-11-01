@@ -16,7 +16,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name = "BRIDGINGDESCRIPTION_TABLE")
-public class BridzingDescription implements Serializable  {
+public class BridgingDescription implements Serializable  {
     
 	private static final long serialVersionUID = 1L;
 	

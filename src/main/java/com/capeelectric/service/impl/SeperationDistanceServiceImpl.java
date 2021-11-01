@@ -75,4 +75,26 @@ public class SeperationDistanceServiceImpl implements SeperationDistanceService{
 			throw new SeperationDistanceException("Invalid Inputs");
 		}
 	}
+	
+	@Override
+	public void updateSeperationDetails(SeperationDistanceDescription seperationDistanceDesc) throws SeperationDistanceException {
+
+		if (seperationDistanceDesc != null && seperationDistanceDesc.getSeperationDistanceDescId() != null
+				&& seperationDistanceDesc.getSeperationDistanceDescId() != 0 && seperationDistanceDesc.getBasicLpsId() != null
+				&& seperationDistanceDesc.getBasicLpsId() != 0) {
+			Optional<SeperationDistanceDescription> seperationDistanceRepo = seperationDistanceRepository
+					.findById(seperationDistanceDesc.getSeperationDistanceDescId());
+			if (seperationDistanceRepo.isPresent()
+					&& seperationDistanceRepo.get().getBasicLpsId().equals(seperationDistanceDesc.getBasicLpsId())) {
+				seperationDistanceDesc.setUpdatedDate(LocalDateTime.now());
+				seperationDistanceDesc.setUpdatedBy(userFullName.findByUserName(seperationDistanceDesc.getUserName()));
+				seperationDistanceRepository.save(seperationDistanceDesc);
+			} else {
+				throw new SeperationDistanceException("Given BasicLpsId and Seperation Distance Id is Invalid");
+			}
+
+		} else {
+			throw new SeperationDistanceException("Invalid inputs");
+		}
+	}
 }

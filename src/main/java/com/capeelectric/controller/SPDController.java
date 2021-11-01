@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -53,5 +54,15 @@ public class SPDController {
 		logger.info("started retrieveSPDDetails function UserName : {}, SiteId : {}", userName, basicLpsId);
 		return new ResponseEntity<List<SPD>>(
 				SPDService.retrieveSPDDetails(userName, basicLpsId), HttpStatus.OK);
+	}
+	
+	@PutMapping("/updateSpdDetails")
+	public ResponseEntity<String> updateSpdDetails(@RequestBody SPD SPDDesc)
+			throws SPDException {
+		logger.info("called updateEarthingLps function UserName : {},BasicLpsId : {},SpdId : {}",
+				SPDDesc.getUserName(), SPDDesc.getBasicLpsId(),
+				SPDDesc.getSpdId());
+		SPDService.updateSpdDetails(SPDDesc);
+	   return new ResponseEntity<String>("SPD Details successfully Updated", HttpStatus.OK);
 	}
 }

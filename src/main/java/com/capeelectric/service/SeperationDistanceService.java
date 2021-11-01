@@ -21,4 +21,6 @@ public interface SeperationDistanceService {
 
 	public List<SeperationDistanceDescription> retrieveSeperationDetails(String userName, Integer basicLpsId)
 			throws SeperationDistanceException;
+	
+	public void updateSeperationDetails(SeperationDistanceDescription seperationDistanceDesc) throws SeperationDistanceException;
 }

@@ -74,4 +74,26 @@ private static final Logger logger = LoggerFactory.getLogger(EarthStudServiceImp
 			throw new EarthStudException("Invalid Inputs");
 		}
 	}
+		
+	@Override
+	public void updateEarthStudDetails(EarthStudDescription earthStudDescription) throws EarthStudException {
+
+		if (earthStudDescription != null && earthStudDescription.getEarthStudDescId() != null
+				&& earthStudDescription.getEarthStudDescId() != 0 && earthStudDescription.getBasicLpsId() != null
+				&& earthStudDescription.getBasicLpsId() != 0) {
+			Optional<EarthStudDescription> earthStudRepo = earthStudRepository
+					.findById(earthStudDescription.getEarthStudDescId());
+			if (earthStudRepo.isPresent()
+					&& earthStudRepo.get().getBasicLpsId().equals(earthStudDescription.getBasicLpsId())) {
+				earthStudDescription.setUpdatedDate(LocalDateTime.now());
+				earthStudDescription.setUpdatedBy(userFullName.findByUserName(earthStudDescription.getUserName()));
+				earthStudRepository.save(earthStudDescription);
+			} else {
+				throw new EarthStudException("Given BasicLpsId and Earth Stud Id is Invalid");
+			}
+
+		} else {
+			throw new EarthStudException("Invalid inputs");
+		}
+	}
 }
