@@ -20,7 +20,7 @@ import com.capeelectric.model.LpsAirDiscription;
 import com.capeelectric.service.AirTerminationLpsService;
 
 @RestController
-@RequestMapping("/api/lps/v2")
+@RequestMapping("/api/lps/v1")
 public class AirTerminationLpsController {
 
 	private static final Logger logger = LoggerFactory.getLogger(AirTerminationLpsController.class);

@@ -30,7 +30,7 @@ import com.capeelectric.service.EarthStudService;
  */
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/lps/v1")
 public class EarthStudController {
 
 	private static final Logger logger = LoggerFactory.getLogger(EarthStudController.class);

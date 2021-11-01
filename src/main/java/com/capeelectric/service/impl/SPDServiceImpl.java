@@ -12,8 +12,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.capeelectric.exception.EarthStudException;
+import com.capeelectric.exception.EarthingLpsException;
 import com.capeelectric.exception.SPDException;
+import com.capeelectric.model.BasicLps;
+import com.capeelectric.model.EarthStudDescription;
 import com.capeelectric.model.SPD;
+import com.capeelectric.repository.BasicLpsRepository;
 import com.capeelectric.repository.SPDRepository;
 import com.capeelectric.service.SPDService;
 import com.capeelectric.util.UserFullName;
@@ -31,6 +36,9 @@ public class SPDServiceImpl implements SPDService{
 	private SPDRepository spdRepository;
 	
 	@Autowired
+	private BasicLpsRepository basicLpsRepository;
+	
+	@Autowired
 	private UserFullName userFullName;
 	
 	@Override
@@ -39,20 +47,26 @@ public class SPDServiceImpl implements SPDService{
 		if (spdDesc != null && spdDesc.getUserName() != null
 				&& !spdDesc.getUserName().isEmpty() && spdDesc.getBasicLpsId() != null
 				&& spdDesc.getBasicLpsId() != 0) {
-			Optional<SPD> spdRepo = spdRepository
-					.findByBasicLpsId(spdDesc.getBasicLpsId());
-			if (!spdRepo.isPresent()
-					|| !spdRepo.get().getBasicLpsId().equals(spdDesc.getBasicLpsId())) {
-				
-				spdDesc.setCreatedDate(LocalDateTime.now());
-				spdDesc.setUpdatedDate(LocalDateTime.now());
-				spdDesc.setCreatedBy(userFullName.findByUserName(spdDesc.getUserName()));
-				spdDesc.setUpdatedBy(userFullName.findByUserName(spdDesc.getUserName()));
-				spdRepository.save(spdDesc);
-			} else {
-				throw new SPDException("Basic LPS Id Already Available,Create New Basic Id");
+			Optional<BasicLps> basicLpsRepo = basicLpsRepository.findByBasicLpsId(spdDesc.getBasicLpsId());
+			if(basicLpsRepo.isPresent()
+					&& basicLpsRepo.get().getBasicLpsId().equals(spdDesc.getBasicLpsId())) {
+				Optional<SPD> spdRepo = spdRepository
+						.findByBasicLpsId(spdDesc.getBasicLpsId());
+				if (!spdRepo.isPresent()
+						|| !spdRepo.get().getBasicLpsId().equals(spdDesc.getBasicLpsId())) {
+					
+					spdDesc.setCreatedDate(LocalDateTime.now());
+					spdDesc.setUpdatedDate(LocalDateTime.now());
+					spdDesc.setCreatedBy(userFullName.findByUserName(spdDesc.getUserName()));
+					spdDesc.setUpdatedBy(userFullName.findByUserName(spdDesc.getUserName()));
+					spdRepository.save(spdDesc);
+				} else {
+					throw new SPDException("Basic LPS Id Already Available.Create New Basic Id");
+				}
 			}
-			
+			else {
+				throw new SPDException("Given Basic LPS Id is Not Registered in Basic LPS");
+			}
 		}
 		else {
 			throw new SPDException("Invalid Inputs");
@@ -90,7 +104,7 @@ public class SPDServiceImpl implements SPDService{
 				spdDesc.setUpdatedBy(userFullName.findByUserName(spdDesc.getUserName()));
 				spdRepository.save(spdDesc);
 			} else {
-				throw new SPDException("Given BasicLpsId and SPD Id is Invalid");
+				throw new SPDException("Given Basic LPS Id and SPD Id is Invalid");
 			}
 
 		} else {

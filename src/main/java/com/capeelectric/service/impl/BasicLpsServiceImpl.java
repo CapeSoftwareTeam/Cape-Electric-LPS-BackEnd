@@ -48,7 +48,7 @@ public class BasicLpsServiceImpl implements BasicLpsService {
 				}
 				else {
 					//logger.debug("Client name already exists");
-					throw new BasicLpsException("Client name "+basicLps.getClientName()+" is already exists");
+					throw new BasicLpsException("Client name "+basicLps.getClientName()+" already exists");
 				}
 			
 		} else {
@@ -85,7 +85,7 @@ public class BasicLpsServiceImpl implements BasicLpsService {
 				basicLps.setUpdatedBy(userFullName.findByUserName(basicLps.getUserName()));
 				basicLpsRepository.save(basicLps);
 			} else {
-				throw new BasicLpsException("Given Basic Lps Id is Invalid");
+				throw new BasicLpsException("Given Basic LPS Id is Invalid");
 			}
 
 		} else {

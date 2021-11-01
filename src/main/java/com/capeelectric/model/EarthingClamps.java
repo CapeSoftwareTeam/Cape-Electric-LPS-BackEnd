@@ -64,6 +64,24 @@ private static final long serialVersionUID = 1L;
 	@Column(name = "TOTALNO_CLAMPSINREM")
 	private String  totalNoClampsInRem;
 	
+	@Column(name = "INSPECTED_CLAMPSINOB")
+	private String  inspectedClampsInOb;
+	
+	@Column(name = "INSPECTED_CLAMPSINREM")
+	private String  inspectedClampsInRem;
+	
+	@Column(name = "INSPECTED_PASSEDINOB")
+	private String  InspectionPassedInOb;
+	
+	@Column(name = "INSPECTED_PASSEDINREM")
+	private String  InspectionPassedInRem;
+	
+	@Column(name = "INSPECTED_FAILEDINOB")
+	private String  InspectionFailedInOb;
+	
+	@Column(name = "INSPECTED_FAILEDINREM")
+	private String  InspectionFailedInRem;
+	
 	
 	@JsonBackReference
 	@ManyToOne(cascade = CascadeType.ALL)
@@ -209,6 +227,68 @@ private static final long serialVersionUID = 1L;
 	public void setEarthingLpsDescription(EarthingLpsDescription earthingLpsDescription) {
 		this.earthingLpsDescription = earthingLpsDescription;
 	}
+
+
+	public String getInspectedClampsInOb() {
+		return inspectedClampsInOb;
+	}
+
+
+	public void setInspectedClampsInOb(String inspectedClampsInOb) {
+		this.inspectedClampsInOb = inspectedClampsInOb;
+	}
+
+
+	public String getInspectedClampsInRem() {
+		return inspectedClampsInRem;
+	}
+
+
+	public void setInspectedClampsInRem(String inspectedClampsInRem) {
+		this.inspectedClampsInRem = inspectedClampsInRem;
+	}
+
+
+	public String getInspectionPassedInOb() {
+		return InspectionPassedInOb;
+	}
+
+
+	public void setInspectionPassedInOb(String inspectionPassedInOb) {
+		InspectionPassedInOb = inspectionPassedInOb;
+	}
+
+
+	public String getInspectionPassedInRem() {
+		return InspectionPassedInRem;
+	}
+
+
+	public void setInspectionPassedInRem(String inspectionPassedInRem) {
+		InspectionPassedInRem = inspectionPassedInRem;
+	}
+
+
+	public String getInspectionFailedInOb() {
+		return InspectionFailedInOb;
+	}
+
+
+	public void setInspectionFailedInOb(String inspectionFailedInOb) {
+		InspectionFailedInOb = inspectionFailedInOb;
+	}
+
+
+	public String getInspectionFailedInRem() {
+		return InspectionFailedInRem;
+	}
+
+
+	public void setInspectionFailedInRem(String inspectionFailedInRem) {
+		InspectionFailedInRem = inspectionFailedInRem;
+	}
+	
+	
 
 	
 }

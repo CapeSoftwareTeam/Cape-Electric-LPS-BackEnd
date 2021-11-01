@@ -25,8 +25,8 @@ public class EarthElectrodeChamber  implements Serializable{
 	@Column(name = "EARTHELECTRODECHAMBER_ID")
 	private Integer earthingElectrodeChamberId;
 	
-	@Column(name = "PSYSICAL_INSPECTIONOB")
-	private String psysicalInspeOb;
+	@Column(name = "PHYSICAL_INSPECTIONOB")
+	private String physicalInspeOb;
 	
 	@Column(name = "PSYSICAL_INSPECTIONREM")
 	private String psysicalInspeRem;
@@ -61,11 +61,24 @@ public class EarthElectrodeChamber  implements Serializable{
 	@Column(name = "TOTAL_CHAMBERSNOREM")
 	private String totalChamberNoRem;
 	
-	@Column(name = "EARTH_ELECTRODEBURIEDOB")
-	private String earthElectrodeBuriedOb;
+	@Column(name = "INSPECTED_CHAMBERINOB")
+	private String  inspectedChamberInOb;
+	
+	@Column(name = "INSPECTED_CHAMBERINREM")
+	private String  inspectedChamberInRem;
+	
+	@Column(name = "INSPECTED_PASSEDINOB")
+	private String  InspectionPassedInOb;
+	
+	@Column(name = "INSPECTED_PASSEDINREM")
+	private String  InspectionPassedInRem;
+	
+	@Column(name = "INSPECTED_FAILEDINOB")
+	private String  InspectionFailedInOb;
+	
+	@Column(name = "INSPECTED_FAILEDINREM")
+	private String  InspectionFailedInRem;
 
-	@Column(name = "EARTH_ELECTRODEBURIEDREM")
-	private String earthElectrodeBuriedRem;
 	
 	@JsonBackReference
 	@ManyToOne(cascade = CascadeType.ALL)
@@ -79,14 +92,6 @@ public class EarthElectrodeChamber  implements Serializable{
 
 	public void setEarthingElectrodeChamberId(Integer earthingElectrodeChamberId) {
 		this.earthingElectrodeChamberId = earthingElectrodeChamberId;
-	}
-
-	public String getPsysicalInspeOb() {
-		return psysicalInspeOb;
-	}
-
-	public void setPsysicalInspeOb(String psysicalInspeOb) {
-		this.psysicalInspeOb = psysicalInspeOb;
 	}
 
 	public String getPsysicalInspeRem() {
@@ -177,22 +182,6 @@ public class EarthElectrodeChamber  implements Serializable{
 		this.totalChamberNoRem = totalChamberNoRem;
 	}
 
-	public String getEarthElectrodeBuriedOb() {
-		return earthElectrodeBuriedOb;
-	}
-
-	public void setEarthElectrodeBuriedOb(String earthElectrodeBuriedOb) {
-		this.earthElectrodeBuriedOb = earthElectrodeBuriedOb;
-	}
-
-	public String getEarthElectrodeBuriedRem() {
-		return earthElectrodeBuriedRem;
-	}
-
-	public void setEarthElectrodeBuriedRem(String earthElectrodeBuriedRem) {
-		this.earthElectrodeBuriedRem = earthElectrodeBuriedRem;
-	}
-
 	public EarthingLpsDescription getEarthingLpsDescription() {
 		return earthingLpsDescription;
 	}
@@ -200,6 +189,61 @@ public class EarthElectrodeChamber  implements Serializable{
 	public void setEarthingLpsDescription(EarthingLpsDescription earthingLpsDescription) {
 		this.earthingLpsDescription = earthingLpsDescription;
 	}
-	
+
+	public String getPhysicalInspeOb() {
+		return physicalInspeOb;
+	}
+
+	public void setPhysicalInspeOb(String physicalInspeOb) {
+		this.physicalInspeOb = physicalInspeOb;
+	}
+
+	public String getInspectedChamberInOb() {
+		return inspectedChamberInOb;
+	}
+
+	public void setInspectedChamberInOb(String inspectedChamberInOb) {
+		this.inspectedChamberInOb = inspectedChamberInOb;
+	}
+
+	public String getInspectedChamberInRem() {
+		return inspectedChamberInRem;
+	}
+
+	public void setInspectedChamberInRem(String inspectedChamberInRem) {
+		this.inspectedChamberInRem = inspectedChamberInRem;
+	}
+
+	public String getInspectionPassedInOb() {
+		return InspectionPassedInOb;
+	}
+
+	public void setInspectionPassedInOb(String inspectionPassedInOb) {
+		InspectionPassedInOb = inspectionPassedInOb;
+	}
+
+	public String getInspectionPassedInRem() {
+		return InspectionPassedInRem;
+	}
+
+	public void setInspectionPassedInRem(String inspectionPassedInRem) {
+		InspectionPassedInRem = inspectionPassedInRem;
+	}
+
+	public String getInspectionFailedInOb() {
+		return InspectionFailedInOb;
+	}
+
+	public void setInspectionFailedInOb(String inspectionFailedInOb) {
+		InspectionFailedInOb = inspectionFailedInOb;
+	}
+
+	public String getInspectionFailedInRem() {
+		return InspectionFailedInRem;
+	}
+
+	public void setInspectionFailedInRem(String inspectionFailedInRem) {
+		InspectionFailedInRem = inspectionFailedInRem;
+	}
 	
 }

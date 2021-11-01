@@ -28,7 +28,7 @@ import com.capeelectric.service.EarthingLpsService;
  *
  */
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/lps/v1")
 public class EarthingLpsController {
 
 private static final Logger logger = LoggerFactory.getLogger(EarthingLpsController.class);

@@ -88,4 +88,40 @@ public class GlobalExceptionHandler {
             ErrorMessage exceptionMessage = new ErrorMessage(e.getMessage(), e.getLocalizedMessage(), "406");
             return new ResponseEntity<ErrorMessage>(exceptionMessage, new HttpHeaders(), HttpStatus.NOT_ACCEPTABLE);
     }
+    
+    @ExceptionHandler({AirTerminationException.class})
+    public ResponseEntity<ErrorMessage> handleAirTerminationException(AirTerminationException e){
+            ErrorMessage exceptionMessage = new ErrorMessage(e.getMessage(), e.getLocalizedMessage(), "404");
+            return new ResponseEntity<ErrorMessage>(exceptionMessage, new HttpHeaders(), HttpStatus.NOT_FOUND);
+    }
+    
+    @ExceptionHandler({DownConductorException.class})
+    public ResponseEntity<ErrorMessage> handleDownConductorException(DownConductorException e){
+            ErrorMessage exceptionMessage = new ErrorMessage(e.getMessage(), e.getLocalizedMessage(), "404");
+            return new ResponseEntity<ErrorMessage>(exceptionMessage, new HttpHeaders(), HttpStatus.NOT_FOUND);
+    }
+    
+    @ExceptionHandler({EarthingLpsException.class})
+    public ResponseEntity<ErrorMessage> handleEarthingLpsException(EarthingLpsException e){
+            ErrorMessage exceptionMessage = new ErrorMessage(e.getMessage(), e.getLocalizedMessage(), "404");
+            return new ResponseEntity<ErrorMessage>(exceptionMessage, new HttpHeaders(), HttpStatus.NOT_FOUND);
+    }
+    
+    @ExceptionHandler({SPDException.class})
+    public ResponseEntity<ErrorMessage> handleSPDException(SPDException e){
+            ErrorMessage exceptionMessage = new ErrorMessage(e.getMessage(), e.getLocalizedMessage(), "404");
+            return new ResponseEntity<ErrorMessage>(exceptionMessage, new HttpHeaders(), HttpStatus.NOT_FOUND);
+    }
+    
+    @ExceptionHandler({SeperationDistanceException.class})
+    public ResponseEntity<ErrorMessage> handleSeperationDistanceException(SeperationDistanceException e){
+            ErrorMessage exceptionMessage = new ErrorMessage(e.getMessage(), e.getLocalizedMessage(), "404");
+            return new ResponseEntity<ErrorMessage>(exceptionMessage, new HttpHeaders(), HttpStatus.NOT_FOUND);
+    }
+    
+    @ExceptionHandler({EarthStudException.class})
+    public ResponseEntity<ErrorMessage> handleEarthStudException(EarthStudException e){
+            ErrorMessage exceptionMessage = new ErrorMessage(e.getMessage(), e.getLocalizedMessage(), "404");
+            return new ResponseEntity<ErrorMessage>(exceptionMessage, new HttpHeaders(), HttpStatus.NOT_FOUND);
+    }
 }

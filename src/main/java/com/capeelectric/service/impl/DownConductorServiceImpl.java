@@ -13,7 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.capeelectric.exception.DownConductorException;
+import com.capeelectric.model.BasicLps;
 import com.capeelectric.model.DownConductorDescription;
+import com.capeelectric.repository.BasicLpsRepository;
 import com.capeelectric.repository.DownConductorRepository;
 import com.capeelectric.service.DownConductorService;
 import com.capeelectric.util.UserFullName;
@@ -32,6 +34,9 @@ public class DownConductorServiceImpl implements DownConductorService{
 	private DownConductorRepository downConductorRepository;
 	
 	@Autowired
+	private BasicLpsRepository basicLpsRepository;
+	
+	@Autowired
 	private UserFullName userFullName;
 	
 	@Override
@@ -40,20 +45,26 @@ public class DownConductorServiceImpl implements DownConductorService{
 		if (downConductorDesc != null && downConductorDesc.getUserName() != null
 				&& !downConductorDesc.getUserName().isEmpty() && downConductorDesc.getBasicLpsId() != null
 				&& downConductorDesc.getBasicLpsId() != 0) {
-			Optional<DownConductorDescription> downConductorRepo = downConductorRepository
-					.findByBasicLpsId(downConductorDesc.getBasicLpsId());
-			if (!downConductorRepo.isPresent()
-					|| !downConductorRepo.get().getBasicLpsId().equals(downConductorDesc.getBasicLpsId())) {
-				
-				downConductorDesc.setCreatedDate(LocalDateTime.now());
-				downConductorDesc.setUpdatedDate(LocalDateTime.now());
-				downConductorDesc.setCreatedBy(userFullName.findByUserName(downConductorDesc.getUserName()));
-				downConductorDesc.setUpdatedBy(userFullName.findByUserName(downConductorDesc.getUserName()));
-				downConductorRepository.save(downConductorDesc);
-			} else {
-				throw new DownConductorException("Basic LPS Id Already Available,Create New Basic Id");
+			Optional<BasicLps> basicLpsRepo = basicLpsRepository.findByBasicLpsId(downConductorDesc.getBasicLpsId());
+			if(basicLpsRepo.isPresent()
+					&& basicLpsRepo.get().getBasicLpsId().equals(downConductorDesc.getBasicLpsId())) {
+				Optional<DownConductorDescription> downConductorRepo = downConductorRepository
+						.findByBasicLpsId(downConductorDesc.getBasicLpsId());
+				if (!downConductorRepo.isPresent()
+						|| !downConductorRepo.get().getBasicLpsId().equals(downConductorDesc.getBasicLpsId())) {
+					
+					downConductorDesc.setCreatedDate(LocalDateTime.now());
+					downConductorDesc.setUpdatedDate(LocalDateTime.now());
+					downConductorDesc.setCreatedBy(userFullName.findByUserName(downConductorDesc.getUserName()));
+					downConductorDesc.setUpdatedBy(userFullName.findByUserName(downConductorDesc.getUserName()));
+					downConductorRepository.save(downConductorDesc);
+				} else {
+					throw new DownConductorException("Basic LPS Id Already Available.Create New Basic Id");
+				}
 			}
-			
+			else {
+				throw new DownConductorException("Given Basic LPS Id is Not Registered in Basic LPS");
+			}
 		}
 		else {
 			throw new DownConductorException("Invalid Inputs");
@@ -91,7 +102,7 @@ public class DownConductorServiceImpl implements DownConductorService{
 				downConductorDesc.setUpdatedBy(userFullName.findByUserName(downConductorDesc.getUserName()));
 				downConductorRepository.save(downConductorDesc);
 			} else {
-				throw new DownConductorException("Given BasicLpsId and Down Conductor Id is Invalid");
+				throw new DownConductorException("Given Basic LPS Id and Down Conductor Id is Invalid");
 			}
 
 		} else {

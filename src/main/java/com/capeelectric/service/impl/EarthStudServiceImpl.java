@@ -13,7 +13,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.capeelectric.exception.EarthStudException;
+import com.capeelectric.exception.EarthingLpsException;
+import com.capeelectric.model.BasicLps;
 import com.capeelectric.model.EarthStudDescription;
+import com.capeelectric.model.EarthingLpsDescription;
+import com.capeelectric.repository.BasicLpsRepository;
 import com.capeelectric.repository.EarthStudRepository;
 import com.capeelectric.service.EarthStudService;
 import com.capeelectric.util.UserFullName;
@@ -30,6 +34,9 @@ private static final Logger logger = LoggerFactory.getLogger(EarthStudServiceImp
 	private EarthStudRepository earthStudRepository;
 	
 	@Autowired
+	private BasicLpsRepository basicLpsRepository;
+	
+	@Autowired
 	private UserFullName userFullName;
 	
 	@Override
@@ -38,20 +45,27 @@ private static final Logger logger = LoggerFactory.getLogger(EarthStudServiceImp
 		if (earthStudDescription != null && earthStudDescription.getUserName() != null
 				&& !earthStudDescription.getUserName().isEmpty() && earthStudDescription.getBasicLpsId() != null
 				&& earthStudDescription.getBasicLpsId() != 0) {
-			Optional<EarthStudDescription> earthStudRepo = earthStudRepository
-					.findByBasicLpsId(earthStudDescription.getBasicLpsId());
-			if (!earthStudRepo.isPresent()
-					|| !earthStudRepo.get().getBasicLpsId().equals(earthStudDescription.getBasicLpsId())) {
-				
-				earthStudDescription.setCreatedDate(LocalDateTime.now());
-				earthStudDescription.setUpdatedDate(LocalDateTime.now());
-				earthStudDescription.setCreatedBy(userFullName.findByUserName(earthStudDescription.getUserName()));
-				earthStudDescription.setUpdatedBy(userFullName.findByUserName(earthStudDescription.getUserName()));
-				earthStudRepository.save(earthStudDescription);
-			} else {
-				throw new EarthStudException("Basic LPS Id Already Available,Create New Basic Id");
-			}
 			
+			Optional<BasicLps> basicLpsRepo = basicLpsRepository.findByBasicLpsId(earthStudDescription.getBasicLpsId());
+			if(basicLpsRepo.isPresent()
+					&& basicLpsRepo.get().getBasicLpsId().equals(earthStudDescription.getBasicLpsId())) {
+				Optional<EarthStudDescription> earthStudRepo = earthStudRepository
+						.findByBasicLpsId(earthStudDescription.getBasicLpsId());
+				if (!earthStudRepo.isPresent()
+						|| !earthStudRepo.get().getBasicLpsId().equals(earthStudDescription.getBasicLpsId())) {
+					
+					earthStudDescription.setCreatedDate(LocalDateTime.now());
+					earthStudDescription.setUpdatedDate(LocalDateTime.now());
+					earthStudDescription.setCreatedBy(userFullName.findByUserName(earthStudDescription.getUserName()));
+					earthStudDescription.setUpdatedBy(userFullName.findByUserName(earthStudDescription.getUserName()));
+					earthStudRepository.save(earthStudDescription);
+				} else {
+					throw new EarthStudException("Basic LPS Id Already Available.Create New Basic Id");
+				}
+			}
+			else {
+				throw new EarthStudException("Given Basic LPS Id is Not Registered in Basic LPS");
+			}
 		}
 		else {
 			throw new EarthStudException("Invalid Inputs");
@@ -89,7 +103,7 @@ private static final Logger logger = LoggerFactory.getLogger(EarthStudServiceImp
 				earthStudDescription.setUpdatedBy(userFullName.findByUserName(earthStudDescription.getUserName()));
 				earthStudRepository.save(earthStudDescription);
 			} else {
-				throw new EarthStudException("Given BasicLpsId and Earth Stud Id is Invalid");
+				throw new EarthStudException("Given Basic LPS Id and Earth Stud Id is Invalid");
 			}
 
 		} else {

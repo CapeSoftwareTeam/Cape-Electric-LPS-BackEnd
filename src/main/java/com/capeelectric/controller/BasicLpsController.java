@@ -28,7 +28,7 @@ import com.capeelectric.service.BasicLpsService;
  */
 
 @RestController
-@RequestMapping("/api/lps/v2")
+@RequestMapping("/api/lps/v1")
 public class BasicLpsController {
 
 	private static final Logger logger = LoggerFactory.getLogger(BasicLpsController.class);

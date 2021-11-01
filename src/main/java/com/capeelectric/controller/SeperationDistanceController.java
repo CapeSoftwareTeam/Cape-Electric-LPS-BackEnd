@@ -28,7 +28,7 @@ import com.capeelectric.service.SeperationDistanceService;
  *
  */
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/lps/v1")
 public class SeperationDistanceController {
 
 	private static final Logger logger = LoggerFactory.getLogger(SeperationDistanceController.class);

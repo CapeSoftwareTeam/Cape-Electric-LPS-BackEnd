@@ -28,7 +28,7 @@ import com.capeelectric.service.DownConductorService;
  */
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/lps/v1")
 public class DownConductorController {
 
 	private static final Logger logger = LoggerFactory.getLogger(DownConductorController.class);

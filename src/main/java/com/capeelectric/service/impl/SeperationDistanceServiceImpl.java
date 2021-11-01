@@ -12,8 +12,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.capeelectric.exception.EarthingLpsException;
+import com.capeelectric.exception.SPDException;
 import com.capeelectric.exception.SeperationDistanceException;
+import com.capeelectric.model.BasicLps;
+import com.capeelectric.model.SPD;
 import com.capeelectric.model.SeperationDistanceDescription;
+import com.capeelectric.repository.BasicLpsRepository;
 import com.capeelectric.repository.SeperationDistanceRepository;
 import com.capeelectric.service.SeperationDistanceService;
 import com.capeelectric.util.UserFullName;
@@ -31,6 +36,9 @@ public class SeperationDistanceServiceImpl implements SeperationDistanceService{
 	private SeperationDistanceRepository seperationDistanceRepository;
 	
 	@Autowired
+	private BasicLpsRepository basicLpsRepository;
+	
+	@Autowired
 	private UserFullName userFullName;
 	
 	@Override
@@ -39,20 +47,27 @@ public class SeperationDistanceServiceImpl implements SeperationDistanceService{
 		if (seperationDistanceDesc != null && seperationDistanceDesc.getUserName() != null
 				&& !seperationDistanceDesc.getUserName().isEmpty() && seperationDistanceDesc.getBasicLpsId() != null
 				&& seperationDistanceDesc.getBasicLpsId() != 0) {
-			Optional<SeperationDistanceDescription> seperationDistanceRepo = seperationDistanceRepository
-					.findByBasicLpsId(seperationDistanceDesc.getBasicLpsId());
-			if (!seperationDistanceRepo.isPresent()
-					|| !seperationDistanceRepo.get().getBasicLpsId().equals(seperationDistanceDesc.getBasicLpsId())) {
-				
-				seperationDistanceDesc.setCreatedDate(LocalDateTime.now());
-				seperationDistanceDesc.setUpdatedDate(LocalDateTime.now());
-				seperationDistanceDesc.setCreatedBy(userFullName.findByUserName(seperationDistanceDesc.getUserName()));
-				seperationDistanceDesc.setUpdatedBy(userFullName.findByUserName(seperationDistanceDesc.getUserName()));
-				seperationDistanceRepository.save(seperationDistanceDesc);
-			} else {
-				throw new SeperationDistanceException("Basic LPS Id Already Available,Create New Basic Id");
-			}
 			
+			Optional<BasicLps> basicLpsRepo = basicLpsRepository.findByBasicLpsId(seperationDistanceDesc.getBasicLpsId());
+			if(basicLpsRepo.isPresent()
+					&& basicLpsRepo.get().getBasicLpsId().equals(seperationDistanceDesc.getBasicLpsId())) {
+				Optional<SeperationDistanceDescription> seperationDistanceRepo = seperationDistanceRepository
+						.findByBasicLpsId(seperationDistanceDesc.getBasicLpsId());
+				if (!seperationDistanceRepo.isPresent()
+						|| !seperationDistanceRepo.get().getBasicLpsId().equals(seperationDistanceDesc.getBasicLpsId())) {
+					
+					seperationDistanceDesc.setCreatedDate(LocalDateTime.now());
+					seperationDistanceDesc.setUpdatedDate(LocalDateTime.now());
+					seperationDistanceDesc.setCreatedBy(userFullName.findByUserName(seperationDistanceDesc.getUserName()));
+					seperationDistanceDesc.setUpdatedBy(userFullName.findByUserName(seperationDistanceDesc.getUserName()));
+					seperationDistanceRepository.save(seperationDistanceDesc);
+				} else {
+					throw new SeperationDistanceException("Basic LPS Id Already Available.Create New Basic Id");
+				}
+			}
+			else {
+				throw new SeperationDistanceException("Given Basic LPS Id is Not Registered in Basic LPS");
+			}
 		}
 		else {
 			throw new SeperationDistanceException("Invalid Inputs");
@@ -90,7 +105,7 @@ public class SeperationDistanceServiceImpl implements SeperationDistanceService{
 				seperationDistanceDesc.setUpdatedBy(userFullName.findByUserName(seperationDistanceDesc.getUserName()));
 				seperationDistanceRepository.save(seperationDistanceDesc);
 			} else {
-				throw new SeperationDistanceException("Given BasicLpsId and Seperation Distance Id is Invalid");
+				throw new SeperationDistanceException("Given Basic LPS Id and Seperation Distance Id is Invalid");
 			}
 
 		} else {

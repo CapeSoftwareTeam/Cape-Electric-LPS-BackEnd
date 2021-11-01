@@ -25,8 +25,8 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
  
 @NamedQueries(value = {
-		@NamedQuery(name = "AirTerminationLpsRepository.findByUserNameAndBasicLpsId", query = "select s from BasicLps s where s.userName=:userName and s.basicLpsId=:basicLpsId"),
-		@NamedQuery(name = "AirTerminationLpsRepository.findByBasicLpsId", query = "select s from BasicLps s where s.basicLpsId=:basicLpsId")
+		@NamedQuery(name = "AirTerminationLpsRepository.findByUserNameAndBasicLpsId", query = "select s from LpsAirDiscription s where s.userName=:userName and s.basicLpsId=:basicLpsId"),
+		@NamedQuery(name = "AirTerminationLpsRepository.findByBasicLpsId", query = "select s from LpsAirDiscription s where s.basicLpsId=:basicLpsId"),
 })
 public class LpsAirDiscription implements Serializable {
  

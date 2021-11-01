@@ -1096,3 +1096,4 @@ Caused by: org.hibernate.QueryException: could not resolve property: basicLpsCli
 	at org.hibernate.hql.internal.ast.QueryTranslatorImpl.analyze(QueryTranslatorImpl.java:276)
 	at org.hibernate.hql.internal.ast.QueryTranslatorImpl.doCompile(QueryTranslatorImpl.java:192)
 	... 118 common frames omitted
+2021-10-31T11:35:49.341+0530 ERROR Duplicate entry 'arun1' for key 'basic_lps_table.CLIENT_NAME'

@@ -12,8 +12,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.capeelectric.exception.DownConductorException;
 import com.capeelectric.exception.EarthingLpsException;
+import com.capeelectric.model.BasicLps;
+import com.capeelectric.model.DownConductorDescription;
 import com.capeelectric.model.EarthingLpsDescription;
+import com.capeelectric.repository.BasicLpsRepository;
 import com.capeelectric.repository.EarthingLpsRepository;
 import com.capeelectric.service.EarthingLpsService;
 import com.capeelectric.util.UserFullName;
@@ -28,6 +32,9 @@ public class EarthingLpsServiceImpl implements EarthingLpsService {
 	private static final Logger logger = LoggerFactory.getLogger(DownConductorServiceImpl.class);
 	
 	@Autowired
+	private BasicLpsRepository basicLpsRepository;
+	
+	@Autowired
 	private EarthingLpsRepository earthingLpsRepository;
 	
 	@Autowired
@@ -39,20 +46,27 @@ public class EarthingLpsServiceImpl implements EarthingLpsService {
 		if (earthingLpsDesc != null && earthingLpsDesc.getUserName() != null
 				&& !earthingLpsDesc.getUserName().isEmpty() && earthingLpsDesc.getBasicLpsId() != null
 				&& earthingLpsDesc.getBasicLpsId() != 0) {
-			Optional<EarthingLpsDescription> earthingLpsRepo = earthingLpsRepository
-					.findByBasicLpsId(earthingLpsDesc.getBasicLpsId());
-			if (!earthingLpsRepo.isPresent()
-					|| !earthingLpsRepo.get().getBasicLpsId().equals(earthingLpsDesc.getBasicLpsId())) {
-				
-				earthingLpsDesc.setCreatedDate(LocalDateTime.now());
-				earthingLpsDesc.setUpdatedDate(LocalDateTime.now());
-				earthingLpsDesc.setCreatedBy(userFullName.findByUserName(earthingLpsDesc.getUserName()));
-				earthingLpsDesc.setUpdatedBy(userFullName.findByUserName(earthingLpsDesc.getUserName()));
-				earthingLpsRepository.save(earthingLpsDesc);
-			} else {
-				throw new EarthingLpsException("Basic LPS Id Already Available,Create New Basic Id");
-			}
 			
+			Optional<BasicLps> basicLpsRepo = basicLpsRepository.findByBasicLpsId(earthingLpsDesc.getBasicLpsId());
+			if(basicLpsRepo.isPresent()
+					&& basicLpsRepo.get().getBasicLpsId().equals(earthingLpsDesc.getBasicLpsId())) {
+				Optional<EarthingLpsDescription> earthingLpsRepo = earthingLpsRepository
+						.findByBasicLpsId(earthingLpsDesc.getBasicLpsId());
+				if (!earthingLpsRepo.isPresent()
+						|| !earthingLpsRepo.get().getBasicLpsId().equals(earthingLpsDesc.getBasicLpsId())) {
+					
+					earthingLpsDesc.setCreatedDate(LocalDateTime.now());
+					earthingLpsDesc.setUpdatedDate(LocalDateTime.now());
+					earthingLpsDesc.setCreatedBy(userFullName.findByUserName(earthingLpsDesc.getUserName()));
+					earthingLpsDesc.setUpdatedBy(userFullName.findByUserName(earthingLpsDesc.getUserName()));
+					earthingLpsRepository.save(earthingLpsDesc);
+				} else {
+					throw new EarthingLpsException("Basic LPS Id Already Available.Create New Basic Id");
+				}
+			}
+			else {
+				throw new EarthingLpsException("Given Basic LPS Id is Not Registered in Basic LPS");
+			}
 		}
 		else {
 			throw new EarthingLpsException("Invalid Inputs");
@@ -90,7 +104,7 @@ public class EarthingLpsServiceImpl implements EarthingLpsService {
 				earthingLpsDesc.setUpdatedBy(userFullName.findByUserName(earthingLpsDesc.getUserName()));
 				earthingLpsRepository.save(earthingLpsDesc);
 			} else {
-				throw new EarthingLpsException("Given BasicLpsId and Earthing Lps Id is Invalid");
+				throw new EarthingLpsException("Given Basic LPS Id and Earthing LPS Id is Invalid");
 			}
 
 		} else {
