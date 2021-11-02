@@ -25,6 +25,12 @@ public class EarthingSystem implements Serializable {
 	@Column(name = "EARTHING_SYSTEM_ID")
 	private Integer earthingSystemId;
 
+	@Column(name = "BURIED_ELECTRODEOB")
+	private String buriedElectrodeOb;
+
+	@Column(name = "BURIED_ELECTRODEREM")
+	private String buriedElectrodeRem;
+
 	@Column(name = "DEPTH_OF_ELECTRODEOB")
 	private String depthOfElectrodeOb;
 
@@ -60,6 +66,30 @@ public class EarthingSystem implements Serializable {
 
 	@Column(name = "RINGEARTHWALL_DISTANCE_REM")
 	private String ringEarthWallDistanceRem;
+
+	@Column(name = "RINGEARTHWALL_EAST_OB")
+	private String ringWallEarthEastOb;
+
+	@Column(name = "RINGEARTHWALL_EAST_REM")
+	private String ringWallEarthEastRem;
+
+	@Column(name = "RINGEARTHWALL_WEST_OB")
+	private String ringWallEarthOb;
+
+	@Column(name = "RINGEARTHWALL_WEST_REM")
+	private String ringWallEarthWestRem;
+
+	@Column(name = "RINGEARTHWALL_NORTH_OB")
+	private String ringWallEarthNorthOb;
+
+	@Column(name = "RINGEARTHWALL_NORTH_REM")
+	private String ringWallEarthNorthRem;
+
+	@Column(name = "RINGEARTHWALL_SOUTH_OB")
+	private String ringWallEarthSouthOb;
+
+	@Column(name = "RINGEARTHWALL_SOUTH_REM")
+	private String ringWallEarthSouthRem;
 
 	@Column(name = "JOINTSMADE_BRAZING_OB")
 	private String jointsMadeBrazingOb;
@@ -98,6 +128,86 @@ public class EarthingSystem implements Serializable {
 
 	public Integer getEarthingSystemId() {
 		return earthingSystemId;
+	}
+
+	public String getBuriedElectrodeOb() {
+		return buriedElectrodeOb;
+	}
+
+	public void setBuriedElectrodeOb(String buriedElectrodeOb) {
+		this.buriedElectrodeOb = buriedElectrodeOb;
+	}
+
+	public String getBuriedElectrodeRem() {
+		return buriedElectrodeRem;
+	}
+
+	public void setBuriedElectrodeRem(String buriedElectrodeRem) {
+		this.buriedElectrodeRem = buriedElectrodeRem;
+	}
+
+	public String getRingWallEarthEastOb() {
+		return ringWallEarthEastOb;
+	}
+
+	public void setRingWallEarthEastOb(String ringWallEarthEastOb) {
+		this.ringWallEarthEastOb = ringWallEarthEastOb;
+	}
+
+	public String getRingWallEarthEastRem() {
+		return ringWallEarthEastRem;
+	}
+
+	public void setRingWallEarthEastRem(String ringWallEarthEastRem) {
+		this.ringWallEarthEastRem = ringWallEarthEastRem;
+	}
+
+	public String getRingWallEarthOb() {
+		return ringWallEarthOb;
+	}
+
+	public void setRingWallEarthOb(String ringWallEarthOb) {
+		this.ringWallEarthOb = ringWallEarthOb;
+	}
+
+	public String getRingWallEarthWestRem() {
+		return ringWallEarthWestRem;
+	}
+
+	public void setRingWallEarthWestRem(String ringWallEarthWestRem) {
+		this.ringWallEarthWestRem = ringWallEarthWestRem;
+	}
+
+	public String getRingWallEarthNorthOb() {
+		return ringWallEarthNorthOb;
+	}
+
+	public void setRingWallEarthNorthOb(String ringWallEarthNorthOb) {
+		this.ringWallEarthNorthOb = ringWallEarthNorthOb;
+	}
+
+	public String getRingWallEarthNorthRem() {
+		return ringWallEarthNorthRem;
+	}
+
+	public void setRingWallEarthNorthRem(String ringWallEarthNorthRem) {
+		this.ringWallEarthNorthRem = ringWallEarthNorthRem;
+	}
+
+	public String getRingWallEarthSouthOb() {
+		return ringWallEarthSouthOb;
+	}
+
+	public void setRingWallEarthSouthOb(String ringWallEarthSouthOb) {
+		this.ringWallEarthSouthOb = ringWallEarthSouthOb;
+	}
+
+	public String getRingWallEarthSouthRem() {
+		return ringWallEarthSouthRem;
+	}
+
+	public void setRingWallEarthSouthRem(String ringWallEarthSouthRem) {
+		this.ringWallEarthSouthRem = ringWallEarthSouthRem;
 	}
 
 	public void setEarthingSystemId(Integer earthingSystemId) {
