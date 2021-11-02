@@ -52,13 +52,13 @@ public class AirTerminationLpsControllerTest {
 
 	@Test
 	public void testAddAirTerminationLpsDetails() throws AirTerminationException {
-		logger.info("testAddBasicLpaDetails Function Started");
+		logger.info("testAddAirTerminationLpsDetails Function Started");
 
 		doNothing().when(airTerminationLpsServiceImpl).addAirTerminationLpsDetails(lpsAirDiscription);
 		ResponseEntity<String> addAirTerminalsDetails = airTerminationLpsController
 				.addAirTerminationLps(lpsAirDiscription);
 		equals(addAirTerminalsDetails.getBody());
-		logger.info("testAddBasicLpaDetails Function Ended");
+		logger.info("testAddAirTerminationLpsDetails Function Ended");
 	}
 
 	@Test
@@ -66,14 +66,14 @@ public class AirTerminationLpsControllerTest {
 		List<LpsAirDiscription> arrayList = new ArrayList<>();
 		arrayList.add(lpsAirDiscription);
 
-		logger.info("testretrieveAirTerminationLps Function Started");
+		logger.info("testAddAirTerminationLpsDetails Function Started");
 
 		when(airTerminationLpsServiceImpl.retrieveAirTerminationLps("LVsystem@gmail.com", 12)).thenReturn(arrayList);
 		ResponseEntity<List<LpsAirDiscription>> retrieveBasicLpsDetails = airTerminationLpsController
 				.retrieveAirTerminationLps("LVsystem@gmail.com", 12);
 		assertEquals(HttpStatus.OK, retrieveBasicLpsDetails.getStatusCode());
 
-		logger.info("testretrieveAirTerminationLps Function Ended");
+		logger.info("testAddAirTerminationLpsDetails Function Ended");
 
 	}
 
