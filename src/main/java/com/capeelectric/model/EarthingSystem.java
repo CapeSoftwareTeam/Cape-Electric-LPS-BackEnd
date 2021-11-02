@@ -74,7 +74,7 @@ public class EarthingSystem implements Serializable {
 	private String ringWallEarthEastRem;
 
 	@Column(name = "RINGEARTHWALL_WEST_OB")
-	private String ringWallEarthWestOb;
+	private String ringWallEarthOb;
 
 	@Column(name = "RINGEARTHWALL_WEST_REM")
 	private String ringWallEarthWestRem;
