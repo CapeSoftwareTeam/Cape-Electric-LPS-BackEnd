@@ -32,8 +32,6 @@ import com.capeelectric.service.impl.BasicLpsServiceImpl;
 @ExtendWith(MockitoExtension.class)
 public class AirTerminationLpsControllerTest {
 
-	
-	
 	private static final Logger logger = LoggerFactory.getLogger(AirTerminationLpsControllerTest.class);
 
 	@InjectMocks
@@ -41,10 +39,8 @@ public class AirTerminationLpsControllerTest {
 
 	@MockBean
 	private AirTerminationLpsServiceImpl airTerminationLpsServiceImpl;
-	
-	
-private LpsAirDiscription lpsAirDiscription;
-	
+
+	private LpsAirDiscription lpsAirDiscription;
 
 	{
 		lpsAirDiscription = new LpsAirDiscription();
@@ -53,17 +49,18 @@ private LpsAirDiscription lpsAirDiscription;
 		lpsAirDiscription.setUserName("Inspector@gmail.com");
 		lpsAirDiscription.setBasicLpsId(1);
 	}
-	
+
 	@Test
-	public void testAddAirTerminationLpsDetails() throws  AirTerminationException {
+	public void testAddAirTerminationLpsDetails() throws AirTerminationException {
 		logger.info("testAddBasicLpaDetails Function Started");
 
 		doNothing().when(airTerminationLpsServiceImpl).addAirTerminationLpsDetails(lpsAirDiscription);
-		ResponseEntity<String> addAirTerminalsDetails = airTerminationLpsController.addAirTerminationLps(lpsAirDiscription);
+		ResponseEntity<String> addAirTerminalsDetails = airTerminationLpsController
+				.addAirTerminationLps(lpsAirDiscription);
 		equals(addAirTerminalsDetails.getBody());
-        logger.info("testAddBasicLpaDetails Function Ended");
+		logger.info("testAddBasicLpaDetails Function Ended");
 	}
-	
+
 	@Test
 	public void testretrieveAirTerminationLps() throws AirTerminationException {
 		List<LpsAirDiscription> arrayList = new ArrayList<>();
@@ -79,10 +76,10 @@ private LpsAirDiscription lpsAirDiscription;
 		logger.info("testretrieveAirTerminationLps Function Ended");
 
 	}
-	
+
 	@Test
-	public void testUpdateAirTerminationLps() throws AirTerminationException{
-		
+	public void testUpdateAirTerminationLps() throws AirTerminationException {
+
 		logger.info("testUpdateAirTerminationLps Function Started");
 		ResponseEntity<String> expectedResponseEntity = new ResponseEntity<String>(HttpStatus.OK);
 		ResponseEntity<String> actualResponseEntity = airTerminationLpsController
@@ -90,6 +87,5 @@ private LpsAirDiscription lpsAirDiscription;
 		assertEquals(actualResponseEntity.getStatusCode(), expectedResponseEntity.getStatusCode());
 		logger.info("testUpdateAirTerminationLps Function Ended");
 	}
-	
 
 }

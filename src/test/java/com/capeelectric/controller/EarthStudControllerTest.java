@@ -28,18 +28,16 @@ import com.capeelectric.service.impl.EarthStudServiceImpl;
 @ExtendWith(SpringExtension.class)
 @ExtendWith(MockitoExtension.class)
 public class EarthStudControllerTest {
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(EarthStudControllerTest.class);
 
 	@InjectMocks
 	private EarthStudController earthStudController;
 
 	@MockBean
-	private EarthStudServiceImpl  earthStudServiceImpl;
-	
-	
-private EarthStudDescription earthStudDescription;
-	
+	private EarthStudServiceImpl earthStudServiceImpl;
+
+	private EarthStudDescription earthStudDescription;
 
 	{
 		earthStudDescription = new EarthStudDescription();
@@ -48,17 +46,17 @@ private EarthStudDescription earthStudDescription;
 		earthStudDescription.setUserName("Inspector@gmail.com");
 		earthStudDescription.setBasicLpsId(1);
 	}
-	
+
 	@Test
-	public void testAddEarthStudDetails() throws  EarthStudException {
+	public void testAddEarthStudDetails() throws EarthStudException {
 		logger.info("testAddEarthStudDetails Function Started");
 
 		doNothing().when(earthStudServiceImpl).addEarthStudDetails(earthStudDescription);
 		ResponseEntity<String> addAirTerminalsDetails = earthStudController.addEarthStud(earthStudDescription);
 		equals(addAirTerminalsDetails.getBody());
-        logger.info("testAddEarthStudDetails Function Ended");
+		logger.info("testAddEarthStudDetails Function Ended");
 	}
-	
+
 	@Test
 	public void testRetrieveEarthStudDetails() throws EarthStudException {
 		List<EarthStudDescription> arrayList = new ArrayList<>();
@@ -74,13 +72,13 @@ private EarthStudDescription earthStudDescription;
 		logger.info("testRetrieveEarthStudDetails Function Ended");
 
 	}
+
 	@Test
-	public void testUpdateEarthStud() throws   EarthStudException{
-		
+	public void testUpdateEarthStud() throws EarthStudException {
+
 		logger.info("testUpdateEarthStud Function Started");
 		ResponseEntity<String> expectedResponseEntity = new ResponseEntity<String>(HttpStatus.OK);
-		ResponseEntity<String> actualResponseEntity = earthStudController
-				.updateEarthStud(earthStudDescription);
+		ResponseEntity<String> actualResponseEntity = earthStudController.updateEarthStud(earthStudDescription);
 		assertEquals(actualResponseEntity.getStatusCode(), expectedResponseEntity.getStatusCode());
 		logger.info("testUpdateEarthStud Function Ended");
 	}

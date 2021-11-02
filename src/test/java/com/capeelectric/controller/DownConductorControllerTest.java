@@ -29,18 +29,15 @@ import com.capeelectric.service.impl.DownConductorServiceImpl;
 @ExtendWith(MockitoExtension.class)
 public class DownConductorControllerTest {
 
-	
 	private static final Logger logger = LoggerFactory.getLogger(DownConductorControllerTest.class);
 
 	@InjectMocks
 	private DownConductorController downConductorController;
 
 	@MockBean
-	private DownConductorServiceImpl  downConductorServiceImpl;
-	
-	
-private DownConductorDescription downConductorDescription;
-	
+	private DownConductorServiceImpl downConductorServiceImpl;
+
+	private DownConductorDescription downConductorDescription;
 
 	{
 		downConductorDescription = new DownConductorDescription();
@@ -49,22 +46,20 @@ private DownConductorDescription downConductorDescription;
 		downConductorDescription.setUserName("Inspector@gmail.com");
 		downConductorDescription.setBasicLpsId(1);
 	}
-	
-	
+
 	@Test
-	public void testAddDownConductorsDetails() throws   DownConductorException {
+	public void testAddDownConductorsDetails() throws DownConductorException {
 		logger.info("testAddDownConductorsDetails Function Started");
 
 		doNothing().when(downConductorServiceImpl).addDownConductorsDetails(downConductorDescription);
-		ResponseEntity<String> addAirTerminalsDetails = downConductorController.addDownConductors(downConductorDescription);
+		ResponseEntity<String> addAirTerminalsDetails = downConductorController
+				.addDownConductors(downConductorDescription);
 		equals(addAirTerminalsDetails.getBody());
-        logger.info("testAddDownConductorsDetails Function Ended");
+		logger.info("testAddDownConductorsDetails Function Ended");
 	}
-	
 
-	
 	@Test
-	public void testRetrieveDownConductor() throws  DownConductorException {
+	public void testRetrieveDownConductor() throws DownConductorException {
 		List<DownConductorDescription> arrayList = new ArrayList<>();
 		arrayList.add(downConductorDescription);
 
@@ -78,10 +73,10 @@ private DownConductorDescription downConductorDescription;
 		logger.info("testRetrieveDownConductor Function Ended");
 
 	}
-	
+
 	@Test
-	public void testUpdateDownConductor() throws  DownConductorException{
-		
+	public void testUpdateDownConductor() throws DownConductorException {
+
 		logger.info("testUpdateDownConductor Function Started");
 		ResponseEntity<String> expectedResponseEntity = new ResponseEntity<String>(HttpStatus.OK);
 		ResponseEntity<String> actualResponseEntity = downConductorController
@@ -89,5 +84,5 @@ private DownConductorDescription downConductorDescription;
 		assertEquals(actualResponseEntity.getStatusCode(), expectedResponseEntity.getStatusCode());
 		logger.info("testUpdateDownConductor Function Ended");
 	}
-	
+
 }

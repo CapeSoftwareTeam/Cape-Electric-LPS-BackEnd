@@ -76,17 +76,16 @@ public class BasicLpsControllerTest {
 //	
 //
 //	}
-	
+
 	@Test
-	public void testAddBasicLpsDetails() throws   BasicLpsException {
+	public void testAddBasicLpsDetails() throws BasicLpsException {
 		logger.info("testAddDownConductorsDetails Function Started");
 
 		doNothing().when(basicLpsServiceImpl).addBasicLpsDetails(basicLps);
 		ResponseEntity<BasicLps> addAirTerminalsDetails = basicLpsController.addBasicLpsDetails(basicLps);
 		equals(addAirTerminalsDetails.getBody());
-        logger.info("testAddDownConductorsDetails Function Ended");
+		logger.info("testAddDownConductorsDetails Function Ended");
 	}
-	
 
 //	@Test
 //	public void testUpdatePeriodicTesting() throws BasicLpsException {
