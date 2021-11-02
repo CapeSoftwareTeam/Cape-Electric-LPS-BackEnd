@@ -55,6 +55,24 @@ public class EarthingDescription implements Serializable {
 	@Column(name = "TOTALNUMBER_OF_ELECTRODEINREM")
 	private String totalNumberOfElectrodeRem;
 
+	@Column(name = "INSPECTED_NO_OB")
+	private String inspectedNoOb;
+
+	@Column(name = "INSPECTED_NO_REM")
+	private String inspectedNoRem;
+
+	@Column(name = "INSPECTIONSPASSED_NO_OB")
+	private String inspectedPassedNoOb;
+
+	@Column(name = "INSPECTIONSPASSED_NO_REM")
+	private String inspectedPassedNoRem;
+
+	@Column(name = "INSPECTIONFAILED_NO_OB")
+	private String inspectedFailedNoOb;
+
+	@Column(name = "INSPECTIONFAILED_NO_REM")
+	private String inspectedFailedNoRem;
+
 	@JsonBackReference
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "EARTHING_ID")
@@ -62,6 +80,54 @@ public class EarthingDescription implements Serializable {
 
 	public Integer getEarthDescriptionId() {
 		return earthDescriptionId;
+	}
+
+	public String getInspectedNoOb() {
+		return inspectedNoOb;
+	}
+
+	public void setInspectedNoOb(String inspectedNoOb) {
+		this.inspectedNoOb = inspectedNoOb;
+	}
+
+	public String getInspectedNoRem() {
+		return inspectedNoRem;
+	}
+
+	public void setInspectedNoRem(String inspectedNoRem) {
+		this.inspectedNoRem = inspectedNoRem;
+	}
+
+	public String getInspectedPassedNoOb() {
+		return inspectedPassedNoOb;
+	}
+
+	public void setInspectedPassedNoOb(String inspectedPassedNoOb) {
+		this.inspectedPassedNoOb = inspectedPassedNoOb;
+	}
+
+	public String getInspectedPassedNoRem() {
+		return inspectedPassedNoRem;
+	}
+
+	public void setInspectedPassedNoRem(String inspectedPassedNoRem) {
+		this.inspectedPassedNoRem = inspectedPassedNoRem;
+	}
+
+	public String getInspectedFailedNo() {
+		return inspectedFailedNoOb;
+	}
+
+	public void setInspectedFailedNo(String inspectedFailedNo) {
+		this.inspectedFailedNoOb = inspectedFailedNo;
+	}
+
+	public String getInspectedFailedRem() {
+		return inspectedNoOb;
+	}
+
+	public void setInspectedFailedRem(String inspectedFailedRem) {
+		this.inspectedNoOb = inspectedFailedRem;
 	}
 
 	public void setEarthDescriptionId(Integer earthDescriptionId) {
