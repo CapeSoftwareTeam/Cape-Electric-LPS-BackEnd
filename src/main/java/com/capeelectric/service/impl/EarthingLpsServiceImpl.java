@@ -93,11 +93,11 @@ public class EarthingLpsServiceImpl implements EarthingLpsService {
 	@Override
 	public void updateEarthingLpsDetails(EarthingLpsDescription earthingLpsDesc) throws EarthingLpsException {
 
-		if (earthingLpsDesc != null && earthingLpsDesc.getEarthingLpsDescId() != null
-				&& earthingLpsDesc.getEarthingLpsDescId() != 0 && earthingLpsDesc.getBasicLpsId() != null
+		if (earthingLpsDesc != null && earthingLpsDesc.getEarthingId() != null
+				&& earthingLpsDesc.getEarthingId() != 0 && earthingLpsDesc.getBasicLpsId() != null
 				&& earthingLpsDesc.getBasicLpsId() != 0) {
 			Optional<EarthingLpsDescription> earthingLpsRepo = earthingLpsRepository
-					.findById(earthingLpsDesc.getEarthingLpsDescId());
+					.findById(earthingLpsDesc.getEarthingId());
 			if (earthingLpsRepo.isPresent()
 					&& earthingLpsRepo.get().getBasicLpsId().equals(earthingLpsDesc.getBasicLpsId())) {
 				earthingLpsDesc.setUpdatedDate(LocalDateTime.now());

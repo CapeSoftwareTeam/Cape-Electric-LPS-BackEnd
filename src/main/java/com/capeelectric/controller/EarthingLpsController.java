@@ -59,7 +59,7 @@ private static final Logger logger = LoggerFactory.getLogger(EarthingLpsControll
 			throws EarthingLpsException {
 		logger.info("called updateEarthingLps function UserName : {},BasicLpsId : {},EarthingLpsDescId : {}",
 				earthingLpsDescription.getUserName(), earthingLpsDescription.getBasicLpsId(),
-				earthingLpsDescription.getEarthingLpsDescId());
+				earthingLpsDescription.getEarthingId());
 		earthingLpsService.updateEarthingLpsDetails(earthingLpsDescription);
 	   return new ResponseEntity<String>("Earthing LPS Details successfully Updated", HttpStatus.OK);
 	}
