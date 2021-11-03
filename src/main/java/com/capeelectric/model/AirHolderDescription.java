@@ -42,6 +42,21 @@ public class AirHolderDescription implements Serializable  {
 	@Column(name = "CODUCTOR_HOLDER_REMARKS")
 	private String conductorHolderRe;
 	
+	
+	@Column(name = "MATERIAL_OF_HOLDEROB")
+	private String materailOfHolderOb;
+	
+	@Column(name = "MATERIAL_OF_HOLDERREM")
+	private String materailOfHolderRem;
+	
+	
+	@Column(name = "MATERIAL_OFPARPET_HOLDEROB")
+	private String materailOfParpetHolderOb;
+	
+	@Column(name = "MATERIAL_OFPARPET_HOLDERREM")
+	private String materailOfParpetHolderRem;
+	
+	
     @Column(name = "HOLDER_TYPE_OBSERVATION")
 	private String holderTypeOb;
 
