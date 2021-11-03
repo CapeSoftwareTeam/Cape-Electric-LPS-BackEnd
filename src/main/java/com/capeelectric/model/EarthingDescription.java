@@ -24,6 +24,72 @@ public class EarthingDescription implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "EARTHDESCRIPTION_ID")
 	private Integer earthDescriptionId;
+	
+	@Column(name = "LOCATION_NUMBER")
+	private Integer locationNumber;
+	
+	@Column(name = "LOCATION_NAME")
+	private String locationName;
+	
+	@Column(name = "SOIL_RESISTIVITYINOB")
+	private String soilResistivityInOb;
+	
+	@Column(name = "SOIL_RESISTIVITYINREM")
+	private String soilResistivityInRem;
+	
+	@Column(name = "EARTHPIT_DIGGINGINOB")
+	private String earthPitDigOb;
+	
+	@Column(name = "EARTHPIT_DIGGINGINREM")
+	private String earthPitDigRem;
+	
+	@Column(name = "EARTHELECTRODE_LESSTHAN_DOWNCONDUCTORSINOB")
+	private String earthElectrodeLesthanDownConductorInOb;
+	
+	@Column(name = "EARTHELECTRODE_LESSTHAN_DOWNCONDUCTORSINREM")
+	private String earthElectrodeLesthanDownConductorInRem;
+	
+	@Column(name = "CONNECTED_EARTHTERMINATIONINOB")
+	private String connectedEarthTerminalInOb;
+	
+	@Column(name = "CONNECTED_EARTHTERMINATIONINREM")
+	private String connectedEarthTerminalInRem;
+	
+	@Column(name = "TESTJOINT_EARTHELECTRODEINOB")
+	private String testJointEarthElectrodeInOb;
+	
+	@Column(name = "TESTJOINT_EARTHELECTRODEINREM")
+	private String testJointEarthElectrodeInRem;
+	
+	@Column(name = "GROUNTLEVEL_COMPOUNTFILLEDINOB")
+	private String grountLevelComponentFilledInOb;
+	
+	@Column(name = "GROUNTLEVEL_COMPOUNTFILLEDINREM")
+	private String grountLevelComponentFilledInRem;
+	
+	@Column(name = "EARTHELCTRODE_LOCATIONINOB")
+	private String earthElectrodeLocationInOb;
+	
+	@Column(name = "EARTHELCTRODE_LOCATIONINREM")
+	private String earthElectrodeLocationInRem;
+	
+	@Column(name = "EARTHELECTRODE_MATERIALINOB")
+	private String earthElectrodeMaterialInOb;
+	
+	@Column(name = "EARTHELECTRODE_MATERIALINREM")
+	private String earthElectrodeMaterialInRem;
+	
+	@Column(name = "EARTHELECTRODE_SIZEINOB")
+	private String earthElectrodeSizeInOb;
+	
+	@Column(name = "EARTHELECTRODE_SIZEINREM")
+	private String earthElectrodeSizeInRem;
+	
+	@Column(name = "EARTHELECTRODE_LENGTHINOB")
+	private String earthElectrodeLengthingOb;
+	
+	@Column(name = "EARTHELECTRODE_LENGTHINREM")
+	private String earthElectrodeLengthingRem;
 
 	@Column(name = "EARTHELECT_MAXIMUMDISTANCEWALLINOB")
 	private String earthelectMaxiDistWallInOb;
@@ -54,6 +120,9 @@ public class EarthingDescription implements Serializable {
 
 	@Column(name = "TOTALNUMBER_OF_ELECTRODEINREM")
 	private String totalNumberOfElectrodeRem;
+	
+	@Column(name = "INSPECTIONFAILED_NO_REM")
+	private String inspectedFailedRem;
 
 	@Column(name = "INSPECTED_NO_OB")
 	private String inspectedNoOb;
@@ -70,9 +139,6 @@ public class EarthingDescription implements Serializable {
 	@Column(name = "INSPECTIONFAILED_NO_OB")
 	private String inspectedFailedNoOb;
 
-	@Column(name = "INSPECTIONFAILED_NO_REM")
-	private String inspectedFailedNoRem;
-
 	@JsonBackReference
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "EARTHING_ID")
@@ -82,56 +148,184 @@ public class EarthingDescription implements Serializable {
 		return earthDescriptionId;
 	}
 
-	public String getInspectedNoOb() {
-		return inspectedNoOb;
-	}
-
-	public void setInspectedNoOb(String inspectedNoOb) {
-		this.inspectedNoOb = inspectedNoOb;
-	}
-
-	public String getInspectedNoRem() {
-		return inspectedNoRem;
-	}
-
-	public void setInspectedNoRem(String inspectedNoRem) {
-		this.inspectedNoRem = inspectedNoRem;
-	}
-
-	public String getInspectedPassedNoOb() {
-		return inspectedPassedNoOb;
-	}
-
-	public void setInspectedPassedNoOb(String inspectedPassedNoOb) {
-		this.inspectedPassedNoOb = inspectedPassedNoOb;
-	}
-
-	public String getInspectedPassedNoRem() {
-		return inspectedPassedNoRem;
-	}
-
-	public void setInspectedPassedNoRem(String inspectedPassedNoRem) {
-		this.inspectedPassedNoRem = inspectedPassedNoRem;
-	}
-
-	public String getInspectedFailedNo() {
-		return inspectedFailedNoOb;
-	}
-
-	public void setInspectedFailedNo(String inspectedFailedNo) {
-		this.inspectedFailedNoOb = inspectedFailedNo;
-	}
-
-	public String getInspectedFailedRem() {
-		return inspectedNoOb;
-	}
-
-	public void setInspectedFailedRem(String inspectedFailedRem) {
-		this.inspectedNoOb = inspectedFailedRem;
-	}
-
 	public void setEarthDescriptionId(Integer earthDescriptionId) {
 		this.earthDescriptionId = earthDescriptionId;
+	}
+
+	public Integer getLocationNumber() {
+		return locationNumber;
+	}
+
+	public void setLocationNumber(Integer locationNumber) {
+		this.locationNumber = locationNumber;
+	}
+
+	public String getLocationName() {
+		return locationName;
+	}
+
+	public void setLocationName(String locationName) {
+		this.locationName = locationName;
+	}
+
+	public String getSoilResistivityInOb() {
+		return soilResistivityInOb;
+	}
+
+	public void setSoilResistivityInOb(String soilResistivityInOb) {
+		this.soilResistivityInOb = soilResistivityInOb;
+	}
+
+	public String getSoilResistivityInRem() {
+		return soilResistivityInRem;
+	}
+
+	public void setSoilResistivityInRem(String soilResistivityInRem) {
+		this.soilResistivityInRem = soilResistivityInRem;
+	}
+
+	public String getEarthPitDigOb() {
+		return earthPitDigOb;
+	}
+
+	public void setEarthPitDigOb(String earthPitDigOb) {
+		this.earthPitDigOb = earthPitDigOb;
+	}
+
+	public String getEarthPitDigRem() {
+		return earthPitDigRem;
+	}
+
+	public void setEarthPitDigRem(String earthPitDigRem) {
+		this.earthPitDigRem = earthPitDigRem;
+	}
+
+	public String getEarthElectrodeLesthanDownConductorInOb() {
+		return earthElectrodeLesthanDownConductorInOb;
+	}
+
+	public void setEarthElectrodeLesthanDownConductorInOb(String earthElectrodeLesthanDownConductorInOb) {
+		this.earthElectrodeLesthanDownConductorInOb = earthElectrodeLesthanDownConductorInOb;
+	}
+
+	public String getEarthElectrodeLesthanDownConductorInRem() {
+		return earthElectrodeLesthanDownConductorInRem;
+	}
+
+	public void setEarthElectrodeLesthanDownConductorInRem(String earthElectrodeLesthanDownConductorInRem) {
+		this.earthElectrodeLesthanDownConductorInRem = earthElectrodeLesthanDownConductorInRem;
+	}
+
+	public String getConnectedEarthTerminalInOb() {
+		return connectedEarthTerminalInOb;
+	}
+
+	public void setConnectedEarthTerminalInOb(String connectedEarthTerminalInOb) {
+		this.connectedEarthTerminalInOb = connectedEarthTerminalInOb;
+	}
+
+	public String getConnectedEarthTerminalInRem() {
+		return connectedEarthTerminalInRem;
+	}
+
+	public void setConnectedEarthTerminalInRem(String connectedEarthTerminalInRem) {
+		this.connectedEarthTerminalInRem = connectedEarthTerminalInRem;
+	}
+
+	public String getTestJointEarthElectrodeInOb() {
+		return testJointEarthElectrodeInOb;
+	}
+
+	public void setTestJointEarthElectrodeInOb(String testJointEarthElectrodeInOb) {
+		this.testJointEarthElectrodeInOb = testJointEarthElectrodeInOb;
+	}
+
+	public String getTestJointEarthElectrodeInRem() {
+		return testJointEarthElectrodeInRem;
+	}
+
+	public void setTestJointEarthElectrodeInRem(String testJointEarthElectrodeInRem) {
+		this.testJointEarthElectrodeInRem = testJointEarthElectrodeInRem;
+	}
+
+	public String getGrountLevelComponentFilledInOb() {
+		return grountLevelComponentFilledInOb;
+	}
+
+	public void setGrountLevelComponentFilledInOb(String grountLevelComponentFilledInOb) {
+		this.grountLevelComponentFilledInOb = grountLevelComponentFilledInOb;
+	}
+
+	public String getGrountLevelComponentFilledInRem() {
+		return grountLevelComponentFilledInRem;
+	}
+
+	public void setGrountLevelComponentFilledInRem(String grountLevelComponentFilledInRem) {
+		this.grountLevelComponentFilledInRem = grountLevelComponentFilledInRem;
+	}
+
+	public String getEarthElectrodeLocationInOb() {
+		return earthElectrodeLocationInOb;
+	}
+
+	public void setEarthElectrodeLocationInOb(String earthElectrodeLocationInOb) {
+		this.earthElectrodeLocationInOb = earthElectrodeLocationInOb;
+	}
+
+	public String getEarthElectrodeLocationInRem() {
+		return earthElectrodeLocationInRem;
+	}
+
+	public void setEarthElectrodeLocationInRem(String earthElectrodeLocationInRem) {
+		this.earthElectrodeLocationInRem = earthElectrodeLocationInRem;
+	}
+
+	public String getEarthElectrodeMaterialInOb() {
+		return earthElectrodeMaterialInOb;
+	}
+
+	public void setEarthElectrodeMaterialInOb(String earthElectrodeMaterialInOb) {
+		this.earthElectrodeMaterialInOb = earthElectrodeMaterialInOb;
+	}
+
+	public String getEarthElectrodeMaterialInRem() {
+		return earthElectrodeMaterialInRem;
+	}
+
+	public void setEarthElectrodeMaterialInRem(String earthElectrodeMaterialInRem) {
+		this.earthElectrodeMaterialInRem = earthElectrodeMaterialInRem;
+	}
+
+	public String getEarthElectrodeSizeInOb() {
+		return earthElectrodeSizeInOb;
+	}
+
+	public void setEarthElectrodeSizeInOb(String earthElectrodeSizeInOb) {
+		this.earthElectrodeSizeInOb = earthElectrodeSizeInOb;
+	}
+
+	public String getEarthElectrodeSizeInRem() {
+		return earthElectrodeSizeInRem;
+	}
+
+	public void setEarthElectrodeSizeInRem(String earthElectrodeSizeInRem) {
+		this.earthElectrodeSizeInRem = earthElectrodeSizeInRem;
+	}
+
+	public String getEarthElectrodeLengthingOb() {
+		return earthElectrodeLengthingOb;
+	}
+
+	public void setEarthElectrodeLengthingOb(String earthElectrodeLengthingOb) {
+		this.earthElectrodeLengthingOb = earthElectrodeLengthingOb;
+	}
+
+	public String getEarthElectrodeLengthingRem() {
+		return earthElectrodeLengthingRem;
+	}
+
+	public void setEarthElectrodeLengthingRem(String earthElectrodeLengthingRem) {
+		this.earthElectrodeLengthingRem = earthElectrodeLengthingRem;
 	}
 
 	public String getEarthelectMaxiDistWallInOb() {
@@ -148,6 +342,14 @@ public class EarthingDescription implements Serializable {
 
 	public void setEarthelectMaxiDistWallInRem(String earthelectMaxiDistWallInRem) {
 		this.earthelectMaxiDistWallInRem = earthelectMaxiDistWallInRem;
+	}
+
+	public String getEarthelectManimumDistanceWallInOb() {
+		return earthelectManimumDistanceWallInOb;
+	}
+
+	public void setEarthelectManimumDistanceWallInOb(String earthelectManimumDistanceWallInOb) {
+		this.earthelectManimumDistanceWallInOb = earthelectManimumDistanceWallInOb;
 	}
 
 	public String getEarthelectManiDistWallInRem() {
@@ -190,14 +392,6 @@ public class EarthingDescription implements Serializable {
 		this.earthelectManiDistRem = earthelectManiDistRem;
 	}
 
-	public String getEarthelectManimumDistanceWallInOb() {
-		return earthelectManimumDistanceWallInOb;
-	}
-
-	public void setEarthelectManimumDistanceWallInOb(String earthelectManimumDistanceWallInOb) {
-		this.earthelectManimumDistanceWallInOb = earthelectManimumDistanceWallInOb;
-	}
-
 	public String getTotalNumberOfElectrodeOb() {
 		return totalNumberOfElectrodeOb;
 	}
@@ -214,6 +408,54 @@ public class EarthingDescription implements Serializable {
 		this.totalNumberOfElectrodeRem = totalNumberOfElectrodeRem;
 	}
 
+	public String getInspectedFailedRem() {
+		return inspectedFailedRem;
+	}
+
+	public void setInspectedFailedRem(String inspectedFailedRem) {
+		this.inspectedFailedRem = inspectedFailedRem;
+	}
+
+	public String getInspectedNoOb() {
+		return inspectedNoOb;
+	}
+
+	public void setInspectedNoOb(String inspectedNoOb) {
+		this.inspectedNoOb = inspectedNoOb;
+	}
+
+	public String getInspectedNoRem() {
+		return inspectedNoRem;
+	}
+
+	public void setInspectedNoRem(String inspectedNoRem) {
+		this.inspectedNoRem = inspectedNoRem;
+	}
+
+	public String getInspectedPassedNoOb() {
+		return inspectedPassedNoOb;
+	}
+
+	public void setInspectedPassedNoOb(String inspectedPassedNoOb) {
+		this.inspectedPassedNoOb = inspectedPassedNoOb;
+	}
+
+	public String getInspectedPassedNoRem() {
+		return inspectedPassedNoRem;
+	}
+
+	public void setInspectedPassedNoRem(String inspectedPassedNoRem) {
+		this.inspectedPassedNoRem = inspectedPassedNoRem;
+	}
+
+	public String getInspectedFailedNoOb() {
+		return inspectedFailedNoOb;
+	}
+
+	public void setInspectedFailedNoOb(String inspectedFailedNoOb) {
+		this.inspectedFailedNoOb = inspectedFailedNoOb;
+	}
+
 	public EarthingLpsDescription getEarthingLpsDescription() {
 		return earthingLpsDescription;
 	}
@@ -221,5 +463,7 @@ public class EarthingDescription implements Serializable {
 	public void setEarthingLpsDescription(EarthingLpsDescription earthingLpsDescription) {
 		this.earthingLpsDescription = earthingLpsDescription;
 	}
+	
+	
 
-}
+	}
