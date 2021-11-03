@@ -4,13 +4,19 @@
 package com.capeelectric.model;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 /**
  * @author CAPE-SOFTWARE
@@ -18,13 +24,13 @@ import javax.persistence.Table;
  */
 
 @Entity
-@Table(name = "SEPERATION_DISTANCE_DESCRIPTION")
+@Table(name = "SEPERATION_DISTANCE_TABLE")
 public class SeperationDistanceDescription {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "SEPERATION_DISTANCE_DESC_ID")
-	private Integer seperationDistanceDescId;
+	@Column(name = "SEPERATION_DISTANCE_ID")
+	private Integer seperationDistanceId;
 	
 	@Column(name = "BASIC_LPS_ID")
 	private Integer basicLpsId;
@@ -43,15 +49,23 @@ public class SeperationDistanceDescription {
 	
 	@Column(name = "UPDATED_DATE")
 	private LocalDateTime updatedDate;
+	
+	
+	@JsonManagedReference
+	@OneToMany(mappedBy = "seperationDistanceDescription", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<SeparateDistance> separateDistanceDescription;
 
 	
-	public Integer getSeperationDistanceDescId() {
-		return seperationDistanceDescId;
+	
+	public Integer getSeperationDistanceId() {
+		return seperationDistanceId;
 	}
 
-	public void setSeperationDistanceDescId(Integer seperationDistanceDescId) {
-		this.seperationDistanceDescId = seperationDistanceDescId;
+	public void setSeperationDistanceId(Integer seperationDistanceId) {
+		this.seperationDistanceId = seperationDistanceId;
 	}
+
+	
 
 	public Integer getBasicLpsId() {
 		return basicLpsId;
