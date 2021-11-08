@@ -89,7 +89,7 @@ public class SeperationDistanceServiceTest {
 	}
 	
 	@Test
-	public void testUpdateSeperationDetails() throws SPDException {
+	public void testUpdateSeperationDetails() throws SeperationDistanceException {
 
 		seperationDistanceDescription.setUserName("LVsystem@gmail.com");
 		seperationDistanceDescription.setSeperationDistanceId(1);
