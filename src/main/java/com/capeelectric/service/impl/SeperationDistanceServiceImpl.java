@@ -94,11 +94,11 @@ public class SeperationDistanceServiceImpl implements SeperationDistanceService{
 	@Override
 	public void updateSeperationDetails(SeperationDistanceDescription seperationDistanceDesc) throws SeperationDistanceException {
 
-		if (seperationDistanceDesc != null && seperationDistanceDesc.getSeperationDistanceDescId() != null
-				&& seperationDistanceDesc.getSeperationDistanceDescId() != 0 && seperationDistanceDesc.getBasicLpsId() != null
+		if (seperationDistanceDesc != null && seperationDistanceDesc.getSeperationDistanceId() != null
+				&& seperationDistanceDesc.getSeperationDistanceId() != 0 && seperationDistanceDesc.getBasicLpsId() != null
 				&& seperationDistanceDesc.getBasicLpsId() != 0) {
 			Optional<SeperationDistanceDescription> seperationDistanceRepo = seperationDistanceRepository
-					.findById(seperationDistanceDesc.getSeperationDistanceDescId());
+					.findById(seperationDistanceDesc.getSeperationDistanceId());
 			if (seperationDistanceRepo.isPresent()
 					&& seperationDistanceRepo.get().getBasicLpsId().equals(seperationDistanceDesc.getBasicLpsId())) {
 				seperationDistanceDesc.setUpdatedDate(LocalDateTime.now());
