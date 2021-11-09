@@ -31,12 +31,6 @@ public class BridgingDescription implements Serializable  {
 	@Column(name = "LOCATION_NAME")
 	private String lacationName;
 	
-	@Column(name = "BRIDGING_CABLES_OB")
-	private String bridgingCablesOb;
-	
-	@Column(name = "BRIDGING_CABLES_REM")
-	private String bridgingCablesRem;
-
 	@Column(name = "ENSURE_BRIDGINGCABLE_OB")
 	private String ensureBridgingCableOb;
 	
@@ -117,22 +111,7 @@ public class BridgingDescription implements Serializable  {
 		this.bridgingDescriptionId = bridgingDescriptionId;
 	}
 
-	public String getBridgingCablesOb() {
-		return bridgingCablesOb;
-	}
-
-	public void setBridgingCablesOb(String bridgingCablesOb) {
-		this.bridgingCablesOb = bridgingCablesOb;
-	}
-
-	public String getBridgingCablesRem() {
-		return bridgingCablesRem;
-	}
-
-	public void setBridgingCablesRem(String bridgingCablesRem) {
-		this.bridgingCablesRem = bridgingCablesRem;
-	}
-
+	
 	public String getEnsureBridgingCableOb() {
 		return ensureBridgingCableOb;
 	}
