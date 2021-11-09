@@ -25,6 +25,12 @@ public class BridgingDescription implements Serializable  {
 	@Column(name = "BRIDGINGDESCRIPTION_ID")
 	private Integer bridgingDescriptionId;
 	
+	@Column(name = "LOCATION_NO")
+	private Integer lacationNo;
+	
+	@Column(name = "LOCATION_NAME")
+	private String lacationName;
+	
 	@Column(name = "BRIDGING_CABLES_OB")
 	private String bridgingCablesOb;
 	
@@ -81,6 +87,31 @@ public class BridgingDescription implements Serializable  {
 	public Integer getBridgingDescriptionId() {
 		return bridgingDescriptionId;
 	}
+	
+	
+
+	public Integer getLacationNo() {
+		return lacationNo;
+	}
+
+
+
+	public void setLacationNo(Integer lacationNo) {
+		this.lacationNo = lacationNo;
+	}
+
+
+	public String getLacationName() {
+		return lacationName;
+	}
+
+
+
+	public void setLacationName(String lacationName) {
+		this.lacationName = lacationName;
+	}
+
+
 
 	public void setBridgingDescriptionId(Integer bridgingDescriptionId) {
 		this.bridgingDescriptionId = bridgingDescriptionId;
