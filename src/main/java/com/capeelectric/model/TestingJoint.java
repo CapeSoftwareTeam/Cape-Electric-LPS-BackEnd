@@ -25,6 +25,12 @@ public class TestingJoint  implements Serializable {
 	@Column(name = "TESTJOINT_ID")
 	private Integer testJointId;
 	
+	@Column(name = "LOCATION_NO")
+	private Integer lacationNo;
+	
+	@Column(name = "LOCATION_NAME")
+	private String lacationName;
+
 	@Column(name = "TESTJOINT_TYPE_OB")
 	private String testJointTypeOb;
 	
@@ -95,6 +101,31 @@ public class TestingJoint  implements Serializable {
 	public Integer getTestJointId() {
 		return testJointId;
 	}
+	
+
+	public Integer getLacationNo() {
+		return lacationNo;
+	}
+
+
+
+	public void setLacationNo(Integer lacationNo) {
+		this.lacationNo = lacationNo;
+	}
+
+
+
+	public String getLacationName() {
+		return lacationName;
+	}
+
+
+
+	public void setLacationName(String lacationName) {
+		this.lacationName = lacationName;
+	}
+
+
 
 	public void setTestJointId(Integer testJointId) {
 		this.testJointId = testJointId;

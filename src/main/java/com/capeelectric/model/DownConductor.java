@@ -27,12 +27,11 @@ public class DownConductor implements Serializable  {
 	@Column(name = "DOWNCONDUCTOR_ID")
 	private Integer downConductorId;
 	
-	@Column(name = "LOCATION_NO_OB")
-	private String lacationNoOb;
+	@Column(name = "LOCATION_NO")
+	private Integer lacationNo;
 	
-	
-	@Column(name = "LOCATION_NO_REM")
-	private String lacationNoRe;
+	@Column(name = "LOCATION_NAME")
+	private String lacationName;
 	
 	@Column(name = "PHYSICAL_INSPECTION_OB")
 	private String physicalInspectionOb;
@@ -132,20 +131,22 @@ public class DownConductor implements Serializable  {
 		this.downConductorId = downConductorId;
 	}
 
-	public String getLacationNoOb() {
-		return lacationNoOb;
+	
+	
+	public Integer getLacationNo() {
+		return lacationNo;
 	}
 
-	public void setLacationNoOb(String lacationNoOb) {
-		this.lacationNoOb = lacationNoOb;
+	public void setLacationNo(Integer lacationNo) {
+		this.lacationNo = lacationNo;
 	}
 
-	public String getLacationNoRe() {
-		return lacationNoRe;
+	public String getLacationName() {
+		return lacationName;
 	}
 
-	public void setLacationNoRe(String lacationNoRe) {
-		this.lacationNoRe = lacationNoRe;
+	public void setLacationName(String lacationName) {
+		this.lacationName = lacationName;
 	}
 
 	public String getPhysicalInspectionOb() {
