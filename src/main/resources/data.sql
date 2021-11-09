@@ -49,6 +49,8 @@ CREATE TABLE country_table (
 			INSERT INTO country_table VALUES (18, 'GERMANY', 'GNY');
 			INSERT INTO country_table VALUES (19, 'FRANCE', 'FRN');
 			INSERT INTO country_table VALUES (20, 'RUSSIA', 'RUS');
+            INSERT INTO country_table VALUES (21, 'NEPAL', 'NPL');
+
 
 --------> State Table with insert queries <------------
 
@@ -89,6 +91,7 @@ CREATE TABLE state_table (
 			INSERT INTO state_table VALUES (26,1,'Manipur','GU');
 			INSERT INTO state_table VALUES (27,1,'Goa','GA');
 			INSERT INTO STATE_TABLE VALUES (28,2,'Others','OT');
+			INSERT INTO STATE_TABLE VALUES (29,21,'Others','OT');
 
 --------> Applicationtypes Table with insert queries <------------
 

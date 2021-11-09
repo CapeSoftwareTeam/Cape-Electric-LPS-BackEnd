@@ -56,26 +56,7 @@ public class SPD implements Serializable {
 	@Column(name = "TOTAL_NO_OUTDOOREQUIPMENT_REM")
 	private String totalNoOutDoorRequipmentRem;
 	
-	@Column(name = "MAINSINCOMING_EACHPANEL_OB")
-	private String mainsIncomingEachPanelOb;
-	
-
-	@Column(name = "MAINSINCOMING_EACHPANEL_REM")
-	private String mainsIncomingEachPanelRem;
-	
-	
-	@Column(name = "STREET_LIGHTPANNEL_OB")
-	private String streetLightPannelOb;
-	
-	@Column(name = "STREET_LIGHTPANNEL_REM")
-	private String streetLightPannelRem;
-
-	@Column(name = "FEEDINGPOWER_EQUIPMENT_OB")
-	private String feedingPowerEquipmentOb;
-	
-	@Column(name = "FEEDINGPOWER_EQUIPMENT_REM")
-	private String feedingPowerEquipmentRem;
-	
+		
 	@Column(name = "CREATED_DATE")
 	private LocalDateTime createdDate;
 	
@@ -178,54 +159,6 @@ public class SPD implements Serializable {
 
 	public void setTotalNoOutDoorRequipmentRem(String totalNoOutDoorRequipmentRem) {
 		this.totalNoOutDoorRequipmentRem = totalNoOutDoorRequipmentRem;
-	}
-
-	public String getMainsIncomingEachPanelOb() {
-		return mainsIncomingEachPanelOb;
-	}
-
-	public void setMainsIncomingEachPanelOb(String mainsIncomingEachPanelOb) {
-		this.mainsIncomingEachPanelOb = mainsIncomingEachPanelOb;
-	}
-
-	public String getMainsIncomingEachPanelRem() {
-		return mainsIncomingEachPanelRem;
-	}
-
-	public void setMainsIncomingEachPanelRem(String mainsIncomingEachPanelRem) {
-		this.mainsIncomingEachPanelRem = mainsIncomingEachPanelRem;
-	}
-
-	public String getStreetLightPannelOb() {
-		return streetLightPannelOb;
-	}
-
-	public void setStreetLightPannelOb(String streetLightPannelOb) {
-		this.streetLightPannelOb = streetLightPannelOb;
-	}
-
-	public String getStreetLightPannelRem() {
-		return streetLightPannelRem;
-	}
-
-	public void setStreetLightPannelRem(String streetLightPannelRem) {
-		this.streetLightPannelRem = streetLightPannelRem;
-	}
-
-	public String getFeedingPowerEquipmentOb() {
-		return feedingPowerEquipmentOb;
-	}
-
-	public void setFeedingPowerEquipmentOb(String feedingPowerEquipmentOb) {
-		this.feedingPowerEquipmentOb = feedingPowerEquipmentOb;
-	}
-
-	public String getFeedingPowerEquipmentRem() {
-		return feedingPowerEquipmentRem;
-	}
-
-	public void setFeedingPowerEquipmentRem(String feedingPowerEquipmentRem) {
-		this.feedingPowerEquipmentRem = feedingPowerEquipmentRem;
 	}
 
 	public LocalDateTime getCreatedDate() {

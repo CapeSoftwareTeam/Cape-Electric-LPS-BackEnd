@@ -59,7 +59,7 @@ public class SeperationDistanceController {
 			throws SeperationDistanceException {
 		logger.info("called updateSeperationDistance function UserName : {},BasicLpsId : {},SeperationDistanceDescId : {}",
 				seperationDistanceDesc.getUserName(), seperationDistanceDesc.getBasicLpsId(),
-				seperationDistanceDesc.getSeperationDistanceDescId());
+				seperationDistanceDesc.getSeperationDistanceId());
 		seperationDistanceService.updateSeperationDetails(seperationDistanceDesc);
 	   return new ResponseEntity<String>("SPD Details successfully Updated", HttpStatus.OK);
 	}
