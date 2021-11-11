@@ -21,6 +21,9 @@ import com.capeelectric.service.DownConductorService;
 import com.capeelectric.util.UserFullName;
 
 /**
+ * 
+ *   This DownConductorServiceImpl service class doing save and retrieve operation related to DownConductorDetails
+ * 
  * @author CAPE-SOFTWARE
  *
  */

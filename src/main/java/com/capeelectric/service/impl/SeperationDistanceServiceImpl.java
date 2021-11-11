@@ -24,6 +24,7 @@ import com.capeelectric.service.SeperationDistanceService;
 import com.capeelectric.util.UserFullName;
 
 /**
+ *  This SeperationDistanceServiceImpl service class doing save and retrieve operation related to SeperationDistanceDetails
  * @author CAPE-SOFTWARE
  *
  */

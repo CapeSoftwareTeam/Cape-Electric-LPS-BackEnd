@@ -24,6 +24,7 @@ import com.capeelectric.service.SPDService;
 import com.capeelectric.util.UserFullName;
 
 /**
+ * This SPDServiceImpl service class doing save and retrieve operation related to SPDDetails
  * @author CAPE-SOFTWARE
  *
  */

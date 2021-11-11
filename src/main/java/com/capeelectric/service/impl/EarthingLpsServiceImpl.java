@@ -23,6 +23,9 @@ import com.capeelectric.service.EarthingLpsService;
 import com.capeelectric.util.UserFullName;
 
 /**
+ *  
+ *   This EarthingLpsServiceImpl service class doing save and retrieve  operation related to  EarthingLpsDetails
+ *      
  * @author CAPE-SOFTWARE
  *
  */
