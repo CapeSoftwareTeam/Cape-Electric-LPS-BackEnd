@@ -11,11 +11,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.capeelectric.exception.DownConductorException;
 import com.capeelectric.exception.EarthingLpsException;
 import com.capeelectric.model.BasicLps;
-import com.capeelectric.model.DownConductorDescription;
 import com.capeelectric.model.EarthingLpsDescription;
 import com.capeelectric.repository.BasicLpsRepository;
 import com.capeelectric.repository.EarthingLpsRepository;

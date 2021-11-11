@@ -6,14 +6,10 @@ package com.capeelectric.service.impl;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.capeelectric.exception.EarthStudException;
-import com.capeelectric.exception.EarthingLpsException;
 import com.capeelectric.exception.SPDException;
 import com.capeelectric.model.BasicLps;
 import com.capeelectric.model.EarthStudDescription;
