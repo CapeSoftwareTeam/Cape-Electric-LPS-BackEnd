@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.capeelectric.exception.SeperationDistanceException;
 import com.capeelectric.model.BasicLps;
-import com.capeelectric.model.SPD;
 import com.capeelectric.model.SeperationDistanceDescription;
 import com.capeelectric.repository.BasicLpsRepository;
 import com.capeelectric.repository.SeperationDistanceRepository;

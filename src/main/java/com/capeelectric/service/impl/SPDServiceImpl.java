@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.capeelectric.exception.SPDException;
 import com.capeelectric.model.BasicLps;
-import com.capeelectric.model.EarthStudDescription;
 import com.capeelectric.model.SPD;
 import com.capeelectric.repository.BasicLpsRepository;
 import com.capeelectric.repository.SPDRepository;
