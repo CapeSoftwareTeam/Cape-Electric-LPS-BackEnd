@@ -23,6 +23,8 @@ import com.capeelectric.service.EarthStudService;
 import com.capeelectric.util.UserFullName;
 
 /**
+ *  This EarthStudServiceImpl service class doing save and retrieve operation related to  EarthStudDetails
+ *      
  * @author CAPE-SOFTWARE
  *
  */
