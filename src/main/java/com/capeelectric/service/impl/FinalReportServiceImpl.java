@@ -11,16 +11,29 @@ import org.springframework.stereotype.Service;
 
 import com.capeelectric.exception.FinalReportException;
 import com.capeelectric.model.BasicLps;
+import com.capeelectric.model.DownConductorDescription;
+import com.capeelectric.model.EarthStudDescription;
+import com.capeelectric.model.EarthingLpsDescription;
 import com.capeelectric.model.FinalReport;
+import com.capeelectric.model.LpsAirDiscription;
+import com.capeelectric.model.LpsFinalReport;
 import com.capeelectric.model.PeriodicInspection;
 import com.capeelectric.model.ReportDetails;
+import com.capeelectric.model.SPD;
+import com.capeelectric.model.SeperationDistanceDescription;
 import com.capeelectric.model.Site;
 import com.capeelectric.model.Summary;
 import com.capeelectric.model.SupplyCharacteristics;
 import com.capeelectric.model.TestingReport;
+import com.capeelectric.repository.AirTerminationLpsRepository;
 import com.capeelectric.repository.BasicLpsRepository;
+import com.capeelectric.repository.DownConductorRepository;
+import com.capeelectric.repository.EarthStudRepository;
+import com.capeelectric.repository.EarthingLpsRepository;
 import com.capeelectric.repository.InspectionRepository;
 import com.capeelectric.repository.InstalReportDetailsRepository;
+import com.capeelectric.repository.SPDRepository;
+import com.capeelectric.repository.SeperationDistanceRepository;
 import com.capeelectric.repository.SiteRepository;
 import com.capeelectric.repository.SummaryRepository;
 import com.capeelectric.repository.SupplyCharacteristicsRepository;
@@ -57,10 +70,36 @@ public class FinalReportServiceImpl implements FinalReportService {
 	@Autowired
 	private SummaryRepository summaryRepository;
 	
+	
+	
 	@Autowired
 	private BasicLpsRepository basicLpsRepository;
+	
+	@Autowired
+	private DownConductorRepository downConductorRepository;
+	
+	@Autowired
+	private EarthingLpsRepository earthingLpsRepository;
+	
+	@Autowired
+	private SPDRepository spdRepository;
+	
+	@Autowired
+	private AirTerminationLpsRepository airTerminationLpsRepository;
+	
+	@Autowired
+	private SeperationDistanceRepository seperationDistanceRepository;
+	
+	@Autowired
+	private EarthStudRepository earthStudRepository;
+	
+	
+	
+	
 
 	private FinalReport finalReport;
+	
+	private LpsFinalReport lpsFinalReport;
 
 	/**
 	 * @param userName and departmentName also string retrieveSiteDetails method to
@@ -150,6 +189,8 @@ public class FinalReportServiceImpl implements FinalReportService {
 		}
 	}
 
+	
+	@Override
 	public List<BasicLps> retrieveListOfBasicLps(String userName) throws FinalReportException {
 		if (userName != null) {
 			try {
@@ -163,6 +204,84 @@ public class FinalReportServiceImpl implements FinalReportService {
 			throw new FinalReportException("Invaild Input");
 		}
 
+	}
+
+	
+	@Override
+	public Optional<LpsFinalReport> retrieveLpsReports(String userName, Integer basicLpsId)
+			throws FinalReportException {
+		if (userName != null && basicLpsId != null) {
+			lpsFinalReport = new LpsFinalReport();
+			lpsFinalReport.setUserName(userName);
+			lpsFinalReport.setLpsBasicId(basicLpsId);
+
+			logger.debug("fetching process started for InstallReport_Information");
+			Optional<BasicLps> basicLpsDetails = basicLpsRepository.findByBasicLpsId(basicLpsId);
+			logger.debug("InstallReport_Information fetching ended");
+			if (basicLpsDetails.isPresent() && basicLpsDetails != null) {
+				lpsFinalReport.setBasicLps(basicLpsDetails.get());
+
+				logger.debug("fetching process started for DownConductorDescription");
+				Optional<DownConductorDescription> downConductorDetails = downConductorRepository
+						.findByBasicLpsId(basicLpsId);
+				logger.debug("DownConductorDescription_fetching ended");
+				if (downConductorDetails.isPresent() && downConductorDetails != null) {
+					lpsFinalReport.setDownConductorDesc(downConductorDetails.get());
+
+					logger.debug("fetching process started for EarthingLpsDescription");
+					Optional<EarthingLpsDescription> earthingLpsDetails = earthingLpsRepository
+							.findByBasicLpsId(basicLpsId);
+					logger.debug("EarthingLpsDescription_fetching ended");
+
+					if (earthingLpsDetails.isPresent() && earthingLpsDetails != null) {
+						lpsFinalReport.setEarthingLpsDescription(earthingLpsDetails.get());
+
+						logger.debug("fetching process started for SPD");
+						Optional<SPD> spdDetails = spdRepository.findByBasicLpsId(basicLpsId);
+						logger.debug("SPD_fetching ended");
+
+						if (spdDetails.isPresent() && spdDetails != null) {
+							lpsFinalReport.setSPDDesc(spdDetails.get());
+
+							logger.debug("fetching process started for LpsAirDiscription");
+							Optional<LpsAirDiscription> lpsAirDisc = airTerminationLpsRepository
+									.findByBasicLpsId(basicLpsId);
+							logger.debug("LpsAirDiscription_fetching ended");
+
+							if (lpsAirDisc.isPresent() && lpsAirDisc != null) {
+								lpsFinalReport.setLpsAirDiscription(lpsAirDisc.get());
+								
+								logger.debug("fetching process started for SeperationDistanceDescription");
+								Optional<SeperationDistanceDescription> separateDistanceDetails = seperationDistanceRepository
+										.findByBasicLpsId(basicLpsId);
+								logger.debug("SeperationDistanceDescription_fetching ended");
+
+								if (separateDistanceDetails.isPresent() && separateDistanceDetails != null) {
+									lpsFinalReport.setSeperationDistanceDesc(separateDistanceDetails.get());
+
+									logger.debug("fetching process started for EarthStud");
+									Optional<EarthStudDescription> earthStudDetails = earthStudRepository
+											.findByBasicLpsId(basicLpsId);
+									logger.debug(" EarthStud_fetching ended");
+
+									if (earthStudDetails.isPresent() && earthStudDetails != null) {
+										lpsFinalReport.setEarthStudDescription(earthStudDetails.get());
+										logger.debug("Successfully Seven_Steps fetching Operation done");
+										return Optional.of(lpsFinalReport);
+
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+
+			return Optional.of(lpsFinalReport);
+
+		} else {
+			throw new FinalReportException("Invalid Input");
+		}
 	}
 
 }
