@@ -63,11 +63,11 @@ public class AirHolderDescription implements Serializable  {
 	@Column(name = "HOLDER_TYPE_REMARKS")
 	private String holderTypeRe;
 	
-	@Column(name = "MATERIAL_HOLDER_OBSERVATION")
-	private String materialHolderOb;
-
-	@Column(name = "MATERIAL_HOLDER_REMARKS")
-	private String materialHolderRe;
+//	@Column(name = "MATERIAL_HOLDER_OBSERVATION")
+//	private String materialHolderOb;
+//
+//	@Column(name = "MATERIAL_HOLDER_REMARKS")
+//	private String materialHolderRe;
 	  
 	@Column(name = "TOTAL_HOLDERSNO_OBSERVATION")
 	private String totalHolderNoOb;
@@ -208,21 +208,21 @@ public class AirHolderDescription implements Serializable  {
 		this.holderTypeRe = holderTypeRe;
 	}
 
-	public String getMaterialHolderOb() {
-		return materialHolderOb;
-	}
-
-	public void setMaterialHolderOb(String materialHolderOb) {
-		this.materialHolderOb = materialHolderOb;
-	}
-
-	public String getMaterialHolderRe() {
-		return materialHolderRe;
-	}
-
-	public void setMaterialHolderRe(String materialHolderRe) {
-		this.materialHolderRe = materialHolderRe;
-	}
+//	public String getMaterialHolderOb() {
+//		return materialHolderOb;
+//	}
+//
+//	public void setMaterialHolderOb(String materialHolderOb) {
+//		this.materialHolderOb = materialHolderOb;
+//	}
+//
+//	public String getMaterialHolderRe() {
+//		return materialHolderRe;
+//	}
+//
+//	public void setMaterialHolderRe(String materialHolderRe) {
+//		this.materialHolderRe = materialHolderRe;
+//	}
 
 	public String getTotalHolderNoOb() {
 		return totalHolderNoOb;
