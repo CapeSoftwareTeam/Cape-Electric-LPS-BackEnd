@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.capeelectric.exception.FinalReportException;
+import com.capeelectric.model.BasicLps;
 import com.capeelectric.model.FinalReport;
 import com.capeelectric.model.Site;
 import com.capeelectric.service.impl.FinalReportServiceImpl;
@@ -32,6 +33,8 @@ public class FinalReportController {
 
 	@Autowired
 	FinalReportServiceImpl finalReportServiceImpl;
+	
+	
 
 	@GetMapping("/retrieveListOfSite/{userName}")
 	public ResponseEntity<List<Site>> retrieveListOfSite(@PathVariable String userName) throws FinalReportException {
@@ -51,5 +54,14 @@ public class FinalReportController {
 				HttpStatus.OK);
 
 	}
+	
+	@GetMapping("/retrieveListOfBasicLps/{userName}")
+	public ResponseEntity<List<BasicLps>> retrieveListOfBasicLps(@PathVariable String userName) throws FinalReportException {
+		logger.info("FinalReportAPI_started retrieveListOfBasicLps function UserName: {}", userName);
+		return new ResponseEntity<List<BasicLps>>(finalReportServiceImpl.retrieveListOfBasicLps(userName),
+				HttpStatus.OK);
+
+	}
+
 
 }

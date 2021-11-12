@@ -23,4 +23,6 @@ public interface BasicLpsRepository extends CrudRepository<BasicLps, Integer> {
 	
 	Optional<BasicLps> findByClientName(String clientName);
 
+	List<BasicLps> findByUserName(String userName);
+
 }

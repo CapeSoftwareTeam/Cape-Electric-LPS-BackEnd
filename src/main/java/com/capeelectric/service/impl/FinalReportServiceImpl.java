@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.capeelectric.exception.FinalReportException;
+import com.capeelectric.model.BasicLps;
 import com.capeelectric.model.FinalReport;
 import com.capeelectric.model.PeriodicInspection;
 import com.capeelectric.model.ReportDetails;
@@ -17,6 +18,7 @@ import com.capeelectric.model.Site;
 import com.capeelectric.model.Summary;
 import com.capeelectric.model.SupplyCharacteristics;
 import com.capeelectric.model.TestingReport;
+import com.capeelectric.repository.BasicLpsRepository;
 import com.capeelectric.repository.InspectionRepository;
 import com.capeelectric.repository.InstalReportDetailsRepository;
 import com.capeelectric.repository.SiteRepository;
@@ -54,6 +56,9 @@ public class FinalReportServiceImpl implements FinalReportService {
 
 	@Autowired
 	private SummaryRepository summaryRepository;
+	
+	@Autowired
+	private BasicLpsRepository basicLpsRepository;
 
 	private FinalReport finalReport;
 
@@ -143,6 +148,21 @@ public class FinalReportServiceImpl implements FinalReportService {
 		} else {
 			throw new FinalReportException("Invalid Input");
 		}
+	}
+
+	public List<BasicLps> retrieveListOfBasicLps(String userName) throws FinalReportException {
+		if (userName != null) {
+			try {
+				logger.info("Basic fetching process started");
+				return basicLpsRepository.findByUserName(userName);
+			} catch (Exception e) {
+				logger.info("Basic fetching process failed");
+				throw new FinalReportException("Fetching basic process failed");
+			}
+		} else {
+			throw new FinalReportException("Invaild Input");
+		}
+
 	}
 
 }
