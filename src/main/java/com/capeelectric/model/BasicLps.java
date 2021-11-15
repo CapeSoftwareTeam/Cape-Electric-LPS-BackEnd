@@ -93,22 +93,9 @@ public class BasicLps implements Serializable {
 	@Column(name = "SOIL_RESISTIVITY")
 	private String soilResistivity;
 	
-	public String getLevelOfProtection() {
-		return levelOfProtection;
-	}
-
-	public void setLevelOfProtection(String levelOfProtection) {
-		this.levelOfProtection = levelOfProtection;
-	}
-
-	public String getSoilResistivity() {
-		return soilResistivity;
-	}
-
-	public void setSoilResistivity(String soilResistivity) {
-		this.soilResistivity = soilResistivity;
-	}
-
+	@Column(name = "ALL_STEPS_COMPLETED")
+	private String allStepsCompleted;
+	
 	@Column(name = "CREATED_DATE")
 	private LocalDateTime createdDate;
 	
@@ -125,6 +112,22 @@ public class BasicLps implements Serializable {
 	@JsonManagedReference
 	@OneToMany(mappedBy = "basicLps", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Set<BasicLpsDescription> basicLpsDescription;
+	
+	public String getLevelOfProtection() {
+		return levelOfProtection;
+	}
+
+	public void setLevelOfProtection(String levelOfProtection) {
+		this.levelOfProtection = levelOfProtection;
+	}
+
+	public String getSoilResistivity() {
+		return soilResistivity;
+	}
+
+	public void setSoilResistivity(String soilResistivity) {
+		this.soilResistivity = soilResistivity;
+	}
 
 	
 	public Integer getBasicLpsId() {
@@ -293,6 +296,14 @@ public class BasicLps implements Serializable {
 
 	public void setBasicLpsDescription(Set<BasicLpsDescription> basicLpsDescription) {
 		this.basicLpsDescription = basicLpsDescription;
+	}
+
+	public String getAllStepsCompleted() {
+		return allStepsCompleted;
+	}
+
+	public void setAllStepsCompleted(String allStepsCompleted) {
+		this.allStepsCompleted = allStepsCompleted;
 	}
 	
 	
