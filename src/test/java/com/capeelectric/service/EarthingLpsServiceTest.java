@@ -17,14 +17,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import com.capeelectric.exception.AirTerminationException;
-import com.capeelectric.exception.BasicLpsException;
+import com.capeelectric.exception.DownConductorException;
 import com.capeelectric.exception.EarthingLpsException;
+import com.capeelectric.exception.SPDException;
+import com.capeelectric.model.BasicLps;
 import com.capeelectric.model.EarthingLpsDescription;
-import com.capeelectric.model.LpsAirDiscription;
 import com.capeelectric.repository.BasicLpsRepository;
 import com.capeelectric.repository.EarthingLpsRepository;
-import com.capeelectric.service.impl.BasicLpsServiceImpl;
 import com.capeelectric.service.impl.EarthingLpsServiceImpl;
 import com.capeelectric.util.UserFullName;
 
@@ -44,29 +43,50 @@ public class EarthingLpsServiceTest {
 	private EarthingLpsException earthingLpsException;
 
 	@MockBean
+	private BasicLpsRepository basicLpsRepository;
+	
+	@MockBean
 	private UserFullName userFullName;
 
 	private EarthingLpsDescription earthingLpsDescription;
 
 	{
 		earthingLpsDescription = new EarthingLpsDescription();
-		earthingLpsDescription.setBasicLpsId(1);
 		earthingLpsDescription.setUserName("LVsystem@gmail.com");
-		earthingLpsDescription.setUserName("Inspector@gmail.com");
 		earthingLpsDescription.setBasicLpsId(1);
+		earthingLpsDescription.setEarthingId(2);
+	}
+	
+	private BasicLps basicLps;
+	{
+		basicLps = new BasicLps();
+		basicLps.setBasicLpsId(1);
+		basicLps.setClientName("Inspector@gmail.com");
 	}
 
 	@Test
 	public void testAddEarthingLpsDetails() throws EarthingLpsException {
 
+		when(basicLpsRepository.findByBasicLpsId(1)).thenReturn(Optional.of(basicLps));
+		when(earthingLpsRepository.findByBasicLpsId(3)).thenReturn(Optional.of(earthingLpsDescription));
+		earthingLpsServiceImpl.addEarthingLpsDetails(earthingLpsDescription);
+		
 		when(earthingLpsRepository.findByBasicLpsId(1)).thenReturn(Optional.of(earthingLpsDescription));
-
-		logger.info("BasicLpsId already Present_flow");
-		// logger.info("Invalid Present_flow");
-		earthingLpsDescription.setUserName(null);
 		EarthingLpsException earthingLpsException_2 = Assertions.assertThrows(EarthingLpsException.class,
 				() -> earthingLpsServiceImpl.addEarthingLpsDetails(earthingLpsDescription));
-		assertEquals(earthingLpsException_2.getMessage(), "Invalid Inputs");
+		assertEquals(earthingLpsException_2.getMessage(), "Basic LPS Id Already Available.Create New Basic Id");
+
+		basicLps.setBasicLpsId(5);
+		earthingLpsDescription.setBasicLpsId(5);
+		when(basicLpsRepository.findByBasicLpsId(1)).thenReturn(Optional.of(basicLps));
+		EarthingLpsException earthingLpsException_3 = Assertions.assertThrows(EarthingLpsException.class,
+				() -> earthingLpsServiceImpl.addEarthingLpsDetails(earthingLpsDescription));
+		assertEquals(earthingLpsException_3.getMessage(), "Given Basic LPS Id is Not Registered in Basic LPS");	
+		
+		earthingLpsDescription.setUserName(null);
+		EarthingLpsException earthingLpsException_4 = Assertions.assertThrows(EarthingLpsException.class,
+				() -> earthingLpsServiceImpl.addEarthingLpsDetails(earthingLpsDescription));
+		assertEquals(earthingLpsException_4.getMessage(), "Invalid Inputs");
 
 	}
 
@@ -76,14 +96,15 @@ public class EarthingLpsServiceTest {
 		List<EarthingLpsDescription> arrayList = new ArrayList<EarthingLpsDescription>();
 		arrayList.add(earthingLpsDescription);
 		when(earthingLpsRepository.findByUserNameAndBasicLpsId("LVsystem@gmail.com", 12)).thenReturn(arrayList);
-
-		logger.info("SuccessFlow of Retrieve  EarthingLps Obeject");
 		earthingLpsServiceImpl.retrieveEarthingLpsDetails("LVsystem@gmail.com", 12);
 
-		logger.info("Invalid Input flow");
 		EarthingLpsException earthingLpsException = Assertions.assertThrows(EarthingLpsException.class,
+				() -> earthingLpsServiceImpl.retrieveEarthingLpsDetails("abc@gmail.com", 12));
+		assertEquals(earthingLpsException.getMessage(), "Given UserName & Id doesn't exist in Down Conductor Details");
+
+		EarthingLpsException earthingLpsException_1 = Assertions.assertThrows(EarthingLpsException.class,
 				() -> earthingLpsServiceImpl.retrieveEarthingLpsDetails(null, 12));
-		assertEquals(earthingLpsException.getMessage(), "Invalid Inputs");
+		assertEquals(earthingLpsException_1.getMessage(), "Invalid Inputs");
 
 	}
 
@@ -93,19 +114,21 @@ public class EarthingLpsServiceTest {
 		earthingLpsDescription.setUserName("LVsystem@gmail.com");
 		earthingLpsDescription.setEarthingId(1);
 		earthingLpsDescription.setBasicLpsId(1);
-
 		when(earthingLpsRepository.findById(1)).thenReturn(Optional.of(earthingLpsDescription));
 		earthingLpsServiceImpl.updateEarthingLpsDetails(earthingLpsDescription);
 
-		EarthingLpsDescription earthingLpsDescription_1 = new EarthingLpsDescription();
-		earthingLpsDescription_1.setBasicLpsId(1);
-
-		when(earthingLpsRepository.findById(1)).thenReturn(Optional.of(earthingLpsDescription));
-		earthingLpsDescription.setBasicLpsId(null);
-		when(earthingLpsRepository.findById(1)).thenReturn(Optional.of(earthingLpsDescription));
+		earthingLpsDescription.setBasicLpsId(2);
+		earthingLpsDescription.setEarthingId(50);
+		when(earthingLpsRepository.findById(20)).thenReturn(Optional.of(earthingLpsDescription));
 		EarthingLpsException assertThrows_1 = Assertions.assertThrows(EarthingLpsException.class,
 				() -> earthingLpsServiceImpl.updateEarthingLpsDetails(earthingLpsDescription));
-		assertEquals(assertThrows_1.getMessage(), "Invalid inputs");
+		assertEquals(assertThrows_1.getMessage(), "Given Basic LPS Id and Earthing LPS Id is Invalid");
+		
+		earthingLpsDescription.setBasicLpsId(null);
+		when(earthingLpsRepository.findById(1)).thenReturn(Optional.of(earthingLpsDescription));
+		EarthingLpsException assertThrows_2 = Assertions.assertThrows(EarthingLpsException.class,
+				() -> earthingLpsServiceImpl.updateEarthingLpsDetails(earthingLpsDescription));
+		assertEquals(assertThrows_2.getMessage(), "Invalid inputs");
 	}
 
 }

@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.capeelectric.exception.EarthStudException;
+import com.capeelectric.exception.SummaryException;
 import com.capeelectric.model.BasicLps;
 import com.capeelectric.model.EarthStudDescription;
 import com.capeelectric.repository.BasicLpsRepository;
@@ -33,6 +34,8 @@ private static final Logger logger = LoggerFactory.getLogger(EarthStudServiceImp
 	
 	@Autowired
 	private BasicLpsRepository basicLpsRepository;
+	
+	private BasicLps basicLps;
 	
 	@Autowired
 	private UserFullName userFullName;
@@ -57,6 +60,14 @@ private static final Logger logger = LoggerFactory.getLogger(EarthStudServiceImp
 					earthStudDescription.setCreatedBy(userFullName.findByUserName(earthStudDescription.getUserName()));
 					earthStudDescription.setUpdatedBy(userFullName.findByUserName(earthStudDescription.getUserName()));
 					earthStudRepository.save(earthStudDescription);
+					basicLpsRepo = basicLpsRepository.findByBasicLpsId(earthStudDescription.getBasicLpsId());
+					if (basicLpsRepo.isPresent() && basicLpsRepo.get().getBasicLpsId().equals(earthStudDescription.getBasicLpsId())) {
+						basicLps = basicLpsRepo.get();
+						basicLps.setAllStepsCompleted("Y");
+						basicLpsRepository.save(basicLps);
+					} else {
+						throw new EarthStudException("Basic LPS Id Information not Available in Basic LPS Id Details");
+					}
 				} else {
 					throw new EarthStudException("Basic LPS Id Already Available.Create New Basic Id");
 				}
