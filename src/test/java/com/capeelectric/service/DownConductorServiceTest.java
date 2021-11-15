@@ -43,6 +43,9 @@ public class DownConductorServiceTest {
 	private DownConductorServiceImpl downConductorServiceImpl;
 
 	@MockBean
+	private BasicLpsRepository basicLpsRepository;
+	
+	@MockBean
 	private UserFullName userFullName;
 
 	private DownConductorDescription downConductorDescription;
@@ -50,23 +53,40 @@ public class DownConductorServiceTest {
 	{
 		downConductorDescription = new DownConductorDescription();
 		downConductorDescription.setBasicLpsId(1);
+		downConductorDescription.setDownConduDescId(5);
 		downConductorDescription.setUserName("LVsystem@gmail.com");
-		// downConductorDescription.setUserName("Inspector@gmail.com");
-		downConductorDescription.setBasicLpsId(1);
 	}
+	private BasicLps basicLps;
 
+	{
+		basicLps = new BasicLps();
+		basicLps.setBasicLpsId(1);
+		basicLps.setClientName("Inspector@gmail.com");
+		
+	}
 	@Test
 	public void testAddDownConductorsDetails() throws DownConductorException {
 
+		when(basicLpsRepository.findByBasicLpsId(1)).thenReturn(Optional.of(basicLps));
+		when(downConductorRepository.findByBasicLpsId(2)).thenReturn(Optional.of(downConductorDescription));
+		downConductorServiceImpl.addDownConductorsDetails(downConductorDescription);
+		
 		when(downConductorRepository.findByBasicLpsId(1)).thenReturn(Optional.of(downConductorDescription));
+		DownConductorException basicLpsException_1 = Assertions.assertThrows(DownConductorException.class,
+				() -> downConductorServiceImpl.addDownConductorsDetails(downConductorDescription));
+		assertEquals(basicLpsException_1.getMessage(),"Basic LPS Id Already Available.Create New Basic Id");
 
-		logger.info("BasicLpsId already Present_flow");
-		logger.info("Invalid Present_flow");
-		downConductorDescription.setUserName(null);
+		downConductorDescription.setBasicLpsId(3);
 		DownConductorException basicLpsException_2 = Assertions.assertThrows(DownConductorException.class,
 				() -> downConductorServiceImpl.addDownConductorsDetails(downConductorDescription));
-		assertEquals(basicLpsException_2.getMessage(), "Invalid Inputs");
-
+		assertEquals(basicLpsException_2.getMessage(),"Given Basic LPS Id is Not Registered in Basic LPS");
+		
+		logger.info("Invalid Present_flow");
+		downConductorDescription.setUserName(null);
+		DownConductorException basicLpsException_3 = Assertions.assertThrows(DownConductorException.class,
+				() -> downConductorServiceImpl.addDownConductorsDetails(downConductorDescription));
+		assertEquals(basicLpsException_3.getMessage(), "Invalid Inputs");
+		
 	}
 
 	@Test
@@ -84,6 +104,11 @@ public class DownConductorServiceTest {
 				() -> downConductorServiceImpl.retrieveDownConductorDetails(null, 12));
 		assertEquals(basicLpsException.getMessage(), "Invalid Inputs");
 
+		downConductorDescription.setUserName("LVsystem@gmail.com");
+		DownConductorException basicLpsException_1 = Assertions.assertThrows(DownConductorException.class,
+				() -> downConductorServiceImpl.retrieveDownConductorDetails("abc@gmail.com", 12));
+		assertEquals(basicLpsException_1.getMessage(), "Given UserName & Id doesn't exist in Down Conductor Details");
+
 	}
 
 	@Test
@@ -100,6 +125,13 @@ public class DownConductorServiceTest {
 		DownConductorException assertThrows_1 = Assertions.assertThrows(DownConductorException.class,
 				() -> downConductorServiceImpl.updateDownConductorDetails(downConductorDescription));
 		assertEquals(assertThrows_1.getMessage(), "Invalid inputs");
+		
+		downConductorDescription.setBasicLpsId(2);
+		downConductorDescription.setDownConduDescId(50);
+		when(downConductorRepository.findById(20)).thenReturn(Optional.of(downConductorDescription));
+		DownConductorException assertThrows_2 = Assertions.assertThrows(DownConductorException.class,
+				() -> downConductorServiceImpl.updateDownConductorDetails(downConductorDescription));
+		assertEquals(assertThrows_2.getMessage(), "Given Basic LPS Id and Down Conductor Id is Invalid");
 
 	}
 
