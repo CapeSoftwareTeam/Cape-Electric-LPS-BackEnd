@@ -19,14 +19,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.capeelectric.exception.AirTerminationException;
-import com.capeelectric.exception.BasicLpsException;
-import com.capeelectric.exception.SummaryException;
-import com.capeelectric.model.BasicLps;
 import com.capeelectric.model.LpsAirDiscription;
-import com.capeelectric.model.TestingReport;
-import com.capeelectric.model.TestingReportComment;
 import com.capeelectric.service.impl.AirTerminationLpsServiceImpl;
-import com.capeelectric.service.impl.BasicLpsServiceImpl;
 
 @ExtendWith(SpringExtension.class)
 @ExtendWith(MockitoExtension.class)

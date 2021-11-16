@@ -1,10 +1,7 @@
 package com.capeelectric.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.when;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -19,16 +16,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.capeelectric.exception.BasicLpsException;
-import com.capeelectric.exception.DownConductorException;
-import com.capeelectric.exception.PeriodicTestingException;
-import com.capeelectric.exception.SummaryException;
 import com.capeelectric.model.BasicLps;
-import com.capeelectric.model.Summary;
-import com.capeelectric.model.TestingReport;
-import com.capeelectric.model.TestingReportComment;
 import com.capeelectric.service.BasicLpsService;
-import com.capeelectric.service.impl.BasicLpsServiceImpl;
-import com.capeelectric.service.impl.LoginServiceImpl;
 
 @ExtendWith(SpringExtension.class)
 @ExtendWith(MockitoExtension.class)

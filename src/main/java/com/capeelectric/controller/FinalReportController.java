@@ -16,9 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.capeelectric.exception.FinalReportException;
 import com.capeelectric.model.BasicLps;
-import com.capeelectric.model.FinalReport;
 import com.capeelectric.model.LpsFinalReport;
-import com.capeelectric.model.Site;
 import com.capeelectric.service.impl.FinalReportServiceImpl;
 
 /**
@@ -34,45 +32,25 @@ public class FinalReportController {
 
 	@Autowired
 	FinalReportServiceImpl finalReportServiceImpl;
-	
-	
 
-	@GetMapping("/retrieveListOfSite/{userName}")
-	public ResponseEntity<List<Site>> retrieveListOfSite(@PathVariable String userName) throws FinalReportException {
-		logger.info("FinalReportAPI_started retrieveSiteDetails function UserName: {}", userName);
-		
-		return new ResponseEntity<List<Site>>(finalReportServiceImpl.retrieveListOfSite(userName),
-				HttpStatus.OK);
-
-	}
-
-	@GetMapping("/retrieveReport/{userName}/{siteId}")
-	public ResponseEntity<Optional<FinalReport>> retrieveReports(@PathVariable String userName,
-			@PathVariable Integer siteId) throws FinalReportException {
-		logger.info("FinalReportAPI_started retrieveFinalReport function userName: {},siteId : {}", userName, siteId);
-		
-		return new ResponseEntity<Optional<FinalReport>>(finalReportServiceImpl.retrieveFinalReport(userName, siteId),
-				HttpStatus.OK);
-
-	}
-	
 	@GetMapping("/retrieveListOfBasicLps/{userName}")
-	public ResponseEntity<List<BasicLps>> retrieveListOfBasicLps(@PathVariable String userName) throws FinalReportException {
+	public ResponseEntity<List<BasicLps>> retrieveListOfBasicLps(@PathVariable String userName)
+			throws FinalReportException {
 		logger.info("FinalReportAPI_started retrieveListOfBasicLps function UserName: {}", userName);
 		return new ResponseEntity<List<BasicLps>>(finalReportServiceImpl.retrieveListOfBasicLps(userName),
 				HttpStatus.OK);
 
 	}
-	
+
 	@GetMapping("/retrieveLpsReport/{userName}/{basicLpsId}")
 	public ResponseEntity<Optional<LpsFinalReport>> retrieveLpsReports(@PathVariable String userName,
 			@PathVariable Integer basicLpsId) throws FinalReportException {
-		logger.info("FinalReportAPI_started retrieveFinalLpsReport function userName: {},basicLpsId : {}", userName, basicLpsId);
-		
-		return new ResponseEntity<Optional<LpsFinalReport>>(finalReportServiceImpl.retrieveLpsReports(userName, basicLpsId),
-				HttpStatus.OK);
+		logger.info("FinalReportAPI_started retrieveFinalLpsReport function userName: {},basicLpsId : {}", userName,
+				basicLpsId);
+
+		return new ResponseEntity<Optional<LpsFinalReport>>(
+				finalReportServiceImpl.retrieveLpsReports(userName, basicLpsId), HttpStatus.OK);
 
 	}
-
 
 }

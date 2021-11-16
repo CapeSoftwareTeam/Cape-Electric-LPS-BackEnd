@@ -1097,3 +1097,31 @@ Caused by: org.hibernate.QueryException: could not resolve property: basicLpsCli
 	at org.hibernate.hql.internal.ast.QueryTranslatorImpl.doCompile(QueryTranslatorImpl.java:192)
 	... 118 common frames omitted
 2021-10-31T11:35:49.341+0530 ERROR Duplicate entry 'arun1' for key 'basic_lps_table.CLIENT_NAME'
+2021-11-02T13:05:15.561+0530 ERROR Access denied for user 'root'@'localhost' (using password: YES)
+2021-11-03T12:33:41.336+0530 ERROR Unknown column 'inspected_clampsinob' in 'field list'
+2021-11-03T12:37:37.467+0530 ERROR Unknown column 'inspected_failedinob' in 'field list'
+2021-11-03T12:39:25.409+0530 ERROR Unknown column 'inspected_passedinob' in 'field list'
+2021-11-03T12:41:58.304+0530 ERROR Unknown column 'physical_inspectioninob' in 'field list'
+2021-11-03T12:43:24.833+0530 ERROR Cannot add or update a child row: a foreign key constraint fails (`lps_inspection`.`earthingclamps_table`, CONSTRAINT `FK_EARTHCLAMPS_EARTHING_ID` FOREIGN KEY (`EARTHING_ID`) REFERENCES `earthing_table` (`EARTHING_ID`) ON DELETE CASCADE)
+2021-11-03T13:09:37.006+0530 ERROR Cannot add or update a child row: a foreign key constraint fails (`lps_inspection`.`earthingclamps_table`, CONSTRAINT `FK_EARTHCLAMPS_EARTHING_ID` FOREIGN KEY (`EARTHING_ID`) REFERENCES `earthing_table` (`EARTHING_ID`) ON DELETE CASCADE)
+2021-11-03T13:13:48.792+0530 ERROR Cannot add or update a child row: a foreign key constraint fails (`lps_inspection`.`earthingclamps_table`, CONSTRAINT `FK_EARTHCLAMPS_EARTHING_ID` FOREIGN KEY (`EARTHING_ID`) REFERENCES `earthing_table` (`EARTHING_ID`) ON DELETE CASCADE)
+2021-11-03T13:18:24.423+0530 ERROR Cannot add or update a child row: a foreign key constraint fails (`lps_inspection`.`earthingclamps_table`, CONSTRAINT `FK_EARTHCLAMPS_EARTHING_ID` FOREIGN KEY (`EARTHING_ID`) REFERENCES `earthing_table` (`EARTHING_ID`) ON DELETE CASCADE)
+2021-11-03T13:23:10.646+0530 ERROR Cannot add or update a child row: a foreign key constraint fails (`lps_inspection`.`earthingclamps_table`, CONSTRAINT `FK_EARTHCLAMPS_EARTHING_ID` FOREIGN KEY (`EARTHING_ID`) REFERENCES `earthing_table` (`EARTHING_ID`) ON DELETE CASCADE)
+2021-11-03T14:25:48.399+0530 ERROR Unknown column 'separatedi0_.seperation_distance_desc_id' in 'field list'
+2021-11-03T15:47:36.359+0530 ERROR Unknown column 'separatedi0_.seperation_distance_desc_id' in 'field list'
+2021-11-03T15:48:54.067+0530 ERROR Unknown column 'separatedi0_.seperation_distance_desc_id' in 'field list'
+2021-11-03T15:50:13.754+0530 ERROR Unknown column 'separatedi0_.seperation_distance_desc_id' in 'field list'
+2021-11-03T15:51:24.036+0530 ERROR Unknown column 'separatedi0_.seperation_distance_desc_id' in 'field list'
+2021-11-03T16:04:31.224+0530 ERROR Unknown column 'seperation_distance_desc_id' in 'field list'
+2021-11-03T16:11:12.553+0530 ERROR Table 'lps_inspection.seperation_distance_description_table' doesn't exist
+2021-11-03T16:29:18.734+0530 ERROR Cannot add or update a child row: a foreign key constraint fails (`lps_inspection`.`earthingclamps_table`, CONSTRAINT `FK_EARTHCLAMPS_EARTHING_ID` FOREIGN KEY (`EARTHING_ID`) REFERENCES `earthing_table` (`EARTHING_ID`) ON DELETE CASCADE)
+2021-11-03T16:36:26.861+0530 ERROR Unknown column 'location_name' in 'field list'
+2021-11-03T16:37:10.407+0530 ERROR Unknown column 'location_name' in 'field list'
+2021-11-03T16:47:42.250+0530 ERROR Unknown column 'inspected_chamberinob' in 'field list'
+2021-11-08T11:05:41.178+0530 ERROR Table 'lps_inspection.reportdetails_comments_table' doesn't exist
+2021-11-09T11:52:15.305+0530 ERROR Access denied for user 'root'@'localhost' (using password: YES)
+2021-11-09T11:53:10.720+0530 ERROR Access denied for user 'root'@'localhost' (using password: YES)
+2021-11-09T12:02:19.389+0530 ERROR Access denied for user 'root'@'localhost' (using password: YES)
+2021-11-12T16:30:47.294+0530 ERROR Unknown column 'earthinglp0_.location_name' in 'field list'
+2021-11-12T16:37:31.036+0530 ERROR Unknown column 'earthinglp0_.location_name' in 'field list'
+2021-11-16T11:33:45.448+0530 ERROR Unknown column 'basiclps0_.all_steps_completed' in 'field list'
