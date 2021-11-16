@@ -12,11 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.capeelectric.exception.AirTerminationException;
 import com.capeelectric.exception.BasicLpsException;
-import com.capeelectric.service.PrintAirTerminationService;
 import com.capeelectric.service.PrintBasicLpsService;
 
 @RestController()
-@RequestMapping("/api/v1")
+@RequestMapping("/api/lps/v1")
 public class PrintBasicLpsController {
 
 	
@@ -30,6 +29,6 @@ public class PrintBasicLpsController {
 			throws AirTerminationException, BasicLpsException {
 		logger.info("called printBasicLps userName: {},siteId : {}", userName, lpsId);
 		printBasicLpsService.printBasicLps(userName, lpsId);
-		return new ResponseEntity(HttpStatus.OK);
+		return new ResponseEntity<String>(HttpStatus.OK);
 	}
 }
