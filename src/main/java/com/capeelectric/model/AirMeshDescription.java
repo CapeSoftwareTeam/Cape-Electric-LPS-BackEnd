@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "AIR_MESHDESCRIPTION_TABLE")
 public class AirMeshDescription implements Serializable {
@@ -42,8 +43,8 @@ public class AirMeshDescription implements Serializable {
 	private String maximumDistanceRe;
 
 	@Column(name = "MINIMUM_DISTANCEOBSERVATION")
-	private String  minimumDistanceOb;
-	
+	private String minimumDistanceOb;
+
 	@Column(name = "MINIMUM_DISTANCEREMARKS")
 	private String minimumDistanceRe;
 
@@ -52,7 +53,13 @@ public class AirMeshDescription implements Serializable {
 
 	@Column(name = "HEIGHT_OFCONDUCTOR_FLATSURAFACEREMARKS")
 	private String heightOfConductorFlatSurfaceRe;
-	
+
+	@Column(name = "LOCATION_NUMBER")
+	private Integer locationNumber;
+
+	@Column(name = "LOCATION_NAME")
+	private String locationName;
+
 	@JsonBackReference
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "LPSAIRDESCRIPTION_ID")
@@ -60,6 +67,22 @@ public class AirMeshDescription implements Serializable {
 
 	public Integer getMeshDescriptionId() {
 		return meshDescriptionId;
+	}
+
+	public Integer getLocationNumber() {
+		return locationNumber;
+	}
+
+	public void setLocationNumber(Integer locationNumber) {
+		this.locationNumber = locationNumber;
+	}
+
+	public String getLocationName() {
+		return locationName;
+	}
+
+	public void setLocationName(String locationName) {
+		this.locationName = locationName;
 	}
 
 	public void setMeshDescriptionId(Integer meshDescriptionId) {
@@ -154,5 +177,4 @@ public class AirMeshDescription implements Serializable {
 		this.lpsAirDes = lpsAirDes;
 	}
 
-	
 }

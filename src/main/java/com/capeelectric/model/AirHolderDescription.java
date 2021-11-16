@@ -24,6 +24,12 @@ public class AirHolderDescription implements Serializable {
 	@Column(name = "HOLDERS_DESCRIPTION_ID")
 	private Integer holderDescriptionId;
 
+	@Column(name = "LOCATION_NUMBER")
+	private Integer locationNumber;
+
+	@Column(name = "LOCATION_NAME")
+	private String locationName;
+
 	@Column(name = "PHYSICAL_INSPECTION_OBSERVATION")
 	private String physicalInspectionOb;
 
@@ -121,6 +127,22 @@ public class AirHolderDescription implements Serializable {
 
 	public Integer getHolderDescriptionId() {
 		return holderDescriptionId;
+	}
+
+	public Integer getLocationNumber() {
+		return locationNumber;
+	}
+
+	public void setLocationNumber(Integer locationNumber) {
+		this.locationNumber = locationNumber;
+	}
+
+	public String getLocationName() {
+		return locationName;
+	}
+
+	public void setLocationName(String locationName) {
+		this.locationName = locationName;
 	}
 
 	public String getMaterailOfHolderOb() {

@@ -16,83 +16,81 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name = "TESTJOINTS_TABLE")
-public class TestingJoint  implements Serializable {
-    
+public class TestingJoint implements Serializable {
+
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "TESTJOINT_ID")
 	private Integer testJointId;
-	
-	@Column(name = "LOCATION_NO")
-	private Integer lacationNo;
-	
+
+	@Column(name = "LOCATION_NUMBER")
+	private Integer locationNumber;
+
 	@Column(name = "LOCATION_NAME")
-	private String lacationName;
+	private String locationName;
 
 	@Column(name = "TESTJOINT_TYPE_OB")
 	private String testJointTypeOb;
-	
+
 	@Column(name = "TESTJOINT_TYPE_REM")
 	private String testJointTypeRem;
-	
+
 	@Column(name = "MATERIAL_TESTJOINT_OB")
 	private String materialTestJointOb;
-	
+
 	@Column(name = "MATERIAL_TESTJOINT_REM")
 	private String materialTestJointRem;
-	
+
 	@Column(name = "ACCESSIBILITY_OF_TESTJOINT_OB")
 	private String accessibilityOfTestJointOb;
-	
+
 	@Column(name = "ACCESSIBILITY_OF_TESTJOINT_REM")
 	private String accessibilityOfTestJointRem;
-	
+
 	@Column(name = "NONMETALICCASING_PROTECTION_OB")
 	private String nonMetalicProtectionOb;
-	 
+
 	@Column(name = "NONMETALICCASING_PROTECTION_REM")
 	private String nonMetalicProtectionRem;
-	
+
 	@Column(name = "TESTJOINTPLACED_GROUNTLEVEL_OB")
 	private String testJointPlacedGroungLevelOb;
-	
-	
+
 	@Column(name = "TESTJOINTPLACED_GROUNTLEVEL_REM")
 	private String testJointPlacedGroungLevelRem;
-	
-	
+
 	@Column(name = "BIMETALLICISSUE_CHECK_OB")
 	private String bimetallicIssueCheckOb;
-	
+
 	@Column(name = "BIMETALLICISSUE_CHECK_REM")
 	private String bimetallicIssueCheckRem;
-	
+
 	@Column(name = "TOTALNO_OF_TESTJOINT_OB")
 	private String totalNoOfTestJointOB;
-	
+
 	@Column(name = "TOTALNO_OF_TESTJOINT_REM")
 	private String totalNoOfTestJointRem;
-	
+
 	@Column(name = "INSPECTED_NO_OB")
 	private String inspectedNoOb;
-	
+
 	@Column(name = "INSPECTED_NO_REM")
 	private String inspectedNoRem;
-	
+
 	@Column(name = "INSPECTIONSPASSED_NO_OB")
 	private String inspectionPassedNoOb;
 
 	@Column(name = "INSPECTIONSPASSED_NO_REM")
 	private String inspectionPassedNoRem;
-	
+
 	@Column(name = "INSPECTIONFAILED_NO_OB")
 	private String inspectionFailedNoOb;
-	
+
 	@Column(name = "INSPECTIONFAILED_NO_REM")
 	private String inspectionFailedNoRem;
-	
+
 	@JsonBackReference
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "DOWNCONDUCTORDESCRIPTION_ID")
@@ -101,31 +99,22 @@ public class TestingJoint  implements Serializable {
 	public Integer getTestJointId() {
 		return testJointId;
 	}
-	
 
-	public Integer getLacationNo() {
-		return lacationNo;
+	public Integer getLocationNumber() {
+		return locationNumber;
 	}
 
-
-
-	public void setLacationNo(Integer lacationNo) {
-		this.lacationNo = lacationNo;
+	public void setLocationNumber(Integer locationNumber) {
+		this.locationNumber = locationNumber;
 	}
 
-
-
-	public String getLacationName() {
-		return lacationName;
+	public String getLocationName() {
+		return locationName;
 	}
 
-
-
-	public void setLacationName(String lacationName) {
-		this.lacationName = lacationName;
+	public void setLocationName(String locationName) {
+		this.locationName = locationName;
 	}
-
-
 
 	public void setTestJointId(Integer testJointId) {
 		this.testJointId = testJointId;
@@ -298,6 +287,5 @@ public class TestingJoint  implements Serializable {
 	public void setDownConductorDescription(DownConductorDescription downConductorDescription) {
 		this.downConductorDescription = downConductorDescription;
 	}
-	
-	
+
 }

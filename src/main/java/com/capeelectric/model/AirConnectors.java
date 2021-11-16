@@ -24,6 +24,12 @@ public class AirConnectors implements Serializable {
 	@Column(name = "CONNECTORS_ID")
 	private Integer connectorId;
 
+	@Column(name = "LOCATION_NUMBER")
+	private Integer locationNumber;
+
+	@Column(name = "LOCATION_NAME")
+	private String locationName;
+
 	@Column(name = "PHYSICAL_INSPECTION_OBSERVATION")
 	private String physicalInspectionOb;
 
@@ -84,232 +90,201 @@ public class AirConnectors implements Serializable {
 	@Column(name = "INSP_FAILED_NO_REM")
 	private String inspectionFailedRe;
 
-	
 	@JsonBackReference
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "LPSAIRDESCRIPTION_ID")
 	private LpsAirDiscription lpsAirDes;
 
-
 	public Integer getConnectorId() {
 		return connectorId;
 	}
 
+	public Integer getLocationNumber() {
+		return locationNumber;
+	}
+
+	public void setLocationNumber(Integer locationNumber) {
+		this.locationNumber = locationNumber;
+	}
+
+	public String getLocationName() {
+		return locationName;
+	}
+
+	public void setLocationName(String locationName) {
+		this.locationName = locationName;
+	}
 
 	public void setConnectorId(Integer connectorId) {
 		this.connectorId = connectorId;
 	}
 
-
 	public String getPhysicalInspectionOb() {
 		return physicalInspectionOb;
 	}
-
 
 	public void setPhysicalInspectionOb(String physicalInspectionOb) {
 		this.physicalInspectionOb = physicalInspectionOb;
 	}
 
-
 	public String getPhysicalInspectionRe() {
 		return physicalInspectionRe;
 	}
-
 
 	public void setPhysicalInspectionRe(String physicalInspectionRe) {
 		this.physicalInspectionRe = physicalInspectionRe;
 	}
 
-
 	public String getCheckConnectionConnectorsOb() {
 		return checkConnectionConnectorsOb;
 	}
-
 
 	public void setCheckConnectionConnectorsOb(String checkConnectionConnectorsOb) {
 		this.checkConnectionConnectorsOb = checkConnectionConnectorsOb;
 	}
 
-
 	public String getCheckConnectionConnectorsRe() {
 		return checkConnectionConnectorsRe;
 	}
-
 
 	public void setCheckConnectionConnectorsRe(String checkConnectionConnectorsRe) {
 		this.checkConnectionConnectorsRe = checkConnectionConnectorsRe;
 	}
 
-
 	public String getMaterialOfConnectorOb() {
 		return materialOfConnectorOb;
 	}
-
 
 	public void setMaterialOfConnectorOb(String materialOfConnectorOb) {
 		this.materialOfConnectorOb = materialOfConnectorOb;
 	}
 
-
 	public String getMaterialOfConnectorRe() {
 		return materialOfConnectorRe;
 	}
-
 
 	public void setMaterialOfConnectorRe(String materialOfConnectorRe) {
 		this.materialOfConnectorRe = materialOfConnectorRe;
 	}
 
-
 	public String getStrightConnectorOb() {
 		return strightConnectorOb;
 	}
-
 
 	public void setStrightConnectorOb(String strightConnectorOb) {
 		this.strightConnectorOb = strightConnectorOb;
 	}
 
-
 	public String getStrightConnectorRe() {
 		return strightConnectorRe;
 	}
-
 
 	public void setStrightConnectorRe(String strightConnectorRe) {
 		this.strightConnectorRe = strightConnectorRe;
 	}
 
-
 	public String gettConnectorOb() {
 		return tConnectorOb;
 	}
-
 
 	public void settConnectorOb(String tConnectorOb) {
 		this.tConnectorOb = tConnectorOb;
 	}
 
-
 	public String gettConnectorRe() {
 		return tConnectorRe;
 	}
-
 
 	public void settConnectorRe(String tConnectorRe) {
 		this.tConnectorRe = tConnectorRe;
 	}
 
-
 	public String getlConnectorOb() {
 		return lConnectorOb;
 	}
-
 
 	public void setlConnectorOb(String lConnectorOb) {
 		this.lConnectorOb = lConnectorOb;
 	}
 
-
 	public String getlConnectorRe() {
 		return lConnectorRe;
 	}
-
 
 	public void setlConnectorRe(String lConnectorRe) {
 		this.lConnectorRe = lConnectorRe;
 	}
 
-
 	public String getTotalNoConnectorOb() {
 		return totalNoConnectorOb;
 	}
-
 
 	public void setTotalNoConnectorOb(String totalNoConnectorOb) {
 		this.totalNoConnectorOb = totalNoConnectorOb;
 	}
 
-
 	public String getTotalNoConnectorRe() {
 		return totalNoConnectorRe;
 	}
-
 
 	public void setTotalNoConnectorRe(String totalNoConnectorRe) {
 		this.totalNoConnectorRe = totalNoConnectorRe;
 	}
 
-
 	public String getInspectionNoOb() {
 		return inspectionNoOb;
 	}
-
 
 	public void setInspectionNoOb(String inspectionNoOb) {
 		this.inspectionNoOb = inspectionNoOb;
 	}
 
-
 	public String getInspectionNoRe() {
 		return inspectionNoRe;
 	}
-
 
 	public void setInspectionNoRe(String inspectionNoRe) {
 		this.inspectionNoRe = inspectionNoRe;
 	}
 
-
 	public String getInspectionPassedNoOb() {
 		return inspectionPassedNoOb;
 	}
-
 
 	public void setInspectionPassedNoOb(String inspectionPassedNoOb) {
 		this.inspectionPassedNoOb = inspectionPassedNoOb;
 	}
 
-
 	public String getInspectionPassedNoRe() {
 		return inspectionPassedNoRe;
 	}
-
 
 	public void setInspectionPassedNoRe(String inspectionPassedNoRe) {
 		this.inspectionPassedNoRe = inspectionPassedNoRe;
 	}
 
-
 	public String getInspectionFailedOb() {
 		return inspectionFailedOb;
 	}
-
 
 	public void setInspectionFailedOb(String inspectionFailedOb) {
 		this.inspectionFailedOb = inspectionFailedOb;
 	}
 
-
 	public String getInspectionFailedRe() {
 		return inspectionFailedRe;
 	}
-
 
 	public void setInspectionFailedRe(String inspectionFailedRe) {
 		this.inspectionFailedRe = inspectionFailedRe;
 	}
 
-
 	public LpsAirDiscription getLpsAirDes() {
 		return lpsAirDes;
 	}
-
 
 	public void setLpsAirDes(LpsAirDiscription lpsAirDes) {
 		this.lpsAirDes = lpsAirDes;
 	}
 
-
- 
 }

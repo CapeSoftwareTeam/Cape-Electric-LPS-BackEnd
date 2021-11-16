@@ -16,45 +16,51 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name = "LIGHTNINGCOUNTERS_TABLE")
-public class LightningCounter  implements Serializable {
+public class LightningCounter implements Serializable {
 
-private static final long serialVersionUID = 1L;
-	
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "LIGHTNINGCOUNTERS_ID")
 	private Integer lightingCountersId;
-	
+
+	@Column(name = "LOCATION_NUMBER")
+	private Integer locationNumber;
+
+	@Column(name = "LOCATION_NAME")
+	private String locationName;
+
 	@Column(name = "THREADHOLD_CURRENT_OB")
 	private String threadHoldCurrentOb;
-	
+
 	@Column(name = "THREADHOLD_CURRENT_REM")
 	private String threadHoldCurrentRem;
-	
+
 	@Column(name = "MAXIMUMWITHSTAND_CURRENT_OB")
 	private String maximumWithStandCurrentOb;
-	
+
 	@Column(name = "MAXIMUMWITHSTAND_CURRENT_REM")
 	private String maximumWithStandCurrentRem;
-	
+
 	@Column(name = "COUNTS_OB")
 	private String countsOb;
-	
+
 	@Column(name = "COUNTS_REM")
 	private String countsRem;
-	
+
 	@Column(name = "BATTERY_LIFETIME_OB")
 	private String batteryLifeTimeOb;
-	
+
 	@Column(name = "BATTERY_LIFETIME_REM")
 	private String batteryLifeTimeRem;
-	
+
 	@Column(name = "PROPERCONNECTION_LIGHTINGCOUNTER_OB")
 	private String properConnectionLightingCounterOb;
-	
+
 	@Column(name = "PROPERCONNECTION_LIGHTINGCOUNTER_REM")
 	private String properConnectionLightingCounterRem;
-	
+
 	@Column(name = "LIGHTINGCOUNTER_PLACED_OB")
 	private String lightingCounterPlacedOb;
 
@@ -66,31 +72,31 @@ private static final long serialVersionUID = 1L;
 
 	@Column(name = "CONDITION_OF_LIGHTINGCOUNTER_REM")
 	private String conditionOfLightingCounterRem;
-	
+
 	@Column(name = "TOTALNO_LIGHTNINGCOUNTER_OB")
 	private String totalNoLightingCounterOb;
 
 	@Column(name = "TOTALNO_LIGHTNINGCOUNTER_REM")
 	private String totalNoLightingCounterRem;
-	
+
 	@Column(name = "INSPECTED_NO_OB")
 	private String inspectedNoOb;
-	
+
 	@Column(name = "INSPECTED_NO_REM")
 	private String inspectedNoRem;
-	
+
 	@Column(name = "INSPECTIONSPASSED_NO_OB")
 	private String inspectionPassedNoOb;
 
 	@Column(name = "INSPECTIONSPASSED_NO_REM")
 	private String inspectionPassedNoRem;
-	
+
 	@Column(name = "INSPECTIONFAILED_NO_OB")
 	private String inspectionFailedNoOb;
-	
+
 	@Column(name = "INSPECTIONFAILED_NO_REM")
 	private String inspectionFailedNoRem;
-	
+
 	@JsonBackReference
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "DOWNCONDUCTORDESCRIPTION_ID")
@@ -98,6 +104,22 @@ private static final long serialVersionUID = 1L;
 
 	public Integer getLightingCountersId() {
 		return lightingCountersId;
+	}
+
+	public Integer getLocationNumber() {
+		return locationNumber;
+	}
+
+	public void setLocationNumber(Integer locationNumber) {
+		this.locationNumber = locationNumber;
+	}
+
+	public String getLocationName() {
+		return locationName;
+	}
+
+	public void setLocationName(String locationName) {
+		this.locationName = locationName;
 	}
 
 	public void setLightingCountersId(Integer lightingCountersId) {
@@ -287,6 +309,5 @@ private static final long serialVersionUID = 1L;
 	public void setDownConductorDescription(DownConductorDescription downConductorDescription) {
 		this.downConductorDescription = downConductorDescription;
 	}
-	
-	
+
 }

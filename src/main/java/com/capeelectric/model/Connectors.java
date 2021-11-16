@@ -16,13 +16,19 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name = "CONNECTORS_TABLE")
-public class Connectors  implements Serializable{
+public class Connectors implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "CONNECTORS_ID")
 	private Integer connectorId;
+
+	@Column(name = "LOCATION_NUMBER")
+	private Integer locationNumber;
+
+	@Column(name = "LOCATION_NAME")
+	private String locationName;
 
 	@Column(name = "PHYSICAL_INSPECTION_OB")
 	private String physicalInspectionOb;
@@ -32,50 +38,46 @@ public class Connectors  implements Serializable{
 
 	@Column(name = "STRAIGHT_CONNECTORCHACK_OB")
 	private String strightConnectCheckOb;
-	
 
 	@Column(name = "STRAIGHT_CONNECTORCHACK_REM")
 	private String strightConnectCheckRem;
-	
+
 	@Column(name = "MATERIAL_CONNECTOR_OB")
 	private String materialConnectorOb;
-	 
+
 	@Column(name = "MATERIAL_CONNECTOR_REM ")
 	private String materialConnectorRem;
-	
+
 	@Column(name = "MAXCONNECTORS_DOWNCONDUCTORS_OB")
 	private String maxConnectorsDownConductorOb;
-	
-	
+
 	@Column(name = "MAXCONNECTORS_DOWNCONDUCTORS_REM")
 	private String maxConnectorsDownConductorRem;
-	
+
 	@Column(name = "TOTALNO_CONNECTORS_OB")
 	private String totalNoConnectorsOb;
 
-
 	@Column(name = "TOTALNO_CONNECTORS_REM")
 	private String totalNoConnectorsRem;
-	
 
 	@Column(name = "INSPECTED_NO_OB")
 	private String inspectedNoOb;
-	
+
 	@Column(name = "INSPECTED_NO_REM")
 	private String inspectedNoRem;
-	
+
 	@Column(name = "INSPECTIONSPASSED_NO_OB")
 	private String inspectionPassedNoOb;
 
 	@Column(name = "INSPECTIONSPASSED_NO_REM")
 	private String inspectionPassedNoRem;
-	
+
 	@Column(name = "INSPECTIONFAILED_NO_OB")
 	private String inspectionFailedNoOb;
-	
+
 	@Column(name = "INSPECTIONFAILED_NO_REM")
 	private String inspectionFailedNoRem;
-	
+
 	@JsonBackReference
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "DOWNCONDUCTORDESCRIPTION_ID")
@@ -83,6 +85,22 @@ public class Connectors  implements Serializable{
 
 	public Integer getConnectorId() {
 		return connectorId;
+	}
+
+	public Integer getLocationNumber() {
+		return locationNumber;
+	}
+
+	public void setLocationNumber(Integer locationNumber) {
+		this.locationNumber = locationNumber;
+	}
+
+	public String getLocationName() {
+		return locationName;
+	}
+
+	public void setLocationName(String locationName) {
+		this.locationName = locationName;
 	}
 
 	public void setConnectorId(Integer connectorId) {
@@ -224,6 +242,5 @@ public class Connectors  implements Serializable{
 	public void setDownConductorDescription(DownConductorDescription downConductorDescription) {
 		this.downConductorDescription = downConductorDescription;
 	}
-	
-	
+
 }

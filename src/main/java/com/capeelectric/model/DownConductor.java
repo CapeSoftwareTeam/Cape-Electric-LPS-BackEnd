@@ -15,109 +15,107 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
-
 @Entity
 @Table(name = "DOWNCONDUCTOR_TABLE")
-public class DownConductor implements Serializable  {
-     
+public class DownConductor implements Serializable {
+
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "DOWNCONDUCTOR_ID")
 	private Integer downConductorId;
-	
-	@Column(name = "LOCATION_NO")
-	private Integer lacationNo;
-	
+
+	@Column(name = "LOCATION_NUMBER")
+	private Integer lacationNumber;
+
 	@Column(name = "LOCATION_NAME")
 	private String lacationName;
-	
+
 	@Column(name = "PHYSICAL_INSPECTION_OB")
 	private String physicalInspectionOb;
-	
+
 	@Column(name = "PHYSICAL_INSPECTION_REM")
 	private String physicalInspectionRem;
-	
+
 	@Column(name = "CONDUCTOR_MATERIAL_OB")
 	private String conductMaterialOb;
-	
+
 	@Column(name = "CONDUCTOR_MATERIAL_REM")
 	private String conductMaterialRem;
-	
+
 	@Column(name = "CONDUCTOR_SIZE_OB")
 	private String conductSizeOb;
-	
+
 	@Column(name = "CONDUCTOR_SIZE_REM")
 	private String conductSizeRem;
-	
+
 	@Column(name = "DOWNCONDUCTOR_EXPOSED_OB")
 	private String downConductExposedOb;
-	
+
 	@Column(name = "DOWNCONDUCTOR_EXPOSED_RE")
 	private String downConductExposedRem;
-	
+
 	@Column(name = "DOWNCONDUCTOR_LOCATION_OB")
 	private String downConductLocationdOb;
-	
+
 	@Column(name = "DOWNCONDUCTOR_LOCATION_REM")
 	private String downConductLocationdRem;
-	
+
 	@Column(name = "DOWNCONDUCTOR_GUTTERS_OB")
 	private String downConductGutterOb;
-	
+
 	@Column(name = "DOWNCONDUCTOR_GUTTERS_REM")
 	private String downConductGutterRem;
-	
+
 	@Column(name = "ENSURE_DOWNCONDUCTOR_OB")
 	private String ensureDownCnoductOb;
 
 	@Column(name = "ENSURE_DOWNCONDUCTOR_REM")
 	private String ensureDownCnoductRem;
-	
-	
+
 	@Column(name = "INSTALLATION_DOWNCONDUCTOR_OB")
 	private String installationDownConductOb;
-	
+
 	@Column(name = "INSTALLATION_DOWNCONDUCTOR_REM")
 	private String installationDownConductRem;
-	
+
 	@Column(name = "MAXIMUM_DOWNCONDUCTOR_OB")
 	private String maximumDownConductOb;
-	
+
 	@Column(name = "MAXIMUM_DOWNCONDUCTOR_REM")
 	private String maximumDownConductRem;
-	
+
 	@Column(name = "MINIMUM_DOWNCONDUCTOR_OB")
 	private String manimumDownConductOb;
-	
+
 	@Column(name = "MINIMUM_DOWNCONDUCTOR_REM")
 	private String manimumDownConductRem;
 
 	@Column(name = "TOTALNO_DOWNCONDUCTOR_OB")
 	private String totalNoDownConductOb;
-	
+
 	@Column(name = "TOTALNO_DOWNCONDUCTOR_REM")
 	private String totalNoDownConductRem;
-	
+
 	@Column(name = "INSPECTED_NO_OB")
 	private String inspectedNoOb;
-	
+
 	@Column(name = "INSPECTED_NO_REM")
 	private String inspectedNoRem;
-	
+
 	@Column(name = "INSPECTIONSPASSED_NO_OB")
 	private String inspectionPassedNoOb;
 
 	@Column(name = "INSPECTIONSPASSED_NO_REM")
 	private String inspectionPassedNoRem;
-	
+
 	@Column(name = "INSPECTIONFAILED_NO_OB")
 	private String inspectionFailedNoOb;
-	
+
 	@Column(name = "INSPECTIONFAILED_NO_REM")
 	private String inspectionFailedNoRem;
-	
+
 	@JsonBackReference
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "DOWNCONDUCTORDESCRIPTION_ID")
@@ -131,14 +129,12 @@ public class DownConductor implements Serializable  {
 		this.downConductorId = downConductorId;
 	}
 
-	
-	
-	public Integer getLacationNo() {
-		return lacationNo;
+	public Integer getLacationNumber() {
+		return lacationNumber;
 	}
 
-	public void setLacationNo(Integer lacationNo) {
-		this.lacationNo = lacationNo;
+	public void setLacationNumber(Integer lacationNumber) {
+		this.lacationNumber = lacationNumber;
 	}
 
 	public String getLacationName() {
@@ -381,6 +377,4 @@ public class DownConductor implements Serializable  {
 		this.downConductorDescription = downConductorDescription;
 	}
 
-	
-	
 }

@@ -17,212 +17,231 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 @Entity
 @Table(name = "HOLDERS_TABLE")
 public class Holder implements Serializable {
-	 
-		private static final long serialVersionUID = 1L;
-		
-		@Id
-		@GeneratedValue(strategy = GenerationType.AUTO)
-		@Column(name = "HOLDERS_ID")
-		private Integer holderId;
-		
-		@Column(name = "PHYSICAL_INSPECTION_OB")
-		private String physicalInspectionOb;
-		
-		@Column(name = "PHYSICAL_INSPECTION_REM")
-		private String physicalInspectionRem;
-		
-		@Column(name = "CONDUCTORHOLDER_FLATSURFACE_OB")
-		private String conductHolderFlatSurfaceOb;
-		
-		@Column(name = "CONDUCTORHOLDER_FLATSURFACE_REM")
-		private String conductHolderFlatSurfaceRem;
 
+	private static final long serialVersionUID = 1L;
 
-		@Column(name = "CONDUCTOR_HOLDED_OB")
-		private String conductorHoldedOb;
-		
-		@Column(name = "CONDUCTOR_HOLDED_REM")
-		private String conductorHoldedRem;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "HOLDERS_ID")
+	private Integer holderId;
 
-		@Column(name = "MATERIAL_HOLDER_OB")
-		private String materialHolderOb;
-		
-		@Column(name = "MATERIAL_HOLDER_REM")
-		private String materialHolderRem;
-		
-		@Column(name = "TOTALNO_HOLDERS_OB")
-		private String totalNoHolderOb;
-		
-		@Column(name = "TOTALNO_HOLDERS_REM")
-		private String totalNoHolderRem;
-		
-		@Column(name = "INSPECTED_NO_OB")
-		private String inspectedNoOb;
-		
-		@Column(name = "INSPECTED_NO_REM")
-		private String inspectedNoRem;
-		
-		@Column(name = "INSPECTIONSPASSED_NO_OB")
-		private String inspectionPassedNoOb;
+	@Column(name = "LOCATION_NUMBER")
+	private Integer locationNumber;
 
-		@Column(name = "INSPECTIONSPASSED_NO_REM")
-		private String inspectionPassedNoRem;
-		
-		@Column(name = "INSPECTIONFAILED_NO_OB")
-		private String inspectionFailedNoOb;
-		
-		@Column(name = "INSPECTIONFAILED_NO_REM")
-		private String inspectionFailedNoRem;
-		
-		@JsonBackReference
-		@ManyToOne(cascade = CascadeType.ALL)
-		@JoinColumn(name = "DOWNCONDUCTORDESCRIPTION_ID")
-		private DownConductorDescription downConductorDescription;
+	@Column(name = "LOCATION_NAME")
+	private String locationName;
 
-		public Integer getHolderId() {
-			return holderId;
-		}
+	@Column(name = "PHYSICAL_INSPECTION_OB")
+	private String physicalInspectionOb;
 
-		public void setHolderId(Integer holderId) {
-			this.holderId = holderId;
-		}
+	@Column(name = "PHYSICAL_INSPECTION_REM")
+	private String physicalInspectionRem;
 
-		public String getPhysicalInspectionOb() {
-			return physicalInspectionOb;
-		}
+	@Column(name = "CONDUCTORHOLDER_FLATSURFACE_OB")
+	private String conductHolderFlatSurfaceOb;
 
-		public void setPhysicalInspectionOb(String physicalInspectionOb) {
-			this.physicalInspectionOb = physicalInspectionOb;
-		}
+	@Column(name = "CONDUCTORHOLDER_FLATSURFACE_REM")
+	private String conductHolderFlatSurfaceRem;
 
-		public String getPhysicalInspectionRem() {
-			return physicalInspectionRem;
-		}
+	@Column(name = "CONDUCTOR_HOLDED_OB")
+	private String conductorHoldedOb;
 
-		public void setPhysicalInspectionRem(String physicalInspectionRem) {
-			this.physicalInspectionRem = physicalInspectionRem;
-		}
+	@Column(name = "CONDUCTOR_HOLDED_REM")
+	private String conductorHoldedRem;
 
-		public String getConductHolderFlatSurfaceOb() {
-			return conductHolderFlatSurfaceOb;
-		}
+	@Column(name = "MATERIAL_HOLDER_OB")
+	private String materialHolderOb;
 
-		public void setConductHolderFlatSurfaceOb(String conductHolderFlatSurfaceOb) {
-			this.conductHolderFlatSurfaceOb = conductHolderFlatSurfaceOb;
-		}
+	@Column(name = "MATERIAL_HOLDER_REM")
+	private String materialHolderRem;
 
-		public String getConductHolderFlatSurfaceRem() {
-			return conductHolderFlatSurfaceRem;
-		}
+	@Column(name = "TOTALNO_HOLDERS_OB")
+	private String totalNoHolderOb;
 
-		public void setConductHolderFlatSurfaceRem(String conductHolderFlatSurfaceRem) {
-			this.conductHolderFlatSurfaceRem = conductHolderFlatSurfaceRem;
-		}
+	@Column(name = "TOTALNO_HOLDERS_REM")
+	private String totalNoHolderRem;
 
-		public String getConductorHoldedOb() {
-			return conductorHoldedOb;
-		}
+	@Column(name = "INSPECTED_NO_OB")
+	private String inspectedNoOb;
 
-		public void setConductorHoldedOb(String conductorHoldedOb) {
-			this.conductorHoldedOb = conductorHoldedOb;
-		}
+	@Column(name = "INSPECTED_NO_REM")
+	private String inspectedNoRem;
 
-		public String getConductorHoldedRem() {
-			return conductorHoldedRem;
-		}
+	@Column(name = "INSPECTIONSPASSED_NO_OB")
+	private String inspectionPassedNoOb;
 
-		public void setConductorHoldedRem(String conductorHoldedRem) {
-			this.conductorHoldedRem = conductorHoldedRem;
-		}
+	@Column(name = "INSPECTIONSPASSED_NO_REM")
+	private String inspectionPassedNoRem;
 
-		public String getMaterialHolderOb() {
-			return materialHolderOb;
-		}
+	@Column(name = "INSPECTIONFAILED_NO_OB")
+	private String inspectionFailedNoOb;
 
-		public void setMaterialHolderOb(String materialHolderOb) {
-			this.materialHolderOb = materialHolderOb;
-		}
+	@Column(name = "INSPECTIONFAILED_NO_REM")
+	private String inspectionFailedNoRem;
 
-		public String getMaterialHolderRem() {
-			return materialHolderRem;
-		}
+	@JsonBackReference
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "DOWNCONDUCTORDESCRIPTION_ID")
+	private DownConductorDescription downConductorDescription;
 
-		public void setMaterialHolderRem(String materialHolderRem) {
-			this.materialHolderRem = materialHolderRem;
-		}
+	public Integer getHolderId() {
+		return holderId;
+	}
 
-		public String getTotalNoHolderOb() {
-			return totalNoHolderOb;
-		}
+	public Integer getLocationNumber() {
+		return locationNumber;
+	}
 
-		public void setTotalNoHolderOb(String totalNoHolderOb) {
-			this.totalNoHolderOb = totalNoHolderOb;
-		}
+	public void setLocationNumber(Integer locationNumber) {
+		this.locationNumber = locationNumber;
+	}
 
-		public String getTotalNoHolderRem() {
-			return totalNoHolderRem;
-		}
+	public String getLocationName() {
+		return locationName;
+	}
 
-		public void setTotalNoHolderRem(String totalNoHolderRem) {
-			this.totalNoHolderRem = totalNoHolderRem;
-		}
+	public void setLocationName(String locationName) {
+		this.locationName = locationName;
+	}
 
-		public String getInspectedNoOb() {
-			return inspectedNoOb;
-		}
+	public void setHolderId(Integer holderId) {
+		this.holderId = holderId;
+	}
 
-		public void setInspectedNoOb(String inspectedNoOb) {
-			this.inspectedNoOb = inspectedNoOb;
-		}
+	public String getPhysicalInspectionOb() {
+		return physicalInspectionOb;
+	}
 
-		public String getInspectedNoRem() {
-			return inspectedNoRem;
-		}
+	public void setPhysicalInspectionOb(String physicalInspectionOb) {
+		this.physicalInspectionOb = physicalInspectionOb;
+	}
 
-		public void setInspectedNoRem(String inspectedNoRem) {
-			this.inspectedNoRem = inspectedNoRem;
-		}
+	public String getPhysicalInspectionRem() {
+		return physicalInspectionRem;
+	}
 
-		public String getInspectionPassedNoOb() {
-			return inspectionPassedNoOb;
-		}
+	public void setPhysicalInspectionRem(String physicalInspectionRem) {
+		this.physicalInspectionRem = physicalInspectionRem;
+	}
 
-		public void setInspectionPassedNoOb(String inspectionPassedNoOb) {
-			this.inspectionPassedNoOb = inspectionPassedNoOb;
-		}
+	public String getConductHolderFlatSurfaceOb() {
+		return conductHolderFlatSurfaceOb;
+	}
 
-		public String getInspectionPassedNoRem() {
-			return inspectionPassedNoRem;
-		}
+	public void setConductHolderFlatSurfaceOb(String conductHolderFlatSurfaceOb) {
+		this.conductHolderFlatSurfaceOb = conductHolderFlatSurfaceOb;
+	}
 
-		public void setInspectionPassedNoRem(String inspectionPassedNoRem) {
-			this.inspectionPassedNoRem = inspectionPassedNoRem;
-		}
+	public String getConductHolderFlatSurfaceRem() {
+		return conductHolderFlatSurfaceRem;
+	}
 
-		public String getInspectionFailedNoOb() {
-			return inspectionFailedNoOb;
-		}
+	public void setConductHolderFlatSurfaceRem(String conductHolderFlatSurfaceRem) {
+		this.conductHolderFlatSurfaceRem = conductHolderFlatSurfaceRem;
+	}
 
-		public void setInspectionFailedNoOb(String inspectionFailedNoOb) {
-			this.inspectionFailedNoOb = inspectionFailedNoOb;
-		}
+	public String getConductorHoldedOb() {
+		return conductorHoldedOb;
+	}
 
-		public String getInspectionFailedNoRem() {
-			return inspectionFailedNoRem;
-		}
+	public void setConductorHoldedOb(String conductorHoldedOb) {
+		this.conductorHoldedOb = conductorHoldedOb;
+	}
 
-		public void setInspectionFailedNoRem(String inspectionFailedNoRem) {
-			this.inspectionFailedNoRem = inspectionFailedNoRem;
-		}
+	public String getConductorHoldedRem() {
+		return conductorHoldedRem;
+	}
 
-		public DownConductorDescription getDownConductorDescription() {
-			return downConductorDescription;
-		}
+	public void setConductorHoldedRem(String conductorHoldedRem) {
+		this.conductorHoldedRem = conductorHoldedRem;
+	}
 
-		public void setDownConductorDescription(DownConductorDescription downConductorDescription) {
-			this.downConductorDescription = downConductorDescription;
-		}
-		
-		
+	public String getMaterialHolderOb() {
+		return materialHolderOb;
+	}
+
+	public void setMaterialHolderOb(String materialHolderOb) {
+		this.materialHolderOb = materialHolderOb;
+	}
+
+	public String getMaterialHolderRem() {
+		return materialHolderRem;
+	}
+
+	public void setMaterialHolderRem(String materialHolderRem) {
+		this.materialHolderRem = materialHolderRem;
+	}
+
+	public String getTotalNoHolderOb() {
+		return totalNoHolderOb;
+	}
+
+	public void setTotalNoHolderOb(String totalNoHolderOb) {
+		this.totalNoHolderOb = totalNoHolderOb;
+	}
+
+	public String getTotalNoHolderRem() {
+		return totalNoHolderRem;
+	}
+
+	public void setTotalNoHolderRem(String totalNoHolderRem) {
+		this.totalNoHolderRem = totalNoHolderRem;
+	}
+
+	public String getInspectedNoOb() {
+		return inspectedNoOb;
+	}
+
+	public void setInspectedNoOb(String inspectedNoOb) {
+		this.inspectedNoOb = inspectedNoOb;
+	}
+
+	public String getInspectedNoRem() {
+		return inspectedNoRem;
+	}
+
+	public void setInspectedNoRem(String inspectedNoRem) {
+		this.inspectedNoRem = inspectedNoRem;
+	}
+
+	public String getInspectionPassedNoOb() {
+		return inspectionPassedNoOb;
+	}
+
+	public void setInspectionPassedNoOb(String inspectionPassedNoOb) {
+		this.inspectionPassedNoOb = inspectionPassedNoOb;
+	}
+
+	public String getInspectionPassedNoRem() {
+		return inspectionPassedNoRem;
+	}
+
+	public void setInspectionPassedNoRem(String inspectionPassedNoRem) {
+		this.inspectionPassedNoRem = inspectionPassedNoRem;
+	}
+
+	public String getInspectionFailedNoOb() {
+		return inspectionFailedNoOb;
+	}
+
+	public void setInspectionFailedNoOb(String inspectionFailedNoOb) {
+		this.inspectionFailedNoOb = inspectionFailedNoOb;
+	}
+
+	public String getInspectionFailedNoRem() {
+		return inspectionFailedNoRem;
+	}
+
+	public void setInspectionFailedNoRem(String inspectionFailedNoRem) {
+		this.inspectionFailedNoRem = inspectionFailedNoRem;
+	}
+
+	public DownConductorDescription getDownConductorDescription() {
+		return downConductorDescription;
+	}
+
+	public void setDownConductorDescription(DownConductorDescription downConductorDescription) {
+		this.downConductorDescription = downConductorDescription;
+	}
 
 }
