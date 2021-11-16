@@ -13,16 +13,17 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "AIR_CLAMPS_TABLE")
-public class AirClamps implements Serializable{
+public class AirClamps implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "CLAMPS_ID")
 	private Integer clampsId;
-	 
+
 	@Column(name = "PHYSICAL_INSPECTION_OBSERVATION")
 	private String physicalInspectionOb;
 
@@ -40,16 +41,16 @@ public class AirClamps implements Serializable{
 
 	@Column(name = "CLAMP_TYPE__REMARKS")
 	private String clampTypRe;
-	 
+
 	@Column(name = "INTERCONNECTION_OF_CLAMPS_OBSERVATION")
-	private String  interConnectionOfClampsOb;
-	
+	private String interConnectionOfClampsOb;
+
 	@Column(name = "INTERCONNECTION_OF_CLAMPS_REMARKS")
-	private String  interConnectionOfClampsRe;
-	
+	private String interConnectionOfClampsRe;
+
 	@Column(name = "MATERIAL_OF_CLAMPS_OBSERVATION")
-	private String  materialOfClampsOb;
-	
+	private String materialOfClampsOb;
+
 	@Column(name = "MATERIAL_OF_CLAMPS_REMARKS")
 	private String materialOfClampsRe;
 
@@ -58,26 +59,31 @@ public class AirClamps implements Serializable{
 
 	@Column(name = "TOTAL_CLAMPSNO_REMARKS")
 	private String totalClampsNoRe;
-	
+
 	@Column(name = "INSP_NO_OBS")
-	private String  inspectionNoOb;
-	
+	private String inspectionNoOb;
+
 	@Column(name = "INSP_NO_REM")
 	private String inspectionNoRe;
- 
+
 	@Column(name = "INSP_PASSED_NO_OBS")
 	private String inspectionPassedOb;
 
 	@Column(name = "INSP_PASSED_NO_REM")
 	private String inspectionPassedRe;
-	
-	
+
 	@Column(name = "INSP_FAILED_NO_OBS")
 	private String inspectionFailedReOb;
 
 	@Column(name = "INSP_FAILED_NO_REM")
 	private String inspectionFailedReRe;
-	
+
+	@Column(name = "LOCATION_NUMBER")
+	private Integer locationNumber;
+
+	@Column(name = "LOCATION_NAME")
+	private String locationName;
+
 	@JsonBackReference
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "LPSAIRDESCRIPTION_ID")
@@ -85,6 +91,22 @@ public class AirClamps implements Serializable{
 
 	public Integer getClampsId() {
 		return clampsId;
+	}
+
+	public Integer getLocationNumber() {
+		return locationNumber;
+	}
+
+	public void setLocationNumber(Integer locationNumber) {
+		this.locationNumber = locationNumber;
+	}
+
+	public String getLocationName() {
+		return locationName;
+	}
+
+	public void setLocationName(String locationName) {
+		this.locationName = locationName;
 	}
 
 	public void setClampsId(Integer clampsId) {
@@ -187,8 +209,6 @@ public class AirClamps implements Serializable{
 		this.totalClampsNoRe = totalClampsNoRe;
 	}
 
-	
-
 	public String getInspectionNoOb() {
 		return inspectionNoOb;
 	}
@@ -244,6 +264,5 @@ public class AirClamps implements Serializable{
 	public void setLpsAirDes(LpsAirDiscription lpsAirDes) {
 		this.lpsAirDes = lpsAirDes;
 	}
-
 
 }
