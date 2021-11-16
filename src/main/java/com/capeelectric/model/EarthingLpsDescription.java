@@ -91,9 +91,9 @@ public class EarthingLpsDescription {
 	@OneToMany(mappedBy = "earthingLpsDescription", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<EarthingSystem> earthingSystem;
 	
-	@JsonManagedReference
-	@OneToMany(mappedBy = "earthingLpsDescription", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<EarthingInspection> earthingInspection;
+//	@JsonManagedReference
+//	@OneToMany(mappedBy = "earthingLpsDescription", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//	private List<EarthingInspection> earthingInspection;
 
 	public Integer getEarthingId() {
 		return earthingId;
@@ -173,13 +173,13 @@ public class EarthingLpsDescription {
 		this.earthingSystem = earthingSystem;
 	}
 
-	public List<EarthingInspection> getEarthingInspection() {
-		return earthingInspection;
-	}
-
-	public void setEarthingInspection(List<EarthingInspection> earthingInspection) {
-		this.earthingInspection = earthingInspection;
-	}
+//	public List<EarthingInspection> getEarthingInspection() {
+//		return earthingInspection;
+//	}
+//
+//	public void setEarthingInspection(List<EarthingInspection> earthingInspection) {
+//		this.earthingInspection = earthingInspection;
+//	}
 
 	public LocalDateTime getUpdatedDate() {
 		return updatedDate;
