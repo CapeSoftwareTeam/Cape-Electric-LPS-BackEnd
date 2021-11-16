@@ -104,11 +104,10 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 				// table1.setSpacingBefore(10f); // Space before table
 				table1.setWidthPercentage(100);
 
-				table1.setSpacingAfter(20f); // Space after table
-				table1.setSpacingBefore(20f); // Space before table
+//				table1.setSpacingAfter(20f); // Space after table
+//				table1.setSpacingBefore(20f); // Space before table
 
 				for (LpsVerticalAirTermination lpsVerticalAirTermination1 : lpsVerticalAirTermination) {
-					document.newPage();
 					verticalAirTerminationIter(table1, lpsVerticalAirTermination1);
 
 				}
@@ -122,7 +121,6 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 				table2.setWidthPercentage(100);
 
 				for (AirMeshDescription airMeshDesc1 : airMeshDesc) {
-					document.newPage();
 					meshConductorIter(table2, airMeshDesc1);
 				}
 
@@ -130,12 +128,11 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 
 				PdfPTable table3 = new PdfPTable(pointColumnWidths41);
 				table3.setWidthPercentage(100); // Width 100%
-				table3.setSpacingAfter(20f); // Space after table
-				table3.setSpacingBefore(20f); // Space before table
+//				table3.setSpacingAfter(20f); // Space after table
+//				table3.setSpacingBefore(20f); // Space before table
 				table3.setWidthPercentage(100);
 
 				for (AirHolderDescription airHolderdesc1 : airHolderdesc) {
-					document.newPage();
 					airHolderIter(table3, airHolderdesc1);
 				}
 
@@ -143,12 +140,11 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 
 				PdfPTable table4 = new PdfPTable(pointColumnWidths41);
 				table4.setWidthPercentage(100); // Width 100%
-				table4.setSpacingAfter(20f); // Space after table
-				table4.setSpacingBefore(20f); // Space before table
+//				table4.setSpacingAfter(20f); // Space after table
+//				table4.setSpacingBefore(20f); // Space before table
 				table4.setWidthPercentage(100);
 
 				for (AirClamps airClamps1 : airClamps) {
-					document.newPage();
 					clampsIter(table4, airClamps1);
 				}
 
@@ -156,12 +152,11 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 
 				PdfPTable table5 = new PdfPTable(pointColumnWidths41);
 				table5.setWidthPercentage(100); // Width 100%
-				table5.setSpacingAfter(20f); // Space after table
-				table5.setSpacingBefore(20f); // Space before table
+//				table5.setSpacingAfter(20f); // Space after table
+//				table5.setSpacingBefore(20f); // Space before table
 				table5.setWidthPercentage(100);
 
 				for (AirExpansion airExpansion1 : airExpansion) {
-					document.newPage();
 					expansionPiecesIter(table5, airExpansion1);
 				}
 
@@ -169,12 +164,11 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 
 				PdfPTable table6 = new PdfPTable(pointColumnWidths41);
 				table6.setWidthPercentage(100); // Width 100%
-				table6.setSpacingAfter(20f); // Space after table
-				table6.setSpacingBefore(20f); // Space before table
+//				table6.setSpacingAfter(20f); // Space after table
+//				table6.setSpacingBefore(20f); // Space before table
 				table6.setWidthPercentage(100);
 
 				for (AirConnectors airConnectors1 : airConnectors) {
-					document.newPage();
 					connectorIter(table6, airConnectors1);
 				}
 
