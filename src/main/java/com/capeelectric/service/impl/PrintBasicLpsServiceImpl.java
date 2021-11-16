@@ -21,7 +21,9 @@ import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.BaseFont;
+import com.itextpdf.text.pdf.GrayColor;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
@@ -48,6 +50,189 @@ public class PrintBasicLpsServiceImpl implements PrintBasicLpsService {
 				BasicLpsDescription basicDesc2 = basicDesc1.get(0);
 				// BasicLpsDescription basicDesc1 = basicDesc.get(0);
 				document.open();
+				
+				
+				
+				Font font12B = new Font(BaseFont.createFont(), 12, Font.NORMAL | Font.BOLD, BaseColor.BLACK);
+				Font font10N = new Font(BaseFont.createFont(), 10, Font.NORMAL, BaseColor.BLACK);
+
+				float[] pointColumnWidths0 = {100F };
+				
+				PdfPTable titlebox = new PdfPTable(pointColumnWidths0);
+				titlebox.setWidthPercentage(100); // Width 100%
+				titlebox.setSpacingBefore(10f); // Space before table
+				titlebox.getDefaultCell().setBorder(15);
+				
+				PdfPCell cell20 = new PdfPCell(new Paragraph("                                                                                                                        " + "LIGHTNING PROTECTION SURVEY REPORT AS PER IS/IEC 62305", font12B));
+				cell20.setHorizontalAlignment(Element.ALIGN_CENTER);
+				cell20.setFixedHeight(40);
+				titlebox.addCell(cell20);
+				
+				document.add(titlebox);
+				
+				PdfPTable projectHeader = new PdfPTable(pointColumnWidths0);
+				projectHeader.setSpacingBefore(15f); // Space before table
+//				projectHeader.setSpacingAfter(7f); // Space after table
+				projectHeader.setWidthPercentage(100);
+				projectHeader.getDefaultCell().setBorder(0);
+				
+				PdfPCell title = new PdfPCell(new Paragraph("Project",
+						new Font(BaseFont.createFont(), 11, Font.NORMAL)));
+				title.setBackgroundColor(new GrayColor(0.82f));
+				title.setHorizontalAlignment(Element.ALIGN_LEFT);
+				title.setBorder(PdfPCell.NO_BORDER);
+				projectHeader.addCell(title);
+				
+				document.add(projectHeader);
+				
+				PdfPTable titlebox1 = new PdfPTable(pointColumnWidths0);
+				titlebox1.setWidthPercentage(100); // Width 100%
+				titlebox1.setSpacingBefore(10f); // Space before table
+				titlebox1.getDefaultCell().setBorder(15);
+				
+				PdfPCell cell25 = new PdfPCell(new Paragraph("", font10N));
+				cell25.setHorizontalAlignment(Element.ALIGN_CENTER);
+				cell25.setFixedHeight(75);
+				titlebox1.addCell(cell25);
+				
+				document.add(titlebox1);
+				
+				float[] pointColumnWidths11 = {30F, 30F };
+				PdfPTable table11 = new PdfPTable(pointColumnWidths11);
+
+				table11.setWidthPercentage(60); // Width 100%
+				table11.setSpacingBefore(25f); // Space before table
+				table11.setSpacingAfter(15f); // Space after table
+				table11.getDefaultCell().setBorder(15);
+				
+				PdfPCell certificate12 = new PdfPCell(new Paragraph("",
+						new Font(BaseFont.createFont(), 10, Font.NORMAL)));
+				table11.addCell(new Phrase("Starting date of inspection", new Font(BaseFont.createFont(), 10, Font.NORMAL)));
+				certificate12.setHorizontalAlignment(Element.ALIGN_LEFT);
+				certificate12.setBorder(15);
+				certificate12.setFixedHeight(25f);
+				table11.addCell(certificate12);
+				
+				PdfPCell certificate13 = new PdfPCell(new Paragraph("",
+						new Font(BaseFont.createFont(), 10, Font.NORMAL)));
+				table11.addCell(new Phrase("Ending date of inspection", new Font(BaseFont.createFont(), 10, Font.NORMAL )));
+				certificate13.setHorizontalAlignment(Element.ALIGN_LEFT);
+				certificate13.setFixedHeight(25f);
+				certificate13.setBorder(15);
+				table11.addCell(certificate13);
+				document.add(table11);
+				
+				float[] pointColumnWidths2 = { 90F, 90F, 90F };
+
+				PdfPTable table2 = new PdfPTable(pointColumnWidths2);
+				table2.setWidthPercentage(100); // Width 100%
+				table2.setSpacingBefore(10f); // Space before table
+				table2.getDefaultCell().setBorder(15);
+
+				PdfPCell cell1 = new PdfPCell(new Paragraph("Inspected by", font10N));
+				cell1.setGrayFill(0.92f);
+				cell1.setFixedHeight(25f);
+				cell1.setHorizontalAlignment(Element.ALIGN_CENTER);
+				table2.addCell(cell1);
+				
+				PdfPCell cell3 = new PdfPCell(new Paragraph("Inspected by", font10N));
+				cell3.setHorizontalAlignment(Element.ALIGN_CENTER);
+				cell3.setGrayFill(0.92f);
+				cell3.setFixedHeight(25f);
+				table2.addCell(cell3);
+				
+				PdfPCell cell4 = new PdfPCell(new Paragraph("Witnessed by", font10N));
+				cell4.setHorizontalAlignment(Element.ALIGN_CENTER);
+				cell4.setGrayFill(0.92f);
+				cell4.setFixedHeight(25f);
+				table2.addCell(cell4);
+				
+				PdfPCell cell5 = new PdfPCell(new Paragraph("", font10N));
+				cell5.setFixedHeight(25f);
+				cell5.setHorizontalAlignment(Element.ALIGN_CENTER);
+				table2.addCell(cell5);
+				
+				PdfPCell cell6 = new PdfPCell(new Paragraph("", font10N));
+				cell6.setHorizontalAlignment(Element.ALIGN_CENTER);
+				cell6.setFixedHeight(25f);
+				table2.addCell(cell6);
+				
+				PdfPCell cell19 = new PdfPCell(new Paragraph("", font10N));
+				cell19.setFixedHeight(25f);
+				cell19.setHorizontalAlignment(Element.ALIGN_CENTER);
+				table2.addCell(cell19);
+				
+				PdfPCell cell55 = new PdfPCell(new Paragraph("", font10N));
+				cell55.setFixedHeight(25f);
+				cell55.setHorizontalAlignment(Element.ALIGN_CENTER);
+				table2.addCell(cell55);
+				
+				PdfPCell cell66 = new PdfPCell(new Paragraph("", font10N));
+				cell66.setHorizontalAlignment(Element.ALIGN_CENTER);
+				cell66.setFixedHeight(25f);
+				table2.addCell(cell66);
+				
+				PdfPCell cell77 = new PdfPCell(new Paragraph("", font10N));
+				cell77.setFixedHeight(25f);
+				cell77.setHorizontalAlignment(Element.ALIGN_CENTER);
+				table2.addCell(cell77);
+				document.add(table2);
+
+				float[] pointColumnWidths3 = { 100F };
+				
+				PdfPTable table3 = new PdfPTable(pointColumnWidths3);
+				table3.setWidthPercentage(33); // Width 100%
+				table3.setSpacingBefore(20f); // Space before table
+				table3.getDefaultCell().setBorder(15);
+				
+				PdfPCell cell8 = new PdfPCell(new Paragraph("Reviewed by", font10N));
+				cell8.setHorizontalAlignment(Element.ALIGN_CENTER);
+				cell8.setGrayFill(0.92f);
+				cell8.setFixedHeight(25f);
+				table3.addCell(cell8);
+				
+				PdfPCell cell9 = new PdfPCell(new Paragraph("", font10N));
+				cell9.setHorizontalAlignment(Element.ALIGN_CENTER);
+				cell9.setFixedHeight(25f);
+				table3.addCell(cell9);
+				
+				PdfPCell cell7 = new PdfPCell(new Paragraph("", font10N));
+				cell7.setFixedHeight(25f);
+				cell7.setHorizontalAlignment(Element.ALIGN_CENTER);
+				table3.addCell(cell7);
+				
+				document.add(table3);
+				
+//				float[] pointColumnWidths3 = {100F };
+				PdfPTable comment = new PdfPTable(pointColumnWidths3);
+				comment.setSpacingBefore(15f); // Space before table
+//				comment.setSpacingAfter(7f); // Space after table
+				comment.setWidthPercentage(100);
+				comment.getDefaultCell().setBorder(0);
+
+				PdfPCell comment1 = new PdfPCell(new Paragraph("Comments",
+						new Font(BaseFont.createFont(), 11, Font.NORMAL)));
+				comment1.setBackgroundColor(new GrayColor(0.82f));
+				comment1.setHorizontalAlignment(Element.ALIGN_LEFT);
+				comment1.setBorder(PdfPCell.NO_BORDER);
+				comment.addCell(comment1);
+				
+				document.add(comment);
+				
+				PdfPTable table41 = new PdfPTable(pointColumnWidths3);
+				table41.setWidthPercentage(100); // Width 100%
+				table41.setSpacingBefore(10f); // Space before table
+				table41.getDefaultCell().setBorder(15);
+				
+				PdfPCell cell21 = new PdfPCell(new Paragraph("", font10N));
+				cell21.setHorizontalAlignment(Element.ALIGN_CENTER);
+				cell21.setFixedHeight(200);
+				table41.addCell(cell21);
+				
+				document.add(table41);
+				
+			document.newPage();
+				
 				float[] pointColumnWidths4 = { 100F };
 
 				Font font1 = new Font(BaseFont.createFont(), 12, Font.NORMAL | Font.BOLD, BaseColor.BLACK);
@@ -80,61 +265,61 @@ public class PrintBasicLpsServiceImpl implements PrintBasicLpsService {
 				// table1.setSpacingBefore(10f); // Space before table
 				table1.setWidthPercentage(100);
 
-				PdfPCell cell1 = new PdfPCell(new Paragraph("Client Name", font2));
-				cell1.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
-				cell1.setFixedHeight(20f);
-				cell1.setGrayFill(0.92f);
-				table1.addCell(cell1);
+				PdfPCell cell11 = new PdfPCell(new Paragraph("Client Name", font2));
+				cell11.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
+				cell11.setFixedHeight(20f);
+				cell11.setGrayFill(0.92f);
+				table1.addCell(cell11);
 
 				PdfPCell cell2 = new PdfPCell(new Paragraph(basicLps1.getClientName(), font3));
 				cell2.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 				table1.addCell(cell2);
 
-				PdfPCell cell3 = new PdfPCell(new Paragraph("Project Name", font2));
-				cell3.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
-				cell3.setFixedHeight(20f);
-				cell3.setGrayFill(0.92f);
-				table1.addCell(cell3);
+				PdfPCell cell31 = new PdfPCell(new Paragraph("Project Name", font2));
+				cell31.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
+				cell31.setFixedHeight(20f);
+				cell31.setGrayFill(0.92f);
+				table1.addCell(cell31);
 
-				PdfPCell cell4 = new PdfPCell(new Paragraph(basicLps1.getProjectName(), font3));
-				cell4.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
-				table1.addCell(cell4);
+				PdfPCell cell41 = new PdfPCell(new Paragraph(basicLps1.getProjectName(), font3));
+				cell41.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
+				table1.addCell(cell41);
 
-				PdfPCell cell5 = new PdfPCell(new Paragraph("PMC Name", font2));
-				cell5.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
-				cell5.setFixedHeight(20f);
-				cell5.setGrayFill(0.92f);
-				table1.addCell(cell5);
+				PdfPCell cell51 = new PdfPCell(new Paragraph("PMC Name", font2));
+				cell51.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
+				cell51.setFixedHeight(20f);
+				cell51.setGrayFill(0.92f);
+				table1.addCell(cell51);
 
-				PdfPCell cell6 = new PdfPCell(new Paragraph(basicLps1.getPmcName(), font3));
-				cell6.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
-				table1.addCell(cell6);
+				PdfPCell cell61 = new PdfPCell(new Paragraph(basicLps1.getPmcName(), font3));
+				cell61.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
+				table1.addCell(cell61);
 
-				PdfPCell cell7 = new PdfPCell(new Paragraph("Consultant Name", font2));
-				cell7.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
-				cell7.setFixedHeight(20f);
-				cell7.setGrayFill(0.92f);
-				table1.addCell(cell7);
+				PdfPCell cell71 = new PdfPCell(new Paragraph("Consultant Name", font2));
+				cell71.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
+				cell71.setFixedHeight(20f);
+				cell71.setGrayFill(0.92f);
+				table1.addCell(cell71);
 
-				PdfPCell cell8 = new PdfPCell(new Paragraph(basicLps1.getConsultantName(), font3));
-				cell8.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
-				table1.addCell(cell8);
+				PdfPCell cell81 = new PdfPCell(new Paragraph(basicLps1.getConsultantName(), font3));
+				cell81.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
+				table1.addCell(cell81);
 
-				PdfPCell cell9 = new PdfPCell(new Paragraph("Contractor Name", font2));
-				cell9.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
-				cell9.setFixedHeight(20f);
-				cell9.setGrayFill(0.92f);
-				table1.addCell(cell9);
+				PdfPCell cell91 = new PdfPCell(new Paragraph("Contractor Name", font2));
+				cell91.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
+				cell91.setFixedHeight(20f);
+				cell91.setGrayFill(0.92f);
+				table1.addCell(cell91);
 
 				PdfPCell cell10 = new PdfPCell(new Paragraph(basicLps1.getContractorName(), font3));
 				cell10.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 				table1.addCell(cell10);
 
-				PdfPCell cell11 = new PdfPCell(new Paragraph("Dealer/Sub-contractor", font2));
-				cell11.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
-				cell11.setFixedHeight(20f);
-				cell11.setGrayFill(0.92f);
-				table1.addCell(cell11);
+				PdfPCell cell111 = new PdfPCell(new Paragraph("Dealer/Sub-contractor", font2));
+				cell111.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
+				cell111.setFixedHeight(20f);
+				cell111.setGrayFill(0.92f);
+				table1.addCell(cell111);
 
 				PdfPCell cell12 = new PdfPCell(new Paragraph(basicLps1.getDealerContractorName(), font3));
 				cell12.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
@@ -162,92 +347,92 @@ public class PrintBasicLpsServiceImpl implements PrintBasicLpsService {
 
 				PdfPCell cell151 = new PdfPCell(new Paragraph("Installation by CAPE/Contractor/Dealer", font2));
 				cell151.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
+				cell151.setFixedHeight(40f);
 				cell151.setGrayFill(0.92f);
-				cell151.setFixedHeight(30f);
 				table1.addCell(cell151);
 
-				PdfPCell cell18 = new PdfPCell(new Paragraph(basicLps1.getLocation(), font3));
+				PdfPCell cell18 = new PdfPCell(new Paragraph(basicLps1.getInstallationContractor(), font3));
 				cell18.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 				table1.addCell(cell18);
 
-				PdfPCell cell19 = new PdfPCell(new Paragraph("Type of Industry", font2));
-				cell19.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
-				cell19.setGrayFill(0.92f);
-				cell19.setFixedHeight(20f);
-				table1.addCell(cell19);
+				PdfPCell cell191 = new PdfPCell(new Paragraph("Type of Industry", font2));
+				cell191.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
+				cell191.setGrayFill(0.92f);
+				cell191.setFixedHeight(20f);
+				table1.addCell(cell191);
 
-				PdfPCell cell20 = new PdfPCell(new Paragraph(basicLps1.getLocation(), font3));
-				cell20.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
-				table1.addCell(cell20);
+				PdfPCell cell201 = new PdfPCell(new Paragraph(basicLps1.getIndustryType(), font3));
+				cell201.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
+				table1.addCell(cell201);
 
-				PdfPCell cell21 = new PdfPCell(new Paragraph("Type of Building", font2));
-				cell21.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
-				cell21.setGrayFill(0.92f);
-				cell21.setFixedHeight(20f);
-				table1.addCell(cell21);
+				PdfPCell cell211 = new PdfPCell(new Paragraph("Type of Building", font2));
+				cell211.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
+				cell211.setGrayFill(0.92f);
+				cell211.setFixedHeight(20f);
+				table1.addCell(cell211);
 
-				PdfPCell cell22 = new PdfPCell(new Paragraph(basicLps1.getLocation(), font3));
+				PdfPCell cell22 = new PdfPCell(new Paragraph(basicLps1.getBuildingType(), font3));
 				cell22.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 				table1.addCell(cell22);
 
 				document.add(table1);
 
-				float[] pointColumnWidths2 = { 39F, 15F, 15F, 15F, 15F, 15F, 15F };
-				PdfPTable table3 = new PdfPTable(pointColumnWidths2);
-				table3.setWidthPercentage(100); // Width 100%
+				float[] pointColumnWidths20 = { 38.5F, 15F, 15F, 15F, 15F, 15F, 15F };
+				PdfPTable table31 = new PdfPTable(pointColumnWidths20);
+				table31.setWidthPercentage(100); // Width 100%
 				// table3.setSpacingBefore(10f); // Space before table
-				table3.setWidthPercentage(100);
+				table31.setWidthPercentage(100);
 
 				PdfPCell cell23 = new PdfPCell(new Paragraph("Building Dimension", font2));
 				cell23.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 				cell23.setGrayFill(0.92f);
 				cell23.setFixedHeight(20f);
-				table3.addCell(cell23);
-				PdfPCell cell111 = new PdfPCell(new Paragraph("Length(m)", font2));
-				cell111.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
-				cell111.setGrayFill(0.92f);
-				cell111.setFixedHeight(20f);
-				table3.addCell(cell111);
+				table31.addCell(cell23);
+				PdfPCell cell1111 = new PdfPCell(new Paragraph("Length(m)", font2));
+				cell1111.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
+				cell1111.setGrayFill(0.92f);
+				cell1111.setFixedHeight(20f);
+				table31.addCell(cell1111);
 				PdfPCell cell112 = new PdfPCell(new Paragraph(basicLps1.getBuildingLength(), font3));
-				cell112.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
+				cell112.setHorizontalAlignment(Element.ALIGN_CENTER);
 
 				cell112.setFixedHeight(20f);
-				table3.addCell(cell112);
+				table31.addCell(cell112);
 
 				PdfPCell cell114 = new PdfPCell(new Paragraph("Width(m)", font2));
 				cell114.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 				cell114.setGrayFill(0.92f);
 				cell114.setFixedHeight(20f);
-				table3.addCell(cell114);
+				table31.addCell(cell114);
 
 				PdfPCell cell115 = new PdfPCell(new Paragraph(basicLps1.getBuildingWidth(), font3));
-				cell115.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
+				cell115.setHorizontalAlignment(Element.ALIGN_CENTER);
 
 				cell115.setFixedHeight(20f);
-				table3.addCell(cell115);
+				table31.addCell(cell115);
 
 				PdfPCell cell113 = new PdfPCell(new Paragraph("Height(m)", font2));
 				cell113.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 				cell113.setGrayFill(0.92f);
-				cell111.setFixedHeight(20f);
-				table3.addCell(cell113);
+				cell1111.setFixedHeight(20f);
+				table31.addCell(cell113);
 
 				PdfPCell cell24 = new PdfPCell(new Paragraph(basicLps1.getBuildingHeight(), font3));
-				cell24.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
-				table3.addCell(cell24);
+				cell24.setHorizontalAlignment(Element.ALIGN_CENTER);
+				table31.addCell(cell24);
 
-				document.add(table3);
+				document.add(table31);
 
 				PdfPTable table4 = new PdfPTable(pointColumnWidths1);
 				table4.setWidthPercentage(100); // Width 100%
 				// table4.setSpacingBefore(10f); // Space before table
 				table4.setWidthPercentage(100);
 
-				PdfPCell cell25 = new PdfPCell(new Paragraph("Level of protection", font2));
-				cell25.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
-				cell25.setFixedHeight(20f);
-				cell25.setGrayFill(0.92f);
-				table4.addCell(cell25);
+				PdfPCell cell251 = new PdfPCell(new Paragraph("Level of protection", font2));
+				cell251.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
+				cell251.setFixedHeight(20f);
+				cell251.setGrayFill(0.92f);
+				table4.addCell(cell251);
 
 				PdfPCell cell26 = new PdfPCell(new Paragraph(basicLps1.getLevelOfProtection(), font3));
 				cell26.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
@@ -266,38 +451,38 @@ public class PrintBasicLpsServiceImpl implements PrintBasicLpsService {
 				document.add(table4);
 
 				Font font11 = new Font(BaseFont.createFont(), 10, Font.NORMAL | Font.BOLD, BaseColor.BLACK);
-				float[] pointColumnWidths3 = { 30F, 150F, 50F, 50F };
+				float[] pointColumnWidths30 = { 30F, 150F, 50F, 50F };
 
-				PdfPTable table2 = new PdfPTable(pointColumnWidths3);
-				table2.setWidthPercentage(100); // Width 100%
-				table2.setSpacingBefore(10f); // Space before table
-				table2.setWidthPercentage(100);
+				PdfPTable table21 = new PdfPTable(pointColumnWidths30);
+				table21.setWidthPercentage(100); // Width 100%
+				table21.setSpacingBefore(10f); // Space before table
+				table21.setWidthPercentage(100);
 
 				PdfPCell cell30 = new PdfPCell(new Paragraph("SL.NO", font11));
 				cell30.setHorizontalAlignment(Element.ALIGN_CENTER);
 				cell30.setGrayFill(0.92f);
-				table2.addCell(cell30);
+				table21.addCell(cell30);
 
-				PdfPCell cell31 = new PdfPCell(new Paragraph("Description", font11));
-				cell31.setHorizontalAlignment(Element.ALIGN_CENTER);
-				cell31.setFixedHeight(25f);
-				cell31.setGrayFill(0.92f);
-				table2.addCell(cell31);
+				PdfPCell cell311 = new PdfPCell(new Paragraph("Description", font11));
+				cell311.setHorizontalAlignment(Element.ALIGN_CENTER);
+				cell311.setFixedHeight(25f);
+				cell311.setGrayFill(0.92f);
+				table21.addCell(cell311);
 
 				PdfPCell cell32 = new PdfPCell(new Paragraph("Observation", font11));
 				cell32.setHorizontalAlignment(Element.ALIGN_CENTER);
 				cell32.setFixedHeight(25f);
 				cell32.setGrayFill(0.92f);
-				table2.addCell(cell32);
+				table21.addCell(cell32);
 
 				PdfPCell cell33 = new PdfPCell(new Paragraph("Remarks", font11));
 				cell33.setGrayFill(0.92f);
 				cell33.setHorizontalAlignment(Element.ALIGN_CENTER);
-				table2.addCell(cell33);
+				table21.addCell(cell33);
 
-				basicDescription(basicDesc2, table2);
+				basicDescription(basicDesc2, table21);
 
-				document.add(table2);
+				document.add(table21);
 				document.close();
 
 			} catch (Exception e) {
@@ -326,13 +511,13 @@ public class PrintBasicLpsServiceImpl implements PrintBasicLpsService {
 		cell35.setGrayFill(0.92f);
 		table2.addCell(cell35);
 
-		PdfPCell cell36 = new PdfPCell(new Paragraph(basicDesc2.getApprovedByObserv(), font));
+		PdfPCell cell36 = new PdfPCell(new Paragraph(basicDesc2.getApprovedDrawingObserv(), font));
 		cell36.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 		cell36.setFixedHeight(20f);
 
 		table2.addCell(cell36);
 
-		PdfPCell cell37 = new PdfPCell(new Paragraph(basicDesc2.getApprovedByRemarks(), font));
+		PdfPCell cell37 = new PdfPCell(new Paragraph(basicDesc2.getApprovedDrawingRemarks	(), font));
 		cell37.setFixedHeight(20f);
 		cell37.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 		table2.addCell(cell37);
@@ -485,7 +670,7 @@ public class PrintBasicLpsServiceImpl implements PrintBasicLpsService {
 		cell65.setGrayFill(0.92f);
 		table2.addCell(cell65);
 
-		PdfPCell cell66 = new PdfPCell(new Paragraph(basicDesc2.getDesignDateObserv(), font));
+		PdfPCell cell66 = new PdfPCell(new Paragraph(basicDesc2.getDeviationObserv(), font));
 		cell66.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 		cell66.setFixedHeight(20f);
 
