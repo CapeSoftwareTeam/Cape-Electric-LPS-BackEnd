@@ -24,64 +24,70 @@ public class EarthingDescription implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "EARTHDESCRIPTION_ID")
 	private Integer earthDescriptionId;
-	
+
 	@Column(name = "SOIL_RESISTIVITYINOB")
 	private String soilResistivityInOb;
-	
+
+	@Column(name = "LOCATION_NUMBER")
+	private Integer locationNumber;
+
+	@Column(name = "LOCATION_NAME")
+	private String locationName;
+
 	@Column(name = "SOIL_RESISTIVITYINREM")
 	private String soilResistivityInRem;
-	
+
 	@Column(name = "EARTHPIT_DIGGINGINOB")
 	private String earthPitDigOb;
-	
+
 	@Column(name = "EARTHPIT_DIGGINGINREM")
 	private String earthPitDigRem;
-	
+
 	@Column(name = "EARTHELECTRODE_LESSTHAN_DOWNCONDUCTORSINOB")
 	private String earthElectrodeLesthanDownConductorInOb;
-	
+
 	@Column(name = "EARTHELECTRODE_LESSTHAN_DOWNCONDUCTORSINREM")
 	private String earthElectrodeLesthanDownConductorInRem;
-	
+
 	@Column(name = "CONNECTED_EARTHTERMINATIONINOB")
 	private String connectedEarthTerminalInOb;
-	
+
 	@Column(name = "CONNECTED_EARTHTERMINATIONINREM")
 	private String connectedEarthTerminalInRem;
-	
+
 	@Column(name = "TESTJOINT_EARTHELECTRODEINOB")
 	private String testJointEarthElectrodeInOb;
-	
+
 	@Column(name = "TESTJOINT_EARTHELECTRODEINREM")
 	private String testJointEarthElectrodeInRem;
-	
+
 	@Column(name = "GROUNTLEVEL_COMPOUNTFILLEDINOB")
 	private String grountLevelComponentFilledInOb;
-	
+
 	@Column(name = "GROUNTLEVEL_COMPOUNTFILLEDINREM")
 	private String grountLevelComponentFilledInRem;
-	
+
 	@Column(name = "EARTHELCTRODE_LOCATIONINOB")
 	private String earthElectrodeLocationInOb;
-	
+
 	@Column(name = "EARTHELCTRODE_LOCATIONINREM")
 	private String earthElectrodeLocationInRem;
-	
+
 	@Column(name = "EARTHELECTRODE_MATERIALINOB")
 	private String earthElectrodeMaterialInOb;
-	
+
 	@Column(name = "EARTHELECTRODE_MATERIALINREM")
 	private String earthElectrodeMaterialInRem;
-	
+
 	@Column(name = "EARTHELECTRODE_SIZEINOB")
 	private String earthElectrodeSizeInOb;
-	
+
 	@Column(name = "EARTHELECTRODE_SIZEINREM")
 	private String earthElectrodeSizeInRem;
-	
+
 	@Column(name = "EARTHELECTRODE_LENGTHINOB")
 	private String earthElectrodeLengthingOb;
-	
+
 	@Column(name = "EARTHELECTRODE_LENGTHINREM")
 	private String earthElectrodeLengthingRem;
 
@@ -114,7 +120,7 @@ public class EarthingDescription implements Serializable {
 
 	@Column(name = "TOTALNUMBER_OF_ELECTRODEINREM")
 	private String totalNumberOfElectrodeRem;
-	
+
 	@Column(name = "INSPECTIONFAILED_NO_REM")
 	private String inspectedFailedRem;
 
@@ -140,6 +146,22 @@ public class EarthingDescription implements Serializable {
 
 	public Integer getEarthDescriptionId() {
 		return earthDescriptionId;
+	}
+
+	public Integer getLocationNumber() {
+		return locationNumber;
+	}
+
+	public void setLocationNumber(Integer locationNumber) {
+		this.locationNumber = locationNumber;
+	}
+
+	public String getLocationName() {
+		return locationName;
+	}
+
+	public void setLocationName(String locationName) {
+		this.locationName = locationName;
 	}
 
 	public void setEarthDescriptionId(Integer earthDescriptionId) {
@@ -441,7 +463,5 @@ public class EarthingDescription implements Serializable {
 	public void setEarthingLpsDescription(EarthingLpsDescription earthingLpsDescription) {
 		this.earthingLpsDescription = earthingLpsDescription;
 	}
-	
-	
 
-	}
+}

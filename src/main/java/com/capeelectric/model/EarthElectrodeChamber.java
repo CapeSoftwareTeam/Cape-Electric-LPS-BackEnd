@@ -24,10 +24,16 @@ public class EarthElectrodeChamber implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "EARTHELECTRODECHAMBER_ID")
 	private Integer earthingElectrodeChamberId;
-	
+
+	@Column(name = "LOCATION_NUMBER")
+	private Integer locationNumber;
+
+	@Column(name = "LOCATION_NAME")
+	private String locationName;
+
 	@Column(name = "PHYSICAL_INSPECTIONOB")
 	private String physicalInspeOb;
-	
+
 	@Column(name = "PHYSICAL_INSPECTIONREM")
 	private String physicalInspeRem;
 
@@ -60,26 +66,25 @@ public class EarthElectrodeChamber implements Serializable {
 
 	@Column(name = "TOTAL_CHAMBERSNOREM")
 	private String totalChamberNoRem;
-	
-	@Column(name = "INSPECTED_CHAMBERINOB")
-	private String  inspectedChamberInOb;
-	
-	@Column(name = "INSPECTED_CHAMBERINREM")
-	private String  inspectedChamberInRem;
-	
-	@Column(name = "INSPECTED_PASSEDINOB")
-	private String  inspectionPassedInOb;
-	
-	@Column(name = "INSPECTED_PASSEDINREM")
-	private String  inspectionPassedInRem;
-	
-	@Column(name = "INSPECTED_FAILEDINOB")
-	private String  inspectionFailedInOb;
-	
-	@Column(name = "INSPECTED_FAILEDINREM")
-	private String  inspectionFailedInRem;
 
-	
+	@Column(name = "INSPECTED_CHAMBERINOB")
+	private String inspectedChamberInOb;
+
+	@Column(name = "INSPECTED_CHAMBERINREM")
+	private String inspectedChamberInRem;
+
+	@Column(name = "INSPECTED_PASSEDINOB")
+	private String inspectionPassedInOb;
+
+	@Column(name = "INSPECTED_PASSEDINREM")
+	private String inspectionPassedInRem;
+
+	@Column(name = "INSPECTED_FAILEDINOB")
+	private String inspectionFailedInOb;
+
+	@Column(name = "INSPECTED_FAILEDINREM")
+	private String inspectionFailedInRem;
+
 	@JsonBackReference
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "EARTHING_ID")
@@ -87,6 +92,22 @@ public class EarthElectrodeChamber implements Serializable {
 
 	public Integer getEarthingElectrodeChamberId() {
 		return earthingElectrodeChamberId;
+	}
+
+	public Integer getLocationNumber() {
+		return locationNumber;
+	}
+
+	public void setLocationNumber(Integer locationNumber) {
+		this.locationNumber = locationNumber;
+	}
+
+	public String getLocationName() {
+		return locationName;
+	}
+
+	public void setLocationName(String locationName) {
+		this.locationName = locationName;
 	}
 
 	public void setEarthingElectrodeChamberId(Integer earthingElectrodeChamberId) {
@@ -245,5 +266,4 @@ public class EarthElectrodeChamber implements Serializable {
 		this.inspectionFailedInRem = inspectionFailedInRem;
 	}
 
-		
 }

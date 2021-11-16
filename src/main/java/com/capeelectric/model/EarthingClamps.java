@@ -25,6 +25,12 @@ public class EarthingClamps implements Serializable {
 	@Column(name = "EARTHCLAMPS_ID")
 	private Integer earthingClampsId;
 
+	@Column(name = "LOCATION_NUMBER")
+	private Integer locationNumber;
+
+	@Column(name = "LOCATION_NAME")
+	private String locationName;
+
 	@Column(name = "PHYSICAL_INSPECTIONINOB")
 	private String physicalInspectionInOb;
 
@@ -59,27 +65,26 @@ public class EarthingClamps implements Serializable {
 	private String totalNoClampsInOb;
 
 	@Column(name = "TOTALNO_CLAMPSINREM")
-	private String  totalNoClampsInRem;
-	
+	private String totalNoClampsInRem;
+
 	@Column(name = "INSPECTED_CLAMPSINOB")
-	private String  inspectedClampsInOb;
-	
+	private String inspectedClampsInOb;
+
 	@Column(name = "INSPECTED_CLAMPSINREM")
-	private String  inspectedClampsInRem;
-	
+	private String inspectedClampsInRem;
+
 	@Column(name = "INSPECTED_PASSEDINOB")
-	private String  inspectionPassedInOb;
-	
+	private String inspectionPassedInOb;
+
 	@Column(name = "INSPECTED_PASSEDINREM")
-	private String  inspectionPassedInRem;
-	
+	private String inspectionPassedInRem;
+
 	@Column(name = "INSPECTED_FAILEDINOB")
-	private String  inspectionFailedInOb;
-	
+	private String inspectionFailedInOb;
+
 	@Column(name = "INSPECTED_FAILEDINREM")
-	private String  inspectionFailedInRem;
-	
-	
+	private String inspectionFailedInRem;
+
 	@JsonBackReference
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "EARTHING_ID")
@@ -87,6 +92,22 @@ public class EarthingClamps implements Serializable {
 
 	public Integer getEarthingClampsId() {
 		return earthingClampsId;
+	}
+
+	public Integer getLocationNumber() {
+		return locationNumber;
+	}
+
+	public void setLocationNumber(Integer locationNumber) {
+		this.locationNumber = locationNumber;
+	}
+
+	public String getLocationName() {
+		return locationName;
+	}
+
+	public void setLocationName(String locationName) {
+		this.locationName = locationName;
 	}
 
 	public void setEarthingClampsId(Integer earthingClampsId) {
@@ -197,21 +218,17 @@ public class EarthingClamps implements Serializable {
 		this.earthingLpsDescription = earthingLpsDescription;
 	}
 
-
 	public String getInspectedClampsInOb() {
 		return inspectedClampsInOb;
 	}
-
 
 	public void setInspectedClampsInOb(String inspectedClampsInOb) {
 		this.inspectedClampsInOb = inspectedClampsInOb;
 	}
 
-
 	public String getInspectedClampsInRem() {
 		return inspectedClampsInRem;
 	}
-
 
 	public void setInspectedClampsInRem(String inspectedClampsInRem) {
 		this.inspectedClampsInRem = inspectedClampsInRem;
@@ -249,5 +266,4 @@ public class EarthingClamps implements Serializable {
 		this.inspectionFailedInRem = inspectionFailedInRem;
 	}
 
-	
 }
