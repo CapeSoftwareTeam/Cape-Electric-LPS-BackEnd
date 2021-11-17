@@ -16,63 +16,63 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name = "BRIDGINGDESCRIPTION_TABLE")
-public class BridgingDescription implements Serializable  {
-    
+public class BridgingDescription implements Serializable {
+
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "BRIDGINGDESCRIPTION_ID")
 	private Integer bridgingDescriptionId;
-	
+
 	@Column(name = "LOCATION_NO")
-	private Integer lacationNo;
-	
+	private Integer locationNumber;
+
 	@Column(name = "LOCATION_NAME")
-	private String lacationName;
-	
+	private String locationName;
+
 	@Column(name = "ENSURE_BRIDGINGCABLE_OB")
 	private String ensureBridgingCableOb;
-	
+
 	@Column(name = "ENSURE_BRIDGINGCABLE_REM")
 	private String ensureBridgingCableRem;
-	
+
 	@Column(name = "ALUMINIUMCONDUCTOR_SIDEWALL_OB")
 	private String aluminiumConductorSideWallOb;
-	
+
 	@Column(name = "ALUMINIUMCONDUCTOR_SIDEWALL_REM")
 	private String aluminiumConductorSideWallRem;
-	
+
 	@Column(name = "BRIDGINGCABLE_CONNECTION_OB")
 	private String bridgingCableConnectionOb;
 
 	@Column(name = "BRIDGINGCABLE_CONNECTION_REM")
 	private String bridgingCableConnectionRem;
-	
+
 	@Column(name = "TOTALNO_BRIDGINGCABLE_OB")
 	private String totalNoBridgingCableOb;
 
 	@Column(name = "TOTALNO_BRIDGINGCABLE_REM")
 	private String totalNoBridgingCableRem;
-	
+
 	@Column(name = "INSPECTED_NO_OB")
 	private String inspectedNoOb;
-	
+
 	@Column(name = "INSPECTED_NO_REM")
 	private String inspectedNoRem;
-	
+
 	@Column(name = "INSPECTIONSPASSED_NO_OB")
 	private String inspectionPassedNoOb;
 
 	@Column(name = "INSPECTIONSPASSED_NO_REM")
 	private String inspectionPassedNoRem;
-	
+
 	@Column(name = "INSPECTIONFAILED_NO_OB")
 	private String inspectionFailedNoOb;
-	
+
 	@Column(name = "INSPECTIONFAILED_NO_REM")
 	private String inspectionFailedNoRem;
-	
+
 	@JsonBackReference
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "DOWNCONDUCTORDESCRIPTION_ID")
@@ -81,37 +81,27 @@ public class BridgingDescription implements Serializable  {
 	public Integer getBridgingDescriptionId() {
 		return bridgingDescriptionId;
 	}
-	
-	
 
-	public Integer getLacationNo() {
-		return lacationNo;
+	public Integer getLocationNumber() {
+		return locationNumber;
 	}
 
-
-
-	public void setLacationNo(Integer lacationNo) {
-		this.lacationNo = lacationNo;
+	public void setLocationNumber(Integer locationNumber) {
+		this.locationNumber = locationNumber;
+	}
+ 
+	public String getLocationName() {
+		return locationName;
 	}
 
-
-	public String getLacationName() {
-		return lacationName;
+	public void setLocationName(String locationName) {
+		this.locationName = locationName;
 	}
-
-
-
-	public void setLacationName(String lacationName) {
-		this.lacationName = lacationName;
-	}
-
-
 
 	public void setBridgingDescriptionId(Integer bridgingDescriptionId) {
 		this.bridgingDescriptionId = bridgingDescriptionId;
 	}
 
-	
 	public String getEnsureBridgingCableOb() {
 		return ensureBridgingCableOb;
 	}
@@ -231,7 +221,5 @@ public class BridgingDescription implements Serializable  {
 	public void setDownConductorDescription(DownConductorDescription downConductorDescription) {
 		this.downConductorDescription = downConductorDescription;
 	}
-
-	
 
 }

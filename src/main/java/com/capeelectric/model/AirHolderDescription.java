@@ -47,43 +47,25 @@ public class AirHolderDescription implements Serializable {
 
 	@Column(name = "CODUCTOR_HOLDER_REMARKS")
 	private String conductorHolderRe;
-
-	@Column(name = "MATERIAL_OF_HOLDEROB")
-	private String materailOfHolderOb;
-
-	@Column(name = "MATERIAL_OF_HOLDERREM")
-	private String materailOfHolderRem;
-
-	@Column(name = "MATERIAL_OFPARPET_HOLDEROB")
-	private String materailOfParpetHolderOb;
-
-	@Column(name = "MATERIAL_OFPARPET_HOLDERREM")
-	private String materailOfParpetHolderRem;
-
+	
 	@Column(name = "HOLDER_TYPE_OBSERVATION")
 	private String holderTypeOb;
 
 	@Column(name = "HOLDER_TYPE_REMARKS")
 	private String holderTypeRe;
 
-//	@Column(name = "MATERIAL_HOLDER_OBSERVATION")
-//	private String materialHolderOb;
-//
-//	@Column(name = "MATERIAL_HOLDER_REMARKS")
-//	private String materialHolderRe;
+	@Column(name = "MATERIAL_OF_HOLDEROB")
+	private String materailOfHolderOb;
 
+	@Column(name = "MATERIAL_OF_HOLDERREM")
+	private String materailOfHolderRem;
+	
 	@Column(name = "TOTAL_HOLDERSNO_OBSERVATION")
 	private String totalHolderNoOb;
 
 	@Column(name = "TOTAL_HOLDERSNO_REMARKS")
 	private String totalHolderNoRe;
-
-	@Column(name = "TOTALPARPET_HOLDER_OBSERVATION")
-	private String totalParpetHolderNoOb;
-
-	@Column(name = "TOTALPARPET_HOLDER_REMARKS")
-	private String totalParpetHolderNoRe;
-
+	
 	@Column(name = "HO_INSP_NO_OBS")
 	private String holderInspNoOb;
 
@@ -101,6 +83,18 @@ public class AirHolderDescription implements Serializable {
 
 	@Column(name = "HO_INSP_FAILED_NO_REM")
 	private String holderInspFailedNoRe;
+	
+	@Column(name = "MATERIAL_OFPARPET_HOLDEROB")
+	private String materailOfParpetHolderOb;
+
+	@Column(name = "MATERIAL_OFPARPET_HOLDERREM")
+	private String materailOfParpetHolderRem;
+
+	@Column(name = "TOTALPARPET_HOLDER_OBSERVATION")
+	private String totalParpetHolderNoOb;
+
+	@Column(name = "TOTALPARPET_HOLDER_REMARKS")
+	private String totalParpetHolderNoRe;
 
 	@Column(name = "PH_INSP_NO_OBS")
 	private String parpetInspectionNoOb;
@@ -252,22 +246,6 @@ public class AirHolderDescription implements Serializable {
 	public void setHolderTypeRe(String holderTypeRe) {
 		this.holderTypeRe = holderTypeRe;
 	}
-
-//	public String getMaterialHolderOb() {
-//		return materialHolderOb;
-//	}
-//
-//	public void setMaterialHolderOb(String materialHolderOb) {
-//		this.materialHolderOb = materialHolderOb;
-//	}
-//
-//	public String getMaterialHolderRe() {
-//		return materialHolderRe;
-//	}
-//
-//	public void setMaterialHolderRe(String materialHolderRe) {
-//		this.materialHolderRe = materialHolderRe;
-//	}
 
 	public String getTotalHolderNoOb() {
 		return totalHolderNoOb;

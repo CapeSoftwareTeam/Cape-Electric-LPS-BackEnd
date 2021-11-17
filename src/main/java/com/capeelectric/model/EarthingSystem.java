@@ -170,6 +170,14 @@ public class EarthingSystem implements Serializable {
 		this.ringWallEarthWestOb = ringWallEarthOb;
 	}
 
+	public String getRingWallEarthWestOb() {
+		return ringWallEarthWestOb;
+	}
+
+	public void setRingWallEarthWestOb(String ringWallEarthWestOb) {
+		this.ringWallEarthWestOb = ringWallEarthWestOb;
+	}
+
 	public String getRingWallEarthWestRem() {
 		return ringWallEarthWestRem;
 	}
