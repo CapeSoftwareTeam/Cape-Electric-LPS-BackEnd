@@ -24,6 +24,18 @@ public class AirMeshDescription implements Serializable {
 	@Column(name = "MESHDESCRIPTION_ID")
 	private Integer meshDescriptionId;
 
+	@Column(name = "PHYSICAL_INSPECTION_OB")
+	private String physicalInspectionOb;
+
+	@Column(name = "PHYSICAL_INSPECTION_REM")
+	private String physicalInspectionRe;
+
+	@Column(name = " MATERIAL_OFCONDUCTOR_OB")
+	private String materailOfConductorOb;
+
+	@Column(name = "MATERIAL_OFCONDUCTOR_REM")
+	private String materailOfConductorRem;
+
 	@Column(name = "SIZE_OF_CONDUCTOROBSERVATION")
 	private String sizeOfConductorOb;
 
@@ -67,6 +79,38 @@ public class AirMeshDescription implements Serializable {
 
 	public Integer getMeshDescriptionId() {
 		return meshDescriptionId;
+	}
+
+	public String getPhysicalInspectionOb() {
+		return physicalInspectionOb;
+	}
+
+	public void setPhysicalInspectionOb(String physicalInspectionOb) {
+		this.physicalInspectionOb = physicalInspectionOb;
+	}
+
+	public String getPhysicalInspectionRe() {
+		return physicalInspectionRe;
+	}
+
+	public void setPhysicalInspectionRe(String physicalInspectionRe) {
+		this.physicalInspectionRe = physicalInspectionRe;
+	}
+
+	public String getMaterailOfConductorOb() {
+		return materailOfConductorOb;
+	}
+
+	public void setMaterailOfConductorOb(String materailOfConductorOb) {
+		this.materailOfConductorOb = materailOfConductorOb;
+	}
+
+	public String getMaterailOfConductorRem() {
+		return materailOfConductorRem;
+	}
+
+	public void setMaterailOfConductorRem(String materailOfConductorRem) {
+		this.materailOfConductorRem = materailOfConductorRem;
 	}
 
 	public Integer getLocationNumber() {
