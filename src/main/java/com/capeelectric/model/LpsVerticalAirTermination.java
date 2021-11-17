@@ -31,6 +31,12 @@ public class LpsVerticalAirTermination implements Serializable {
 	@Column(name = "LOCATION_NAME")
 	private String locationName;
 
+	@Column(name = "INSTALLATION_TERMINATIONSYSTEM_OB")
+	private String installationTerminationsystemOb;
+
+	@Column(name = "INSTALLATION_TERMINATIONSYSTEM_REM")
+	private String installationTerminationsystemRem;
+
 	@Column(name = "SIZE_OF_TERMINALOBSERVATION")
 	private String sizeOfTerminalOb;
 
@@ -110,6 +116,22 @@ public class LpsVerticalAirTermination implements Serializable {
 
 	public Integer getLpsVerticalAirTerminationId() {
 		return lpsVerticalAirTerminationId;
+	}
+
+	public String getInstallationTerminationsystemOb() {
+		return installationTerminationsystemOb;
+	}
+
+	public void setInstallationTerminationsystemOb(String installationTerminationsystemOb) {
+		this.installationTerminationsystemOb = installationTerminationsystemOb;
+	}
+
+	public String getInstallationTerminationsystemRem() {
+		return installationTerminationsystemRem;
+	}
+
+	public void setInstallationTerminationsystemRem(String installationTerminationsystemRem) {
+		this.installationTerminationsystemRem = installationTerminationsystemRem;
 	}
 
 	public Integer getLocationNumber() {
