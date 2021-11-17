@@ -4042,3 +4042,176 @@
 2021-11-16T17:53:48.784+0530 INFO No active profile set, falling back to default profiles: default
 2021-11-16T17:53:49.688+0530 DEBUG Filter 'jwtRequestFilter' configured for use
 2021-11-16T17:53:50.167+0530 INFO Started LpsInspectionApplication in 1.429 seconds (JVM running for 28386.372)
+2021-11-16T18:00:29.837+0530 INFO called printBasicLps userName: sivaraju@capeindia.net,siteId : 22
+2021-11-16T19:10:50.288+0530 INFO Starting LpsInspectionApplication using Java 16.0.2 on DESKTOP-97UV318 with PID 29688 (D:\project cape\siva\delete\Cape-Electric-LPS-BackEnd\target\classes started by SIVARAJU in D:\project cape\siva\delete\Cape-Electric-LPS-BackEnd)
+2021-11-16T19:10:50.289+0530 DEBUG Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-11-16T19:10:50.289+0530 INFO No active profile set, falling back to default profiles: default
+2021-11-16T19:10:51.431+0530 DEBUG Filter 'jwtRequestFilter' configured for use
+2021-11-16T19:10:52.230+0530 INFO Started LpsInspectionApplication in 2.217 seconds (JVM running for 33008.435)
+2021-11-16T19:10:54.455+0530 INFO Starting LpsInspectionApplication using Java 16.0.2 on DESKTOP-97UV318 with PID 29688 (D:\project cape\siva\delete\Cape-Electric-LPS-BackEnd\target\classes started by SIVARAJU in D:\project cape\siva\delete\Cape-Electric-LPS-BackEnd)
+2021-11-16T19:10:54.456+0530 DEBUG Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-11-16T19:10:54.456+0530 INFO No active profile set, falling back to default profiles: default
+2021-11-16T19:10:54.993+0530 DEBUG Filter 'jwtRequestFilter' configured for use
+2021-11-16T19:10:55.361+0530 INFO Started LpsInspectionApplication in 0.922 seconds (JVM running for 33011.567)
+2021-11-16T19:17:29.990+0530 INFO Starting LpsInspectionApplication using Java 16.0.2 on DESKTOP-97UV318 with PID 29688 (D:\project cape\siva\delete\Cape-Electric-LPS-BackEnd\target\classes started by SIVARAJU in D:\project cape\siva\delete\Cape-Electric-LPS-BackEnd)
+2021-11-16T19:17:29.991+0530 DEBUG Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-11-16T19:17:29.991+0530 INFO No active profile set, falling back to default profiles: default
+2021-11-16T19:17:30.546+0530 DEBUG Filter 'jwtRequestFilter' configured for use
+2021-11-16T19:17:30.707+0530 INFO Started LpsInspectionApplication in 0.752 seconds (JVM running for 33406.913)
+2021-11-16T19:20:03.042+0530 INFO Starting LpsInspectionApplication using Java 16.0.2 on DESKTOP-97UV318 with PID 29688 (D:\project cape\siva\delete\Cape-Electric-LPS-BackEnd\target\classes started by SIVARAJU in D:\project cape\siva\delete\Cape-Electric-LPS-BackEnd)
+2021-11-16T19:20:03.042+0530 DEBUG Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-11-16T19:20:03.042+0530 INFO No active profile set, falling back to default profiles: default
+2021-11-16T19:20:03.392+0530 DEBUG Filter 'jwtRequestFilter' configured for use
+2021-11-16T19:20:03.731+0530 INFO Started LpsInspectionApplication in 0.713 seconds (JVM running for 33559.936)
+2021-11-16T19:20:35.296+0530 INFO Starting LpsInspectionApplication using Java 16.0.2 on DESKTOP-97UV318 with PID 29688 (D:\project cape\siva\delete\Cape-Electric-LPS-BackEnd\target\classes started by SIVARAJU in D:\project cape\siva\delete\Cape-Electric-LPS-BackEnd)
+2021-11-16T19:20:35.296+0530 DEBUG Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-11-16T19:20:35.296+0530 INFO No active profile set, falling back to default profiles: default
+2021-11-16T19:20:36.353+0530 DEBUG Filter 'jwtRequestFilter' configured for use
+2021-11-16T19:20:36.545+0530 INFO Started LpsInspectionApplication in 1.277 seconds (JVM running for 33592.75)
+2021-11-16T19:22:01.071+0530 INFO Starting LpsInspectionApplication using Java 16.0.2 on DESKTOP-97UV318 with PID 29688 (D:\project cape\siva\delete\Cape-Electric-LPS-BackEnd\target\classes started by SIVARAJU in D:\project cape\siva\delete\Cape-Electric-LPS-BackEnd)
+2021-11-16T19:22:01.072+0530 DEBUG Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-11-16T19:22:01.072+0530 INFO No active profile set, falling back to default profiles: default
+2021-11-16T19:22:01.468+0530 DEBUG Filter 'jwtRequestFilter' configured for use
+2021-11-16T19:22:01.735+0530 INFO Started LpsInspectionApplication in 0.677 seconds (JVM running for 33677.941)
+2021-11-16T19:22:41.245+0530 INFO Starting LpsInspectionApplication using Java 16.0.2 on DESKTOP-97UV318 with PID 29688 (D:\project cape\siva\delete\Cape-Electric-LPS-BackEnd\target\classes started by SIVARAJU in D:\project cape\siva\delete\Cape-Electric-LPS-BackEnd)
+2021-11-16T19:22:41.245+0530 DEBUG Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-11-16T19:22:41.245+0530 INFO No active profile set, falling back to default profiles: default
+2021-11-16T19:22:41.641+0530 DEBUG Filter 'jwtRequestFilter' configured for use
+2021-11-16T19:22:41.846+0530 INFO Started LpsInspectionApplication in 0.619 seconds (JVM running for 33718.052)
+2021-11-16T19:24:12.518+0530 INFO Starting LpsInspectionApplication using Java 16.0.2 on DESKTOP-97UV318 with PID 29688 (D:\project cape\siva\delete\Cape-Electric-LPS-BackEnd\target\classes started by SIVARAJU in D:\project cape\siva\delete\Cape-Electric-LPS-BackEnd)
+2021-11-16T19:24:12.518+0530 DEBUG Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-11-16T19:24:12.518+0530 INFO No active profile set, falling back to default profiles: default
+2021-11-16T19:24:12.901+0530 DEBUG Filter 'jwtRequestFilter' configured for use
+2021-11-16T19:24:13.132+0530 INFO Started LpsInspectionApplication in 0.637 seconds (JVM running for 33809.338)
+2021-11-16T19:25:58.095+0530 INFO Starting LpsInspectionApplication using Java 16.0.2 on DESKTOP-97UV318 with PID 29688 (D:\project cape\siva\delete\Cape-Electric-LPS-BackEnd\target\classes started by SIVARAJU in D:\project cape\siva\delete\Cape-Electric-LPS-BackEnd)
+2021-11-16T19:25:58.096+0530 DEBUG Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-11-16T19:25:58.096+0530 INFO No active profile set, falling back to default profiles: default
+2021-11-16T19:25:58.502+0530 DEBUG Filter 'jwtRequestFilter' configured for use
+2021-11-16T19:25:58.696+0530 INFO Started LpsInspectionApplication in 0.627 seconds (JVM running for 33914.901)
+2021-11-16T19:26:59.628+0530 INFO Starting LpsInspectionApplication using Java 16.0.2 on DESKTOP-97UV318 with PID 29688 (D:\project cape\siva\delete\Cape-Electric-LPS-BackEnd\target\classes started by SIVARAJU in D:\project cape\siva\delete\Cape-Electric-LPS-BackEnd)
+2021-11-16T19:26:59.628+0530 DEBUG Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-11-16T19:26:59.628+0530 INFO No active profile set, falling back to default profiles: default
+2021-11-16T19:27:00.176+0530 DEBUG Filter 'jwtRequestFilter' configured for use
+2021-11-16T19:27:00.385+0530 INFO Started LpsInspectionApplication in 0.779 seconds (JVM running for 33976.591)
+2021-11-16T19:27:49.220+0530 INFO Starting LpsInspectionApplication using Java 16.0.2 on DESKTOP-97UV318 with PID 29688 (D:\project cape\siva\delete\Cape-Electric-LPS-BackEnd\target\classes started by SIVARAJU in D:\project cape\siva\delete\Cape-Electric-LPS-BackEnd)
+2021-11-16T19:27:49.220+0530 DEBUG Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-11-16T19:27:49.220+0530 INFO No active profile set, falling back to default profiles: default
+2021-11-16T19:27:49.592+0530 DEBUG Filter 'jwtRequestFilter' configured for use
+2021-11-16T19:27:49.765+0530 INFO Started LpsInspectionApplication in 0.578 seconds (JVM running for 34025.971)
+2021-11-16T19:28:39.444+0530 INFO Starting LpsInspectionApplication using Java 16.0.2 on DESKTOP-97UV318 with PID 29688 (D:\project cape\siva\delete\Cape-Electric-LPS-BackEnd\target\classes started by SIVARAJU in D:\project cape\siva\delete\Cape-Electric-LPS-BackEnd)
+2021-11-16T19:28:39.444+0530 DEBUG Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-11-16T19:28:39.444+0530 INFO No active profile set, falling back to default profiles: default
+2021-11-16T19:28:39.790+0530 DEBUG Filter 'jwtRequestFilter' configured for use
+2021-11-16T19:28:39.981+0530 INFO Started LpsInspectionApplication in 0.557 seconds (JVM running for 34076.186)
+2021-11-16T19:29:30.784+0530 INFO Starting LpsInspectionApplication using Java 16.0.2 on DESKTOP-97UV318 with PID 29688 (D:\project cape\siva\delete\Cape-Electric-LPS-BackEnd\target\classes started by SIVARAJU in D:\project cape\siva\delete\Cape-Electric-LPS-BackEnd)
+2021-11-16T19:29:30.784+0530 DEBUG Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-11-16T19:29:30.784+0530 INFO No active profile set, falling back to default profiles: default
+2021-11-16T19:29:31.148+0530 DEBUG Filter 'jwtRequestFilter' configured for use
+2021-11-16T19:29:31.347+0530 INFO Started LpsInspectionApplication in 0.591 seconds (JVM running for 34127.553)
+2021-11-16T19:30:13.925+0530 INFO Starting LpsInspectionApplication using Java 16.0.2 on DESKTOP-97UV318 with PID 29688 (D:\project cape\siva\delete\Cape-Electric-LPS-BackEnd\target\classes started by SIVARAJU in D:\project cape\siva\delete\Cape-Electric-LPS-BackEnd)
+2021-11-16T19:30:13.925+0530 DEBUG Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-11-16T19:30:13.925+0530 INFO No active profile set, falling back to default profiles: default
+2021-11-16T19:30:14.271+0530 DEBUG Filter 'jwtRequestFilter' configured for use
+2021-11-16T19:30:14.513+0530 INFO Started LpsInspectionApplication in 0.608 seconds (JVM running for 34170.718)
+2021-11-16T19:31:18.466+0530 INFO Starting LpsInspectionApplication using Java 16.0.2 on DESKTOP-97UV318 with PID 29688 (D:\project cape\siva\delete\Cape-Electric-LPS-BackEnd\target\classes started by SIVARAJU in D:\project cape\siva\delete\Cape-Electric-LPS-BackEnd)
+2021-11-16T19:31:18.466+0530 DEBUG Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-11-16T19:31:18.466+0530 INFO No active profile set, falling back to default profiles: default
+2021-11-16T19:31:18.812+0530 DEBUG Filter 'jwtRequestFilter' configured for use
+2021-11-16T19:31:18.976+0530 INFO Started LpsInspectionApplication in 0.531 seconds (JVM running for 34235.181)
+2021-11-16T19:35:19.223+0530 INFO Starting LpsInspectionApplication using Java 16.0.2 on DESKTOP-97UV318 with PID 29688 (D:\project cape\siva\delete\Cape-Electric-LPS-BackEnd\target\classes started by SIVARAJU in D:\project cape\siva\delete\Cape-Electric-LPS-BackEnd)
+2021-11-16T19:35:19.223+0530 DEBUG Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-11-16T19:35:19.223+0530 INFO No active profile set, falling back to default profiles: default
+2021-11-16T19:35:19.615+0530 DEBUG Filter 'jwtRequestFilter' configured for use
+2021-11-16T19:35:19.833+0530 INFO Started LpsInspectionApplication in 0.628 seconds (JVM running for 34476.039)
+2021-11-16T20:07:01.267+0530 INFO Starting LpsInspectionApplication using Java 16.0.2 on DESKTOP-97UV318 with PID 29688 (D:\project cape\siva\delete\Cape-Electric-LPS-BackEnd\target\classes started by SIVARAJU in D:\project cape\siva\delete\Cape-Electric-LPS-BackEnd)
+2021-11-16T20:07:01.268+0530 DEBUG Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-11-16T20:07:01.268+0530 INFO No active profile set, falling back to default profiles: default
+2021-11-16T20:07:02.727+0530 DEBUG Filter 'jwtRequestFilter' configured for use
+2021-11-16T20:07:03.488+0530 INFO Started LpsInspectionApplication in 2.292 seconds (JVM running for 36379.693)
+2021-11-16T20:07:39.648+0530 INFO Starting LpsInspectionApplication using Java 16.0.2 on DESKTOP-97UV318 with PID 29688 (D:\project cape\siva\delete\Cape-Electric-LPS-BackEnd\target\classes started by SIVARAJU in D:\project cape\siva\delete\Cape-Electric-LPS-BackEnd)
+2021-11-16T20:07:39.648+0530 DEBUG Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-11-16T20:07:39.649+0530 INFO No active profile set, falling back to default profiles: default
+2021-11-16T20:07:40.821+0530 DEBUG Filter 'jwtRequestFilter' configured for use
+2021-11-16T20:07:41.332+0530 INFO Started LpsInspectionApplication in 1.781 seconds (JVM running for 36417.538)
+2021-11-16T20:12:15.230+0530 INFO Starting LpsInspectionApplication using Java 16.0.2 on DESKTOP-97UV318 with PID 29688 (D:\project cape\siva\delete\Cape-Electric-LPS-BackEnd\target\classes started by SIVARAJU in D:\project cape\siva\delete\Cape-Electric-LPS-BackEnd)
+2021-11-16T20:12:15.231+0530 DEBUG Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-11-16T20:12:15.231+0530 INFO No active profile set, falling back to default profiles: default
+2021-11-16T20:12:16.094+0530 DEBUG Filter 'jwtRequestFilter' configured for use
+2021-11-16T20:12:16.499+0530 INFO Started LpsInspectionApplication in 1.365 seconds (JVM running for 36692.705)
+2021-11-16T20:21:38.285+0530 INFO Starting LpsInspectionApplication using Java 16.0.2 on DESKTOP-97UV318 with PID 29688 (D:\project cape\siva\delete\Cape-Electric-LPS-BackEnd\target\classes started by SIVARAJU in D:\project cape\siva\delete\Cape-Electric-LPS-BackEnd)
+2021-11-16T20:21:38.285+0530 DEBUG Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-11-16T20:21:38.286+0530 INFO No active profile set, falling back to default profiles: default
+2021-11-16T20:21:39.545+0530 DEBUG Filter 'jwtRequestFilter' configured for use
+2021-11-16T20:21:39.975+0530 INFO Started LpsInspectionApplication in 1.777 seconds (JVM running for 37256.181)
+2021-11-16T20:28:13.284+0530 INFO Starting LpsInspectionApplication using Java 16.0.2 on DESKTOP-97UV318 with PID 29688 (D:\project cape\siva\delete\Cape-Electric-LPS-BackEnd\target\classes started by SIVARAJU in D:\project cape\siva\delete\Cape-Electric-LPS-BackEnd)
+2021-11-16T20:28:13.285+0530 DEBUG Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-11-16T20:28:13.285+0530 INFO No active profile set, falling back to default profiles: default
+2021-11-16T20:28:14.578+0530 DEBUG Filter 'jwtRequestFilter' configured for use
+2021-11-16T20:28:15.043+0530 INFO Started LpsInspectionApplication in 1.815 seconds (JVM running for 37651.249)
+2021-11-16T20:29:16.460+0530 INFO Starting LpsInspectionApplication using Java 16.0.2 on DESKTOP-97UV318 with PID 29688 (D:\project cape\siva\delete\Cape-Electric-LPS-BackEnd\target\classes started by SIVARAJU in D:\project cape\siva\delete\Cape-Electric-LPS-BackEnd)
+2021-11-16T20:29:16.461+0530 DEBUG Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-11-16T20:29:16.461+0530 INFO No active profile set, falling back to default profiles: default
+2021-11-16T20:29:17.364+0530 DEBUG Filter 'jwtRequestFilter' configured for use
+2021-11-16T20:29:17.781+0530 INFO Started LpsInspectionApplication in 1.368 seconds (JVM running for 37713.986)
+2021-11-16T20:39:50.812+0530 INFO Starting LpsInspectionApplication using Java 16.0.2 on DESKTOP-97UV318 with PID 29688 (D:\project cape\siva\delete\Cape-Electric-LPS-BackEnd\target\classes started by SIVARAJU in D:\project cape\siva\delete\Cape-Electric-LPS-BackEnd)
+2021-11-16T20:39:50.813+0530 DEBUG Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-11-16T20:39:50.813+0530 INFO No active profile set, falling back to default profiles: default
+2021-11-16T20:39:52.024+0530 DEBUG Filter 'jwtRequestFilter' configured for use
+2021-11-16T20:39:52.399+0530 INFO Started LpsInspectionApplication in 1.63 seconds (JVM running for 38348.605)
+2021-11-16T20:44:36.824+0530 INFO Starting LpsInspectionApplication using Java 16.0.2 on DESKTOP-97UV318 with PID 29688 (D:\project cape\siva\delete\Cape-Electric-LPS-BackEnd\target\classes started by SIVARAJU in D:\project cape\siva\delete\Cape-Electric-LPS-BackEnd)
+2021-11-16T20:44:36.824+0530 DEBUG Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-11-16T20:44:36.824+0530 INFO No active profile set, falling back to default profiles: default
+2021-11-16T20:44:38.165+0530 DEBUG Filter 'jwtRequestFilter' configured for use
+2021-11-16T20:44:38.667+0530 INFO Started LpsInspectionApplication in 1.891 seconds (JVM running for 38634.873)
+2021-11-16T20:45:22.221+0530 INFO Starting LpsInspectionApplication using Java 16.0.2 on DESKTOP-97UV318 with PID 29688 (D:\project cape\siva\delete\Cape-Electric-LPS-BackEnd\target\classes started by SIVARAJU in D:\project cape\siva\delete\Cape-Electric-LPS-BackEnd)
+2021-11-16T20:45:22.222+0530 DEBUG Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-11-16T20:45:22.222+0530 INFO No active profile set, falling back to default profiles: default
+2021-11-16T20:45:22.999+0530 DEBUG Filter 'jwtRequestFilter' configured for use
+2021-11-16T20:45:23.309+0530 INFO Started LpsInspectionApplication in 1.133 seconds (JVM running for 38679.514)
+2021-11-16T20:46:01.618+0530 INFO Starting LpsInspectionApplication using Java 16.0.2 on DESKTOP-97UV318 with PID 29688 (D:\project cape\siva\delete\Cape-Electric-LPS-BackEnd\target\classes started by SIVARAJU in D:\project cape\siva\delete\Cape-Electric-LPS-BackEnd)
+2021-11-16T20:46:01.618+0530 DEBUG Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-11-16T20:46:01.618+0530 INFO No active profile set, falling back to default profiles: default
+2021-11-16T20:46:02.304+0530 DEBUG Filter 'jwtRequestFilter' configured for use
+2021-11-16T20:46:02.624+0530 INFO Started LpsInspectionApplication in 1.049 seconds (JVM running for 38718.83)
+2021-11-16T20:46:31.542+0530 WARN JWT Token does not begin with Bearer String
+2021-11-17T09:51:28.752+0530 INFO Starting LpsInspectionApplication using Java 16.0.2 on DESKTOP-97UV318 with PID 25876 (D:\project cape\siva\delete\Cape-Electric-LPS-BackEnd\target\classes started by SIVARAJU in D:\project cape\siva\delete\Cape-Electric-LPS-BackEnd)
+2021-11-17T09:51:28.755+0530 DEBUG Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-11-17T09:51:28.755+0530 INFO No active profile set, falling back to default profiles: default
+2021-11-17T09:51:34.771+0530 DEBUG Filter 'jwtRequestFilter' configured for use
+2021-11-17T09:51:37.837+0530 INFO Started LpsInspectionApplication in 9.476 seconds (JVM running for 10.309)
+2021-11-17T09:52:23.677+0530 WARN JWT Token does not begin with Bearer String
+2021-11-17T09:56:45.660+0530 INFO Starting LpsInspectionApplication using Java 16.0.2 on DESKTOP-97UV318 with PID 25876 (D:\project cape\siva\delete\Cape-Electric-LPS-BackEnd\target\classes started by SIVARAJU in D:\project cape\siva\delete\Cape-Electric-LPS-BackEnd)
+2021-11-17T09:56:45.661+0530 DEBUG Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-11-17T09:56:45.662+0530 INFO No active profile set, falling back to default profiles: default
+2021-11-17T09:56:47.049+0530 DEBUG Filter 'jwtRequestFilter' configured for use
+2021-11-17T09:56:47.688+0530 INFO Started LpsInspectionApplication in 2.104 seconds (JVM running for 320.161)
+2021-11-17T09:56:49.375+0530 INFO Starting LpsInspectionApplication using Java 16.0.2 on DESKTOP-97UV318 with PID 25876 (D:\project cape\siva\delete\Cape-Electric-LPS-BackEnd\target\classes started by SIVARAJU in D:\project cape\siva\delete\Cape-Electric-LPS-BackEnd)
+2021-11-17T09:56:49.461+0530 DEBUG Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-11-17T09:56:49.461+0530 INFO No active profile set, falling back to default profiles: default
+2021-11-17T09:56:50.518+0530 DEBUG Filter 'jwtRequestFilter' configured for use
+2021-11-17T09:56:50.976+0530 INFO Started LpsInspectionApplication in 1.64 seconds (JVM running for 323.449)
+2021-11-17T09:57:04.823+0530 INFO Starting LpsInspectionApplication using Java 16.0.2 on DESKTOP-97UV318 with PID 25876 (D:\project cape\siva\delete\Cape-Electric-LPS-BackEnd\target\classes started by SIVARAJU in D:\project cape\siva\delete\Cape-Electric-LPS-BackEnd)
+2021-11-17T09:57:04.824+0530 DEBUG Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-11-17T09:57:04.825+0530 INFO No active profile set, falling back to default profiles: default
+2021-11-17T09:57:05.529+0530 DEBUG Filter 'jwtRequestFilter' configured for use
+2021-11-17T09:57:05.837+0530 INFO Started LpsInspectionApplication in 1.047 seconds (JVM running for 338.309)
+2021-11-17T09:57:25.410+0530 WARN JWT Token does not begin with Bearer String
+2021-11-17T09:58:19.190+0530 INFO Starting LpsInspectionApplication using Java 16.0.2 on DESKTOP-97UV318 with PID 25876 (D:\project cape\siva\delete\Cape-Electric-LPS-BackEnd\target\classes started by SIVARAJU in D:\project cape\siva\delete\Cape-Electric-LPS-BackEnd)
+2021-11-17T09:58:19.192+0530 DEBUG Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-11-17T09:58:19.193+0530 INFO No active profile set, falling back to default profiles: default
+2021-11-17T09:58:20.189+0530 DEBUG Filter 'jwtRequestFilter' configured for use
+2021-11-17T09:58:20.777+0530 INFO Started LpsInspectionApplication in 1.618 seconds (JVM running for 413.25)
+2021-11-17T09:58:37.709+0530 INFO Starting LpsInspectionApplication using Java 16.0.2 on DESKTOP-97UV318 with PID 25876 (D:\project cape\siva\delete\Cape-Electric-LPS-BackEnd\target\classes started by SIVARAJU in D:\project cape\siva\delete\Cape-Electric-LPS-BackEnd)
+2021-11-17T09:58:37.720+0530 DEBUG Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-11-17T09:58:37.721+0530 INFO No active profile set, falling back to default profiles: default
+2021-11-17T09:58:38.373+0530 DEBUG Filter 'jwtRequestFilter' configured for use
+2021-11-17T09:58:38.708+0530 INFO Started LpsInspectionApplication in 1.033 seconds (JVM running for 431.182)
+2021-11-17T09:58:43.418+0530 WARN JWT Token does not begin with Bearer String
+2021-11-17T09:59:40.618+0530 WARN JWT Token does not begin with Bearer String
+2021-11-17T10:00:17.752+0530 INFO Starting LpsInspectionApplication using Java 16.0.2 on DESKTOP-97UV318 with PID 25876 (D:\project cape\siva\delete\Cape-Electric-LPS-BackEnd\target\classes started by SIVARAJU in D:\project cape\siva\delete\Cape-Electric-LPS-BackEnd)
+2021-11-17T10:00:17.812+0530 DEBUG Running with Spring Boot v2.5.5, Spring v5.3.10
+2021-11-17T10:00:17.813+0530 INFO No active profile set, falling back to default profiles: default
+2021-11-17T10:00:18.561+0530 DEBUG Filter 'jwtRequestFilter' configured for use
+2021-11-17T10:00:18.968+0530 INFO Started LpsInspectionApplication in 1.241 seconds (JVM running for 531.442)
+2021-11-17T10:00:23.156+0530 WARN JWT Token does not begin with Bearer String
+2021-11-17T10:00:23.184+0530 INFO called printBasicLps userName: sivaraju@capeindia.net,siteId : 22

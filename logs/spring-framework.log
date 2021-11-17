@@ -9488,3 +9488,275 @@ Method [public org.springframework.http.ResponseEntity<java.util.List<com.capeel
 2021-11-16T17:53:50.031+0530 DEBUG Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
 2021-11-16T17:53:50.072+0530 DEBUG ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
 2021-11-16T17:53:50.101+0530 DEBUG ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-11-16T18:00:28.688+0530 INFO Initializing Servlet 'dispatcherServlet'
+2021-11-16T18:00:28.707+0530 DEBUG Detected StandardServletMultipartResolver
+2021-11-16T18:00:28.710+0530 DEBUG Detected AcceptHeaderLocaleResolver
+2021-11-16T18:00:28.710+0530 DEBUG Detected FixedThemeResolver
+2021-11-16T18:00:28.752+0530 DEBUG Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@d0cb748
+2021-11-16T18:00:28.752+0530 DEBUG Detected org.springframework.web.servlet.support.SessionFlashMapManager@3d794031
+2021-11-16T18:00:28.754+0530 DEBUG enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2021-11-16T18:00:28.754+0530 INFO Completed initialization in 53 ms
+2021-11-16T18:00:28.818+0530 DEBUG Mapped to com.capeelectric.controller.PrintBasicLpsController#printBasicLps(String, Integer)
+2021-11-16T18:00:29.785+0530 DEBUG GET "/api/v1/printBasicLps/sivaraju@capeindia.net/22", parameters={}
+2021-11-16T18:00:29.786+0530 DEBUG Mapped to com.capeelectric.controller.PrintBasicLpsController#printBasicLps(String, Integer)
+2021-11-16T18:00:30.037+0530 DEBUG Using 'text/plain', given [*/*] and supported [text/plain, */*, text/plain, */*, application/json, application/*+json, application/json, application/*+json]
+2021-11-16T18:00:30.038+0530 DEBUG Nothing to write: null body
+2021-11-16T18:00:30.040+0530 DEBUG Completed 200 OK
+2021-11-16T19:10:52.078+0530 DEBUG 27 mappings in 'requestMappingHandlerMapping'
+2021-11-16T19:10:52.113+0530 DEBUG Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2021-11-16T19:10:52.144+0530 DEBUG ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-11-16T19:10:52.157+0530 DEBUG ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-11-16T19:10:55.190+0530 DEBUG 27 mappings in 'requestMappingHandlerMapping'
+2021-11-16T19:10:55.207+0530 DEBUG Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2021-11-16T19:10:55.239+0530 DEBUG ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-11-16T19:10:55.343+0530 DEBUG ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-11-16T19:17:30.655+0530 DEBUG 27 mappings in 'requestMappingHandlerMapping'
+2021-11-16T19:17:30.673+0530 DEBUG Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2021-11-16T19:17:30.686+0530 DEBUG ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-11-16T19:17:30.689+0530 DEBUG ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-11-16T19:20:03.629+0530 DEBUG 27 mappings in 'requestMappingHandlerMapping'
+2021-11-16T19:20:03.659+0530 DEBUG Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2021-11-16T19:20:03.690+0530 DEBUG ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-11-16T19:20:03.694+0530 DEBUG ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-11-16T19:20:36.486+0530 DEBUG 27 mappings in 'requestMappingHandlerMapping'
+2021-11-16T19:20:36.512+0530 DEBUG Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2021-11-16T19:20:36.524+0530 DEBUG ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-11-16T19:20:36.527+0530 DEBUG ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-11-16T19:22:01.609+0530 DEBUG 27 mappings in 'requestMappingHandlerMapping'
+2021-11-16T19:22:01.643+0530 DEBUG Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2021-11-16T19:22:01.659+0530 DEBUG ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-11-16T19:22:01.662+0530 DEBUG ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-11-16T19:22:41.793+0530 DEBUG 27 mappings in 'requestMappingHandlerMapping'
+2021-11-16T19:22:41.809+0530 DEBUG Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2021-11-16T19:22:41.821+0530 DEBUG ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-11-16T19:22:41.826+0530 DEBUG ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-11-16T19:24:13.046+0530 DEBUG 27 mappings in 'requestMappingHandlerMapping'
+2021-11-16T19:24:13.061+0530 DEBUG Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2021-11-16T19:24:13.076+0530 DEBUG ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-11-16T19:24:13.088+0530 DEBUG ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-11-16T19:25:58.627+0530 DEBUG 27 mappings in 'requestMappingHandlerMapping'
+2021-11-16T19:25:58.652+0530 DEBUG Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2021-11-16T19:25:58.672+0530 DEBUG ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-11-16T19:25:58.678+0530 DEBUG ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-11-16T19:27:00.333+0530 DEBUG 27 mappings in 'requestMappingHandlerMapping'
+2021-11-16T19:27:00.350+0530 DEBUG Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2021-11-16T19:27:00.366+0530 DEBUG ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-11-16T19:27:00.370+0530 DEBUG ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-11-16T19:27:49.712+0530 DEBUG 27 mappings in 'requestMappingHandlerMapping'
+2021-11-16T19:27:49.735+0530 DEBUG Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2021-11-16T19:27:49.749+0530 DEBUG ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-11-16T19:27:49.752+0530 DEBUG ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-11-16T19:28:39.942+0530 DEBUG 27 mappings in 'requestMappingHandlerMapping'
+2021-11-16T19:28:39.957+0530 DEBUG Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2021-11-16T19:28:39.966+0530 DEBUG ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-11-16T19:28:39.969+0530 DEBUG ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-11-16T19:29:31.299+0530 DEBUG 27 mappings in 'requestMappingHandlerMapping'
+2021-11-16T19:29:31.315+0530 DEBUG Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2021-11-16T19:29:31.329+0530 DEBUG ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-11-16T19:29:31.332+0530 DEBUG ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-11-16T19:30:14.421+0530 DEBUG 27 mappings in 'requestMappingHandlerMapping'
+2021-11-16T19:30:14.446+0530 DEBUG Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2021-11-16T19:30:14.457+0530 DEBUG ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-11-16T19:30:14.466+0530 DEBUG ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-11-16T19:31:18.936+0530 DEBUG 27 mappings in 'requestMappingHandlerMapping'
+2021-11-16T19:31:18.949+0530 DEBUG Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2021-11-16T19:31:18.960+0530 DEBUG ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-11-16T19:31:18.963+0530 DEBUG ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-11-16T19:35:19.758+0530 DEBUG 27 mappings in 'requestMappingHandlerMapping'
+2021-11-16T19:35:19.777+0530 DEBUG Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2021-11-16T19:35:19.806+0530 DEBUG ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-11-16T19:35:19.811+0530 DEBUG ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-11-16T20:07:03.321+0530 DEBUG 27 mappings in 'requestMappingHandlerMapping'
+2021-11-16T20:07:03.372+0530 DEBUG Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2021-11-16T20:07:03.414+0530 DEBUG ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-11-16T20:07:03.432+0530 DEBUG ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-11-16T20:07:41.138+0530 DEBUG 27 mappings in 'requestMappingHandlerMapping'
+2021-11-16T20:07:41.251+0530 DEBUG Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2021-11-16T20:07:41.283+0530 DEBUG ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-11-16T20:07:41.292+0530 DEBUG ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-11-16T20:12:16.377+0530 DEBUG 27 mappings in 'requestMappingHandlerMapping'
+2021-11-16T20:12:16.411+0530 DEBUG Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2021-11-16T20:12:16.457+0530 DEBUG ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-11-16T20:12:16.464+0530 DEBUG ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-11-16T20:21:39.826+0530 DEBUG 27 mappings in 'requestMappingHandlerMapping'
+2021-11-16T20:21:39.870+0530 DEBUG Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2021-11-16T20:21:39.933+0530 DEBUG ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-11-16T20:21:39.940+0530 DEBUG ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-11-16T20:28:14.901+0530 DEBUG 27 mappings in 'requestMappingHandlerMapping'
+2021-11-16T20:28:14.947+0530 DEBUG Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2021-11-16T20:28:14.998+0530 DEBUG ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-11-16T20:28:15.006+0530 DEBUG ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-11-16T20:29:17.645+0530 DEBUG 27 mappings in 'requestMappingHandlerMapping'
+2021-11-16T20:29:17.716+0530 DEBUG Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2021-11-16T20:29:17.743+0530 DEBUG ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-11-16T20:29:17.750+0530 DEBUG ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-11-16T20:39:52.243+0530 DEBUG 27 mappings in 'requestMappingHandlerMapping'
+2021-11-16T20:39:52.277+0530 DEBUG Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2021-11-16T20:39:52.341+0530 DEBUG ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-11-16T20:39:52.352+0530 DEBUG ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-11-16T20:43:05.188+0530 INFO Initializing Servlet 'dispatcherServlet'
+2021-11-16T20:43:05.189+0530 DEBUG Detected StandardServletMultipartResolver
+2021-11-16T20:43:05.189+0530 DEBUG Detected AcceptHeaderLocaleResolver
+2021-11-16T20:43:05.189+0530 DEBUG Detected FixedThemeResolver
+2021-11-16T20:43:05.190+0530 DEBUG Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@53530e43
+2021-11-16T20:43:05.191+0530 DEBUG Detected org.springframework.web.servlet.support.SessionFlashMapManager@5f42ed91
+2021-11-16T20:43:05.191+0530 DEBUG enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2021-11-16T20:43:05.191+0530 INFO Completed initialization in 2 ms
+2021-11-16T20:43:05.193+0530 DEBUG Mapped to ResourceHttpRequestHandler [Classpath [META-INF/resources/], Classpath [resources/], Classpath [static/], Classpath [public/], ServletContext [/]]
+2021-11-16T20:43:05.213+0530 DEBUG "ERROR" dispatch for GET "/error", parameters={}
+2021-11-16T20:43:05.214+0530 DEBUG Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2021-11-16T20:43:05.221+0530 DEBUG Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+2021-11-16T20:43:05.227+0530 DEBUG Writing [{timestamp=Tue Nov 16 20:43:05 IST 2021, status=401, error=Unauthorized, message=Unauthorized, path= (truncated)...]
+2021-11-16T20:43:05.236+0530 DEBUG Exiting from "ERROR" dispatch, status 401
+2021-11-16T20:44:00.842+0530 DEBUG Mapped to ResourceHttpRequestHandler [Classpath [META-INF/resources/], Classpath [resources/], Classpath [static/], Classpath [public/], ServletContext [/]]
+2021-11-16T20:44:00.848+0530 DEBUG "ERROR" dispatch for GET "/error", parameters={}
+2021-11-16T20:44:00.849+0530 DEBUG Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2021-11-16T20:44:00.850+0530 DEBUG Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+2021-11-16T20:44:00.851+0530 DEBUG Writing [{timestamp=Tue Nov 16 20:44:00 IST 2021, status=401, error=Unauthorized, message=Unauthorized, path= (truncated)...]
+2021-11-16T20:44:00.852+0530 DEBUG Exiting from "ERROR" dispatch, status 401
+2021-11-16T20:44:38.527+0530 DEBUG 27 mappings in 'requestMappingHandlerMapping'
+2021-11-16T20:44:38.597+0530 DEBUG Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2021-11-16T20:44:38.621+0530 DEBUG ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-11-16T20:44:38.629+0530 DEBUG ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-11-16T20:45:23.203+0530 DEBUG 27 mappings in 'requestMappingHandlerMapping'
+2021-11-16T20:45:23.253+0530 DEBUG Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2021-11-16T20:45:23.273+0530 DEBUG ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-11-16T20:45:23.278+0530 DEBUG ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-11-16T20:45:26.517+0530 INFO Initializing Servlet 'dispatcherServlet'
+2021-11-16T20:45:26.518+0530 DEBUG Detected StandardServletMultipartResolver
+2021-11-16T20:45:26.518+0530 DEBUG Detected AcceptHeaderLocaleResolver
+2021-11-16T20:45:26.518+0530 DEBUG Detected FixedThemeResolver
+2021-11-16T20:45:26.519+0530 DEBUG Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@4799dfae
+2021-11-16T20:45:26.519+0530 DEBUG Detected org.springframework.web.servlet.support.SessionFlashMapManager@4829eb52
+2021-11-16T20:45:26.519+0530 DEBUG enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2021-11-16T20:45:26.519+0530 INFO Completed initialization in 2 ms
+2021-11-16T20:45:26.520+0530 DEBUG Mapped to ResourceHttpRequestHandler [Classpath [META-INF/resources/], Classpath [resources/], Classpath [static/], Classpath [public/], ServletContext [/]]
+2021-11-16T20:45:26.523+0530 DEBUG "ERROR" dispatch for GET "/error", parameters={}
+2021-11-16T20:45:26.524+0530 DEBUG Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2021-11-16T20:45:26.525+0530 DEBUG Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+2021-11-16T20:45:26.526+0530 DEBUG Writing [{timestamp=Tue Nov 16 20:45:26 IST 2021, status=401, error=Unauthorized, message=Unauthorized, path= (truncated)...]
+2021-11-16T20:45:26.528+0530 DEBUG Exiting from "ERROR" dispatch, status 401
+2021-11-16T20:46:02.502+0530 DEBUG 27 mappings in 'requestMappingHandlerMapping'
+2021-11-16T20:46:02.549+0530 DEBUG Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2021-11-16T20:46:02.570+0530 DEBUG ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-11-16T20:46:02.576+0530 DEBUG ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-11-16T20:46:07.208+0530 INFO Initializing Servlet 'dispatcherServlet'
+2021-11-16T20:46:07.208+0530 DEBUG Detected StandardServletMultipartResolver
+2021-11-16T20:46:07.209+0530 DEBUG Detected AcceptHeaderLocaleResolver
+2021-11-16T20:46:07.209+0530 DEBUG Detected FixedThemeResolver
+2021-11-16T20:46:07.209+0530 DEBUG Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@19bdef6e
+2021-11-16T20:46:07.209+0530 DEBUG Detected org.springframework.web.servlet.support.SessionFlashMapManager@620d830d
+2021-11-16T20:46:07.209+0530 DEBUG enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2021-11-16T20:46:07.209+0530 INFO Completed initialization in 1 ms
+2021-11-16T20:46:07.210+0530 DEBUG Mapped to ResourceHttpRequestHandler [Classpath [META-INF/resources/], Classpath [resources/], Classpath [static/], Classpath [public/], ServletContext [/]]
+2021-11-16T20:46:07.215+0530 DEBUG "ERROR" dispatch for GET "/error", parameters={}
+2021-11-16T20:46:07.216+0530 DEBUG Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2021-11-16T20:46:07.218+0530 DEBUG Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+2021-11-16T20:46:07.218+0530 DEBUG Writing [{timestamp=Tue Nov 16 20:46:07 IST 2021, status=401, error=Unauthorized, message=Unauthorized, path= (truncated)...]
+2021-11-16T20:46:07.222+0530 DEBUG Exiting from "ERROR" dispatch, status 401
+2021-11-16T20:46:25.367+0530 DEBUG Mapped to ResourceHttpRequestHandler [Classpath [META-INF/resources/], Classpath [resources/], Classpath [static/], Classpath [public/], ServletContext [/]]
+2021-11-16T20:46:25.369+0530 DEBUG "ERROR" dispatch for GET "/error", parameters={}
+2021-11-16T20:46:25.369+0530 DEBUG Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2021-11-16T20:46:25.370+0530 DEBUG Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+2021-11-16T20:46:25.370+0530 DEBUG Writing [{timestamp=Tue Nov 16 20:46:25 IST 2021, status=401, error=Unauthorized, message=Unauthorized, path= (truncated)...]
+2021-11-16T20:46:25.372+0530 DEBUG Exiting from "ERROR" dispatch, status 401
+2021-11-16T20:46:31.541+0530 DEBUG Mapped to ResourceHttpRequestHandler [Classpath [META-INF/resources/], Classpath [resources/], Classpath [static/], Classpath [public/], ServletContext [/]]
+2021-11-16T20:46:31.544+0530 DEBUG "ERROR" dispatch for GET "/error", parameters={}
+2021-11-16T20:46:31.544+0530 DEBUG Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2021-11-16T20:46:31.545+0530 DEBUG Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+2021-11-16T20:46:31.545+0530 DEBUG Writing [{timestamp=Tue Nov 16 20:46:31 IST 2021, status=401, error=Unauthorized, message=Unauthorized, path= (truncated)...]
+2021-11-16T20:46:31.548+0530 DEBUG Exiting from "ERROR" dispatch, status 401
+2021-11-17T09:51:36.391+0530 DEBUG 27 mappings in 'requestMappingHandlerMapping'
+2021-11-17T09:51:36.932+0530 DEBUG Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2021-11-17T09:51:37.291+0530 DEBUG ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-11-17T09:51:37.484+0530 DEBUG ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-11-17T09:52:23.632+0530 INFO Initializing Servlet 'dispatcherServlet'
+2021-11-17T09:52:23.633+0530 DEBUG Detected StandardServletMultipartResolver
+2021-11-17T09:52:23.633+0530 DEBUG Detected AcceptHeaderLocaleResolver
+2021-11-17T09:52:23.633+0530 DEBUG Detected FixedThemeResolver
+2021-11-17T09:52:23.634+0530 DEBUG Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@2bafd31e
+2021-11-17T09:52:23.635+0530 DEBUG Detected org.springframework.web.servlet.support.SessionFlashMapManager@3de5e02f
+2021-11-17T09:52:23.636+0530 DEBUG enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2021-11-17T09:52:23.636+0530 INFO Completed initialization in 4 ms
+2021-11-17T09:52:23.675+0530 DEBUG Mapped to ResourceHttpRequestHandler [Classpath [META-INF/resources/], Classpath [resources/], Classpath [static/], Classpath [public/], ServletContext [/]]
+2021-11-17T09:52:23.706+0530 DEBUG "ERROR" dispatch for GET "/error", parameters={}
+2021-11-17T09:52:23.715+0530 DEBUG Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2021-11-17T09:52:23.790+0530 DEBUG Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+2021-11-17T09:52:23.791+0530 DEBUG Writing [{timestamp=Wed Nov 17 09:52:23 IST 2021, status=401, error=Unauthorized, message=Unauthorized, path= (truncated)...]
+2021-11-17T09:52:23.880+0530 DEBUG Exiting from "ERROR" dispatch, status 401
+2021-11-17T09:56:47.401+0530 DEBUG 27 mappings in 'requestMappingHandlerMapping'
+2021-11-17T09:56:47.445+0530 DEBUG Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2021-11-17T09:56:47.593+0530 DEBUG ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-11-17T09:56:47.610+0530 DEBUG ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-11-17T09:56:50.814+0530 DEBUG 27 mappings in 'requestMappingHandlerMapping'
+2021-11-17T09:56:50.892+0530 DEBUG Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2021-11-17T09:56:50.932+0530 DEBUG ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-11-17T09:56:50.942+0530 DEBUG ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-11-17T09:57:05.740+0530 DEBUG 27 mappings in 'requestMappingHandlerMapping'
+2021-11-17T09:57:05.768+0530 DEBUG Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2021-11-17T09:57:05.789+0530 DEBUG ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-11-17T09:57:05.795+0530 DEBUG ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-11-17T09:57:25.092+0530 INFO Initializing Servlet 'dispatcherServlet'
+2021-11-17T09:57:25.399+0530 DEBUG Detected StandardServletMultipartResolver
+2021-11-17T09:57:25.401+0530 DEBUG Detected AcceptHeaderLocaleResolver
+2021-11-17T09:57:25.401+0530 DEBUG Detected FixedThemeResolver
+2021-11-17T09:57:25.403+0530 DEBUG Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@33724709
+2021-11-17T09:57:25.405+0530 DEBUG Detected org.springframework.web.servlet.support.SessionFlashMapManager@49c428ed
+2021-11-17T09:57:25.406+0530 DEBUG enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2021-11-17T09:57:25.406+0530 INFO Completed initialization in 7 ms
+2021-11-17T09:57:25.409+0530 DEBUG Mapped to ResourceHttpRequestHandler [Classpath [META-INF/resources/], Classpath [resources/], Classpath [static/], Classpath [public/], ServletContext [/]]
+2021-11-17T09:57:25.417+0530 DEBUG "ERROR" dispatch for GET "/error", parameters={}
+2021-11-17T09:57:25.419+0530 DEBUG Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2021-11-17T09:57:25.423+0530 DEBUG Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+2021-11-17T09:57:25.424+0530 DEBUG Writing [{timestamp=Wed Nov 17 09:57:25 IST 2021, status=401, error=Unauthorized, message=Unauthorized, path= (truncated)...]
+2021-11-17T09:57:25.433+0530 DEBUG Exiting from "ERROR" dispatch, status 401
+2021-11-17T09:58:20.592+0530 DEBUG 27 mappings in 'requestMappingHandlerMapping'
+2021-11-17T09:58:20.639+0530 DEBUG Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2021-11-17T09:58:20.738+0530 DEBUG ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-11-17T09:58:20.743+0530 DEBUG ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-11-17T09:58:38.636+0530 DEBUG 27 mappings in 'requestMappingHandlerMapping'
+2021-11-17T09:58:38.662+0530 DEBUG Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2021-11-17T09:58:38.680+0530 DEBUG ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-11-17T09:58:38.686+0530 DEBUG ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-11-17T09:58:43.410+0530 INFO Initializing Servlet 'dispatcherServlet'
+2021-11-17T09:58:43.411+0530 DEBUG Detected StandardServletMultipartResolver
+2021-11-17T09:58:43.412+0530 DEBUG Detected AcceptHeaderLocaleResolver
+2021-11-17T09:58:43.412+0530 DEBUG Detected FixedThemeResolver
+2021-11-17T09:58:43.413+0530 DEBUG Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@305e0d9
+2021-11-17T09:58:43.414+0530 DEBUG Detected org.springframework.web.servlet.support.SessionFlashMapManager@1394a302
+2021-11-17T09:58:43.415+0530 DEBUG enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2021-11-17T09:58:43.415+0530 INFO Completed initialization in 4 ms
+2021-11-17T09:58:43.417+0530 DEBUG Mapped to ResourceHttpRequestHandler [Classpath [META-INF/resources/], Classpath [resources/], Classpath [static/], Classpath [public/], ServletContext [/]]
+2021-11-17T09:58:43.421+0530 DEBUG GET "/api/v1/printBasicLps/sivaraju@capeindia.net/22", parameters={}
+2021-11-17T09:58:43.422+0530 DEBUG Mapped to ResourceHttpRequestHandler [Classpath [META-INF/resources/], Classpath [resources/], Classpath [static/], Classpath [public/], ServletContext [/]]
+2021-11-17T09:58:43.433+0530 DEBUG Resource not found
+2021-11-17T09:58:43.543+0530 DEBUG Completed 404 NOT_FOUND
+2021-11-17T09:58:43.545+0530 DEBUG "ERROR" dispatch for GET "/error", parameters={}
+2021-11-17T09:58:43.549+0530 DEBUG Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2021-11-17T09:58:43.554+0530 DEBUG Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+2021-11-17T09:58:43.556+0530 DEBUG Writing [{timestamp=Wed Nov 17 09:58:43 IST 2021, status=404, error=Not Found, message=No message available,  (truncated)...]
+2021-11-17T09:58:43.563+0530 DEBUG Exiting from "ERROR" dispatch, status 404
+2021-11-17T09:59:40.322+0530 DEBUG Mapped to com.capeelectric.controller.PrintBasicLpsController#printBasicLps(String, Integer)
+2021-11-17T09:59:40.622+0530 DEBUG "ERROR" dispatch for GET "/error", parameters={}
+2021-11-17T09:59:40.623+0530 DEBUG Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2021-11-17T09:59:40.625+0530 DEBUG Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+2021-11-17T09:59:40.626+0530 DEBUG Writing [{timestamp=Wed Nov 17 09:59:40 IST 2021, status=401, error=Unauthorized, message=Unauthorized, path= (truncated)...]
+2021-11-17T09:59:40.628+0530 DEBUG Exiting from "ERROR" dispatch, status 401
+2021-11-17T10:00:18.879+0530 DEBUG 27 mappings in 'requestMappingHandlerMapping'
+2021-11-17T10:00:18.913+0530 DEBUG Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2021-11-17T10:00:18.940+0530 DEBUG ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2021-11-17T10:00:18.944+0530 DEBUG ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2021-11-17T10:00:23.143+0530 INFO Initializing Servlet 'dispatcherServlet'
+2021-11-17T10:00:23.144+0530 DEBUG Detected StandardServletMultipartResolver
+2021-11-17T10:00:23.145+0530 DEBUG Detected AcceptHeaderLocaleResolver
+2021-11-17T10:00:23.145+0530 DEBUG Detected FixedThemeResolver
+2021-11-17T10:00:23.151+0530 DEBUG Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@3bc6b545
+2021-11-17T10:00:23.152+0530 DEBUG Detected org.springframework.web.servlet.support.SessionFlashMapManager@3f18f985
+2021-11-17T10:00:23.152+0530 DEBUG enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2021-11-17T10:00:23.153+0530 INFO Completed initialization in 9 ms
+2021-11-17T10:00:23.155+0530 DEBUG Mapped to com.capeelectric.controller.PrintBasicLpsController#printBasicLps(String, Integer)
+2021-11-17T10:00:23.158+0530 DEBUG GET "/api/lps/v1/printBasicLps/sivaraju@capeindia.net/22", parameters={}
+2021-11-17T10:00:23.159+0530 DEBUG Mapped to com.capeelectric.controller.PrintBasicLpsController#printBasicLps(String, Integer)
+2021-11-17T10:00:24.068+0530 DEBUG Using 'text/plain', given [*/*] and supported [text/plain, */*, text/plain, */*, application/json, application/*+json, application/json, application/*+json]
+2021-11-17T10:00:24.071+0530 DEBUG Nothing to write: null body
+2021-11-17T10:00:24.075+0530 DEBUG Completed 200 OK
