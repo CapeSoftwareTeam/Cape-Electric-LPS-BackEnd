@@ -115,6 +115,12 @@ public class SeperationDistanceDescription {
 		this.updatedDate = updatedDate;
 	}
 
-	
-	
+	public List<SeparateDistance> getSeparateDistanceDescription() {
+		return separateDistanceDescription;
+	}
+
+	public void setSeparateDistanceDescription(List<SeparateDistance> separateDistanceDescription) {
+		this.separateDistanceDescription = separateDistanceDescription;
+	}
+
 }
