@@ -24,6 +24,9 @@ public class AirHolderDescription implements Serializable {
 	@Column(name = "HOLDERS_DESCRIPTION_ID")
 	private Integer holderDescriptionId;
 
+	@Column(name = "FLAG")
+	private Boolean flag;
+	
 	@Column(name = "LOCATION_NUMBER")
 	private Integer locationNumber;
 
@@ -373,6 +376,14 @@ public class AirHolderDescription implements Serializable {
 
 	public void setLpsAirDes(LpsAirDiscription lpsAirDes) {
 		this.lpsAirDes = lpsAirDes;
+	}
+
+	public Boolean getFlag() {
+		return flag;
+	}
+
+	public void setFlag(Boolean flag) {
+		this.flag = flag;
 	}
 
 }

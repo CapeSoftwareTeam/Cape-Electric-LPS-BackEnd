@@ -24,7 +24,10 @@ public class AirExpansion implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "EXPANSION_ID")
 	private Integer expansionId;
-
+	
+	@Column(name = "FLAG")
+	private Boolean flag;
+	
 	@Column(name = "LOCATION_NUMBER")
 	private Integer locationNumber;
 
@@ -220,6 +223,14 @@ public class AirExpansion implements Serializable {
 
 	public void setLpsAirDes(LpsAirDiscription lpsAirDes) {
 		this.lpsAirDes = lpsAirDes;
+	}
+
+	public Boolean getFlag() {
+		return flag;
+	}
+
+	public void setFlag(Boolean flag) {
+		this.flag = flag;
 	}
 
 }

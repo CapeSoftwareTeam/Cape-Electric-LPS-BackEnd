@@ -24,7 +24,10 @@ public class BridgingDescription implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "BRIDGINGDESCRIPTION_ID")
 	private Integer bridgingDescriptionId;
-
+	
+	@Column(name = "FLAG")
+	private Boolean flag;
+	
 	@Column(name = "LOCATION_NO")
 	private Integer locationNumber;
 
@@ -220,6 +223,14 @@ public class BridgingDescription implements Serializable {
 
 	public void setDownConductorDescription(DownConductorDescription downConductorDescription) {
 		this.downConductorDescription = downConductorDescription;
+	}
+
+	public Boolean getFlag() {
+		return flag;
+	}
+
+	public void setFlag(Boolean flag) {
+		this.flag = flag;
 	}
 
 }

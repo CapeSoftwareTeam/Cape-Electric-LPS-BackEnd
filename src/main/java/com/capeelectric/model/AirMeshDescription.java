@@ -24,6 +24,9 @@ public class AirMeshDescription implements Serializable {
 	@Column(name = "MESHDESCRIPTION_ID")
 	private Integer meshDescriptionId;
 
+	@Column(name = "FLAG")
+	private Boolean flag;
+	
 	@Column(name = "PHYSICAL_INSPECTION_OB")
 	private String physicalInspectionOb;
 
@@ -219,6 +222,14 @@ public class AirMeshDescription implements Serializable {
 
 	public void setLpsAirDes(LpsAirDiscription lpsAirDes) {
 		this.lpsAirDes = lpsAirDes;
+	}
+
+	public Boolean getFlag() {
+		return flag;
+	}
+
+	public void setFlag(Boolean flag) {
+		this.flag = flag;
 	}
 
 }

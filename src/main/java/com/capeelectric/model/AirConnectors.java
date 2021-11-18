@@ -23,7 +23,10 @@ public class AirConnectors implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "CONNECTORS_ID")
 	private Integer connectorId;
-
+	
+	@Column(name = "FLAG")
+	private Boolean flag;
+	
 	@Column(name = "LOCATION_NUMBER")
 	private Integer locationNumber;
 
@@ -285,6 +288,14 @@ public class AirConnectors implements Serializable {
 
 	public void setLpsAirDes(LpsAirDiscription lpsAirDes) {
 		this.lpsAirDes = lpsAirDes;
+	}
+
+	public Boolean getFlag() {
+		return flag;
+	}
+
+	public void setFlag(Boolean flag) {
+		this.flag = flag;
 	}
 
 }

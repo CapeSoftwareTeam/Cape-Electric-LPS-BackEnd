@@ -25,6 +25,9 @@ public class TestingJoint implements Serializable {
 	@Column(name = "TESTJOINT_ID")
 	private Integer testJointId;
 
+	@Column(name = "FLAG")
+	private Boolean flag;
+	
 	@Column(name = "LOCATION_NUMBER")
 	private Integer locationNumber;
 
@@ -286,6 +289,14 @@ public class TestingJoint implements Serializable {
 
 	public void setDownConductorDescription(DownConductorDescription downConductorDescription) {
 		this.downConductorDescription = downConductorDescription;
+	}
+
+	public Boolean getFlag() {
+		return flag;
+	}
+
+	public void setFlag(Boolean flag) {
+		this.flag = flag;
 	}
 
 }

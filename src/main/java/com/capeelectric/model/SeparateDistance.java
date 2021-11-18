@@ -21,6 +21,9 @@ public class SeparateDistance {
 	@Column(name = "SEPERATION_DISTANCE_DESC_ID")
 	private Integer seperationDistanceDescId;
 	
+	@Column(name = "FLAG")
+	private Boolean flag;
+	
 	@Column(name = "SEPERATION_DISTANCE_DESC")
 	private String seperationDistanceDesc;
 	
@@ -77,6 +80,12 @@ public class SeparateDistance {
 		this.seperationDistanceDescription = seperationDistanceDescription;
 	}
 
-	
+	public Boolean getFlag() {
+		return flag;
+	}
+
+	public void setFlag(Boolean flag) {
+		this.flag = flag;
+	}
 
 }
