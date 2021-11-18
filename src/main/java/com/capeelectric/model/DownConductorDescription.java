@@ -96,20 +96,20 @@ private static final long serialVersionUID = 1L;
 	
 	@JsonManagedReference
 	@OneToMany(mappedBy = "downConductorDescription", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<Holder>holder;
+	private List<Holder> holder;
 	
 	@JsonManagedReference
 	@OneToMany(mappedBy = "downConductorDescription", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<Connectors>connectors;
+	private List<Connectors> connectors;
 	
 	
 	@JsonManagedReference
 	@OneToMany(mappedBy = "downConductorDescription", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<LightningCounter>lightningCounter;
+	private List<LightningCounter> lightningCounter;
 	
 	@JsonManagedReference
 	@OneToMany(mappedBy = "downConductorDescription", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<TestingJoint>testingJoint;
+	private List<TestingJoint> testingJoint;
 	
 	@JsonManagedReference
 	@OneToMany(mappedBy = "downConductorDescription", fetch = FetchType.LAZY, cascade = CascadeType.ALL)

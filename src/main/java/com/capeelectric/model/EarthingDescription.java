@@ -25,6 +25,9 @@ public class EarthingDescription implements Serializable {
 	@Column(name = "EARTHDESCRIPTION_ID")
 	private Integer earthDescriptionId;
 
+	@Column(name = "FLAG")
+	private Boolean flag;
+	
 	@Column(name = "SOIL_RESISTIVITYINOB")
 	private String soilResistivityInOb;
 
@@ -462,6 +465,14 @@ public class EarthingDescription implements Serializable {
 
 	public void setEarthingLpsDescription(EarthingLpsDescription earthingLpsDescription) {
 		this.earthingLpsDescription = earthingLpsDescription;
+	}
+
+	public Boolean getFlag() {
+		return flag;
+	}
+
+	public void setFlag(Boolean flag) {
+		this.flag = flag;
 	}
 
 }

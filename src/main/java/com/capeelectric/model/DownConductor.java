@@ -26,6 +26,9 @@ public class DownConductor implements Serializable {
 	@Column(name = "DOWNCONDUCTOR_ID")
 	private Integer downConductorId;
 
+	@Column(name = "FLAG")
+	private Boolean flag;
+	
 	@Column(name = "LOCATION_NUMBER")
 	private Integer locationNumber;
 
@@ -375,6 +378,14 @@ public class DownConductor implements Serializable {
 
 	public void setDownConductorDescription(DownConductorDescription downConductorDescription) {
 		this.downConductorDescription = downConductorDescription;
+	}
+
+	public Boolean getFlag() {
+		return flag;
+	}
+
+	public void setFlag(Boolean flag) {
+		this.flag = flag;
 	}
 
 }

@@ -23,7 +23,10 @@ public class AirClamps implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "CLAMPS_ID")
 	private Integer clampsId;
-
+	
+	@Column(name = "FLAG")
+	private Boolean flag;
+	
 	@Column(name = "PHYSICAL_INSPECTION_OBSERVATION")
 	private String physicalInspectionOb;
 
@@ -95,6 +98,14 @@ public class AirClamps implements Serializable {
 
 	public Integer getLocationNumber() {
 		return locationNumber;
+	}
+
+	public Boolean getFlag() {
+		return flag;
+	}
+
+	public void setFlag(Boolean flag) {
+		this.flag = flag;
 	}
 
 	public void setLocationNumber(Integer locationNumber) {

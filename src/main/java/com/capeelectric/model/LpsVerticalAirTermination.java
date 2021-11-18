@@ -25,6 +25,9 @@ public class LpsVerticalAirTermination implements Serializable {
 	@Column(name = "LPSVERTICALAIRTERMINAL_ID")
 	private Integer lpsVerticalAirTerminationId;
 
+	@Column(name = "FLAG")
+	private Boolean flag;
+	
 	@Column(name = "LOCATION_NUMBER")
 	private Integer locationNumber;
 
@@ -120,6 +123,14 @@ public class LpsVerticalAirTermination implements Serializable {
 
 	public String getInstallationTerminationsystemOb() {
 		return installationTerminationsystemOb;
+	}
+
+	public Boolean getFlag() {
+		return flag;
+	}
+
+	public void setFlag(Boolean flag) {
+		this.flag = flag;
 	}
 
 	public void setInstallationTerminationsystemOb(String installationTerminationsystemOb) {

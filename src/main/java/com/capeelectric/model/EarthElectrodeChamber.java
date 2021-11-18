@@ -25,6 +25,9 @@ public class EarthElectrodeChamber implements Serializable {
 	@Column(name = "EARTHELECTRODECHAMBER_ID")
 	private Integer earthingElectrodeChamberId;
 
+	@Column(name = "FLAG")
+	private Boolean flag;
+	
 	@Column(name = "LOCATION_NUMBER")
 	private Integer locationNumber;
 
@@ -264,6 +267,14 @@ public class EarthElectrodeChamber implements Serializable {
 
 	public void setInspectionFailedInRem(String inspectionFailedInRem) {
 		this.inspectionFailedInRem = inspectionFailedInRem;
+	}
+
+	public Boolean getFlag() {
+		return flag;
+	}
+
+	public void setFlag(Boolean flag) {
+		this.flag = flag;
 	}
 
 }

@@ -25,6 +25,9 @@ public class Holder implements Serializable {
 	@Column(name = "HOLDERS_ID")
 	private Integer holderId;
 
+	@Column(name = "FLAG")
+	private Boolean flag;
+	
 	@Column(name = "LOCATION_NUMBER")
 	private Integer locationNumber;
 
@@ -242,6 +245,14 @@ public class Holder implements Serializable {
 
 	public void setDownConductorDescription(DownConductorDescription downConductorDescription) {
 		this.downConductorDescription = downConductorDescription;
+	}
+
+	public Boolean getFlag() {
+		return flag;
+	}
+
+	public void setFlag(Boolean flag) {
+		this.flag = flag;
 	}
 
 }

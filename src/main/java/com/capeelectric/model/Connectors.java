@@ -24,6 +24,9 @@ public class Connectors implements Serializable {
 	@Column(name = "CONNECTORS_ID")
 	private Integer connectorId;
 
+	@Column(name = "FLAG")
+	private Boolean flag;
+	
 	@Column(name = "LOCATION_NUMBER")
 	private Integer locationNumber;
 
@@ -241,6 +244,14 @@ public class Connectors implements Serializable {
 
 	public void setDownConductorDescription(DownConductorDescription downConductorDescription) {
 		this.downConductorDescription = downConductorDescription;
+	}
+
+	public Boolean getFlag() {
+		return flag;
+	}
+
+	public void setFlag(Boolean flag) {
+		this.flag = flag;
 	}
 
 }

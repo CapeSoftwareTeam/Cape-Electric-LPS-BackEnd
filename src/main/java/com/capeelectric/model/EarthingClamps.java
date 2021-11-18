@@ -25,6 +25,9 @@ public class EarthingClamps implements Serializable {
 	@Column(name = "EARTHCLAMPS_ID")
 	private Integer earthingClampsId;
 
+	@Column(name = "FLAG")
+	private Boolean flag;
+	
 	@Column(name = "LOCATION_NUMBER")
 	private Integer locationNumber;
 
@@ -264,6 +267,14 @@ public class EarthingClamps implements Serializable {
 
 	public void setInspectionFailedInRem(String inspectionFailedInRem) {
 		this.inspectionFailedInRem = inspectionFailedInRem;
+	}
+
+	public Boolean getFlag() {
+		return flag;
+	}
+
+	public void setFlag(Boolean flag) {
+		this.flag = flag;
 	}
 
 }
