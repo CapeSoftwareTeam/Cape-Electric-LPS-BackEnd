@@ -18,7 +18,6 @@ import com.capeelectric.model.DownConductorDescription;
 import com.capeelectric.model.EarthStudDescription;
 import com.capeelectric.model.EarthingLpsDescription;
 import com.capeelectric.model.LpsAirDiscription;
-import com.capeelectric.model.LpsFinalReport;
 import com.capeelectric.model.SPD;
 import com.capeelectric.model.SeperationDistanceDescription;
 import com.capeelectric.repository.AirTerminationLpsRepository;
@@ -67,10 +66,6 @@ public class EarthStudServiceImpl implements EarthStudService {
 
 	@Autowired
 	private SeperationDistanceRepository seperationDistanceRepository;
-
-	@Autowired
-
-	private LpsFinalReport lpsFinalReport;
 
 	@Override
 	public void addEarthStudDetails(EarthStudDescription earthStudDescription) throws EarthStudException {
