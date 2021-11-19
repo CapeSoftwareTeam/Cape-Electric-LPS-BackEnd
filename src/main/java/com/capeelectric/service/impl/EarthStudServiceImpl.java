@@ -65,7 +65,7 @@ public class EarthStudServiceImpl implements EarthStudService {
 					if (basicLpsRepo.isPresent()
 							&& basicLpsRepo.get().getBasicLpsId().equals(earthStudDescription.getBasicLpsId())) {
 						basicLps = basicLpsRepo.get();
-						basicLps.setAllStepsCompleted("Y");
+						basicLps.setAllStepsCompleted("AllStepCompleted");
 						basicLpsRepository.save(basicLps);
 					} else {
 						throw new EarthStudException("Basic LPS Id Information not Available in Basic LPS Id Details");
