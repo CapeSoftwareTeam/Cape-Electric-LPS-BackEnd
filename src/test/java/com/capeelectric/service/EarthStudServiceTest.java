@@ -14,12 +14,10 @@ import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.capeelectric.exception.EarthStudException;
-import com.capeelectric.exception.EarthingLpsException;
 import com.capeelectric.model.BasicLps;
 import com.capeelectric.model.DownConductorDescription;
 import com.capeelectric.model.EarthStudDescription;
@@ -35,7 +33,6 @@ import com.capeelectric.repository.EarthingLpsRepository;
 import com.capeelectric.repository.SPDRepository;
 import com.capeelectric.repository.SeperationDistanceRepository;
 import com.capeelectric.service.impl.EarthStudServiceImpl;
-import com.capeelectric.service.impl.EarthingLpsServiceImpl;
 import com.capeelectric.util.UserFullName;
 
 @ExtendWith(SpringExtension.class)
@@ -70,8 +67,6 @@ public class EarthStudServiceTest {
 
 	@MockBean
 	private SeperationDistanceRepository seperationDistanceRepository;
-	
-	 
 	
 	@MockBean
 	private UserFullName userFullName;
@@ -129,8 +124,6 @@ public class EarthStudServiceTest {
 		when(earthingLpsRepository
 				.findByBasicLpsId(1)).thenReturn(Optional.of(earthingLpsDescription));
 		when( spdRepository.findByBasicLpsId(1)).thenReturn(Optional.of(sPD));
-		when(spdRepository
-				.findByBasicLpsId(1)).thenReturn(Optional.of(sPD));
 		when(seperationDistanceRepository
 				.findByBasicLpsId(1)).thenReturn(Optional.of(seperationDistanceDescription));
 		
@@ -138,22 +131,150 @@ public class EarthStudServiceTest {
 		when(earthStudRepository.findByBasicLpsId(3)).thenReturn(Optional.of(earthStudDescription));
 		eartStudServiceImpl.addEarthStudDetails(earthStudDescription);
 		
-//		when(earthStudRepository.findByBasicLpsId(1)).thenReturn(Optional.of(earthStudDescription));
-//		EarthStudException earthStudException_2 = Assertions.assertThrows(EarthStudException.class,
-//				() -> eartStudServiceImpl.addEarthStudDetails(earthStudDescription));
-//		assertEquals(earthStudException_2.getMessage(), "Basic LPS Id Already Available.Create New Basic Id");
-//
-//		basicLps.setBasicLpsId(5);
-//		earthStudDescription.setBasicLpsId(5);
-//		when(basicLpsRepository.findByBasicLpsId(1)).thenReturn(Optional.of(basicLps));
-//		EarthStudException earthStudException_3 = Assertions.assertThrows(EarthStudException.class,
-//				() -> eartStudServiceImpl.addEarthStudDetails(earthStudDescription));
-//		assertEquals(earthStudException_3.getMessage(), "Given Basic LPS Id is Not Registered in Basic LPS");	
-//		
+		when(earthStudRepository.findByBasicLpsId(1)).thenReturn(Optional.of(earthStudDescription));
+		EarthStudException earthStudException_2 = Assertions.assertThrows(EarthStudException.class,
+				() -> eartStudServiceImpl.addEarthStudDetails(earthStudDescription));
+		assertEquals(earthStudException_2.getMessage(), "Basic LPS Id Already Available.Create New Basic Id");
+		
+		when(seperationDistanceRepository
+				.findByBasicLpsId(2)).thenReturn(Optional.of(seperationDistanceDescription));
+ 		EarthStudException earthStudException_3 = Assertions.assertThrows(EarthStudException.class,
+				() -> eartStudServiceImpl.addEarthStudDetails(earthStudDescription));
+		assertEquals(earthStudException_3.getMessage(), "Basic LPS Id Already Available.Create New Basic Id");
+
+ 	
 		earthStudDescription.setUserName(null);
 		EarthStudException earthStudException_4 = Assertions.assertThrows(EarthStudException.class,
 				() -> eartStudServiceImpl.addEarthStudDetails(earthStudDescription));
 		assertEquals(earthStudException_4.getMessage(), "Invalid Inputs");
+	}
+	@Test
+	public void testAddEarthStud_SeperationException() throws EarthStudException {
+		
+		when(basicLpsRepository.findByBasicLpsId(1)).thenReturn(Optional.of(basicLps));
+		
+		when(airTerminationLpsRepository.findByBasicLpsId(1)).thenReturn(Optional.of(lpsAirDiscription));
+		when(downConductorRepository
+				.findByBasicLpsId(1)).thenReturn(Optional.of(downConductorDescription));
+		when(earthingLpsRepository
+				.findByBasicLpsId(1)).thenReturn(Optional.of(earthingLpsDescription));
+		when(spdRepository.findByBasicLpsId(1)).thenReturn(Optional.of(sPD));
+	 
+		when(seperationDistanceRepository
+				.findByBasicLpsId(2)).thenReturn(Optional.of(seperationDistanceDescription));
+		
+		EarthStudException earthStudException_1 = Assertions.assertThrows(EarthStudException.class,
+				() -> eartStudServiceImpl.addEarthStudDetails(earthStudDescription));
+		assertEquals(earthStudException_1.getMessage(), "Please enter Seperation Distance step to proceed further");
+ 	 
+	}
+	@Test
+	public void testAddEarthStud_SpdException() throws EarthStudException {
+		
+		when(basicLpsRepository.findByBasicLpsId(1)).thenReturn(Optional.of(basicLps));
+		
+		when(airTerminationLpsRepository.findByBasicLpsId(1)).thenReturn(Optional.of(lpsAirDiscription));
+		when(downConductorRepository
+				.findByBasicLpsId(1)).thenReturn(Optional.of(downConductorDescription));
+		when(earthingLpsRepository
+				.findByBasicLpsId(1)).thenReturn(Optional.of(earthingLpsDescription));
+		when(spdRepository.findByBasicLpsId(2)).thenReturn(Optional.of(sPD));
+		
+		 EarthStudException earthStudException_1 = Assertions.assertThrows(EarthStudException.class,
+				() -> eartStudServiceImpl.addEarthStudDetails(earthStudDescription));
+		assertEquals(earthStudException_1.getMessage(), "Please enter SPD step to proceed further");
+		
+	}
+	
+	@Test
+	public void testAddEarthStud_EarthingException() throws EarthStudException {
+		
+		when(basicLpsRepository.findByBasicLpsId(1)).thenReturn(Optional.of(basicLps));
+		
+		when(airTerminationLpsRepository.findByBasicLpsId(1)).thenReturn(Optional.of(lpsAirDiscription));
+		when(downConductorRepository
+				.findByBasicLpsId(1)).thenReturn(Optional.of(downConductorDescription));
+		when( spdRepository.findByBasicLpsId(1)).thenReturn(Optional.of(sPD));
+		when(seperationDistanceRepository
+				.findByBasicLpsId(1)).thenReturn(Optional.of(seperationDistanceDescription));
+		
+		
+		when(earthingLpsRepository
+				.findByBasicLpsId(2)).thenReturn(Optional.of(earthingLpsDescription));
+		 
+		EarthStudException earthStudException_1 = Assertions.assertThrows(EarthStudException.class,
+				() -> eartStudServiceImpl.addEarthStudDetails(earthStudDescription));
+		assertEquals(earthStudException_1.getMessage(), "Please enter Earthing step to proceed further");
+		
+	}
+	
+	@Test
+	public void testAddEarthStud_DownConductorsException() throws EarthStudException {
+		
+       when(basicLpsRepository.findByBasicLpsId(1)).thenReturn(Optional.of(basicLps));
+		
+		when(airTerminationLpsRepository.findByBasicLpsId(1)).thenReturn(Optional.of(lpsAirDiscription));
+		when(downConductorRepository
+				.findByBasicLpsId(2)).thenReturn(Optional.of(downConductorDescription));
+		when( spdRepository.findByBasicLpsId(1)).thenReturn(Optional.of(sPD));
+		when(seperationDistanceRepository
+				.findByBasicLpsId(1)).thenReturn(Optional.of(seperationDistanceDescription));
+		
+		
+		when(earthingLpsRepository
+				.findByBasicLpsId(1)).thenReturn(Optional.of(earthingLpsDescription));
+		 
+		EarthStudException earthStudException_1 = Assertions.assertThrows(EarthStudException.class,
+				() -> eartStudServiceImpl.addEarthStudDetails(earthStudDescription));
+		assertEquals(earthStudException_1.getMessage(), "Please enter Down Conductors step to proceed further");
+		
+	}
+	@Test
+	public void testAddEarthStud_AirTerminationException() throws EarthStudException {
+		 
+		when(basicLpsRepository.findByBasicLpsId(1)).thenReturn(Optional.of(basicLps));
+			
+		when(airTerminationLpsRepository.findByBasicLpsId(2)).thenReturn(Optional.of(lpsAirDiscription));
+		when(downConductorRepository
+				.findByBasicLpsId(1)).thenReturn(Optional.of(downConductorDescription));
+		when( spdRepository.findByBasicLpsId(1)).thenReturn(Optional.of(sPD));
+		when(seperationDistanceRepository
+				.findByBasicLpsId(1)).thenReturn(Optional.of(seperationDistanceDescription));
+		
+		
+		when(earthingLpsRepository
+				.findByBasicLpsId(1)).thenReturn(Optional.of(earthingLpsDescription));
+		 
+		EarthStudException earthStudException_1 = Assertions.assertThrows(EarthStudException.class,
+				() -> eartStudServiceImpl.addEarthStudDetails(earthStudDescription));
+		assertEquals(earthStudException_1.getMessage(), "Please enter Air Termination step to proceed further");
+		
+	}
+	@Test
+	public void testAddEarthStud_BasicException() throws EarthStudException {
+		
+		when(basicLpsRepository.findByBasicLpsId(2)).thenReturn(Optional.of(basicLps));
+		
+		when(airTerminationLpsRepository.findByBasicLpsId(1)).thenReturn(Optional.of(lpsAirDiscription));
+		when(downConductorRepository
+				.findByBasicLpsId(1)).thenReturn(Optional.of(downConductorDescription));
+		when( spdRepository.findByBasicLpsId(1)).thenReturn(Optional.of(sPD));
+		when(seperationDistanceRepository
+				.findByBasicLpsId(1)).thenReturn(Optional.of(seperationDistanceDescription));
+		
+		
+		when(earthingLpsRepository
+				.findByBasicLpsId(1)).thenReturn(Optional.of(earthingLpsDescription));
+		
+		EarthStudException earthStudException_1 = Assertions.assertThrows(EarthStudException.class,
+				() -> eartStudServiceImpl.addEarthStudDetails(earthStudDescription));
+		assertEquals(earthStudException_1.getMessage(), "Please enter Basic Information step to proceed further");
+		
+		earthStudDescription.setBasicLpsId(12);
+		EarthStudException earthStudException_2 = Assertions.assertThrows(EarthStudException.class,
+				() -> eartStudServiceImpl.addEarthStudDetails(earthStudDescription));
+		assertEquals(earthStudException_2.getMessage(), "Please enter details for all previous steps to proceed further");
+		
 	}
 
 	@Test
