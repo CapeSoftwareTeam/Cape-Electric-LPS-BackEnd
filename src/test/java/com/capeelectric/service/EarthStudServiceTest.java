@@ -66,7 +66,6 @@ public class EarthStudServiceTest {
 		basicLps.setClientName("Inspector@gmail.com");
 	}
 	
-	@Test
 	public void testAddEarthStudDetails() throws EarthStudException {
 
 		when(basicLpsRepository.findByBasicLpsId(1)).thenReturn(Optional.of(basicLps));
