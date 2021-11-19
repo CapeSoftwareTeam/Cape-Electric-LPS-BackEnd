@@ -17,6 +17,7 @@ import com.capeelectric.exception.AirTerminationException;
 import com.capeelectric.exception.BasicLpsException;
 import com.capeelectric.exception.DownConductorException;
 import com.capeelectric.exception.EarthStudException;
+import com.capeelectric.exception.EarthingLpsException;
 import com.capeelectric.exception.SPDException;
 import com.capeelectric.service.PrintAirTerminationService;
 import com.capeelectric.service.PrintBasicLpsService;
@@ -63,12 +64,12 @@ public class FinalPDFController {
 	@ResponseBody
 	public ResponseEntity<Resource> printFinalPDF(@PathVariable String userName, @PathVariable Integer lpsId)
 			throws Exception, BasicLpsException, AirTerminationException, DownConductorException, SPDException,
-			EarthStudException {
+			EarthStudException, EarthingLpsException {
 		printBasicLpsService.printBasicLps(userName, lpsId);
 		printAirTerminationService.printAirTermination(userName, lpsId);
 		printDownConductorService.printDownConductor(userName, lpsId);
 		printSPDService.printSPD(userName, lpsId);
-		// printEarthingLpsService.(userName, lpsId);
+		printEarthingLpsService.printEarthingLpsDetails(userName, lpsId);
 		printSDandEarthStudService.printSDandEarthStud(userName, lpsId);
 		printFinalPDFService.printFinalPDF(userName, lpsId);
 

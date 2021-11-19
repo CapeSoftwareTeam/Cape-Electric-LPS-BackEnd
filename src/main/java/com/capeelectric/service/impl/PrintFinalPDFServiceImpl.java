@@ -27,15 +27,15 @@ public class PrintFinalPDFServiceImpl implements PrintFinalPDFService {
 	public void printFinalPDF(String userName, Integer lpsId) throws Exception {
 		if (userName != null && !userName.isEmpty() && lpsId != null && lpsId != 0) {
 			Document document = new Document(PageSize.A4, 68, 68, 62, 68);
-			System.out.println("jhfdgbjf");
 			try {
 				List<InputStream> inputPdfList = new ArrayList<InputStream>();
 
+				inputPdfList.add(new FileInputStream("BasicLps.pdf"));
+				inputPdfList.add(new FileInputStream("AirTermination.pdf"));
+				inputPdfList.add(new FileInputStream("DownConductorLps.pdf"));
 				inputPdfList.add(new FileInputStream("SPD.pdf"));
-				// inputPdfList.add(new FileInputStream("SDandEarthStud.pdf"));
-				// inputPdfList.add(new FileInputStream("DownConductorLps.pdf"));
-//				inputPdfList.add(new FileInputStream("Testing.pdf"));
-//				inputPdfList.add(new FileInputStream("Summary.pdf"));
+				inputPdfList.add(new FileInputStream("EarthingLps.pdf"));
+				inputPdfList.add(new FileInputStream("SDandEarthStud.pdf"));
 
 				OutputStream outputStream = new FileOutputStream("finalreport.pdf");
 				mergePdfFiles(inputPdfList, outputStream);

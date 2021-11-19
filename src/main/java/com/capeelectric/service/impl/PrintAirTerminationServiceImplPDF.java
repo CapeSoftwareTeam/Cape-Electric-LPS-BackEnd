@@ -4,6 +4,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 
+import org.hibernate.internal.build.AllowSysOut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,9 +14,11 @@ import com.capeelectric.model.AirConnectors;
 import com.capeelectric.model.AirExpansion;
 import com.capeelectric.model.AirHolderDescription;
 import com.capeelectric.model.AirMeshDescription;
+import com.capeelectric.model.BasicLps;
 import com.capeelectric.model.LpsAirDiscription;
 import com.capeelectric.model.LpsVerticalAirTermination;
 import com.capeelectric.repository.AirTerminationLpsRepository;
+import com.capeelectric.repository.BasicLpsRepository;
 import com.capeelectric.service.PrintAirTerminationService;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
@@ -25,6 +28,7 @@ import com.itextpdf.text.Font;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
+import com.itextpdf.text.log.SysoCounter;
 import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.GrayColor;
 import com.itextpdf.text.pdf.PdfPCell;
@@ -35,18 +39,24 @@ import com.itextpdf.text.pdf.PdfWriter;
 public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationService {
 
 	@Autowired
+	private BasicLpsRepository basicLpsRepository;
+
+	@Autowired
 	private AirTerminationLpsRepository airTerminationLpsRepository;
 
 	@Override
-	public void printAirTermination(String userName, Integer lpsId) throws AirTerminationException {
-		if (userName != null && !userName.isEmpty() && lpsId != null && lpsId != 0) {
+	public void printAirTermination(String userName, Integer basicLpsId) throws AirTerminationException {
+		if (userName != null && !userName.isEmpty() && basicLpsId != null && basicLpsId != 0) {
 			Document document = new Document(PageSize.A4, 68, 68, 62, 68);
 
 			try {
 
 				PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("AirTermination.pdf"));
 
-				List<LpsAirDiscription> s = airTerminationLpsRepository.findByUserNameAndBasicLpsId(userName, lpsId);
+				List<BasicLps> basicLps = basicLpsRepository.findByUserNameAndBasicLpsId(userName, basicLpsId);
+				BasicLps basicLps1 = basicLps.get(0);
+				
+				List<LpsAirDiscription> s = airTerminationLpsRepository.findByUserNameAndBasicLpsId(userName, basicLpsId);
 				LpsAirDiscription lpsAirDiscription = s.get(0);
 
 				List<AirClamps> airClamps = lpsAirDiscription.getAirClamps();
@@ -58,8 +68,150 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 						.getLpsVerticalAirTermination();
 
 				document.open();
+				
+				Font font1 = new Font(BaseFont.createFont(), 12, Font.NORMAL | Font.BOLD, BaseColor.BLACK);
+				Font font2 = new Font(BaseFont.createFont(), 10, Font.NORMAL | Font.BOLD, BaseColor.BLACK);
+				Font font3 = new Font(BaseFont.createFont(), 10, Font.NORMAL, BaseColor.BLACK);
 
-				Font font1 = new Font(BaseFont.createFont(), 10, Font.NORMAL | Font.BOLD, BaseColor.BLACK);
+				float[] pointColumnWidths40 = { 100F };
+				
+				PdfPTable headertable = new PdfPTable(pointColumnWidths40);
+				headertable.setWidthPercentage(100); // Width 100%
+				headertable.setSpacingBefore(10f); // Space before table
+				headertable.setWidthPercentage(100);
+
+				PdfPCell label = new PdfPCell(
+						new Paragraph("Checklist for Air Termination System of LPS\r\n"
+								+ "as per IS/IEC 62305", font1));
+				label.setHorizontalAlignment(Element.ALIGN_CENTER);
+				label.setGrayFill(0.92f);
+//				label.setFixedHeight(20f);
+				headertable.addCell(label);
+				document.add(headertable);
+				
+				float[] pointColumnWidths1 = { 30F, 70F };
+
+				PdfPTable table1 = new PdfPTable(pointColumnWidths1);
+				table1.setWidthPercentage(100); // Width 100%
+				// table1.setSpacingBefore(10f); // Space before table
+				table1.setWidthPercentage(100);
+
+				PdfPCell cell11 = new PdfPCell(new Paragraph("Client Name", font2));
+				cell11.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
+				cell11.setFixedHeight(20f);
+				cell11.setGrayFill(0.92f);
+				table1.addCell(cell11);
+
+				PdfPCell cell2 = new PdfPCell(new Paragraph(basicLps1.getClientName(), font3));
+				cell2.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
+				table1.addCell(cell2);
+
+				PdfPCell cell31 = new PdfPCell(new Paragraph("Project Name", font2));
+				cell31.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
+				cell31.setFixedHeight(20f);
+				cell31.setGrayFill(0.92f);
+				table1.addCell(cell31);
+
+				PdfPCell cell41 = new PdfPCell(new Paragraph(basicLps1.getProjectName(), font3));
+				cell41.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
+				table1.addCell(cell41);
+
+				PdfPCell cell191 = new PdfPCell(new Paragraph("Type of Industry", font2));
+				cell191.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
+				cell191.setGrayFill(0.92f);
+				cell191.setFixedHeight(20f);
+				table1.addCell(cell191);
+
+				PdfPCell cell201 = new PdfPCell(new Paragraph(basicLps1.getIndustryType(), font3));
+				cell201.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
+				table1.addCell(cell201);
+
+				PdfPCell cell211 = new PdfPCell(new Paragraph("Type of Building", font2));
+				cell211.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
+				cell211.setGrayFill(0.92f);
+				cell211.setFixedHeight(20f);
+				table1.addCell(cell211);
+
+				PdfPCell cell22 = new PdfPCell(new Paragraph(basicLps1.getBuildingType(), font3));
+				cell22.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
+				table1.addCell(cell22);
+
+				document.add(table1);
+
+				float[] pointColumnWidths20 = { 38.5F, 15F, 15F, 15F, 15F, 15F, 15F };
+				PdfPTable table31 = new PdfPTable(pointColumnWidths20);
+				table31.setWidthPercentage(100); // Width 100%
+				// table3.setSpacingBefore(10f); // Space before table
+				table31.setWidthPercentage(100);
+
+				PdfPCell cell23 = new PdfPCell(new Paragraph("Building Dimension", font2));
+				cell23.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
+				cell23.setGrayFill(0.92f);
+				cell23.setFixedHeight(20f);
+				table31.addCell(cell23);
+				PdfPCell cell1111 = new PdfPCell(new Paragraph("Length(m)", font2));
+				cell1111.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
+				cell1111.setGrayFill(0.92f);
+				cell1111.setFixedHeight(20f);
+				table31.addCell(cell1111);
+				PdfPCell cell112 = new PdfPCell(new Paragraph(basicLps1.getBuildingLength(), font3));
+				cell112.setHorizontalAlignment(Element.ALIGN_CENTER);
+
+				cell112.setFixedHeight(20f);
+				table31.addCell(cell112);
+
+				PdfPCell cell114 = new PdfPCell(new Paragraph("Width(m)", font2));
+				cell114.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
+				cell114.setGrayFill(0.92f);
+				cell114.setFixedHeight(20f);
+				table31.addCell(cell114);
+
+				PdfPCell cell115 = new PdfPCell(new Paragraph(basicLps1.getBuildingWidth(), font3));
+				cell115.setHorizontalAlignment(Element.ALIGN_CENTER);
+
+				cell115.setFixedHeight(20f);
+				table31.addCell(cell115);
+
+				PdfPCell cell113 = new PdfPCell(new Paragraph("Height(m)", font2));
+				cell113.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
+				cell113.setGrayFill(0.92f);
+				cell1111.setFixedHeight(20f);
+				table31.addCell(cell113);
+
+				PdfPCell cell24 = new PdfPCell(new Paragraph(basicLps1.getBuildingHeight(), font3));
+				cell24.setHorizontalAlignment(Element.ALIGN_CENTER);
+				table31.addCell(cell24);
+
+				document.add(table31);
+
+				PdfPTable table4 = new PdfPTable(pointColumnWidths1);
+				table4.setWidthPercentage(100); // Width 100%
+				// table4.setSpacingBefore(10f); // Space before table
+				table4.setWidthPercentage(100);
+
+				PdfPCell cell251 = new PdfPCell(new Paragraph("Level of protection", font2));
+				cell251.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
+				cell251.setFixedHeight(20f);
+				cell251.setGrayFill(0.92f);
+				table4.addCell(cell251);
+
+				PdfPCell cell26 = new PdfPCell(new Paragraph(basicLps1.getLevelOfProtection(), font3));
+				cell26.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
+				table4.addCell(cell26);
+
+				PdfPCell cell27 = new PdfPCell(new Paragraph("Soil Resistivity", font2));
+				cell27.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
+				cell27.setGrayFill(0.92f);
+				cell27.setFixedHeight(20f);
+				table4.addCell(cell27);
+
+				PdfPCell cell28 = new PdfPCell(new Paragraph(basicLps1.getSoilResistivity(), font3));
+				cell28.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
+				table4.addCell(cell28);
+
+				document.add(table4);
+
+				Font font11 = new Font(BaseFont.createFont(), 10, Font.NORMAL | Font.BOLD, BaseColor.BLACK);
 				float[] pointColumnWidths4 = { 30F, 150F, 50F, 50F };
 
 				PdfPTable table = new PdfPTable(pointColumnWidths4);
@@ -67,45 +219,47 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 				table.setSpacingBefore(10f); // Space before table
 				table.setWidthPercentage(100);
 
-				PdfPCell cell = new PdfPCell(new Paragraph("SL.NO", font1));
+				PdfPCell cell = new PdfPCell(new Paragraph("SL.NO", font11));
 				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 				cell.setGrayFill(0.92f);
-				PdfPCell cell1 = new PdfPCell(new Paragraph("Description", font1));
+				PdfPCell cell1 = new PdfPCell(new Paragraph("Description", font11));
 				cell1.setHorizontalAlignment(Element.ALIGN_CENTER);
 				cell1.setFixedHeight(25f);
 				cell1.setGrayFill(0.92f);
 				table.addCell(cell);
 				table.addCell(cell1);
 
-				PdfPCell cell2 = new PdfPCell(new Paragraph("Observation", font1));
-				cell2.setHorizontalAlignment(Element.ALIGN_CENTER);
-				cell2.setFixedHeight(25f);
-				cell2.setGrayFill(0.92f);
-				table.addCell(cell2);
+				PdfPCell cell21 = new PdfPCell(new Paragraph("Observation", font11));
+				cell21.setHorizontalAlignment(Element.ALIGN_CENTER);
+				cell21.setFixedHeight(25f);
+				cell21.setGrayFill(0.92f);
+				table.addCell(cell21);
 
-				PdfPCell cell3 = new PdfPCell(new Paragraph("Remarks", font1));
+				PdfPCell cell3 = new PdfPCell(new Paragraph("Remarks", font11));
 				cell3.setGrayFill(0.92f);
 				cell3.setHorizontalAlignment(Element.ALIGN_CENTER);
 				table.addCell(cell3);
+				
 				tableData(table, lpsAirDiscription, document);
+				
 				document.add(table);
 
 				float[] pointColumnWidths41 = { 30F, 150F, 50F, 50F };
 
-				PdfPTable table1 = new PdfPTable(pointColumnWidths41);
-				table1.setWidthPercentage(100); // Width 100%
+				PdfPTable table11 = new PdfPTable(pointColumnWidths41);
+				table11.setWidthPercentage(100); // Width 100%
 				// table1.setSpacingBefore(10f); // Space before table
-				table1.setWidthPercentage(100);
+				table11.setWidthPercentage(100);
 
 //				table1.setSpacingAfter(20f); // Space after table
 //				table1.setSpacingBefore(20f); // Space before table
 
 				for (LpsVerticalAirTermination lpsVerticalAirTermination1 : lpsVerticalAirTermination) {
-					verticalAirTerminationIter(table1, lpsVerticalAirTermination1);
+					verticalAirTerminationIter(table11, lpsVerticalAirTermination1);
 
 				}
 
-				document.add(table1);
+				document.add(table11);
 
 				PdfPTable table2 = new PdfPTable(pointColumnWidths41);
 				table2.setWidthPercentage(100); // Width 100%
@@ -131,17 +285,17 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 
 				document.add(table3);
 
-				PdfPTable table4 = new PdfPTable(pointColumnWidths41);
-				table4.setWidthPercentage(100); // Width 100%
+				PdfPTable table41 = new PdfPTable(pointColumnWidths41);
+				table41.setWidthPercentage(100); // Width 100%
 //				table4.setSpacingAfter(20f); // Space after table
 //				table4.setSpacingBefore(20f); // Space before table
-				table4.setWidthPercentage(100);
+				table41.setWidthPercentage(100);
 
 				for (AirClamps airClamps1 : airClamps) {
-					clampsIter(table4, airClamps1);
+					clampsIter(table41, airClamps1);
 				}
 
-				document.add(table4);
+				document.add(table41);
 
 				PdfPTable table5 = new PdfPTable(pointColumnWidths41);
 				table5.setWidthPercentage(100); // Width 100%
@@ -201,7 +355,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 		table.addCell(cell3);
 		if (lpsAirDiscription.getConnectionMadeBraRe() != null) {
 
-			PdfPCell cell1 = new PdfPCell(new Paragraph(lpsAirDiscription.getConnectionMadeBraOb(), font2));
+			PdfPCell cell1 = new PdfPCell(new Paragraph(lpsAirDiscription.getConnectionMadeBraRe(), font2));
 			cell1.setHorizontalAlignment(Element.ALIGN_CENTER);
 			table.addCell(cell1);
 		} else {
@@ -251,7 +405,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 		table.addCell(cell5);
 		if (lpsAirDiscription.getCombustablePartOb() != null) {
 
-			PdfPCell cell1 = new PdfPCell(new Paragraph(lpsAirDiscription.getCombustablePartOb(), font2));
+			PdfPCell cell1 = new PdfPCell(new Paragraph(lpsAirDiscription.getCombustablePartRe(), font2));
 			cell1.setHorizontalAlignment(Element.ALIGN_CENTER);
 			table.addCell(cell1);
 		} else {
@@ -319,7 +473,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 		cell11.setBackgroundColor(new GrayColor(0.93f));
 		table6.addCell(cell11);
 
-		cell11.setPhrase(new Phrase("Clamps", font));
+		cell11.setPhrase(new Phrase("Connectors", font));
 		cell11.setHorizontalAlignment(Element.ALIGN_CENTER);
 		cell11.setBackgroundColor(new GrayColor(0.93f));
 		cell11.setColspan(3);
@@ -572,7 +726,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 		cell11.setBackgroundColor(new GrayColor(0.93f));
 		table5.addCell(cell11);
 
-		cell11.setPhrase(new Phrase("Clamps", font));
+		cell11.setPhrase(new Phrase("Expansion Pieces", font));
 		cell11.setHorizontalAlignment(Element.ALIGN_CENTER);
 		cell11.setBackgroundColor(new GrayColor(0.93f));
 		cell11.setColspan(3);

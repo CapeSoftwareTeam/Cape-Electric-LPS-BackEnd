@@ -1,8 +1,6 @@
 package com.capeelectric.service;
 
 import java.net.MalformedURLException;
- 
-import java.nio.file.Paths;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;

@@ -14,7 +14,7 @@ import com.capeelectric.exception.AirTerminationException;
 import com.capeelectric.service.PrintAirTerminationService;
 
 @RestController()
-@RequestMapping("/api/v1")
+@RequestMapping("/api/lps/v1")
 public class PrintAirTermination {
 	private static final Logger logger = LoggerFactory.getLogger(PrintAirTermination.class);
 
