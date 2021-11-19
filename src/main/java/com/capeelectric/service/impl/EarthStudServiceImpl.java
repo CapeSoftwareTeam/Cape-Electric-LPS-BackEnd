@@ -68,10 +68,6 @@ public class EarthStudServiceImpl implements EarthStudService {
 	@Autowired
 	private SeperationDistanceRepository seperationDistanceRepository;
 
-	@Autowired
-
-	private LpsFinalReport lpsFinalReport;
-
 	@Override
 	public void addEarthStudDetails(EarthStudDescription earthStudDescription) throws EarthStudException {
 		if (earthStudDescription != null && earthStudDescription.getUserName() != null
