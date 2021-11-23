@@ -438,7 +438,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		table2.addCell(cell22);
 		
 		PdfPCell cell25 = new PdfPCell(new Paragraph("12.1", font));
-		cell25.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell25.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell25.setGrayFill(0.92f);
 		cell25.setFixedHeight(20f);
 		table2.addCell(cell25);
@@ -457,7 +457,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		table2.addCell(cell28);
 
 		PdfPCell cell29 = new PdfPCell(new Paragraph("12.2", font));
-		cell29.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell29.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell29.setGrayFill(0.92f);
 		table2.addCell(cell29);
 
@@ -475,7 +475,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		table2.addCell(cell45);
 
 		PdfPCell cell48 = new PdfPCell(new Paragraph("12.3", font));
-		cell48.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell48.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell48.setGrayFill(0.92f);
 		table2.addCell(cell48);
 
@@ -493,7 +493,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		table2.addCell(cell49);
 
 		PdfPCell cell50 = new PdfPCell(new Paragraph("12.4", font));
-		cell50.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell50.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell50.setGrayFill(0.92f);
 		table2.addCell(cell50);
 
@@ -512,7 +512,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		table2.addCell(cell53);
 
 		PdfPCell cell54 = new PdfPCell(new Paragraph("12.5", font));
-		cell54.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell54.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell54.setGrayFill(0.92f);
 		table2.addCell(cell54);
 
@@ -530,7 +530,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		table2.addCell(cell57);
 
 		PdfPCell cell58 = new PdfPCell(new Paragraph("12.6", font));
-		cell58.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell58.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell58.setGrayFill(0.92f);
 		table2.addCell(cell58);
 
@@ -549,17 +549,17 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		table2.addCell(cell61);
 
 		PdfPCell cell65 = new PdfPCell(new Paragraph("12.7", font));
-		cell65.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell65.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell65.setGrayFill(0.92f);
 		table2.addCell(cell65);
 
 		PdfPCell cell66 = new PdfPCell(new Paragraph("Total number of test joints", font));
-		cell66.setHorizontalAlignment(Element.ALIGN_LEFT);
+		cell66.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell66.setGrayFill(0.92f);
 		table2.addCell(cell66);
 
 		PdfPCell cell67 = new PdfPCell(new Paragraph(testJoint.getTotalNoOfTestJointOB(), font));
-		cell67.setHorizontalAlignment(Element.ALIGN_LEFT);
+		cell67.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		table2.addCell(cell67);
 
 		PdfPCell cell68 = new PdfPCell(new Paragraph(testJoint.getTotalNoOfTestJointRem(), font));
@@ -567,12 +567,12 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		table2.addCell(cell68);
 
 		PdfPCell cell70 = new PdfPCell(new Paragraph("12.8", font));
-		cell70.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell70.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell70.setGrayFill(0.92f);
 		table2.addCell(cell70);
 
 		PdfPCell cell71 = new PdfPCell(new Paragraph("Number of test joints inspected", font));
-		cell71.setHorizontalAlignment(Element.ALIGN_LEFT);
+		cell71.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell71.setGrayFill(0.92f);
 		table2.addCell(cell71);
 
@@ -585,12 +585,12 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		table2.addCell(cell73);
 
 		PdfPCell cell74 = new PdfPCell(new Paragraph("12.9", font));
-		cell74.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell74.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell74.setGrayFill(0.92f);
 		table2.addCell(cell74);
 
 		PdfPCell cell75 = new PdfPCell(new Paragraph("Number of inspections passed", font));
-		cell75.setHorizontalAlignment(Element.ALIGN_LEFT);
+		cell75.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell75.setGrayFill(0.92f);
 		table2.addCell(cell75);
 
@@ -603,12 +603,12 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		table2.addCell(cell77);
 
 		PdfPCell cell78 = new PdfPCell(new Paragraph("12.10", font));
-		cell78.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell78.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell78.setGrayFill(0.92f);
 		table2.addCell(cell78);
 
 		PdfPCell cell79 = new PdfPCell(new Paragraph("Number of inspections failed", font));
-		cell79.setHorizontalAlignment(Element.ALIGN_LEFT);
+		cell79.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell79.setGrayFill(0.92f);
 		table2.addCell(cell79);
 
@@ -647,7 +647,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		table2.addCell(cell22);
 
 		PdfPCell cell25 = new PdfPCell(new Paragraph("11.1", font));
-		cell25.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell25.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell25.setGrayFill(0.92f);
 		table2.addCell(cell25);
 
@@ -665,7 +665,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		table2.addCell(cell28);
 
 		PdfPCell cell29 = new PdfPCell(new Paragraph("11.2", font));
-		cell29.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell29.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell29.setGrayFill(0.92f);
 		table2.addCell(cell29);
 
@@ -683,7 +683,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		table2.addCell(cell45);
 
 		PdfPCell cell48 = new PdfPCell(new Paragraph("11.3", font));
-		cell48.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell48.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell48.setGrayFill(0.92f);
 		table2.addCell(cell48);
 
@@ -701,7 +701,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		table2.addCell(cell49);
 
 		PdfPCell cell50 = new PdfPCell(new Paragraph("11.4", font));
-		cell50.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell50.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell50.setGrayFill(0.92f);
 		table2.addCell(cell50);
 
@@ -719,7 +719,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		table2.addCell(cell53);
 
 		PdfPCell cell54 = new PdfPCell(new Paragraph("11.5", font));
-		cell54.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell54.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell54.setGrayFill(0.92f);
 		table2.addCell(cell54);
 
@@ -738,7 +738,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		table2.addCell(cell57);
 
 		PdfPCell cell58 = new PdfPCell(new Paragraph("11.6", font));
-		cell58.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell58.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell58.setGrayFill(0.92f);
 		table2.addCell(cell58);
 
@@ -757,7 +757,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		table2.addCell(cell61);
 
 		PdfPCell cell65 = new PdfPCell(new Paragraph("11.7", font));
-		cell65.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell65.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell65.setGrayFill(0.92f);
 		table2.addCell(cell65);
 
@@ -776,12 +776,12 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		table2.addCell(cell68);
 
 		PdfPCell cell70 = new PdfPCell(new Paragraph("11.8", font));
-		cell70.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell70.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell70.setGrayFill(0.92f);
 		table2.addCell(cell70);
 
 		PdfPCell cell71 = new PdfPCell(new Paragraph("Total number of lightning counter", font));
-		cell71.setHorizontalAlignment(Element.ALIGN_LEFT);
+		cell71.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell71.setGrayFill(0.92f);
 		table2.addCell(cell71);
 
@@ -794,12 +794,12 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		table2.addCell(cell73);
 
 		PdfPCell cell74 = new PdfPCell(new Paragraph("11.9", font));
-		cell74.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell74.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell74.setGrayFill(0.92f);
 		table2.addCell(cell74);
 
 		PdfPCell cell75 = new PdfPCell(new Paragraph("Number of lightning counter inspected", font));
-		cell75.setHorizontalAlignment(Element.ALIGN_LEFT);
+		cell75.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell75.setGrayFill(0.92f);
 		table2.addCell(cell75);
 
@@ -812,17 +812,17 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		table2.addCell(cell77);
 
 		PdfPCell cell78 = new PdfPCell(new Paragraph("11.10", font));
-		cell78.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell78.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell78.setGrayFill(0.92f);
 		table2.addCell(cell78);
 
 		PdfPCell cell79 = new PdfPCell(new Paragraph("Number of inspections passed", font));
-		cell79.setHorizontalAlignment(Element.ALIGN_LEFT);
+		cell79.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell79.setGrayFill(0.92f);
 		table2.addCell(cell79);
 
 		PdfPCell cell80 = new PdfPCell(new Paragraph(lightingCounter1.getInspectionPassedNoOb(), font));
-		cell80.setHorizontalAlignment(Element.ALIGN_LEFT);
+		cell80.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		table2.addCell(cell80);
 
 		PdfPCell cell81 = new PdfPCell(new Paragraph(lightingCounter1.getInspectionPassedNoRem(), font));
@@ -830,12 +830,12 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		table2.addCell(cell81);
 
 		PdfPCell cell82 = new PdfPCell(new Paragraph("11.11", font));
-		cell82.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell82.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell82.setGrayFill(0.92f);
 		table2.addCell(cell82);
 
 		PdfPCell cell83 = new PdfPCell(new Paragraph("Number of inspections failed", font));
-		cell83.setHorizontalAlignment(Element.ALIGN_LEFT);
+		cell83.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell83.setGrayFill(0.92f);
 		table2.addCell(cell83);
 
@@ -933,7 +933,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		table2.addCell(cell50);
 
 		PdfPCell cell51 = new PdfPCell(new Paragraph("Max number of connector in a down conductor", font));
-		cell51.setHorizontalAlignment(Element.ALIGN_LEFT);
+		cell51.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell51.setGrayFill(0.92f);
 		table2.addCell(cell51);
 
@@ -951,7 +951,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		table2.addCell(cell54);
 
 		PdfPCell cell55 = new PdfPCell(new Paragraph("Total number of connectors", font));
-		cell55.setHorizontalAlignment(Element.ALIGN_LEFT);
+		cell55.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell55.setGrayFill(0.92f);
 		table2.addCell(cell55);
 
@@ -969,7 +969,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		table2.addCell(cell58);
 
 		PdfPCell cell59 = new PdfPCell(new Paragraph("Number of connectors inspected", font));
-		cell59.setHorizontalAlignment(Element.ALIGN_LEFT);
+		cell59.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell59.setGrayFill(0.92f);
 		table2.addCell(cell59);
 
@@ -987,7 +987,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		table2.addCell(cell65);
 
 		PdfPCell cell66 = new PdfPCell(new Paragraph("Number of inspection passed", font));
-		cell66.setHorizontalAlignment(Element.ALIGN_LEFT);
+		cell66.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell66.setGrayFill(0.92f);
 		table2.addCell(cell66);
 
@@ -1005,7 +1005,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		table2.addCell(cell70);
 
 		PdfPCell cell71 = new PdfPCell(new Paragraph("Number of inspection failed", font));
-		cell71.setHorizontalAlignment(Element.ALIGN_LEFT);
+		cell71.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell71.setGrayFill(0.92f);
 		table2.addCell(cell71);
 
@@ -1044,7 +1044,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 
 		
 		PdfPCell cell25 = new PdfPCell(new Paragraph("9.1", font));
-		cell25.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell25.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell25.setGrayFill(0.92f);
 		table2.addCell(cell25);
 
@@ -1062,7 +1062,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		table2.addCell(cell28);
 
 		PdfPCell cell29 = new PdfPCell(new Paragraph("9.2", font));
-		cell29.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell29.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell29.setGrayFill(0.92f);
 		table2.addCell(cell29);
 
@@ -1081,7 +1081,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		table2.addCell(cell45);
 
 		PdfPCell cell48 = new PdfPCell(new Paragraph("9.3", font));
-		cell48.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell48.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell48.setGrayFill(0.92f);
 		table2.addCell(cell48);
 
@@ -1101,7 +1101,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		table2.addCell(cell49);
 
 		PdfPCell cell50 = new PdfPCell(new Paragraph("9.4", font));
-		cell50.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell50.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell50.setGrayFill(0.92f);
 		table2.addCell(cell50);
 
@@ -1119,12 +1119,12 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		table2.addCell(cell53);
 
 		PdfPCell cell54 = new PdfPCell(new Paragraph("9.5", font));
-		cell54.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell54.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell54.setGrayFill(0.92f);
 		table2.addCell(cell54);
 
 		PdfPCell cell55 = new PdfPCell(new Paragraph("Total number of holders", font));
-		cell55.setHorizontalAlignment(Element.ALIGN_LEFT);
+		cell55.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell55.setGrayFill(0.92f);
 		table2.addCell(cell55);
 
@@ -1137,12 +1137,12 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		table2.addCell(cell57);
 
 		PdfPCell cell58 = new PdfPCell(new Paragraph("9.6", font));
-		cell58.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell58.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell58.setGrayFill(0.92f);
 		table2.addCell(cell58);
 
 		PdfPCell cell59 = new PdfPCell(new Paragraph("Number of holders inspected", font));
-		cell59.setHorizontalAlignment(Element.ALIGN_LEFT);
+		cell59.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell59.setGrayFill(0.92f);
 		table2.addCell(cell59);
 
@@ -1155,12 +1155,12 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		table2.addCell(cell61);
 
 		PdfPCell cell65 = new PdfPCell(new Paragraph("9.7", font));
-		cell65.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell65.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell65.setGrayFill(0.92f);
 		table2.addCell(cell65);
 
 		PdfPCell cell66 = new PdfPCell(new Paragraph("Number of inspection passed", font));
-		cell66.setHorizontalAlignment(Element.ALIGN_LEFT);
+		cell66.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell66.setGrayFill(0.92f);
 		table2.addCell(cell66);
 
@@ -1173,12 +1173,12 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		table2.addCell(cell68);
 
 		PdfPCell cell70 = new PdfPCell(new Paragraph("9.8", font));
-		cell70.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell70.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell70.setGrayFill(0.92f);
 		table2.addCell(cell70);
 
 		PdfPCell cell71 = new PdfPCell(new Paragraph("Number of inspection failed", font));
-		cell71.setHorizontalAlignment(Element.ALIGN_LEFT);
+		cell71.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell71.setGrayFill(0.92f);
 		table2.addCell(cell71);
 
@@ -1218,7 +1218,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 
 
 		PdfPCell cell25 = new PdfPCell(new Paragraph("8.1", font));
-		cell25.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell25.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell25.setGrayFill(0.92f);
 		table1.addCell(cell25);
 
@@ -1237,7 +1237,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		table1.addCell(cell28);
 
 		PdfPCell cell29 = new PdfPCell(new Paragraph("8.2", font));
-		cell29.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell29.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell29.setGrayFill(0.92f);
 		table1.addCell(cell29);
 
@@ -1256,7 +1256,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		table1.addCell(cell45);
 
 		PdfPCell cell46 = new PdfPCell(new Paragraph("8.3", font));
-		cell46.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell46.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell46.setGrayFill(0.92f);
 		table1.addCell(cell46);
 
@@ -1275,12 +1275,12 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		table1.addCell(cell49);
 
 		PdfPCell cell50 = new PdfPCell(new Paragraph("8.4", font));
-		cell50.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell50.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell50.setGrayFill(0.92f);
 		table1.addCell(cell50);
 
 		PdfPCell cell51 = new PdfPCell(new Paragraph("Total number of bridging cables", font));
-		cell51.setHorizontalAlignment(Element.ALIGN_LEFT);
+		cell51.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell51.setGrayFill(0.92f);
 		table1.addCell(cell51);
 
@@ -1293,12 +1293,12 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		table1.addCell(cell53);
 
 		PdfPCell cell54 = new PdfPCell(new Paragraph("8.5", font));
-		cell54.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell54.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell54.setGrayFill(0.92f);
 		table1.addCell(cell54);
 
 		PdfPCell cell55 = new PdfPCell(new Paragraph("Number of bridging cables inspected", font));
-		cell55.setHorizontalAlignment(Element.ALIGN_LEFT);
+		cell55.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell55.setGrayFill(0.92f);
 		table1.addCell(cell55);
 
@@ -1311,12 +1311,12 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		table1.addCell(cell57);
 
 		PdfPCell cell58 = new PdfPCell(new Paragraph("8.6", font));
-		cell58.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell58.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell58.setGrayFill(0.92f);
 		table1.addCell(cell58);
 
 		PdfPCell cell59 = new PdfPCell(new Paragraph("Number of inspections passed", font));
-		cell59.setHorizontalAlignment(Element.ALIGN_LEFT);
+		cell59.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell59.setGrayFill(0.92f);
 		table1.addCell(cell59);
 
@@ -1329,12 +1329,12 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		table1.addCell(cell61);
 
 		PdfPCell cell62 = new PdfPCell(new Paragraph("8.7", font));
-		cell62.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell62.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell62.setGrayFill(0.92f);
 		table1.addCell(cell62);
 
 		PdfPCell cell63 = new PdfPCell(new Paragraph("Number of inspections failed", font));
-		cell63.setHorizontalAlignment(Element.ALIGN_LEFT);
+		cell63.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell63.setGrayFill(0.92f);
 		table1.addCell(cell63);
 
@@ -1372,7 +1372,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		table1.addCell(cell22);
 
 		PdfPCell cell25 = new PdfPCell(new Paragraph("7.2", font));
-		cell25.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell25.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell25.setGrayFill(0.92f);
 		table1.addCell(cell25);
 
@@ -1390,7 +1390,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		table1.addCell(cell28);
 
 		PdfPCell cell29 = new PdfPCell(new Paragraph("7.3", font));
-		cell29.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell29.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell29.setGrayFill(0.92f);
 		table1.addCell(cell29);
 
@@ -1408,7 +1408,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		table1.addCell(cell32);
 
 		PdfPCell cell33 = new PdfPCell(new Paragraph("7.4", font));
-		cell33.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell33.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell33.setGrayFill(0.92f);
 		table1.addCell(cell33);
 
@@ -1426,7 +1426,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		table1.addCell(cell36);
 
 		PdfPCell cell37 = new PdfPCell(new Paragraph("7.5", font));
-		cell37.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell37.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell37.setGrayFill(0.92f);
 		table1.addCell(cell37);
 
@@ -1444,7 +1444,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		table1.addCell(cell40);
 
 		PdfPCell cell41 = new PdfPCell(new Paragraph("7.6", font));
-		cell41.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell41.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell41.setGrayFill(0.92f);
 		table1.addCell(cell41);
 
@@ -1464,7 +1464,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		table1.addCell(cell44);
 
 		PdfPCell cell45 = new PdfPCell(new Paragraph("7.7", font));
-		cell45.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell45.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell45.setGrayFill(0.92f);
 		table1.addCell(cell45);
 
@@ -1483,7 +1483,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		table1.addCell(cell48);
 
 		PdfPCell cell49 = new PdfPCell(new Paragraph("7.8", font));
-		cell49.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell49.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell49.setGrayFill(0.92f);
 		table1.addCell(cell49);
 
@@ -1502,7 +1502,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		table1.addCell(cell52);
 
 		PdfPCell cell53 = new PdfPCell(new Paragraph("7.9", font));
-		cell53.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell53.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell53.setGrayFill(0.92f);
 		table1.addCell(cell53);
 
@@ -1520,13 +1520,13 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		cell56.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table1.addCell(cell56);
 
-		PdfPCell cell57 = new PdfPCell(new Paragraph("7.1", font));
-		cell57.setHorizontalAlignment(Element.ALIGN_CENTER);
+		PdfPCell cell57 = new PdfPCell(new Paragraph("7.10", font));
+		cell57.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell57.setGrayFill(0.92f);
 		table1.addCell(cell57);
 
 		PdfPCell cell58 = new PdfPCell(new Paragraph("Maximum distance between down conductors", font));
-		cell58.setHorizontalAlignment(Element.ALIGN_LEFT);
+		cell58.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell58.setGrayFill(0.92f);
 		table1.addCell(cell58);
 
@@ -1539,12 +1539,12 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		table1.addCell(cell60);
 
 		PdfPCell cell61 = new PdfPCell(new Paragraph("7.11", font));
-		cell61.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell61.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell61.setGrayFill(0.92f);
 		table1.addCell(cell61);
 
 		PdfPCell cell62 = new PdfPCell(new Paragraph("Minimum distance between down conductors", font));
-		cell62.setHorizontalAlignment(Element.ALIGN_LEFT);
+		cell62.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell62.setGrayFill(0.92f);
 		table1.addCell(cell62);
 
@@ -1557,12 +1557,12 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		table1.addCell(cell64);
 
 		PdfPCell cell65 = new PdfPCell(new Paragraph("7.12", font));
-		cell65.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell65.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell65.setGrayFill(0.92f);
 		table1.addCell(cell65);
 
 		PdfPCell cell66 = new PdfPCell(new Paragraph("Total number of down conductors", font));
-		cell66.setHorizontalAlignment(Element.ALIGN_LEFT);
+		cell66.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell66.setGrayFill(0.92f);
 		table1.addCell(cell66);
 
@@ -1575,12 +1575,12 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		table1.addCell(cell68);
 
 		PdfPCell cell69 = new PdfPCell(new Paragraph("7.13", font));
-		cell69.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell69.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell69.setGrayFill(0.92f);
 		table1.addCell(cell69);
 
 		PdfPCell cell70 = new PdfPCell(new Paragraph("Number of down conductors inspected", font));
-		cell70.setHorizontalAlignment(Element.ALIGN_LEFT);
+		cell70.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell70.setGrayFill(0.92f);
 		table1.addCell(cell70);
 
@@ -1593,12 +1593,12 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		table1.addCell(cell72);
 
 		PdfPCell cell73 = new PdfPCell(new Paragraph("7.14", font));
-		cell73.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell73.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell73.setGrayFill(0.92f);
 		table1.addCell(cell73);
 
 		PdfPCell cell74 = new PdfPCell(new Paragraph("Number of inspections passed", font));
-		cell74.setHorizontalAlignment(Element.ALIGN_LEFT);
+		cell74.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell74.setGrayFill(0.92f);
 		table1.addCell(cell74);
 
@@ -1611,12 +1611,12 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		table1.addCell(cell76);
 
 		PdfPCell cell77 = new PdfPCell(new Paragraph("7.15", font));
-		cell77.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell77.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell77.setGrayFill(0.92f);
 		table1.addCell(cell77);
 
 		PdfPCell cell78 = new PdfPCell(new Paragraph("Number of inspections failed", font));
-		cell78.setHorizontalAlignment(Element.ALIGN_LEFT);
+		cell78.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell78.setGrayFill(0.92f);
 		table1.addCell(cell78);
 

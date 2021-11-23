@@ -543,7 +543,7 @@ public class PrintSDandEarthStudServiceImpl implements PrintSDandEarthStudServic
 		cell40.setColspan(3);
 		table1.addCell(cell40);
 
-		PdfPCell cell35 = new PdfPCell(new Paragraph("1", font1));
+		PdfPCell cell35 = new PdfPCell(new Paragraph("1.a", font1));
 		cell35.setHorizontalAlignment(Element.ALIGN_CENTER);
 		cell35.setGrayFill(0.92f);
 		table1.addCell(cell35);
@@ -551,7 +551,7 @@ public class PrintSDandEarthStudServiceImpl implements PrintSDandEarthStudServic
 		PdfPCell cell36 = new PdfPCell(new Paragraph(separateDistance3.getSeperationDistanceDesc(), font1));
 		cell36.setHorizontalAlignment(Element.ALIGN_LEFT);
 		cell36.setFixedHeight(20f);
-		// cell36.setGrayFill(0.92f);
+		 cell36.setGrayFill(0.92f);
 		table1.addCell(cell36);
 
 		PdfPCell cell37 = new PdfPCell(new Paragraph(separateDistance3.getSeperationDistanceOb(), font1));

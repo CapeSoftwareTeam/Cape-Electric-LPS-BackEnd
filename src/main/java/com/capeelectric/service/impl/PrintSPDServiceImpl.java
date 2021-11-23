@@ -27,12 +27,13 @@ import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+
 @Service
 public class PrintSPDServiceImpl implements PrintSPDService {
-	
+
 	@Autowired
 	private SPDRepository spdRepository;
-	
+
 	@Autowired
 	private BasicLpsRepository basicLpsRepository;
 
@@ -40,23 +41,22 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 	public void printSPD(String userName, Integer lpsId) throws SPDException {
 		if (userName != null && !userName.isEmpty() && lpsId != null && lpsId != 0) {
 			Document document = new Document(PageSize.A4, 68, 68, 62, 68);
-			
+
 			try {
 
 				PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("SPD.pdf"));
-				
+
 				List<SPD> spdMain = spdRepository.findByUserNameAndBasicLpsId(userName, lpsId);
 				SPD spdMain1 = spdMain.get(0);
-				
+
 				List<BasicLps> basicLps = basicLpsRepository.findByUserNameAndBasicLpsId(userName, lpsId);
 				BasicLps basicLps1 = basicLps.get(0);
-				
+
 				List<SpdDescription> spdDesc1 = spdMain1.getSpdDescription();
-				
+
 				SpdDescription spdDesc2 = spdDesc1.get(0);
 				document.open();
-				
-				
+
 				float[] pointColumnWidths40 = { 100F };
 
 				PdfPTable headertable = new PdfPTable(pointColumnWidths40);
@@ -69,8 +69,7 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 				Font font3 = new Font(BaseFont.createFont(), 10, Font.NORMAL, BaseColor.BLACK);
 
 				PdfPCell label = new PdfPCell(
-						new Paragraph("Checklist for SPD of LPS \r\n"
-								+ "as per IS/IEC 62305", font1));
+						new Paragraph("Checklist for SPD of LPS \r\n" + "as per IS/IEC 62305", font1));
 				label.setHorizontalAlignment(Element.ALIGN_CENTER);
 				label.setGrayFill(0.92f);
 				// label.setFixedHeight(20f);
@@ -198,14 +197,11 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 				table4.addCell(cell28);
 
 				document.add(table4);
-				
-				
-				
-				
-				
+
 				Font font11 = new Font(BaseFont.createFont(), 10, Font.NORMAL | Font.BOLD, BaseColor.BLACK);
-				float[] pointColumnWidths30 = { 30F, 150F, 50F, 50F };
 				
+				float[] pointColumnWidths30 = { 30F, 150F, 50F, 50F };
+
 				PdfPTable table = new PdfPTable(pointColumnWidths30);
 				table.setWidthPercentage(100); // Width 100%
 				table.setSpacingBefore(10f); // Space before table
@@ -234,12 +230,10 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 				cell33.setFixedHeight(20f);
 				cell33.setHorizontalAlignment(Element.ALIGN_CENTER);
 				table.addCell(cell33);
-				
-				
-				
-				
-				Font font = new Font(BaseFont.createFont(), 10, Font.NORMAL , BaseColor.BLACK);
-				
+
+				Font font = new Font(BaseFont.createFont(), 10, Font.NORMAL, BaseColor.BLACK);
+				Font font8 = new Font(BaseFont.createFont(), 8, Font.NORMAL, BaseColor.BLACK);
+
 				PdfPCell cell = new PdfPCell(new Paragraph("1", font));
 				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 				cell.setFixedHeight(20f);
@@ -259,7 +253,7 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 				PdfPCell cell4 = new PdfPCell(new Paragraph(spdMain1.getMainsIncomingRem(), font));
 				cell4.setHorizontalAlignment(Element.ALIGN_LEFT);
 				table.addCell(cell4);
-				
+
 				PdfPCell cell34 = new PdfPCell(new Paragraph("2", font));
 				cell34.setHorizontalAlignment(Element.ALIGN_CENTER);
 				cell34.setFixedHeight(20f);
@@ -282,8 +276,7 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 				cell37.setFixedHeight(20f);
 				cell37.setHorizontalAlignment(Element.ALIGN_LEFT);
 				table.addCell(cell37);
-				
-				
+
 				PdfPCell cell40 = new PdfPCell(new Paragraph("3", font));
 				cell40.setHorizontalAlignment(Element.ALIGN_CENTER);
 				cell40.setFixedHeight(20f);
@@ -291,7 +284,8 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 				table.addCell(cell40);
 
 				PdfPCell cell411 = new PdfPCell(new Paragraph(
-						"Total Number of panels supplting power to outdoor equipment such as light fittings / air conditioner chiller units (not split AC outdoor unit)", font));
+						"Total Number of panels supplting power to outdoor equipment such as light fittings / air conditioner chiller units (not split AC outdoor unit)",
+						font));
 				cell411.setHorizontalAlignment(Element.ALIGN_LEFT);
 				cell411.setFixedHeight(20f);
 				cell411.setGrayFill(0.92f);
@@ -308,7 +302,7 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 				cell43.setFixedHeight(20f);
 				cell43.setHorizontalAlignment(Element.ALIGN_LEFT);
 				table.addCell(cell43);
-				
+
 				PdfPCell cell44 = new PdfPCell(new Paragraph("4", font));
 				cell44.setHorizontalAlignment(Element.ALIGN_CENTER);
 				cell43.setFixedHeight(20f);
@@ -333,39 +327,51 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 				cell47.setHorizontalAlignment(Element.ALIGN_LEFT);
 				table.addCell(cell47);
 				
+				PdfPCell cell441 = new PdfPCell(new Paragraph("Note", font11));
+				cell441.setHorizontalAlignment(Element.ALIGN_CENTER);
+				cell43.setFixedHeight(20f);
+				cell441.setGrayFill(0.92f);
+				table.addCell(cell441);
+
+				PdfPCell cell451 = new PdfPCell(
+						new Paragraph("SPD is necessary for each mains incoming panel and each electrical panel feeding power to an outdoor equipment", font8));
+				cell451.setHorizontalAlignment(Element.ALIGN_LEFT);
+				cell451.setColspan(3);
+				cell451.setGrayFill(0.92f);
+				table.addCell(cell451);
+
 				mainsIncomingItr(document, spdDesc2, font11, table, font);
-                
+
 				streetLightIter(spdDesc2, font11, table, font);
-				
+
 				pannelFeedingPowerIter(spdDesc2, font11, table, font);
-				
-                document.add(table);
+
+				document.add(table);
 				document.close();
 			}
-			
-		
-		
-	catch (Exception e) {
-		e.printStackTrace();
-	}
-	
+
+			catch (Exception e) {
+				e.printStackTrace();
+			}
+
 		}
-	
-	else {
-		throw new SPDException("Invalid Inputs");
-	}
-	
-		
+
+		else {
+			throw new SPDException("Invalid Inputs");
+		}
+
 	}
 
-	private void pannelFeedingPowerIter(SpdDescription spdDesc2, Font font11, PdfPTable table, Font font) throws DocumentException, IOException {
+	private void pannelFeedingPowerIter(SpdDescription spdDesc2, Font font11, PdfPTable table, Font font)
+			throws DocumentException, IOException {
 		PdfPCell cell13 = new PdfPCell(new Paragraph("7", font11));
 		cell13.setHorizontalAlignment(Element.ALIGN_CENTER);
 		cell13.setGrayFill(0.92f);
 		table.addCell(cell13);
 
 		PdfPCell cell14 = new PdfPCell(new Paragraph(
-				"Other panels feeding power to outdoor equipment if more panels are available data from each panel is necessary)", font11));
+				"Other panels feeding power to outdoor equipment if more panels are available data from each panel is necessary)",
+				font11));
 		cell14.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 		cell14.setGrayFill(0.92f);
 		cell14.setColspan(3);
@@ -378,16 +384,13 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 //		PdfPCell cell16 = new PdfPCell(new Paragraph("", font));
 //		cell16.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 //		table.addCell(cell16);
-		
-		
+
 		PdfPCell cell17 = new PdfPCell(new Paragraph("7a", font));
 		cell17.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell17.setGrayFill(0.92f);
 		table.addCell(cell17);
 
-		PdfPCell cell18 = new PdfPCell(new Paragraph(
-				"Type of SPD / Model",
-				font));
+		PdfPCell cell18 = new PdfPCell(new Paragraph("Type of SPD / Model", font));
 		cell18.setHorizontalAlignment(Element.ALIGN_LEFT);
 		cell18.setFixedHeight(20f);
 		cell18.setGrayFill(0.92f);
@@ -400,7 +403,7 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 		PdfPCell cell20 = new PdfPCell(new Paragraph(spdDesc2.getSpdApplicationRem(), font));
 		cell20.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table.addCell(cell20);
-		
+
 		PdfPCell cell48 = new PdfPCell(new Paragraph("7b", font));
 		cell48.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell48.setGrayFill(0.92f);
@@ -464,39 +467,6 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 		PdfPCell cell59 = new PdfPCell(new Paragraph(spdDesc2.getIncomingRatingRem(), font));
 		cell59.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table.addCell(cell59);
-		
-		Font font111 = new Font(BaseFont.createFont(), 10, Font.NORMAL | Font.BOLD, BaseColor.BLACK);
-		float[] pointColumnWidths30 = { 30F, 150F, 50F, 50F };
-		
-//		PdfPTable table1 = new PdfPTable(pointColumnWidths30);
-//		table1.setWidthPercentage(100); // Width 100%
-//		//table.setSpacingBefore(10f); // Space before table
-//		table.setWidthPercentage(100);
-
-		PdfPCell cell30 = new PdfPCell(new Paragraph("SL.NO", font111));
-		cell30.setHorizontalAlignment(Element.ALIGN_CENTER);
-		cell30.setFixedHeight(20f);
-		cell30.setGrayFill(0.92f);
-		table.addCell(cell30);
-
-		PdfPCell cell311 = new PdfPCell(new Paragraph("Description", font111));
-		cell311.setHorizontalAlignment(Element.ALIGN_CENTER);
-		cell311.setFixedHeight(20f);
-		cell311.setGrayFill(0.92f);
-		table.addCell(cell311);
-
-		PdfPCell cell32 = new PdfPCell(new Paragraph("Observation", font111));
-		cell32.setHorizontalAlignment(Element.ALIGN_CENTER);
-		cell32.setFixedHeight(20f);
-		cell32.setGrayFill(0.92f);
-		table.addCell(cell32);
-
-		PdfPCell cell33 = new PdfPCell(new Paragraph("Remarks", font111));
-		cell33.setGrayFill(0.92f);
-		cell33.setFixedHeight(20f);
-		cell33.setHorizontalAlignment(Element.ALIGN_CENTER);
-		table.addCell(cell33);
-		
 
 		PdfPCell cell60 = new PdfPCell(new Paragraph("7e", font));
 		cell60.setHorizontalAlignment(Element.ALIGN_RIGHT);
@@ -538,7 +508,6 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 		cell67.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table.addCell(cell67);
 
-		
 		PdfPCell cell68 = new PdfPCell(new Paragraph("7g", font));
 		cell68.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell68.setGrayFill(0.92f);
@@ -558,7 +527,7 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 		PdfPCell cell71 = new PdfPCell(new Paragraph(spdDesc2.getConnectingWireLengthRem(), font));
 		cell71.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table.addCell(cell71);
-		
+
 	}
 
 	private void streetLightIter(SpdDescription spdDesc2, Font font11, PdfPTable table, Font font) {
@@ -583,15 +552,13 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 //		cell16.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 //		table.addCell(cell16);
 //		
-		
+
 		PdfPCell cell17 = new PdfPCell(new Paragraph("6a", font));
 		cell17.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell17.setGrayFill(0.92f);
 		table.addCell(cell17);
 
-		PdfPCell cell18 = new PdfPCell(new Paragraph(
-				"Type of SPD / Model",
-				font));
+		PdfPCell cell18 = new PdfPCell(new Paragraph("Type of SPD / Model", font));
 		cell18.setHorizontalAlignment(Element.ALIGN_LEFT);
 		cell18.setFixedHeight(20f);
 		cell18.setGrayFill(0.92f);
@@ -606,7 +573,7 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 		cell20.setHorizontalAlignment(Element.ALIGN_LEFT);
 		cell20.setFixedHeight(20f);
 		table.addCell(cell20);
-		
+
 		PdfPCell cell48 = new PdfPCell(new Paragraph("6b", font));
 		cell48.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell48.setGrayFill(0.92f);
@@ -711,7 +678,6 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 		cell67.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table.addCell(cell67);
 
-		
 		PdfPCell cell68 = new PdfPCell(new Paragraph("6g", font));
 		cell68.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell68.setGrayFill(0.92f);
@@ -755,16 +721,14 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 //		PdfPCell cell16 = new PdfPCell(new Paragraph("", font));
 //		cell16.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 //		table.addCell(cell16);
-		
+
 		PdfPCell cell17 = new PdfPCell(new Paragraph("5a", font));
 		cell17.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell17.setFixedHeight(20f);
 		cell17.setGrayFill(0.92f);
 		table.addCell(cell17);
 
-		PdfPCell cell18 = new PdfPCell(new Paragraph(
-				"Type of SPD / Model",
-				font));
+		PdfPCell cell18 = new PdfPCell(new Paragraph("Type of SPD / Model", font));
 		cell18.setHorizontalAlignment(Element.ALIGN_LEFT);
 		cell18.setFixedHeight(20f);
 		cell18.setGrayFill(0.92f);
@@ -779,7 +743,7 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 		cell20.setHorizontalAlignment(Element.ALIGN_LEFT);
 		cell20.setFixedHeight(20f);
 		table.addCell(cell20);
-		
+
 		PdfPCell cell48 = new PdfPCell(new Paragraph("5b", font));
 		cell48.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell48.setFixedHeight(20f);
@@ -884,7 +848,6 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 		cell67.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table.addCell(cell67);
 
-		
 		PdfPCell cell68 = new PdfPCell(new Paragraph("5g", font));
 		cell68.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell68.setGrayFill(0.92f);
@@ -904,7 +867,7 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 		PdfPCell cell71 = new PdfPCell(new Paragraph(spdDesc2.getConnectingWireLengthRem(), font));
 		cell71.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 		table.addCell(cell71);
-		
+
 	}
 
 }
