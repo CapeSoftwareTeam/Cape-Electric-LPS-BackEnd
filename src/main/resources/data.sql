@@ -692,10 +692,6 @@ use lv_safety_verification;
 						    CREATED_DATE datetime,
 						    UPDATED_BY VARCHAR(255),
 						    UPDATED_DATE datetime,
-				            STREET_LIGHTPANNEL_OB VARCHAR(225),
-				            STREET_LIGHTPANNEL_REM VARCHAR(225),
-				            FEEDINGPOWER_EQUIPMENT_OB VARCHAR(225),
-				            FEEDINGPOWER_EQUIPMENT_REM VARCHAR(225),
 				           CONSTRAINT PK_SPD_ID  PRIMARY KEY(SPD_ID)
 				            );
 
