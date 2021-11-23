@@ -377,15 +377,7 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 		cell14.setColspan(3);
 		table.addCell(cell14);
 
-//		PdfPCell cell15 = new PdfPCell(new Paragraph("", font));
-//		cell15.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
-//		table.addCell(cell15);
-//
-//		PdfPCell cell16 = new PdfPCell(new Paragraph("", font));
-//		cell16.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
-//		table.addCell(cell16);
-
-		PdfPCell cell17 = new PdfPCell(new Paragraph("7a", font));
+		PdfPCell cell17 = new PdfPCell(new Paragraph("7.a", font));
 		cell17.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell17.setGrayFill(0.92f);
 		table.addCell(cell17);
@@ -404,7 +396,7 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 		cell20.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table.addCell(cell20);
 
-		PdfPCell cell48 = new PdfPCell(new Paragraph("7b", font));
+		PdfPCell cell48 = new PdfPCell(new Paragraph("7.b", font));
 		cell48.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell48.setGrayFill(0.92f);
 		cell48.setFixedHeight(20f);
@@ -427,7 +419,7 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 		cell51.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table.addCell(cell51);
 
-		PdfPCell cell52 = new PdfPCell(new Paragraph("7c", font));
+		PdfPCell cell52 = new PdfPCell(new Paragraph("7.c", font));
 		cell52.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell52.setGrayFill(0.92f);
 		cell52.setFixedHeight(20f);
@@ -448,7 +440,7 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 		cell55.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table.addCell(cell55);
 
-		PdfPCell cell56 = new PdfPCell(new Paragraph("7d", font));
+		PdfPCell cell56 = new PdfPCell(new Paragraph("7.d", font));
 		cell56.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell56.setGrayFill(0.92f);
 		table.addCell(cell56);
@@ -468,7 +460,7 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 		cell59.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table.addCell(cell59);
 
-		PdfPCell cell60 = new PdfPCell(new Paragraph("7e", font));
+		PdfPCell cell60 = new PdfPCell(new Paragraph("7.e", font));
 		cell60.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell60.setGrayFill(0.92f);
 		table.addCell(cell60);
@@ -488,7 +480,7 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 		cell63.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table.addCell(cell63);
 
-		PdfPCell cell64 = new PdfPCell(new Paragraph("7f", font));
+		PdfPCell cell64 = new PdfPCell(new Paragraph("7.f", font));
 		cell64.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell64.setGrayFill(0.92f);
 		table.addCell(cell64);
@@ -508,7 +500,7 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 		cell67.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table.addCell(cell67);
 
-		PdfPCell cell68 = new PdfPCell(new Paragraph("7g", font));
+		PdfPCell cell68 = new PdfPCell(new Paragraph("7.g", font));
 		cell68.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell68.setGrayFill(0.92f);
 		table.addCell(cell68);
@@ -544,16 +536,7 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 		cell14.setGrayFill(0.92f);
 		table.addCell(cell14);
 
-//		PdfPCell cell15 = new PdfPCell(new Paragraph("", font));
-//		cell15.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
-//		table.addCell(cell15);
-//
-//		PdfPCell cell16 = new PdfPCell(new Paragraph("", font));
-//		cell16.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
-//		table.addCell(cell16);
-//		
-
-		PdfPCell cell17 = new PdfPCell(new Paragraph("6a", font));
+		PdfPCell cell17 = new PdfPCell(new Paragraph("6.a", font));
 		cell17.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell17.setGrayFill(0.92f);
 		table.addCell(cell17);
@@ -574,7 +557,7 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 		cell20.setFixedHeight(20f);
 		table.addCell(cell20);
 
-		PdfPCell cell48 = new PdfPCell(new Paragraph("6b", font));
+		PdfPCell cell48 = new PdfPCell(new Paragraph("6.b", font));
 		cell48.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell48.setGrayFill(0.92f);
 		cell48.setFixedHeight(20f);
@@ -597,7 +580,7 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 		cell51.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table.addCell(cell51);
 
-		PdfPCell cell52 = new PdfPCell(new Paragraph("6c", font));
+		PdfPCell cell52 = new PdfPCell(new Paragraph("6.c", font));
 		cell52.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell52.setGrayFill(0.92f);
 		cell52.setFixedHeight(20f);
@@ -618,7 +601,7 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 		cell55.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table.addCell(cell55);
 
-		PdfPCell cell56 = new PdfPCell(new Paragraph("6d", font));
+		PdfPCell cell56 = new PdfPCell(new Paragraph("6.d", font));
 		cell56.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell56.setGrayFill(0.92f);
 		table.addCell(cell56);
@@ -638,7 +621,7 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 		cell59.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table.addCell(cell59);
 
-		PdfPCell cell60 = new PdfPCell(new Paragraph("6e", font));
+		PdfPCell cell60 = new PdfPCell(new Paragraph("6.e", font));
 		cell60.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell60.setGrayFill(0.92f);
 		table.addCell(cell60);
@@ -658,7 +641,7 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 		cell63.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table.addCell(cell63);
 
-		PdfPCell cell64 = new PdfPCell(new Paragraph("6f", font));
+		PdfPCell cell64 = new PdfPCell(new Paragraph("6.f", font));
 		cell64.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell64.setGrayFill(0.92f);
 		table.addCell(cell64);
@@ -678,7 +661,7 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 		cell67.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table.addCell(cell67);
 
-		PdfPCell cell68 = new PdfPCell(new Paragraph("6g", font));
+		PdfPCell cell68 = new PdfPCell(new Paragraph("6.g", font));
 		cell68.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell68.setGrayFill(0.92f);
 		table.addCell(cell68);
@@ -713,16 +696,8 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 		cell14.setGrayFill(0.92f);
 		cell14.setColspan(3);
 		table.addCell(cell14);
-
-//		PdfPCell cell15 = new PdfPCell(new Paragraph("", font));
-//		cell15.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
-//		table.addCell(cell15);
-//
-//		PdfPCell cell16 = new PdfPCell(new Paragraph("", font));
-//		cell16.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
-//		table.addCell(cell16);
-
-		PdfPCell cell17 = new PdfPCell(new Paragraph("5a", font));
+		
+		PdfPCell cell17 = new PdfPCell(new Paragraph("5.a", font));
 		cell17.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell17.setFixedHeight(20f);
 		cell17.setGrayFill(0.92f);
@@ -744,7 +719,7 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 		cell20.setFixedHeight(20f);
 		table.addCell(cell20);
 
-		PdfPCell cell48 = new PdfPCell(new Paragraph("5b", font));
+		PdfPCell cell48 = new PdfPCell(new Paragraph("5.b", font));
 		cell48.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell48.setFixedHeight(20f);
 		cell48.setGrayFill(0.92f);
@@ -767,7 +742,7 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 		cell51.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table.addCell(cell51);
 
-		PdfPCell cell52 = new PdfPCell(new Paragraph("5c", font));
+		PdfPCell cell52 = new PdfPCell(new Paragraph("5.c", font));
 		cell52.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell52.setGrayFill(0.92f);
 		cell52.setFixedHeight(20f);
@@ -788,7 +763,7 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 		cell55.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table.addCell(cell55);
 
-		PdfPCell cell56 = new PdfPCell(new Paragraph("5d", font));
+		PdfPCell cell56 = new PdfPCell(new Paragraph("5.d", font));
 		cell56.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell56.setGrayFill(0.92f);
 		table.addCell(cell56);
@@ -808,7 +783,7 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 		cell59.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table.addCell(cell59);
 
-		PdfPCell cell60 = new PdfPCell(new Paragraph("5e", font));
+		PdfPCell cell60 = new PdfPCell(new Paragraph("5.e", font));
 		cell60.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell60.setGrayFill(0.92f);
 		table.addCell(cell60);
@@ -828,7 +803,7 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 		cell63.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table.addCell(cell63);
 
-		PdfPCell cell64 = new PdfPCell(new Paragraph("5f", font));
+		PdfPCell cell64 = new PdfPCell(new Paragraph("5.f", font));
 		cell64.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell64.setGrayFill(0.92f);
 		table.addCell(cell64);
@@ -848,7 +823,7 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 		cell67.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table.addCell(cell67);
 
-		PdfPCell cell68 = new PdfPCell(new Paragraph("5g", font));
+		PdfPCell cell68 = new PdfPCell(new Paragraph("5.g", font));
 		cell68.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell68.setGrayFill(0.92f);
 		table.addCell(cell68);
