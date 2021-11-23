@@ -687,7 +687,35 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 		cell166.setGrayFill(0.92f);
 		table202.addCell(cell166);
 
-		PdfPCell cell169 = new PdfPCell(new Paragraph("6.a", font));
+		PdfPCell cell1241 = new PdfPCell(new Paragraph("\r\n" + "6.a", font));
+		cell1241.setHorizontalAlignment(Element.ALIGN_RIGHT);
+		cell1241.setRowspan(2);
+		cell1241.setGrayFill(0.92f);
+		table202.addCell(cell1241);
+
+		PdfPCell cell1210 = new PdfPCell(new Paragraph("Location Name", font));
+		cell1210.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
+		cell1210.setColspan(1);
+		cell1210.setGrayFill(0.92f);
+		table202.addCell(cell1210);
+
+		PdfPCell cell2 = new PdfPCell(new Paragraph(earthChamber.getLocationName(), font));
+		cell2.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
+		cell2.setColspan(2);
+		table202.addCell(cell2);
+
+		PdfPCell cell121 = new PdfPCell(new Paragraph("Location Number", font));
+		cell121.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
+		cell121.setColspan(1);
+		cell121.setGrayFill(0.92f);
+		table202.addCell(cell121);
+
+		PdfPCell cell211 = new PdfPCell(new Paragraph(earthChamber.getLocationNumber().toString(), font));
+		cell211.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
+		cell211.setColspan(2);
+		table202.addCell(cell211);
+		
+		PdfPCell cell169 = new PdfPCell(new Paragraph("6.b", font));
 		cell169.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell169.setGrayFill(0.92f);
 		table202.addCell(cell169);
@@ -705,7 +733,7 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 		cell172.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table202.addCell(cell172);
 
-		PdfPCell cell173 = new PdfPCell(new Paragraph("6.b", font));
+		PdfPCell cell173 = new PdfPCell(new Paragraph("6.c", font));
 		cell173.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell173.setGrayFill(0.92f);
 		table202.addCell(cell173);
@@ -723,7 +751,7 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 		cell176.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table202.addCell(cell176);
 
-		PdfPCell cell177 = new PdfPCell(new Paragraph("6.c", font));
+		PdfPCell cell177 = new PdfPCell(new Paragraph("6.d", font));
 		cell177.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell177.setGrayFill(0.92f);
 		table202.addCell(cell177);
@@ -741,7 +769,7 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 		cell180.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table202.addCell(cell180);
 
-		PdfPCell cell181 = new PdfPCell(new Paragraph("6.d", font));
+		PdfPCell cell181 = new PdfPCell(new Paragraph("6.e", font));
 		cell181.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell181.setGrayFill(0.92f);
 		table202.addCell(cell181);
@@ -759,7 +787,7 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 		cell184.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table202.addCell(cell184);
 
-		PdfPCell cell185 = new PdfPCell(new Paragraph("6.e", font));
+		PdfPCell cell185 = new PdfPCell(new Paragraph("6.f", font));
 		cell185.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell185.setGrayFill(0.92f);
 		table202.addCell(cell185);
@@ -777,7 +805,7 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 		cell188.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table202.addCell(cell188);
 
-		PdfPCell cell189 = new PdfPCell(new Paragraph("6.f", font));
+		PdfPCell cell189 = new PdfPCell(new Paragraph("6.g", font));
 		cell189.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell189.setGrayFill(0.92f);
 		table202.addCell(cell189);
@@ -795,7 +823,7 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 		cell192.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table202.addCell(cell192);
 
-		PdfPCell cell193 = new PdfPCell(new Paragraph("6.g", font));
+		PdfPCell cell193 = new PdfPCell(new Paragraph("6.h", font));
 		cell193.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell193.setGrayFill(0.92f);
 		table202.addCell(cell193);
@@ -813,7 +841,7 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 		cell196.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table202.addCell(cell196);
 
-		PdfPCell cell197 = new PdfPCell(new Paragraph("6.h", font));
+		PdfPCell cell197 = new PdfPCell(new Paragraph("6.i", font));
 		cell197.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell197.setGrayFill(0.92f);
 		table202.addCell(cell197);
@@ -831,7 +859,7 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 		cell200.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table202.addCell(cell200);
 
-		PdfPCell cell2011 = new PdfPCell(new Paragraph("6.i", font));
+		PdfPCell cell2011 = new PdfPCell(new Paragraph("6.j", font));
 		cell2011.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell2011.setGrayFill(0.92f);
 		table202.addCell(cell2011);
@@ -871,8 +899,36 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 		cell125.setColspan(3);
 		cell125.setGrayFill(0.92f);
 		table22.addCell(cell125);
+		
+		PdfPCell cell1241 = new PdfPCell(new Paragraph("\r\n" + "5.a", font));
+		cell1241.setHorizontalAlignment(Element.ALIGN_RIGHT);
+		cell1241.setRowspan(2);
+		cell1241.setGrayFill(0.92f);
+		table22.addCell(cell1241);
 
-		PdfPCell cell128 = new PdfPCell(new Paragraph("5.a", font));
+		PdfPCell cell1210 = new PdfPCell(new Paragraph("Location Name", font));
+		cell1210.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
+		cell1210.setColspan(1);
+		cell1210.setGrayFill(0.92f);
+		table22.addCell(cell1210);
+
+		PdfPCell cell2 = new PdfPCell(new Paragraph(earthClamps.getLocationName(), font));
+		cell2.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
+		cell2.setColspan(2);
+		table22.addCell(cell2);
+
+		PdfPCell cell121 = new PdfPCell(new Paragraph("Location Number", font));
+		cell121.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
+		cell121.setColspan(1);
+		cell121.setGrayFill(0.92f);
+		table22.addCell(cell121);
+
+		PdfPCell cell211 = new PdfPCell(new Paragraph(earthClamps.getLocationNumber().toString(), font));
+		cell211.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
+		cell211.setColspan(2);
+		table22.addCell(cell211);
+
+		PdfPCell cell128 = new PdfPCell(new Paragraph("5.b", font));
 		cell128.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell128.setGrayFill(0.92f);
 		table22.addCell(cell128);
@@ -890,7 +946,7 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 		cell131.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table22.addCell(cell131);
 
-		PdfPCell cell132 = new PdfPCell(new Paragraph("5.b", font));
+		PdfPCell cell132 = new PdfPCell(new Paragraph("5.c", font));
 		cell132.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell132.setGrayFill(0.92f);
 		table22.addCell(cell132);
@@ -908,7 +964,7 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 		cell136.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table22.addCell(cell136);
 
-		PdfPCell cell137 = new PdfPCell(new Paragraph("5.c", font));
+		PdfPCell cell137 = new PdfPCell(new Paragraph("5.d", font));
 		cell137.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell137.setGrayFill(0.92f);
 		table22.addCell(cell137);
@@ -927,7 +983,7 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 		cell140.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table22.addCell(cell140);
 
-		PdfPCell cell141 = new PdfPCell(new Paragraph("5.d", font));
+		PdfPCell cell141 = new PdfPCell(new Paragraph("5.e", font));
 		cell141.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell141.setGrayFill(0.92f);
 		table22.addCell(cell141);
@@ -945,7 +1001,7 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 		cell144.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table22.addCell(cell144);
 
-		PdfPCell cell145 = new PdfPCell(new Paragraph("5.e", font));
+		PdfPCell cell145 = new PdfPCell(new Paragraph("5.f", font));
 		cell145.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell145.setGrayFill(0.92f);
 		table22.addCell(cell145);
@@ -963,7 +1019,7 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 		cell148.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table22.addCell(cell148);
 
-		PdfPCell cell149 = new PdfPCell(new Paragraph("5.f", font));
+		PdfPCell cell149 = new PdfPCell(new Paragraph("5.g", font));
 		cell149.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell149.setGrayFill(0.92f);
 		table22.addCell(cell149);
@@ -981,7 +1037,7 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 		cell152.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table22.addCell(cell152);
 
-		PdfPCell cell153 = new PdfPCell(new Paragraph("5.g", font));
+		PdfPCell cell153 = new PdfPCell(new Paragraph("5.h", font));
 		cell153.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell153.setGrayFill(0.92f);
 		table22.addCell(cell153);
@@ -999,7 +1055,7 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 		cell156.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table22.addCell(cell156);
 
-		PdfPCell cell157 = new PdfPCell(new Paragraph("5.h", font));
+		PdfPCell cell157 = new PdfPCell(new Paragraph("5.i", font));
 		cell157.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell157.setGrayFill(0.92f);
 		table22.addCell(cell157);
@@ -1017,7 +1073,7 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 		cell160.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table22.addCell(cell160);
 
-		PdfPCell cell161 = new PdfPCell(new Paragraph("5.i", font));
+		PdfPCell cell161 = new PdfPCell(new Paragraph("5.j", font));
 		cell161.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell161.setGrayFill(0.92f);
 		table22.addCell(cell161);
@@ -1058,8 +1114,36 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 		cell49.setColspan(3);
 		cell49.setGrayFill(0.92f);
 		table21.addCell(cell49);
+		
+		PdfPCell cell124 = new PdfPCell(new Paragraph("\r\n" + "4.a", font));
+		cell124.setHorizontalAlignment(Element.ALIGN_RIGHT);
+		cell124.setRowspan(2);
+		cell124.setGrayFill(0.92f);
+		table21.addCell(cell124);
 
-		PdfPCell cell52 = new PdfPCell(new Paragraph("4.a", font));
+		PdfPCell cell1210 = new PdfPCell(new Paragraph("Location Name", font));
+		cell1210.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
+		cell1210.setColspan(1);
+		cell1210.setGrayFill(0.92f);
+		table21.addCell(cell1210);
+
+		PdfPCell cell2 = new PdfPCell(new Paragraph(earthDesc.getLocationName(), font));
+		cell2.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
+		cell2.setColspan(2);
+		table21.addCell(cell2);
+
+		PdfPCell cell121 = new PdfPCell(new Paragraph("Location Number", font));
+		cell121.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
+		cell121.setColspan(1);
+		cell121.setGrayFill(0.92f);
+		table21.addCell(cell121);
+
+		PdfPCell cell211 = new PdfPCell(new Paragraph(earthDesc.getLocationNumber().toString(), font));
+		cell211.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
+		cell211.setColspan(2);
+		table21.addCell(cell211);
+
+		PdfPCell cell52 = new PdfPCell(new Paragraph("4.b", font));
 		cell52.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell52.setGrayFill(0.92f);
 		table21.addCell(cell52);
@@ -1077,7 +1161,7 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 		cell55.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table21.addCell(cell55);
 
-		PdfPCell cell56 = new PdfPCell(new Paragraph("4.b", font));
+		PdfPCell cell56 = new PdfPCell(new Paragraph("4.c", font));
 		cell56.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell56.setGrayFill(0.92f);
 		table21.addCell(cell56);
@@ -1096,7 +1180,7 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 		cell59.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table21.addCell(cell59);
 
-		PdfPCell cell60 = new PdfPCell(new Paragraph("4.c", font));
+		PdfPCell cell60 = new PdfPCell(new Paragraph("4.d", font));
 		cell60.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell60.setGrayFill(0.92f);
 		table21.addCell(cell60);
@@ -1115,7 +1199,7 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 		cell63.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table21.addCell(cell63);
 
-		PdfPCell cell64 = new PdfPCell(new Paragraph("4.d", font));
+		PdfPCell cell64 = new PdfPCell(new Paragraph("4.e", font));
 		cell64.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell64.setGrayFill(0.92f);
 		table21.addCell(cell64);
@@ -1134,7 +1218,7 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 		cell67.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table21.addCell(cell67);
 
-		PdfPCell cell68 = new PdfPCell(new Paragraph("4.e", font));
+		PdfPCell cell68 = new PdfPCell(new Paragraph("4.f", font));
 		cell68.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell68.setGrayFill(0.92f);
 		table21.addCell(cell68);
@@ -1154,7 +1238,7 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 		cell71.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table21.addCell(cell71);
 
-		PdfPCell cell72 = new PdfPCell(new Paragraph("4.f", font));
+		PdfPCell cell72 = new PdfPCell(new Paragraph("4.g", font));
 		cell72.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell72.setGrayFill(0.92f);
 		table21.addCell(cell72);
@@ -1172,7 +1256,7 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 		cell75.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table21.addCell(cell75);
 
-		PdfPCell cell76 = new PdfPCell(new Paragraph("4.g", font));
+		PdfPCell cell76 = new PdfPCell(new Paragraph("4.h", font));
 		cell76.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell76.setGrayFill(0.92f);
 		table21.addCell(cell76);
@@ -1191,7 +1275,7 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 		cell79.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table21.addCell(cell79);
 
-		PdfPCell cell80 = new PdfPCell(new Paragraph("4.h", font));
+		PdfPCell cell80 = new PdfPCell(new Paragraph("4.i", font));
 		cell80.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell80.setGrayFill(0.92f);
 		table21.addCell(cell80);
@@ -1209,7 +1293,7 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 		cell83.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table21.addCell(cell83);
 
-		PdfPCell cell84 = new PdfPCell(new Paragraph("4.i", font));
+		PdfPCell cell84 = new PdfPCell(new Paragraph("4.j", font));
 		cell84.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell84.setGrayFill(0.92f);
 		table21.addCell(cell84);
@@ -1227,7 +1311,7 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 		cell87.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table21.addCell(cell87);
 
-		PdfPCell cell88 = new PdfPCell(new Paragraph("4.j", font));
+		PdfPCell cell88 = new PdfPCell(new Paragraph("4.k", font));
 		cell88.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell88.setGrayFill(0.92f);
 		table21.addCell(cell88);
@@ -1245,7 +1329,7 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 		cell91.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table21.addCell(cell91);
 
-		PdfPCell cell92 = new PdfPCell(new Paragraph("4.k", font));
+		PdfPCell cell92 = new PdfPCell(new Paragraph("4.l", font));
 		cell92.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell92.setGrayFill(0.92f);
 		table21.addCell(cell92);
@@ -1263,7 +1347,7 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 		cell95.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table21.addCell(cell95);
 
-		PdfPCell cell96 = new PdfPCell(new Paragraph("4.l", font));
+		PdfPCell cell96 = new PdfPCell(new Paragraph("4.m", font));
 		cell96.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell96.setGrayFill(0.92f);
 		cell96.setGrayFill(0.92f);
@@ -1281,7 +1365,7 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 		cell99.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table21.addCell(cell99);
 
-		PdfPCell cell100 = new PdfPCell(new Paragraph("4.m", font));
+		PdfPCell cell100 = new PdfPCell(new Paragraph("4.n", font));
 		cell100.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell100.setGrayFill(0.92f);
 		table21.addCell(cell100);
@@ -1299,7 +1383,7 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 		cell103.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table21.addCell(cell103);
 
-		PdfPCell cell104 = new PdfPCell(new Paragraph("4.n", font));
+		PdfPCell cell104 = new PdfPCell(new Paragraph("4.o", font));
 		cell104.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell104.setGrayFill(0.92f);
 		table21.addCell(cell104);
@@ -1317,7 +1401,7 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 		cell107.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table21.addCell(cell107);
 
-		PdfPCell cell108 = new PdfPCell(new Paragraph("4.o", font));
+		PdfPCell cell108 = new PdfPCell(new Paragraph("4.p", font));
 		cell108.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell108.setGrayFill(0.92f);
 		table21.addCell(cell108);
@@ -1335,7 +1419,7 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 		cell111.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table21.addCell(cell111);
 
-		PdfPCell cell1121 = new PdfPCell(new Paragraph("4.p", font));
+		PdfPCell cell1121 = new PdfPCell(new Paragraph("4.q", font));
 		cell1121.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell1121.setGrayFill(0.92f);
 		table21.addCell(cell1121);
@@ -1353,7 +1437,7 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 		cell1151.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table21.addCell(cell1151);
 
-		PdfPCell cell116 = new PdfPCell(new Paragraph("4.q", font));
+		PdfPCell cell116 = new PdfPCell(new Paragraph("4.r", font));
 		cell116.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell116.setGrayFill(0.92f);
 		table21.addCell(cell116);
@@ -1371,15 +1455,15 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 		cell119.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table21.addCell(cell119);
 
-		PdfPCell cell120 = new PdfPCell(new Paragraph("4.r", font));
+		PdfPCell cell120 = new PdfPCell(new Paragraph("4.s", font));
 		cell120.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell120.setGrayFill(0.92f);
 		table21.addCell(cell120);
 
-		PdfPCell cell121 = new PdfPCell(new Paragraph("Number of inspection failed", font));
-		cell121.setHorizontalAlignment(Element.ALIGN_RIGHT);
-		cell121.setGrayFill(0.92f);
-		table21.addCell(cell121);
+		PdfPCell cell1211 = new PdfPCell(new Paragraph("Number of inspection failed", font));
+		cell1211.setHorizontalAlignment(Element.ALIGN_RIGHT);
+		cell1211.setGrayFill(0.92f);
+		table21.addCell(cell1211);
 
 		PdfPCell cell122 = new PdfPCell(new Paragraph(earthDesc.getInspectedFailedNoOb(), font));
 		cell122.setHorizontalAlignment(Element.ALIGN_LEFT);
