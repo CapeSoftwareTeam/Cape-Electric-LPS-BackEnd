@@ -452,7 +452,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 		Font font1 = new Font(BaseFont.createFont(), 10, Font.NORMAL, BaseColor.BLACK);
 		Font font2 = new Font(BaseFont.createFont(), 9, Font.NORMAL, BaseColor.BLACK);
 
-		PdfPCell cell124 = new PdfPCell(new Paragraph("\r\n" + "11", font2));
+		PdfPCell cell124 = new PdfPCell(new Paragraph("\r\n" + "11.a", font2));
 		cell124.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell124.setFixedHeight(20f);
 		cell124.setRowspan(2);
@@ -484,7 +484,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 		table6.addCell(cell211);
 
 		PdfPCell cell = new PdfPCell();
-		cell.setPhrase(new Phrase("11.a", font1));
+		cell.setPhrase(new Phrase("11.b", font1));
 		cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table6.addCell(cell);
@@ -507,7 +507,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 			table6.addCell(cell1);
 		}
 
-		cell.setPhrase(new Phrase("11.b", font1));
+		cell.setPhrase(new Phrase("11.c", font1));
 		cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table6.addCell(cell);
@@ -532,7 +532,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 			table6.addCell(cell1);
 		}
 
-		cell.setPhrase(new Phrase("11.c", font1));
+		cell.setPhrase(new Phrase("11.d", font1));
 		cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table6.addCell(cell);
@@ -555,7 +555,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 			table6.addCell(cell1);
 		}
 
-		cell.setPhrase(new Phrase("11.d", font1));
+		cell.setPhrase(new Phrase("11.e", font1));
 		cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table6.addCell(cell);
@@ -578,7 +578,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 			table6.addCell(cell1);
 		}
 
-		cell.setPhrase(new Phrase("11.e", font1));
+		cell.setPhrase(new Phrase("11.f", font1));
 		cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table6.addCell(cell);
@@ -601,7 +601,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 			table6.addCell(cell1);
 		}
 
-		cell.setPhrase(new Phrase("11.f", font1));
+		cell.setPhrase(new Phrase("11.g", font1));
 		cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table6.addCell(cell);
@@ -624,7 +624,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 			table6.addCell(cell1);
 		}
 
-		cell.setPhrase(new Phrase("11.g", font1));
+		cell.setPhrase(new Phrase("11.h", font1));
 		cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table6.addCell(cell);
@@ -647,7 +647,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 			table6.addCell(cell1);
 		}
 
-		cell.setPhrase(new Phrase("11.h", font1));
+		cell.setPhrase(new Phrase("11.i", font1));
 		cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table6.addCell(cell);
@@ -670,7 +670,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 			table6.addCell(cell1);
 		}
 
-		cell.setPhrase(new Phrase("11.i", font1));
+		cell.setPhrase(new Phrase("11.j", font1));
 		cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table6.addCell(cell);
@@ -693,7 +693,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 			table6.addCell(cell1);
 		}
 
-		cell.setPhrase(new Phrase("11.j", font1));
+		cell.setPhrase(new Phrase("11.k", font1));
 		cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table6.addCell(cell);
@@ -744,7 +744,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 		cell11.setColspan(3);
 		table5.addCell(cell11);
 
-		PdfPCell cell124 = new PdfPCell(new Paragraph("\r\n" + "10", font2));
+		PdfPCell cell124 = new PdfPCell(new Paragraph("\r\n" + "10.a", font2));
 		cell124.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell124.setFixedHeight(20f);
 		cell124.setRowspan(2);
@@ -776,7 +776,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 		table5.addCell(cell211);
 
 		PdfPCell cell = new PdfPCell();
-		cell.setPhrase(new Phrase("10.a", font1));
+		cell.setPhrase(new Phrase("10.b", font1));
 		cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table5.addCell(cell);
@@ -799,7 +799,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 			table5.addCell(cell1);
 		}
 
-		cell.setPhrase(new Phrase("10.b", font1));
+		cell.setPhrase(new Phrase("10.c", font1));
 		cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table5.addCell(cell);
@@ -823,7 +823,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 			table5.addCell(cell1);
 		}
 
-		cell.setPhrase(new Phrase("10.c", font1));
+		cell.setPhrase(new Phrase("10.d", font1));
 		cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table5.addCell(cell);
@@ -846,7 +846,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 			table5.addCell(cell1);
 		}
 
-		cell.setPhrase(new Phrase("10.d", font1));
+		cell.setPhrase(new Phrase("10.e", font1));
 		cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table5.addCell(cell);
@@ -869,7 +869,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 			table5.addCell(cell1);
 		}
 
-		cell.setPhrase(new Phrase("10.e", font1));
+		cell.setPhrase(new Phrase("10.f", font1));
 		cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table5.addCell(cell);
@@ -892,7 +892,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 			table5.addCell(cell1);
 		}
 
-		cell.setPhrase(new Phrase("10.f", font1));
+		cell.setPhrase(new Phrase("10.g", font1));
 		cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table5.addCell(cell);
@@ -915,7 +915,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 			table5.addCell(cell1);
 		}
 
-		cell.setPhrase(new Phrase("10.g", font1));
+		cell.setPhrase(new Phrase("10.h", font1));
 		cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table5.addCell(cell);
@@ -967,7 +967,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 		cell11.setColspan(3);
 		table4.addCell(cell11);
 
-		PdfPCell cell124 = new PdfPCell(new Paragraph("\r\n" + "9", font2));
+		PdfPCell cell124 = new PdfPCell(new Paragraph("\r\n" + "9.a", font2));
 		cell124.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell124.setFixedHeight(20f);
 		cell124.setRowspan(2);
@@ -999,7 +999,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 		table4.addCell(cell211);
 
 		PdfPCell cell = new PdfPCell();
-		cell.setPhrase(new Phrase("9.a", font1));
+		cell.setPhrase(new Phrase("9.b", font1));
 		cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table4.addCell(cell);
@@ -1022,7 +1022,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 			table4.addCell(cell1);
 		}
 
-		cell.setPhrase(new Phrase("9.b", font1));
+		cell.setPhrase(new Phrase("9.c", font1));
 		cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table4.addCell(cell);
@@ -1045,7 +1045,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 			table4.addCell(cell1);
 		}
 
-		cell.setPhrase(new Phrase("9.c", font1));
+		cell.setPhrase(new Phrase("9.d", font1));
 		cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table4.addCell(cell);
@@ -1068,7 +1068,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 			table4.addCell(cell1);
 		}
 
-		cell.setPhrase(new Phrase("9.d", font1));
+		cell.setPhrase(new Phrase("9.e", font1));
 		cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table4.addCell(cell);
@@ -1091,7 +1091,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 			table4.addCell(cell1);
 		}
 
-		cell.setPhrase(new Phrase("9.e", font1));
+		cell.setPhrase(new Phrase("9.f", font1));
 		cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table4.addCell(cell);
@@ -1114,7 +1114,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 			table4.addCell(cell1);
 		}
 
-		cell.setPhrase(new Phrase("9.f", font1));
+		cell.setPhrase(new Phrase("9.g", font1));
 		cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table4.addCell(cell);
@@ -1137,7 +1137,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 			table4.addCell(cell1);
 		}
 
-		cell.setPhrase(new Phrase("9.g", font1));
+		cell.setPhrase(new Phrase("9.h", font1));
 		cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table4.addCell(cell);
@@ -1160,7 +1160,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 			table4.addCell(cell1);
 		}
 
-		cell.setPhrase(new Phrase("9.h", font1));
+		cell.setPhrase(new Phrase("9.i", font1));
 		cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table4.addCell(cell);
@@ -1183,7 +1183,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 			table4.addCell(cell1);
 		}
 
-		cell.setPhrase(new Phrase("9.i", font1));
+		cell.setPhrase(new Phrase("9.j", font1));
 		cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table4.addCell(cell);
@@ -1235,7 +1235,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 		Font font1 = new Font(BaseFont.createFont(), 10, Font.NORMAL, BaseColor.BLACK);
 		Font font2 = new Font(BaseFont.createFont(), 9, Font.NORMAL, BaseColor.BLACK);
 
-		PdfPCell cell124 = new PdfPCell(new Paragraph("\r\n" + "8", font2));
+		PdfPCell cell124 = new PdfPCell(new Paragraph("\r\n" + "8.a", font2));
 		cell124.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell124.setFixedHeight(20f);
 		cell124.setRowspan(2);
@@ -1267,7 +1267,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 		table3.addCell(cell211);
 
 		PdfPCell cell = new PdfPCell();
-		cell.setPhrase(new Phrase("8.a", font1));
+		cell.setPhrase(new Phrase("8.b", font1));
 		cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table3.addCell(cell);
@@ -1290,7 +1290,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 			table3.addCell(cell1);
 		}
 
-		cell.setPhrase(new Phrase("8.b", font1));
+		cell.setPhrase(new Phrase("8.c", font1));
 		cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table3.addCell(cell);
@@ -1313,7 +1313,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 			table3.addCell(cell1);
 		}
 
-		cell.setPhrase(new Phrase("8.c", font1));
+		cell.setPhrase(new Phrase("8.d", font1));
 		cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table3.addCell(cell);
@@ -1336,7 +1336,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 			table3.addCell(cell1);
 		}
 
-		cell.setPhrase(new Phrase("8.d", font1));
+		cell.setPhrase(new Phrase("8.e", font1));
 		cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table3.addCell(cell);
@@ -1359,7 +1359,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 			table3.addCell(cell1);
 		}
 
-		cell.setPhrase(new Phrase("8.e", font1));
+		cell.setPhrase(new Phrase("8.f", font1));
 		cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table3.addCell(cell);
@@ -1382,7 +1382,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 			table3.addCell(cell1);
 		}
 
-		cell.setPhrase(new Phrase("8.f", font1));
+		cell.setPhrase(new Phrase("8.g", font1));
 		cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table3.addCell(cell);
@@ -1405,7 +1405,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 			table3.addCell(cell1);
 		}
 
-		cell.setPhrase(new Phrase("8.g", font1));
+		cell.setPhrase(new Phrase("8.h", font1));
 		cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table3.addCell(cell);
@@ -1428,7 +1428,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 			table3.addCell(cell1);
 		}
 
-		cell.setPhrase(new Phrase("8.h", font1));
+		cell.setPhrase(new Phrase("8.i", font1));
 		cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table3.addCell(cell);
@@ -1451,7 +1451,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 			table3.addCell(cell1);
 		}
 
-		cell.setPhrase(new Phrase("8.i", font1));
+		cell.setPhrase(new Phrase("8.j", font1));
 		cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table3.addCell(cell);
@@ -1474,7 +1474,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 			table3.addCell(cell1);
 		}
 
-		cell.setPhrase(new Phrase("8.j", font1));
+		cell.setPhrase(new Phrase("8.k", font1));
 		cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table3.addCell(cell);
@@ -1497,7 +1497,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 			table3.addCell(cell1);
 		}
 
-		cell.setPhrase(new Phrase("8.k", font1));
+		cell.setPhrase(new Phrase("8.l", font1));
 		cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table3.addCell(cell);
@@ -1520,7 +1520,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 			table3.addCell(cell1);
 		}
 
-		cell.setPhrase(new Phrase("8.l", font1));
+		cell.setPhrase(new Phrase("8.m", font1));
 		cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table3.addCell(cell);
@@ -1543,7 +1543,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 			table3.addCell(cell1);
 		}
 
-		cell.setPhrase(new Phrase("8.m", font1));
+		cell.setPhrase(new Phrase("8.n", font1));
 		cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table3.addCell(cell);
@@ -1566,7 +1566,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 			table3.addCell(cell1);
 		}
 
-		cell.setPhrase(new Phrase("8.n", font1));
+		cell.setPhrase(new Phrase("8.o", font1));
 		cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table3.addCell(cell);
@@ -1617,7 +1617,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 		cell11.setColspan(3);
 		table2.addCell(cell11);
 
-		PdfPCell cell124 = new PdfPCell(new Paragraph("\r\n" + "7", font2));
+		PdfPCell cell124 = new PdfPCell(new Paragraph("\r\n" + "7.a", font2));
 		cell124.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell124.setFixedHeight(20f);
 		cell124.setRowspan(2);
@@ -1649,7 +1649,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 		table2.addCell(cell211);
 
 		PdfPCell cell200 = new PdfPCell();
-		cell200.setPhrase(new Phrase("7.a", font1));
+		cell200.setPhrase(new Phrase("7.b", font1));
 		cell200.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell200.setBackgroundColor(new GrayColor(0.93f));
 		table2.addCell(cell200);
@@ -1673,7 +1673,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 		}
 
 		PdfPCell cell201 = new PdfPCell();
-		cell201.setPhrase(new Phrase("7.b", font1));
+		cell201.setPhrase(new Phrase("7.c", font1));
 		cell201.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell201.setBackgroundColor(new GrayColor(0.93f));
 		table2.addCell(cell201);
@@ -1697,7 +1697,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 		}
 
 		PdfPCell cell = new PdfPCell();
-		cell.setPhrase(new Phrase("7.c", font1));
+		cell.setPhrase(new Phrase("7.d", font1));
 		cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table2.addCell(cell);
@@ -1720,7 +1720,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 			table2.addCell(cell1);
 		}
 
-		cell.setPhrase(new Phrase("7.d", font1));
+		cell.setPhrase(new Phrase("7.e", font1));
 		cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table2.addCell(cell);
@@ -1743,7 +1743,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 			table2.addCell(cell1);
 		}
 
-		cell.setPhrase(new Phrase("7.e", font1));
+		cell.setPhrase(new Phrase("7.f", font1));
 		cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table2.addCell(cell);
@@ -1766,7 +1766,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 			table2.addCell(cell1);
 		}
 
-		cell.setPhrase(new Phrase("7.f", font1));
+		cell.setPhrase(new Phrase("7.g", font1));
 		cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table2.addCell(cell);
@@ -1789,7 +1789,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 			table2.addCell(cell1);
 		}
 
-		cell.setPhrase(new Phrase("7.g", font2));
+		cell.setPhrase(new Phrase("7.h", font2));
 		cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table2.addCell(cell);
@@ -1843,7 +1843,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 		cell11.setColspan(3);
 		table1.addCell(cell11);
 
-		PdfPCell cell124 = new PdfPCell(new Paragraph("\r\n" + "6.a.a", font2));
+		PdfPCell cell124 = new PdfPCell(new Paragraph("\r\n"+"6.a", font2));
 		cell124.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell124.setFixedHeight(20f);
 		cell124.setRowspan(2);
@@ -1876,7 +1876,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 		table1.addCell(cell211);
 
 		PdfPCell cell = new PdfPCell();
-		cell.setPhrase(new Phrase("6.a", font1));
+		cell.setPhrase(new Phrase("6.b", font1));
 		cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table1.addCell(cell);
@@ -1899,7 +1899,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 			table1.addCell(cell1);
 		}
 
-		cell.setPhrase(new Phrase("6.b", font1));
+		cell.setPhrase(new Phrase("6.c", font1));
 		cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table1.addCell(cell);
@@ -1923,7 +1923,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 			table1.addCell(cell1);
 		}
 
-		cell.setPhrase(new Phrase("6.c", font1));
+		cell.setPhrase(new Phrase("6.d", font1));
 		cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table1.addCell(cell);
@@ -1946,7 +1946,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 			table1.addCell(cell1);
 		}
 
-		cell.setPhrase(new Phrase("6.d", font1));
+		cell.setPhrase(new Phrase("6.e", font1));
 		cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table1.addCell(cell);
@@ -1969,7 +1969,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 			table1.addCell(cell1);
 		}
 
-		cell.setPhrase(new Phrase("6.e", font1));
+		cell.setPhrase(new Phrase("6.f", font1));
 		cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table1.addCell(cell);
@@ -1993,7 +1993,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 			table1.addCell(cell1);
 		}
 
-		cell.setPhrase(new Phrase("6.f", font1));
+		cell.setPhrase(new Phrase("6.g", font1));
 		cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table1.addCell(cell);
@@ -2018,7 +2018,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 			table1.addCell(cell1);
 		}
 
-		cell.setPhrase(new Phrase("6.g", font1));
+		cell.setPhrase(new Phrase("6.h", font1));
 		cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table1.addCell(cell);
@@ -2043,7 +2043,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 			table1.addCell(cell1);
 		}
 
-		cell.setPhrase(new Phrase("6.h", font1));
+		cell.setPhrase(new Phrase("6.i", font1));
 		cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table1.addCell(cell);
@@ -2068,7 +2068,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 			table1.addCell(cell1);
 		}
 
-		cell.setPhrase(new Phrase("6.i", font1));
+		cell.setPhrase(new Phrase("6.j", font1));
 		cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table1.addCell(cell);
@@ -2093,7 +2093,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 			table1.addCell(cell1);
 		}
 
-		cell.setPhrase(new Phrase("6.j", font1));
+		cell.setPhrase(new Phrase("6.k", font1));
 		cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table1.addCell(cell);
@@ -2117,7 +2117,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 
 		}
 
-		cell.setPhrase(new Phrase("6.k", font1));
+		cell.setPhrase(new Phrase("6.l", font1));
 		cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table1.addCell(cell);
@@ -2140,7 +2140,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 			table1.addCell(cell1);
 		}
 
-		cell.setPhrase(new Phrase("6.l", font1));
+		cell.setPhrase(new Phrase("6.m", font1));
 		cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table1.addCell(cell);
@@ -2163,7 +2163,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 			table1.addCell(cell1);
 		}
 
-		cell.setPhrase(new Phrase("6.m", font1));
+		cell.setPhrase(new Phrase("6.n", font1));
 		cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table1.addCell(cell);
