@@ -69,7 +69,7 @@ public class FinalPDFController {
 		printAirTerminationService.printAirTermination(userName, lpsId);
 		printDownConductorService.printDownConductor(userName, lpsId);
 		printSPDService.printSPD(userName, lpsId);
-		printEarthingLpsService.printEarthingLpsDetails(userName, lpsId);
+		//printEarthingLpsService.printEarthingLpsDetails(userName, lpsId);
 		printSDandEarthStudService.printSDandEarthStud(userName, lpsId);
 		printFinalPDFService.printFinalPDF(userName, lpsId);
 

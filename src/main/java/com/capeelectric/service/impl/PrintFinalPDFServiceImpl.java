@@ -34,7 +34,7 @@ public class PrintFinalPDFServiceImpl implements PrintFinalPDFService {
 				inputPdfList.add(new FileInputStream("AirTermination.pdf"));
 				inputPdfList.add(new FileInputStream("DownConductorLps.pdf"));
 				inputPdfList.add(new FileInputStream("SPD.pdf"));
-				inputPdfList.add(new FileInputStream("EarthingLps.pdf"));
+				//inputPdfList.add(new FileInputStream("EarthingLps.pdf"));
 				inputPdfList.add(new FileInputStream("SDandEarthStud.pdf"));
 
 				OutputStream outputStream = new FileOutputStream("finalreport.pdf");
