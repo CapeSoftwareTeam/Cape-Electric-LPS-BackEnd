@@ -56,8 +56,8 @@ public class MailPDFController {
 		printBasicLpsService.printBasicLps(userName, lpsId);
 		printAirTerminationService.printAirTermination(userName, lpsId);
 		printDownConductorService.printDownConductor(userName, lpsId);
+		printEarthingLpsService.printEarthingLpsDetails(userName, lpsId);
 		printSPDService.printSPD(userName, lpsId);
-		//printEarthingLpsService.printEarthingLpsDetails(userName, lpsId);
 		printSDandEarthStudService.printSDandEarthStud(userName, lpsId);
 	    awsEmailService.sendEmailPDF(userName);
 		return new ResponseEntity<String>("Final PDF file has been sent to your registered mail id.", HttpStatus.OK);

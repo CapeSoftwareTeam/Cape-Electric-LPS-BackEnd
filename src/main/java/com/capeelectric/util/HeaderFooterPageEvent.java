@@ -1,13 +1,13 @@
 package com.capeelectric.util;
 
 import java.io.IOException;
+
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.ExceptionConverter;
 import com.itextpdf.text.Font;
-import com.itextpdf.text.Font.FontFamily;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.BaseFont;
@@ -51,21 +51,21 @@ public class HeaderFooterPageEvent extends PdfPageEventHelper {
 			final PdfContentByte directContent = writer.getDirectContent();
 			directContent.setColorFill(new GrayColor(DARK_GRAY));
 
-			String file = "file:///D:/project%20cape/siva/Cape-Back-end/src/main/resources/image/rush-logo.png";
-			Image image = Image.getInstance(file);
-			image.scaleToFit(185, 185);
-			image.setAbsolutePosition(-3, -9);
-			document.add(image);
+//			String file = "file:///C:/Users/capeelectricsoftware/Documents/GitHub/Cape-Electric-LPS-BackEnd/src/main/resources/image/rush-logo.png";
+//			Image image = Image.getInstance(file);
+//			image.scaleToFit(185, 185);
+//			image.setAbsolutePosition(-3, -9);
+//			document.add(image);
 			
 			Font font = new Font(BaseFont.createFont(), 9, Font.NORMAL, BaseColor.DARK_GRAY);
 
 			ColumnText.showTextAligned(writer.getDirectContent(), Element.ALIGN_CENTER,
-					new Phrase("Testing Inspection and Verification (TIC) of LV electrical installation", font), 300,
-					40, 0);
-			ColumnText.showTextAligned(writer.getDirectContent(), Element.ALIGN_CENTER,
-					new Phrase("Electrical safety in Industrial and Commercial premises", font), 302, 30, 0);
-			ColumnText.showTextAligned(writer.getDirectContent(), Element.ALIGN_CENTER,
-					new Phrase("as per IEC 60364 – 6 (IS 732)", font), 300, 20, 0);
+					new Phrase("CAPE electric pvt. Ltd., A41B Sipcot, Oragadam, Kancheepuram – 602105.", font), 300,
+					30, 0);
+//			ColumnText.showTextAligned(writer.getDirectContent(), Element.ALIGN_CENTER,
+//					new Phrase("Electrical safety in Industrial and Commercial premises", font), 302, 30, 0);
+//			ColumnText.showTextAligned(writer.getDirectContent(), Element.ALIGN_CENTER,
+//					new Phrase("as per IEC 60364 – 6 (IS 732)", font), 300, 20, 0);
 
 			footer.setWidths(new int[] { 2, 1 });
 			footer.setTotalWidth(70);
@@ -83,7 +83,7 @@ public class HeaderFooterPageEvent extends PdfPageEventHelper {
 
 			PdfContentByte canvas = writer.getDirectContent();
 			canvas.beginMarkedContentSequence(PdfName.ARTIFACT);
-			footer.writeSelectedRows(0, -1, 470, 45, canvas);
+			footer.writeSelectedRows(0, -1, 470, 40, canvas);
 			footer.getDefaultCell().setBorder(0);
 			canvas.endMarkedContentSequence();
 		} catch (DocumentException | IOException de) {
