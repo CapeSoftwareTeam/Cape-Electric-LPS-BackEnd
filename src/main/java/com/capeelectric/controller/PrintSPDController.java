@@ -10,9 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.capeelectric.exception.DownConductorException;
 import com.capeelectric.exception.SPDException;
-import com.capeelectric.service.PrintDownConductorService;
 import com.capeelectric.service.PrintSPDService;
 
 @RestController

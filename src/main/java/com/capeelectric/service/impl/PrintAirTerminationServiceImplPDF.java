@@ -283,6 +283,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 				}
 
 				document.close();
+				writer.close();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -454,14 +455,12 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 
 		PdfPCell cell124 = new PdfPCell(new Paragraph("\r\n" + "11.a", font2));
 		cell124.setHorizontalAlignment(Element.ALIGN_RIGHT);
-		cell124.setFixedHeight(20f);
 		cell124.setRowspan(2);
 		cell124.setGrayFill(0.92f);
 		table6.addCell(cell124);
 
 		PdfPCell cell1210 = new PdfPCell(new Paragraph("Location Name", font));
 		cell1210.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
-		cell1210.setFixedHeight(20f);
 		cell1210.setColspan(1);
 		cell1210.setGrayFill(0.92f);
 		table6.addCell(cell1210);
@@ -473,7 +472,6 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 
 		PdfPCell cell121 = new PdfPCell(new Paragraph("Location Number", font));
 		cell121.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
-		cell121.setFixedHeight(20f);
 		cell121.setColspan(1);
 		cell121.setGrayFill(0.92f);
 		table6.addCell(cell121);
@@ -746,14 +744,12 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 
 		PdfPCell cell124 = new PdfPCell(new Paragraph("\r\n" + "10.a", font2));
 		cell124.setHorizontalAlignment(Element.ALIGN_RIGHT);
-		cell124.setFixedHeight(20f);
 		cell124.setRowspan(2);
 		cell124.setGrayFill(0.92f);
 		table5.addCell(cell124);
 
 		PdfPCell cell1210 = new PdfPCell(new Paragraph("Location Name", font));
 		cell1210.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
-		cell1210.setFixedHeight(20f);
 		cell1210.setColspan(1);
 		cell1210.setGrayFill(0.92f);
 		table5.addCell(cell1210);
@@ -765,7 +761,6 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 
 		PdfPCell cell121 = new PdfPCell(new Paragraph("Location Number", font));
 		cell121.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
-		cell121.setFixedHeight(20f);
 		cell121.setColspan(1);
 		cell121.setGrayFill(0.92f);
 		table5.addCell(cell121);
@@ -969,14 +964,12 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 
 		PdfPCell cell124 = new PdfPCell(new Paragraph("\r\n" + "9.a", font2));
 		cell124.setHorizontalAlignment(Element.ALIGN_RIGHT);
-		cell124.setFixedHeight(20f);
 		cell124.setRowspan(2);
 		cell124.setGrayFill(0.92f);
 		table4.addCell(cell124);
 
 		PdfPCell cell1210 = new PdfPCell(new Paragraph("Location Name", font));
 		cell1210.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
-		cell1210.setFixedHeight(20f);
 		cell1210.setColspan(1);
 		cell1210.setGrayFill(0.92f);
 		table4.addCell(cell1210);
@@ -988,7 +981,6 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 
 		PdfPCell cell121 = new PdfPCell(new Paragraph("Location Number", font));
 		cell121.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
-		cell121.setFixedHeight(20f);
 		cell121.setColspan(1);
 		cell121.setGrayFill(0.92f);
 		table4.addCell(cell121);
@@ -1236,14 +1228,12 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 
 		PdfPCell cell124 = new PdfPCell(new Paragraph("\r\n" + "8.a", font2));
 		cell124.setHorizontalAlignment(Element.ALIGN_RIGHT);
-		cell124.setFixedHeight(20f);
 		cell124.setRowspan(2);
 		cell124.setGrayFill(0.92f);
 		table3.addCell(cell124);
 
 		PdfPCell cell1210 = new PdfPCell(new Paragraph("Location Name", font));
 		cell1210.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
-		cell1210.setFixedHeight(20f);
 		cell1210.setColspan(1);
 		cell1210.setGrayFill(0.92f);
 		table3.addCell(cell1210);
@@ -1255,7 +1245,6 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 
 		PdfPCell cell121 = new PdfPCell(new Paragraph("Location Number", font));
 		cell121.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
-		cell121.setFixedHeight(20f);
 		cell121.setColspan(1);
 		cell121.setGrayFill(0.92f);
 		table3.addCell(cell121);
@@ -1617,14 +1606,12 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 
 		PdfPCell cell124 = new PdfPCell(new Paragraph("\r\n" + "7.a", font2));
 		cell124.setHorizontalAlignment(Element.ALIGN_RIGHT);
-		cell124.setFixedHeight(20f);
 		cell124.setRowspan(2);
 		cell124.setGrayFill(0.92f);
 		table2.addCell(cell124);
 
 		PdfPCell cell1210 = new PdfPCell(new Paragraph("Location Name", font));
 		cell1210.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
-		cell1210.setFixedHeight(20f);
 		cell1210.setColspan(1);
 		cell1210.setGrayFill(0.92f);
 		table2.addCell(cell1210);
@@ -1636,7 +1623,6 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 
 		PdfPCell cell121 = new PdfPCell(new Paragraph("Location Number", font));
 		cell121.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
-		cell121.setFixedHeight(20f);
 		cell121.setColspan(1);
 		cell121.setGrayFill(0.92f);
 		table2.addCell(cell121);
@@ -1843,14 +1829,12 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 
 		PdfPCell cell124 = new PdfPCell(new Paragraph("\r\n"+"6.a", font1));
 		cell124.setHorizontalAlignment(Element.ALIGN_RIGHT);
-		cell124.setFixedHeight(20f);
 		cell124.setRowspan(2);
 		cell124.setGrayFill(0.92f);
 		table1.addCell(cell124);
 
 		PdfPCell cell1210 = new PdfPCell(new Paragraph("Location Name", font));
 		cell1210.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
-		cell1210.setFixedHeight(20f);
 		cell1210.setColspan(1);
 		cell1210.setGrayFill(0.92f);
 		table1.addCell(cell1210);
@@ -1862,7 +1846,6 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 
 		PdfPCell cell121 = new PdfPCell(new Paragraph("Location Number", font));
 		cell121.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
-		cell121.setFixedHeight(20f);
 		cell121.setColspan(1);
 		cell121.setGrayFill(0.92f);
 		table1.addCell(cell121);

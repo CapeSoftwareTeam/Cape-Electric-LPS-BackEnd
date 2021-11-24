@@ -75,9 +75,8 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 				headertable.setSpacingBefore(10f); // Space before table
 				headertable.setWidthPercentage(100);
 
-				PdfPCell label = new PdfPCell(new Paragraph(
-						"Checklist for Down Conductors of LPS \r\n"
-						+ "as per IS/IEC 62305", font1));
+				PdfPCell label = new PdfPCell(
+						new Paragraph("Checklist for Down Conductors of LPS \r\n" + "as per IS/IEC 62305", font1));
 				label.setHorizontalAlignment(Element.ALIGN_CENTER);
 				label.setGrayFill(0.92f);
 //				label.setFixedHeight(20f);
@@ -398,7 +397,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 					testingJointIter(document, testJoint, font);
 				}
 				document.close();
-				;
+				writer.close();
 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -447,7 +446,6 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 
 		PdfPCell cell1210 = new PdfPCell(new Paragraph("Location Name", font111));
 		cell1210.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
-		cell1210.setFixedHeight(20f);
 		cell1210.setColspan(1);
 		cell1210.setGrayFill(0.92f);
 		table2.addCell(cell1210);
@@ -459,7 +457,6 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 
 		PdfPCell cell121 = new PdfPCell(new Paragraph("Location Number", font111));
 		cell121.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
-		cell121.setFixedHeight(20f);
 		cell121.setColspan(1);
 		cell121.setGrayFill(0.92f);
 		table2.addCell(cell121);
@@ -472,7 +469,6 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		PdfPCell cell25 = new PdfPCell(new Paragraph("12.b", font));
 		cell25.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell25.setGrayFill(0.92f);
-		cell25.setFixedHeight(20f);
 		table2.addCell(cell25);
 
 		PdfPCell cell26 = new PdfPCell(new Paragraph("Test joint available or not", font));
@@ -680,14 +676,12 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 
 		PdfPCell cell124 = new PdfPCell(new Paragraph("\r\n" + "11.a", font));
 		cell124.setHorizontalAlignment(Element.ALIGN_RIGHT);
-		cell124.setFixedHeight(20f);
 		cell124.setRowspan(2);
 		cell124.setGrayFill(0.92f);
 		table2.addCell(cell124);
 
 		PdfPCell cell1210 = new PdfPCell(new Paragraph("Location Name", font111));
 		cell1210.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
-		cell1210.setFixedHeight(20f);
 		cell1210.setColspan(1);
 		cell1210.setGrayFill(0.92f);
 		table2.addCell(cell1210);
@@ -699,7 +693,6 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 
 		PdfPCell cell121 = new PdfPCell(new Paragraph("Location Number", font111));
 		cell121.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
-		cell121.setFixedHeight(20f);
 		cell121.setColspan(1);
 		cell121.setGrayFill(0.92f);
 		table2.addCell(cell121);
@@ -937,14 +930,12 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 
 		PdfPCell cell124 = new PdfPCell(new Paragraph("\r\n" + "10.a", font));
 		cell124.setHorizontalAlignment(Element.ALIGN_RIGHT);
-		cell124.setFixedHeight(20f);
 		cell124.setRowspan(2);
 		cell124.setGrayFill(0.92f);
 		table2.addCell(cell124);
 
 		PdfPCell cell1210 = new PdfPCell(new Paragraph("Location Name", font111));
 		cell1210.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
-		cell1210.setFixedHeight(20f);
 		cell1210.setColspan(1);
 		cell1210.setGrayFill(0.92f);
 		table2.addCell(cell1210);
@@ -956,7 +947,6 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 
 		PdfPCell cell121 = new PdfPCell(new Paragraph("Location Number", font111));
 		cell121.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
-		cell121.setFixedHeight(20f);
 		cell121.setColspan(1);
 		cell121.setGrayFill(0.92f);
 		table2.addCell(cell121);
@@ -1138,14 +1128,12 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 
 		PdfPCell cell124 = new PdfPCell(new Paragraph("\r\n" + "9.a", font));
 		cell124.setHorizontalAlignment(Element.ALIGN_RIGHT);
-		cell124.setFixedHeight(20f);
 		cell124.setRowspan(2);
 		cell124.setGrayFill(0.92f);
 		table2.addCell(cell124);
 
 		PdfPCell cell1210 = new PdfPCell(new Paragraph("Location Name", font111));
 		cell1210.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
-		cell1210.setFixedHeight(20f);
 		cell1210.setColspan(1);
 		cell1210.setGrayFill(0.92f);
 		table2.addCell(cell1210);
@@ -1157,7 +1145,6 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 
 		PdfPCell cell121 = new PdfPCell(new Paragraph("Location Number", font111));
 		cell121.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
-		cell121.setFixedHeight(20f);
 		cell121.setColspan(1);
 		cell121.setGrayFill(0.92f);
 		table2.addCell(cell121);
@@ -1342,14 +1329,12 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 
 		PdfPCell cell124 = new PdfPCell(new Paragraph("\r\n" + "8.a", font));
 		cell124.setHorizontalAlignment(Element.ALIGN_RIGHT);
-		cell124.setFixedHeight(20f);
 		cell124.setRowspan(2);
 		cell124.setGrayFill(0.92f);
 		table1.addCell(cell124);
 
 		PdfPCell cell1210 = new PdfPCell(new Paragraph("Location Name", font11));
 		cell1210.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
-		cell1210.setFixedHeight(20f);
 		cell1210.setColspan(1);
 		cell1210.setGrayFill(0.92f);
 		table1.addCell(cell1210);
@@ -1361,7 +1346,6 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 
 		PdfPCell cell121 = new PdfPCell(new Paragraph("Location Number", font11));
 		cell121.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
-		cell121.setFixedHeight(20f);
 		cell121.setColspan(1);
 		cell121.setGrayFill(0.92f);
 		table1.addCell(cell121);
@@ -1522,19 +1506,16 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		cell22.setHorizontalAlignment(Element.ALIGN_CENTER);
 		cell22.setGrayFill(0.92f);
 		cell22.setColspan(3);
-		cell22.setFixedHeight(20f);
 		table1.addCell(cell22);
 
 		PdfPCell cell124 = new PdfPCell(new Paragraph("\r\n" + "7.a", font));
 		cell124.setHorizontalAlignment(Element.ALIGN_RIGHT);
-		cell124.setFixedHeight(20f);
 		cell124.setRowspan(2);
 		cell124.setGrayFill(0.92f);
 		table1.addCell(cell124);
 
 		PdfPCell cell1210 = new PdfPCell(new Paragraph("Location Name", font11));
 		cell1210.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
-		cell1210.setFixedHeight(20f);
 		cell1210.setColspan(1);
 		cell1210.setGrayFill(0.92f);
 		table1.addCell(cell1210);
@@ -1546,7 +1527,6 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 
 		PdfPCell cell121 = new PdfPCell(new Paragraph("Location Number", font11));
 		cell121.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
-		cell121.setFixedHeight(20f);
 		cell121.setColspan(1);
 		cell121.setGrayFill(0.92f);
 		table1.addCell(cell121);

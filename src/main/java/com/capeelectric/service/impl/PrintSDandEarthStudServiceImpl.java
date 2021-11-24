@@ -10,10 +10,8 @@ import org.springframework.stereotype.Service;
 import com.capeelectric.exception.EarthStudException;
 import com.capeelectric.model.BasicLps;
 import com.capeelectric.model.EarthStudDescription;
-import com.capeelectric.model.LpsAirDiscription;
 import com.capeelectric.model.SeparateDistance;
 import com.capeelectric.model.SeperationDistanceDescription;
-import com.capeelectric.repository.AirTerminationLpsRepository;
 import com.capeelectric.repository.BasicLpsRepository;
 import com.capeelectric.repository.EarthStudRepository;
 import com.capeelectric.repository.SeperationDistanceRepository;
@@ -50,23 +48,20 @@ public class PrintSDandEarthStudServiceImpl implements PrintSDandEarthStudServic
 			try {
 
 				PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("SDandEarthStud.pdf"));
+				
 				document.open();
-				Font font11 = new Font(BaseFont.createFont(), 10, Font.NORMAL | Font.BOLD, BaseColor.BLACK);
-				float[] pointColumnWidths30 = { 25F, 150F, 55F, 50F };
-
+				
+				List<BasicLps> basicLps = basicLpsRepository.findByUserNameAndBasicLpsId(userName, lpsId);
+				BasicLps basicLps1 = basicLps.get(0);
+				
 				List<SeperationDistanceDescription> separateDistance = seperationDistanceRepository
 						.findByUserNameAndBasicLpsId(userName, lpsId);
 				SeperationDistanceDescription separateDistance1 = separateDistance.get(0);
 
 				List<SeparateDistance> separateDistance2 = separateDistance1.getSeparateDistanceDescription();
-				// SeparateDistance separateDistance3 = separateDistance2.get(0);
 
-				List<EarthStudDescription> earthStud1 = earthStudRepository.findByUserNameAndBasicLpsId(userName,
-						lpsId);
+				List<EarthStudDescription> earthStud1 = earthStudRepository.findByUserNameAndBasicLpsId(userName,lpsId);
 				EarthStudDescription earthStud = earthStud1.get(0);
-
-				List<BasicLps> basicLps = basicLpsRepository.findByUserNameAndBasicLpsId(userName, lpsId);
-				BasicLps basicLps1 = basicLps.get(0);
 
 				float[] pointColumnWidths40 = { 100F };
 
@@ -208,6 +203,10 @@ public class PrintSDandEarthStudServiceImpl implements PrintSDandEarthStudServic
 				table4.addCell(cell28);
 
 				document.add(table4);
+				
+				Font font11 = new Font(BaseFont.createFont(), 10, Font.NORMAL | Font.BOLD, BaseColor.BLACK);
+				
+				float[] pointColumnWidths30 = { 25F, 150F, 55F, 50F };
 
 				PdfPTable table = new PdfPTable(pointColumnWidths30);
 				table.setWidthPercentage(100); // Width 100%
@@ -508,6 +507,8 @@ public class PrintSDandEarthStudServiceImpl implements PrintSDandEarthStudServic
 
 				document.add(table2);
 				document.close();
+				writer.close();
+				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

@@ -49,9 +49,6 @@ public class PrintBasicLpsServiceImpl implements PrintBasicLpsService {
 				Set<BasicLpsDescription> basicDesc = basicLps1.getBasicLpsDescription();
 				List<BasicLpsDescription> basicDesc1 = new ArrayList<>(basicDesc);
 
-				BasicLpsDescription basicDesc2 = basicDesc1.get(0);
-				// BasicLpsDescription basicDesc1 = basicDesc.get(0);
-
 				document.open();
 
 				Font font12B = new Font(BaseFont.createFont(), 12, Font.NORMAL | Font.BOLD, BaseColor.BLACK);
@@ -254,11 +251,6 @@ public class PrintBasicLpsServiceImpl implements PrintBasicLpsService {
 				cell.setFixedHeight(30f);
 				table.addCell(cell);
 
-//				PdfPCell cell222 = new PdfPCell(new Paragraph("Basic details", font1));
-//				cell222.setHorizontalAlignment(Element.ALIGN_CENTER);
-//				cell222.setGrayFill(0.92f);
-//				cell222.setFixedHeight(20f);
-//				table.addCell(cell222);
 				document.add(table);
 
 				float[] pointColumnWidths1 = { 30F, 70F };
@@ -484,11 +476,14 @@ public class PrintBasicLpsServiceImpl implements PrintBasicLpsService {
 				cell33.setHorizontalAlignment(Element.ALIGN_CENTER);
 				table21.addCell(cell33);
 
-				basicDescription(basicDesc2, table21);
+				for (BasicLpsDescription basicDesc2 : basicDesc1) {
+					basicDescription(basicDesc2, table21);
+					document.add(table21);
+				}
 
-				document.add(table21);
 				document.close();
-
+				writer.close();
+				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

@@ -7,11 +7,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.capeelectric.exception.EarthStudException;
 import com.capeelectric.exception.SPDException;
 import com.capeelectric.model.BasicLps;
 import com.capeelectric.model.SPD;
-import com.capeelectric.model.SeperationDistanceDescription;
 import com.capeelectric.model.SpdDescription;
 import com.capeelectric.repository.BasicLpsRepository;
 import com.capeelectric.repository.SPDRepository;
@@ -54,7 +52,6 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 
 				List<SpdDescription> spdDesc1 = spdMain1.getSpdDescription();
 
-				SpdDescription spdDesc2 = spdDesc1.get(0);
 				document.open();
 
 				float[] pointColumnWidths40 = { 100F };
@@ -199,7 +196,7 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 				document.add(table4);
 
 				Font font11 = new Font(BaseFont.createFont(), 10, Font.NORMAL | Font.BOLD, BaseColor.BLACK);
-				
+
 				float[] pointColumnWidths30 = { 30F, 150F, 50F, 50F };
 
 				PdfPTable table = new PdfPTable(pointColumnWidths30);
@@ -326,28 +323,53 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 				cell47.setFixedHeight(20f);
 				cell47.setHorizontalAlignment(Element.ALIGN_LEFT);
 				table.addCell(cell47);
-				
+
 				PdfPCell cell441 = new PdfPCell(new Paragraph("Note", font11));
 				cell441.setHorizontalAlignment(Element.ALIGN_CENTER);
 				cell43.setFixedHeight(20f);
 				cell441.setGrayFill(0.92f);
 				table.addCell(cell441);
 
-				PdfPCell cell451 = new PdfPCell(
-						new Paragraph("SPD is necessary for each mains incoming panel and each electrical panel feeding power to an outdoor equipment", font8));
+				PdfPCell cell451 = new PdfPCell(new Paragraph(
+						"SPD is necessary for each mains incoming panel and each electrical panel feeding power to an outdoor equipment",
+						font8));
 				cell451.setHorizontalAlignment(Element.ALIGN_LEFT);
 				cell451.setColspan(3);
 				cell451.setGrayFill(0.92f);
 				table.addCell(cell451);
 
-				mainsIncomingItr(document, spdDesc2, font11, table, font);
+				for (SpdDescription spdDesc2 : spdDesc1) {
 
-				streetLightIter(spdDesc2, font11, table, font);
+					if (spdDesc2.getSpdDescriptionRole().equals("Mains_SPD") || spdDesc2.getSpdDescriptionRole().equals("Mains_SPD")
+							|| spdDesc2.getSpdDescriptionRole().equals("Mains_SPD")) {
 
-				pannelFeedingPowerIter(spdDesc2, font11, table, font);
+						mainsIncomingItr(document, spdDesc2, font11, table, font);
+					}
+				}
+
+				for (SpdDescription spdDesc2 : spdDesc1) {
+
+					if (spdDesc2.getSpdDescriptionRole().equals("Street_SPD") || spdDesc2.getSpdDescriptionRole().equals("Street_SPD")
+							|| spdDesc2.getSpdDescriptionRole().equals("Street_SPD")) {
+
+						streetLightIter(spdDesc2, font11, table, font);
+
+					}
+				}
+
+				for (SpdDescription spdDesc2 : spdDesc1) {
+
+					if (spdDesc2.getSpdDescriptionRole().equals("Other_SPD") || spdDesc2.getSpdDescriptionRole().equals("Other_SPD")
+							|| spdDesc2.getSpdDescriptionRole().equals("Other_SPD")) {
+
+						pannelFeedingPowerIter(spdDesc2, font11, table, font);
+
+					}
+				}
 
 				document.add(table);
 				document.close();
+				writer.close();
 			}
 
 			catch (Exception e) {
@@ -696,7 +718,7 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 		cell14.setGrayFill(0.92f);
 		cell14.setColspan(3);
 		table.addCell(cell14);
-		
+
 		PdfPCell cell17 = new PdfPCell(new Paragraph("5.a", font));
 		cell17.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell17.setFixedHeight(20f);

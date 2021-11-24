@@ -60,7 +60,7 @@ public class MailPDFController {
 		printSPDService.printSPD(userName, lpsId);
 		printSDandEarthStudService.printSDandEarthStud(userName, lpsId);
 	    awsEmailService.sendEmailPDF(userName);
-		return new ResponseEntity<String>("Final PDF file has been sent to your registered mail id.", HttpStatus.OK);
+		return new ResponseEntity<String>("Final LPS-PDF file has been sent to your registered mail id.", HttpStatus.OK);
 	}
 
 }
