@@ -245,7 +245,7 @@ public class PrintBasicLpsServiceImpl implements PrintBasicLpsService {
 				table.setWidthPercentage(100);
 
 				PdfPCell cell = new PdfPCell(
-						new Paragraph("check list of lightning protection system\r\n" + "Basic details ", font1));
+						new Paragraph("Check list of lightning protection system\r\n" + "Basic details ", font1));
 				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 				cell.setGrayFill(0.92f);
 				cell.setFixedHeight(30f);
