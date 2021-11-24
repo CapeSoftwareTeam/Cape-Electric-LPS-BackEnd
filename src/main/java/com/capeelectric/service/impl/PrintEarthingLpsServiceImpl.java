@@ -56,16 +56,12 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 				EarthingLpsDescription erthing = earthingLpsRepo.get(0);
 
 				List<EarthingDescription> earthDesc1 = erthing.getEarthingDescription();
-//				EarthingDescription earthDescription = earthDesc1.get(0);
 
 				List<EarthingClamps> earthClamps1 = erthing.getEarthingClamps();
-//				EarthingClamps earthClamps = earthClamps1.get(0);
 
 				List<EarthElectrodeChamber> earthChamber1 = erthing.getEarthingElectrodeChamber();
-//				EarthElectrodeChamber earthChamber = earthChamber1.get(0);
 
 				List<EarthingSystem> earthSystem1 = erthing.getEarthingSystem();
-//				EarthingSystem earthSystem = earthSystem1.get(0);
 
 				document.open();
 
@@ -693,24 +689,26 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 		cell1241.setGrayFill(0.92f);
 		table202.addCell(cell1241);
 
-		PdfPCell cell1210 = new PdfPCell(new Paragraph("Location Name", font));
+		PdfPCell cell1210 = new PdfPCell(new Paragraph("Location Name", font11));
 		cell1210.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 		cell1210.setColspan(1);
+		cell1210.setFixedHeight(20f);
 		cell1210.setGrayFill(0.92f);
 		table202.addCell(cell1210);
 
-		PdfPCell cell2 = new PdfPCell(new Paragraph(earthChamber.getLocationName(), font));
+		PdfPCell cell2 = new PdfPCell(new Paragraph(earthChamber.getLocationName(), font11));
 		cell2.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 		cell2.setColspan(2);
 		table202.addCell(cell2);
 
-		PdfPCell cell121 = new PdfPCell(new Paragraph("Location Number", font));
+		PdfPCell cell121 = new PdfPCell(new Paragraph("Location Number", font11));
 		cell121.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 		cell121.setColspan(1);
+		cell121.setFixedHeight(20f);
 		cell121.setGrayFill(0.92f);
 		table202.addCell(cell121);
 
-		PdfPCell cell211 = new PdfPCell(new Paragraph(earthChamber.getLocationNumber().toString(), font));
+		PdfPCell cell211 = new PdfPCell(new Paragraph(earthChamber.getLocationNumber().toString(), font11));
 		cell211.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 		cell211.setColspan(2);
 		table202.addCell(cell211);
@@ -906,24 +904,26 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 		cell1241.setGrayFill(0.92f);
 		table22.addCell(cell1241);
 
-		PdfPCell cell1210 = new PdfPCell(new Paragraph("Location Name", font));
+		PdfPCell cell1210 = new PdfPCell(new Paragraph("Location Name", font11));
 		cell1210.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 		cell1210.setColspan(1);
+		cell1210.setFixedHeight(20f);
 		cell1210.setGrayFill(0.92f);
 		table22.addCell(cell1210);
 
-		PdfPCell cell2 = new PdfPCell(new Paragraph(earthClamps.getLocationName(), font));
+		PdfPCell cell2 = new PdfPCell(new Paragraph(earthClamps.getLocationName(), font11));
 		cell2.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 		cell2.setColspan(2);
 		table22.addCell(cell2);
 
-		PdfPCell cell121 = new PdfPCell(new Paragraph("Location Number", font));
+		PdfPCell cell121 = new PdfPCell(new Paragraph("Location Number", font11));
 		cell121.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 		cell121.setColspan(1);
+		cell121.setFixedHeight(20f);
 		cell121.setGrayFill(0.92f);
 		table22.addCell(cell121);
 
-		PdfPCell cell211 = new PdfPCell(new Paragraph(earthClamps.getLocationNumber().toString(), font));
+		PdfPCell cell211 = new PdfPCell(new Paragraph(earthClamps.getLocationNumber().toString(), font11));
 		cell211.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 		cell211.setColspan(2);
 		table22.addCell(cell211);
@@ -1121,24 +1121,26 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 		cell124.setGrayFill(0.92f);
 		table21.addCell(cell124);
 
-		PdfPCell cell1210 = new PdfPCell(new Paragraph("Location Name", font));
+		PdfPCell cell1210 = new PdfPCell(new Paragraph("Location Name", font11));
 		cell1210.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 		cell1210.setColspan(1);
+		cell1210.setFixedHeight(20f);
 		cell1210.setGrayFill(0.92f);
 		table21.addCell(cell1210);
 
-		PdfPCell cell2 = new PdfPCell(new Paragraph(earthDesc.getLocationName(), font));
+		PdfPCell cell2 = new PdfPCell(new Paragraph(earthDesc.getLocationName(), font11));
 		cell2.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 		cell2.setColspan(2);
 		table21.addCell(cell2);
 
-		PdfPCell cell121 = new PdfPCell(new Paragraph("Location Number", font));
+		PdfPCell cell121 = new PdfPCell(new Paragraph("Location Number", font11));
 		cell121.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 		cell121.setColspan(1);
+		cell121.setFixedHeight(20f);
 		cell121.setGrayFill(0.92f);
 		table21.addCell(cell121);
 
-		PdfPCell cell211 = new PdfPCell(new Paragraph(earthDesc.getLocationNumber().toString(), font));
+		PdfPCell cell211 = new PdfPCell(new Paragraph(earthDesc.getLocationNumber().toString(), font11));
 		cell211.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 		cell211.setColspan(2);
 		table21.addCell(cell211);
