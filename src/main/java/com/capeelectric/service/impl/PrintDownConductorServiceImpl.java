@@ -76,7 +76,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 				headertable.setWidthPercentage(100);
 
 				PdfPCell label = new PdfPCell(
-						new Paragraph("Checklist for Down Conductors of LPS \r\n" + "as per IS/IEC 62305", font1));
+						new Paragraph("Check list for Down Conductors of LPS \r\n" + "as per IS/IEC 62305", font1));
 				label.setHorizontalAlignment(Element.ALIGN_CENTER);
 				label.setGrayFill(0.92f);
 //				label.setFixedHeight(20f);
@@ -248,7 +248,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 				table.addCell(cell34);
 
 				PdfPCell cell35 = new PdfPCell(new Paragraph(
-						"Check for Bi-metalllic issue (connections between dissimilar metals are not allowed)", font));
+						"Check for Bi-metallic issue (connections between dissimilar metals are not allowed)", font));
 				cell35.setHorizontalAlignment(Element.ALIGN_LEFT);
 				// cell35.setFixedHeight(20f);
 				cell35.setGrayFill(0.92f);
@@ -526,7 +526,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		table2.addCell(cell50);
 
 		PdfPCell cell51 = new PdfPCell(
-				new Paragraph("Provision of protection of test joint by non metalic casings", font));
+				new Paragraph("Provision of protection of test joint by non metallic casings", font));
 		cell51.setHorizontalAlignment(Element.ALIGN_LEFT);
 		cell51.setGrayFill(0.92f);
 		table2.addCell(cell51);
@@ -563,7 +563,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		table2.addCell(cell58);
 
 		PdfPCell cell59 = new PdfPCell(new Paragraph(
-				"Check for Bi-metalllic issue (connections between dissimilar metals are not allowed)", font));
+				"Check for Bi-metallic issue (connections between dissimilar metals are not allowed)", font));
 		cell59.setHorizontalAlignment(Element.ALIGN_LEFT);
 		cell59.setGrayFill(0.92f);
 		table2.addCell(cell59);
@@ -780,7 +780,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		table2.addCell(cell54);
 
 		PdfPCell cell55 = new PdfPCell(
-				new Paragraph("Proper connections of lightning counter for correct functionin", font));
+				new Paragraph("Proper connections of lightning counter for correct functioning", font));
 		cell55.setHorizontalAlignment(Element.ALIGN_LEFT);
 		cell55.setGrayFill(0.92f);
 		table2.addCell(cell55);
@@ -1399,7 +1399,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		table1.addCell(cell46);
 
 		PdfPCell cell47 = new PdfPCell(
-				new Paragraph("Ensure the conection of bridging cable (losse/tight /corroded)", font));
+				new Paragraph("Ensure the conection of bridging cable (loose/tight /corroded)", font));
 		cell47.setHorizontalAlignment(Element.ALIGN_LEFT);
 		cell47.setGrayFill(0.92f);
 		table1.addCell(cell47);

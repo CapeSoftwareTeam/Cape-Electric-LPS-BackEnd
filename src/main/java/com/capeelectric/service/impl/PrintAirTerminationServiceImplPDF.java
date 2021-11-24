@@ -80,7 +80,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 				headertable.setWidthPercentage(100);
 
 				PdfPCell label = new PdfPCell(new Paragraph(
-						"Checklist for Air Termination System of LPS\r\n" + "as per IS/IEC 62305", font1));
+						"Check list for Air Termination System of LPS\r\n" + "as per IS/IEC 62305", font1));
 				label.setHorizontalAlignment(Element.ALIGN_CENTER);
 				label.setGrayFill(0.92f);
 //				label.setFixedHeight(20f);
@@ -306,7 +306,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table.addCell(cell);
 
-		cell.setPhrase(new Phrase("Connections are made by brazing/welding/crimping/ seaming/screwing/boltinh", font1));
+		cell.setPhrase(new Phrase("Connections are made by brazing/welding/crimping/ seaming/screwing/bolting", font1));
 		cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table.addCell(cell);
@@ -382,7 +382,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 		table.addCell(cell);
 
 		cell.setPhrase(new Phrase(
-				"No power/ control/ instrumentation/telecommunication cable or cable passage in path/near air terminals and/or air termination mesh condcutor",
+				"No power/ control/ instrumentation/telecommunication cable or cable passage in path/near air terminals and/or air termination mesh conductor",
 				font1));
 		cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
@@ -1955,7 +1955,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table1.addCell(cell);
 
-		cell.setPhrase(new Phrase("Angle of protection based on heigh", font1));
+		cell.setPhrase(new Phrase("Angle of protection based on height", font1));
 		cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table1.addCell(cell);

@@ -76,7 +76,7 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 				table.setWidthPercentage(100);
 
 				PdfPCell cell = new PdfPCell(
-						new Paragraph("Check List for lightning protection system\r\n" + "Earthing Details", font1));
+						new Paragraph("Check list for Earthing System of LPS\r\n" + "as per IS/IEC 62305", font1));
 				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 				cell.setGrayFill(0.92f);
 				cell.setFixedHeight(30f);
@@ -1231,7 +1231,7 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 		cell72.setGrayFill(0.92f);
 		table21.addCell(cell72);
 
-		PdfPCell cell73 = new PdfPCell(new Paragraph("Coumpound filled properly upto gorund level", font));
+		PdfPCell cell73 = new PdfPCell(new Paragraph("compound filled properly upto gorund level", font));
 		cell73.setHorizontalAlignment(Element.ALIGN_LEFT);
 		cell73.setGrayFill(0.92f);
 		table21.addCell(cell73);

@@ -245,7 +245,7 @@ public class PrintBasicLpsServiceImpl implements PrintBasicLpsService {
 				table.setWidthPercentage(100);
 
 				PdfPCell cell = new PdfPCell(
-						new Paragraph("Check List for lightning protection system\r\n" + "Basic details ", font1));
+						new Paragraph("check list of lightning protection system\r\n" + "Basic details ", font1));
 				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 				cell.setGrayFill(0.92f);
 				cell.setFixedHeight(30f);
@@ -340,7 +340,8 @@ public class PrintBasicLpsServiceImpl implements PrintBasicLpsService {
 				cell16.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 				table1.addCell(cell16);
 
-				PdfPCell cell151 = new PdfPCell(new Paragraph("Installation by CAPE/Contractor/Dealer", font2));
+				PdfPCell cell151 = new PdfPCell(new Paragraph("Installation by CAPE /\r\n"
+						+ "Contractor/Dealer", font2));
 				cell151.setHorizontalAlignment(Element.ALIGN_LEFT);
 //				cell151.setFixedHeight(25f);
 				cell151.setGrayFill(0.92f);

@@ -75,7 +75,7 @@ public class PrintSDandEarthStudServiceImpl implements PrintSDandEarthStudServic
 				Font font3 = new Font(BaseFont.createFont(), 10, Font.NORMAL, BaseColor.BLACK);
 
 				PdfPCell label = new PdfPCell(
-						new Paragraph("Checklist for Separation Distance of LPS \r\n" + "as per IS/IEC 62305", font1));
+						new Paragraph("Check list for Separation Distance of LPS \r\n" + "as per IS/IEC 62305", font1));
 				label.setHorizontalAlignment(Element.ALIGN_CENTER);
 				label.setGrayFill(0.92f);
 				// label.setFixedHeight(20f);
@@ -248,7 +248,7 @@ public class PrintSDandEarthStudServiceImpl implements PrintSDandEarthStudServic
 				headertable1.setWidthPercentage(100);
 
 				PdfPCell label1 = new PdfPCell(
-						new Paragraph("Checklist for Earth Studs of LPS \r\n" + "as per IS/IEC 62305", font1));
+						new Paragraph("Check list for Earth Studs of LPS \r\n" + "as per IS/IEC 62305", font1));
 				label1.setHorizontalAlignment(Element.ALIGN_CENTER);
 				label1.setGrayFill(0.92f);
 				// label.setFixedHeight(20f);
@@ -537,7 +537,7 @@ public class PrintSDandEarthStudServiceImpl implements PrintSDandEarthStudServic
 		table1.addCell(cell43);
 
 		PdfPCell cell40 = new PdfPCell(new Paragraph(
-				"Measured Seperation distance beweeen air termination and electrical apparatus (lights, Solar PV, AC chillers, cameras…. Etc)(Measurement required in atleast 10 locations on roof top)",
+				"Measured separation distance between air termination and electrical apparatus (lights, solar PV, AC chillers, cameras…. Etc)(Measurement required in atleast 10 locations on roof top)",
 				font2));
 		cell40.setHorizontalAlignment(Element.ALIGN_CENTER);
 		cell40.setGrayFill(0.92f);
