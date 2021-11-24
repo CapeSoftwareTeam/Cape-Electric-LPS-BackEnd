@@ -89,7 +89,7 @@ public class PrintFinalPDFServiceImpl implements PrintFinalPDFService {
 
 					if (folderName.length() > 0) {
 						PutObjectRequest request = new PutObjectRequest(s3BucketName,
-								"LPS Project Name_".concat(folderName) + "/" + fileNameInS3, new File(fileNameInLocalPC));
+								"LPS_Project Name_".concat(folderName) + "/" + fileNameInS3, new File(fileNameInLocalPC));
 						s3Client.putObject(request);
 						logger.info("Uploading file done in AWS s3 ");
 					} else {
