@@ -26,6 +26,6 @@ public class PrintAirTermination {
 			throws AirTerminationException {
 		logger.info("called printSummary function userName: {},siteId : {}", userName, lpsId);
 		printAirTerminationService.printAirTermination(userName, lpsId);
-		return new ResponseEntity(HttpStatus.OK);
+		return new ResponseEntity<String>(HttpStatus.OK);
 	}
 }

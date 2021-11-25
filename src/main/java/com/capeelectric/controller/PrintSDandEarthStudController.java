@@ -10,10 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.capeelectric.exception.AirTerminationException;
-import com.capeelectric.exception.BasicLpsException;
 import com.capeelectric.exception.EarthStudException;
-import com.capeelectric.service.PrintBasicLpsService;
 import com.capeelectric.service.PrintSDandEarthStudService;
 
 @RestController()

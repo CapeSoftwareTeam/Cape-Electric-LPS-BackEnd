@@ -14,9 +14,19 @@ import org.springframework.stereotype.Service;
 
 import com.capeelectric.exception.EarthStudException;
 import com.capeelectric.model.BasicLps;
+import com.capeelectric.model.DownConductorDescription;
 import com.capeelectric.model.EarthStudDescription;
+import com.capeelectric.model.EarthingLpsDescription;
+import com.capeelectric.model.LpsAirDiscription;
+import com.capeelectric.model.SPD;
+import com.capeelectric.model.SeperationDistanceDescription;
+import com.capeelectric.repository.AirTerminationLpsRepository;
 import com.capeelectric.repository.BasicLpsRepository;
+import com.capeelectric.repository.DownConductorRepository;
 import com.capeelectric.repository.EarthStudRepository;
+import com.capeelectric.repository.EarthingLpsRepository;
+import com.capeelectric.repository.SPDRepository;
+import com.capeelectric.repository.SeperationDistanceRepository;
 import com.capeelectric.service.EarthStudService;
 import com.capeelectric.util.UserFullName;
 
@@ -41,13 +51,60 @@ public class EarthStudServiceImpl implements EarthStudService {
 
 	@Autowired
 	private UserFullName userFullName;
+	
+	@Autowired
+	private DownConductorRepository downConductorRepository;
+
+	@Autowired
+	private EarthingLpsRepository earthingLpsRepository;
+
+	@Autowired
+	private SPDRepository spdRepository;
+
+	@Autowired
+	private AirTerminationLpsRepository airTerminationLpsRepository;
+
+	@Autowired
+	private SeperationDistanceRepository seperationDistanceRepository;
 
 	@Override
 	public void addEarthStudDetails(EarthStudDescription earthStudDescription) throws EarthStudException {
 		if (earthStudDescription != null && earthStudDescription.getUserName() != null
 				&& !earthStudDescription.getUserName().isEmpty() && earthStudDescription.getBasicLpsId() != null
 				&& earthStudDescription.getBasicLpsId() != 0) {
+			Optional<BasicLps> basicLpsDetails = basicLpsRepository
+					.findByBasicLpsId(earthStudDescription.getBasicLpsId());
+			Optional<LpsAirDiscription> lpsAirDisc = airTerminationLpsRepository
+					.findByBasicLpsId(earthStudDescription.getBasicLpsId());
 
+			Optional<DownConductorDescription> downConductorDetails = downConductorRepository
+					.findByBasicLpsId(earthStudDescription.getBasicLpsId());
+			Optional<EarthingLpsDescription> earthingLpsDetails = earthingLpsRepository
+					.findByBasicLpsId(earthStudDescription.getBasicLpsId());
+			Optional<SPD> spdDetails = spdRepository.findByBasicLpsId(earthStudDescription.getBasicLpsId());
+			Optional<SeperationDistanceDescription> separateDistanceDetails = seperationDistanceRepository
+					.findByBasicLpsId(earthStudDescription.getBasicLpsId());
+			Optional<EarthStudDescription> earthStudDetails = earthStudRepository
+					.findByBasicLpsId(earthStudDescription.getBasicLpsId());
+
+			if (!basicLpsDetails.isPresent() && !lpsAirDisc.isPresent() && !downConductorDetails.isPresent()
+					&& !earthingLpsDetails.isPresent() && !separateDistanceDetails.isPresent()
+					&& !spdDetails.isPresent()) {
+				throw new EarthStudException("Please enter details for all previous steps to proceed further");
+			} else if (!basicLpsDetails.isPresent()) {
+				throw new EarthStudException("Please enter Basic Information step to proceed further");
+			} else if (!lpsAirDisc.isPresent()) {
+				throw new EarthStudException("Please enter Air Termination step to proceed further");
+			} else if (!downConductorDetails.isPresent()) {
+				throw new EarthStudException("Please enter Down Conductors step to proceed further");
+			} else if (!earthingLpsDetails.isPresent()) {
+				throw new EarthStudException("Please enter Earthing step to proceed further");
+			} else if (!spdDetails.isPresent()) {
+				throw new EarthStudException("Please enter SPD step to proceed further");
+
+			} else if (!separateDistanceDetails.isPresent()) {
+				throw new EarthStudException("Please enter Seperation Distance step to proceed further");
+			}
 			Optional<BasicLps> basicLpsRepo = basicLpsRepository.findByBasicLpsId(earthStudDescription.getBasicLpsId());
 			if (basicLpsRepo.isPresent()
 					&& basicLpsRepo.get().getBasicLpsId().equals(earthStudDescription.getBasicLpsId())) {

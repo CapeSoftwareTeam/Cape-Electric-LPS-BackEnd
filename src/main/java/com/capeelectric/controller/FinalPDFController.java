@@ -1,11 +1,10 @@
 package com.capeelectric.controller;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
+import java.io.ByteArrayOutputStream;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -62,23 +61,39 @@ public class FinalPDFController {
 
 	@GetMapping("/printFinalPDF/{userName}/{lpsId}")
 	@ResponseBody
-	public ResponseEntity<Resource> printFinalPDF(@PathVariable String userName, @PathVariable Integer lpsId)
+	public ResponseEntity<byte[]> printFinalPDF(@PathVariable String userName, @PathVariable Integer lpsId)
 			throws Exception, BasicLpsException, AirTerminationException, DownConductorException, SPDException,
 			EarthStudException, EarthingLpsException {
 		printBasicLpsService.printBasicLps(userName, lpsId);
 		printAirTerminationService.printAirTermination(userName, lpsId);
 		printDownConductorService.printDownConductor(userName, lpsId);
-		printSPDService.printSPD(userName, lpsId);
 		printEarthingLpsService.printEarthingLpsDetails(userName, lpsId);
+		printSPDService.printSPD(userName, lpsId);
 		printSDandEarthStudService.printSDandEarthStud(userName, lpsId);
 		printFinalPDFService.printFinalPDF(userName, lpsId);
 
-		Resource file = returnPDFService.printFinalPDF(userName, lpsId);
-		Path path = file.getFile().toPath();
+		String keyname = "Lpsfinalreport.pdf";
+		ByteArrayOutputStream downloadInputStream = returnPDFService.printFinalPDF(userName, lpsId);
 
-		return ResponseEntity.ok().header(HttpHeaders.CONTENT_TYPE, Files.probeContentType(path))
-				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"")
-				.body(file);
+		return ResponseEntity.ok().contentType(contentType(keyname))
+				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + keyname + "\"")
+				.body(downloadInputStream.toByteArray());
 	}
 
+	private MediaType contentType(String keyname) {
+		String[] fileArrSplit = keyname.split("\\.");
+		String fileExtension = fileArrSplit[fileArrSplit.length - 1];
+		switch (fileExtension) {
+		case "txt":
+			return MediaType.TEXT_PLAIN;
+		case "png":
+			return MediaType.IMAGE_PNG;
+		case "jpg":
+			return MediaType.IMAGE_JPEG;
+		case "pdf":
+			return MediaType.APPLICATION_PDF;
+		default:
+			return MediaType.APPLICATION_OCTET_STREAM;
+		}
+	}
 }

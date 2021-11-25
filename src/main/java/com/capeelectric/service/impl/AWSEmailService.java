@@ -189,7 +189,7 @@ public class AWSEmailService {
 			Multipart multipart = new MimeMultipart();
 			multipart.addBodyPart(messageBodyPart);
 			messageBodyPart = new MimeBodyPart();
-			String filename = ("finalreport.pdf");
+			String filename = ("Lpsfinalreport.pdf");
 
 			DataSource source = new FileDataSource(filename);
 			messageBodyPart.setDataHandler(new DataHandler(source));

@@ -67,10 +67,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		httpSecurity.cors().and()
 				// dont authenticate this particular request
 				.authorizeRequests().antMatchers(
-						"/api/lps/v1/printBasicLps/**",
 						"/api/v2/authenticate",
 						"/api/v2/addRegistration",
-					
 						"/api/v2/forgotPassword/**", 
 						"/api/v2/updatePassword/**",
 						"/api/v2/createPassword/**",

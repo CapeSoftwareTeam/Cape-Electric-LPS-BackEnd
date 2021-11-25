@@ -28,7 +28,7 @@ public class BridgingDescription implements Serializable {
 	@Column(name = "FLAG")
 	private Boolean flag;
 	
-	@Column(name = "LOCATION_NO")
+	@Column(name = "LOCATION_NUMBER")
 	private Integer locationNumber;
 
 	@Column(name = "LOCATION_NAME")
