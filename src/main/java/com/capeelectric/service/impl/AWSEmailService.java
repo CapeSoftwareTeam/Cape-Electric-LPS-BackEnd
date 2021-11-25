@@ -11,7 +11,6 @@ import javax.mail.BodyPart;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Multipart;
-import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
@@ -74,7 +73,6 @@ public class AWSEmailService {
 			props.put("mail.smtp.starttls.enable", "true");
 
 			Session mailSession = Session.getDefaultInstance(props);
-			mailSession.setDebug(true);
 
 			Transport transport = mailSession.getTransport("smtp");
 
@@ -107,7 +105,6 @@ public class AWSEmailService {
 			props.put("mail.smtp.starttls.enable", "true");
 
 			Session mailSession = Session.getDefaultInstance(props);
-			mailSession.setDebug(true);
 
 			Transport transport = mailSession.getTransport("smtp");
 
@@ -144,7 +141,6 @@ public class AWSEmailService {
 		props.put("mail.smtp.starttls.enable", "true");
 
 		Session mailSession = Session.getDefaultInstance(props);
-		mailSession.setDebug(true);
 
 		Transport transport = mailSession.getTransport("smtp");
 
@@ -172,11 +168,7 @@ public class AWSEmailService {
 		props.put("mail.smtp.host", emailConfig.getSMTP_HOST_NAME());
 		props.put("mail.smtp.auth", "true");
 		props.put("mail.smtp.starttls.enable", "true");
-		Session session = Session.getInstance(props, new javax.mail.Authenticator() {
-			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication(emailConfig.getSMTP_AUTH_USER(), emailConfig.getSMTP_AUTH_PWD());
-			}
-		});
+		Session session = Session.getDefaultInstance(props);
 		
 		try {
 
