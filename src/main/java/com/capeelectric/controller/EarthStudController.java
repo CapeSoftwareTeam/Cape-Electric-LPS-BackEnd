@@ -44,7 +44,7 @@ public class EarthStudController {
 		logger.info("called addEarthStud function UserName : {}, SiteId : {}",
 				earthStudDescription.getUserName(), earthStudDescription.getBasicLpsId());
 		earthStudService.addEarthStudDetails(earthStudDescription);
-		return new ResponseEntity<String>("Earth Stud Details Sucessfully Saved",
+		return new ResponseEntity<String>("Earth Stud Details Sucessfully Submitted",
 				HttpStatus.CREATED);
 	}
 
