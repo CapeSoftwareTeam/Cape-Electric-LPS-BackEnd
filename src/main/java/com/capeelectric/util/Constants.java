@@ -31,4 +31,6 @@ public class Constants {
 	public static final String FROM_EMAIL = "info@rushforsafety.com";
 	
 	public static final String AWS_EMAIL_PORT = String.valueOf(587);
+	
+	public static final String EMAIL_SUBJECT = "Rush Electrical Safety Digital TIC Platform";
 }
