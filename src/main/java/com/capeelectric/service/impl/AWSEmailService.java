@@ -176,7 +176,7 @@ public class AWSEmailService {
 			Transport transport = session.getTransport("smtp");
 			message.setFrom(new InternetAddress(from));
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
-			message.setSubject("Welcome to Rush App Online Services");
+			message.setSubject(Constants.EMAIL_SUBJECT);
 			BodyPart messageBodyPart = new MimeBodyPart();
 			messageBodyPart.setText("Please find the attached final pdf submitted");
 			Multipart multipart = new MimeMultipart();
