@@ -173,6 +173,7 @@ public class AWSEmailService {
 		try {
 
 			Message message = new MimeMessage(session);
+			Transport transport = session.getTransport("smtp");
 			message.setFrom(new InternetAddress(from));
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
 			message.setSubject("Welcome to Rush App Online Services");
@@ -188,7 +189,9 @@ public class AWSEmailService {
 			messageBodyPart.setFileName(filename);
 			multipart.addBodyPart(messageBodyPart);
 			message.setContent(multipart);
-			Transport.send(message);
+			transport.connect(emailConfig.getSMTP_HOST_NAME(), Integer.valueOf(Constants.AWS_EMAIL_PORT), emailConfig.getSMTP_AUTH_USER(), emailConfig.getSMTP_AUTH_PWD());
+			transport.sendMessage(message, message.getRecipients(Message.RecipientType.TO));
+			transport.close();
 		} catch (MessagingException e) {
 			throw new RuntimeException(e);
 		}
