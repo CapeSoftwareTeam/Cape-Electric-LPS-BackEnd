@@ -41,7 +41,7 @@ public class EarthStudController {
 	@PostMapping("/addEarthStud")
 	public ResponseEntity<String> addEarthStud(@RequestBody  EarthStudDescription earthStudDescription)
 			throws EarthStudException {
-		logger.info("called addEarthStud function UserName : {}, SiteId : {}",
+		logger.info("called addEarthStud function UserName : {}, BasicLpsId : {}",
 				earthStudDescription.getUserName(), earthStudDescription.getBasicLpsId());
 		earthStudService.addEarthStudDetails(earthStudDescription);
 		return new ResponseEntity<String>("Earth Stud Details Sucessfully Submitted",
@@ -51,7 +51,7 @@ public class EarthStudController {
 	@GetMapping("/retrieveEarthStud/{userName}/{basicLpsId}")
 	public ResponseEntity<List<EarthStudDescription>> retrieveEarthStudDetails(@PathVariable String userName,
 			@PathVariable Integer basicLpsId) throws EarthStudException {
-		logger.info("started retrieveEarthStud function UserName : {}, SiteId : {}", userName, basicLpsId);
+		logger.info("started retrieveEarthStud function UserName : {}, BasicLpsId : {}", userName, basicLpsId);
 		return new ResponseEntity<List<EarthStudDescription>>(
 				earthStudService.retrieveEarthStudDetails(userName, basicLpsId), HttpStatus.OK);
 	}

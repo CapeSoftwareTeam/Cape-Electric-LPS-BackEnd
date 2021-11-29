@@ -31,7 +31,7 @@ public class AirTerminationLpsController {
 	@PostMapping("/addAirTerminationLps")
 	public ResponseEntity<String> addAirTerminationLps(@RequestBody LpsAirDiscription lpsAirDescription)
 			throws AirTerminationException {
-		logger.info("called addAirTerminationLpsDetails function", lpsAirDescription.getUserName());
+		logger.info("called addAirTerminationLpsDetails function UserName: {}",lpsAirDescription.getUserName());
 		airTerminationLpsService.addAirTerminationLpsDetails(lpsAirDescription);
 		return new ResponseEntity<String>("Lps Air Terminal Successfully Saved", HttpStatus.CREATED);
 	}

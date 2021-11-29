@@ -24,7 +24,7 @@ public class PrintSDandEarthStudController {
 	@GetMapping("/printSDandEarthStud/{userName}/{lpsId}")
 	public ResponseEntity<String> printSDandEarthStud(@PathVariable String userName, @PathVariable Integer lpsId)
 			throws EarthStudException {
-		logger.info("called printBasicLps userName: {},siteId : {}", userName, lpsId);
+		logger.info("called printBasicLps UserName: {},BasicLpsId : {}", userName, lpsId);
 		printSDandEarthStudService.printSDandEarthStud(userName, lpsId);
 		return new ResponseEntity<String>(HttpStatus.OK);
 	}

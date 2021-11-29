@@ -24,7 +24,7 @@ public class PrintAirTermination {
 	@GetMapping("/printAirTermination/{userName}/{lpsId}")
 	public ResponseEntity<String> printAirTermination(@PathVariable String userName, @PathVariable Integer lpsId)
 			throws AirTerminationException {
-		logger.info("called printSummary function userName: {},siteId : {}", userName, lpsId);
+		logger.info("called printSummary function UserName: {},BasicLpsId : {}", userName, lpsId);
 		printAirTerminationService.printAirTermination(userName, lpsId);
 		return new ResponseEntity<String>(HttpStatus.OK);
 	}

@@ -26,7 +26,7 @@ public class PrintDownConductorController {
 	@GetMapping("/printDownConductor/{userName}/{lpsId}")
 	public ResponseEntity<String> printDownConductor(@PathVariable String userName, @PathVariable Integer lpsId)
 			throws  DownConductorException {
-		logger.info("called printDownConductor userName: {},siteId : {}", userName, lpsId);
+		logger.info("called printDownConductor UserName: {},BasicLpsId : {}", userName, lpsId);
 		printDownConductorService.printDownConductor(userName, lpsId);
 		return new ResponseEntity<String>(HttpStatus.OK);
 	}
