@@ -193,7 +193,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 				cell26.setHorizontalAlignment(Element.ALIGN_LEFT);
 				table4.addCell(cell26);
 
-				PdfPCell cell27 = new PdfPCell(new Paragraph("Soil Resistivity (ohms)", font2));
+				PdfPCell cell27 = new PdfPCell(new Paragraph("Soil Resistivity Ω", font2));
 				cell27.setHorizontalAlignment(Element.ALIGN_LEFT);
 				cell27.setGrayFill(0.92f);
 				cell27.setFixedHeight(20f);

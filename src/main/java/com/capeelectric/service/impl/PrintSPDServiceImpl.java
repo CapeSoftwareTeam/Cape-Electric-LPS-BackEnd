@@ -183,7 +183,7 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 				cell26.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 				table4.addCell(cell26);
 
-				PdfPCell cell27 = new PdfPCell(new Paragraph("Soil Resistivity (ohms)", font2));
+				PdfPCell cell27 = new PdfPCell(new Paragraph("Soil Resistivity Ω", font2));
 				cell27.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 				cell27.setGrayFill(0.92f);
 				cell27.setFixedHeight(20f);
