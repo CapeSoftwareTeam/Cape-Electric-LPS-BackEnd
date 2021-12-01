@@ -467,7 +467,7 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 		cell56.setGrayFill(0.92f);
 		table.addCell(cell56);
 
-		PdfPCell cell57 = new PdfPCell(new Paragraph("Check incorner rating of the panel", font));
+		PdfPCell cell57 = new PdfPCell(new Paragraph("Check incomer rating of the panel", font));
 		cell57.setHorizontalAlignment(Element.ALIGN_LEFT);
 		cell57.setFixedHeight(20f);
 		cell57.setGrayFill(0.92f);
@@ -628,7 +628,7 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 		cell56.setGrayFill(0.92f);
 		table.addCell(cell56);
 
-		PdfPCell cell57 = new PdfPCell(new Paragraph("Check incorner rating of the panel", font));
+		PdfPCell cell57 = new PdfPCell(new Paragraph("Check incomer rating of the panel", font));
 		cell57.setHorizontalAlignment(Element.ALIGN_LEFT);
 		cell57.setFixedHeight(20f);
 		cell57.setGrayFill(0.92f);
@@ -790,7 +790,7 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 		cell56.setGrayFill(0.92f);
 		table.addCell(cell56);
 
-		PdfPCell cell57 = new PdfPCell(new Paragraph("Check incorner rating of the panel", font));
+		PdfPCell cell57 = new PdfPCell(new Paragraph("Check incomer rating of the panel", font));
 		cell57.setHorizontalAlignment(Element.ALIGN_LEFT);
 		cell57.setFixedHeight(20f);
 		cell57.setGrayFill(0.92f);
