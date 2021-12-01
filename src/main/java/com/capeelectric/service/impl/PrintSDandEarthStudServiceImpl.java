@@ -48,19 +48,20 @@ public class PrintSDandEarthStudServiceImpl implements PrintSDandEarthStudServic
 			try {
 
 				PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("SDandEarthStud.pdf"));
-				
+
 				document.open();
-				
+
 				List<BasicLps> basicLps = basicLpsRepository.findByUserNameAndBasicLpsId(userName, lpsId);
 				BasicLps basicLps1 = basicLps.get(0);
-				
+
 				List<SeperationDistanceDescription> separateDistance = seperationDistanceRepository
 						.findByUserNameAndBasicLpsId(userName, lpsId);
 				SeperationDistanceDescription separateDistance1 = separateDistance.get(0);
 
 				List<SeparateDistance> separateDistance2 = separateDistance1.getSeparateDistanceDescription();
 
-				List<EarthStudDescription> earthStud1 = earthStudRepository.findByUserNameAndBasicLpsId(userName,lpsId);
+				List<EarthStudDescription> earthStud1 = earthStudRepository.findByUserNameAndBasicLpsId(userName,
+						lpsId);
 				EarthStudDescription earthStud = earthStud1.get(0);
 
 				float[] pointColumnWidths40 = { 100F };
@@ -203,9 +204,9 @@ public class PrintSDandEarthStudServiceImpl implements PrintSDandEarthStudServic
 				table4.addCell(cell28);
 
 				document.add(table4);
-				
+
 				Font font11 = new Font(BaseFont.createFont(), 10, Font.NORMAL | Font.BOLD, BaseColor.BLACK);
-				
+
 				float[] pointColumnWidths30 = { 25F, 150F, 55F, 50F };
 
 				PdfPTable table = new PdfPTable(pointColumnWidths30);
@@ -235,7 +236,22 @@ public class PrintSDandEarthStudServiceImpl implements PrintSDandEarthStudServic
 				cell33.setGrayFill(0.92f);
 				cell33.setHorizontalAlignment(Element.ALIGN_CENTER);
 				table.addCell(cell33);
+
+				PdfPCell cell430 = new PdfPCell(new Paragraph("1", font3));
+				cell430.setHorizontalAlignment(Element.ALIGN_CENTER);
+				cell430.setGrayFill(0.92f);
+				// cell43.setColspan(3);
+				table.addCell(cell430);
+
+				PdfPCell cell400 = new PdfPCell(new Paragraph(
+						"Measured separation distance between air termination and electrical apparatus (lights, solar PV, AC chillers, cameras…. Etc)(Measurement required in atleast 10 locations on roof top)",
+						font3));
+				cell400.setHorizontalAlignment(Element.ALIGN_CENTER);
+				cell400.setGrayFill(0.92f);
+				cell400.setColspan(3);
+				table.addCell(cell400);
 				document.add(table);
+
 				for (SeparateDistance separateDistance3 : separateDistance2) {
 					PdfPTable table1 = separateDistanceIter(pointColumnWidths30, separateDistance3);
 					document.add(table1);
@@ -508,7 +524,7 @@ public class PrintSDandEarthStudServiceImpl implements PrintSDandEarthStudServic
 				document.add(table2);
 				document.close();
 				writer.close();
-				
+
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -530,21 +546,21 @@ public class PrintSDandEarthStudServiceImpl implements PrintSDandEarthStudServic
 		// table1.setSpacingBefore(10f); // Space before table
 		table1.setWidthPercentage(100);
 
-		PdfPCell cell43 = new PdfPCell(new Paragraph("1", font2));
-		cell43.setHorizontalAlignment(Element.ALIGN_CENTER);
-		cell43.setGrayFill(0.92f);
-		// cell43.setColspan(3);
-		table1.addCell(cell43);
+//		PdfPCell cell43 = new PdfPCell(new Paragraph("1", font2));
+//		cell43.setHorizontalAlignment(Element.ALIGN_CENTER);
+//		cell43.setGrayFill(0.92f);
+//		// cell43.setColspan(3);
+//		table1.addCell(cell43);
+//
+//		PdfPCell cell40 = new PdfPCell(new Paragraph(
+//				"Measured separation distance between air termination and electrical apparatus (lights, solar PV, AC chillers, cameras…. Etc)(Measurement required in atleast 10 locations on roof top)",
+//				font2));
+//		cell40.setHorizontalAlignment(Element.ALIGN_CENTER);
+//		cell40.setGrayFill(0.92f);
+//		cell40.setColspan(3);
+//		table1.addCell(cell40);
 
-		PdfPCell cell40 = new PdfPCell(new Paragraph(
-				"Measured separation distance between air termination and electrical apparatus (lights, solar PV, AC chillers, cameras…. Etc)(Measurement required in atleast 10 locations on roof top)",
-				font2));
-		cell40.setHorizontalAlignment(Element.ALIGN_CENTER);
-		cell40.setGrayFill(0.92f);
-		cell40.setColspan(3);
-		table1.addCell(cell40);
-
-		PdfPCell cell35 = new PdfPCell(new Paragraph("1.a", font1));
+		PdfPCell cell35 = new PdfPCell(new Paragraph("", font1));
 		cell35.setHorizontalAlignment(Element.ALIGN_CENTER);
 		cell35.setGrayFill(0.92f);
 		table1.addCell(cell35);
@@ -552,7 +568,7 @@ public class PrintSDandEarthStudServiceImpl implements PrintSDandEarthStudServic
 		PdfPCell cell36 = new PdfPCell(new Paragraph(separateDistance3.getSeperationDistanceDesc(), font1));
 		cell36.setHorizontalAlignment(Element.ALIGN_LEFT);
 		cell36.setFixedHeight(20f);
-		 cell36.setGrayFill(0.92f);
+		cell36.setGrayFill(0.92f);
 		table1.addCell(cell36);
 
 		PdfPCell cell37 = new PdfPCell(new Paragraph(separateDistance3.getSeperationDistanceOb(), font1));
