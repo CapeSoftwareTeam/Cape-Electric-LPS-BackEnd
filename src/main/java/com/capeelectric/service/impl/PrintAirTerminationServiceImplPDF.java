@@ -1467,7 +1467,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table3.addCell(cell);
 
-		cell.setPhrase(new Phrase("Material of parpet holder", font2));
+		cell.setPhrase(new Phrase("Material of parapet holder", font2));
 		cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table3.addCell(cell);
