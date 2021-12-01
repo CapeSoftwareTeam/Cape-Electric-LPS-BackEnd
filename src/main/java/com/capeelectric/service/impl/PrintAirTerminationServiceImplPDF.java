@@ -3,6 +3,7 @@ package com.capeelectric.service.impl;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,14 +37,8 @@ import com.itextpdf.text.pdf.PdfWriter;
 @Service
 public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationService {
 
-	@Autowired
-	private BasicLpsRepository basicLpsRepository;
-
-	@Autowired
-	private AirTerminationLpsRepository airTerminationLpsRepository;
-
 	@Override
-	public void printAirTermination(String userName, Integer basicLpsId) throws AirTerminationException {
+	public void printAirTermination(String userName, Integer basicLpsId,Optional<BasicLps> basicLpsDetails, Optional<LpsAirDiscription> lpsAirDisc) throws AirTerminationException {
 		if (userName != null && !userName.isEmpty() && basicLpsId != null && basicLpsId != 0) {
 			Document document = new Document(PageSize.A4, 68, 68, 62, 68);
 
@@ -51,12 +46,12 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 
 				PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("AirTermination.pdf"));
 
-				List<BasicLps> basicLps = basicLpsRepository.findByUserNameAndBasicLpsId(userName, basicLpsId);
-				BasicLps basicLps1 = basicLps.get(0);
+//				List<BasicLps> basicLps = basicLpsRepository.findByUserNameAndBasicLpsId(userName, basicLpsId);
+				BasicLps basicLps1 = basicLpsDetails.get();
 
-				List<LpsAirDiscription> s = airTerminationLpsRepository.findByUserNameAndBasicLpsId(userName,
-						basicLpsId);
-				LpsAirDiscription lpsAirDiscription = s.get(0);
+//				List<LpsAirDiscription> s = airTerminationLpsRepository.findByUserNameAndBasicLpsId(userName,
+//						basicLpsId);
+				LpsAirDiscription lpsAirDiscription = lpsAirDisc.get();
 
 				List<AirClamps> airClamps = lpsAirDiscription.getAirClamps();
 				List<AirConnectors> airConnectors = lpsAirDiscription.getAirConnectors();

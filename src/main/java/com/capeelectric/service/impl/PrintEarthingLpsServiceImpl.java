@@ -2,8 +2,8 @@ package com.capeelectric.service.impl;
 
 import java.io.FileOutputStream;
 import java.util.List;
+import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.capeelectric.exception.EarthingLpsException;
@@ -13,8 +13,6 @@ import com.capeelectric.model.EarthingClamps;
 import com.capeelectric.model.EarthingDescription;
 import com.capeelectric.model.EarthingLpsDescription;
 import com.capeelectric.model.EarthingSystem;
-import com.capeelectric.repository.BasicLpsRepository;
-import com.capeelectric.repository.EarthingLpsRepository;
 import com.capeelectric.service.PrintEarthingLpsService;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
@@ -30,14 +28,9 @@ import com.itextpdf.text.pdf.PdfWriter;
 @Service
 public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 
-	@Autowired
-	private BasicLpsRepository basicLpsRepository;
-
-	@Autowired
-	private EarthingLpsRepository earthingLpsRepository;
 
 	@Override
-	public List<EarthingLpsDescription> printEarthingLpsDetails(String userName, Integer basicLpsId)
+	public List<EarthingLpsDescription> printEarthingLpsDetails(String userName, Integer basicLpsId,Optional<BasicLps> basicLpsDetails, Optional<EarthingLpsDescription> earthingLpsDetails)
 			throws EarthingLpsException {
 
 		if (userName != null && !userName.isEmpty() && basicLpsId != null && basicLpsId != 0) {
@@ -47,12 +40,16 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 
 				PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("EarthingLps.pdf"));
 
-				List<BasicLps> basicLps = basicLpsRepository.findByUserNameAndBasicLpsId(userName, basicLpsId);
-				BasicLps basicLps1 = basicLps.get(0);
+//				List<BasicLps> basicLps = basicLpsRepository.findByUserNameAndBasicLpsId(userName, basicLpsId);
+				BasicLps basicLps1 = basicLpsDetails.get();
 
-				List<EarthingLpsDescription> earthingLpsRepo = earthingLpsRepository
-						.findByUserNameAndBasicLpsId(userName, basicLpsId);
-				EarthingLpsDescription erthing = earthingLpsRepo.get(0);
+//				List<EarthingLpsDescription> earthingLpsRepo = earthingLpsRepository
+//						.findByUserNameAndBasicLpsId(userName, basicLpsId);
+				
+				System.out.println("printing Earthing Module");
+
+				
+				EarthingLpsDescription erthing = earthingLpsDetails.get();
 
 				List<EarthingDescription> earthDesc1 = erthing.getEarthingDescription();
 

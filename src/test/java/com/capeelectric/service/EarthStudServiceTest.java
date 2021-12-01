@@ -17,7 +17,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import com.capeelectric.exception.AirTerminationException;
+import com.capeelectric.exception.BasicLpsException;
+import com.capeelectric.exception.DownConductorException;
 import com.capeelectric.exception.EarthStudException;
+import com.capeelectric.exception.EarthingLpsException;
+import com.capeelectric.exception.SPDException;
 import com.capeelectric.model.BasicLps;
 import com.capeelectric.model.DownConductorDescription;
 import com.capeelectric.model.EarthStudDescription;
@@ -116,7 +121,7 @@ public class EarthStudServiceTest {
 	
 	
 	@Test
-	public void testAddEarthStudDetails() throws EarthStudException {
+	public void testAddEarthStudDetails() throws EarthStudException, BasicLpsException, AirTerminationException, DownConductorException, EarthingLpsException, SPDException, Exception {
 		 
 		when(airTerminationLpsRepository.findByBasicLpsId(1)).thenReturn(Optional.of(lpsAirDiscription));
 		when(downConductorRepository

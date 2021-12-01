@@ -38,12 +38,15 @@ public class ReturnPDFService {
 	@Autowired
 	private BasicLpsRepository basicLpsRepository;
 
-	public ByteArrayOutputStream printFinalPDF(String userName, Integer lpsId) throws Exception {
+	public ByteArrayOutputStream printFinalPDF(String userName, Integer lpsId, String keyName) throws Exception {
+		
 		if (userName != null && !userName.isEmpty() && lpsId != null && lpsId != 0) {
+		
 			String folderName = ((basicLpsRepository.findById(lpsId).isPresent()
-					&& basicLpsRepository.findById(lpsId).get() != null) ? basicLpsRepository.findById(lpsId).get().getAllStepsCompleted(): "");
-			
-			String fileNameInS3 = "Lpsfinalreport.pdf";
+					&& basicLpsRepository.findById(lpsId).get() != null)
+							? basicLpsRepository.findById(lpsId).get().getProjectName()
+							: "");
+		
 			try {
 				BasicAWSCredentials awsCreds = new BasicAWSCredentials(accessKeyId, accessKeySecret);
 				AmazonS3 s3Client = AmazonS3ClientBuilder.standard().withRegion(Regions.AP_SOUTH_1)
@@ -51,12 +54,13 @@ public class ReturnPDFService {
 
 				// 5 seconds of time for executing between FileUpload And FileDownload in AWS s3
 				// bucket
-				Thread.sleep(5000);
+//				T1hread.sleep(5000);
 
 				// Downloading the PDF File in AWS S3 Bucket with folderName + fileNameInS3
 				S3Object fullObject;
 				fullObject = s3Client.getObject(
-						new GetObjectRequest(s3BucketName, "LPS_Project Name_".concat(folderName) + "/" + fileNameInS3));
+						new GetObjectRequest(s3BucketName, "LPS_Project Name_".concat(folderName) + "/" + keyName));
+				
 				
 				logger.info("Downloading file done from AWS s3");
 				InputStream is = fullObject.getObjectContent();

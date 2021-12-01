@@ -18,8 +18,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import com.capeelectric.exception.AirTerminationException;
+import com.capeelectric.exception.BasicLpsException;
 import com.capeelectric.exception.DownConductorException;
 import com.capeelectric.exception.EarthStudException;
+import com.capeelectric.exception.EarthingLpsException;
+import com.capeelectric.exception.SPDException;
 import com.capeelectric.model.DownConductorDescription;
 import com.capeelectric.model.EarthStudDescription;
 import com.capeelectric.service.impl.DownConductorServiceImpl;
@@ -48,7 +52,7 @@ public class EarthStudControllerTest {
 	}
 
 	@Test
-	public void testAddEarthStudDetails() throws EarthStudException {
+	public void testAddEarthStudDetails() throws EarthStudException, BasicLpsException, AirTerminationException, DownConductorException, EarthingLpsException, SPDException, Exception {
 		logger.info("testAddEarthStudDetails Function Started");
 
 		doNothing().when(earthStudServiceImpl).addEarthStudDetails(earthStudDescription);

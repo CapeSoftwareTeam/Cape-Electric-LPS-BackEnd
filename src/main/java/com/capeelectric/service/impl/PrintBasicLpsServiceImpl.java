@@ -4,6 +4,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,11 +32,11 @@ import com.itextpdf.text.pdf.PdfWriter;
 @Service
 public class PrintBasicLpsServiceImpl implements PrintBasicLpsService {
 
-	@Autowired
-	private BasicLpsRepository basicLpsRepository;
+//	@Autowired
+//	private BasicLpsRepository basicLpsRepository;
 
 	@Override
-	public void printBasicLps(String userName, Integer lpsId) throws BasicLpsException {
+	public void printBasicLps(String userName, Integer lpsId, Optional<BasicLps> basicLpsDetails) throws BasicLpsException {
 		if (userName != null && !userName.isEmpty() && lpsId != null && lpsId != 0) {
 			Document document = new Document(PageSize.A4, 68, 68, 62, 68);
 
@@ -43,8 +44,8 @@ public class PrintBasicLpsServiceImpl implements PrintBasicLpsService {
 
 				PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("BasicLps.pdf"));
 
-				List<BasicLps> basicLps = basicLpsRepository.findByUserNameAndBasicLpsId(userName, lpsId);
-				BasicLps basicLps1 = basicLps.get(0);
+//				List<BasicLps> basicLps = basicLpsRepository.findByUserNameAndBasicLpsId(userName, lpsId);
+				BasicLps basicLps1 = basicLpsDetails.get();
 
 				Set<BasicLpsDescription> basicDesc = basicLps1.getBasicLpsDescription();
 				List<BasicLpsDescription> basicDesc1 = new ArrayList<>(basicDesc);

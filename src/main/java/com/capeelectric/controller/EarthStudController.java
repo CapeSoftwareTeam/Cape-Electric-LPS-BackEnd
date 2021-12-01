@@ -18,7 +18,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.capeelectric.exception.AirTerminationException;
+import com.capeelectric.exception.BasicLpsException;
+import com.capeelectric.exception.DownConductorException;
 import com.capeelectric.exception.EarthStudException;
+import com.capeelectric.exception.EarthingLpsException;
+import com.capeelectric.exception.SPDException;
 import com.capeelectric.model.EarthStudDescription;
 import com.capeelectric.service.EarthStudService;
 
@@ -40,7 +45,7 @@ public class EarthStudController {
 	
 	@PostMapping("/addEarthStud")
 	public ResponseEntity<String> addEarthStud(@RequestBody  EarthStudDescription earthStudDescription)
-			throws EarthStudException {
+			throws EarthStudException, BasicLpsException, AirTerminationException, DownConductorException, EarthingLpsException, SPDException, Exception {
 		logger.info("called addEarthStud function UserName : {}, BasicLpsId : {}",
 				earthStudDescription.getUserName(), earthStudDescription.getBasicLpsId());
 		earthStudService.addEarthStudDetails(earthStudDescription);
