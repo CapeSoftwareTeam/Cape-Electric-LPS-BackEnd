@@ -192,7 +192,7 @@ public class PrintSDandEarthStudServiceImpl implements PrintSDandEarthStudServic
 				cell26.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 				table4.addCell(cell26);
 
-				PdfPCell cell27 = new PdfPCell(new Paragraph("Soil Resistivity Ω", font2));
+				PdfPCell cell27 = new PdfPCell(new Paragraph("Soil Resistivity (ohms)", font2));
 				cell27.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 				cell27.setGrayFill(0.92f);
 				cell27.setFixedHeight(20f);
@@ -362,7 +362,7 @@ public class PrintSDandEarthStudServiceImpl implements PrintSDandEarthStudServic
 				cell261.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 				table8.addCell(cell261);
 
-				PdfPCell cell270 = new PdfPCell(new Paragraph("Soil Resistivity Ω", font2));
+				PdfPCell cell270 = new PdfPCell(new Paragraph("Soil Resistivity (ohms)", font2));
 				cell270.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 				cell270.setGrayFill(0.92f);
 				cell270.setFixedHeight(20f);
