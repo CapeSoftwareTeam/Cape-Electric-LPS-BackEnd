@@ -197,7 +197,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 				cell26.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 				table4.addCell(cell26);
 
-				PdfPCell cell27 = new PdfPCell(new Paragraph("Soil Resistivity", font2));
+				PdfPCell cell27 = new PdfPCell(new Paragraph("Soil Resistivity (ohms)", font2));
 				cell27.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 				cell27.setGrayFill(0.92f);
 				cell27.setFixedHeight(20f);
@@ -407,7 +407,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table.addCell(cell);
 
-		cell.setPhrase(new Phrase("Equipotenial bonding carried out or not", font1));
+		cell.setPhrase(new Phrase("Equipotential bonding carried out or not", font1));
 		cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table.addCell(cell);
@@ -1686,7 +1686,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table2.addCell(cell);
 
-		cell.setPhrase(new Phrase("Size/cross section area of conductor", font2));
+		cell.setPhrase(new Phrase("Size/cross section area of conductor (mm)", font2));
 		cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table2.addCell(cell);
@@ -1709,7 +1709,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table2.addCell(cell);
 
-		cell.setPhrase(new Phrase("Mesh Size", font2));
+		cell.setPhrase(new Phrase("Mesh Size (m)", font2));
 		cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table2.addCell(cell);
@@ -1732,7 +1732,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table2.addCell(cell);
 
-		cell.setPhrase(new Phrase("Maximum distance between mesh conductors", font2));
+		cell.setPhrase(new Phrase("Maximum distance between mesh conductors (m)", font2));
 		cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table2.addCell(cell);
@@ -1755,7 +1755,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table2.addCell(cell);
 
-		cell.setPhrase(new Phrase("Minimum distance between mesh conductors", font2));
+		cell.setPhrase(new Phrase("Minimum distance between mesh conductors (m)", font2));
 		cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table2.addCell(cell);
@@ -1909,7 +1909,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table1.addCell(cell);
 
-		cell.setPhrase(new Phrase("Size/cross section area of air terminal", font1));
+		cell.setPhrase(new Phrase("Size/cross section area of air terminal (mm)", font1));
 		cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table1.addCell(cell);
@@ -1932,7 +1932,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table1.addCell(cell);
 
-		cell.setPhrase(new Phrase("Height of vertical air terminal", font1));
+		cell.setPhrase(new Phrase("Height of vertical air terminal (m)", font1));
 		cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table1.addCell(cell);

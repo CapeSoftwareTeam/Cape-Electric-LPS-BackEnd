@@ -183,7 +183,7 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 				cell26.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 				table4.addCell(cell26);
 
-				PdfPCell cell27 = new PdfPCell(new Paragraph("Soil Resistivity", font2));
+				PdfPCell cell27 = new PdfPCell(new Paragraph("Soil Resistivity (ohms)", font2));
 				cell27.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 				cell27.setGrayFill(0.92f);
 				cell27.setFixedHeight(20f);
@@ -487,7 +487,7 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 		cell60.setGrayFill(0.92f);
 		table.addCell(cell60);
 
-		PdfPCell cell61 = new PdfPCell(new Paragraph("Check Back up fuse", font));
+		PdfPCell cell61 = new PdfPCell(new Paragraph("Check Back up fuse (A)", font));
 		cell61.setHorizontalAlignment(Element.ALIGN_LEFT);
 		cell61.setFixedHeight(20f);
 		cell61.setGrayFill(0.92f);
@@ -507,7 +507,7 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 		cell64.setGrayFill(0.92f);
 		table.addCell(cell64);
 
-		PdfPCell cell65 = new PdfPCell(new Paragraph("Check Connecting wire length", font));
+		PdfPCell cell65 = new PdfPCell(new Paragraph("Check Connecting wire length (m)", font));
 		cell65.setHorizontalAlignment(Element.ALIGN_LEFT);
 		cell65.setFixedHeight(20f);
 		cell65.setGrayFill(0.92f);
@@ -527,7 +527,7 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 		cell68.setGrayFill(0.92f);
 		table.addCell(cell68);
 
-		PdfPCell cell69 = new PdfPCell(new Paragraph("Check Connecting wire size", font));
+		PdfPCell cell69 = new PdfPCell(new Paragraph("Check Connecting wire size (Sq.mm)", font));
 		cell69.setHorizontalAlignment(Element.ALIGN_LEFT);
 		cell69.setFixedHeight(20f);
 		cell69.setGrayFill(0.92f);
@@ -648,7 +648,7 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 		cell60.setGrayFill(0.92f);
 		table.addCell(cell60);
 
-		PdfPCell cell61 = new PdfPCell(new Paragraph("Check Back up fuse", font));
+		PdfPCell cell61 = new PdfPCell(new Paragraph("Check Back up fuse (A)", font));
 		cell61.setHorizontalAlignment(Element.ALIGN_LEFT);
 		cell61.setFixedHeight(20f);
 		cell61.setGrayFill(0.92f);
@@ -668,7 +668,7 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 		cell64.setGrayFill(0.92f);
 		table.addCell(cell64);
 
-		PdfPCell cell65 = new PdfPCell(new Paragraph("Check Connecting wire length", font));
+		PdfPCell cell65 = new PdfPCell(new Paragraph("Check Connecting wire length (m)", font));
 		cell65.setHorizontalAlignment(Element.ALIGN_LEFT);
 		cell65.setFixedHeight(20f);
 		cell65.setGrayFill(0.92f);
@@ -688,7 +688,7 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 		cell68.setGrayFill(0.92f);
 		table.addCell(cell68);
 
-		PdfPCell cell69 = new PdfPCell(new Paragraph("Check Connecting wire size", font));
+		PdfPCell cell69 = new PdfPCell(new Paragraph("Check Connecting wire size (Sq.mm)", font));
 		cell69.setHorizontalAlignment(Element.ALIGN_LEFT);
 		cell69.setFixedHeight(20f);
 		cell69.setGrayFill(0.92f);
@@ -810,7 +810,7 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 		cell60.setGrayFill(0.92f);
 		table.addCell(cell60);
 
-		PdfPCell cell61 = new PdfPCell(new Paragraph("Check Back up fuse", font));
+		PdfPCell cell61 = new PdfPCell(new Paragraph("Check Back up fuse (A)", font));
 		cell61.setHorizontalAlignment(Element.ALIGN_LEFT);
 		cell61.setFixedHeight(20f);
 		cell61.setGrayFill(0.92f);
@@ -830,7 +830,7 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 		cell64.setGrayFill(0.92f);
 		table.addCell(cell64);
 
-		PdfPCell cell65 = new PdfPCell(new Paragraph("Check Connecting wire length", font));
+		PdfPCell cell65 = new PdfPCell(new Paragraph("Check Connecting wire length (m)", font));
 		cell65.setHorizontalAlignment(Element.ALIGN_LEFT);
 		cell65.setFixedHeight(20f);
 		cell65.setGrayFill(0.92f);
@@ -850,7 +850,7 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 		cell68.setGrayFill(0.92f);
 		table.addCell(cell68);
 
-		PdfPCell cell69 = new PdfPCell(new Paragraph("Check Connecting wire size", font));
+		PdfPCell cell69 = new PdfPCell(new Paragraph("Check Connecting wire size (Sq.mm)", font));
 		cell69.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 		cell69.setFixedHeight(20f);
 		cell69.setGrayFill(0.92f);
