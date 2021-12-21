@@ -188,7 +188,7 @@ public class AWSEmailService {
 
 //		if(!emailDisable.equalsIgnoreCase("Y")) {
 
-		String to = "hasan@capeindia.net";
+		String to = userName;
 		String from = FROM;
 		Properties props = new Properties();
 		props.put("mail.transport.protocol", "smtp");

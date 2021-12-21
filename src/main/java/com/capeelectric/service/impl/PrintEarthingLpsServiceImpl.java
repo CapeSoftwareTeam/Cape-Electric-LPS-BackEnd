@@ -46,9 +46,6 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 //				List<EarthingLpsDescription> earthingLpsRepo = earthingLpsRepository
 //						.findByUserNameAndBasicLpsId(userName, basicLpsId);
 				
-				System.out.println("printing Earthing Module");
-
-				
 				EarthingLpsDescription erthing = earthingLpsDetails.get();
 
 				List<EarthingDescription> earthDesc1 = erthing.getEarthingDescription();
