@@ -514,7 +514,7 @@ public class PrintBasicLpsServiceImpl implements PrintBasicLpsService {
 
 		PdfPCell cell36 = new PdfPCell(new Paragraph(basicDesc2.getApprovedDrawingObserv(), font));
 		cell36.setHorizontalAlignment(Element.ALIGN_LEFT);
-		cell36.setFixedHeight(20f);
+//		cell36.setFixedHeight(20f);
 		table2.addCell(cell36);
 
 		PdfPCell cell37 = new PdfPCell(new Paragraph(basicDesc2.getApprovedDrawingRemarks(), font));
@@ -590,8 +590,8 @@ public class PrintBasicLpsServiceImpl implements PrintBasicLpsService {
 
 		PdfPCell cell52 = new PdfPCell(new Paragraph("1d", font));
 		cell52.setHorizontalAlignment(Element.ALIGN_RIGHT);
-//		cell52.setGrayFill(0.92f);
-		cell52.setFixedHeight(20f);
+		cell52.setGrayFill(0.92f);
+//		cell52.setFixedHeight(20f);
 		table2.addCell(cell52);
 
 		PdfPCell cell53 = new PdfPCell(new Paragraph("Date of approval", font));
@@ -631,7 +631,7 @@ public class PrintBasicLpsServiceImpl implements PrintBasicLpsService {
 
 		PdfPCell cell60 = new PdfPCell(new Paragraph("1f", font));
 		cell60.setHorizontalAlignment(Element.ALIGN_RIGHT);
-//		cell60.setGrayFill(0.92f);
+		cell60.setGrayFill(0.92f);
 		table2.addCell(cell60);
 
 		PdfPCell cell61 = new PdfPCell(new Paragraph("Revision number", font));

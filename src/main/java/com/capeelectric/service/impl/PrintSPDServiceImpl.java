@@ -226,7 +226,7 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 
 				PdfPCell cell = new PdfPCell(new Paragraph("1", font));
 				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-				cell.setFixedHeight(20f);
+//				cell.setFixedHeight(20f);
 				cell.setGrayFill(0.92f);
 				table.addCell(cell);
 
@@ -723,7 +723,7 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 //		cell19.setFixedHeight(20f);
 		table.addCell(cell19);
 
-		PdfPCell cell20 = new PdfPCell(new Paragraph(spdDesc2.getSpdApplicationRem(), font));
+		PdfPCell cell20 = new PdfPCell(new Paragraph(spdDesc2.getSpdTypeRe(), font));
 		cell20.setHorizontalAlignment(Element.ALIGN_LEFT);
 //		cell20.setFixedHeight(20f);
 		table.addCell(cell20);
@@ -773,7 +773,7 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 
 		PdfPCell cell56 = new PdfPCell(new Paragraph("5.d", font));
 		cell56.setHorizontalAlignment(Element.ALIGN_RIGHT);
-//		cell56.setGrayFill(0.92f);
+		cell56.setGrayFill(0.92f);
 		table.addCell(cell56);
 
 		PdfPCell cell57 = new PdfPCell(new Paragraph("Check incomer rating of the panel", font));
@@ -793,7 +793,7 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 
 		PdfPCell cell60 = new PdfPCell(new Paragraph("5.e", font));
 		cell60.setHorizontalAlignment(Element.ALIGN_RIGHT);
-//		cell60.setGrayFill(0.92f);
+		cell60.setGrayFill(0.92f);
 		table.addCell(cell60);
 
 		PdfPCell cell61 = new PdfPCell(new Paragraph("Check Back up fuse (A)", font));
@@ -813,7 +813,7 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 
 		PdfPCell cell64 = new PdfPCell(new Paragraph("5.f", font));
 		cell64.setHorizontalAlignment(Element.ALIGN_RIGHT);
-//		cell64.setGrayFill(0.92f);
+		cell64.setGrayFill(0.92f);
 		table.addCell(cell64);
 
 		PdfPCell cell65 = new PdfPCell(new Paragraph("Check Connecting wire length (m)", font));

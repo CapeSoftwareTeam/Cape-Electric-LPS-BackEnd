@@ -647,7 +647,7 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 		table205.addCell(cell272);
 		return table205;
 	}
-
+	
 	private PdfPTable earthingChamber(Font font11, Font font, EarthElectrodeChamber earthChamber) {
 
 		float[] pointColumnWidths2 = { 25F, 150F, 55F, 50F };
@@ -1337,6 +1337,7 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 
 		PdfPCell cell97 = new PdfPCell(new Paragraph("Minimum distance between earth electrode and wall (m)", font));
 		cell97.setHorizontalAlignment(Element.ALIGN_LEFT);
+		cell97.setGrayFill(0.92f);
 		table21.addCell(cell97);
 
 		PdfPCell cell98 = new PdfPCell(new Paragraph(earthDesc.getEarthelectManimumDistanceWallInOb(), font));
