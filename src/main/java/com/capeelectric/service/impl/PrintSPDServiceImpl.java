@@ -232,7 +232,7 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 
 				PdfPCell cell21 = new PdfPCell(new Paragraph("Mains incoming panel", font));
 				cell21.setHorizontalAlignment(Element.ALIGN_LEFT);
-				cell21.setFixedHeight(20f);
+//				cell21.setFixedHeight(20f);
 				cell21.setGrayFill(0.92f);
 				table.addCell(cell21);
 
@@ -246,30 +246,29 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 
 				PdfPCell cell34 = new PdfPCell(new Paragraph("2", font));
 				cell34.setHorizontalAlignment(Element.ALIGN_CENTER);
-				cell34.setFixedHeight(20f);
+//				cell34.setFixedHeight(20f);
 				cell34.setGrayFill(0.92f);
 				table.addCell(cell34);
 
 				PdfPCell cell35 = new PdfPCell(new Paragraph("Total Number of mains incoming panels", font));
 				cell35.setHorizontalAlignment(Element.ALIGN_LEFT);
-				cell35.setFixedHeight(20f);
+//				cell35.setFixedHeight(20f);
 				cell35.setGrayFill(0.92f);
 				table.addCell(cell35);
 
 				PdfPCell cell36 = new PdfPCell(new Paragraph(spdMain1.getTotalMainsIncomingOb(), font));
 				cell36.setHorizontalAlignment(Element.ALIGN_LEFT);
-				cell36.setFixedHeight(20f);
-
+//				cell36.setFixedHeight(20f);
 				table.addCell(cell36);
 
 				PdfPCell cell37 = new PdfPCell(new Paragraph(spdMain1.getTotalNoOutDoorRequipmentRem(), font));
-				cell37.setFixedHeight(20f);
+//				cell37.setFixedHeight(20f);
 				cell37.setHorizontalAlignment(Element.ALIGN_LEFT);
 				table.addCell(cell37);
 
 				PdfPCell cell40 = new PdfPCell(new Paragraph("3", font));
 				cell40.setHorizontalAlignment(Element.ALIGN_CENTER);
-				cell40.setFixedHeight(20f);
+//				cell40.setFixedHeight(20f);
 				cell40.setGrayFill(0.92f);
 				table.addCell(cell40);
 
@@ -277,49 +276,46 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 						"Total Number of panels supplying power to outdoor equipment such as light fittings / air conditioner chiller units (not split AC outdoor unit)",
 						font));
 				cell411.setHorizontalAlignment(Element.ALIGN_LEFT);
-				cell411.setFixedHeight(20f);
+//				cell411.setFixedHeight(20f);
 				cell411.setGrayFill(0.92f);
 				table.addCell(cell411);
 
 				PdfPCell cell42 = new PdfPCell(new Paragraph(spdMain1.getNoPannelSupplittingOb(), font));
 				cell42.setHorizontalAlignment(Element.ALIGN_LEFT);
-				cell42.setFixedHeight(20f);
-				cell42.setFixedHeight(20f);
-
+//				cell42.setFixedHeight(20f);
 				table.addCell(cell42);
 
 				PdfPCell cell43 = new PdfPCell(new Paragraph(spdMain1.getNoPannelSupplittingRem(), font));
-				cell43.setFixedHeight(20f);
+//				cell43.setFixedHeight(20f);
 				cell43.setHorizontalAlignment(Element.ALIGN_LEFT);
 				table.addCell(cell43);
 
 				PdfPCell cell44 = new PdfPCell(new Paragraph("4", font));
 				cell44.setHorizontalAlignment(Element.ALIGN_CENTER);
-				cell43.setFixedHeight(20f);
+//				cell43.setFixedHeight(20f);
 				cell44.setGrayFill(0.92f);
 				table.addCell(cell44);
 
 				PdfPCell cell45 = new PdfPCell(
 						new Paragraph("Total Number of outdoor equipment and each type equipment", font));
 				cell45.setHorizontalAlignment(Element.ALIGN_LEFT);
-				cell45.setFixedHeight(20f);
+//				cell45.setFixedHeight(20f);
 				cell45.setGrayFill(0.92f);
 				table.addCell(cell45);
 
 				PdfPCell cell46 = new PdfPCell(new Paragraph(spdMain1.getTotalNoOutDoorRequipmentOb(), font));
 				cell46.setHorizontalAlignment(Element.ALIGN_LEFT);
-
-				cell46.setFixedHeight(20f);
+//				cell46.setFixedHeight(20f);
 				table.addCell(cell46);
 
 				PdfPCell cell47 = new PdfPCell(new Paragraph(spdMain1.getTotalNoOutDoorRequipmentRem(), font));
-				cell47.setFixedHeight(20f);
+//				cell47.setFixedHeight(20f);
 				cell47.setHorizontalAlignment(Element.ALIGN_LEFT);
 				table.addCell(cell47);
 
 				PdfPCell cell441 = new PdfPCell(new Paragraph("Note", font11));
 				cell441.setHorizontalAlignment(Element.ALIGN_CENTER);
-				cell43.setFixedHeight(20f);
+//				cell43.setFixedHeight(20f);
 				cell441.setGrayFill(0.92f);
 				table.addCell(cell441);
 
@@ -399,7 +395,7 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 
 		PdfPCell cell18 = new PdfPCell(new Paragraph("Type of SPD / Model", font));
 		cell18.setHorizontalAlignment(Element.ALIGN_LEFT);
-		cell18.setFixedHeight(20f);
+//		cell18.setFixedHeight(20f);
 		cell18.setGrayFill(0.92f);
 		table.addCell(cell18);
 
@@ -414,41 +410,40 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 		PdfPCell cell48 = new PdfPCell(new Paragraph("7.b", font));
 		cell48.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell48.setGrayFill(0.92f);
-		cell48.setFixedHeight(20f);
+//		cell48.setFixedHeight(20f);
 		table.addCell(cell48);
 
 		PdfPCell cell49 = new PdfPCell(new Paragraph("Application", font));
 		cell49.setHorizontalAlignment(Element.ALIGN_LEFT);
-		cell49.setFixedHeight(20f);
+//		cell49.setFixedHeight(20f);
 		cell49.setGrayFill(0.92f);
 		table.addCell(cell49);
 
 		PdfPCell cell50 = new PdfPCell(new Paragraph(spdDesc2.getSpdApplicationOb(), font));
 		cell50.setHorizontalAlignment(Element.ALIGN_LEFT);
-		cell50.setFixedHeight(20f);
-
+//		cell50.setFixedHeight(20f);
 		table.addCell(cell50);
 
 		PdfPCell cell51 = new PdfPCell(new Paragraph(spdDesc2.getSpdApplicationRem(), font));
-		cell51.setFixedHeight(20f);
+//		cell51.setFixedHeight(20f);
 		cell51.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table.addCell(cell51);
 
 		PdfPCell cell52 = new PdfPCell(new Paragraph("7.c", font));
 		cell52.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell52.setGrayFill(0.92f);
-		cell52.setFixedHeight(20f);
+//		cell52.setFixedHeight(20f);
 		table.addCell(cell52);
 
 		PdfPCell cell53 = new PdfPCell(new Paragraph("Panel name", font));
 		cell53.setHorizontalAlignment(Element.ALIGN_LEFT);
-		cell53.setFixedHeight(20f);
+//		cell53.setFixedHeight(20f);
 		cell53.setGrayFill(0.92f);
 		table.addCell(cell53);
 
 		PdfPCell cell54 = new PdfPCell(new Paragraph(spdDesc2.getPanelNameOb(), font));
 		cell54.setHorizontalAlignment(Element.ALIGN_LEFT);
-		cell54.setFixedHeight(20f);
+//		cell54.setFixedHeight(20f);
 		table.addCell(cell54);
 
 		PdfPCell cell55 = new PdfPCell(new Paragraph(spdDesc2.getPanelNameRem(), font));
@@ -462,13 +457,13 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 
 		PdfPCell cell57 = new PdfPCell(new Paragraph("Check incomer rating of the panel", font));
 		cell57.setHorizontalAlignment(Element.ALIGN_LEFT);
-		cell57.setFixedHeight(20f);
+//		cell57.setFixedHeight(20f);
 		cell57.setGrayFill(0.92f);
 		table.addCell(cell57);
 
 		PdfPCell cell58 = new PdfPCell(new Paragraph(spdDesc2.getIncomingRatingOb(), font));
 		cell58.setHorizontalAlignment(Element.ALIGN_LEFT);
-		cell58.setFixedHeight(20f);
+//		cell58.setFixedHeight(20f);
 		table.addCell(cell58);
 
 		PdfPCell cell59 = new PdfPCell(new Paragraph(spdDesc2.getIncomingRatingRem(), font));
@@ -482,13 +477,13 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 
 		PdfPCell cell61 = new PdfPCell(new Paragraph("Check Back up fuse (A)", font));
 		cell61.setHorizontalAlignment(Element.ALIGN_LEFT);
-		cell61.setFixedHeight(20f);
+//		cell61.setFixedHeight(20f);
 		cell61.setGrayFill(0.92f);
 		table.addCell(cell61);
 
 		PdfPCell cell62 = new PdfPCell(new Paragraph(spdDesc2.getBackupFuseCheckOb(), font));
 		cell62.setHorizontalAlignment(Element.ALIGN_LEFT);
-		cell62.setFixedHeight(20f);
+//		cell62.setFixedHeight(20f);
 		table.addCell(cell62);
 
 		PdfPCell cell63 = new PdfPCell(new Paragraph(spdDesc2.getBackupFuseCheckRem(), font));
@@ -502,13 +497,13 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 
 		PdfPCell cell65 = new PdfPCell(new Paragraph("Check Connecting wire length (m)", font));
 		cell65.setHorizontalAlignment(Element.ALIGN_LEFT);
-		cell65.setFixedHeight(20f);
+//		cell65.setFixedHeight(20f);
 		cell65.setGrayFill(0.92f);
 		table.addCell(cell65);
 
 		PdfPCell cell66 = new PdfPCell(new Paragraph(spdDesc2.getConnectingWireLengthOb(), font));
 		cell66.setHorizontalAlignment(Element.ALIGN_LEFT);
-		cell66.setFixedHeight(20f);
+//		cell66.setFixedHeight(20f);
 		table.addCell(cell66);
 
 		PdfPCell cell67 = new PdfPCell(new Paragraph(spdDesc2.getConnectingWireLengthRem(), font));
@@ -522,13 +517,13 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 
 		PdfPCell cell69 = new PdfPCell(new Paragraph("Check Connecting wire size (Sq.mm)", font));
 		cell69.setHorizontalAlignment(Element.ALIGN_LEFT);
-		cell69.setFixedHeight(20f);
+//		cell69.setFixedHeight(20f);
 		cell69.setGrayFill(0.92f);
 		table.addCell(cell69);
 
 		PdfPCell cell70 = new PdfPCell(new Paragraph(spdDesc2.getConnectingWireLengthOb(), font));
 		cell70.setHorizontalAlignment(Element.ALIGN_LEFT);
-		cell70.setFixedHeight(20f);
+//		cell70.setFixedHeight(20f);
 		table.addCell(cell70);
 
 		PdfPCell cell71 = new PdfPCell(new Paragraph(spdDesc2.getConnectingWireLengthRem(), font));
@@ -558,58 +553,57 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 
 		PdfPCell cell18 = new PdfPCell(new Paragraph("Type of SPD / Model", font));
 		cell18.setHorizontalAlignment(Element.ALIGN_LEFT);
-		cell18.setFixedHeight(20f);
+//		cell18.setFixedHeight(20f);
 		cell18.setGrayFill(0.92f);
 		table.addCell(cell18);
 
 		PdfPCell cell19 = new PdfPCell(new Paragraph(spdDesc2.getSpdTypeOb(), font));
 		cell19.setHorizontalAlignment(Element.ALIGN_LEFT);
-		cell19.setFixedHeight(20f);
+//		cell19.setFixedHeight(20f);
 		table.addCell(cell19);
 
 		PdfPCell cell20 = new PdfPCell(new Paragraph(spdDesc2.getSpdApplicationRem(), font));
 		cell20.setHorizontalAlignment(Element.ALIGN_LEFT);
-		cell20.setFixedHeight(20f);
+//		cell20.setFixedHeight(20f);
 		table.addCell(cell20);
 
 		PdfPCell cell48 = new PdfPCell(new Paragraph("6.b", font));
 		cell48.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell48.setGrayFill(0.92f);
-		cell48.setFixedHeight(20f);
+//		cell48.setFixedHeight(20f);
 		table.addCell(cell48);
 
 		PdfPCell cell49 = new PdfPCell(new Paragraph("Application", font));
 		cell49.setHorizontalAlignment(Element.ALIGN_LEFT);
-		cell49.setFixedHeight(20f);
+//		cell49.setFixedHeight(20f);
 		cell49.setGrayFill(0.92f);
 		table.addCell(cell49);
 
 		PdfPCell cell50 = new PdfPCell(new Paragraph(spdDesc2.getSpdApplicationOb(), font));
 		cell50.setHorizontalAlignment(Element.ALIGN_LEFT);
-		cell50.setFixedHeight(20f);
-
+//		cell50.setFixedHeight(20f);
 		table.addCell(cell50);
 
 		PdfPCell cell51 = new PdfPCell(new Paragraph(spdDesc2.getSpdApplicationRem(), font));
-		cell51.setFixedHeight(20f);
+//		cell51.setFixedHeight(20f);
 		cell51.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table.addCell(cell51);
 
 		PdfPCell cell52 = new PdfPCell(new Paragraph("6.c", font));
 		cell52.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell52.setGrayFill(0.92f);
-		cell52.setFixedHeight(20f);
+//		cell52.setFixedHeight(20f);
 		table.addCell(cell52);
 
 		PdfPCell cell53 = new PdfPCell(new Paragraph("Panel name", font));
 		cell53.setHorizontalAlignment(Element.ALIGN_LEFT);
-		cell53.setFixedHeight(20f);
+//		cell53.setFixedHeight(20f);
 		cell53.setGrayFill(0.92f);
 		table.addCell(cell53);
 
 		PdfPCell cell54 = new PdfPCell(new Paragraph(spdDesc2.getPanelNameOb(), font));
 		cell54.setHorizontalAlignment(Element.ALIGN_LEFT);
-		cell54.setFixedHeight(20f);
+//		cell54.setFixedHeight(20f);
 		table.addCell(cell54);
 
 		PdfPCell cell55 = new PdfPCell(new Paragraph(spdDesc2.getPanelNameRem(), font));
@@ -623,13 +617,13 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 
 		PdfPCell cell57 = new PdfPCell(new Paragraph("Check incomer rating of the panel", font));
 		cell57.setHorizontalAlignment(Element.ALIGN_LEFT);
-		cell57.setFixedHeight(20f);
+//		cell57.setFixedHeight(20f);
 		cell57.setGrayFill(0.92f);
 		table.addCell(cell57);
 
 		PdfPCell cell58 = new PdfPCell(new Paragraph(spdDesc2.getIncomingRatingOb(), font));
 		cell58.setHorizontalAlignment(Element.ALIGN_LEFT);
-		cell58.setFixedHeight(20f);
+//		cell58.setFixedHeight(20f);
 		table.addCell(cell58);
 
 		PdfPCell cell59 = new PdfPCell(new Paragraph(spdDesc2.getIncomingRatingRem(), font));
@@ -643,13 +637,13 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 
 		PdfPCell cell61 = new PdfPCell(new Paragraph("Check Back up fuse (A)", font));
 		cell61.setHorizontalAlignment(Element.ALIGN_LEFT);
-		cell61.setFixedHeight(20f);
+//		cell61.setFixedHeight(20f);
 		cell61.setGrayFill(0.92f);
 		table.addCell(cell61);
 
 		PdfPCell cell62 = new PdfPCell(new Paragraph(spdDesc2.getBackupFuseCheckOb(), font));
 		cell62.setHorizontalAlignment(Element.ALIGN_LEFT);
-		cell62.setFixedHeight(20f);
+//		cell62.setFixedHeight(20f);
 		table.addCell(cell62);
 
 		PdfPCell cell63 = new PdfPCell(new Paragraph(spdDesc2.getBackupFuseCheckRem(), font));
@@ -663,13 +657,13 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 
 		PdfPCell cell65 = new PdfPCell(new Paragraph("Check Connecting wire length (m)", font));
 		cell65.setHorizontalAlignment(Element.ALIGN_LEFT);
-		cell65.setFixedHeight(20f);
+//		cell65.setFixedHeight(20f);
 		cell65.setGrayFill(0.92f);
 		table.addCell(cell65);
 
 		PdfPCell cell66 = new PdfPCell(new Paragraph(spdDesc2.getConnectingWireLengthOb(), font));
 		cell66.setHorizontalAlignment(Element.ALIGN_LEFT);
-		cell66.setFixedHeight(20f);
+//		cell66.setFixedHeight(20f);
 		table.addCell(cell66);
 
 		PdfPCell cell67 = new PdfPCell(new Paragraph(spdDesc2.getConnectingWireLengthRem(), font));
@@ -683,13 +677,13 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 
 		PdfPCell cell69 = new PdfPCell(new Paragraph("Check Connecting wire size (Sq.mm)", font));
 		cell69.setHorizontalAlignment(Element.ALIGN_LEFT);
-		cell69.setFixedHeight(20f);
+//		cell69.setFixedHeight(20f);
 		cell69.setGrayFill(0.92f);
 		table.addCell(cell69);
 
 		PdfPCell cell70 = new PdfPCell(new Paragraph(spdDesc2.getConnectingWireLengthOb(), font));
 		cell70.setHorizontalAlignment(Element.ALIGN_LEFT);
-		cell70.setFixedHeight(20f);
+//		cell70.setFixedHeight(20f);
 		table.addCell(cell70);
 
 		PdfPCell cell71 = new PdfPCell(new Paragraph(spdDesc2.getConnectingWireLengthRem(), font));
@@ -714,64 +708,63 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 
 		PdfPCell cell17 = new PdfPCell(new Paragraph("5.a", font));
 		cell17.setHorizontalAlignment(Element.ALIGN_RIGHT);
-		cell17.setFixedHeight(20f);
+//		cell17.setFixedHeight(20f);
 		cell17.setGrayFill(0.92f);
 		table.addCell(cell17);
 
 		PdfPCell cell18 = new PdfPCell(new Paragraph("Type of SPD / Model", font));
 		cell18.setHorizontalAlignment(Element.ALIGN_LEFT);
-		cell18.setFixedHeight(20f);
+//		cell18.setFixedHeight(20f);
 		cell18.setGrayFill(0.92f);
 		table.addCell(cell18);
 
 		PdfPCell cell19 = new PdfPCell(new Paragraph(spdDesc2.getSpdTypeOb(), font));
 		cell19.setHorizontalAlignment(Element.ALIGN_LEFT);
-		cell19.setFixedHeight(20f);
+//		cell19.setFixedHeight(20f);
 		table.addCell(cell19);
 
 		PdfPCell cell20 = new PdfPCell(new Paragraph(spdDesc2.getSpdApplicationRem(), font));
 		cell20.setHorizontalAlignment(Element.ALIGN_LEFT);
-		cell20.setFixedHeight(20f);
+//		cell20.setFixedHeight(20f);
 		table.addCell(cell20);
 
 		PdfPCell cell48 = new PdfPCell(new Paragraph("5.b", font));
 		cell48.setHorizontalAlignment(Element.ALIGN_RIGHT);
-		cell48.setFixedHeight(20f);
+//		cell48.setFixedHeight(20f);
 		cell48.setGrayFill(0.92f);
 		table.addCell(cell48);
 
 		PdfPCell cell49 = new PdfPCell(new Paragraph("Application", font));
 		cell49.setHorizontalAlignment(Element.ALIGN_LEFT);
-		cell49.setFixedHeight(20f);
+//		cell49.setFixedHeight(20f);
 		cell49.setGrayFill(0.92f);
 		table.addCell(cell49);
 
 		PdfPCell cell50 = new PdfPCell(new Paragraph(spdDesc2.getSpdApplicationOb(), font));
 		cell50.setHorizontalAlignment(Element.ALIGN_LEFT);
-		cell50.setFixedHeight(20f);
-
+//		cell50.setFixedHeight(20f);
 		table.addCell(cell50);
 
 		PdfPCell cell51 = new PdfPCell(new Paragraph(spdDesc2.getSpdApplicationRem(), font));
-		cell51.setFixedHeight(20f);
+//		cell51.setFixedHeight(20f);
 		cell51.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table.addCell(cell51);
 
 		PdfPCell cell52 = new PdfPCell(new Paragraph("5.c", font));
 		cell52.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell52.setGrayFill(0.92f);
-		cell52.setFixedHeight(20f);
+//		cell52.setFixedHeight(20f);
 		table.addCell(cell52);
 
 		PdfPCell cell53 = new PdfPCell(new Paragraph("Panel name", font));
 		cell53.setHorizontalAlignment(Element.ALIGN_LEFT);
-		cell53.setFixedHeight(20f);
+//		cell53.setFixedHeight(20f);
 		cell53.setGrayFill(0.92f);
 		table.addCell(cell53);
 
 		PdfPCell cell54 = new PdfPCell(new Paragraph(spdDesc2.getPanelNameOb(), font));
 		cell54.setHorizontalAlignment(Element.ALIGN_LEFT);
-		cell54.setFixedHeight(20f);
+//		cell54.setFixedHeight(20f);
 		table.addCell(cell54);
 
 		PdfPCell cell55 = new PdfPCell(new Paragraph(spdDesc2.getPanelNameRem(), font));
@@ -780,18 +773,18 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 
 		PdfPCell cell56 = new PdfPCell(new Paragraph("5.d", font));
 		cell56.setHorizontalAlignment(Element.ALIGN_RIGHT);
-		cell56.setGrayFill(0.92f);
+//		cell56.setGrayFill(0.92f);
 		table.addCell(cell56);
 
 		PdfPCell cell57 = new PdfPCell(new Paragraph("Check incomer rating of the panel", font));
 		cell57.setHorizontalAlignment(Element.ALIGN_LEFT);
-		cell57.setFixedHeight(20f);
+//		cell57.setFixedHeight(20f);
 		cell57.setGrayFill(0.92f);
 		table.addCell(cell57);
 
 		PdfPCell cell58 = new PdfPCell(new Paragraph(spdDesc2.getIncomingRatingOb(), font));
 		cell58.setHorizontalAlignment(Element.ALIGN_LEFT);
-		cell58.setFixedHeight(20f);
+//		cell58.setFixedHeight(20f);
 		table.addCell(cell58);
 
 		PdfPCell cell59 = new PdfPCell(new Paragraph(spdDesc2.getIncomingRatingRem(), font));
@@ -800,18 +793,18 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 
 		PdfPCell cell60 = new PdfPCell(new Paragraph("5.e", font));
 		cell60.setHorizontalAlignment(Element.ALIGN_RIGHT);
-		cell60.setGrayFill(0.92f);
+//		cell60.setGrayFill(0.92f);
 		table.addCell(cell60);
 
 		PdfPCell cell61 = new PdfPCell(new Paragraph("Check Back up fuse (A)", font));
 		cell61.setHorizontalAlignment(Element.ALIGN_LEFT);
-		cell61.setFixedHeight(20f);
+//		cell61.setFixedHeight(20f);
 		cell61.setGrayFill(0.92f);
 		table.addCell(cell61);
 
 		PdfPCell cell62 = new PdfPCell(new Paragraph(spdDesc2.getBackupFuseCheckOb(), font));
 		cell62.setHorizontalAlignment(Element.ALIGN_LEFT);
-		cell62.setFixedHeight(20f);
+//		cell62.setFixedHeight(20f);
 		table.addCell(cell62);
 
 		PdfPCell cell63 = new PdfPCell(new Paragraph(spdDesc2.getBackupFuseCheckRem(), font));
@@ -820,18 +813,18 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 
 		PdfPCell cell64 = new PdfPCell(new Paragraph("5.f", font));
 		cell64.setHorizontalAlignment(Element.ALIGN_RIGHT);
-		cell64.setGrayFill(0.92f);
+//		cell64.setGrayFill(0.92f);
 		table.addCell(cell64);
 
 		PdfPCell cell65 = new PdfPCell(new Paragraph("Check Connecting wire length (m)", font));
 		cell65.setHorizontalAlignment(Element.ALIGN_LEFT);
-		cell65.setFixedHeight(20f);
+//		cell65.setFixedHeight(20f);
 		cell65.setGrayFill(0.92f);
 		table.addCell(cell65);
 
 		PdfPCell cell66 = new PdfPCell(new Paragraph(spdDesc2.getConnectingWireLengthOb(), font));
 		cell66.setHorizontalAlignment(Element.ALIGN_LEFT);
-		cell66.setFixedHeight(20f);
+//		cell66.setFixedHeight(20f);
 		table.addCell(cell66);
 
 		PdfPCell cell67 = new PdfPCell(new Paragraph(spdDesc2.getConnectingWireLengthRem(), font));
@@ -845,13 +838,13 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 
 		PdfPCell cell69 = new PdfPCell(new Paragraph("Check Connecting wire size (Sq.mm)", font));
 		cell69.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
-		cell69.setFixedHeight(20f);
+//		cell69.setFixedHeight(20f);
 		cell69.setGrayFill(0.92f);
 		table.addCell(cell69);
 
 		PdfPCell cell70 = new PdfPCell(new Paragraph(spdDesc2.getConnectingWireLengthOb(), font));
 		cell70.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
-		cell70.setFixedHeight(20f);
+//		cell70.setFixedHeight(20f);
 		table.addCell(cell70);
 
 		PdfPCell cell71 = new PdfPCell(new Paragraph(spdDesc2.getConnectingWireLengthRem(), font));

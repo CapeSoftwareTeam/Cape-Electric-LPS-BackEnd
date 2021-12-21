@@ -413,6 +413,7 @@ public class PrintSDandEarthStudServiceImpl implements PrintSDandEarthStudServic
 				table2.addCell(cell42);
 
 				for (EarthStudDescription earthStud : earthStud1) {
+					
 					PdfPCell cell43 = new PdfPCell(new Paragraph("1", font12));
 					cell43.setHorizontalAlignment(Element.ALIGN_CENTER);
 					cell43.setGrayFill(0.92f);
@@ -420,13 +421,13 @@ public class PrintSDandEarthStudServiceImpl implements PrintSDandEarthStudServic
 
 					PdfPCell cell44 = new PdfPCell(new Paragraph("Earth stud visibility if any", font12));
 					cell44.setHorizontalAlignment(Element.ALIGN_LEFT);
-					cell44.setFixedHeight(20f);
+//					cell44.setFixedHeight(20f);
 					cell44.setGrayFill(0.92f);
 					table2.addCell(cell44);
 
 					PdfPCell cell45 = new PdfPCell(new Paragraph(earthStud.getEarthStudVisibilityOb(), font12));
 					cell45.setHorizontalAlignment(Element.ALIGN_LEFT);
-					cell45.setFixedHeight(20f);
+//					cell45.setFixedHeight(20f);
 					table2.addCell(cell45);
 
 					PdfPCell cell46 = new PdfPCell(new Paragraph(earthStud.getEarthStudVisibilityRem(), font12));
@@ -440,13 +441,13 @@ public class PrintSDandEarthStudServiceImpl implements PrintSDandEarthStudServic
 
 					PdfPCell cell48 = new PdfPCell(new Paragraph("Earth stud bend if any", font12));
 					cell48.setHorizontalAlignment(Element.ALIGN_LEFT);
-					cell48.setFixedHeight(20f);
+//					cell48.setFixedHeight(20f);
 					cell48.setGrayFill(0.92f);
 					table2.addCell(cell48);
 
 					PdfPCell cell49 = new PdfPCell(new Paragraph(earthStud.getEarthStudBendOb(), font12));
 					cell49.setHorizontalAlignment(Element.ALIGN_LEFT);
-					cell49.setFixedHeight(20f);
+//					cell49.setFixedHeight(20f);
 					table2.addCell(cell49);
 
 					PdfPCell cell50 = new PdfPCell(new Paragraph(earthStud.getEarthStudBendRem(), font12));
@@ -460,13 +461,13 @@ public class PrintSDandEarthStudServiceImpl implements PrintSDandEarthStudServic
 
 					PdfPCell cell52 = new PdfPCell(new Paragraph("Proper bonding rail", font12));
 					cell52.setHorizontalAlignment(Element.ALIGN_LEFT);
-					cell52.setFixedHeight(20f);
+//					cell52.setFixedHeight(20f);
 					cell52.setGrayFill(0.92f);
 					table2.addCell(cell52);
 
 					PdfPCell cell53 = new PdfPCell(new Paragraph(earthStud.getProperBondingRailOb(), font12));
 					cell53.setHorizontalAlignment(Element.ALIGN_LEFT);
-					cell53.setFixedHeight(20f);
+//					cell53.setFixedHeight(20f);
 					table2.addCell(cell53);
 
 					PdfPCell cell54 = new PdfPCell(new Paragraph(earthStud.getProperBondingRailRem(), font12));
@@ -480,13 +481,13 @@ public class PrintSDandEarthStudServiceImpl implements PrintSDandEarthStudServic
 
 					PdfPCell cell56 = new PdfPCell(new Paragraph("Physical damage of stud", font12));
 					cell56.setHorizontalAlignment(Element.ALIGN_LEFT);
-					cell56.setFixedHeight(20f);
+//					cell56.setFixedHeight(20f);
 					cell56.setGrayFill(0.92f);
 					table2.addCell(cell56);
 
 					PdfPCell cell57 = new PdfPCell(new Paragraph(earthStud.getPhysicalDamageStudOb(), font12));
 					cell57.setHorizontalAlignment(Element.ALIGN_LEFT);
-					cell57.setFixedHeight(20f);
+//					cell57.setFixedHeight(20f);
 					table2.addCell(cell57);
 
 					PdfPCell cell58 = new PdfPCell(new Paragraph(earthStud.getPhysicalDamageStudRem(), font12));
@@ -500,13 +501,13 @@ public class PrintSDandEarthStudServiceImpl implements PrintSDandEarthStudServic
 
 					PdfPCell cell60 = new PdfPCell(new Paragraph("Whether continuity exist in earth stud", font12));
 					cell60.setHorizontalAlignment(Element.ALIGN_LEFT);
-					cell60.setFixedHeight(20f);
+//					cell60.setFixedHeight(20f);
 					cell60.setGrayFill(0.92f);
 					table2.addCell(cell60);
 
 					PdfPCell cell61 = new PdfPCell(new Paragraph(earthStud.getContinutyExistaEarthOb(), font12));
 					cell61.setHorizontalAlignment(Element.ALIGN_LEFT);
-					cell61.setFixedHeight(20f);
+//					cell61.setFixedHeight(20f);
 					table2.addCell(cell61);
 
 					PdfPCell cell62 = new PdfPCell(new Paragraph(earthStud.getContinutyExistaEarthRem(), font12));
@@ -547,13 +548,13 @@ public class PrintSDandEarthStudServiceImpl implements PrintSDandEarthStudServic
 
 		PdfPCell cell36 = new PdfPCell(new Paragraph(separateDistance3.getSeperationDistanceDesc(), font1));
 		cell36.setHorizontalAlignment(Element.ALIGN_LEFT);
-		cell36.setFixedHeight(20f);
+//		cell36.setFixedHeight(20f);
 		cell36.setGrayFill(0.92f);
 		table1.addCell(cell36);
 
 		PdfPCell cell37 = new PdfPCell(new Paragraph(separateDistance3.getSeperationDistanceOb(), font1));
 		cell37.setHorizontalAlignment(Element.ALIGN_LEFT);
-		cell37.setFixedHeight(20f);
+//		cell37.setFixedHeight(20f);
 		// cell37.setGrayFill(0.92f);
 		table1.addCell(cell37);
 
