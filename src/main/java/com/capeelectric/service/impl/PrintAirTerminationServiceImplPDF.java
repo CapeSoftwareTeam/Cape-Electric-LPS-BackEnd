@@ -1713,7 +1713,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 		cell9.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table2.addCell(cell9);
 		if (airMeshDesc1.getMeshSizeRe() != null) {
-			PdfPCell cell1 = new PdfPCell(new Paragraph(airMeshDesc1.getSizeOfConductorRe(), font2));
+			PdfPCell cell1 = new PdfPCell(new Paragraph(airMeshDesc1.getMeshSizeRe(), font2));
 			cell1.setHorizontalAlignment(Element.ALIGN_LEFT);
 			table2.addCell(cell1);
 		} else {
@@ -1981,11 +1981,11 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table1.addCell(cell);
 
-		PdfPCell cell13 = new PdfPCell(new Paragraph(lpsVerticalAirTermination1.getMaterialOfTerminalOb(), font1));
+		PdfPCell cell13 = new PdfPCell(new Paragraph(lpsVerticalAirTermination1.getInstallationTerminationsystemOb(), font1));
 		cell13.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table1.addCell(cell13);
 		if (lpsVerticalAirTermination1.getMaterialOfTerminalRe() != null) {
-			PdfPCell cell1 = new PdfPCell(new Paragraph(lpsVerticalAirTermination1.getMaterialOfTerminalRe(), font1));
+			PdfPCell cell1 = new PdfPCell(new Paragraph(lpsVerticalAirTermination1.getInstallationTerminationsystemRem(), font1));
 			cell1.setHorizontalAlignment(Element.ALIGN_LEFT);
 			table1.addCell(cell1);
 		} else {

@@ -521,12 +521,12 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 		cell69.setGrayFill(0.92f);
 		table.addCell(cell69);
 
-		PdfPCell cell70 = new PdfPCell(new Paragraph(spdDesc2.getConnectingWireLengthOb(), font));
+		PdfPCell cell70 = new PdfPCell(new Paragraph(spdDesc2.getConnectingWireSizeOb(), font));
 		cell70.setHorizontalAlignment(Element.ALIGN_LEFT);
 //		cell70.setFixedHeight(20f);
 		table.addCell(cell70);
 
-		PdfPCell cell71 = new PdfPCell(new Paragraph(spdDesc2.getConnectingWireLengthRem(), font));
+		PdfPCell cell71 = new PdfPCell(new Paragraph(spdDesc2.getConnectingWireSizeRem(), font));
 		cell71.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table.addCell(cell71);
 
@@ -681,12 +681,12 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 		cell69.setGrayFill(0.92f);
 		table.addCell(cell69);
 
-		PdfPCell cell70 = new PdfPCell(new Paragraph(spdDesc2.getConnectingWireLengthOb(), font));
+		PdfPCell cell70 = new PdfPCell(new Paragraph(spdDesc2.getConnectingWireSizeOb(), font));
 		cell70.setHorizontalAlignment(Element.ALIGN_LEFT);
 //		cell70.setFixedHeight(20f);
 		table.addCell(cell70);
 
-		PdfPCell cell71 = new PdfPCell(new Paragraph(spdDesc2.getConnectingWireLengthRem(), font));
+		PdfPCell cell71 = new PdfPCell(new Paragraph(spdDesc2.getConnectingWireSizeRem(), font));
 		cell71.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table.addCell(cell71);
 	}
@@ -842,12 +842,12 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 		cell69.setGrayFill(0.92f);
 		table.addCell(cell69);
 
-		PdfPCell cell70 = new PdfPCell(new Paragraph(spdDesc2.getConnectingWireLengthOb(), font));
+		PdfPCell cell70 = new PdfPCell(new Paragraph(spdDesc2.getConnectingWireSizeOb(), font));
 		cell70.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 //		cell70.setFixedHeight(20f);
 		table.addCell(cell70);
 
-		PdfPCell cell71 = new PdfPCell(new Paragraph(spdDesc2.getConnectingWireLengthRem(), font));
+		PdfPCell cell71 = new PdfPCell(new Paragraph(spdDesc2.getConnectingWireSizeRem(), font));
 		cell71.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 		table.addCell(cell71);
 

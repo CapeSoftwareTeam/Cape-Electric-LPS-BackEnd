@@ -348,11 +348,11 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 				cell18.setGrayFill(0.92f);
 				table.addCell(cell18);
 
-				PdfPCell cell19 = new PdfPCell(new Paragraph(downLps1.getChemicalSprinklerOb(), font));
+				PdfPCell cell19 = new PdfPCell(new Paragraph(downLps1.getCobustMaterialWallOB(), font));
 				cell19.setHorizontalAlignment(Element.ALIGN_LEFT);
 				table.addCell(cell19);
 
-				PdfPCell cell20 = new PdfPCell(new Paragraph(downLps1.getChemicalSprinklerRem(), font));
+				PdfPCell cell20 = new PdfPCell(new Paragraph(downLps1.getCobustMaterialWallRem(), font));
 				cell20.setHorizontalAlignment(Element.ALIGN_LEFT);
 				table.addCell(cell20);
 
@@ -582,7 +582,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		table2.addCell(cell66);
 
 		PdfPCell cell67 = new PdfPCell(new Paragraph(testJoint.getTotalNoOfTestJointOB(), font));
-		cell67.setHorizontalAlignment(Element.ALIGN_RIGHT);
+		cell67.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table2.addCell(cell67);
 
 		PdfPCell cell68 = new PdfPCell(new Paragraph(testJoint.getTotalNoOfTestJointRem(), font));
@@ -873,7 +873,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		table2.addCell(cell79);
 
 		PdfPCell cell80 = new PdfPCell(new Paragraph(lightingCounter1.getInspectionPassedNoOb(), font));
-		cell80.setHorizontalAlignment(Element.ALIGN_RIGHT);
+		cell80.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table2.addCell(cell80);
 
 		PdfPCell cell81 = new PdfPCell(new Paragraph(lightingCounter1.getInspectionPassedNoRem(), font));
@@ -1020,7 +1020,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		cell52.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table2.addCell(cell52);
 
-		PdfPCell cell53 = new PdfPCell(new Paragraph(connector.getMaterialConnectorRem(), font));
+		PdfPCell cell53 = new PdfPCell(new Paragraph(connector.getMaxConnectorsDownConductorRem(), font));
 		cell53.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table2.addCell(cell53);
 
@@ -1361,11 +1361,11 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		cell26.setGrayFill(0.92f);
 		table1.addCell(cell26);
 
-		PdfPCell cell27 = new PdfPCell(new Paragraph(bridgingDesc1.getBridgingCableConnectionOb(), font));
+		PdfPCell cell27 = new PdfPCell(new Paragraph(bridgingDesc1.getEnsureBridgingCableOb(), font));
 		cell27.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table1.addCell(cell27);
 
-		PdfPCell cell28 = new PdfPCell(new Paragraph(bridgingDesc1.getBridgingCableConnectionRem(), font));
+		PdfPCell cell28 = new PdfPCell(new Paragraph(bridgingDesc1.getEnsureBridgingCableRem(), font));
 		cell28.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table1.addCell(cell28);
 
@@ -1399,11 +1399,11 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		cell47.setGrayFill(0.92f);
 		table1.addCell(cell47);
 
-		PdfPCell cell48 = new PdfPCell(new Paragraph(bridgingDesc1.getEnsureBridgingCableOb(), font));
+		PdfPCell cell48 = new PdfPCell(new Paragraph(bridgingDesc1.getBridgingCableConnectionOb(), font));
 		cell48.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table1.addCell(cell48);
 
-		PdfPCell cell49 = new PdfPCell(new Paragraph(bridgingDesc1.getEnsureBridgingCableRem(), font));
+		PdfPCell cell49 = new PdfPCell(new Paragraph(bridgingDesc1.getBridgingCableConnectionRem(), font));
 		cell49.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table1.addCell(cell49);
 
@@ -1766,7 +1766,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		cell75.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table1.addCell(cell75);
 
-		PdfPCell cell76 = new PdfPCell(new Paragraph(downConductor1.getInspectedNoRem(), font));
+		PdfPCell cell76 = new PdfPCell(new Paragraph(downConductor1.getInspectionPassedNoRem(), font));
 		cell76.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table1.addCell(cell76);
 
@@ -1784,7 +1784,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		cell79.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table1.addCell(cell79);
 
-		PdfPCell cell80 = new PdfPCell(new Paragraph(downConductor1.getInspectionPassedNoRem(), font));
+		PdfPCell cell80 = new PdfPCell(new Paragraph(downConductor1.getInspectionFailedNoRem(), font));
 		cell80.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table1.addCell(cell80);
 		return table1;

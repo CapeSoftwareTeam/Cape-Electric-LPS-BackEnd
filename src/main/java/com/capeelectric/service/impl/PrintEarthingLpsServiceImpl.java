@@ -1029,11 +1029,11 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 		cell154.setGrayFill(0.92f);
 		table22.addCell(cell154);
 
-		PdfPCell cell155 = new PdfPCell(new Paragraph(earthClamps.getTotalNoClampsInOb(), font));
+		PdfPCell cell155 = new PdfPCell(new Paragraph(earthClamps.getInspectedClampsInOb(), font));
 		cell155.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table22.addCell(cell155);
 
-		PdfPCell cell156 = new PdfPCell(new Paragraph(earthClamps.getTotalNoClampsInRem(), font));
+		PdfPCell cell156 = new PdfPCell(new Paragraph(earthClamps.getInspectedClampsInRem(), font));
 		cell156.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table22.addCell(cell156);
 
@@ -1412,11 +1412,11 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 		cell1131.setGrayFill(0.92f);
 		table21.addCell(cell1131);
 
-		PdfPCell cell1141 = new PdfPCell(new Paragraph(earthDesc.getTotalNumberOfElectrodeOb(), font));
+		PdfPCell cell1141 = new PdfPCell(new Paragraph(earthDesc.getInspectedNoOb(), font));
 		cell1141.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table21.addCell(cell1141);
 
-		PdfPCell cell1151 = new PdfPCell(new Paragraph(earthDesc.getTotalNumberOfElectrodeRem(), font));
+		PdfPCell cell1151 = new PdfPCell(new Paragraph(earthDesc.getInspectedNoRem(), font));
 		cell1151.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table21.addCell(cell1151);
 
