@@ -91,76 +91,80 @@ public class FinalReportServiceImpl implements FinalReportService {
 			lpsFinalReport = new LpsFinalReport();
 			lpsFinalReport.setUserName(userName);
 			lpsFinalReport.setLpsBasicId(basicLpsId);
-			
-			//Basic Lps
+
+			// Basic Lps
 			logger.debug("fetching process started for BasicLpsDetails_Information");
 			Optional<BasicLps> basicLpsDetails = basicLpsRepository.findByBasicLpsId(basicLpsId);
 			logger.debug("BasicLpsDetails_Information fetching ended");
-			if (basicLpsDetails.isPresent() && basicLpsDetails != null) {
+
+			// Lps Air description
+			logger.debug("fetching process started for LpsAirDiscription");
+			Optional<LpsAirDiscription> lpsAirDisc = airTerminationLpsRepository.findByBasicLpsId(basicLpsId);
+			logger.debug("LpsAirDiscription_fetching ended");
+
+			// Down Conductors
+			logger.debug("fetching process started for DownConductorDescription");
+			Optional<DownConductorDescription> downConductorDetails = downConductorRepository
+					.findByBasicLpsId(basicLpsId);
+			logger.debug("DownConductorDescription_fetching ended");
+
+			// Earthing Lps
+			logger.debug("fetching process started for EarthingLpsDescription");
+			Optional<EarthingLpsDescription> earthingLpsDetails = earthingLpsRepository.findByBasicLpsId(basicLpsId);
+			logger.debug("EarthingLpsDescription_fetching ended");
+
+			// SPD details
+			logger.debug("fetching process started for SPD");
+			Optional<SPD> spdDetails = spdRepository.findByBasicLpsId(basicLpsId);
+			logger.debug("SPD_fetching ended");
+
+			// Seperation Distance
+			logger.debug("fetching process started for SeperationDistanceDescription");
+			Optional<SeperationDistanceDescription> separateDistanceDetails = seperationDistanceRepository
+					.findByBasicLpsId(basicLpsId);
+			logger.debug("SeperationDistanceDescription_fetching ended");
+
+			// Earth Stud
+			logger.debug("fetching process started for EarthStud");
+			Optional<EarthStudDescription> earthStudDetails = earthStudRepository.findByBasicLpsId(basicLpsId);
+			logger.debug(" EarthStud_fetching ended");
+
+			 if (basicLpsDetails.isPresent() && basicLpsDetails != null) {
 				lpsFinalReport.setBasicLps(basicLpsDetails.get());
-				
-				//Lps Air description
-				logger.debug("fetching process started for LpsAirDiscription");
-				Optional<LpsAirDiscription> lpsAirDisc = airTerminationLpsRepository
-						.findByBasicLpsId(basicLpsId);
-				logger.debug("LpsAirDiscription_fetching ended");
-				if (lpsAirDisc.isPresent() && lpsAirDisc != null) {
-					lpsFinalReport.setLpsAirDiscription(lpsAirDisc.get());
-					
-					//Down Conductors
-					logger.debug("fetching process started for DownConductorDescription");
-					Optional<DownConductorDescription> downConductorDetails = downConductorRepository
-							.findByBasicLpsId(basicLpsId);
-					logger.debug("DownConductorDescription_fetching ended");
-					if (downConductorDetails.isPresent() && downConductorDetails != null) {
-						lpsFinalReport.setDownConductorDesc(downConductorDetails.get());
-						
-						//Earthing Lps
-						logger.debug("fetching process started for EarthingLpsDescription");
-						Optional<EarthingLpsDescription> earthingLpsDetails = earthingLpsRepository
-								.findByBasicLpsId(basicLpsId);
-						logger.debug("EarthingLpsDescription_fetching ended");
-						if (earthingLpsDetails.isPresent() && earthingLpsDetails != null) {
-							lpsFinalReport.setEarthingLpsDescription(earthingLpsDetails.get());
-							
-							//SPD details
-							logger.debug("fetching process started for SPD");
-							Optional<SPD> spdDetails = spdRepository.findByBasicLpsId(basicLpsId);
-							logger.debug("SPD_fetching ended");
-							if (spdDetails.isPresent() && spdDetails != null) {
-								lpsFinalReport.setSPDDesc(spdDetails.get());
-								
-								//Seperation Distance
-								logger.debug("fetching process started for SeperationDistanceDescription");
-								Optional<SeperationDistanceDescription> separateDistanceDetails = seperationDistanceRepository
-										.findByBasicLpsId(basicLpsId);
-								logger.debug("SeperationDistanceDescription_fetching ended");
-								if (separateDistanceDetails.isPresent() && separateDistanceDetails != null) {
-									lpsFinalReport.setSeperationDistanceDesc(separateDistanceDetails.get());
-
-									//Earth Stud
-									logger.debug("fetching process started for EarthStud");
-									Optional<EarthStudDescription> earthStudDetails = earthStudRepository
-											.findByBasicLpsId(basicLpsId);
-									logger.debug(" EarthStud_fetching ended");
-									if (earthStudDetails.isPresent() && earthStudDetails != null) {
-										lpsFinalReport.setEarthStudDescription(earthStudDetails.get());
-										logger.debug("Successfully Seven_Steps fetching Operation done");
-										return Optional.of(lpsFinalReport);
-
-									}
-								}
-							}
-						}
-					}
-				}
 			}
 
-			return Optional.of(lpsFinalReport);
+			 if (lpsAirDisc.isPresent() && lpsAirDisc != null) {
+				lpsFinalReport.setLpsAirDiscription(lpsAirDisc.get());
 
-		} else {
+			}
+			 if (downConductorDetails.isPresent() && downConductorDetails != null) {
+				lpsFinalReport.setDownConductorDesc(downConductorDetails.get());
+			}
+
+			 if (earthingLpsDetails.isPresent() && earthingLpsDetails != null) {
+				lpsFinalReport.setEarthingLpsDescription(earthingLpsDetails.get());
+			}
+
+			 if (spdDetails.isPresent() && spdDetails != null) {
+				lpsFinalReport.setSPDDesc(spdDetails.get());
+			}
+
+			 if (separateDistanceDetails.isPresent() && separateDistanceDetails != null) {
+				lpsFinalReport.setSeperationDistanceDesc(separateDistanceDetails.get());
+
+			}
+			 if (earthStudDetails.isPresent() && earthStudDetails != null) {
+				lpsFinalReport.setEarthStudDescription(earthStudDetails.get());
+				logger.debug("Successfully Seven_Steps fetching Operation done");
+				return Optional.of(lpsFinalReport);
+
+			}
+
+		}
+		else {
 			throw new FinalReportException("Invalid Input");
 		}
+		return Optional.of(lpsFinalReport);
 	}
 
 }
