@@ -3,8 +3,8 @@ package com.capeelectric.service.impl;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.capeelectric.exception.DownConductorException;
@@ -16,8 +16,6 @@ import com.capeelectric.model.DownConductorDescription;
 import com.capeelectric.model.Holder;
 import com.capeelectric.model.LightningCounter;
 import com.capeelectric.model.TestingJoint;
-import com.capeelectric.repository.BasicLpsRepository;
-import com.capeelectric.repository.DownConductorRepository;
 import com.capeelectric.service.PrintDownConductorService;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
@@ -34,25 +32,20 @@ import com.itextpdf.text.pdf.PdfWriter;
 @Service
 public class PrintDownConductorServiceImpl implements PrintDownConductorService {
 
-	@Autowired
-	private DownConductorRepository downConductorRepository;
-
-	@Autowired
-	private BasicLpsRepository basicLpsRepository;
-
 	@Override
-	public void printDownConductor(String userName, Integer lpsId) throws DownConductorException {
+	public void printDownConductor(String userName, Integer lpsId,Optional<BasicLps> basicLpsDetails, Optional<DownConductorDescription> downConductorDetails) throws DownConductorException {
 		if (userName != null && !userName.isEmpty() && lpsId != null && lpsId != 0) {
 			Document document = new Document(PageSize.A4, 68, 68, 62, 68);
 			try {
 
-				List<BasicLps> basicLps = basicLpsRepository.findByUserNameAndBasicLpsId(userName, lpsId);
-				BasicLps basicLps1 = basicLps.get(0);
+//				List<BasicLps> basicLps = basicLpsRepository.findByUserNameAndBasicLpsId(userName, lpsId);
+				BasicLps basicLps1 = basicLpsDetails.get();
 
 				PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("DownConductorLps.pdf"));
-				List<DownConductorDescription> downLps = downConductorRepository.findByUserNameAndBasicLpsId(userName,
-						lpsId);
-				DownConductorDescription downLps1 = downLps.get(0);
+				
+//				List<DownConductorDescription> downLps = downConductorRepository.findByUserNameAndBasicLpsId(userName,
+//						lpsId);
+				DownConductorDescription downLps1 = downConductorDetails.get();
 
 				List<DownConductor> downConductor = downLps1.getDownConductor();
 				List<BridgingDescription> bridgingDesc = downLps1.getBridgingDescription();
@@ -61,6 +54,8 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 				List<Holder> holder1 = downLps1.getHolder();
 				List<TestingJoint> testJoint1 = downLps1.getTestingJoint();
 				List<Connectors> connector1 = downLps1.getConnectors();
+
+				System.out.println("printing DownConductor Module");
 
 				document.open();
 

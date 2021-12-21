@@ -3,16 +3,14 @@ package com.capeelectric.service.impl;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.capeelectric.exception.SPDException;
 import com.capeelectric.model.BasicLps;
 import com.capeelectric.model.SPD;
 import com.capeelectric.model.SpdDescription;
-import com.capeelectric.repository.BasicLpsRepository;
-import com.capeelectric.repository.SPDRepository;
 import com.capeelectric.service.PrintSPDService;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
@@ -29,14 +27,8 @@ import com.itextpdf.text.pdf.PdfWriter;
 @Service
 public class PrintSPDServiceImpl implements PrintSPDService {
 
-	@Autowired
-	private SPDRepository spdRepository;
-
-	@Autowired
-	private BasicLpsRepository basicLpsRepository;
-
 	@Override
-	public void printSPD(String userName, Integer lpsId) throws SPDException {
+	public void printSPD(String userName, Integer lpsId,Optional<BasicLps> basicLpsDetails, Optional<SPD> spdDetails) throws SPDException {
 		if (userName != null && !userName.isEmpty() && lpsId != null && lpsId != 0) {
 			Document document = new Document(PageSize.A4, 68, 68, 62, 68);
 
@@ -44,11 +36,12 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 
 				PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("SPD.pdf"));
 
-				List<SPD> spdMain = spdRepository.findByUserNameAndBasicLpsId(userName, lpsId);
-				SPD spdMain1 = spdMain.get(0);
+//				List<SPD> spdMain = spdRepository.findByUserNameAndBasicLpsId(userName, lpsId);
+			
+				SPD spdMain1 = spdDetails.get();
 
-				List<BasicLps> basicLps = basicLpsRepository.findByUserNameAndBasicLpsId(userName, lpsId);
-				BasicLps basicLps1 = basicLps.get(0);
+//				List<BasicLps> basicLps = basicLpsRepository.findByUserNameAndBasicLpsId(userName, lpsId);
+				BasicLps basicLps1 = basicLpsDetails.get();
 
 				List<SpdDescription> spdDesc1 = spdMain1.getSpdDescription();
 

@@ -3,6 +3,7 @@ package com.capeelectric.service.impl;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,9 +13,7 @@ import com.capeelectric.model.BasicLps;
 import com.capeelectric.model.EarthStudDescription;
 import com.capeelectric.model.SeparateDistance;
 import com.capeelectric.model.SeperationDistanceDescription;
-import com.capeelectric.repository.BasicLpsRepository;
 import com.capeelectric.repository.EarthStudRepository;
-import com.capeelectric.repository.SeperationDistanceRepository;
 import com.capeelectric.service.PrintSDandEarthStudService;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
@@ -32,16 +31,11 @@ import com.itextpdf.text.pdf.PdfWriter;
 public class PrintSDandEarthStudServiceImpl implements PrintSDandEarthStudService {
 
 	@Autowired
-	private SeperationDistanceRepository seperationDistanceRepository;
-
-	@Autowired
 	private EarthStudRepository earthStudRepository;
-
-	@Autowired
-	private BasicLpsRepository basicLpsRepository;
-
+	
 	@Override
-	public void printSDandEarthStud(String userName, Integer lpsId) throws EarthStudException {
+	public void printSDandEarthStud(String userName, Integer lpsId, Optional<BasicLps> basicLpsDetails,
+			Optional<SeperationDistanceDescription> separateDistanceDetails) throws EarthStudException {
 		if (userName != null && !userName.isEmpty() && lpsId != null && lpsId != 0) {
 			Document document = new Document(PageSize.A4, 68, 68, 62, 68);
 
@@ -51,18 +45,15 @@ public class PrintSDandEarthStudServiceImpl implements PrintSDandEarthStudServic
 
 				document.open();
 
-				List<BasicLps> basicLps = basicLpsRepository.findByUserNameAndBasicLpsId(userName, lpsId);
-				BasicLps basicLps1 = basicLps.get(0);
-
-				List<SeperationDistanceDescription> separateDistance = seperationDistanceRepository
-						.findByUserNameAndBasicLpsId(userName, lpsId);
-				SeperationDistanceDescription separateDistance1 = separateDistance.get(0);
-
+				BasicLps basicLps1 = basicLpsDetails.get();
+				
+				SeperationDistanceDescription separateDistance1 = separateDistanceDetails.get();
 				List<SeparateDistance> separateDistance2 = separateDistance1.getSeparateDistanceDescription();
 
 				List<EarthStudDescription> earthStud1 = earthStudRepository.findByUserNameAndBasicLpsId(userName,
 						lpsId);
 				EarthStudDescription earthStud = earthStud1.get(0);
+
 
 				float[] pointColumnWidths40 = { 100F };
 
@@ -82,6 +73,8 @@ public class PrintSDandEarthStudServiceImpl implements PrintSDandEarthStudServic
 				// label.setFixedHeight(20f);
 				headertable.addCell(label);
 				document.add(headertable);
+				
+				System.out.println("printed earht stud module");
 
 				float[] pointColumnWidths1 = { 30F, 70F };
 
@@ -237,7 +230,9 @@ public class PrintSDandEarthStudServiceImpl implements PrintSDandEarthStudServic
 				cell33.setHorizontalAlignment(Element.ALIGN_CENTER);
 				table.addCell(cell33);
 
-				PdfPCell cell430 = new PdfPCell(new Paragraph("1", font3));
+				
+				PdfPCell cell430 = new PdfPCell(new Paragraph("1", font2));
+
 				cell430.setHorizontalAlignment(Element.ALIGN_CENTER);
 				cell430.setGrayFill(0.92f);
 				// cell43.setColspan(3);
@@ -246,12 +241,12 @@ public class PrintSDandEarthStudServiceImpl implements PrintSDandEarthStudServic
 				PdfPCell cell400 = new PdfPCell(new Paragraph(
 						"Measured separation distance between air termination and electrical apparatus (lights, solar PV, AC chillers, cameras…. Etc)(Measurement required in atleast 10 locations on roof top)",
 						font3));
+
 				cell400.setHorizontalAlignment(Element.ALIGN_CENTER);
 				cell400.setGrayFill(0.92f);
 				cell400.setColspan(3);
 				table.addCell(cell400);
 				document.add(table);
-
 				for (SeparateDistance separateDistance3 : separateDistance2) {
 					PdfPTable table1 = separateDistanceIter(pointColumnWidths30, separateDistance3);
 					document.add(table1);
@@ -540,25 +535,11 @@ public class PrintSDandEarthStudServiceImpl implements PrintSDandEarthStudServic
 	private PdfPTable separateDistanceIter(float[] pointColumnWidths30, SeparateDistance separateDistance3)
 			throws DocumentException, IOException {
 		Font font1 = new Font(BaseFont.createFont(), 10, Font.NORMAL, BaseColor.BLACK);
-		Font font2 = new Font(BaseFont.createFont(), 10, Font.NORMAL, BaseColor.BLACK);
+	
 		PdfPTable table1 = new PdfPTable(pointColumnWidths30);
 		table1.setWidthPercentage(100); // Width 100%
 		// table1.setSpacingBefore(10f); // Space before table
 		table1.setWidthPercentage(100);
-
-//		PdfPCell cell43 = new PdfPCell(new Paragraph("1", font2));
-//		cell43.setHorizontalAlignment(Element.ALIGN_CENTER);
-//		cell43.setGrayFill(0.92f);
-//		// cell43.setColspan(3);
-//		table1.addCell(cell43);
-//
-//		PdfPCell cell40 = new PdfPCell(new Paragraph(
-//				"Measured separation distance between air termination and electrical apparatus (lights, solar PV, AC chillers, cameras…. Etc)(Measurement required in atleast 10 locations on roof top)",
-//				font2));
-//		cell40.setHorizontalAlignment(Element.ALIGN_CENTER);
-//		cell40.setGrayFill(0.92f);
-//		cell40.setColspan(3);
-//		table1.addCell(cell40);
 
 		PdfPCell cell35 = new PdfPCell(new Paragraph("", font1));
 		cell35.setHorizontalAlignment(Element.ALIGN_CENTER);
