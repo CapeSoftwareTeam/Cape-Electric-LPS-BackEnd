@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.capeelectric.exception.DownConductorException;
@@ -31,6 +33,8 @@ import com.itextpdf.text.pdf.PdfWriter;
 
 @Service
 public class PrintDownConductorServiceImpl implements PrintDownConductorService {
+	
+	private static final Logger logger = LoggerFactory.getLogger(PrintDownConductorServiceImpl.class);
 
 	@Override
 	public void printDownConductor(String userName, Integer lpsId,Optional<BasicLps> basicLpsDetails, Optional<DownConductorDescription> downConductorDetails) throws DownConductorException {
@@ -55,7 +59,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 				List<TestingJoint> testJoint1 = downLps1.getTestingJoint();
 				List<Connectors> connector1 = downLps1.getConnectors();
 
-				System.out.println("printing DownConductor Module");
+				logger.debug("printing DownConductor Module");
 
 				document.open();
 
