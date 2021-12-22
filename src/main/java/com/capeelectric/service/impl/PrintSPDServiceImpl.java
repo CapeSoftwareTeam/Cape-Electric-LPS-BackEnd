@@ -261,7 +261,7 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 //				cell36.setFixedHeight(20f);
 				table.addCell(cell36);
 
-				PdfPCell cell37 = new PdfPCell(new Paragraph(spdMain1.getTotalNoOutDoorRequipmentRem(), font));
+				PdfPCell cell37 = new PdfPCell(new Paragraph(spdMain1.getTotalMainsIncomingRem(), font));
 //				cell37.setFixedHeight(20f);
 				cell37.setHorizontalAlignment(Element.ALIGN_LEFT);
 				table.addCell(cell37);
@@ -403,7 +403,7 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 		cell19.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table.addCell(cell19);
 
-		PdfPCell cell20 = new PdfPCell(new Paragraph(spdDesc2.getSpdApplicationRem(), font));
+		PdfPCell cell20 = new PdfPCell(new Paragraph(spdDesc2.getSpdTypeRe(), font));
 		cell20.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table.addCell(cell20);
 
@@ -562,7 +562,7 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 //		cell19.setFixedHeight(20f);
 		table.addCell(cell19);
 
-		PdfPCell cell20 = new PdfPCell(new Paragraph(spdDesc2.getSpdApplicationRem(), font));
+		PdfPCell cell20 = new PdfPCell(new Paragraph(spdDesc2.getSpdTypeRe(), font));
 		cell20.setHorizontalAlignment(Element.ALIGN_LEFT);
 //		cell20.setFixedHeight(20f);
 		table.addCell(cell20);

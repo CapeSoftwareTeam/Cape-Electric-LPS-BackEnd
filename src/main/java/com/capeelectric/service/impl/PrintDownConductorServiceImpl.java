@@ -625,7 +625,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		cell76.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table2.addCell(cell76);
 
-		PdfPCell cell77 = new PdfPCell(new Paragraph(testJoint.getInspectedNoRem(), font));
+		PdfPCell cell77 = new PdfPCell(new Paragraph(testJoint.getInspectionPassedNoRem(), font));
 		cell77.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table2.addCell(cell77);
 

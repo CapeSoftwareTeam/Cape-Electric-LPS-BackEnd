@@ -872,8 +872,8 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 		PdfPCell cell26 = new PdfPCell(new Paragraph(airExpansion1.getInspectionNoOb(), font2));
 		cell26.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table5.addCell(cell26);
-		if (airExpansion1.getInspectionFailedNoRe() != null) {
-			PdfPCell cell1 = new PdfPCell(new Paragraph(airExpansion1.getInspectionFailedNoRe(), font2));
+		if (airExpansion1.getInspectionNoRe() != null) {
+			PdfPCell cell1 = new PdfPCell(new Paragraph(airExpansion1.getInspectionNoRe(), font2));
 			cell1.setHorizontalAlignment(Element.ALIGN_LEFT);
 			table5.addCell(cell1);
 		} else {
@@ -2106,8 +2106,8 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 		PdfPCell cell18 = new PdfPCell(new Paragraph(lpsVerticalAirTermination1.getInspNoOb(), font1));
 		cell18.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table1.addCell(cell18);
-		if (lpsVerticalAirTermination1.getInspFaileddNoRe() != null) {
-			PdfPCell cell1 = new PdfPCell(new Paragraph(lpsVerticalAirTermination1.getInspFaileddNoRe(), font1));
+		if (lpsVerticalAirTermination1.getInspNoRe() != null) {
+			PdfPCell cell1 = new PdfPCell(new Paragraph(lpsVerticalAirTermination1.getInspNoRe(), font1));
 			cell1.setHorizontalAlignment(Element.ALIGN_LEFT);
 			table1.addCell(cell1);
 		} else {
