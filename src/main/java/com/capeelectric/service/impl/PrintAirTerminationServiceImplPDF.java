@@ -292,7 +292,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 			throws DocumentException, IOException {
 
 		Font font1 = new Font(BaseFont.createFont(), 10, Font.NORMAL, BaseColor.BLACK);
-		Font font2 = new Font(BaseFont.createFont(), 9, Font.NORMAL, BaseColor.BLACK);
+		Font font2 = new Font(BaseFont.createFont(), 10, Font.NORMAL, BaseColor.BLACK);
 
 		PdfPCell cell = new PdfPCell();
 
@@ -433,7 +433,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 
 		Font font = new Font(BaseFont.createFont(), 10, Font.NORMAL | Font.BOLD, BaseColor.BLACK);
 		Font font1 = new Font(BaseFont.createFont(), 10, Font.NORMAL, BaseColor.BLACK);
-		Font font2 = new Font(BaseFont.createFont(), 9, Font.NORMAL, BaseColor.BLACK);
+		Font font2 = new Font(BaseFont.createFont(), 10, Font.NORMAL, BaseColor.BLACK);
 		
 		PdfPCell cell11 = new PdfPCell();
 		cell11.setPhrase(new Phrase("11", font));
