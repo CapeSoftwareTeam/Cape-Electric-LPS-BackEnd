@@ -1344,7 +1344,7 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 		cell98.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table21.addCell(cell98);
 
-		PdfPCell cell99 = new PdfPCell(new Paragraph(earthDesc.getEarthelectManiDistWallInRem(), font));
+		PdfPCell cell99 = new PdfPCell(new Paragraph(earthDesc.getEarthelectManimumDistanceWallInRem(), font));
 		cell99.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table21.addCell(cell99);
 
@@ -1452,7 +1452,7 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 		cell122.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table21.addCell(cell122);
 
-		PdfPCell cell123 = new PdfPCell(new Paragraph(earthDesc.getInspectedFailedRem(), font));
+		PdfPCell cell123 = new PdfPCell(new Paragraph(earthDesc.getInspectedFailedNoRem(), font));
 		cell123.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table21.addCell(cell123);
 		return table21;
