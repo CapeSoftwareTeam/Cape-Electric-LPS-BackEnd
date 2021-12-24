@@ -104,7 +104,7 @@ public class EarthingDescription implements Serializable {
 	private String earthelectManimumDistanceWallInOb;
 
 	@Column(name = "EARTHELECT_MINIMUMDISTANCEWALLINREM")
-	private String earthelectManiDistWallInRem;
+	private String earthelectManimumDistanceWallInRem;
 
 	@Column(name = "EARTHELECT_MAXIMUMDISTANCEINOB")
 	private String earthelectMaxiDistOb;
@@ -125,7 +125,7 @@ public class EarthingDescription implements Serializable {
 	private String totalNumberOfElectrodeRem;
 
 	@Column(name = "INSPECTIONFAILED_NO_REM")
-	private String inspectedFailedRem;
+	private String inspectedFailedNoRem;
 
 	@Column(name = "INSPECTED_NO_OB")
 	private String inspectedNoOb;
@@ -355,12 +355,13 @@ public class EarthingDescription implements Serializable {
 		this.earthelectManimumDistanceWallInOb = earthelectManimumDistanceWallInOb;
 	}
 
-	public String getEarthelectManiDistWallInRem() {
-		return earthelectManiDistWallInRem;
+
+	public String getEarthelectManimumDistanceWallInRem() {
+		return earthelectManimumDistanceWallInRem;
 	}
 
-	public void setEarthelectManiDistWallInRem(String earthelectManiDistWallInRem) {
-		this.earthelectManiDistWallInRem = earthelectManiDistWallInRem;
+	public void setEarthelectManimumDistanceWallInRem(String earthelectManimumDistanceWallInRem) {
+		this.earthelectManimumDistanceWallInRem = earthelectManimumDistanceWallInRem;
 	}
 
 	public String getEarthelectMaxiDistOb() {
@@ -411,12 +412,12 @@ public class EarthingDescription implements Serializable {
 		this.totalNumberOfElectrodeRem = totalNumberOfElectrodeRem;
 	}
 
-	public String getInspectedFailedRem() {
-		return inspectedFailedRem;
+	public String getInspectedFailedNoRem() {
+		return inspectedFailedNoRem;
 	}
 
-	public void setInspectedFailedRem(String inspectedFailedRem) {
-		this.inspectedFailedRem = inspectedFailedRem;
+	public void setInspectedFailedNoRem(String inspectedFailedNoRem) {
+		this.inspectedFailedNoRem = inspectedFailedNoRem;
 	}
 
 	public String getInspectedNoOb() {
