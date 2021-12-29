@@ -4,6 +4,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,11 +32,11 @@ import com.itextpdf.text.pdf.PdfWriter;
 @Service
 public class PrintBasicLpsServiceImpl implements PrintBasicLpsService {
 
-	@Autowired
-	private BasicLpsRepository basicLpsRepository;
+//	@Autowired
+//	private BasicLpsRepository basicLpsRepository;
 
 	@Override
-	public void printBasicLps(String userName, Integer lpsId) throws BasicLpsException {
+	public void printBasicLps(String userName, Integer lpsId, Optional<BasicLps> basicLpsDetails) throws BasicLpsException {
 		if (userName != null && !userName.isEmpty() && lpsId != null && lpsId != 0) {
 			Document document = new Document(PageSize.A4, 68, 68, 62, 68);
 
@@ -43,8 +44,8 @@ public class PrintBasicLpsServiceImpl implements PrintBasicLpsService {
 
 				PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("BasicLps.pdf"));
 
-				List<BasicLps> basicLps = basicLpsRepository.findByUserNameAndBasicLpsId(userName, lpsId);
-				BasicLps basicLps1 = basicLps.get(0);
+//				List<BasicLps> basicLps = basicLpsRepository.findByUserNameAndBasicLpsId(userName, lpsId);
+				BasicLps basicLps1 = basicLpsDetails.get();
 
 				Set<BasicLpsDescription> basicDesc = basicLps1.getBasicLpsDescription();
 				List<BasicLpsDescription> basicDesc1 = new ArrayList<>(basicDesc);
@@ -434,7 +435,7 @@ public class PrintBasicLpsServiceImpl implements PrintBasicLpsService {
 				cell26.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 				table4.addCell(cell26);
 
-				PdfPCell cell27 = new PdfPCell(new Paragraph("Soil Resistivity", font2));
+				PdfPCell cell27 = new PdfPCell(new Paragraph("Soil Resistivity (ohms)", font2));
 				cell27.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 				cell27.setGrayFill(0.92f);
 				cell27.setFixedHeight(20f);
@@ -501,109 +502,107 @@ public class PrintBasicLpsServiceImpl implements PrintBasicLpsService {
 
 		PdfPCell cell34 = new PdfPCell(new Paragraph("1", font));
 		cell34.setHorizontalAlignment(Element.ALIGN_CENTER);
-		cell34.setFixedHeight(20f);
+//		cell34.setFixedHeight(20f);
 		cell34.setGrayFill(0.92f);
 		table2.addCell(cell34);
 
 		PdfPCell cell35 = new PdfPCell(new Paragraph("Collect approved copy of drawing from the site", font));
 		cell35.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
-		cell35.setFixedHeight(20f);
+//		cell35.setFixedHeight(20f);
 		cell35.setGrayFill(0.92f);
 		table2.addCell(cell35);
 
 		PdfPCell cell36 = new PdfPCell(new Paragraph(basicDesc2.getApprovedDrawingObserv(), font));
 		cell36.setHorizontalAlignment(Element.ALIGN_LEFT);
-		cell36.setFixedHeight(20f);
-
+//		cell36.setFixedHeight(20f);
 		table2.addCell(cell36);
 
 		PdfPCell cell37 = new PdfPCell(new Paragraph(basicDesc2.getApprovedDrawingRemarks(), font));
-		cell37.setFixedHeight(20f);
+//		cell37.setFixedHeight(20f);
 		cell37.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table2.addCell(cell37);
 
 		PdfPCell cell40 = new PdfPCell(new Paragraph("1a", font));
 		cell40.setHorizontalAlignment(Element.ALIGN_RIGHT);
-		cell40.setFixedHeight(20f);
+//		cell40.setFixedHeight(20f);
 		cell40.setGrayFill(0.92f);
 		table2.addCell(cell40);
 
 		PdfPCell cell41 = new PdfPCell(new Paragraph("Architect Name", font));
 		cell41.setHorizontalAlignment(Element.ALIGN_RIGHT);
-		cell41.setFixedHeight(20f);
+//		cell41.setFixedHeight(20f);
 		cell41.setGrayFill(0.92f);
 		table2.addCell(cell41);
 
 		PdfPCell cell42 = new PdfPCell(new Paragraph(basicDesc2.getArchitectNameObserv(), font));
 		cell42.setHorizontalAlignment(Element.ALIGN_LEFT);
-		cell42.setFixedHeight(20f);
-		cell42.setFixedHeight(20f);
+//		cell42.setFixedHeight(20f);
 		table2.addCell(cell42);
 
 		PdfPCell cell43 = new PdfPCell(new Paragraph(basicDesc2.getArchitectNameRemarks(), font));
-		cell43.setFixedHeight(20f);
+//		cell43.setFixedHeight(20f);
 		cell43.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table2.addCell(cell43);
 
 		PdfPCell cell44 = new PdfPCell(new Paragraph("1b", font));
 		cell44.setHorizontalAlignment(Element.ALIGN_RIGHT);
-		cell43.setFixedHeight(20f);
+//		cell43.setFixedHeight(20f);
 		cell44.setGrayFill(0.92f);
 		table2.addCell(cell44);
 
 		PdfPCell cell45 = new PdfPCell(new Paragraph("Date of Design", font));
 		cell45.setHorizontalAlignment(Element.ALIGN_RIGHT);
-		cell45.setFixedHeight(20f);
+//		cell45.setFixedHeight(20f);
 		cell45.setGrayFill(0.92f);
 		table2.addCell(cell45);
 
 		PdfPCell cell46 = new PdfPCell(new Paragraph(basicDesc2.getDesignDateObserv(), font));
 		cell46.setHorizontalAlignment(Element.ALIGN_LEFT);
-		cell46.setFixedHeight(20f);
+//		cell46.setFixedHeight(20f);
 		table2.addCell(cell46);
 
 		PdfPCell cell47 = new PdfPCell(new Paragraph(basicDesc2.getDesignDateRemarks(), font));
-		cell47.setFixedHeight(20f);
+//		cell47.setFixedHeight(20f);
 		cell47.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table2.addCell(cell47);
 
 		PdfPCell cell48 = new PdfPCell(new Paragraph("1c", font));
 		cell48.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell48.setGrayFill(0.92f);
-		cell48.setFixedHeight(20f);
+//		cell48.setFixedHeight(20f);
 		table2.addCell(cell48);
 
 		PdfPCell cell49 = new PdfPCell(new Paragraph("Approved by", font));
 		cell49.setHorizontalAlignment(Element.ALIGN_RIGHT);
-		cell49.setFixedHeight(20f);
+//		cell49.setFixedHeight(20f);
 		cell49.setGrayFill(0.92f);
 		table2.addCell(cell49);
 
 		PdfPCell cell50 = new PdfPCell(new Paragraph(basicDesc2.getApprovedByObserv(), font));
 		cell50.setHorizontalAlignment(Element.ALIGN_LEFT);
-		cell50.setFixedHeight(20f);
+//		cell50.setFixedHeight(20f);
 		table2.addCell(cell50);
 
 		PdfPCell cell51 = new PdfPCell(new Paragraph(basicDesc2.getApprovedByRemarks(), font));
-		cell51.setFixedHeight(20f);
+//		cell51.setFixedHeight(20f);
 		cell51.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table2.addCell(cell51);
 
 		PdfPCell cell52 = new PdfPCell(new Paragraph("1d", font));
 		cell52.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell52.setGrayFill(0.92f);
-		cell52.setFixedHeight(20f);
+//		cell52.setFixedHeight(20f);
 		table2.addCell(cell52);
 
 		PdfPCell cell53 = new PdfPCell(new Paragraph("Date of approval", font));
 		cell53.setHorizontalAlignment(Element.ALIGN_RIGHT);
-		cell53.setFixedHeight(20f);
+//		cell53.setFixedHeight(20f);
 		cell53.setGrayFill(0.92f);
 		table2.addCell(cell53);
 
 		PdfPCell cell54 = new PdfPCell(new Paragraph(basicDesc2.getDateOfApprovalOb(), font));
 		cell54.setHorizontalAlignment(Element.ALIGN_LEFT);
-		cell54.setFixedHeight(20f);
+//		cell54.setFixedHeight(20f);
 		table2.addCell(cell54);
 
 		PdfPCell cell55 = new PdfPCell(new Paragraph(basicDesc2.getDateOfApprovalRem(), font));
@@ -617,13 +616,13 @@ public class PrintBasicLpsServiceImpl implements PrintBasicLpsService {
 
 		PdfPCell cell57 = new PdfPCell(new Paragraph("Drawing number", font));
 		cell57.setHorizontalAlignment(Element.ALIGN_RIGHT);
-		cell57.setFixedHeight(20f);
+//		cell57.setFixedHeight(20f);
 		cell57.setGrayFill(0.92f);
 		table2.addCell(cell57);
 
 		PdfPCell cell58 = new PdfPCell(new Paragraph(basicDesc2.getDrawingObserv(), font));
 		cell58.setHorizontalAlignment(Element.ALIGN_LEFT);
-		cell58.setFixedHeight(20f);
+//		cell58.setFixedHeight(20f);
 		table2.addCell(cell58);
 
 		PdfPCell cell59 = new PdfPCell(new Paragraph(basicDesc2.getDrawingRemarks(), font));
@@ -637,18 +636,16 @@ public class PrintBasicLpsServiceImpl implements PrintBasicLpsService {
 
 		PdfPCell cell61 = new PdfPCell(new Paragraph("Revision number", font));
 		cell61.setHorizontalAlignment(Element.ALIGN_RIGHT);
-		cell61.setFixedHeight(20f);
+//		cell61.setFixedHeight(20f);
 		cell61.setGrayFill(0.92f);
 		table2.addCell(cell61);
 
 		PdfPCell cell62 = new PdfPCell(new Paragraph(basicDesc2.getRevisionNoObserv(), font));
 		cell62.setHorizontalAlignment(Element.ALIGN_LEFT);
-		cell62.setFixedHeight(20f);
-
+//		cell62.setFixedHeight(20f);
 		table2.addCell(cell62);
 
 		PdfPCell cell63 = new PdfPCell(new Paragraph(basicDesc2.getRevisionNoRemarks(), font));
-
 		cell63.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table2.addCell(cell63);
 
@@ -685,7 +682,7 @@ public class PrintBasicLpsServiceImpl implements PrintBasicLpsService {
 
 		PdfPCell cell70 = new PdfPCell(new Paragraph(basicDesc2.getInstallationQualityObserv(), font));
 		cell70.setHorizontalAlignment(Element.ALIGN_LEFT);
-		cell70.setFixedHeight(20f);
+//		cell70.setFixedHeight(20f);
 		table2.addCell(cell70);
 
 		PdfPCell cell71 = new PdfPCell(new Paragraph(basicDesc2.getInstallationQualityRemarks(), font));

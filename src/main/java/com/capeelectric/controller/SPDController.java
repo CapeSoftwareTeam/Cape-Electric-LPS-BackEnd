@@ -41,7 +41,7 @@ public class SPDController {
 	@PostMapping("/addSPDDetails")
 	public ResponseEntity<String> addSPDDetails(@RequestBody  SPD SPDDesc)
 			throws SPDException {
-		logger.info("called addSPDDetails function UserName : {}, SiteId : {}",
+		logger.info("called addSPDDetails function UserName : {}, BasicLpsId : {}",
 				SPDDesc.getUserName(), SPDDesc.getBasicLpsId());
 		SPDService.addSPDDetails(SPDDesc);
 		return new ResponseEntity<String>("SPD Details Sucessfully Saved",
@@ -51,7 +51,7 @@ public class SPDController {
 	@GetMapping("/retrieveSPD/{userName}/{basicLpsId}")
 	public ResponseEntity<List<SPD>> retrieveSPDDetails(@PathVariable String userName,
 			@PathVariable Integer basicLpsId) throws SPDException {
-		logger.info("started retrieveSPDDetails function UserName : {}, SiteId : {}", userName, basicLpsId);
+		logger.info("started retrieveSPDDetails function UserName : {}, BasicLpsId : {}", userName, basicLpsId);
 		return new ResponseEntity<List<SPD>>(
 				SPDService.retrieveSPDDetails(userName, basicLpsId), HttpStatus.OK);
 	}

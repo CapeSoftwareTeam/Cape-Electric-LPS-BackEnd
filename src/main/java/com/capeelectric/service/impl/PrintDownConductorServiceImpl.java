@@ -3,8 +3,10 @@ package com.capeelectric.service.impl;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.capeelectric.exception.DownConductorException;
@@ -16,8 +18,6 @@ import com.capeelectric.model.DownConductorDescription;
 import com.capeelectric.model.Holder;
 import com.capeelectric.model.LightningCounter;
 import com.capeelectric.model.TestingJoint;
-import com.capeelectric.repository.BasicLpsRepository;
-import com.capeelectric.repository.DownConductorRepository;
 import com.capeelectric.service.PrintDownConductorService;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
@@ -33,26 +33,23 @@ import com.itextpdf.text.pdf.PdfWriter;
 
 @Service
 public class PrintDownConductorServiceImpl implements PrintDownConductorService {
-
-	@Autowired
-	private DownConductorRepository downConductorRepository;
-
-	@Autowired
-	private BasicLpsRepository basicLpsRepository;
+	
+	private static final Logger logger = LoggerFactory.getLogger(PrintDownConductorServiceImpl.class);
 
 	@Override
-	public void printDownConductor(String userName, Integer lpsId) throws DownConductorException {
+	public void printDownConductor(String userName, Integer lpsId,Optional<BasicLps> basicLpsDetails, Optional<DownConductorDescription> downConductorDetails) throws DownConductorException {
 		if (userName != null && !userName.isEmpty() && lpsId != null && lpsId != 0) {
 			Document document = new Document(PageSize.A4, 68, 68, 62, 68);
 			try {
 
-				List<BasicLps> basicLps = basicLpsRepository.findByUserNameAndBasicLpsId(userName, lpsId);
-				BasicLps basicLps1 = basicLps.get(0);
+//				List<BasicLps> basicLps = basicLpsRepository.findByUserNameAndBasicLpsId(userName, lpsId);
+				BasicLps basicLps1 = basicLpsDetails.get();
 
 				PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("DownConductorLps.pdf"));
-				List<DownConductorDescription> downLps = downConductorRepository.findByUserNameAndBasicLpsId(userName,
-						lpsId);
-				DownConductorDescription downLps1 = downLps.get(0);
+				
+//				List<DownConductorDescription> downLps = downConductorRepository.findByUserNameAndBasicLpsId(userName,
+//						lpsId);
+				DownConductorDescription downLps1 = downConductorDetails.get();
 
 				List<DownConductor> downConductor = downLps1.getDownConductor();
 				List<BridgingDescription> bridgingDesc = downLps1.getBridgingDescription();
@@ -61,6 +58,8 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 				List<Holder> holder1 = downLps1.getHolder();
 				List<TestingJoint> testJoint1 = downLps1.getTestingJoint();
 				List<Connectors> connector1 = downLps1.getConnectors();
+
+				logger.debug("printing DownConductor Module");
 
 				document.open();
 
@@ -193,7 +192,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 				cell26.setHorizontalAlignment(Element.ALIGN_LEFT);
 				table4.addCell(cell26);
 
-				PdfPCell cell27 = new PdfPCell(new Paragraph("Soil Resistivity", font2));
+				PdfPCell cell27 = new PdfPCell(new Paragraph("Soil Resistivity (ohms)", font2));
 				cell27.setHorizontalAlignment(Element.ALIGN_LEFT);
 				cell27.setGrayFill(0.92f);
 				cell27.setFixedHeight(20f);
@@ -328,7 +327,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 				table.addCell(cell13);
 
 				PdfPCell cell14 = new PdfPCell(new Paragraph(
-						"Chemical sprinkler is not in the path to detriorate or corrode the down conductor", font));
+						"Chemical sprinkler is not in the path to deteriorate or corrode the down conductor", font));
 				cell14.setHorizontalAlignment(Element.ALIGN_LEFT);
 				cell14.setGrayFill(0.92f);
 				table.addCell(cell14);
@@ -353,11 +352,11 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 				cell18.setGrayFill(0.92f);
 				table.addCell(cell18);
 
-				PdfPCell cell19 = new PdfPCell(new Paragraph(downLps1.getChemicalSprinklerOb(), font));
+				PdfPCell cell19 = new PdfPCell(new Paragraph(downLps1.getCobustMaterialWallOB(), font));
 				cell19.setHorizontalAlignment(Element.ALIGN_LEFT);
 				table.addCell(cell19);
 
-				PdfPCell cell20 = new PdfPCell(new Paragraph(downLps1.getChemicalSprinklerRem(), font));
+				PdfPCell cell20 = new PdfPCell(new Paragraph(downLps1.getCobustMaterialWallRem(), font));
 				cell20.setHorizontalAlignment(Element.ALIGN_LEFT);
 				table.addCell(cell20);
 
@@ -544,7 +543,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		cell54.setGrayFill(0.92f);
 		table2.addCell(cell54);
 
-		PdfPCell cell55 = new PdfPCell(new Paragraph("Is test joint placed 1.5 metre from the ground level", font));
+		PdfPCell cell55 = new PdfPCell(new Paragraph("Is test joint placed 1.5 meter from the ground level", font));
 		cell55.setHorizontalAlignment(Element.ALIGN_LEFT);
 		cell55.setGrayFill(0.92f);
 		table2.addCell(cell55);
@@ -587,7 +586,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		table2.addCell(cell66);
 
 		PdfPCell cell67 = new PdfPCell(new Paragraph(testJoint.getTotalNoOfTestJointOB(), font));
-		cell67.setHorizontalAlignment(Element.ALIGN_RIGHT);
+		cell67.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table2.addCell(cell67);
 
 		PdfPCell cell68 = new PdfPCell(new Paragraph(testJoint.getTotalNoOfTestJointRem(), font));
@@ -626,7 +625,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		cell76.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table2.addCell(cell76);
 
-		PdfPCell cell77 = new PdfPCell(new Paragraph(testJoint.getInspectedNoRem(), font));
+		PdfPCell cell77 = new PdfPCell(new Paragraph(testJoint.getInspectionPassedNoRem(), font));
 		cell77.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table2.addCell(cell77);
 
@@ -707,7 +706,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		cell25.setGrayFill(0.92f);
 		table2.addCell(cell25);
 
-		PdfPCell cell26 = new PdfPCell(new Paragraph("Threshold current", font));
+		PdfPCell cell26 = new PdfPCell(new Paragraph("Threshold current (kA)", font));
 		cell26.setHorizontalAlignment(Element.ALIGN_LEFT);
 		cell26.setGrayFill(0.92f);
 		table2.addCell(cell26);
@@ -725,7 +724,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		cell29.setGrayFill(0.92f);
 		table2.addCell(cell29);
 
-		PdfPCell cell31 = new PdfPCell(new Paragraph("Maximum withstand current", font));
+		PdfPCell cell31 = new PdfPCell(new Paragraph("Maximum withstand current (kA)", font));
 		cell31.setHorizontalAlignment(Element.ALIGN_LEFT);
 		cell31.setGrayFill(0.92f);
 		table2.addCell(cell31);
@@ -761,7 +760,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		cell50.setGrayFill(0.92f);
 		table2.addCell(cell50);
 
-		PdfPCell cell51 = new PdfPCell(new Paragraph("Battery life time", font));
+		PdfPCell cell51 = new PdfPCell(new Paragraph("Battery life time (year)", font));
 		cell51.setHorizontalAlignment(Element.ALIGN_LEFT);
 		cell51.setGrayFill(0.92f);
 		table2.addCell(cell51);
@@ -799,7 +798,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		table2.addCell(cell58);
 
 		PdfPCell cell59 = new PdfPCell(
-				new Paragraph("Is lightning counter is placed 0.5 metre above test joint", font));
+				new Paragraph("Is lightning counter is placed 0.5 meter above test joint", font));
 		cell59.setHorizontalAlignment(Element.ALIGN_LEFT);
 		cell59.setGrayFill(0.92f);
 		table2.addCell(cell59);
@@ -878,7 +877,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		table2.addCell(cell79);
 
 		PdfPCell cell80 = new PdfPCell(new Paragraph(lightingCounter1.getInspectionPassedNoOb(), font));
-		cell80.setHorizontalAlignment(Element.ALIGN_RIGHT);
+		cell80.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table2.addCell(cell80);
 
 		PdfPCell cell81 = new PdfPCell(new Paragraph(lightingCounter1.getInspectionPassedNoRem(), font));
@@ -1025,7 +1024,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		cell52.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table2.addCell(cell52);
 
-		PdfPCell cell53 = new PdfPCell(new Paragraph(connector.getMaterialConnectorRem(), font));
+		PdfPCell cell53 = new PdfPCell(new Paragraph(connector.getMaxConnectorsDownConductorRem(), font));
 		cell53.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table2.addCell(cell53);
 
@@ -1366,11 +1365,11 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		cell26.setGrayFill(0.92f);
 		table1.addCell(cell26);
 
-		PdfPCell cell27 = new PdfPCell(new Paragraph(bridgingDesc1.getBridgingCableConnectionOb(), font));
+		PdfPCell cell27 = new PdfPCell(new Paragraph(bridgingDesc1.getEnsureBridgingCableOb(), font));
 		cell27.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table1.addCell(cell27);
 
-		PdfPCell cell28 = new PdfPCell(new Paragraph(bridgingDesc1.getBridgingCableConnectionRem(), font));
+		PdfPCell cell28 = new PdfPCell(new Paragraph(bridgingDesc1.getEnsureBridgingCableRem(), font));
 		cell28.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table1.addCell(cell28);
 
@@ -1399,16 +1398,16 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		table1.addCell(cell46);
 
 		PdfPCell cell47 = new PdfPCell(
-				new Paragraph("Ensure the conection of bridging cable (loose/tight /corroded)", font));
+				new Paragraph("Ensure the connection of bridging cable (loose/tight /corroded)", font));
 		cell47.setHorizontalAlignment(Element.ALIGN_LEFT);
 		cell47.setGrayFill(0.92f);
 		table1.addCell(cell47);
 
-		PdfPCell cell48 = new PdfPCell(new Paragraph(bridgingDesc1.getEnsureBridgingCableOb(), font));
+		PdfPCell cell48 = new PdfPCell(new Paragraph(bridgingDesc1.getBridgingCableConnectionOb(), font));
 		cell48.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table1.addCell(cell48);
 
-		PdfPCell cell49 = new PdfPCell(new Paragraph(bridgingDesc1.getEnsureBridgingCableRem(), font));
+		PdfPCell cell49 = new PdfPCell(new Paragraph(bridgingDesc1.getBridgingCableConnectionRem(), font));
 		cell49.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table1.addCell(cell49);
 
@@ -1577,7 +1576,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		cell33.setGrayFill(0.92f);
 		table1.addCell(cell33);
 
-		PdfPCell cell34 = new PdfPCell(new Paragraph("Size/cross section area of conductor", font));
+		PdfPCell cell34 = new PdfPCell(new Paragraph("Size/cross section area of conductor (mm)", font));
 		cell34.setHorizontalAlignment(Element.ALIGN_LEFT);
 		cell34.setGrayFill(0.92f);
 		table1.addCell(cell34);
@@ -1690,7 +1689,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		cell57.setGrayFill(0.92f);
 		table1.addCell(cell57);
 
-		PdfPCell cell58 = new PdfPCell(new Paragraph("Maximum distance between down conductors", font));
+		PdfPCell cell58 = new PdfPCell(new Paragraph("Maximum distance between down conductors (m)", font));
 		cell58.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell58.setGrayFill(0.92f);
 		table1.addCell(cell58);
@@ -1708,7 +1707,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		cell61.setGrayFill(0.92f);
 		table1.addCell(cell61);
 
-		PdfPCell cell62 = new PdfPCell(new Paragraph("Minimum distance between down conductors", font));
+		PdfPCell cell62 = new PdfPCell(new Paragraph("Minimum distance between down conductors (m)", font));
 		cell62.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell62.setGrayFill(0.92f);
 		table1.addCell(cell62);
@@ -1771,7 +1770,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		cell75.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table1.addCell(cell75);
 
-		PdfPCell cell76 = new PdfPCell(new Paragraph(downConductor1.getInspectedNoRem(), font));
+		PdfPCell cell76 = new PdfPCell(new Paragraph(downConductor1.getInspectionPassedNoRem(), font));
 		cell76.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table1.addCell(cell76);
 
@@ -1789,7 +1788,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		cell79.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table1.addCell(cell79);
 
-		PdfPCell cell80 = new PdfPCell(new Paragraph(downConductor1.getInspectionPassedNoRem(), font));
+		PdfPCell cell80 = new PdfPCell(new Paragraph(downConductor1.getInspectionFailedNoRem(), font));
 		cell80.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table1.addCell(cell80);
 		return table1;

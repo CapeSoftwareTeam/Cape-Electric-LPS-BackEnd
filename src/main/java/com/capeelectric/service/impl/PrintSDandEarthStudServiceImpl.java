@@ -3,6 +3,7 @@ package com.capeelectric.service.impl;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,9 +13,7 @@ import com.capeelectric.model.BasicLps;
 import com.capeelectric.model.EarthStudDescription;
 import com.capeelectric.model.SeparateDistance;
 import com.capeelectric.model.SeperationDistanceDescription;
-import com.capeelectric.repository.BasicLpsRepository;
 import com.capeelectric.repository.EarthStudRepository;
-import com.capeelectric.repository.SeperationDistanceRepository;
 import com.capeelectric.service.PrintSDandEarthStudService;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
@@ -32,36 +31,28 @@ import com.itextpdf.text.pdf.PdfWriter;
 public class PrintSDandEarthStudServiceImpl implements PrintSDandEarthStudService {
 
 	@Autowired
-	private SeperationDistanceRepository seperationDistanceRepository;
-
-	@Autowired
 	private EarthStudRepository earthStudRepository;
 
-	@Autowired
-	private BasicLpsRepository basicLpsRepository;
-
 	@Override
-	public void printSDandEarthStud(String userName, Integer lpsId) throws EarthStudException {
+	public void printSDandEarthStud(String userName, Integer lpsId, Optional<BasicLps> basicLpsDetails,
+			Optional<SeperationDistanceDescription> separateDistanceDetails) throws EarthStudException {
 		if (userName != null && !userName.isEmpty() && lpsId != null && lpsId != 0) {
 			Document document = new Document(PageSize.A4, 68, 68, 62, 68);
 
 			try {
 
 				PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("SDandEarthStud.pdf"));
-				
-				document.open();
-				
-				List<BasicLps> basicLps = basicLpsRepository.findByUserNameAndBasicLpsId(userName, lpsId);
-				BasicLps basicLps1 = basicLps.get(0);
-				
-				List<SeperationDistanceDescription> separateDistance = seperationDistanceRepository
-						.findByUserNameAndBasicLpsId(userName, lpsId);
-				SeperationDistanceDescription separateDistance1 = separateDistance.get(0);
 
+				document.open();
+
+				BasicLps basicLps1 = basicLpsDetails.get();
+
+				SeperationDistanceDescription separateDistance1 = separateDistanceDetails.get();
 				List<SeparateDistance> separateDistance2 = separateDistance1.getSeparateDistanceDescription();
 
-				List<EarthStudDescription> earthStud1 = earthStudRepository.findByUserNameAndBasicLpsId(userName,lpsId);
-				EarthStudDescription earthStud = earthStud1.get(0);
+				List<EarthStudDescription> earthStud1 = earthStudRepository.findByUserNameAndBasicLpsId(userName,
+						lpsId);
+//				EarthStudDescription earthStud = earthStud1.get(0);
 
 				float[] pointColumnWidths40 = { 100F };
 
@@ -192,7 +183,7 @@ public class PrintSDandEarthStudServiceImpl implements PrintSDandEarthStudServic
 				cell26.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 				table4.addCell(cell26);
 
-				PdfPCell cell27 = new PdfPCell(new Paragraph("Soil Resistivity", font2));
+				PdfPCell cell27 = new PdfPCell(new Paragraph("Soil Resistivity (ohms)", font2));
 				cell27.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 				cell27.setGrayFill(0.92f);
 				cell27.setFixedHeight(20f);
@@ -203,9 +194,9 @@ public class PrintSDandEarthStudServiceImpl implements PrintSDandEarthStudServic
 				table4.addCell(cell28);
 
 				document.add(table4);
-				
+
 				Font font11 = new Font(BaseFont.createFont(), 10, Font.NORMAL | Font.BOLD, BaseColor.BLACK);
-				
+
 				float[] pointColumnWidths30 = { 25F, 150F, 55F, 50F };
 
 				PdfPTable table = new PdfPTable(pointColumnWidths30);
@@ -235,11 +226,59 @@ public class PrintSDandEarthStudServiceImpl implements PrintSDandEarthStudServic
 				cell33.setGrayFill(0.92f);
 				cell33.setHorizontalAlignment(Element.ALIGN_CENTER);
 				table.addCell(cell33);
+
+				PdfPCell cell430 = new PdfPCell(new Paragraph("1", font2));
+
+				cell430.setHorizontalAlignment(Element.ALIGN_CENTER);
+				cell430.setGrayFill(0.92f);
+				// cell43.setColspan(3);
+				table.addCell(cell430);
+
+				PdfPCell cell400 = new PdfPCell(new Paragraph(
+						"Measured separation distance between air termination and electrical apparatus (lights, solar PV, AC chillers, cameras…. Etc)(Measurement required in atleast 10 locations on roof top)",
+						font3));
+
+				cell400.setHorizontalAlignment(Element.ALIGN_CENTER);
+				cell400.setGrayFill(0.92f);
+				cell400.setColspan(3);
+				table.addCell(cell400);
 				document.add(table);
+
+				PdfPTable table1 = new PdfPTable(pointColumnWidths30);
+				table1.setWidthPercentage(100); // Width 100%
+				// table1.setSpacingBefore(10f); // Space before table
+				table1.setWidthPercentage(100);
+
+				int i = 2;
 				for (SeparateDistance separateDistance3 : separateDistance2) {
-					PdfPTable table1 = separateDistanceIter(pointColumnWidths30, separateDistance3);
-					document.add(table1);
+					Font font111 = new Font(BaseFont.createFont(), 10, Font.NORMAL, BaseColor.BLACK);
+
+					PdfPCell cell35 = new PdfPCell(new Paragraph(""+i,font111));
+					cell35.setHorizontalAlignment(Element.ALIGN_CENTER);
+					cell35.setGrayFill(0.92f);
+					table1.addCell(cell35);
+
+					PdfPCell cell36 = new PdfPCell(
+							new Paragraph(separateDistance3.getSeperationDistanceDesc(), font111));
+					cell36.setHorizontalAlignment(Element.ALIGN_LEFT);
+					cell36.setFixedHeight(20f);
+					cell36.setGrayFill(0.92f);
+					table1.addCell(cell36);
+
+					PdfPCell cell37 = new PdfPCell(new Paragraph(separateDistance3.getSeperationDistanceOb(), font111));
+					cell37.setHorizontalAlignment(Element.ALIGN_LEFT);
+					cell37.setFixedHeight(20f);
+					// cell37.setGrayFill(0.92f);
+					table1.addCell(cell37);
+
+					PdfPCell cell38 = new PdfPCell(
+							new Paragraph(separateDistance3.getSeperationDistanceRem(), font111));
+					// cell38.setGrayFill(0.92f);
+					cell38.setHorizontalAlignment(Element.ALIGN_LEFT);
+					table1.addCell(cell38);
+					++i;
 				}
+				document.add(table1);
 				document.newPage();
 
 				PdfPTable headertable1 = new PdfPTable(pointColumnWidths40);
@@ -247,8 +286,8 @@ public class PrintSDandEarthStudServiceImpl implements PrintSDandEarthStudServic
 				headertable1.setSpacingBefore(10f); // Space before table
 				headertable1.setWidthPercentage(100);
 
-				PdfPCell label1 = new PdfPCell(
-						new Paragraph("Check list for Earth Studs of LPS \r\n" + "as per IS/IEC 62305", font1));
+				PdfPCell label1 = new PdfPCell(new Paragraph(
+						"Check list for Equipotential bonding of LPS \r\n" + "as per IS/IEC 62305", font1));
 				label1.setHorizontalAlignment(Element.ALIGN_CENTER);
 				label1.setGrayFill(0.92f);
 				// label.setFixedHeight(20f);
@@ -362,7 +401,7 @@ public class PrintSDandEarthStudServiceImpl implements PrintSDandEarthStudServic
 				cell261.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 				table8.addCell(cell261);
 
-				PdfPCell cell270 = new PdfPCell(new Paragraph("Soil Resistivity", font2));
+				PdfPCell cell270 = new PdfPCell(new Paragraph("Soil Resistivity (ohms)", font2));
 				cell270.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 				cell270.setGrayFill(0.92f);
 				cell270.setFixedHeight(20f);
@@ -405,110 +444,114 @@ public class PrintSDandEarthStudServiceImpl implements PrintSDandEarthStudServic
 				cell42.setHorizontalAlignment(Element.ALIGN_CENTER);
 				table2.addCell(cell42);
 
-				PdfPCell cell43 = new PdfPCell(new Paragraph("1", font12));
-				cell43.setHorizontalAlignment(Element.ALIGN_CENTER);
-				cell43.setGrayFill(0.92f);
-				table2.addCell(cell43);
+				for (EarthStudDescription earthStud : earthStud1) {
+					
+					PdfPCell cell43 = new PdfPCell(new Paragraph("1", font12));
+					cell43.setHorizontalAlignment(Element.ALIGN_CENTER);
+					cell43.setGrayFill(0.92f);
+					table2.addCell(cell43);
 
-				PdfPCell cell44 = new PdfPCell(new Paragraph("Earth stud visibility if any", font12));
-				cell44.setHorizontalAlignment(Element.ALIGN_LEFT);
-				cell44.setFixedHeight(20f);
-				cell44.setGrayFill(0.92f);
-				table2.addCell(cell44);
+					PdfPCell cell44 = new PdfPCell(new Paragraph("Earth stud visibility if any", font12));
+					cell44.setHorizontalAlignment(Element.ALIGN_LEFT);
+//					cell44.setFixedHeight(20f);
+					cell44.setGrayFill(0.92f);
+					table2.addCell(cell44);
 
-				PdfPCell cell45 = new PdfPCell(new Paragraph(earthStud.getEarthStudVisibilityOb(), font12));
-				cell45.setHorizontalAlignment(Element.ALIGN_LEFT);
-				cell45.setFixedHeight(20f);
-				table2.addCell(cell45);
+					PdfPCell cell45 = new PdfPCell(new Paragraph(earthStud.getEarthStudVisibilityOb(), font12));
+					cell45.setHorizontalAlignment(Element.ALIGN_LEFT);
+//					cell45.setFixedHeight(20f);
+					table2.addCell(cell45);
 
-				PdfPCell cell46 = new PdfPCell(new Paragraph(earthStud.getEarthStudVisibilityRem(), font12));
-				cell46.setHorizontalAlignment(Element.ALIGN_LEFT);
-				table2.addCell(cell46);
+					PdfPCell cell46 = new PdfPCell(new Paragraph(earthStud.getEarthStudVisibilityRem(), font12));
+					cell46.setHorizontalAlignment(Element.ALIGN_LEFT);
+					table2.addCell(cell46);
 
-				PdfPCell cell47 = new PdfPCell(new Paragraph("2", font12));
-				cell47.setHorizontalAlignment(Element.ALIGN_CENTER);
-				cell47.setGrayFill(0.92f);
-				table2.addCell(cell47);
+					PdfPCell cell47 = new PdfPCell(new Paragraph("2", font12));
+					cell47.setHorizontalAlignment(Element.ALIGN_CENTER);
+					cell47.setGrayFill(0.92f);
+					table2.addCell(cell47);
 
-				PdfPCell cell48 = new PdfPCell(new Paragraph("Earth stud bend if any", font12));
-				cell48.setHorizontalAlignment(Element.ALIGN_LEFT);
-				cell48.setFixedHeight(20f);
-				cell48.setGrayFill(0.92f);
-				table2.addCell(cell48);
+					PdfPCell cell48 = new PdfPCell(new Paragraph("Earth stud bend if any", font12));
+					cell48.setHorizontalAlignment(Element.ALIGN_LEFT);
+//					cell48.setFixedHeight(20f);
+					cell48.setGrayFill(0.92f);
+					table2.addCell(cell48);
 
-				PdfPCell cell49 = new PdfPCell(new Paragraph(earthStud.getEarthStudBendOb(), font12));
-				cell49.setHorizontalAlignment(Element.ALIGN_LEFT);
-				cell49.setFixedHeight(20f);
-				table2.addCell(cell49);
+					PdfPCell cell49 = new PdfPCell(new Paragraph(earthStud.getEarthStudBendOb(), font12));
+					cell49.setHorizontalAlignment(Element.ALIGN_LEFT);
+//					cell49.setFixedHeight(20f);
+					table2.addCell(cell49);
 
-				PdfPCell cell50 = new PdfPCell(new Paragraph(earthStud.getEarthStudBendRem(), font12));
-				cell50.setHorizontalAlignment(Element.ALIGN_LEFT);
-				table2.addCell(cell50);
+					PdfPCell cell50 = new PdfPCell(new Paragraph(earthStud.getEarthStudBendRem(), font12));
+					cell50.setHorizontalAlignment(Element.ALIGN_LEFT);
+					table2.addCell(cell50);
 
-				PdfPCell cell51 = new PdfPCell(new Paragraph("3", font12));
-				cell51.setHorizontalAlignment(Element.ALIGN_CENTER);
-				cell51.setGrayFill(0.92f);
-				table2.addCell(cell51);
+					PdfPCell cell51 = new PdfPCell(new Paragraph("3", font12));
+					cell51.setHorizontalAlignment(Element.ALIGN_CENTER);
+					cell51.setGrayFill(0.92f);
+					table2.addCell(cell51);
 
-				PdfPCell cell52 = new PdfPCell(new Paragraph("Proper bonding rail", font12));
-				cell52.setHorizontalAlignment(Element.ALIGN_LEFT);
-				cell52.setFixedHeight(20f);
-				cell52.setGrayFill(0.92f);
-				table2.addCell(cell52);
+					PdfPCell cell52 = new PdfPCell(new Paragraph("Proper bonding rail", font12));
+					cell52.setHorizontalAlignment(Element.ALIGN_LEFT);
+//					cell52.setFixedHeight(20f);
+					cell52.setGrayFill(0.92f);
+					table2.addCell(cell52);
 
-				PdfPCell cell53 = new PdfPCell(new Paragraph(earthStud.getProperBondingRailOb(), font12));
-				cell53.setHorizontalAlignment(Element.ALIGN_LEFT);
-				cell53.setFixedHeight(20f);
-				table2.addCell(cell53);
+					PdfPCell cell53 = new PdfPCell(new Paragraph(earthStud.getProperBondingRailOb(), font12));
+					cell53.setHorizontalAlignment(Element.ALIGN_LEFT);
+//					cell53.setFixedHeight(20f);
+					table2.addCell(cell53);
 
-				PdfPCell cell54 = new PdfPCell(new Paragraph(earthStud.getProperBondingRailRem(), font12));
-				cell54.setHorizontalAlignment(Element.ALIGN_LEFT);
-				table2.addCell(cell54);
+					PdfPCell cell54 = new PdfPCell(new Paragraph(earthStud.getProperBondingRailRem(), font12));
+					cell54.setHorizontalAlignment(Element.ALIGN_LEFT);
+					table2.addCell(cell54);
 
-				PdfPCell cell55 = new PdfPCell(new Paragraph("4", font12));
-				cell55.setHorizontalAlignment(Element.ALIGN_CENTER);
-				cell55.setGrayFill(0.92f);
-				table2.addCell(cell55);
+					PdfPCell cell55 = new PdfPCell(new Paragraph("4", font12));
+					cell55.setHorizontalAlignment(Element.ALIGN_CENTER);
+					cell55.setGrayFill(0.92f);
+					table2.addCell(cell55);
 
-				PdfPCell cell56 = new PdfPCell(new Paragraph("Physical damage of stud", font12));
-				cell56.setHorizontalAlignment(Element.ALIGN_LEFT);
-				cell56.setFixedHeight(20f);
-				cell56.setGrayFill(0.92f);
-				table2.addCell(cell56);
+					PdfPCell cell56 = new PdfPCell(new Paragraph("Physical damage of stud", font12));
+					cell56.setHorizontalAlignment(Element.ALIGN_LEFT);
+//					cell56.setFixedHeight(20f);
+					cell56.setGrayFill(0.92f);
+					table2.addCell(cell56);
 
-				PdfPCell cell57 = new PdfPCell(new Paragraph(earthStud.getPhysicalDamageStudOb(), font12));
-				cell57.setHorizontalAlignment(Element.ALIGN_LEFT);
-				cell57.setFixedHeight(20f);
-				table2.addCell(cell57);
+					PdfPCell cell57 = new PdfPCell(new Paragraph(earthStud.getPhysicalDamageStudOb(), font12));
+					cell57.setHorizontalAlignment(Element.ALIGN_LEFT);
+//					cell57.setFixedHeight(20f);
+					table2.addCell(cell57);
 
-				PdfPCell cell58 = new PdfPCell(new Paragraph(earthStud.getPhysicalDamageStudRem(), font12));
-				cell58.setHorizontalAlignment(Element.ALIGN_LEFT);
-				table2.addCell(cell58);
+					PdfPCell cell58 = new PdfPCell(new Paragraph(earthStud.getPhysicalDamageStudRem(), font12));
+					cell58.setHorizontalAlignment(Element.ALIGN_LEFT);
+					table2.addCell(cell58);
 
-				PdfPCell cell59 = new PdfPCell(new Paragraph("5", font12));
-				cell59.setHorizontalAlignment(Element.ALIGN_CENTER);
-				cell59.setGrayFill(0.92f);
-				table2.addCell(cell59);
+					PdfPCell cell59 = new PdfPCell(new Paragraph("5", font12));
+					cell59.setHorizontalAlignment(Element.ALIGN_CENTER);
+					cell59.setGrayFill(0.92f);
+					table2.addCell(cell59);
 
-				PdfPCell cell60 = new PdfPCell(new Paragraph("Whether continuity exist in earth stud", font12));
-				cell60.setHorizontalAlignment(Element.ALIGN_LEFT);
-				cell60.setFixedHeight(20f);
-				cell60.setGrayFill(0.92f);
-				table2.addCell(cell60);
+					PdfPCell cell60 = new PdfPCell(new Paragraph("Whether continuity exist in earth stud", font12));
+					cell60.setHorizontalAlignment(Element.ALIGN_LEFT);
+//					cell60.setFixedHeight(20f);
+					cell60.setGrayFill(0.92f);
+					table2.addCell(cell60);
 
-				PdfPCell cell61 = new PdfPCell(new Paragraph(earthStud.getContinutyExistaEarthOb(), font12));
-				cell61.setHorizontalAlignment(Element.ALIGN_LEFT);
-				cell61.setFixedHeight(20f);
-				table2.addCell(cell61);
+					PdfPCell cell61 = new PdfPCell(new Paragraph(earthStud.getContinutyExistaEarthOb(), font12));
+					cell61.setHorizontalAlignment(Element.ALIGN_LEFT);
+//					cell61.setFixedHeight(20f);
+					table2.addCell(cell61);
 
-				PdfPCell cell62 = new PdfPCell(new Paragraph(earthStud.getContinutyExistaEarthRem(), font12));
-				cell62.setHorizontalAlignment(Element.ALIGN_LEFT);
-				table2.addCell(cell62);
+					PdfPCell cell62 = new PdfPCell(new Paragraph(earthStud.getContinutyExistaEarthRem(), font12));
+					cell62.setHorizontalAlignment(Element.ALIGN_LEFT);
+					table2.addCell(cell62);
 
-				document.add(table2);
+					document.add(table2);
+
+				}
 				document.close();
 				writer.close();
-				
+
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -519,53 +562,6 @@ public class PrintSDandEarthStudServiceImpl implements PrintSDandEarthStudServic
 			throw new EarthStudException("Invalid Inputs");
 		}
 
-	}
-
-	private PdfPTable separateDistanceIter(float[] pointColumnWidths30, SeparateDistance separateDistance3)
-			throws DocumentException, IOException {
-		Font font1 = new Font(BaseFont.createFont(), 10, Font.NORMAL, BaseColor.BLACK);
-		Font font2 = new Font(BaseFont.createFont(), 10, Font.NORMAL, BaseColor.BLACK);
-		PdfPTable table1 = new PdfPTable(pointColumnWidths30);
-		table1.setWidthPercentage(100); // Width 100%
-		// table1.setSpacingBefore(10f); // Space before table
-		table1.setWidthPercentage(100);
-
-		PdfPCell cell43 = new PdfPCell(new Paragraph("1", font2));
-		cell43.setHorizontalAlignment(Element.ALIGN_CENTER);
-		cell43.setGrayFill(0.92f);
-		// cell43.setColspan(3);
-		table1.addCell(cell43);
-
-		PdfPCell cell40 = new PdfPCell(new Paragraph(
-				"Measured separation distance between air termination and electrical apparatus (lights, solar PV, AC chillers, cameras…. Etc)(Measurement required in atleast 10 locations on roof top)",
-				font2));
-		cell40.setHorizontalAlignment(Element.ALIGN_CENTER);
-		cell40.setGrayFill(0.92f);
-		cell40.setColspan(3);
-		table1.addCell(cell40);
-
-		PdfPCell cell35 = new PdfPCell(new Paragraph("1.a", font1));
-		cell35.setHorizontalAlignment(Element.ALIGN_CENTER);
-		cell35.setGrayFill(0.92f);
-		table1.addCell(cell35);
-
-		PdfPCell cell36 = new PdfPCell(new Paragraph(separateDistance3.getSeperationDistanceDesc(), font1));
-		cell36.setHorizontalAlignment(Element.ALIGN_LEFT);
-		cell36.setFixedHeight(20f);
-		 cell36.setGrayFill(0.92f);
-		table1.addCell(cell36);
-
-		PdfPCell cell37 = new PdfPCell(new Paragraph(separateDistance3.getSeperationDistanceOb(), font1));
-		cell37.setHorizontalAlignment(Element.ALIGN_LEFT);
-		cell37.setFixedHeight(20f);
-		// cell37.setGrayFill(0.92f);
-		table1.addCell(cell37);
-
-		PdfPCell cell38 = new PdfPCell(new Paragraph(separateDistance3.getSeperationDistanceRem(), font1));
-		// cell38.setGrayFill(0.92f);
-		cell38.setHorizontalAlignment(Element.ALIGN_LEFT);
-		table1.addCell(cell38);
-		return table1;
 	}
 
 }

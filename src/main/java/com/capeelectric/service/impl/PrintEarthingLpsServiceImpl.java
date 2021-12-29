@@ -2,8 +2,8 @@ package com.capeelectric.service.impl;
 
 import java.io.FileOutputStream;
 import java.util.List;
+import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.capeelectric.exception.EarthingLpsException;
@@ -13,8 +13,6 @@ import com.capeelectric.model.EarthingClamps;
 import com.capeelectric.model.EarthingDescription;
 import com.capeelectric.model.EarthingLpsDescription;
 import com.capeelectric.model.EarthingSystem;
-import com.capeelectric.repository.BasicLpsRepository;
-import com.capeelectric.repository.EarthingLpsRepository;
 import com.capeelectric.service.PrintEarthingLpsService;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
@@ -30,14 +28,9 @@ import com.itextpdf.text.pdf.PdfWriter;
 @Service
 public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 
-	@Autowired
-	private BasicLpsRepository basicLpsRepository;
-
-	@Autowired
-	private EarthingLpsRepository earthingLpsRepository;
 
 	@Override
-	public List<EarthingLpsDescription> printEarthingLpsDetails(String userName, Integer basicLpsId)
+	public List<EarthingLpsDescription> printEarthingLpsDetails(String userName, Integer basicLpsId,Optional<BasicLps> basicLpsDetails, Optional<EarthingLpsDescription> earthingLpsDetails)
 			throws EarthingLpsException {
 
 		if (userName != null && !userName.isEmpty() && basicLpsId != null && basicLpsId != 0) {
@@ -47,12 +40,13 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 
 				PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("EarthingLps.pdf"));
 
-				List<BasicLps> basicLps = basicLpsRepository.findByUserNameAndBasicLpsId(userName, basicLpsId);
-				BasicLps basicLps1 = basicLps.get(0);
+//				List<BasicLps> basicLps = basicLpsRepository.findByUserNameAndBasicLpsId(userName, basicLpsId);
+				BasicLps basicLps1 = basicLpsDetails.get();
 
-				List<EarthingLpsDescription> earthingLpsRepo = earthingLpsRepository
-						.findByUserNameAndBasicLpsId(userName, basicLpsId);
-				EarthingLpsDescription erthing = earthingLpsRepo.get(0);
+//				List<EarthingLpsDescription> earthingLpsRepo = earthingLpsRepository
+//						.findByUserNameAndBasicLpsId(userName, basicLpsId);
+				
+				EarthingLpsDescription erthing = earthingLpsDetails.get();
 
 				List<EarthingDescription> earthDesc1 = erthing.getEarthingDescription();
 
@@ -193,7 +187,7 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 				cell26.setHorizontalAlignment(Element.ALIGN_LEFT);
 				table4.addCell(cell26);
 
-				PdfPCell cell27 = new PdfPCell(new Paragraph("Soil Resistivity", font2));
+				PdfPCell cell27 = new PdfPCell(new Paragraph("Soil Resistivity (ohms)", font2));
 				cell27.setHorizontalAlignment(Element.ALIGN_LEFT);
 				cell27.setGrayFill(0.92f);
 				cell27.setFixedHeight(20f);
@@ -386,7 +380,7 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 		cell213.setGrayFill(0.92f);
 		table205.addCell(cell213);
 
-		PdfPCell cell214 = new PdfPCell(new Paragraph("Depth of electrode from ground level", font));
+		PdfPCell cell214 = new PdfPCell(new Paragraph("Depth of electrode from ground level (m)", font));
 		cell214.setHorizontalAlignment(Element.ALIGN_LEFT);
 		cell214.setGrayFill(0.92f);
 		table205.addCell(cell214);
@@ -476,7 +470,7 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 		cell233.setGrayFill(0.92f);
 		table205.addCell(cell233);
 
-		PdfPCell cell234 = new PdfPCell(new Paragraph("Distance of ring earthing from wall", font));
+		PdfPCell cell234 = new PdfPCell(new Paragraph("Distance of ring earthing from wall (m)", font));
 		cell234.setHorizontalAlignment(Element.ALIGN_LEFT);
 		cell234.setGrayFill(0.92f);
 		table205.addCell(cell234);
@@ -603,7 +597,7 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 		cell261.setGrayFill(0.92f);
 		table205.addCell(cell261);
 
-		PdfPCell cell262 = new PdfPCell(new Paragraph("Size/cross section area of earth electrode", font));
+		PdfPCell cell262 = new PdfPCell(new Paragraph("Size/cross section area of earth electrode (mm)", font));
 		cell262.setHorizontalAlignment(Element.ALIGN_LEFT);
 		cell262.setGrayFill(0.92f);
 		table205.addCell(cell262);
@@ -621,7 +615,7 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 		cell265.setGrayFill(0.92f);
 		table205.addCell(cell265);
 
-		PdfPCell cell266 = new PdfPCell(new Paragraph("Maximum distance between earth electrode and wall", font));
+		PdfPCell cell266 = new PdfPCell(new Paragraph("Maximum distance between earth electrode and wall (m)", font));
 		cell266.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell266.setGrayFill(0.92f);
 		table205.addCell(cell266);
@@ -639,7 +633,7 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 		cell269.setGrayFill(0.92f);
 		table205.addCell(cell269);
 
-		PdfPCell cell270 = new PdfPCell(new Paragraph("Minimum distance between earth electrode and wall", font));
+		PdfPCell cell270 = new PdfPCell(new Paragraph("Minimum distance between earth electrode and wall (m)", font));
 		cell270.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell270.setGrayFill(0.92f);
 		table205.addCell(cell270);
@@ -653,7 +647,7 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 		table205.addCell(cell272);
 		return table205;
 	}
-
+	
 	private PdfPTable earthingChamber(Font font11, Font font, EarthElectrodeChamber earthChamber) {
 
 		float[] pointColumnWidths2 = { 25F, 150F, 55F, 50F };
@@ -744,7 +738,7 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 		cell177.setGrayFill(0.92f);
 		table202.addCell(cell177);
 
-		PdfPCell cell178 = new PdfPCell(new Paragraph("Size of chamber", font));
+		PdfPCell cell178 = new PdfPCell(new Paragraph("Size of chamber (mm)", font));
 		cell178.setHorizontalAlignment(Element.ALIGN_LEFT);
 		cell178.setGrayFill(0.92f);
 		table202.addCell(cell178);
@@ -762,7 +756,7 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 		cell181.setGrayFill(0.92f);
 		table202.addCell(cell181);
 
-		PdfPCell cell182 = new PdfPCell(new Paragraph("Maximum withstand load", font));
+		PdfPCell cell182 = new PdfPCell(new Paragraph("Maximum withstand load (KN)", font));
 		cell182.setHorizontalAlignment(Element.ALIGN_LEFT);
 		cell182.setGrayFill(0.92f);
 		table202.addCell(cell182);
@@ -1035,11 +1029,11 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 		cell154.setGrayFill(0.92f);
 		table22.addCell(cell154);
 
-		PdfPCell cell155 = new PdfPCell(new Paragraph(earthClamps.getTotalNoClampsInOb(), font));
+		PdfPCell cell155 = new PdfPCell(new Paragraph(earthClamps.getInspectedClampsInOb(), font));
 		cell155.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table22.addCell(cell155);
 
-		PdfPCell cell156 = new PdfPCell(new Paragraph(earthClamps.getTotalNoClampsInRem(), font));
+		PdfPCell cell156 = new PdfPCell(new Paragraph(earthClamps.getInspectedClampsInRem(), font));
 		cell156.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table22.addCell(cell156);
 
@@ -1136,7 +1130,7 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 		cell52.setGrayFill(0.92f);
 		table21.addCell(cell52);
 
-		PdfPCell cell53 = new PdfPCell(new Paragraph("Soil resistivity", font));
+		PdfPCell cell53 = new PdfPCell(new Paragraph("Soil resistivity (ohms)", font));
 		cell53.setHorizontalAlignment(Element.ALIGN_LEFT);
 		cell53.setGrayFill(0.92f);
 		table21.addCell(cell53);
@@ -1286,7 +1280,7 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 		cell84.setGrayFill(0.92f);
 		table21.addCell(cell84);
 
-		PdfPCell cell85 = new PdfPCell(new Paragraph("Size/cross section area of earth electrode", font));
+		PdfPCell cell85 = new PdfPCell(new Paragraph("Size/cross section area of earth electrode (mm)", font));
 		cell85.setHorizontalAlignment(Element.ALIGN_LEFT);
 		cell85.setGrayFill(0.92f);
 		table21.addCell(cell85);
@@ -1304,7 +1298,7 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 		cell88.setGrayFill(0.92f);
 		table21.addCell(cell88);
 
-		PdfPCell cell89 = new PdfPCell(new Paragraph("Length of earth electrode", font));
+		PdfPCell cell89 = new PdfPCell(new Paragraph("Length of earth electrode (m)", font));
 		cell89.setHorizontalAlignment(Element.ALIGN_LEFT);
 		cell89.setGrayFill(0.92f);
 		table21.addCell(cell89);
@@ -1322,7 +1316,7 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 		cell92.setGrayFill(0.92f);
 		table21.addCell(cell92);
 
-		PdfPCell cell93 = new PdfPCell(new Paragraph("Maximum distance between earth electrode and wall", font));
+		PdfPCell cell93 = new PdfPCell(new Paragraph("Maximum distance between earth electrode and wall (m)", font));
 		cell93.setHorizontalAlignment(Element.ALIGN_LEFT);
 		cell93.setGrayFill(0.92f);
 		table21.addCell(cell93);
@@ -1341,15 +1335,16 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 		cell96.setGrayFill(0.92f);
 		table21.addCell(cell96);
 
-		PdfPCell cell97 = new PdfPCell(new Paragraph("Minimum distance between earth electrode and wall", font));
+		PdfPCell cell97 = new PdfPCell(new Paragraph("Minimum distance between earth electrode and wall (m)", font));
 		cell97.setHorizontalAlignment(Element.ALIGN_LEFT);
+		cell97.setGrayFill(0.92f);
 		table21.addCell(cell97);
 
 		PdfPCell cell98 = new PdfPCell(new Paragraph(earthDesc.getEarthelectManimumDistanceWallInOb(), font));
 		cell98.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table21.addCell(cell98);
 
-		PdfPCell cell99 = new PdfPCell(new Paragraph(earthDesc.getEarthelectManiDistWallInRem(), font));
+		PdfPCell cell99 = new PdfPCell(new Paragraph(earthDesc.getEarthelectManimumDistanceWallInRem(), font));
 		cell99.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table21.addCell(cell99);
 
@@ -1358,7 +1353,7 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 		cell100.setGrayFill(0.92f);
 		table21.addCell(cell100);
 
-		PdfPCell cell101 = new PdfPCell(new Paragraph("Maximum distance between earth electrodes", font));
+		PdfPCell cell101 = new PdfPCell(new Paragraph("Maximum distance between earth electrodes (m)", font));
 		cell101.setHorizontalAlignment(Element.ALIGN_LEFT);
 		cell101.setGrayFill(0.92f);
 		table21.addCell(cell101);
@@ -1376,7 +1371,7 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 		cell104.setGrayFill(0.92f);
 		table21.addCell(cell104);
 
-		PdfPCell cell105 = new PdfPCell(new Paragraph("Minimum distance between earth electrodes", font));
+		PdfPCell cell105 = new PdfPCell(new Paragraph("Minimum distance between earth electrodes (m)", font));
 		cell105.setHorizontalAlignment(Element.ALIGN_LEFT);
 		cell105.setGrayFill(0.92f);
 		table21.addCell(cell105);
@@ -1417,11 +1412,11 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 		cell1131.setGrayFill(0.92f);
 		table21.addCell(cell1131);
 
-		PdfPCell cell1141 = new PdfPCell(new Paragraph(earthDesc.getTotalNumberOfElectrodeOb(), font));
+		PdfPCell cell1141 = new PdfPCell(new Paragraph(earthDesc.getInspectedNoOb(), font));
 		cell1141.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table21.addCell(cell1141);
 
-		PdfPCell cell1151 = new PdfPCell(new Paragraph(earthDesc.getTotalNumberOfElectrodeRem(), font));
+		PdfPCell cell1151 = new PdfPCell(new Paragraph(earthDesc.getInspectedNoRem(), font));
 		cell1151.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table21.addCell(cell1151);
 
@@ -1457,7 +1452,7 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 		cell122.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table21.addCell(cell122);
 
-		PdfPCell cell123 = new PdfPCell(new Paragraph(earthDesc.getInspectedFailedRem(), font));
+		PdfPCell cell123 = new PdfPCell(new Paragraph(earthDesc.getInspectedFailedNoRem(), font));
 		cell123.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table21.addCell(cell123);
 		return table21;

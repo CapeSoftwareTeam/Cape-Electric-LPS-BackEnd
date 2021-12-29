@@ -18,7 +18,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.capeelectric.exception.AirTerminationException;
+import com.capeelectric.exception.BasicLpsException;
+import com.capeelectric.exception.DownConductorException;
 import com.capeelectric.exception.EarthStudException;
+import com.capeelectric.exception.EarthingLpsException;
+import com.capeelectric.exception.SPDException;
 import com.capeelectric.model.EarthStudDescription;
 import com.capeelectric.service.EarthStudService;
 
@@ -40,8 +45,8 @@ public class EarthStudController {
 	
 	@PostMapping("/addEarthStud")
 	public ResponseEntity<String> addEarthStud(@RequestBody  EarthStudDescription earthStudDescription)
-			throws EarthStudException {
-		logger.info("called addEarthStud function UserName : {}, SiteId : {}",
+			throws EarthStudException, BasicLpsException, AirTerminationException, DownConductorException, EarthingLpsException, SPDException, Exception {
+		logger.info("called addEarthStud function UserName : {}, BasicLpsId : {}",
 				earthStudDescription.getUserName(), earthStudDescription.getBasicLpsId());
 		earthStudService.addEarthStudDetails(earthStudDescription);
 		return new ResponseEntity<String>("Earth Stud Details Sucessfully Submitted",
@@ -51,7 +56,7 @@ public class EarthStudController {
 	@GetMapping("/retrieveEarthStud/{userName}/{basicLpsId}")
 	public ResponseEntity<List<EarthStudDescription>> retrieveEarthStudDetails(@PathVariable String userName,
 			@PathVariable Integer basicLpsId) throws EarthStudException {
-		logger.info("started retrieveEarthStud function UserName : {}, SiteId : {}", userName, basicLpsId);
+		logger.info("started retrieveEarthStud function UserName : {}, BasicLpsId : {}", userName, basicLpsId);
 		return new ResponseEntity<List<EarthStudDescription>>(
 				earthStudService.retrieveEarthStudDetails(userName, basicLpsId), HttpStatus.OK);
 	}

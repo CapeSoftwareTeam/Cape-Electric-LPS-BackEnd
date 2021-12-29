@@ -3,6 +3,7 @@ package com.capeelectric.service.impl;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,14 +37,8 @@ import com.itextpdf.text.pdf.PdfWriter;
 @Service
 public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationService {
 
-	@Autowired
-	private BasicLpsRepository basicLpsRepository;
-
-	@Autowired
-	private AirTerminationLpsRepository airTerminationLpsRepository;
-
 	@Override
-	public void printAirTermination(String userName, Integer basicLpsId) throws AirTerminationException {
+	public void printAirTermination(String userName, Integer basicLpsId,Optional<BasicLps> basicLpsDetails, Optional<LpsAirDiscription> lpsAirDisc) throws AirTerminationException {
 		if (userName != null && !userName.isEmpty() && basicLpsId != null && basicLpsId != 0) {
 			Document document = new Document(PageSize.A4, 68, 68, 62, 68);
 
@@ -51,12 +46,12 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 
 				PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("AirTermination.pdf"));
 
-				List<BasicLps> basicLps = basicLpsRepository.findByUserNameAndBasicLpsId(userName, basicLpsId);
-				BasicLps basicLps1 = basicLps.get(0);
+//				List<BasicLps> basicLps = basicLpsRepository.findByUserNameAndBasicLpsId(userName, basicLpsId);
+				BasicLps basicLps1 = basicLpsDetails.get();
 
-				List<LpsAirDiscription> s = airTerminationLpsRepository.findByUserNameAndBasicLpsId(userName,
-						basicLpsId);
-				LpsAirDiscription lpsAirDiscription = s.get(0);
+//				List<LpsAirDiscription> s = airTerminationLpsRepository.findByUserNameAndBasicLpsId(userName,
+//						basicLpsId);
+				LpsAirDiscription lpsAirDiscription = lpsAirDisc.get();
 
 				List<AirClamps> airClamps = lpsAirDiscription.getAirClamps();
 				List<AirConnectors> airConnectors = lpsAirDiscription.getAirConnectors();
@@ -197,7 +192,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 				cell26.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 				table4.addCell(cell26);
 
-				PdfPCell cell27 = new PdfPCell(new Paragraph("Soil Resistivity", font2));
+				PdfPCell cell27 = new PdfPCell(new Paragraph("Soil Resistivity (ohms)", font2));
 				cell27.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 				cell27.setGrayFill(0.92f);
 				cell27.setFixedHeight(20f);
@@ -297,7 +292,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 			throws DocumentException, IOException {
 
 		Font font1 = new Font(BaseFont.createFont(), 10, Font.NORMAL, BaseColor.BLACK);
-		Font font2 = new Font(BaseFont.createFont(), 9, Font.NORMAL, BaseColor.BLACK);
+		Font font2 = new Font(BaseFont.createFont(), 10, Font.NORMAL, BaseColor.BLACK);
 
 		PdfPCell cell = new PdfPCell();
 
@@ -407,7 +402,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table.addCell(cell);
 
-		cell.setPhrase(new Phrase("Equipotenial bonding carried out or not", font1));
+		cell.setPhrase(new Phrase("Equipotential bonding carried out or not", font1));
 		cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table.addCell(cell);
@@ -438,7 +433,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 
 		Font font = new Font(BaseFont.createFont(), 10, Font.NORMAL | Font.BOLD, BaseColor.BLACK);
 		Font font1 = new Font(BaseFont.createFont(), 10, Font.NORMAL, BaseColor.BLACK);
-		Font font2 = new Font(BaseFont.createFont(), 9, Font.NORMAL, BaseColor.BLACK);
+		Font font2 = new Font(BaseFont.createFont(), 10, Font.NORMAL, BaseColor.BLACK);
 		
 		PdfPCell cell11 = new PdfPCell();
 		cell11.setPhrase(new Phrase("11", font));
@@ -877,8 +872,8 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 		PdfPCell cell26 = new PdfPCell(new Paragraph(airExpansion1.getInspectionNoOb(), font2));
 		cell26.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table5.addCell(cell26);
-		if (airExpansion1.getInspectionFailedNoRe() != null) {
-			PdfPCell cell1 = new PdfPCell(new Paragraph(airExpansion1.getInspectionFailedNoRe(), font2));
+		if (airExpansion1.getInspectionNoRe() != null) {
+			PdfPCell cell1 = new PdfPCell(new Paragraph(airExpansion1.getInspectionNoRe(), font2));
 			cell1.setHorizontalAlignment(Element.ALIGN_LEFT);
 			table5.addCell(cell1);
 		} else {
@@ -1467,7 +1462,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table3.addCell(cell);
 
-		cell.setPhrase(new Phrase("Material of parpet holder", font2));
+		cell.setPhrase(new Phrase("Material of parapet holder", font2));
 		cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table3.addCell(cell);
@@ -1686,7 +1681,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table2.addCell(cell);
 
-		cell.setPhrase(new Phrase("Size/cross section area of conductor", font2));
+		cell.setPhrase(new Phrase("Size/cross section area of conductor (mm)", font2));
 		cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table2.addCell(cell);
@@ -1709,7 +1704,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table2.addCell(cell);
 
-		cell.setPhrase(new Phrase("Mesh Size", font2));
+		cell.setPhrase(new Phrase("Mesh Size (m)", font2));
 		cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table2.addCell(cell);
@@ -1718,7 +1713,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 		cell9.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table2.addCell(cell9);
 		if (airMeshDesc1.getMeshSizeRe() != null) {
-			PdfPCell cell1 = new PdfPCell(new Paragraph(airMeshDesc1.getSizeOfConductorRe(), font2));
+			PdfPCell cell1 = new PdfPCell(new Paragraph(airMeshDesc1.getMeshSizeRe(), font2));
 			cell1.setHorizontalAlignment(Element.ALIGN_LEFT);
 			table2.addCell(cell1);
 		} else {
@@ -1732,7 +1727,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table2.addCell(cell);
 
-		cell.setPhrase(new Phrase("Maximum distance between mesh conductors", font2));
+		cell.setPhrase(new Phrase("Maximum distance between mesh conductors (m)", font2));
 		cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table2.addCell(cell);
@@ -1755,7 +1750,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table2.addCell(cell);
 
-		cell.setPhrase(new Phrase("Minimum distance between mesh conductors", font2));
+		cell.setPhrase(new Phrase("Minimum distance between mesh conductors (m)", font2));
 		cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table2.addCell(cell);
@@ -1909,7 +1904,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table1.addCell(cell);
 
-		cell.setPhrase(new Phrase("Size/cross section area of air terminal", font1));
+		cell.setPhrase(new Phrase("Size/cross section area of air terminal (mm)", font1));
 		cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table1.addCell(cell);
@@ -1932,7 +1927,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table1.addCell(cell);
 
-		cell.setPhrase(new Phrase("Height of vertical air terminal", font1));
+		cell.setPhrase(new Phrase("Height of vertical air terminal (m)", font1));
 		cell.setHorizontalAlignment(Element.ALIGN_LEFT);
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table1.addCell(cell);
@@ -1986,11 +1981,11 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table1.addCell(cell);
 
-		PdfPCell cell13 = new PdfPCell(new Paragraph(lpsVerticalAirTermination1.getMaterialOfTerminalOb(), font1));
+		PdfPCell cell13 = new PdfPCell(new Paragraph(lpsVerticalAirTermination1.getInstallationTerminationsystemOb(), font1));
 		cell13.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table1.addCell(cell13);
 		if (lpsVerticalAirTermination1.getMaterialOfTerminalRe() != null) {
-			PdfPCell cell1 = new PdfPCell(new Paragraph(lpsVerticalAirTermination1.getMaterialOfTerminalRe(), font1));
+			PdfPCell cell1 = new PdfPCell(new Paragraph(lpsVerticalAirTermination1.getInstallationTerminationsystemRem(), font1));
 			cell1.setHorizontalAlignment(Element.ALIGN_LEFT);
 			table1.addCell(cell1);
 		} else {
@@ -2111,8 +2106,8 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 		PdfPCell cell18 = new PdfPCell(new Paragraph(lpsVerticalAirTermination1.getInspNoOb(), font1));
 		cell18.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table1.addCell(cell18);
-		if (lpsVerticalAirTermination1.getInspFaileddNoRe() != null) {
-			PdfPCell cell1 = new PdfPCell(new Paragraph(lpsVerticalAirTermination1.getInspFaileddNoRe(), font1));
+		if (lpsVerticalAirTermination1.getInspNoRe() != null) {
+			PdfPCell cell1 = new PdfPCell(new Paragraph(lpsVerticalAirTermination1.getInspNoRe(), font1));
 			cell1.setHorizontalAlignment(Element.ALIGN_LEFT);
 			table1.addCell(cell1);
 		} else {

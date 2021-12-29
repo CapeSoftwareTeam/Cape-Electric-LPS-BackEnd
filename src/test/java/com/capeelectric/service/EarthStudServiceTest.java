@@ -14,10 +14,16 @@ import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import com.capeelectric.exception.AirTerminationException;
+import com.capeelectric.exception.BasicLpsException;
+import com.capeelectric.exception.DownConductorException;
 import com.capeelectric.exception.EarthStudException;
+import com.capeelectric.exception.EarthingLpsException;
+import com.capeelectric.exception.SPDException;
 import com.capeelectric.model.BasicLps;
 import com.capeelectric.model.DownConductorDescription;
 import com.capeelectric.model.EarthStudDescription;
@@ -41,6 +47,27 @@ public class EarthStudServiceTest {
 
 	private static final Logger logger = LoggerFactory.getLogger(EarthStudServiceTest.class);
 
+	@MockBean
+	private PrintBasicLpsService printBasicLpsService;
+
+	@MockBean
+	private PrintAirTerminationService printAirTerminationService;
+
+	@MockBean
+	private PrintDownConductorService printDownConductorService;
+
+	@MockBean
+	private PrintEarthingLpsService printEarthingLpsService;
+
+	@MockBean
+	private PrintSPDService printSPDService;
+
+	@MockBean
+	private PrintSDandEarthStudService printSDandEarthStudService;
+
+	@MockBean
+	private PrintFinalPDFService printFinalPDFService;
+	
 	@MockBean
 	private EarthStudRepository earthStudRepository;
 
@@ -83,8 +110,10 @@ public class EarthStudServiceTest {
 	private BasicLps basicLps;
 	{
 		basicLps = new BasicLps();
+		basicLps.setUserName("lps@capeindia.net");
 		basicLps.setBasicLpsId(1);
 		basicLps.setClientName("Inspector@gmail.com");
+		basicLps.setAllStepsCompleted("AllStepCompleted");
 	}
 	
 	private LpsAirDiscription lpsAirDiscription;
@@ -116,7 +145,7 @@ public class EarthStudServiceTest {
 	
 	
 	@Test
-	public void testAddEarthStudDetails() throws EarthStudException {
+	public void testAddEarthStudDetails() throws EarthStudException, BasicLpsException, AirTerminationException, DownConductorException, EarthingLpsException, SPDException, Exception {
 		 
 		when(airTerminationLpsRepository.findByBasicLpsId(1)).thenReturn(Optional.of(lpsAirDiscription));
 		when(downConductorRepository
@@ -129,18 +158,42 @@ public class EarthStudServiceTest {
 		
 		when(basicLpsRepository.findByBasicLpsId(1)).thenReturn(Optional.of(basicLps));
 		when(earthStudRepository.findByBasicLpsId(3)).thenReturn(Optional.of(earthStudDescription));
+		
+		
+		printBasicLpsService.printBasicLps(earthStudDescription.getUserName(), earthStudDescription.getBasicLpsId(),
+				Optional.of(basicLps));
+		
+		printAirTerminationService.printAirTermination(earthStudDescription.getUserName(),
+				earthStudDescription.getBasicLpsId(), Optional.of(basicLps), Optional.of(lpsAirDiscription));
+
+		printDownConductorService.printDownConductor(earthStudDescription.getUserName(),
+				earthStudDescription.getBasicLpsId(), Optional.of(basicLps), Optional.of(downConductorDescription));
+
+		printEarthingLpsService.printEarthingLpsDetails(earthStudDescription.getUserName(),
+				earthStudDescription.getBasicLpsId(), Optional.of(basicLps), Optional.of(earthingLpsDescription));
+
+		printSPDService.printSPD(earthStudDescription.getUserName(), earthStudDescription.getBasicLpsId(),
+				Optional.of(basicLps), Optional.of(sPD));
+
+		printSDandEarthStudService.printSDandEarthStud(earthStudDescription.getUserName(),
+				earthStudDescription.getBasicLpsId(), Optional.of(basicLps), Optional.of(seperationDistanceDescription));
+
+		printFinalPDFService.printFinalPDF(earthStudDescription.getUserName(),
+				earthStudDescription.getBasicLpsId());
+		
 		eartStudServiceImpl.addEarthStudDetails(earthStudDescription);
 		
-		when(earthStudRepository.findByBasicLpsId(1)).thenReturn(Optional.of(earthStudDescription));
-		EarthStudException earthStudException_2 = Assertions.assertThrows(EarthStudException.class,
-				() -> eartStudServiceImpl.addEarthStudDetails(earthStudDescription));
-		assertEquals(earthStudException_2.getMessage(), "Basic LPS Id Already Available.Create New Basic Id");
+//		when(earthStudRepository.findByBasicLpsId(3)).thenReturn(Optional.of(earthStudDescription));
+//		when(basicLpsRepository.findByBasicLpsId(5)).thenReturn(Optional.of(basicLps));
+//		EarthStudException earthStudException_2 = Assertions.assertThrows(EarthStudException.class,
+//				() -> eartStudServiceImpl.addEarthStudDetails(earthStudDescription));
+//		assertEquals(earthStudException_2.getMessage(), "Basic LPS Id Information not Available in Basic LPS Id Details");
 		
-		when(seperationDistanceRepository
-				.findByBasicLpsId(2)).thenReturn(Optional.of(seperationDistanceDescription));
+		
+		when(earthStudRepository.findByBasicLpsId(1)).thenReturn(Optional.of(earthStudDescription));
  		EarthStudException earthStudException_3 = Assertions.assertThrows(EarthStudException.class,
 				() -> eartStudServiceImpl.addEarthStudDetails(earthStudDescription));
-		assertEquals(earthStudException_3.getMessage(), "Basic LPS Id Already Available.Create New Basic Id");
+		assertEquals(earthStudException_3.getMessage(), "Given Basic LPS Id is Not Registered in Basic LPS");
 
  	
 		earthStudDescription.setUserName(null);

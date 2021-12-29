@@ -39,7 +39,7 @@ private static final Logger logger = LoggerFactory.getLogger(EarthingLpsControll
 	@PostMapping("/addEarthingLps")
 	public ResponseEntity<String> addEarthingLps(@RequestBody   EarthingLpsDescription earthingLpsDescription)
 			throws EarthingLpsException {
-		logger.info("called addEarthingLps function UserName : {}, SiteId : {}",
+		logger.info("called addEarthingLps function UserName : {}, BasicLpsId : {}",
 				earthingLpsDescription.getUserName(), earthingLpsDescription.getBasicLpsId());
 		earthingLpsService.addEarthingLpsDetails(earthingLpsDescription);
 		return new ResponseEntity<String>("Earthing Details Sucessfully Saved",
@@ -49,7 +49,7 @@ private static final Logger logger = LoggerFactory.getLogger(EarthingLpsControll
 	@GetMapping("/retrieveEarthingLps/{userName}/{basicLpsId}")
 	public ResponseEntity<List<EarthingLpsDescription>> retrieveEarthingLps(@PathVariable String userName,
 			@PathVariable Integer basicLpsId) throws EarthingLpsException {
-		logger.info("started retrieveEarthingLps function UserName : {}, SiteId : {}", userName, basicLpsId);
+		logger.info("started retrieveEarthingLps function UserName : {}, BasicLpsId : {}", userName, basicLpsId);
 		return new ResponseEntity<List<EarthingLpsDescription>>(
 				earthingLpsService.retrieveEarthingLpsDetails(userName, basicLpsId), HttpStatus.OK);
 	}

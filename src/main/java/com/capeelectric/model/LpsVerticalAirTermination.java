@@ -34,12 +34,18 @@ public class LpsVerticalAirTermination implements Serializable {
 	@Column(name = "LOCATION_NAME")
 	private String locationName;
 
-	@Column(name = "INSTALLATION_TERMINATIONSYSTEM_OB")
-	private String installationTerminationsystemOb;
+	@Column(name = "PHYSICAL_INSPECTIONOBSERVATION")
+	private String physicalInspectionOb;
 
-	@Column(name = "INSTALLATION_TERMINATIONSYSTEM_REM")
-	private String installationTerminationsystemRem;
+	@Column(name = "PHYSICAL_INSPECTIONREMARKS")
+	private String physicalInspectionRe;
+	
+	@Column(name = "MATERIAL_OF_TERMINALOBSERVATION")
+	private String materialOfTerminalOb;
 
+	@Column(name = "MATERIAL_OF_TERMINALREMARKS")
+	private String materialOfTerminalRe;
+	
 	@Column(name = "SIZE_OF_TERMINALOBSERVATION")
 	private String sizeOfTerminalOb;
 
@@ -57,19 +63,13 @@ public class LpsVerticalAirTermination implements Serializable {
 
 	@Column(name = "ANGLEPROTECTION_HEIGHTREMARKS")
 	private String angleProtectionHeightRe;
+	
+	@Column(name = "INSTALLATION_TERMINATIONSYSTEM_OB")
+	private String installationTerminationsystemOb;
 
-	@Column(name = "MATERIAL_OF_TERMINALOBSERVATION")
-	private String materialOfTerminalOb;
-
-	@Column(name = "MATERIAL_OF_TERMINALREMARKS")
-	private String materialOfTerminalRe;
-
-	@Column(name = "PHYSICAL_INSPECTIONOBSERVATION")
-	private String physicalInspectionOb;
-
-	@Column(name = "PHYSICAL_INSPECTIONREMARKS")
-	private String physicalInspectionRe;
-
+	@Column(name = "INSTALLATION_TERMINATIONSYSTEM_REM")
+	private String installationTerminationsystemRem;
+	
 	@Column(name = "SUPPORT_FLATSURFACEOBSERVATION")
 	private String supportFlatSurfaceOb;
 

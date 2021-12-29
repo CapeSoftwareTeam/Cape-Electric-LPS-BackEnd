@@ -39,7 +39,7 @@ public class SeperationDistanceController {
 	@PostMapping("/addSeperationDistance")
 	public ResponseEntity<String> addSeperationDistance(@RequestBody  SeperationDistanceDescription seperationDistanceDesc)
 			throws SeperationDistanceException {
-		logger.info("called addSeperationDistance function UserName : {}, SiteId : {}",
+		logger.info("called addSeperationDistance function UserName : {}, BasicLpsId : {}",
 				seperationDistanceDesc.getUserName(), seperationDistanceDesc.getBasicLpsId());
 		seperationDistanceService.addSeperationDistance(seperationDistanceDesc);
 		return new ResponseEntity<String>("Seperation Distance Details Sucessfully Saved",
