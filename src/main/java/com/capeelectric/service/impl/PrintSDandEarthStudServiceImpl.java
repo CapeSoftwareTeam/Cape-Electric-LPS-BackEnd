@@ -243,10 +243,42 @@ public class PrintSDandEarthStudServiceImpl implements PrintSDandEarthStudServic
 				cell400.setColspan(3);
 				table.addCell(cell400);
 				document.add(table);
+
+				PdfPTable table1 = new PdfPTable(pointColumnWidths30);
+				table1.setWidthPercentage(100); // Width 100%
+				// table1.setSpacingBefore(10f); // Space before table
+				table1.setWidthPercentage(100);
+
+				int i = 2;
 				for (SeparateDistance separateDistance3 : separateDistance2) {
-					PdfPTable table1 = separateDistanceIter(pointColumnWidths30, separateDistance3);
-					document.add(table1);
+					Font font111 = new Font(BaseFont.createFont(), 10, Font.NORMAL, BaseColor.BLACK);
+
+					PdfPCell cell35 = new PdfPCell(new Paragraph(""+i,font111));
+					cell35.setHorizontalAlignment(Element.ALIGN_CENTER);
+					cell35.setGrayFill(0.92f);
+					table1.addCell(cell35);
+
+					PdfPCell cell36 = new PdfPCell(
+							new Paragraph(separateDistance3.getSeperationDistanceDesc(), font111));
+					cell36.setHorizontalAlignment(Element.ALIGN_LEFT);
+					cell36.setFixedHeight(20f);
+					cell36.setGrayFill(0.92f);
+					table1.addCell(cell36);
+
+					PdfPCell cell37 = new PdfPCell(new Paragraph(separateDistance3.getSeperationDistanceOb(), font111));
+					cell37.setHorizontalAlignment(Element.ALIGN_LEFT);
+					cell37.setFixedHeight(20f);
+					// cell37.setGrayFill(0.92f);
+					table1.addCell(cell37);
+
+					PdfPCell cell38 = new PdfPCell(
+							new Paragraph(separateDistance3.getSeperationDistanceRem(), font111));
+					// cell38.setGrayFill(0.92f);
+					cell38.setHorizontalAlignment(Element.ALIGN_LEFT);
+					table1.addCell(cell38);
+					++i;
 				}
+				document.add(table1);
 				document.newPage();
 
 				PdfPTable headertable1 = new PdfPTable(pointColumnWidths40);
@@ -530,39 +562,6 @@ public class PrintSDandEarthStudServiceImpl implements PrintSDandEarthStudServic
 			throw new EarthStudException("Invalid Inputs");
 		}
 
-	}
-
-	private PdfPTable separateDistanceIter(float[] pointColumnWidths30, SeparateDistance separateDistance3)
-			throws DocumentException, IOException {
-		Font font1 = new Font(BaseFont.createFont(), 10, Font.NORMAL, BaseColor.BLACK);
-
-		PdfPTable table1 = new PdfPTable(pointColumnWidths30);
-		table1.setWidthPercentage(100); // Width 100%
-		// table1.setSpacingBefore(10f); // Space before table
-		table1.setWidthPercentage(100);
-
-		PdfPCell cell35 = new PdfPCell(new Paragraph("", font1));
-		cell35.setHorizontalAlignment(Element.ALIGN_CENTER);
-		cell35.setGrayFill(0.92f);
-		table1.addCell(cell35);
-
-		PdfPCell cell36 = new PdfPCell(new Paragraph(separateDistance3.getSeperationDistanceDesc(), font1));
-		cell36.setHorizontalAlignment(Element.ALIGN_LEFT);
-//		cell36.setFixedHeight(20f);
-		cell36.setGrayFill(0.92f);
-		table1.addCell(cell36);
-
-		PdfPCell cell37 = new PdfPCell(new Paragraph(separateDistance3.getSeperationDistanceOb(), font1));
-		cell37.setHorizontalAlignment(Element.ALIGN_LEFT);
-//		cell37.setFixedHeight(20f);
-		// cell37.setGrayFill(0.92f);
-		table1.addCell(cell37);
-
-		PdfPCell cell38 = new PdfPCell(new Paragraph(separateDistance3.getSeperationDistanceRem(), font1));
-		// cell38.setGrayFill(0.92f);
-		cell38.setHorizontalAlignment(Element.ALIGN_LEFT);
-		table1.addCell(cell38);
-		return table1;
 	}
 
 }
