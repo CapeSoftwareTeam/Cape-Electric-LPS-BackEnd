@@ -31,12 +31,6 @@ public class EarthingDescription implements Serializable {
 	@Column(name = "SOIL_RESISTIVITYINOB")
 	private String soilResistivityInOb;
 
-	@Column(name = "LOCATION_NUMBER")
-	private Integer locationNumber;
-
-	@Column(name = "LOCATION_NAME")
-	private String locationName;
-
 	@Column(name = "SOIL_RESISTIVITYINREM")
 	private String soilResistivityInRem;
 
@@ -149,22 +143,6 @@ public class EarthingDescription implements Serializable {
 
 	public Integer getEarthDescriptionId() {
 		return earthDescriptionId;
-	}
-
-	public Integer getLocationNumber() {
-		return locationNumber;
-	}
-
-	public void setLocationNumber(Integer locationNumber) {
-		this.locationNumber = locationNumber;
-	}
-
-	public String getLocationName() {
-		return locationName;
-	}
-
-	public void setLocationName(String locationName) {
-		this.locationName = locationName;
 	}
 
 	public void setEarthDescriptionId(Integer earthDescriptionId) {

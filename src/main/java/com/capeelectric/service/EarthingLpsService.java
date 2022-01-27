@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.capeelectric.exception.EarthingLpsException;
 import com.capeelectric.model.EarthingLpsDescription;
+import com.capeelectric.model.EarthingReport;
 
 
 
@@ -16,12 +17,12 @@ import com.capeelectric.model.EarthingLpsDescription;
  */
 public interface EarthingLpsService {
 	
-	public void addEarthingLpsDetails(EarthingLpsDescription earthingLpsDescription)
+	public void addEarthingLpsDetails(EarthingReport earthingReport)
 			throws EarthingLpsException;
 
-	public List<EarthingLpsDescription> retrieveEarthingLpsDetails(String userName, Integer basicLpsId)
+	public List<EarthingReport> retrieveEarthingLpsDetails(String userName, Integer basicLpsId)
 			throws EarthingLpsException;
 	
-	public void updateEarthingLpsDetails(EarthingLpsDescription earthingLpsDesc) throws EarthingLpsException;
+	public void updateEarthingLpsDetails(EarthingReport earthingReport) throws EarthingLpsException;
 
 }

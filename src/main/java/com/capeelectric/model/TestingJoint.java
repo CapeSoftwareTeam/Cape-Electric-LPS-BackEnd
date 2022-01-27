@@ -27,12 +27,6 @@ public class TestingJoint implements Serializable {
 
 	@Column(name = "FLAG")
 	private Boolean flag;
-	
-	@Column(name = "LOCATION_NUMBER")
-	private Integer locationNumber;
-
-	@Column(name = "LOCATION_NAME")
-	private String locationName;
 
 	@Column(name = "TESTJOINT_TYPE_OB")
 	private String testJointTypeOb;
@@ -101,22 +95,6 @@ public class TestingJoint implements Serializable {
 
 	public Integer getTestJointId() {
 		return testJointId;
-	}
-
-	public Integer getLocationNumber() {
-		return locationNumber;
-	}
-
-	public void setLocationNumber(Integer locationNumber) {
-		this.locationNumber = locationNumber;
-	}
-
-	public String getLocationName() {
-		return locationName;
-	}
-
-	public void setLocationName(String locationName) {
-		this.locationName = locationName;
 	}
 
 	public void setTestJointId(Integer testJointId) {

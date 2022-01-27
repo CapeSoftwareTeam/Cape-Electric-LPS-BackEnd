@@ -13,11 +13,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.capeelectric.exception.DownConductorException;
+import com.capeelectric.model.AirTermination;
 import com.capeelectric.model.BasicLps;
 import com.capeelectric.model.DownConductorDescription;
+import com.capeelectric.model.DownConductorReport;
 import com.capeelectric.repository.BasicLpsRepository;
 import com.capeelectric.repository.DownConductorRepository;
 import com.capeelectric.service.DownConductorService;
+import com.capeelectric.util.FindNonRemovedObjects;
 import com.capeelectric.util.UserFullName;
 
 /**
@@ -42,25 +45,33 @@ public class DownConductorServiceImpl implements DownConductorService{
 	@Autowired
 	private UserFullName userFullName;
 	
+	@Autowired
+	private FindNonRemovedObjects findNonRemovedObjects;
+	
 	@Override
-	public void addDownConductorsDetails(DownConductorDescription downConductorDesc)
+	public void addDownConductorsDetails(DownConductorReport downConductorReport)
 			throws  DownConductorException{
-		if (downConductorDesc != null && downConductorDesc.getUserName() != null
-				&& !downConductorDesc.getUserName().isEmpty() && downConductorDesc.getBasicLpsId() != null
-				&& downConductorDesc.getBasicLpsId() != 0) {
-			Optional<BasicLps> basicLpsRepo = basicLpsRepository.findByBasicLpsId(downConductorDesc.getBasicLpsId());
+		if (downConductorReport != null && downConductorReport.getUserName() != null
+				&& !downConductorReport.getUserName().isEmpty() && downConductorReport.getBasicLpsId() != null
+				&& downConductorReport.getBasicLpsId() != 0) {
+			Optional<BasicLps> basicLpsRepo = basicLpsRepository.findByBasicLpsId(downConductorReport.getBasicLpsId());
 			if(basicLpsRepo.isPresent()
-					&& basicLpsRepo.get().getBasicLpsId().equals(downConductorDesc.getBasicLpsId())) {
-				Optional<DownConductorDescription> downConductorRepo = downConductorRepository
-						.findByBasicLpsId(downConductorDesc.getBasicLpsId());
+					&& basicLpsRepo.get().getBasicLpsId().equals(downConductorReport.getBasicLpsId())) {
+				Optional<DownConductorReport> downConductorRepo = downConductorRepository
+						.findByBasicLpsId(downConductorReport.getBasicLpsId());
 				if (!downConductorRepo.isPresent()
-						|| !downConductorRepo.get().getBasicLpsId().equals(downConductorDesc.getBasicLpsId())) {
+						|| !downConductorRepo.get().getBasicLpsId().equals(downConductorReport.getBasicLpsId())) {
 					
-					downConductorDesc.setCreatedDate(LocalDateTime.now());
-					downConductorDesc.setUpdatedDate(LocalDateTime.now());
-					downConductorDesc.setCreatedBy(userFullName.findByUserName(downConductorDesc.getUserName()));
-					downConductorDesc.setUpdatedBy(userFullName.findByUserName(downConductorDesc.getUserName()));
-					downConductorRepository.save(downConductorDesc);
+					List<DownConductorDescription> downConductorDescription = downConductorReport.getDownConductorDescription();
+					if(downConductorDescription != null && downConductorDescription.size() > 0) {
+						downConductorReport.setCreatedDate(LocalDateTime.now());
+						downConductorReport.setUpdatedDate(LocalDateTime.now());
+						downConductorReport.setCreatedBy(userFullName.findByUserName(downConductorReport.getUserName()));
+						downConductorReport.setUpdatedBy(userFullName.findByUserName(downConductorReport.getUserName()));
+						downConductorRepository.save(downConductorReport);
+					} else {
+						throw new DownConductorException("Please fill all the fields before clicking next button");
+					}
 				} else {
 					throw new DownConductorException("Basic LPS Id Already Available.Create New Basic Id");
 				}
@@ -76,12 +87,15 @@ public class DownConductorServiceImpl implements DownConductorService{
 	}
 	
 	@Override
-	public List<DownConductorDescription> retrieveDownConductorDetails(String userName, Integer basicLpsId)
+	public List<DownConductorReport> retrieveDownConductorDetails(String userName, Integer basicLpsId)
 			throws DownConductorException {
 		if (userName != null) {
-			List<DownConductorDescription> downConductorRepo = downConductorRepository.findByUserNameAndBasicLpsId(userName,
+			List<DownConductorReport> downConductorRepo = downConductorRepository.findByUserNameAndBasicLpsId(userName,
 					basicLpsId);
-			if (downConductorRepo != null && !downConductorRepo.isEmpty()) {				
+			if (downConductorRepo != null && !downConductorRepo.isEmpty()) {	
+				for(DownConductorReport downConductorReportItr : downConductorRepo) {
+					downConductorReportItr.setDownConductorDescription(findNonRemovedObjects.findNonRemovedDownConductorsBuildings(downConductorReportItr));
+				}
 				return downConductorRepo;
 			} else {
 				throw new DownConductorException("Given UserName & Id doesn't exist in Down Conductor Details");
@@ -92,18 +106,18 @@ public class DownConductorServiceImpl implements DownConductorService{
 	}
 	
 	@Override
-	public void updateDownConductorDetails(DownConductorDescription downConductorDesc) throws DownConductorException {
+	public void updateDownConductorDetails(DownConductorReport downConductorReport) throws DownConductorException {
 
-		if (downConductorDesc != null && downConductorDesc.getDownConduDescId() != null
-				&& downConductorDesc.getDownConduDescId() != 0 && downConductorDesc.getBasicLpsId() != null
-				&& downConductorDesc.getBasicLpsId() != 0) {
-			Optional<DownConductorDescription> downConductorRepo = downConductorRepository
-					.findById(downConductorDesc.getDownConduDescId());
+		if (downConductorReport != null && downConductorReport.getDownConductorReportId() != null
+				&& downConductorReport.getDownConductorReportId() != 0 && downConductorReport.getBasicLpsId() != null
+				&& downConductorReport.getBasicLpsId() != 0) {
+			Optional<DownConductorReport> downConductorRepo = downConductorRepository
+					.findById(downConductorReport.getDownConductorReportId());
 			if (downConductorRepo.isPresent()
-					&& downConductorRepo.get().getBasicLpsId().equals(downConductorDesc.getBasicLpsId())) {
-				downConductorDesc.setUpdatedDate(LocalDateTime.now());
-				downConductorDesc.setUpdatedBy(userFullName.findByUserName(downConductorDesc.getUserName()));
-				downConductorRepository.save(downConductorDesc);
+					&& downConductorRepo.get().getBasicLpsId().equals(downConductorReport.getBasicLpsId())) {
+				downConductorReport.setUpdatedDate(LocalDateTime.now());
+				downConductorReport.setUpdatedBy(userFullName.findByUserName(downConductorReport.getUserName()));
+				downConductorRepository.save(downConductorReport);
 			} else {
 				throw new DownConductorException("Given Basic LPS Id and Down Conductor Id is Invalid");
 			}

@@ -27,12 +27,6 @@ public class BridgingDescription implements Serializable {
 	
 	@Column(name = "FLAG")
 	private Boolean flag;
-	
-	@Column(name = "LOCATION_NUMBER")
-	private Integer locationNumber;
-
-	@Column(name = "LOCATION_NAME")
-	private String locationName;
 
 	@Column(name = "ENSURE_BRIDGINGCABLE_OB")
 	private String ensureBridgingCableOb;
@@ -83,22 +77,6 @@ public class BridgingDescription implements Serializable {
 
 	public Integer getBridgingDescriptionId() {
 		return bridgingDescriptionId;
-	}
-
-	public Integer getLocationNumber() {
-		return locationNumber;
-	}
-
-	public void setLocationNumber(Integer locationNumber) {
-		this.locationNumber = locationNumber;
-	}
- 
-	public String getLocationName() {
-		return locationName;
-	}
-
-	public void setLocationName(String locationName) {
-		this.locationName = locationName;
 	}
 
 	public void setBridgingDescriptionId(Integer bridgingDescriptionId) {

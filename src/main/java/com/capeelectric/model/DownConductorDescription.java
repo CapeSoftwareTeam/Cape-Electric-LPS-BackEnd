@@ -14,9 +14,12 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 /**
@@ -35,11 +38,17 @@ private static final long serialVersionUID = 1L;
 	@Column(name = "DOWNCONDUCTORDESCRIPTION_ID")
 	private Integer downConduDescId;
 	
-	@Column(name = "BASIC_LPS_ID")
-	private Integer basicLpsId;
+	@Column(name = "BUILDING_NAME")
+	private String buildingName;
 	
-	@Column(name = "USER_NAME")
-	private String userName;
+	@Column(name = "BUILDING_NUMBER")
+	private Integer buildingNumber;
+	
+	@Column(name = "BUILDING_COUNT")
+	private Integer buildingCount;
+	
+	@Column(name = "FLAG")
+	private String flag;
 	
 	@Column(name = "BI_METALLICISSUE_OB")
 	private String biMetallicIssueOb;
@@ -78,18 +87,6 @@ private static final long serialVersionUID = 1L;
 	@Column(name = "COMBUSTIBLEMATERIAL_WALL_REM")
 	private String cobustMaterialWallRem;
 	
-	@Column(name = "CREATED_DATE")
-	private LocalDateTime createdDate;
-	
-	@Column(name = "CREATED_BY")
-	private String createdBy;
-
-	@Column(name = "UPDATED_BY")
-	private String updatedBy;
-	
-	@Column(name = "UPDATED_DATE")
-	private LocalDateTime updatedDate;
-	
 	@JsonManagedReference
 	@OneToMany(mappedBy = "downConductorDescription", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<BridgingDescription>bridgingDescription;
@@ -115,6 +112,11 @@ private static final long serialVersionUID = 1L;
 	@OneToMany(mappedBy = "downConductorDescription", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<DownConductor> downConductor;
 	
+	@JsonBackReference
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "DOWN_CONDUCTOR_REPORT_ID")
+	private DownConductorReport downConductorReport;
+	
 	
 
 	public Integer getDownConduDescId() {
@@ -123,22 +125,6 @@ private static final long serialVersionUID = 1L;
 
 	public void setDownConduDescId(Integer downConduDescId) {
 		this.downConduDescId = downConduDescId;
-	}
-
-	public Integer getBasicLpsId() {
-		return basicLpsId;
-	}
-
-	public void setBasicLpsId(Integer basicLpsId) {
-		this.basicLpsId = basicLpsId;
-	}
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
 	}
 
 	public String getBiMetallicIssueOb() {
@@ -237,38 +223,6 @@ private static final long serialVersionUID = 1L;
 		this.cobustMaterialWallRem = cobustMaterialWallRem;
 	}
 
-	public LocalDateTime getCreatedDate() {
-		return createdDate;
-	}
-
-	public void setCreatedDate(LocalDateTime createdDate) {
-		this.createdDate = createdDate;
-	}
-
-	public String getCreatedBy() {
-		return createdBy;
-	}
-
-	public void setCreatedBy(String createdBy) {
-		this.createdBy = createdBy;
-	}
-
-	public String getUpdatedBy() {
-		return updatedBy;
-	}
-
-	public void setUpdatedBy(String updatedBy) {
-		this.updatedBy = updatedBy;
-	}
-
-	public LocalDateTime getUpdatedDate() {
-		return updatedDate;
-	}
-
-	public void setUpdatedDate(LocalDateTime updatedDate) {
-		this.updatedDate = updatedDate;
-	}
-
 	public List<BridgingDescription> getBridgingDescription() {
 		return bridgingDescription;
 	}
@@ -317,5 +271,48 @@ private static final long serialVersionUID = 1L;
 		this.downConductor = downConductor;
 	}
 
+	public String getBuildingName() {
+		return buildingName;
+	}
+
+	public void setBuildingName(String buildingName) {
+		this.buildingName = buildingName;
+	}
+
+	public Integer getBuildingNumber() {
+		return buildingNumber;
+	}
+
+	public void setBuildingNumber(Integer buildingNumber) {
+		this.buildingNumber = buildingNumber;
+	}
+
+	public Integer getBuildingCount() {
+		return buildingCount;
+	}
+
+	public void setBuildingCount(Integer buildingCount) {
+		this.buildingCount = buildingCount;
+	}
+
+	public DownConductorReport getDownConductorReport() {
+		return downConductorReport;
+	}
+
+	public void setDownConductorReport(DownConductorReport downConductorReport) {
+		this.downConductorReport = downConductorReport;
+	}
+
+	public String getFlag() {
+		return flag;
+	}
+
+	public void setFlag(String flag) {
+		this.flag = flag;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 	
 }

@@ -27,12 +27,6 @@ public class Holder implements Serializable {
 
 	@Column(name = "FLAG")
 	private Boolean flag;
-	
-	@Column(name = "LOCATION_NUMBER")
-	private Integer locationNumber;
-
-	@Column(name = "LOCATION_NAME")
-	private String locationName;
 
 	@Column(name = "PHYSICAL_INSPECTION_OB")
 	private String physicalInspectionOb;
@@ -89,22 +83,6 @@ public class Holder implements Serializable {
 
 	public Integer getHolderId() {
 		return holderId;
-	}
-
-	public Integer getLocationNumber() {
-		return locationNumber;
-	}
-
-	public void setLocationNumber(Integer locationNumber) {
-		this.locationNumber = locationNumber;
-	}
-
-	public String getLocationName() {
-		return locationName;
-	}
-
-	public void setLocationName(String locationName) {
-		this.locationName = locationName;
 	}
 
 	public void setHolderId(Integer holderId) {

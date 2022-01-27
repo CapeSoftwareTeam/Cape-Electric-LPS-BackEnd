@@ -28,12 +28,6 @@ public class LightningCounter implements Serializable {
 	@Column(name = "FLAG")
 	private Boolean flag;
 	
-	@Column(name = "LOCATION_NUMBER")
-	private Integer locationNumber;
-
-	@Column(name = "LOCATION_NAME")
-	private String locationName;
-
 	@Column(name = "THREADHOLD_CURRENT_OB")
 	private String threadHoldCurrentOb;
 
@@ -107,22 +101,6 @@ public class LightningCounter implements Serializable {
 
 	public Integer getLightingCountersId() {
 		return lightingCountersId;
-	}
-
-	public Integer getLocationNumber() {
-		return locationNumber;
-	}
-
-	public void setLocationNumber(Integer locationNumber) {
-		this.locationNumber = locationNumber;
-	}
-
-	public String getLocationName() {
-		return locationName;
-	}
-
-	public void setLocationName(String locationName) {
-		this.locationName = locationName;
 	}
 
 	public void setLightingCountersId(Integer lightingCountersId) {

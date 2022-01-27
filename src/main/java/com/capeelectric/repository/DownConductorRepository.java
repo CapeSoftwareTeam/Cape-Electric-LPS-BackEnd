@@ -9,15 +9,16 @@ import java.util.Optional;
 import org.springframework.data.repository.CrudRepository;
 
 import com.capeelectric.model.DownConductorDescription;
+import com.capeelectric.model.DownConductorReport;
 
 
 /**
  * @author CAPE-SOFTWARE
  *
  */
-public interface DownConductorRepository extends CrudRepository<DownConductorDescription, Integer>{
+public interface DownConductorRepository extends CrudRepository<DownConductorReport, Integer>{
 
-	public List<DownConductorDescription> findByUserNameAndBasicLpsId(String userName, Integer basicLpsId);
+	public List<DownConductorReport> findByUserNameAndBasicLpsId(String userName, Integer basicLpsId);
 
-	public Optional<DownConductorDescription> findByBasicLpsId(Integer basicLpsId);
+	public Optional<DownConductorReport> findByBasicLpsId(Integer basicLpsId);
 }

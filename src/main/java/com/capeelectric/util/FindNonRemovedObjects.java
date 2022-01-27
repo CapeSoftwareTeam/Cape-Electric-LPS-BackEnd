@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.context.annotation.Configuration;
 
 import com.capeelectric.model.AirTermination;
+import com.capeelectric.model.DownConductorDescription;
+import com.capeelectric.model.DownConductorReport;
 import com.capeelectric.model.LpsAirDiscription;
 
 @Configuration
@@ -25,6 +27,22 @@ public class FindNonRemovedObjects {
 			}
 		}
 		return lpsAirDiscription;
+	}
+	
+	public List<DownConductorDescription> findNonRemovedDownConductorsBuildings(DownConductorReport downConductorReport) {
+
+		ArrayList<DownConductorDescription> downConductorDescription = new ArrayList<DownConductorDescription>();
+		List<DownConductorDescription> findNonRemoveBuildings = downConductorReport.getDownConductorDescription();
+		for (DownConductorDescription  downConductorDescriptionItr: findNonRemoveBuildings) {
+			if (downConductorDescriptionItr.getFlag()==null || !downConductorDescriptionItr.getFlag().equalsIgnoreCase("R")) {
+				if(downConductorDescriptionItr.getFlag()==null) {
+					downConductorDescriptionItr.setFlag("N");
+				}
+				downConductorDescription.add(downConductorDescriptionItr);
+				 
+			}
+		}
+		return downConductorDescription;
 	}
 
 }
