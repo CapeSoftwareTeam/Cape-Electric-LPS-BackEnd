@@ -69,16 +69,10 @@ public class AirMeshDescription implements Serializable {
 	@Column(name = "HEIGHT_OFCONDUCTOR_FLATSURAFACEREMARKS")
 	private String heightOfConductorFlatSurfaceRe;
 
-	@Column(name = "LOCATION_NUMBER")
-	private Integer locationNumber;
-
-	@Column(name = "LOCATION_NAME")
-	private String locationName;
-
 	@JsonBackReference
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "LPSAIRDESCRIPTION_ID")
-	private LpsAirDiscription lpsAirDes;
+	private LpsAirDiscription lpsAirDescription;
 
 	public Integer getMeshDescriptionId() {
 		return meshDescriptionId;
@@ -114,22 +108,6 @@ public class AirMeshDescription implements Serializable {
 
 	public void setMaterailOfConductorRem(String materailOfConductorRem) {
 		this.materailOfConductorRem = materailOfConductorRem;
-	}
-
-	public Integer getLocationNumber() {
-		return locationNumber;
-	}
-
-	public void setLocationNumber(Integer locationNumber) {
-		this.locationNumber = locationNumber;
-	}
-
-	public String getLocationName() {
-		return locationName;
-	}
-
-	public void setLocationName(String locationName) {
-		this.locationName = locationName;
 	}
 
 	public void setMeshDescriptionId(Integer meshDescriptionId) {
@@ -216,12 +194,14 @@ public class AirMeshDescription implements Serializable {
 		this.heightOfConductorFlatSurfaceRe = heightOfConductorFlatSurfaceRe;
 	}
 
-	public LpsAirDiscription getLpsAirDes() {
-		return lpsAirDes;
+	
+
+	public LpsAirDiscription getLpsAirDescription() {
+		return lpsAirDescription;
 	}
 
-	public void setLpsAirDes(LpsAirDiscription lpsAirDes) {
-		this.lpsAirDes = lpsAirDes;
+	public void setLpsAirDescription(LpsAirDiscription lpsAirDescription) {
+		this.lpsAirDescription = lpsAirDescription;
 	}
 
 	public Boolean getFlag() {

@@ -81,23 +81,13 @@ public class AirClamps implements Serializable {
 	@Column(name = "INSP_FAILED_NO_REM")
 	private String inspectionFailedReRe;
 
-	@Column(name = "LOCATION_NUMBER")
-	private Integer locationNumber;
-
-	@Column(name = "LOCATION_NAME")
-	private String locationName;
-
 	@JsonBackReference
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "LPSAIRDESCRIPTION_ID")
-	private LpsAirDiscription lpsAirDes;
+	private LpsAirDiscription lpsAirDescription;
 
 	public Integer getClampsId() {
 		return clampsId;
-	}
-
-	public Integer getLocationNumber() {
-		return locationNumber;
 	}
 
 	public Boolean getFlag() {
@@ -108,17 +98,6 @@ public class AirClamps implements Serializable {
 		this.flag = flag;
 	}
 
-	public void setLocationNumber(Integer locationNumber) {
-		this.locationNumber = locationNumber;
-	}
-
-	public String getLocationName() {
-		return locationName;
-	}
-
-	public void setLocationName(String locationName) {
-		this.locationName = locationName;
-	}
 
 	public void setClampsId(Integer clampsId) {
 		this.clampsId = clampsId;
@@ -268,12 +247,13 @@ public class AirClamps implements Serializable {
 		this.inspectionFailedReRe = inspectionFailedReRe;
 	}
 
-	public LpsAirDiscription getLpsAirDes() {
-		return lpsAirDes;
+	public LpsAirDiscription getLpsAirDescription() {
+		return lpsAirDescription;
 	}
 
-	public void setLpsAirDes(LpsAirDiscription lpsAirDes) {
-		this.lpsAirDes = lpsAirDes;
+	public void setLpsAirDescription(LpsAirDiscription lpsAirDescription) {
+		this.lpsAirDescription = lpsAirDescription;
 	}
+
 
 }

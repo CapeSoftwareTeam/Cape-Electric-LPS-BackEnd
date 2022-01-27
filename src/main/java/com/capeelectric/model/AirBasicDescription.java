@@ -19,15 +19,15 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
  */
 
 @Entity
-@Table(name = "BASIC_LPS_DESCRIPTION_TABLE")
-public class BasicLpsDescription implements Serializable {
+@Table(name = "AIR_BASIC_DESCRIPTION_TABLE")
+public class AirBasicDescription implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "BASIC_LPS_DESCRIPTION_ID")
-	private Integer basicLpsDescriptionId;
+	@Column(name = "AIR_BASIC_DESCRIPTION_ID")
+	private Integer airBasicDescriptionId;
 	
 	@Column(name = "APPROVED_COPYOF_DRAWING_OBSERVATION")
 	private String approvedDrawingObserv;
@@ -83,19 +83,60 @@ public class BasicLpsDescription implements Serializable {
 	@Column(name = "REMARKS_QUALITY_OF_INSTALLATION")
 	private String installationQualityRemarks;
 	
+	@Column(name = "CONNECTION_MADE_BRAZINGOBSERVATION")
+	private String connectionMadeBraOb;
+	
+	@Column(name = "CONNECTION_MADE_BRAZINGREMARKS")
+	private String connectionMadeBraRe;
+
+	@Column(name = "ELECTRICAL_EQUIPMENT_PLACEDOBSERVATION")
+	private String electricalEquipPlacedOb;
+
+	@Column(name = "ELECTRICAL_EQUIPMENT_PLACEDREMARKS")
+	private String electricalEquipPlacedRe;
+	
+	@Column(name = "COMBUSTABLE_PARTOBSERVATION")
+	private String combustablePartOb;
+
+	@Column(name = "COMBUSTABLE_PARTREMARKS")
+	private String combustablePartRe;
+	
+	@Column(name = "TERMINATION_MESH_CONDUCTOROBSERVATION")
+	private String terminationMeshConductorOb;
+
+
+	@Column(name = "TERMINATION_MESH_CONDUCTORREMARKS")
+	private String terminationMeshConductorRe;
+	
+	@Column(name = "BONDING_EQUIPOTENTIALOBSERVATION")
+	private String bondingEquipotentialOb;
+
+
+	@Column(name = "BONDING_EQUIPOTENTIALREMARKS")
+	private String bondingEquipotentialRe;
+
+		
 	@JsonBackReference
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "BASIC_LPS_ID")
-	private BasicLps basicLps;
+	@JoinColumn(name = "LPSAIRDESCRIPTION_ID")
+	private LpsAirDiscription lpsAirDescription;
 
-	
-	
-	public Integer getBasicLpsDescriptionId() {
-		return basicLpsDescriptionId;
+
+	public Integer getAirBasicDescriptionId() {
+		return airBasicDescriptionId;
 	}
 
-	public void setBasicLpsDescriptionId(Integer basicLpsDescriptionId) {
-		this.basicLpsDescriptionId = basicLpsDescriptionId;
+	public void setAirBasicDescriptionId(Integer airBasicDescriptionId) {
+		this.airBasicDescriptionId = airBasicDescriptionId;
+	}
+
+
+	public LpsAirDiscription getLpsAirDescription() {
+		return lpsAirDescription;
+	}
+
+	public void setLpsAirDescription(LpsAirDiscription lpsAirDescription) {
+		this.lpsAirDescription = lpsAirDescription;
 	}
 
 	public String getApprovedDrawingObserv() {
@@ -242,13 +283,84 @@ public class BasicLpsDescription implements Serializable {
 		this.installationQualityRemarks = installationQualityRemarks;
 	}
 
-	public BasicLps getBasicLps() {
-		return basicLps;
+	public String getConnectionMadeBraOb() {
+		return connectionMadeBraOb;
 	}
 
-	public void setBasicLps(BasicLps basicLps) {
-		this.basicLps = basicLps;
+	public void setConnectionMadeBraOb(String connectionMadeBraOb) {
+		this.connectionMadeBraOb = connectionMadeBraOb;
 	}
-	
-	
+
+	public String getConnectionMadeBraRe() {
+		return connectionMadeBraRe;
+	}
+
+	public void setConnectionMadeBraRe(String connectionMadeBraRe) {
+		this.connectionMadeBraRe = connectionMadeBraRe;
+	}
+
+	public String getElectricalEquipPlacedOb() {
+		return electricalEquipPlacedOb;
+	}
+
+	public void setElectricalEquipPlacedOb(String electricalEquipPlacedOb) {
+		this.electricalEquipPlacedOb = electricalEquipPlacedOb;
+	}
+
+	public String getElectricalEquipPlacedRe() {
+		return electricalEquipPlacedRe;
+	}
+
+	public void setElectricalEquipPlacedRe(String electricalEquipPlacedRe) {
+		this.electricalEquipPlacedRe = electricalEquipPlacedRe;
+	}
+
+	public String getCombustablePartOb() {
+		return combustablePartOb;
+	}
+
+	public void setCombustablePartOb(String combustablePartOb) {
+		this.combustablePartOb = combustablePartOb;
+	}
+
+	public String getCombustablePartRe() {
+		return combustablePartRe;
+	}
+
+	public void setCombustablePartRe(String combustablePartRe) {
+		this.combustablePartRe = combustablePartRe;
+	}
+
+	public String getTerminationMeshConductorOb() {
+		return terminationMeshConductorOb;
+	}
+
+	public void setTerminationMeshConductorOb(String terminationMeshConductorOb) {
+		this.terminationMeshConductorOb = terminationMeshConductorOb;
+	}
+
+	public String getTerminationMeshConductorRe() {
+		return terminationMeshConductorRe;
+	}
+
+	public void setTerminationMeshConductorRe(String terminationMeshConductorRe) {
+		this.terminationMeshConductorRe = terminationMeshConductorRe;
+	}
+
+	public String getBondingEquipotentialOb() {
+		return bondingEquipotentialOb;
+	}
+
+	public void setBondingEquipotentialOb(String bondingEquipotentialOb) {
+		this.bondingEquipotentialOb = bondingEquipotentialOb;
+	}
+
+	public String getBondingEquipotentialRe() {
+		return bondingEquipotentialRe;
+	}
+
+	public void setBondingEquipotentialRe(String bondingEquipotentialRe) {
+		this.bondingEquipotentialRe = bondingEquipotentialRe;
+	}
+
 }

@@ -75,8 +75,7 @@ public class BasicLpsServiceImpl implements BasicLpsService {
 	@Override
 	public void updateBasicLpsDetails(BasicLps basicLps) throws BasicLpsException {
 
-		if (basicLps != null && basicLps.getBasicLpsId() != null && basicLps.getBasicLpsId() != 0
-				&& basicLps.getBasicLpsDescription() != null) {
+		if (basicLps != null && basicLps.getBasicLpsId() != null && basicLps.getBasicLpsId() != 0) {
 			Optional<BasicLps> basicLpsRepo = basicLpsRepository
 					.findByBasicLpsId(basicLps.getBasicLpsId());
 			if (basicLpsRepo.isPresent()

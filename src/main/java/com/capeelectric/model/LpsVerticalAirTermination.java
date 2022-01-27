@@ -27,12 +27,6 @@ public class LpsVerticalAirTermination implements Serializable {
 
 	@Column(name = "FLAG")
 	private Boolean flag;
-	
-	@Column(name = "LOCATION_NUMBER")
-	private Integer locationNumber;
-
-	@Column(name = "LOCATION_NAME")
-	private String locationName;
 
 	@Column(name = "PHYSICAL_INSPECTIONOBSERVATION")
 	private String physicalInspectionOb;
@@ -115,7 +109,7 @@ public class LpsVerticalAirTermination implements Serializable {
 	@JsonBackReference
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "LPSAIRDESCRIPTION_ID")
-	private LpsAirDiscription lpsAirDes;
+	private LpsAirDiscription lpsAirDescription;
 
 	public Integer getLpsVerticalAirTerminationId() {
 		return lpsVerticalAirTerminationId;
@@ -145,21 +139,6 @@ public class LpsVerticalAirTermination implements Serializable {
 		this.installationTerminationsystemRem = installationTerminationsystemRem;
 	}
 
-	public Integer getLocationNumber() {
-		return locationNumber;
-	}
-
-	public void setLocationNumber(Integer locationNumber) {
-		this.locationNumber = locationNumber;
-	}
-
-	public String getLocationName() {
-		return locationName;
-	}
-
-	public void setLocationName(String locationName) {
-		this.locationName = locationName;
-	}
 
 	public void setLpsVerticalAirTerminationId(Integer lpsVerticalAirTerminationId) {
 		this.lpsVerticalAirTerminationId = lpsVerticalAirTerminationId;
@@ -357,12 +336,14 @@ public class LpsVerticalAirTermination implements Serializable {
 		this.inspFaileddNoRe = inspFaileddNoRe;
 	}
 
-	public LpsAirDiscription getLpsAirDes() {
-		return lpsAirDes;
+	public LpsAirDiscription getLpsAirDescription() {
+		return lpsAirDescription;
 	}
 
-	public void setLpsAirDes(LpsAirDiscription lpsAirDes) {
-		this.lpsAirDes = lpsAirDes;
+	public void setLpsAirDescription(LpsAirDiscription lpsAirDescription) {
+		this.lpsAirDescription = lpsAirDescription;
 	}
+
+	
 
 }

@@ -3,16 +3,21 @@ package com.capeelectric.service.impl;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.capeelectric.exception.AirTerminationException;
+import com.capeelectric.model.AirTermination;
 import com.capeelectric.model.BasicLps;
 import com.capeelectric.model.LpsAirDiscription;
 import com.capeelectric.repository.AirTerminationLpsRepository;
 import com.capeelectric.repository.BasicLpsRepository;
 import com.capeelectric.service.AirTerminationLpsService;
+import com.capeelectric.util.FindNonRemovedObjects;
 import com.capeelectric.util.UserFullName;
 
 /**
@@ -25,6 +30,8 @@ import com.capeelectric.util.UserFullName;
 
 @Service
 public class AirTerminationLpsServiceImpl implements AirTerminationLpsService {
+	
+	private static final Logger logger = LoggerFactory.getLogger(AirTerminationLpsServiceImpl.class);
 
 	@Autowired
 	private AirTerminationLpsRepository airTerminationLpsRepository;
@@ -34,65 +41,88 @@ public class AirTerminationLpsServiceImpl implements AirTerminationLpsService {
 
 	@Autowired
 	private UserFullName userFullName;
+	
+	@Autowired
+	private FindNonRemovedObjects findNonRemovedObjects;
 
 	@Override
-	public void addAirTerminationLpsDetails(LpsAirDiscription lpsAirDescription) throws AirTerminationException {
-		if (lpsAirDescription != null && lpsAirDescription.getUserName() != null && lpsAirDescription.getUserName() != "") {
-			Optional<BasicLps> basicLpsRepo = basicLpsRepository.findByBasicLpsId(lpsAirDescription.getBasicLpsId());
+	public void addAirTerminationLpsDetails(AirTermination airTermination ) throws AirTerminationException {
+		if (airTermination != null && airTermination.getUserName() != null && airTermination.getUserName() != "") {
+			Optional<BasicLps> basicLpsRepo = basicLpsRepository.findByBasicLpsId(airTermination.getBasicLpsId());
 			if(basicLpsRepo.isPresent()
-					&& basicLpsRepo.get().getBasicLpsId().equals(lpsAirDescription.getBasicLpsId())) {
-				Optional<LpsAirDiscription> airTerminationLpsRepo = airTerminationLpsRepository.findByBasicLpsId(lpsAirDescription.getBasicLpsId());
-				if(!airTerminationLpsRepo.isPresent() || !airTerminationLpsRepo.get().getBasicLpsId().equals(lpsAirDescription.getBasicLpsId())) {
-					lpsAirDescription.setCreatedDate(LocalDateTime.now());
-					lpsAirDescription.setUpdatedDate(LocalDateTime.now());
-					lpsAirDescription.setCreatedBy(userFullName.findByUserName(lpsAirDescription.getUserName()));
-					lpsAirDescription.setUpdatedBy(userFullName.findByUserName(lpsAirDescription.getUserName()));
-					airTerminationLpsRepository.save(lpsAirDescription);
+					&& basicLpsRepo.get().getBasicLpsId().equals(airTermination.getBasicLpsId())) {
+				List<LpsAirDiscription> lpsAirDiscription = airTermination.getLpsAirDescription();
+				Optional<AirTermination> airTerminationLpsRepo = airTerminationLpsRepository.findByBasicLpsId(airTermination.getBasicLpsId());
+				if(!airTerminationLpsRepo.isPresent() || !airTerminationLpsRepo.get().getBasicLpsId().equals(airTermination.getBasicLpsId())) {
+					if(lpsAirDiscription != null && lpsAirDiscription.size() > 0) {
+						for(LpsAirDiscription lpsAirDiscriptionItr : lpsAirDiscription) {
+							lpsAirDiscriptionItr.setBuildingCount(new Random().nextInt(999999999));
+						}
+					}
+					airTermination.setCreatedDate(LocalDateTime.now());
+					airTermination.setUpdatedDate(LocalDateTime.now());
+					airTermination.setCreatedBy(userFullName.findByUserName(airTermination.getUserName()));
+					airTermination.setUpdatedBy(userFullName.findByUserName(airTermination.getUserName()));
+					try {
+						airTerminationLpsRepository.save(airTermination);
+						logger.debug("Air Termination Successfully Saved in DB");
+					}catch(Exception e) {
+						logger.error("Not able to save Air Termination data "+e.getMessage());
+						throw new AirTerminationException("Not able to save Air Termination data "+e.getMessage());
+					}
 				}
 				else {
+					logger.error("Given Basic LPS Id is already Available in Air Termination");
 					throw new AirTerminationException("Given Basic LPS Id is already Available in Air Termination");
 				}
 			}
 			else {
+				logger.error("Given Basic LPS Id is Not Registered in Basic LPS");
 				throw new AirTerminationException("Given Basic LPS Id is Not Registered in Basic LPS");
 			}
 		}
 		 else {
+			logger.error("Invalid Inputs");
 			throw new AirTerminationException("Invalid Inputs");
 		}
 
 	}
 
 	@Override
-	public List<LpsAirDiscription> retrieveAirTerminationLps(String userName, Integer basicLpsId)
+	public List<AirTermination> retrieveAirTerminationLps(String userName, Integer basicLpsId)
 			throws AirTerminationException {
 		if (userName != null && basicLpsId != null) {
-			List<LpsAirDiscription> airTerminationLpsRepo = airTerminationLpsRepository
+			List<AirTermination> airTerminationLpsRepo = airTerminationLpsRepository
 					.findByUserNameAndBasicLpsId(userName, basicLpsId);
 			if (airTerminationLpsRepo != null && !airTerminationLpsRepo.isEmpty()) {
+				for(AirTermination airTerminationRepo : airTerminationLpsRepo) {
+					airTerminationRepo.setLpsAirDescription(findNonRemovedObjects.findNonRemovedAirTerminationBuildings(airTerminationRepo));
+				}
 				return airTerminationLpsRepo;
 			} else {
+				logger.error("Given UserName & Id doesn't exist in Air Termination LPS Details");
 				throw new AirTerminationException("Given UserName & Id doesn't exist in Air Termination LPS Details");
 			}
 		} else {
+			logger.error("Invalid Inputs");
 			throw new AirTerminationException("Invalid Inputs");
 		}
 
 	}
 
 	@Override
-	public void updateAirTerminationLps(LpsAirDiscription lpsAirDescription) throws AirTerminationException {
+	public void updateAirTerminationLps(AirTermination airTermination) throws AirTerminationException {
 
-		if (lpsAirDescription != null && lpsAirDescription.getLpsAirDescId() != null
-				&& lpsAirDescription.getLpsAirDescId() != 0 && lpsAirDescription.getBasicLpsId() != null
-				&& lpsAirDescription.getBasicLpsId() != 0) {
-			Optional<LpsAirDiscription> airTerminationLpsRepo = airTerminationLpsRepository
-					.findById(lpsAirDescription.getLpsAirDescId());
+		if (airTermination != null && airTermination.getAirTerminationId() != null
+				&& airTermination.getAirTerminationId() != 0 && airTermination.getBasicLpsId() != null
+				&& airTermination.getBasicLpsId() != 0) {
+			Optional<AirTermination> airTerminationLpsRepo = airTerminationLpsRepository
+					.findById(airTermination.getAirTerminationId());
 			if (airTerminationLpsRepo.isPresent()
-					&& airTerminationLpsRepo.get().getBasicLpsId().equals(lpsAirDescription.getBasicLpsId())) {
-				lpsAirDescription.setUpdatedDate(LocalDateTime.now());
-				lpsAirDescription.setUpdatedBy(userFullName.findByUserName(lpsAirDescription.getUserName()));
-			    airTerminationLpsRepository.save(lpsAirDescription);
+					&& airTerminationLpsRepo.get().getBasicLpsId().equals(airTermination.getBasicLpsId())) {
+				airTermination.setUpdatedDate(LocalDateTime.now());
+				airTermination.setUpdatedBy(userFullName.findByUserName(airTermination.getUserName()));
+			    airTerminationLpsRepository.save(airTermination);
 			} else {
 				throw new AirTerminationException("Given Basic LPS Id and LPS Air Description Id is Invalid");
 			}

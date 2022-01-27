@@ -75,21 +75,6 @@ public class BasicLps implements Serializable {
 	@Column(name = "INDUSTRY_TYPE")
 	private String industryType;
 	
-	@Column(name = "BUILDING_TYPE")
-	private String buildingType;
-	
-	@Column(name = "BUILDING_LENGTH")
-	private String buildingLength;
-	
-	@Column(name = "BUILDING_WIDTH")
-	private String buildingWidth;
-	
-	@Column(name = "BUILDING_HEIGHT")
-	private String buildingHeight;
-	
-	@Column(name = "LEVEL_OF_PROTECTION")
-	private String levelOfProtection;
-	
 	@Column(name = "SOIL_RESISTIVITY")
 	private String soilResistivity;
 	
@@ -107,19 +92,7 @@ public class BasicLps implements Serializable {
 	
 	@Column(name = "UPDATED_DATE")
 	private LocalDateTime updatedDate;
-
 	
-	@JsonManagedReference
-	@OneToMany(mappedBy = "basicLps", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private Set<BasicLpsDescription> basicLpsDescription;
-	
-	public String getLevelOfProtection() {
-		return levelOfProtection;
-	}
-
-	public void setLevelOfProtection(String levelOfProtection) {
-		this.levelOfProtection = levelOfProtection;
-	}
 
 	public String getSoilResistivity() {
 		return soilResistivity;
@@ -218,38 +191,6 @@ public class BasicLps implements Serializable {
 		this.industryType = industryType;
 	}
 
-	public String getBuildingType() {
-		return buildingType;
-	}
-
-	public void setBuildingType(String buildingType) {
-		this.buildingType = buildingType;
-	}
-
-	public String getBuildingLength() {
-		return buildingLength;
-	}
-
-	public void setBuildingLength(String buildingLength) {
-		this.buildingLength = buildingLength;
-	}
-
-	public String getBuildingWidth() {
-		return buildingWidth;
-	}
-
-	public void setBuildingWidth(String buildingWidth) {
-		this.buildingWidth = buildingWidth;
-	}
-
-	public String getBuildingHeight() {
-		return buildingHeight;
-	}
-
-	public void setBuildingHeight(String buildingHeight) {
-		this.buildingHeight = buildingHeight;
-	}
-	
 	public LocalDateTime getCreatedDate() {
 		return createdDate;
 	}
@@ -288,14 +229,6 @@ public class BasicLps implements Serializable {
 
 	public void setUserName(String userName) {
 		this.userName = userName;
-	}
-
-	public Set<BasicLpsDescription> getBasicLpsDescription() {
-		return basicLpsDescription;
-	}
-
-	public void setBasicLpsDescription(Set<BasicLpsDescription> basicLpsDescription) {
-		this.basicLpsDescription = basicLpsDescription;
 	}
 
 	public String getAllStepsCompleted() {

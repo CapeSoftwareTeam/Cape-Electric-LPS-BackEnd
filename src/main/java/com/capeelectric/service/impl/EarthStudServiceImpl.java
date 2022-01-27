@@ -22,6 +22,7 @@ import com.capeelectric.exception.DownConductorException;
 import com.capeelectric.exception.EarthStudException;
 import com.capeelectric.exception.EarthingLpsException;
 import com.capeelectric.exception.SPDException;
+import com.capeelectric.model.AirTermination;
 import com.capeelectric.model.BasicLps;
 import com.capeelectric.model.DownConductorDescription;
 import com.capeelectric.model.EarthStudDescription;
@@ -121,7 +122,7 @@ public class EarthStudServiceImpl implements EarthStudService {
 				&& earthStudDescription.getBasicLpsId() != 0) {
 			Optional<BasicLps> basicLpsDetails = basicLpsRepository
 					.findByBasicLpsId(earthStudDescription.getBasicLpsId());
-			Optional<LpsAirDiscription> lpsAirDisc = airTerminationLpsRepository
+			Optional<AirTermination> lpsAirDisc = airTerminationLpsRepository
 					.findByBasicLpsId(earthStudDescription.getBasicLpsId());
 
 			Optional<DownConductorDescription> downConductorDetails = downConductorRepository
