@@ -14,7 +14,6 @@ import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
@@ -179,7 +178,7 @@ public class EarthStudServiceTest {
 				earthStudDescription.getBasicLpsId(), Optional.of(basicLps), Optional.of(seperationDistanceDescription));
 
 		printFinalPDFService.printFinalPDF(earthStudDescription.getUserName(),
-				earthStudDescription.getBasicLpsId());
+				earthStudDescription.getBasicLpsId(), basicLps.getProjectName());
 		
 		eartStudServiceImpl.addEarthStudDetails(earthStudDescription);
 		
