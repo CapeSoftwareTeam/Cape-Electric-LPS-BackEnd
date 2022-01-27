@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.capeelectric.exception.BasicLpsException;
 import com.capeelectric.model.BasicLps;
-import com.capeelectric.model.BasicLpsDescription;
+import com.capeelectric.model.AirBasicDescription;
 import com.capeelectric.repository.BasicLpsRepository;
 import com.capeelectric.service.PrintBasicLpsService;
 import com.itextpdf.text.BaseColor;
@@ -47,8 +47,8 @@ public class PrintBasicLpsServiceImpl implements PrintBasicLpsService {
 //				List<BasicLps> basicLps = basicLpsRepository.findByUserNameAndBasicLpsId(userName, lpsId);
 				BasicLps basicLps1 = basicLpsDetails.get();
 
-				Set<BasicLpsDescription> basicDesc = basicLps1.getBasicLpsDescription();
-				List<BasicLpsDescription> basicDesc1 = new ArrayList<>(basicDesc);
+				Set<AirBasicDescription> basicDesc = basicLps1.getBasicLpsDescription();
+				List<AirBasicDescription> basicDesc1 = new ArrayList<>(basicDesc);
 
 				document.open();
 
@@ -478,7 +478,7 @@ public class PrintBasicLpsServiceImpl implements PrintBasicLpsService {
 				cell33.setHorizontalAlignment(Element.ALIGN_CENTER);
 				table21.addCell(cell33);
 
-				for (BasicLpsDescription basicDesc2 : basicDesc1) {
+				for (AirBasicDescription basicDesc2 : basicDesc1) {
 					basicDescription(basicDesc2, table21);
 					document.add(table21);
 				}
@@ -495,7 +495,7 @@ public class PrintBasicLpsServiceImpl implements PrintBasicLpsService {
 		}
 	}
 
-	private void basicDescription(BasicLpsDescription basicDesc2, PdfPTable table2)
+	private void basicDescription(AirBasicDescription basicDesc2, PdfPTable table2)
 			throws DocumentException, IOException {
 
 		Font font = new Font(BaseFont.createFont(), 10, Font.NORMAL, BaseColor.BLACK);
