@@ -68,7 +68,7 @@ public class PrintFinalPDFServiceImpl implements PrintFinalPDFService {
 				inputPdfList.add(new FileInputStream("SDandEarthStud.pdf"));
 
 				
-				OutputStream outputStream = new FileOutputStream("Lpsfinalreport.pdf");
+				OutputStream outputStream = new FileOutputStream(projectName+".pdf");
 				mergePdfFiles(inputPdfList, outputStream, awsS3ServiceImpl);
 				
 				try {
@@ -82,7 +82,7 @@ public class PrintFinalPDFServiceImpl implements PrintFinalPDFService {
 
 					if (projectName.length() > 0) {
 						PutObjectRequest request = new PutObjectRequest(s3BucketName,
-								"LPS_Project Name_".concat(projectName) + "/" + projectName, new File(projectName+".pdf"));
+								"LPS_Project Name_".concat(projectName) + "/" + (projectName+".pdf"), new File(projectName+".pdf"));
 						s3Client.putObject(request);
 						
 						logger.info("Uploading file done in AWS s3 ");
