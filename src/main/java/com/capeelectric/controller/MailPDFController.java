@@ -23,13 +23,12 @@ public class MailPDFController {
 	@Autowired
 	private AWSEmailService awsEmailService;
 
-	@GetMapping("/sendPDFinMail/{userName}/{lpsId}")
-	public ResponseEntity<byte[]> sendFinalPDF(@PathVariable String userName, @PathVariable Integer lpsId)
+	@GetMapping("/sendPDFinMail/{userName}/{lpsId}/{projectName}")
+	public ResponseEntity<byte[]> sendFinalPDF(@PathVariable String userName, @PathVariable Integer lpsId, @PathVariable String projectName)
 			throws BasicLpsException, AirTerminationException, DownConductorException, SPDException,
 			EarthStudException, EarthingLpsException, Exception {
 
-		String keyname = "Lpsfinalreport.pdf";
-		awsEmailService.sendEmailPDF(userName,lpsId, lpsId, keyname);
+		awsEmailService.sendEmailPDF(userName,lpsId, lpsId, projectName);
 		
 		return new ResponseEntity<byte[]>(HttpStatus.OK);
 

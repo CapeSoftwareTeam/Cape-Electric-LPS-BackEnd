@@ -22,7 +22,6 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.AmazonS3Exception;
 import com.amazonaws.services.s3.model.PutObjectRequest;
-import com.capeelectric.repository.BasicLpsRepository;
 import com.capeelectric.service.PrintFinalPDFService;
 import com.capeelectric.util.HeaderFooterPageEvent;
 import com.itextpdf.text.Document;
@@ -39,9 +38,6 @@ public class PrintFinalPDFServiceImpl implements PrintFinalPDFService {
 
 	@Autowired
 	private AWSS3ServiceImpl awsS3ServiceImpl;
-	
-	@Autowired
-	private BasicLpsRepository basicLpsRepository;
 
 	@Value("${s3.bucket.name}")
 	private String s3BucketName;
@@ -55,7 +51,7 @@ public class PrintFinalPDFServiceImpl implements PrintFinalPDFService {
 	private static final Logger logger = LoggerFactory.getLogger(PrintFinalPDFServiceImpl.class);
 
 	@Override
-	public void printFinalPDF(String userName, Integer lpsId) throws Exception {
+	public void printFinalPDF(String userName, Integer lpsId, String projectName) throws Exception {
 
 		if (userName != null && !userName.isEmpty() && lpsId != null && lpsId != 0) {
 			Document document = new Document(PageSize.A4, 68, 68, 62, 68);
@@ -72,7 +68,7 @@ public class PrintFinalPDFServiceImpl implements PrintFinalPDFService {
 				inputPdfList.add(new FileInputStream("SDandEarthStud.pdf"));
 
 				
-				OutputStream outputStream = new FileOutputStream("Lpsfinalreport.pdf");
+				OutputStream outputStream = new FileOutputStream(projectName+".pdf");
 				mergePdfFiles(inputPdfList, outputStream, awsS3ServiceImpl);
 				
 				try {
@@ -83,17 +79,10 @@ public class PrintFinalPDFServiceImpl implements PrintFinalPDFService {
 							.withCredentials(new AWSStaticCredentialsProvider(awsCreds)).build();
 
 //					Uploading the PDF File in AWS S3 Bucket with folderName + fileNameInS3
-					String folderName = ((basicLpsRepository.findById(lpsId).isPresent()
-							&& basicLpsRepository.findById(lpsId).get() != null)
-									? basicLpsRepository.findById(lpsId).get().getProjectName()
-									: "");
 
-					String fileNameInS3 = "Lpsfinalreport.pdf";
-					String fileNameInLocalPC = "Lpsfinalreport.pdf";
-
-					if (folderName.length() > 0) {
+					if (projectName.length() > 0) {
 						PutObjectRequest request = new PutObjectRequest(s3BucketName,
-								"LPS_Project Name_".concat(folderName) + "/" + fileNameInS3, new File(fileNameInLocalPC));
+								"LPS_Project Name_".concat(projectName) + "/" + (projectName+".pdf"), new File(projectName+".pdf"));
 						s3Client.putObject(request);
 						
 						logger.info("Uploading file done in AWS s3 ");
@@ -127,10 +116,10 @@ public class PrintFinalPDFServiceImpl implements PrintFinalPDFService {
 			totalPages = totalPages + pdfReader.getNumberOfPages();
 		}
 		PdfWriter writer = PdfWriter.getInstance(document, outputStream);
-		Image image = Image.getInstance(awsS3ServiceImpl.findByName("rush-logo.png"));
-		image.scaleToFit(185, 185);
-		image.setAbsolutePosition(-3, -9);
-
+		Image image = Image.getInstance(awsS3ServiceImpl.findByName("Original1.png"));
+		image.scaleToFit(145, 155);
+		image.setAbsolutePosition(15, -41);
+		
 		HeaderFooterPageEvent event = new HeaderFooterPageEvent();
 		writer.setPageEvent((PdfPageEvent) event);
 		document.open();

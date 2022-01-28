@@ -26,14 +26,13 @@ public class FinalPDFController {
 	}
 
 
-	@GetMapping("/printFinalPDF/{userName}/{lpsId}")
+	@GetMapping("/printFinalPDF/{userName}/{lpsId}/{projectName}")
 	@ResponseBody
-	public ResponseEntity<byte[]> printFinalPDF(@PathVariable String userName, @PathVariable Integer lpsId)
+	public ResponseEntity<byte[]> printFinalPDF(@PathVariable String userName, @PathVariable Integer lpsId, @PathVariable String projectName)
 			throws Exception {
-
-		String keyname = "Lpsfinalreport.pdf";
-		ByteArrayOutputStream downloadInputStream = returnPDFService.printFinalPDF(userName, lpsId, keyname);
-
+		
+		ByteArrayOutputStream downloadInputStream = returnPDFService.printFinalPDF(userName, lpsId, projectName);
+		String keyname = projectName+".pdf";
 		return ResponseEntity.ok().contentType(contentType(keyname))
 				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + keyname + "\"")
 				.body(downloadInputStream.toByteArray());
