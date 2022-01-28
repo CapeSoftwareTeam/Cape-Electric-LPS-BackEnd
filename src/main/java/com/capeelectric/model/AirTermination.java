@@ -24,13 +24,10 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "AIR_TERMINATION_DETAILS_TABLE")
-
-
 @NamedQueries(value = {
 		@NamedQuery(name = "AirTerminationLpsRepository.findByUserNameAndBasicLpsId", query = "select s from AirTermination s where s.userName=:userName and s.basicLpsId=:basicLpsId"),
 		@NamedQuery(name = "AirTerminationLpsRepository.findByBasicLpsId", query = "select s from AirTermination s where s.basicLpsId=:basicLpsId"),
 })
-
 public class AirTermination implements Serializable {
 
 	private static final long serialVersionUID = 1L;

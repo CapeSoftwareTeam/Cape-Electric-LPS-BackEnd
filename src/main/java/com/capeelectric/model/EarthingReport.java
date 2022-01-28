@@ -17,6 +17,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.NamedQueries;
+import org.hibernate.annotations.NamedQuery;
+
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 /**
@@ -26,6 +29,10 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "EARTHING_REPORT")
+@NamedQueries(value = {
+		@NamedQuery(name = "EarthingLpsRepository.findByUserNameAndBasicLpsId", query = "select s from EarthingReport s where s.userName=:userName and s.basicLpsId=:basicLpsId"),
+		@NamedQuery(name = "EarthingLpsRepository.findByBasicLpsId", query = "select s from EarthingReport s where s.basicLpsId=:basicLpsId"),
+})
 public class EarthingReport implements Serializable  {
 	
 	private static final long serialVersionUID = 1L;

@@ -17,6 +17,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.NamedQueries;
+import org.hibernate.annotations.NamedQuery;
+
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 /**
@@ -27,6 +30,10 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "DOWN_CONDUCTOR_REPORT_TABLE")
+@NamedQueries(value = {
+		@NamedQuery(name = "DownConductorRepository.findByUserNameAndBasicLpsId", query = "select s from DownConductorReport s where s.userName=:userName and s.basicLpsId=:basicLpsId"),
+		@NamedQuery(name = "DownConductorRepository.findByBasicLpsId", query = "select s from DownConductorReport s where s.basicLpsId=:basicLpsId"),
+})
 public class DownConductorReport implements Serializable {
 
 	private static final long serialVersionUID = 1L;
