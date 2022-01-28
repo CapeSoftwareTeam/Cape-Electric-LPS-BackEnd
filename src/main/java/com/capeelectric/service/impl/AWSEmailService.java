@@ -215,19 +215,14 @@ public class AWSEmailService {
 			AmazonS3 s3Client = AmazonS3ClientBuilder.standard().withRegion(Regions.AP_SOUTH_1)
 					.withCredentials(new AWSStaticCredentialsProvider(awsCreds)).build();
 
-			
-			String folderName = ((basicLpsRepository.findById(lpsId).isPresent()
-					&& basicLpsRepository.findById(lpsId).get() != null)
-							? basicLpsRepository.findById(lpsId).get().getProjectName()
-							: "");
-
+			String filename = keyname+".pdf";
 			S3Object fullObject;
 			fullObject = s3Client.getObject(
-					new GetObjectRequest(s3BucketName, "LPS_Project Name_".concat(folderName) + "/" + keyname));
+					new GetObjectRequest(s3BucketName, "LPS_Project Name_".concat(keyname) + "/" + filename));
 
 			InputStream in = fullObject.getObjectContent();
 			byte[] buf = new byte[1024];
-			OutputStream out = new FileOutputStream("Lpsfinalreport.pdf");
+			OutputStream out = new FileOutputStream(filename);
 			while ((count = in.read(buf)) != -1) {
 				if (Thread.interrupted()) {
 					throw new InterruptedException();
@@ -236,8 +231,6 @@ public class AWSEmailService {
 			}
 			out.close();
 			in.close();
-
-			String filename = ("Lpsfinalreport.pdf");
 
 			DataSource source = new FileDataSource(filename);
 			messageBodyPart.setDataHandler(new DataHandler(source));

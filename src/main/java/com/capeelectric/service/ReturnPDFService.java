@@ -6,7 +6,6 @@ import java.io.InputStream;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +18,6 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.GetObjectRequest;
 import com.amazonaws.services.s3.model.S3Object;
-import com.capeelectric.repository.BasicLpsRepository;
 
 @Service
 public class ReturnPDFService {
@@ -35,17 +33,10 @@ public class ReturnPDFService {
 	@Value("${access.key.secret}")
 	private String accessKeySecret;
 
-	@Autowired
-	private BasicLpsRepository basicLpsRepository;
-
 	public ByteArrayOutputStream printFinalPDF(String userName, Integer lpsId, String keyName) throws Exception {
 
 		if (userName != null && !userName.isEmpty() && lpsId != null && lpsId != 0) {
 
-			String folderName = ((basicLpsRepository.findById(lpsId).isPresent()
-					&& basicLpsRepository.findById(lpsId).get() != null)
-							? basicLpsRepository.findById(lpsId).get().getProjectName()
-							: "");
 
 			try {
 				BasicAWSCredentials awsCreds = new BasicAWSCredentials(accessKeyId, accessKeySecret);
@@ -59,7 +50,7 @@ public class ReturnPDFService {
 				// Downloading the PDF File in AWS S3 Bucket with folderName + fileNameInS3
 				S3Object fullObject;
 				fullObject = s3Client.getObject(
-						new GetObjectRequest(s3BucketName, "LPS_Project Name_".concat(folderName) + "/" + keyName));
+						new GetObjectRequest(s3BucketName, "LPS_Project Name_".concat(keyName) + "/" + keyName+".pdf"));
 
 				logger.info("Downloading file done from AWS s3");
 				InputStream is = fullObject.getObjectContent();

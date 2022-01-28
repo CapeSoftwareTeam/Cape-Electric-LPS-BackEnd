@@ -329,18 +329,14 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 
 				for (SpdDescription spdDesc2 : spdDesc1) {
 
-					if (spdDesc2.getSpdDescriptionRole().equals("Mains_SPD") || spdDesc2.getSpdDescriptionRole().equals("Mains_SPD")
-							|| spdDesc2.getSpdDescriptionRole().equals("Mains_SPD")) {
-
+					if (spdDesc2.getSpdDescriptionRole().equalsIgnoreCase("Mains_SPD")) {
 						mainsIncomingItr(document, spdDesc2, font11, table, font);
 					}
 				}
 
 				for (SpdDescription spdDesc2 : spdDesc1) {
 
-					if (spdDesc2.getSpdDescriptionRole().equals("Street_SPD") || spdDesc2.getSpdDescriptionRole().equals("Street_SPD")
-							|| spdDesc2.getSpdDescriptionRole().equals("Street_SPD")) {
-
+					if (spdDesc2.getSpdDescriptionRole().equalsIgnoreCase("Street_SPD")) {
 						streetLightIter(spdDesc2, font11, table, font);
 
 					}
@@ -348,9 +344,7 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 
 				for (SpdDescription spdDesc2 : spdDesc1) {
 
-					if (spdDesc2.getSpdDescriptionRole().equals("Other_SPD") || spdDesc2.getSpdDescriptionRole().equals("Other_SPD")
-							|| spdDesc2.getSpdDescriptionRole().equals("Other_SPD")) {
-
+					if (spdDesc2.getSpdDescriptionRole().equalsIgnoreCase("Other_SPD")) {
 						pannelFeedingPowerIter(spdDesc2, font11, table, font);
 
 					}

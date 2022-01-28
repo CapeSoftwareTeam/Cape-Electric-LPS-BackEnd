@@ -212,7 +212,7 @@ public class EarthStudServiceImpl implements EarthStudService {
 					earthStudDescription.getBasicLpsId(), basicLpsDetails, separateDistanceDetails);
 
 			printFinalPDFService.printFinalPDF(earthStudDescription.getUserName(),
-					earthStudDescription.getBasicLpsId());
+					earthStudDescription.getBasicLpsId(), basicLpsDetails.get().getProjectName());
 
 		} else {
 			logger.error("Invalid Inputs");
