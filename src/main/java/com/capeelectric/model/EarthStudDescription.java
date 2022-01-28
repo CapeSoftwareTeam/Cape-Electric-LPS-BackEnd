@@ -6,12 +6,17 @@ package com.capeelectric.model;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 /**
  * @author CAPE-SOFTWARE
@@ -28,8 +33,17 @@ public class EarthStudDescription implements Serializable{
 	@Column(name = "EARTH_STUD_DESC_ID")
 	private Integer earthStudDescId;
 	
-	@Column(name = "BASIC_LPS_ID")
-	private Integer basicLpsId;
+	@Column(name = "BUILDING_NUMBER")
+	private Integer buildingNumber;
+	
+	@Column(name = "BUILDING_NAME")
+	private String buildingName;
+	
+	@Column(name = "BUILDING_COUNT")
+	private Integer buildingCount;
+	
+	@Column(name = "FLAG")
+	private String flag;
 	
 	@Column(name = "EARTH_STUDVISIBILITYOB")
 	private String earthStudVisibilityOb;
@@ -61,21 +75,10 @@ public class EarthStudDescription implements Serializable{
 	@Column(name = "CONTINUTY_EXISTAEARTHREM")
 	private String continutyExistaEarthRem;
 	
-	@Column(name = "USER_NAME")
-	private String userName;
-
-	@Column(name = "CREATED_DATE")
-	private LocalDateTime createdDate;
-	
-	@Column(name = "CREATED_BY")
-	private String createdBy;
-
-	@Column(name = "UPDATED_BY")
-	private String updatedBy;
-	
-	@Column(name = "UPDATED_DATE")
-	private LocalDateTime updatedDate;
-
+	@JsonBackReference
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "EARTH_STUD_REPORT_ID")
+	private EarthStudReport earthStudReport;
 	
 	public Integer getEarthStudDescId() {
 		return earthStudDescId;
@@ -83,10 +86,6 @@ public class EarthStudDescription implements Serializable{
 
 	public void setEarthStudDescId(Integer earthStudDescId) {
 		this.earthStudDescId = earthStudDescId;
-	}
-
-	public Integer getBasicLpsId() {
-		return basicLpsId;
 	}
 
 	public String getEarthStudVisibilityOb() {
@@ -169,49 +168,48 @@ public class EarthStudDescription implements Serializable{
 		this.continutyExistaEarthRem = continutyExistaEarthRem;
 	}
 
-	public void setBasicLpsId(Integer basicLpsId) {
-		this.basicLpsId = basicLpsId;
+	public Integer getBuildingNumber() {
+		return buildingNumber;
 	}
 
-	public String getUserName() {
-		return userName;
+	public void setBuildingNumber(Integer buildingNumber) {
+		this.buildingNumber = buildingNumber;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public String getBuildingName() {
+		return buildingName;
 	}
 
-	public LocalDateTime getCreatedDate() {
-		return createdDate;
+	public void setBuildingName(String buildingName) {
+		this.buildingName = buildingName;
 	}
 
-	public void setCreatedDate(LocalDateTime createdDate) {
-		this.createdDate = createdDate;
+	public Integer getBuildingCount() {
+		return buildingCount;
 	}
 
-	public String getCreatedBy() {
-		return createdBy;
+	public void setBuildingCount(Integer buildingCount) {
+		this.buildingCount = buildingCount;
 	}
 
-	public void setCreatedBy(String createdBy) {
-		this.createdBy = createdBy;
+	public String getFlag() {
+		return flag;
 	}
 
-	public String getUpdatedBy() {
-		return updatedBy;
+	public void setFlag(String flag) {
+		this.flag = flag;
 	}
 
-	public void setUpdatedBy(String updatedBy) {
-		this.updatedBy = updatedBy;
+	public EarthStudReport getEarthStudReport() {
+		return earthStudReport;
 	}
 
-	public LocalDateTime getUpdatedDate() {
-		return updatedDate;
+	public void setEarthStudReport(EarthStudReport earthStudReport) {
+		this.earthStudReport = earthStudReport;
 	}
 
-	public void setUpdatedDate(LocalDateTime updatedDate) {
-		this.updatedDate = updatedDate;
-	}
-	
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}	
 	
 }

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.capeelectric.exception.SPDException;
 import com.capeelectric.model.SPD;
+import com.capeelectric.model.SpdReport;
 import com.capeelectric.service.SPDService;
 
 
@@ -39,32 +40,32 @@ public class SPDController {
 	private SPDService SPDService;
 	
 	@PostMapping("/addSPDDetails")
-	public ResponseEntity<String> addSPDDetails(@RequestBody  SPD SPDDesc)
+	public ResponseEntity<String> addSPDDetails(@RequestBody  SpdReport spdReport)
 			throws SPDException {
 		logger.info("called addSPDDetails function UserName : {}, BasicLpsId : {}",
-				SPDDesc.getUserName(), SPDDesc.getBasicLpsId());
-		SPDService.addSPDDetails(SPDDesc);
+				spdReport.getUserName(), spdReport.getBasicLpsId());
+		SPDService.addSPDDetails(spdReport);
 		logger.info("Ended addSPDDetails function");
 		return new ResponseEntity<String>("SPD Details Sucessfully Saved",
 				HttpStatus.CREATED);
 	}
 
 	@GetMapping("/retrieveSPD/{userName}/{basicLpsId}")
-	public ResponseEntity<List<SPD>> retrieveSPDDetails(@PathVariable String userName,
+	public ResponseEntity<List<SpdReport>> retrieveSPDDetails(@PathVariable String userName,
 			@PathVariable Integer basicLpsId) throws SPDException {
 		logger.info("started retrieveSPDDetails function UserName : {}, BasicLpsId : {}", userName, basicLpsId);
-		return new ResponseEntity<List<SPD>>(
+		return new ResponseEntity<List<SpdReport>>(
 				SPDService.retrieveSPDDetails(userName, basicLpsId), HttpStatus.OK);
 	}
 	
 	@PutMapping("/updateSpdDetails")
-	public ResponseEntity<String> updateSpdDetails(@RequestBody SPD SPDDesc)
+	public ResponseEntity<String> updateSpdDetails(@RequestBody SpdReport spdReport)
 			throws SPDException {
-		logger.info("called updateEarthingLps function UserName : {},BasicLpsId : {},SpdId : {}",
-				SPDDesc.getUserName(), SPDDesc.getBasicLpsId(),
-				SPDDesc.getSpdId());
-		SPDService.updateSpdDetails(SPDDesc);
-		logger.info("Ended updateEarthingLps function");
+		logger.info("called updateSpdDetails function UserName : {},BasicLpsId : {},SpdReportId : {}",
+				spdReport.getUserName(), spdReport.getBasicLpsId(),
+				spdReport.getSpdReportId());
+		SPDService.updateSpdDetails(spdReport);
+		logger.info("Ended updateSpdDetails function");
 	   return new ResponseEntity<String>("SPD Details successfully Updated", HttpStatus.OK);
 	}
 }

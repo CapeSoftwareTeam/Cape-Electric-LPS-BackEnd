@@ -3,6 +3,7 @@
  */
 package com.capeelectric.model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -13,9 +14,12 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 /**
@@ -25,38 +29,36 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "SEPERATION_DISTANCE_TABLE")
-public class SeperationDistanceDescription {
+public class SeperationDistanceDescription implements Serializable {
+	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "SEPERATION_DISTANCE_ID")
 	private Integer seperationDistanceId;
 	
-	@Column(name = "BASIC_LPS_ID")
-	private Integer basicLpsId;
+	@Column(name = "BUILDING_NUMBER")
+	private Integer buildingNumber;
 	
-	@Column(name = "USER_NAME")
-	private String userName;
-
-	@Column(name = "CREATED_DATE")
-	private LocalDateTime createdDate;
+	@Column(name = "BUILDING_COUNT")
+	private Integer buildingCount;
 	
-	@Column(name = "CREATED_BY")
-	private String createdBy;
-
-	@Column(name = "UPDATED_BY")
-	private String updatedBy;
+	@Column(name = "BUILDING_NAME")
+	private String buildingName;
 	
-	@Column(name = "UPDATED_DATE")
-	private LocalDateTime updatedDate;
-	
-	
+	@Column(name = "FLAG")
+	private String flag;
+		
 	@JsonManagedReference
 	@OneToMany(mappedBy = "seperationDistanceDescription", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<SeparateDistance> separateDistanceDescription;
+	private List<SeparateDistance> separateDistance;
+	
+	@JsonBackReference
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "SEPERATION_DISTANCE_REPORT_ID")
+	private SeperationDistanceReport seperationDistanceReport;
 
-	
-	
+
 	public Integer getSeperationDistanceId() {
 		return seperationDistanceId;
 	}
@@ -65,62 +67,54 @@ public class SeperationDistanceDescription {
 		this.seperationDistanceId = seperationDistanceId;
 	}
 
-	
 
-	public Integer getBasicLpsId() {
-		return basicLpsId;
+	public Integer getBuildingNumber() {
+		return buildingNumber;
 	}
 
-	public void setBasicLpsId(Integer basicLpsId) {
-		this.basicLpsId = basicLpsId;
+	public void setBuildingNumber(Integer buildingNumber) {
+		this.buildingNumber = buildingNumber;
 	}
 
-	public String getUserName() {
-		return userName;
+	public Integer getBuildingCount() {
+		return buildingCount;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setBuildingCount(Integer buildingCount) {
+		this.buildingCount = buildingCount;
 	}
 
-	public LocalDateTime getCreatedDate() {
-		return createdDate;
+	public String getBuildingName() {
+		return buildingName;
 	}
 
-	public void setCreatedDate(LocalDateTime createdDate) {
-		this.createdDate = createdDate;
+	public void setBuildingName(String buildingName) {
+		this.buildingName = buildingName;
 	}
 
-	public String getCreatedBy() {
-		return createdBy;
+	public String getFlag() {
+		return flag;
 	}
 
-	public void setCreatedBy(String createdBy) {
-		this.createdBy = createdBy;
+	public void setFlag(String flag) {
+		this.flag = flag;
 	}
 
-	public String getUpdatedBy() {
-		return updatedBy;
+	public SeperationDistanceReport getSeperationDistanceReport() {
+		return seperationDistanceReport;
 	}
 
-	public void setUpdatedBy(String updatedBy) {
-		this.updatedBy = updatedBy;
+	public void setSeperationDistanceReport(SeperationDistanceReport seperationDistanceReport) {
+		this.seperationDistanceReport = seperationDistanceReport;
 	}
 
-	public LocalDateTime getUpdatedDate() {
-		return updatedDate;
+	public List<SeparateDistance> getSeparateDistance() {
+		return separateDistance;
 	}
 
-	public void setUpdatedDate(LocalDateTime updatedDate) {
-		this.updatedDate = updatedDate;
+	public void setSeparateDistance(List<SeparateDistance> separateDistance) {
+		this.separateDistance = separateDistance;
 	}
 
-	public List<SeparateDistance> getSeparateDistanceDescription() {
-		return separateDistanceDescription;
-	}
-
-	public void setSeparateDistanceDescription(List<SeparateDistance> separateDistanceDescription) {
-		this.separateDistanceDescription = separateDistanceDescription;
-	}
 
 }

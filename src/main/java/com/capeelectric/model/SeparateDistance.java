@@ -1,5 +1,7 @@
 package com.capeelectric.model;
 
+import java.io.Serializable;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,8 +15,8 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 @Entity
 @Table(name = "SEPERATION_DISTANCE_DESCRIPTION_TABLE")
-public class SeparateDistance {
-	
+public class SeparateDistance implements Serializable {
+	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

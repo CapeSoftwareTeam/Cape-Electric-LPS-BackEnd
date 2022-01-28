@@ -11,9 +11,12 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -25,11 +28,17 @@ public class SPD implements Serializable {
 	@Column(name = "SPD_ID")
 	private Integer spdId;
 	
-	@Column(name = "BASIC_LPS_ID")
-	private Integer basicLpsId;
+	@Column(name = "BUILDING_NUMBER")
+	private Integer buildingNumber;
 	
-	@Column(name = "USER_NAME")
-	private String userName;
+	@Column(name = "BUILDING_NAME")
+	private String buildingName;
+	
+	@Column(name = "BUILDING_COUNT")
+	private Integer buildingCount;
+	
+	@Column(name = "FLAG")
+	private String flag;
 	
 	@Column(name = "MAINS_INCOMING_OB")
 	private String mainsIncomingOb;
@@ -56,22 +65,14 @@ public class SPD implements Serializable {
 	@Column(name = "TOTAL_NO_OUTDOOREQUIPMENT_REM")
 	private String totalNoOutDoorRequipmentRem;
 	
-		
-	@Column(name = "CREATED_DATE")
-	private LocalDateTime createdDate;
-	
-	@Column(name = "CREATED_BY")
-	private String createdBy;
-
-	@Column(name = "UPDATED_BY")
-	private String updatedBy;
-	
-	@Column(name = "UPDATED_DATE")
-	private LocalDateTime updatedDate;
-	
 	@JsonManagedReference
 	@OneToMany(mappedBy = "spd", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<SpdDescription> spdDescription;
+	
+	@JsonBackReference
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "SPD_REPORT_ID")
+	private SpdReport spdReport;
 
 	public Integer getSpdId() {
 		return spdId;
@@ -79,22 +80,6 @@ public class SPD implements Serializable {
 
 	public void setSpdId(Integer spdId) {
 		this.spdId = spdId;
-	}
-
-	public Integer getBasicLpsId() {
-		return basicLpsId;
-	}
-
-	public void setBasicLpsId(Integer basicLpsId) {
-		this.basicLpsId = basicLpsId;
-	}
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
 	}
 
 	public String getMainsIncomingOb() {
@@ -161,38 +146,6 @@ public class SPD implements Serializable {
 		this.totalNoOutDoorRequipmentRem = totalNoOutDoorRequipmentRem;
 	}
 
-	public LocalDateTime getCreatedDate() {
-		return createdDate;
-	}
-
-	public void setCreatedDate(LocalDateTime createdDate) {
-		this.createdDate = createdDate;
-	}
-
-	public String getCreatedBy() {
-		return createdBy;
-	}
-
-	public void setCreatedBy(String createdBy) {
-		this.createdBy = createdBy;
-	}
-
-	public String getUpdatedBy() {
-		return updatedBy;
-	}
-
-	public void setUpdatedBy(String updatedBy) {
-		this.updatedBy = updatedBy;
-	}
-
-	public LocalDateTime getUpdatedDate() {
-		return updatedDate;
-	}
-
-	public void setUpdatedDate(LocalDateTime updatedDate) {
-		this.updatedDate = updatedDate;
-	}
-
 	public List<SpdDescription> getSpdDescription() {
 		return spdDescription;
 	}
@@ -201,5 +154,44 @@ public class SPD implements Serializable {
 		this.spdDescription = spdDescription;
 	}
 
+	public Integer getBuildingNumber() {
+		return buildingNumber;
+	}
+
+	public void setBuildingNumber(Integer buildingNumber) {
+		this.buildingNumber = buildingNumber;
+	}
+
+	public String getBuildingName() {
+		return buildingName;
+	}
+
+	public void setBuildingName(String buildingName) {
+		this.buildingName = buildingName;
+	}
+
+	public Integer getBuildingCount() {
+		return buildingCount;
+	}
+
+	public void setBuildingCount(Integer buildingCount) {
+		this.buildingCount = buildingCount;
+	}
+
+	public String getFlag() {
+		return flag;
+	}
+
+	public void setFlag(String flag) {
+		this.flag = flag;
+	}
+
+	public SpdReport getSpdReport() {
+		return spdReport;
+	}
+
+	public void setSpdReport(SpdReport spdReport) {
+		this.spdReport = spdReport;
+	}	
 	
 }

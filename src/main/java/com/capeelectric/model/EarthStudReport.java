@@ -28,32 +28,32 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
  */
 
 @Entity
-@Table(name = "EARTHING_REPORT_TABLE")
+@Table(name = "EARTH_STUD_REPORT_TABLE")
 @NamedQueries(value = {
-		@NamedQuery(name = "EarthingLpsRepository.findByUserNameAndBasicLpsId", query = "select s from EarthingReport s where s.userName=:userName and s.basicLpsId=:basicLpsId"),
-		@NamedQuery(name = "EarthingLpsRepository.findByBasicLpsId", query = "select s from EarthingReport s where s.basicLpsId=:basicLpsId"),
+		@NamedQuery(name = "EarthStudRepository.findByUserNameAndBasicLpsId", query = "select s from EarthStudReport s where s.userName=:userName and s.basicLpsId=:basicLpsId"),
+		@NamedQuery(name = "EarthStudRepository.findByBasicLpsId", query = "select s from EarthStudReport s where s.basicLpsId=:basicLpsId"),
 })
-public class EarthingReport implements Serializable  {
+public class EarthStudReport implements Serializable  {
 	
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -7161836502468880542L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "EARTHING_REPORT_ID")
-	private Integer earthingReportId;
-	
-	@Column(name = "USER_NAME")
-	private String userName;
+	@Column(name = "EARTH_STUD_REPORT_ID")
+	private Integer earthStudReportId;
 	
 	@Column(name = "BASIC_LPS_ID")
 	private Integer basicLpsId;
 	
+	@Column(name = "USER_NAME")
+	private String userName;
+
 	@Column(name = "CREATED_DATE")
 	private LocalDateTime createdDate;
 	
 	@Column(name = "CREATED_BY")
 	private String createdBy;
-	
+
 	@Column(name = "UPDATED_BY")
 	private String updatedBy;
 	
@@ -61,23 +61,16 @@ public class EarthingReport implements Serializable  {
 	private LocalDateTime updatedDate;
 	
 	@JsonManagedReference
-	@OneToMany(mappedBy = "earthingReport", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<EarthingLpsDescription> earthingLpsDescription;
+	@OneToMany(mappedBy = "earthStudReport", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<EarthStudDescription> earthStudDescription;
 
-	public Integer getEarthingReportId() {
-		return earthingReportId;
+
+	public Integer getEarthStudReportId() {
+		return earthStudReportId;
 	}
 
-	public void setEarthingReportId(Integer earthingReportId) {
-		this.earthingReportId = earthingReportId;
-	}
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setEarthStudReportId(Integer earthStudReportId) {
+		this.earthStudReportId = earthStudReportId;
 	}
 
 	public Integer getBasicLpsId() {
@@ -86,6 +79,14 @@ public class EarthingReport implements Serializable  {
 
 	public void setBasicLpsId(Integer basicLpsId) {
 		this.basicLpsId = basicLpsId;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 	public LocalDateTime getCreatedDate() {
@@ -120,16 +121,17 @@ public class EarthingReport implements Serializable  {
 		this.updatedDate = updatedDate;
 	}
 
-	public List<EarthingLpsDescription> getEarthingLpsDescription() {
-		return earthingLpsDescription;
+	public List<EarthStudDescription> getEarthStudDescription() {
+		return earthStudDescription;
 	}
 
-	public void setEarthingLpsDescription(List<EarthingLpsDescription> earthingLpsDescription) {
-		this.earthingLpsDescription = earthingLpsDescription;
+	public void setEarthStudDescription(List<EarthStudDescription> earthStudDescription) {
+		this.earthStudDescription = earthStudDescription;
 	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+	
 	
 }

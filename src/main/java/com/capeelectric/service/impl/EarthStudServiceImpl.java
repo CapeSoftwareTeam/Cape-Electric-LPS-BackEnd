@@ -25,11 +25,16 @@ import com.capeelectric.exception.SPDException;
 import com.capeelectric.model.AirTermination;
 import com.capeelectric.model.BasicLps;
 import com.capeelectric.model.DownConductorDescription;
+import com.capeelectric.model.DownConductorReport;
 import com.capeelectric.model.EarthStudDescription;
+import com.capeelectric.model.EarthStudReport;
 import com.capeelectric.model.EarthingLpsDescription;
+import com.capeelectric.model.EarthingReport;
 import com.capeelectric.model.LpsAirDiscription;
 import com.capeelectric.model.SPD;
 import com.capeelectric.model.SeperationDistanceDescription;
+import com.capeelectric.model.SeperationDistanceReport;
+import com.capeelectric.model.SpdReport;
 import com.capeelectric.repository.AirTerminationLpsRepository;
 import com.capeelectric.repository.BasicLpsRepository;
 import com.capeelectric.repository.DownConductorRepository;
@@ -45,6 +50,7 @@ import com.capeelectric.service.PrintEarthingLpsService;
 import com.capeelectric.service.PrintFinalPDFService;
 import com.capeelectric.service.PrintSDandEarthStudService;
 import com.capeelectric.service.PrintSPDService;
+import com.capeelectric.util.FindNonRemovedObjects;
 import com.capeelectric.util.HeaderFooterPageEvent;
 import com.capeelectric.util.UserFullName;
 import com.itextpdf.text.Document;
@@ -112,26 +118,39 @@ public class EarthStudServiceImpl implements EarthStudService {
 
 	@Autowired
 	private SeperationDistanceRepository seperationDistanceRepository;
+	
+	@Autowired
+	private FindNonRemovedObjects findNonRemovedObjects;
 
 	@Override
-	public void addEarthStudDetails(EarthStudDescription earthStudDescription)
+	public void addEarthStudDetails(EarthStudReport earthStudReport)
 			throws EarthStudException, BasicLpsException, AirTerminationException, DownConductorException,
 			EarthingLpsException, SPDException, Exception {
-		if (earthStudDescription != null && earthStudDescription.getUserName() != null
-				&& !earthStudDescription.getUserName().isEmpty() && earthStudDescription.getBasicLpsId() != null
-				&& earthStudDescription.getBasicLpsId() != 0) {
+		if (earthStudReport != null && earthStudReport.getUserName() != null
+				&& !earthStudReport.getUserName().isEmpty() && earthStudReport.getBasicLpsId() != null
+				&& earthStudReport.getBasicLpsId() != 0) {
+			//For Basic Lps data
 			Optional<BasicLps> basicLpsDetails = basicLpsRepository
-					.findByBasicLpsId(earthStudDescription.getBasicLpsId());
+					.findByBasicLpsId(earthStudReport.getBasicLpsId());
+			
+			//For Air Termination data
 			Optional<AirTermination> lpsAirDisc = airTerminationLpsRepository
-					.findByBasicLpsId(earthStudDescription.getBasicLpsId());
-
-			Optional<DownConductorDescription> downConductorDetails = downConductorRepository
-					.findByBasicLpsId(earthStudDescription.getBasicLpsId());
-			Optional<EarthingLpsDescription> earthingLpsDetails = earthingLpsRepository
-					.findByBasicLpsId(earthStudDescription.getBasicLpsId());
-			Optional<SPD> spdDetails = spdRepository.findByBasicLpsId(earthStudDescription.getBasicLpsId());
-			Optional<SeperationDistanceDescription> separateDistanceDetails = seperationDistanceRepository
-					.findByBasicLpsId(earthStudDescription.getBasicLpsId());
+					.findByBasicLpsId(earthStudReport.getBasicLpsId());
+			
+			//For Down Conductor data
+			Optional<DownConductorReport> downConductorDetails = downConductorRepository
+					.findByBasicLpsId(earthStudReport.getBasicLpsId());
+			
+			//For Earthing Lps data
+			Optional<EarthingReport> earthingLpsDetails = earthingLpsRepository
+					.findByBasicLpsId(earthStudReport.getBasicLpsId());
+			
+			//For SPD data
+			Optional<SpdReport> spdDetails = spdRepository.findByBasicLpsId(earthStudReport.getBasicLpsId());
+			
+			//For Seperation Distance data
+			Optional<SeperationDistanceReport> separateDistanceDetails = seperationDistanceRepository
+					.findByBasicLpsId(earthStudReport.getBasicLpsId());
 
 			if (!basicLpsDetails.isPresent() && !lpsAirDisc.isPresent() && !downConductorDetails.isPresent()
 					&& !earthingLpsDetails.isPresent() && !separateDistanceDetails.isPresent()
@@ -158,30 +177,38 @@ public class EarthStudServiceImpl implements EarthStudService {
 				logger.error("Please enter Seperation Distance step to proceed further");
 				throw new EarthStudException("Please enter Seperation Distance step to proceed further");
 			}
-			Optional<BasicLps> basicLpsRepo = basicLpsRepository.findByBasicLpsId(earthStudDescription.getBasicLpsId());
+			Optional<BasicLps> basicLpsRepo = basicLpsRepository.findByBasicLpsId(earthStudReport.getBasicLpsId());
 			if (basicLpsRepo.isPresent()
-					&& basicLpsRepo.get().getBasicLpsId().equals(earthStudDescription.getBasicLpsId())) {
-				Optional<EarthStudDescription> earthStudRepo = earthStudRepository
-						.findByBasicLpsId(earthStudDescription.getBasicLpsId());
+					&& basicLpsRepo.get().getBasicLpsId().equals(earthStudReport.getBasicLpsId())) {
+				Optional<EarthStudReport> earthStudRepo = earthStudRepository
+						.findByBasicLpsId(earthStudReport.getBasicLpsId());
 				if (!earthStudRepo.isPresent()
-						|| !earthStudRepo.get().getBasicLpsId().equals(earthStudDescription.getBasicLpsId())) {
-
-					earthStudDescription.setCreatedDate(LocalDateTime.now());
-					earthStudDescription.setUpdatedDate(LocalDateTime.now());
-					earthStudDescription.setCreatedBy(userFullName.findByUserName(earthStudDescription.getUserName()));
-					earthStudDescription.setUpdatedBy(userFullName.findByUserName(earthStudDescription.getUserName()));
-					earthStudRepository.save(earthStudDescription);
-					logger.debug("Earth Stud Report Details Successfully Saved in DB");
-					basicLpsRepo = basicLpsRepository.findByBasicLpsId(earthStudDescription.getBasicLpsId());
-					if (basicLpsRepo.isPresent()
-							&& basicLpsRepo.get().getBasicLpsId().equals(earthStudDescription.getBasicLpsId())) {
-						basicLps = basicLpsRepo.get();
-						basicLps.setAllStepsCompleted("AllStepCompleted");
-						basicLpsRepository.save(basicLps);
-						logger.debug("Basic Lps Report Details Successfully Updated as All Steps Completed in DB");
+						|| !earthStudRepo.get().getBasicLpsId().equals(earthStudReport.getBasicLpsId())) {
+					
+					List<EarthStudDescription> earthStudDescription = earthStudReport.getEarthStudDescription();
+					if(earthStudDescription != null && earthStudDescription.size() > 0) {
+						earthStudReport.setCreatedDate(LocalDateTime.now());
+						earthStudReport.setUpdatedDate(LocalDateTime.now());
+						earthStudReport.setCreatedBy(userFullName.findByUserName(earthStudReport.getUserName()));
+						earthStudReport.setUpdatedBy(userFullName.findByUserName(earthStudReport.getUserName()));
+						earthStudRepository.save(earthStudReport);
+						logger.debug("Earth Stud Report Details Successfully Saved in DB");
+						
+						basicLpsRepo = basicLpsRepository.findByBasicLpsId(earthStudReport.getBasicLpsId());
+						if (basicLpsRepo.isPresent()
+								&& basicLpsRepo.get().getBasicLpsId().equals(earthStudReport.getBasicLpsId())) {
+							basicLps = basicLpsRepo.get();
+							basicLps.setAllStepsCompleted("AllStepCompleted");
+							basicLpsRepository.save(basicLps);
+							logger.debug("Basic Lps Report Details Successfully Updated as All Steps Completed in DB");
+							
+						} else {
+							logger.error("Basic LPS Id Information not Available in Basic LPS Id Details");
+							throw new EarthStudException("Basic LPS Id Information not Available in Basic LPS Id Details");
+						}
 					} else {
-						logger.error("Basic LPS Id Information not Available in Basic LPS Id Details");
-						throw new EarthStudException("Basic LPS Id Information not Available in Basic LPS Id Details");
+						logger.error("Please fill all the fields before clicking next button");
+						throw new EarthingLpsException("Please fill all the fields before clicking next button");
 					}
 				} else {
 					logger.error("Given Basic LPS Id is Not Registered in Basic LPS");
@@ -222,12 +249,16 @@ public class EarthStudServiceImpl implements EarthStudService {
 	}
 
 	@Override
-	public List<EarthStudDescription> retrieveEarthStudDetails(String userName, Integer basicLpsId)
+	public List<EarthStudReport> retrieveEarthStudDetails(String userName, Integer basicLpsId)
 			throws EarthStudException {
 		if (userName != null) {
-			List<EarthStudDescription> earthStudRepo = earthStudRepository.findByUserNameAndBasicLpsId(userName,
+			List<EarthStudReport> earthStudRepo = earthStudRepository.findByUserNameAndBasicLpsId(userName,
 					basicLpsId);
 			if (earthStudRepo != null && !earthStudRepo.isEmpty()) {
+				for(EarthStudReport earthStudReportItr : earthStudRepo) {
+					earthStudReportItr.setEarthStudDescription(findNonRemovedObjects.findNonRemovedEarthStudBuildings(earthStudReportItr));
+					logger.debug("Successfully done findNonRemovedEarthStudBuildings() call");
+				}
 				return earthStudRepo;
 			} else {
 				logger.error("Given UserName & Id doesn't exist in Earth Stud Report Details");
@@ -240,18 +271,18 @@ public class EarthStudServiceImpl implements EarthStudService {
 	}
 
 	@Override
-	public void updateEarthStudDetails(EarthStudDescription earthStudDescription) throws EarthStudException {
+	public void updateEarthStudDetails(EarthStudReport earthStudReport) throws EarthStudException {
 
-		if (earthStudDescription != null && earthStudDescription.getEarthStudDescId() != null
-				&& earthStudDescription.getEarthStudDescId() != 0 && earthStudDescription.getBasicLpsId() != null
-				&& earthStudDescription.getBasicLpsId() != 0) {
-			Optional<EarthStudDescription> earthStudRepo = earthStudRepository
-					.findById(earthStudDescription.getEarthStudDescId());
+		if (earthStudReport != null && earthStudReport.getEarthStudReportId() != null
+				&& earthStudReport.getEarthStudReportId() != 0 && earthStudReport.getBasicLpsId() != null
+				&& earthStudReport.getBasicLpsId() != 0) {
+			Optional<EarthStudReport> earthStudRepo = earthStudRepository
+					.findById(earthStudReport.getEarthStudReportId());
 			if (earthStudRepo.isPresent()
-					&& earthStudRepo.get().getBasicLpsId().equals(earthStudDescription.getBasicLpsId())) {
-				earthStudDescription.setUpdatedDate(LocalDateTime.now());
-				earthStudDescription.setUpdatedBy(userFullName.findByUserName(earthStudDescription.getUserName()));
-				earthStudRepository.save(earthStudDescription);
+					&& earthStudRepo.get().getBasicLpsId().equals(earthStudReport.getBasicLpsId())) {
+				earthStudReport.setUpdatedDate(LocalDateTime.now());
+				earthStudReport.setUpdatedBy(userFullName.findByUserName(earthStudReport.getUserName()));
+				earthStudRepository.save(earthStudReport);
 				logger.debug("Earth Stud Report Details Successfully Updated in DB");
 			} else {
 				logger.error("Given Basic LPS Id and Earth Stud Id is Invalid");
