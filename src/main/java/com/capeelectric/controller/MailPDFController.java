@@ -28,8 +28,7 @@ public class MailPDFController {
 			throws BasicLpsException, AirTerminationException, DownConductorException, SPDException,
 			EarthStudException, EarthingLpsException, Exception {
 
-		String keyname = "Lpsfinalreport.pdf";
-		awsEmailService.sendEmailPDF(userName,lpsId, lpsId, keyname);
+		awsEmailService.sendEmailPDF(userName,lpsId, lpsId, projectName);
 		
 		return new ResponseEntity<byte[]>(HttpStatus.OK);
 
