@@ -42,6 +42,7 @@ public class SeperationDistanceController {
 		logger.info("called addSeperationDistance function UserName : {}, BasicLpsId : {}",
 				seperationDistanceDesc.getUserName(), seperationDistanceDesc.getBasicLpsId());
 		seperationDistanceService.addSeperationDistance(seperationDistanceDesc);
+		logger.info("Ended addSeperationDistance function");
 		return new ResponseEntity<String>("Seperation Distance Details Sucessfully Saved",
 				HttpStatus.CREATED);
 	}
@@ -61,6 +62,7 @@ public class SeperationDistanceController {
 				seperationDistanceDesc.getUserName(), seperationDistanceDesc.getBasicLpsId(),
 				seperationDistanceDesc.getSeperationDistanceId());
 		seperationDistanceService.updateSeperationDetails(seperationDistanceDesc);
+		logger.info("Ended updateSeperationDistance function");
 	   return new ResponseEntity<String>("SPD Details successfully Updated", HttpStatus.OK);
 	}
 }

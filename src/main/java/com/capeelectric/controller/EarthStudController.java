@@ -49,6 +49,7 @@ public class EarthStudController {
 		logger.info("called addEarthStud function UserName : {}, BasicLpsId : {}",
 				earthStudDescription.getUserName(), earthStudDescription.getBasicLpsId());
 		earthStudService.addEarthStudDetails(earthStudDescription);
+		logger.info("Ended addEarthStud function");
 		return new ResponseEntity<String>("Earth Stud Details Sucessfully Submitted",
 				HttpStatus.CREATED);
 	}
@@ -68,6 +69,7 @@ public class EarthStudController {
 				earthStudDescription.getUserName(), earthStudDescription.getBasicLpsId(),
 				earthStudDescription.getEarthStudDescId());
 		earthStudService.updateEarthStudDetails(earthStudDescription);
+		logger.info("Ended updateEarthStud function");
 	   return new ResponseEntity<String>("Earth Stud Details successfully Updated", HttpStatus.OK);
 	}
 }

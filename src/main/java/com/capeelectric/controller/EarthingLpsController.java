@@ -43,6 +43,7 @@ private static final Logger logger = LoggerFactory.getLogger(EarthingLpsControll
 		logger.info("called addEarthingLps function UserName : {}, BasicLpsId : {}",
 				earthingReport.getUserName(), earthingReport.getBasicLpsId());
 		earthingLpsService.addEarthingLpsDetails(earthingReport);
+		logger.info("Ended addEarthingLps function");
 		return new ResponseEntity<String>("Earthing Details Sucessfully Saved",
 				HttpStatus.CREATED);
 	}
@@ -62,6 +63,7 @@ private static final Logger logger = LoggerFactory.getLogger(EarthingLpsControll
 				earthingReport.getUserName(), earthingReport.getBasicLpsId(),
 				earthingReport.getEarthingReportId());
 		earthingLpsService.updateEarthingLpsDetails(earthingReport);
+		logger.info("Ended updateEarthingLps function");
 	   return new ResponseEntity<String>("Earthing LPS Details successfully Updated", HttpStatus.OK);
 	}
 }

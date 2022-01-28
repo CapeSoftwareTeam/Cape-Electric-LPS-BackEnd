@@ -136,19 +136,26 @@ public class EarthStudServiceImpl implements EarthStudService {
 			if (!basicLpsDetails.isPresent() && !lpsAirDisc.isPresent() && !downConductorDetails.isPresent()
 					&& !earthingLpsDetails.isPresent() && !separateDistanceDetails.isPresent()
 					&& !spdDetails.isPresent()) {
+				logger.error("Please enter details for all previous steps to proceed further");
 				throw new EarthStudException("Please enter details for all previous steps to proceed further");
 			} else if (!basicLpsDetails.isPresent()) {
+				logger.error("Please enter Basic Information step to proceed further");
 				throw new EarthStudException("Please enter Basic Information step to proceed further");
 			} else if (!lpsAirDisc.isPresent()) {
+				logger.error("Please enter Air Termination step to proceed further");
 				throw new EarthStudException("Please enter Air Termination step to proceed further");
 			} else if (!downConductorDetails.isPresent()) {
+				logger.error("Please enter Down Conductors step to proceed further");
 				throw new EarthStudException("Please enter Down Conductors step to proceed further");
 			} else if (!earthingLpsDetails.isPresent()) {
+				logger.error("Please enter Earthing step to proceed further");
 				throw new EarthStudException("Please enter Earthing step to proceed further");
 			} else if (!spdDetails.isPresent()) {
+				logger.error("Please enter SPD step to proceed further");
 				throw new EarthStudException("Please enter SPD step to proceed further");
 
 			} else if (!separateDistanceDetails.isPresent()) {
+				logger.error("Please enter Seperation Distance step to proceed further");
 				throw new EarthStudException("Please enter Seperation Distance step to proceed further");
 			}
 			Optional<BasicLps> basicLpsRepo = basicLpsRepository.findByBasicLpsId(earthStudDescription.getBasicLpsId());
@@ -164,20 +171,25 @@ public class EarthStudServiceImpl implements EarthStudService {
 					earthStudDescription.setCreatedBy(userFullName.findByUserName(earthStudDescription.getUserName()));
 					earthStudDescription.setUpdatedBy(userFullName.findByUserName(earthStudDescription.getUserName()));
 					earthStudRepository.save(earthStudDescription);
+					logger.debug("Earth Stud Report Details Successfully Saved in DB");
 					basicLpsRepo = basicLpsRepository.findByBasicLpsId(earthStudDescription.getBasicLpsId());
 					if (basicLpsRepo.isPresent()
 							&& basicLpsRepo.get().getBasicLpsId().equals(earthStudDescription.getBasicLpsId())) {
 						basicLps = basicLpsRepo.get();
 						basicLps.setAllStepsCompleted("AllStepCompleted");
 						basicLpsRepository.save(basicLps);
+						logger.debug("Basic Lps Report Details Successfully Updated as All Steps Completed in DB");
 					} else {
+						logger.error("Basic LPS Id Information not Available in Basic LPS Id Details");
 						throw new EarthStudException("Basic LPS Id Information not Available in Basic LPS Id Details");
 					}
 				} else {
+					logger.error("Given Basic LPS Id is Not Registered in Basic LPS");
 					throw new EarthStudException("Given Basic LPS Id is Not Registered in Basic LPS");
 				}
 
 			} else {
+				logger.error("Basic LPS Id Already Available.Create New Basic Id");
 				throw new EarthStudException("Basic LPS Id Already Available.Create New Basic Id");
 			}
 
@@ -203,6 +215,7 @@ public class EarthStudServiceImpl implements EarthStudService {
 					earthStudDescription.getBasicLpsId());
 
 		} else {
+			logger.error("Invalid Inputs");
 			throw new EarthStudException("Invalid Inputs");
 		}
 
@@ -217,9 +230,11 @@ public class EarthStudServiceImpl implements EarthStudService {
 			if (earthStudRepo != null && !earthStudRepo.isEmpty()) {
 				return earthStudRepo;
 			} else {
-				throw new EarthStudException("Given UserName & Id doesn't exist in Down Conductor Details");
+				logger.error("Given UserName & Id doesn't exist in Earth Stud Report Details");
+				throw new EarthStudException("Given UserName & Id doesn't exist in Earth Stud Report Details");
 			}
 		} else {
+			logger.error("Invalid Inputs");
 			throw new EarthStudException("Invalid Inputs");
 		}
 	}
@@ -237,11 +252,14 @@ public class EarthStudServiceImpl implements EarthStudService {
 				earthStudDescription.setUpdatedDate(LocalDateTime.now());
 				earthStudDescription.setUpdatedBy(userFullName.findByUserName(earthStudDescription.getUserName()));
 				earthStudRepository.save(earthStudDescription);
+				logger.debug("Earth Stud Report Details Successfully Updated in DB");
 			} else {
+				logger.error("Given Basic LPS Id and Earth Stud Id is Invalid");
 				throw new EarthStudException("Given Basic LPS Id and Earth Stud Id is Invalid");
 			}
 
 		} else {
+			logger.error("Invalid inputs");
 			throw new EarthStudException("Invalid inputs");
 		}
 	}

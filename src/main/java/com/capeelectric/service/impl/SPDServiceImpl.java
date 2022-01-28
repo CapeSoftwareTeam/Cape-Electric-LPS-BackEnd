@@ -56,15 +56,19 @@ public class SPDServiceImpl implements SPDService{
 					spdDesc.setCreatedBy(userFullName.findByUserName(spdDesc.getUserName()));
 					spdDesc.setUpdatedBy(userFullName.findByUserName(spdDesc.getUserName()));
 					spdRepository.save(spdDesc);
+					logger.debug("SPD Report Details Successfully Saved in DB");
 				} else {
+					logger.error("Basic LPS Id Already Available.Create New Basic Id");
 					throw new SPDException("Basic LPS Id Already Available.Create New Basic Id");
 				}
 			}
 			else {
+				logger.error("Given Basic LPS Id is Not Registered in Basic LPS");
 				throw new SPDException("Given Basic LPS Id is Not Registered in Basic LPS");
 			}
 		}
 		else {
+			logger.error("Invalid Inputs");
 			throw new SPDException("Invalid Inputs");
 		}
 			
@@ -79,9 +83,11 @@ public class SPDServiceImpl implements SPDService{
 			if (spdRepo != null && !spdRepo.isEmpty()) {				
 				return spdRepo;
 			} else {
-				throw new SPDException("Given UserName & Id doesn't exist in Down Conductor Details");
+				logger.error("Given UserName & Id doesn't exist in SPD Report Details");
+				throw new SPDException("Given UserName & Id doesn't exist in SPD Report Details");
 			}
 		} else {
+			logger.error("Invalid Inputs");
 			throw new SPDException("Invalid Inputs");
 		}
 	}
@@ -99,11 +105,14 @@ public class SPDServiceImpl implements SPDService{
 				spdDesc.setUpdatedDate(LocalDateTime.now());
 				spdDesc.setUpdatedBy(userFullName.findByUserName(spdDesc.getUserName()));
 				spdRepository.save(spdDesc);
+				logger.debug("Earthing Report Details Successfully Updated in DB");
 			} else {
+				logger.error("Given Basic LPS Id and SPD Id is Invalid");
 				throw new SPDException("Given Basic LPS Id and SPD Id is Invalid");
 			}
 
 		} else {
+			logger.error("Invalid inputs");
 			throw new SPDException("Invalid inputs");
 		}
 	}

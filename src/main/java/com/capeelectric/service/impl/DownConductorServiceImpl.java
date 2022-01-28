@@ -69,18 +69,23 @@ public class DownConductorServiceImpl implements DownConductorService{
 						downConductorReport.setCreatedBy(userFullName.findByUserName(downConductorReport.getUserName()));
 						downConductorReport.setUpdatedBy(userFullName.findByUserName(downConductorReport.getUserName()));
 						downConductorRepository.save(downConductorReport);
+						logger.debug("Down Conductor Details Successfully Saved in DB");
 					} else {
+						logger.error("Please fill all the fields before clicking next button");
 						throw new DownConductorException("Please fill all the fields before clicking next button");
 					}
 				} else {
+					logger.error("Basic LPS Id Already Available.Create New Basic Id");
 					throw new DownConductorException("Basic LPS Id Already Available.Create New Basic Id");
 				}
 			}
 			else {
+				logger.error("Given Basic LPS Id is Not Registered in Basic LPS");
 				throw new DownConductorException("Given Basic LPS Id is Not Registered in Basic LPS");
 			}
 		}
 		else {
+			logger.error("Invalid Inputs");
 			throw new DownConductorException("Invalid Inputs");
 		}
 			
@@ -95,12 +100,15 @@ public class DownConductorServiceImpl implements DownConductorService{
 			if (downConductorRepo != null && !downConductorRepo.isEmpty()) {	
 				for(DownConductorReport downConductorReportItr : downConductorRepo) {
 					downConductorReportItr.setDownConductorDescription(findNonRemovedObjects.findNonRemovedDownConductorsBuildings(downConductorReportItr));
+					logger.debug("Successfully done findNonRemovedDownConductorsBuildings() call");
 				}
 				return downConductorRepo;
 			} else {
+				logger.error("Given UserName & Id doesn't exist in Down Conductor Details");
 				throw new DownConductorException("Given UserName & Id doesn't exist in Down Conductor Details");
 			}
 		} else {
+			logger.error("Invalid Inputs");
 			throw new DownConductorException("Invalid Inputs");
 		}
 	}
@@ -118,11 +126,14 @@ public class DownConductorServiceImpl implements DownConductorService{
 				downConductorReport.setUpdatedDate(LocalDateTime.now());
 				downConductorReport.setUpdatedBy(userFullName.findByUserName(downConductorReport.getUserName()));
 				downConductorRepository.save(downConductorReport);
+				logger.debug("Down Conductor Details Updated Successfully in DB");
 			} else {
+				logger.error("Given Basic LPS Id and Down Conductor Id is Invalid");
 				throw new DownConductorException("Given Basic LPS Id and Down Conductor Id is Invalid");
 			}
 
 		} else {
+			logger.error("Invalid inputs");
 			throw new DownConductorException("Invalid inputs");
 		}
 	}

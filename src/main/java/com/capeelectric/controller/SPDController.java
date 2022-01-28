@@ -44,6 +44,7 @@ public class SPDController {
 		logger.info("called addSPDDetails function UserName : {}, BasicLpsId : {}",
 				SPDDesc.getUserName(), SPDDesc.getBasicLpsId());
 		SPDService.addSPDDetails(SPDDesc);
+		logger.info("Ended addSPDDetails function");
 		return new ResponseEntity<String>("SPD Details Sucessfully Saved",
 				HttpStatus.CREATED);
 	}
@@ -63,6 +64,7 @@ public class SPDController {
 				SPDDesc.getUserName(), SPDDesc.getBasicLpsId(),
 				SPDDesc.getSpdId());
 		SPDService.updateSpdDetails(SPDDesc);
+		logger.info("Ended updateEarthingLps function");
 	   return new ResponseEntity<String>("SPD Details successfully Updated", HttpStatus.OK);
 	}
 }

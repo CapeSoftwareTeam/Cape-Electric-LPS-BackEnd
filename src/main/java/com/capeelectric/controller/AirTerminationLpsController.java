@@ -34,6 +34,7 @@ public class AirTerminationLpsController {
 			throws AirTerminationException {
 		logger.info("called addAirTerminationLpsDetails function UserName: {}",airTermination.getUserName());
 		airTerminationLpsService.addAirTerminationLpsDetails(airTermination);
+		logger.info("Ended addAirTerminationLpsDetails function");
 		return new ResponseEntity<String>("Lps Air Terminal Successfully Saved", HttpStatus.CREATED);
 	}
 	
@@ -54,6 +55,7 @@ public class AirTerminationLpsController {
 				airTermination.getUserName(), airTermination.getBasicLpsId(),
 				airTermination.getAirTerminationId());
 		airTerminationLpsService.updateAirTerminationLps(airTermination);
+		logger.info("Ended updateAirTerminationLps function");
 	   return new ResponseEntity<String>("AirTerminationLps successfully Updated", HttpStatus.OK);
 	}
 

@@ -97,6 +97,7 @@ public class AirTerminationLpsServiceImpl implements AirTerminationLpsService {
 			if (airTerminationLpsRepo != null && !airTerminationLpsRepo.isEmpty()) {
 				for(AirTermination airTerminationRepo : airTerminationLpsRepo) {
 					airTerminationRepo.setLpsAirDescription(findNonRemovedObjects.findNonRemovedAirTerminationBuildings(airTerminationRepo));
+					logger.debug("Successfully done findNonRemovedAirTerminationBuildings() call");
 				}
 				return airTerminationLpsRepo;
 			} else {
@@ -123,11 +124,14 @@ public class AirTerminationLpsServiceImpl implements AirTerminationLpsService {
 				airTermination.setUpdatedDate(LocalDateTime.now());
 				airTermination.setUpdatedBy(userFullName.findByUserName(airTermination.getUserName()));
 			    airTerminationLpsRepository.save(airTermination);
+				logger.debug("Air Termination successfully updated into DB");
 			} else {
+				logger.error("Given Basic LPS Id and LPS Air Description Id is Invalid");
 				throw new AirTerminationException("Given Basic LPS Id and LPS Air Description Id is Invalid");
 			}
 
 		} else {
+			logger.error("Invalid inputs");
 			throw new AirTerminationException("Invalid inputs");
 		}
 	}

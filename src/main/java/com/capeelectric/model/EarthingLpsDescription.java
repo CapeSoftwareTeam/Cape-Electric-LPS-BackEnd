@@ -65,6 +65,9 @@ public class EarthingLpsDescription implements Serializable  {
 	@Column(name = "BUILDING_COUNT")
 	private Integer buildingCount;
 	
+	@Column(name = "FLAG")
+	private String flag;
+	
 	@JsonManagedReference
 	@OneToMany(mappedBy = "earthingLpsDescription", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<EarthingDescription> earthingDescription;
@@ -217,6 +220,14 @@ public class EarthingLpsDescription implements Serializable  {
 
 	public void setEarthingReport(EarthingReport earthingReport) {
 		this.earthingReport = earthingReport;
+	}
+
+	public String getFlag() {
+		return flag;
+	}
+
+	public void setFlag(String flag) {
+		this.flag = flag;
 	}
 
 	public static long getSerialversionuid() {

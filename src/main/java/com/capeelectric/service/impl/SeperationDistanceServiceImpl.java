@@ -57,15 +57,19 @@ public class SeperationDistanceServiceImpl implements SeperationDistanceService{
 					seperationDistanceDesc.setCreatedBy(userFullName.findByUserName(seperationDistanceDesc.getUserName()));
 					seperationDistanceDesc.setUpdatedBy(userFullName.findByUserName(seperationDistanceDesc.getUserName()));
 					seperationDistanceRepository.save(seperationDistanceDesc);
+					logger.debug("Seperation Distance Report Details Successfully Saved in DB");
 				} else {
+					logger.error("Basic LPS Id Already Available.Create New Basic Id");
 					throw new SeperationDistanceException("Basic LPS Id Already Available.Create New Basic Id");
 				}
 			}
 			else {
+				logger.error("Given Basic LPS Id is Not Registered in Basic LPS");
 				throw new SeperationDistanceException("Given Basic LPS Id is Not Registered in Basic LPS");
 			}
 		}
 		else {
+			logger.error("Invalid Inputs");
 			throw new SeperationDistanceException("Invalid Inputs");
 		}
 			
@@ -80,9 +84,11 @@ public class SeperationDistanceServiceImpl implements SeperationDistanceService{
 			if (seperationDistanceRepo != null && !seperationDistanceRepo.isEmpty()) {				
 				return seperationDistanceRepo;
 			} else {
-				throw new SeperationDistanceException("Given UserName & Id doesn't exist in Down Conductor Details");
+				logger.error("Given UserName & Id doesn't exist in Seperation Distance Details");
+				throw new SeperationDistanceException("Given UserName & Id doesn't exist in Seperation Distance Details");
 			}
 		} else {
+			logger.error("Invalid Inputs");
 			throw new SeperationDistanceException("Invalid Inputs");
 		}
 	}
@@ -100,11 +106,14 @@ public class SeperationDistanceServiceImpl implements SeperationDistanceService{
 				seperationDistanceDesc.setUpdatedDate(LocalDateTime.now());
 				seperationDistanceDesc.setUpdatedBy(userFullName.findByUserName(seperationDistanceDesc.getUserName()));
 				seperationDistanceRepository.save(seperationDistanceDesc);
+				logger.debug("Seperation Distance Report Details Successfully Updated in DB");
 			} else {
+				logger.error("Given Basic LPS Id and Seperation Distance Id is Invalid");
 				throw new SeperationDistanceException("Given Basic LPS Id and Seperation Distance Id is Invalid");
 			}
 
 		} else {
+			logger.error("Invalid inputs");
 			throw new SeperationDistanceException("Invalid inputs");
 		}
 	}

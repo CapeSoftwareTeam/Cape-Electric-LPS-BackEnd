@@ -58,6 +58,7 @@ public class BasicLpsController {
 		logger.info("called updateBasicLpsDetails function UserName : {},BasicLpsId : {}", basicLps.getUserName(),
 				basicLps.getBasicLpsId());
 		basicLpsService.updateBasicLpsDetails(basicLps);
+		logger.info("Ended updateBasicLpsDetails function");
 		return new ResponseEntity<String>("Basic Lps Details Updated Successfully", HttpStatus.OK);
 	}
 	

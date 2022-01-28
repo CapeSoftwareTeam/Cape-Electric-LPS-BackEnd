@@ -43,6 +43,7 @@ public class DownConductorController {
 		logger.info("called addDownConductors function UserName : {}, SiteId : {}",
 				downConductorReport.getUserName(), downConductorReport.getBasicLpsId());
 		downConductorService.addDownConductorsDetails(downConductorReport);
+		logger.info("Ended addDownConductors function");
 		return new ResponseEntity<String>("Down Conductors Details Sucessfully Saved",
 				HttpStatus.CREATED);
 	}
@@ -62,6 +63,7 @@ public class DownConductorController {
 				downConductorReport.getUserName(), downConductorReport.getBasicLpsId(),
 				downConductorReport.getDownConductorReportId());
 		downConductorService.updateDownConductorDetails(downConductorReport);
+		logger.info("Ended updateDownConductor function");
 	   return new ResponseEntity<String>("Down Conductors Details successfully Updated", HttpStatus.OK);
 	}
 }

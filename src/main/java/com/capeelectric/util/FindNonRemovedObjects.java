@@ -8,6 +8,8 @@ import org.springframework.context.annotation.Configuration;
 import com.capeelectric.model.AirTermination;
 import com.capeelectric.model.DownConductorDescription;
 import com.capeelectric.model.DownConductorReport;
+import com.capeelectric.model.EarthingLpsDescription;
+import com.capeelectric.model.EarthingReport;
 import com.capeelectric.model.LpsAirDiscription;
 
 @Configuration
@@ -43,6 +45,21 @@ public class FindNonRemovedObjects {
 			}
 		}
 		return downConductorDescription;
+	}
+	
+	public List<EarthingLpsDescription> findNonRemovedEarthingLpsBuildings(EarthingReport earthingReport) {
+
+		ArrayList<EarthingLpsDescription> earthingLpsDescription = new ArrayList<EarthingLpsDescription>();
+		List<EarthingLpsDescription> findNonRemoveBuildings = earthingReport.getEarthingLpsDescription();
+		for (EarthingLpsDescription  earthingLpsDescriptionItr: findNonRemoveBuildings) {
+			if (earthingLpsDescriptionItr.getFlag()==null || !earthingLpsDescriptionItr.getFlag().equalsIgnoreCase("R")) {
+				if(earthingLpsDescriptionItr.getFlag()==null) {
+					earthingLpsDescriptionItr.setFlag("N");
+				}
+				earthingLpsDescription.add(earthingLpsDescriptionItr);			 
+			}
+		}
+		return earthingLpsDescription;
 	}
 
 }

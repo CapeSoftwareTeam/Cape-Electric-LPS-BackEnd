@@ -16,11 +16,13 @@ import com.capeelectric.exception.DownConductorException;
 import com.capeelectric.exception.EarthingLpsException;
 import com.capeelectric.model.BasicLps;
 import com.capeelectric.model.DownConductorDescription;
+import com.capeelectric.model.DownConductorReport;
 import com.capeelectric.model.EarthingLpsDescription;
 import com.capeelectric.model.EarthingReport;
 import com.capeelectric.repository.BasicLpsRepository;
 import com.capeelectric.repository.EarthingLpsRepository;
 import com.capeelectric.service.EarthingLpsService;
+import com.capeelectric.util.FindNonRemovedObjects;
 import com.capeelectric.util.UserFullName;
 
 /**
@@ -44,6 +46,9 @@ public class EarthingLpsServiceImpl implements EarthingLpsService {
 	@Autowired
 	private UserFullName userFullName;
 	
+	@Autowired
+	private FindNonRemovedObjects findNonRemovedObjects;
+	
 	@Override
 	public void addEarthingLpsDetails(EarthingReport earthingReport)
 			throws  EarthingLpsException{
@@ -65,19 +70,24 @@ public class EarthingLpsServiceImpl implements EarthingLpsService {
 						earthingReport.setCreatedBy(userFullName.findByUserName(earthingReport.getUserName()));
 						earthingReport.setUpdatedBy(userFullName.findByUserName(earthingReport.getUserName()));
 						earthingLpsRepository.save(earthingReport);
+						logger.debug("Earthing Report Details Successfully Saved in DB");
 					} else {
+						logger.error("Please fill all the fields before clicking next button");
 						throw new EarthingLpsException("Please fill all the fields before clicking next button");
 					}
 					
 				} else {
+					logger.error("Basic LPS Id Already Available.Create New Basic Id");
 					throw new EarthingLpsException("Basic LPS Id Already Available.Create New Basic Id");
 				}
 			}
 			else {
+				logger.error("Given Basic LPS Id is Not Registered in Basic LPS");
 				throw new EarthingLpsException("Given Basic LPS Id is Not Registered in Basic LPS");
 			}
 		}
 		else {
+			logger.error("Invalid Inputs");
 			throw new EarthingLpsException("Invalid Inputs");
 		}
 			
@@ -89,12 +99,18 @@ public class EarthingLpsServiceImpl implements EarthingLpsService {
 		if (userName != null) {
 			List<EarthingReport> earthingLpsRepo = earthingLpsRepository.findByUserNameAndBasicLpsId(userName,
 					basicLpsId);
-			if (earthingLpsRepo != null && !earthingLpsRepo.isEmpty()) {				
+			if (earthingLpsRepo != null && !earthingLpsRepo.isEmpty()) {
+				for(EarthingReport earthingReportItr : earthingLpsRepo) {
+					earthingReportItr.setEarthingLpsDescription(findNonRemovedObjects.findNonRemovedEarthingLpsBuildings(earthingReportItr));
+					logger.debug("Successfully done findNonRemovedEarthingLpsBuildings() call");
+				}
 				return earthingLpsRepo;
 			} else {
-				throw new EarthingLpsException("Given UserName & Id doesn't exist in Down Conductor Details");
+				logger.error("Given UserName & Id doesn't exist in Earthing Report Details");
+				throw new EarthingLpsException("Given UserName & Id doesn't exist in Earthing Report Details");
 			}
 		} else {
+			logger.error("Invalid Inputs");
 			throw new EarthingLpsException("Invalid Inputs");
 		}
 	}
@@ -112,11 +128,14 @@ public class EarthingLpsServiceImpl implements EarthingLpsService {
 				earthingReport.setUpdatedDate(LocalDateTime.now());
 				earthingReport.setUpdatedBy(userFullName.findByUserName(earthingReport.getUserName()));
 				earthingLpsRepository.save(earthingReport);
+				logger.debug("Earthing Report Details Successfully Updated in DB");
 			} else {
+				logger.error("Given Basic LPS Id and Earthing LPS Id is Invalid");
 				throw new EarthingLpsException("Given Basic LPS Id and Earthing LPS Id is Invalid");
 			}
 
 		} else {
+			logger.error("Invalid inputs");
 			throw new EarthingLpsException("Invalid inputs");
 		}
 	}

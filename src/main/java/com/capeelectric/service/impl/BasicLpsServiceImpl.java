@@ -47,11 +47,12 @@ public class BasicLpsServiceImpl implements BasicLpsService {
 					return basicLpsRepository.save(basicLps);
 				}
 				else {
-					//logger.debug("Client name already exists");
+					logger.error("Client name "+basicLps.getClientName()+" already exists");
 					throw new BasicLpsException("Client name "+basicLps.getClientName()+" already exists");
 				}
 			
 		} else {
+			logger.error("Invalid Inputs");
 			throw new BasicLpsException("Invalid Inputs");
 		}
 	}
@@ -62,12 +63,15 @@ public class BasicLpsServiceImpl implements BasicLpsService {
 		if (userName != null) {
 			List<BasicLps> basicLpsDetailsRepo = basicLpsRepository.findByUserNameAndBasicLpsId(userName,
 					basicLpsId);
-			if (basicLpsDetailsRepo != null && !basicLpsDetailsRepo.isEmpty()) {				
+			if (basicLpsDetailsRepo != null && !basicLpsDetailsRepo.isEmpty()) {	
+				logger.debug("Basic Client Repo data available");
 				return basicLpsDetailsRepo;
 			} else {
+				logger.error("Given UserName & Id doesn't exist in Basic Lps Details");
 				throw new BasicLpsException("Given UserName & Id doesn't exist in Basic Lps Details");
 			}
 		} else {
+			logger.error("Invalid Inputs");
 			throw new BasicLpsException("Invalid Inputs");
 		}
 	}
@@ -83,11 +87,15 @@ public class BasicLpsServiceImpl implements BasicLpsService {
 				basicLps.setUpdatedDate(LocalDateTime.now());
 				basicLps.setUpdatedBy(userFullName.findByUserName(basicLps.getUserName()));
 				basicLpsRepository.save(basicLps);
+				logger.debug("Basic Lps successfully Updated in DB");
+
 			} else {
+				logger.error("Given Basic LPS Id is Invalid");
 				throw new BasicLpsException("Given Basic LPS Id is Invalid");
 			}
 
 		} else {
+			logger.error("Invalid Inputs");
 			throw new BasicLpsException("Invalid inputs");
 		}
 	}
