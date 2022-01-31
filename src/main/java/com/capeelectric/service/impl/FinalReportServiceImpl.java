@@ -147,39 +147,39 @@ public class FinalReportServiceImpl implements FinalReportService {
 				 airTermination.get().setLpsAirDescription(
 							findNonRemovedObject.findNonRemovedAirTerminationBuildings(airTermination.get()));
 				lpsFinalReport.setAirTermination(airTermination.get());
+				
+				 if (downConductorReport.isPresent() && downConductorReport != null) {
+					 downConductorReport.get().setDownConductorDescription(
+								findNonRemovedObject.findNonRemovedDownConductorsBuildings(downConductorReport.get()));
+					lpsFinalReport.setDownConductorReport(downConductorReport.get());
+				}
 
-			}
-			 if (downConductorReport.isPresent() && downConductorReport != null) {
-				 downConductorReport.get().setDownConductorDescription(
-							findNonRemovedObject.findNonRemovedDownConductorsBuildings(downConductorReport.get()));
-				lpsFinalReport.setDownConductorReport(downConductorReport.get());
-			}
+				 if (earthingReport.isPresent() && earthingReport != null) {
+					 earthingReport.get().setEarthingLpsDescription(
+								findNonRemovedObject.findNonRemovedEarthingLpsBuildings(earthingReport.get()));
+					lpsFinalReport.setEarthingReport(earthingReport.get());
+				}
 
-			 if (earthingReport.isPresent() && earthingReport != null) {
-				 earthingReport.get().setEarthingLpsDescription(
-							findNonRemovedObject.findNonRemovedEarthingLpsBuildings(earthingReport.get()));
-				lpsFinalReport.setEarthingReport(earthingReport.get());
-			}
+				 if (spdReport.isPresent() && spdReport != null) {
+					 spdReport.get().setSpd(
+								findNonRemovedObject.findNonRemovedSpdBuildings(spdReport.get()));
+					lpsFinalReport.setSpdReport(spdReport.get());
+				}
 
-			 if (spdReport.isPresent() && spdReport != null) {
-				 spdReport.get().setSpd(
-							findNonRemovedObject.findNonRemovedSpdBuildings(spdReport.get()));
-				lpsFinalReport.setSpdReport(spdReport.get());
-			}
+				 if (seperationDistanceReport.isPresent() && seperationDistanceReport != null) {
+					 seperationDistanceReport.get().setSeperationDistanceDescription(
+								findNonRemovedObject.findNonRemovedSeperationDistanceBuildings(seperationDistanceReport.get()));
+					lpsFinalReport.setSeperationDistanceReport(seperationDistanceReport.get());
 
-			 if (seperationDistanceReport.isPresent() && seperationDistanceReport != null) {
-				 seperationDistanceReport.get().setSeperationDistanceDescription(
-							findNonRemovedObject.findNonRemovedSeperationDistanceBuildings(seperationDistanceReport.get()));
-				lpsFinalReport.setSeperationDistanceReport(seperationDistanceReport.get());
+				}
+				 if (earthStudReport.isPresent() && earthStudReport != null) {
+					 earthStudReport.get().setEarthStudDescription(
+								findNonRemovedObject.findNonRemovedEarthStudBuildings(earthStudReport.get()));
+					lpsFinalReport.setEarthStudReport(earthStudReport.get());
+					logger.debug("Successfully Seven_Steps fetching Operation done");
+					return Optional.of(lpsFinalReport);
 
-			}
-			 if (earthStudReport.isPresent() && earthStudReport != null) {
-				 earthStudReport.get().setEarthStudDescription(
-							findNonRemovedObject.findNonRemovedEarthStudBuildings(earthStudReport.get()));
-				lpsFinalReport.setEarthStudReport(earthStudReport.get());
-				logger.debug("Successfully Seven_Steps fetching Operation done");
-				return Optional.of(lpsFinalReport);
-
+				}
 			}
 
 		}
