@@ -6,6 +6,9 @@ package com.capeelectric.service.impl;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+
+import javax.transaction.Transactional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +50,7 @@ public class SPDServiceImpl implements SPDService{
 	@Autowired
 	private FindNonRemovedObjects findNonRemovedObjects;
 	
+	@Transactional
 	@Override
 	public void addSPDDetails(SpdReport spdReport)
 			throws  SPDException{
@@ -111,6 +115,7 @@ public class SPDServiceImpl implements SPDService{
 		}
 	}
 	
+	@Transactional
 	@Override
 	public void updateSpdDetails(SpdReport spdReport) throws SPDException {
 
@@ -124,7 +129,7 @@ public class SPDServiceImpl implements SPDService{
 				spdReport.setUpdatedDate(LocalDateTime.now());
 				spdReport.setUpdatedBy(userFullName.findByUserName(spdReport.getUserName()));
 				spdRepository.save(spdReport);
-				logger.debug("Earthing Report Details Successfully Updated in DB");
+				logger.debug("SPD Report Details Successfully Updated in DB");
 			} else {
 				logger.error("Given Basic LPS Id and SPD Id is Invalid");
 				throw new SPDException("Given Basic LPS Id and SPD Id is Invalid");

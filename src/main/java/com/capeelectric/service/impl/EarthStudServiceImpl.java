@@ -11,6 +11,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -122,6 +124,7 @@ public class EarthStudServiceImpl implements EarthStudService {
 	@Autowired
 	private FindNonRemovedObjects findNonRemovedObjects;
 
+	@Transactional
 	@Override
 	public void addEarthStudDetails(EarthStudReport earthStudReport)
 			throws EarthStudException, BasicLpsException, AirTerminationException, DownConductorException,
@@ -270,6 +273,7 @@ public class EarthStudServiceImpl implements EarthStudService {
 		}
 	}
 
+	@Transactional
 	@Override
 	public void updateEarthStudDetails(EarthStudReport earthStudReport) throws EarthStudException {
 

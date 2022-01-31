@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
+import javax.transaction.Transactional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +15,21 @@ import org.springframework.stereotype.Service;
 import com.capeelectric.exception.AirTerminationException;
 import com.capeelectric.model.AirTermination;
 import com.capeelectric.model.BasicLps;
+import com.capeelectric.model.DownConductorDescription;
+import com.capeelectric.model.EarthStudDescription;
+import com.capeelectric.model.EarthingLpsDescription;
 import com.capeelectric.model.LpsAirDiscription;
+import com.capeelectric.model.SPD;
+import com.capeelectric.model.SeperationDistanceDescription;
 import com.capeelectric.repository.AirTerminationLpsRepository;
 import com.capeelectric.repository.BasicLpsRepository;
+import com.capeelectric.repository.DownConductorListRepository;
+import com.capeelectric.repository.EarthStudListRepository;
+import com.capeelectric.repository.EarthingLpsListRepository;
+import com.capeelectric.repository.SPDListRepository;
+import com.capeelectric.repository.SeperationDistanceListRepository;
 import com.capeelectric.service.AirTerminationLpsService;
+import com.capeelectric.util.AddRemovedStatus;
 import com.capeelectric.util.FindNonRemovedObjects;
 import com.capeelectric.util.UserFullName;
 
@@ -44,7 +57,26 @@ public class AirTerminationLpsServiceImpl implements AirTerminationLpsService {
 	
 	@Autowired
 	private FindNonRemovedObjects findNonRemovedObjects;
+	
+	@Autowired
+	private DownConductorListRepository downConductorListRepository;
+	
+	@Autowired
+	private EarthingLpsListRepository earthingLpsListRepository;
+	
+	@Autowired
+	private SPDListRepository spdListRepository;
+	
+	@Autowired
+	private SeperationDistanceListRepository seperationDistanceListRepository;
+	
+	@Autowired
+	private EarthStudListRepository earthStudListRepository;
+	
+	@Autowired
+	private AddRemovedStatus addRemovedStatus;
 
+	@Transactional
 	@Override
 	public void addAirTerminationLpsDetails(AirTermination airTermination ) throws AirTerminationException {
 		if (airTermination != null && airTermination.getUserName() != null && airTermination.getUserName() != "") {
@@ -111,6 +143,7 @@ public class AirTerminationLpsServiceImpl implements AirTerminationLpsService {
 
 	}
 
+	@Transactional
 	@Override
 	public void updateAirTerminationLps(AirTermination airTermination) throws AirTerminationException {
 
@@ -121,6 +154,21 @@ public class AirTerminationLpsServiceImpl implements AirTerminationLpsService {
 					.findById(airTermination.getAirTerminationId());
 			if (airTerminationLpsRepo.isPresent()
 					&& airTerminationLpsRepo.get().getBasicLpsId().equals(airTermination.getBasicLpsId())) {
+				addRemovedStatus.addRemoveStatusInDownConductors(airTermination.getLpsAirDescription());
+				addRemovedStatus.addRemoveStatusInEarthingLps(airTermination.getLpsAirDescription());
+				addRemovedStatus.addRemoveStatusInSpd(airTermination.getLpsAirDescription());
+				addRemovedStatus.addRemoveStatusInSeperationDistance(airTermination.getLpsAirDescription());
+				addRemovedStatus.addRemoveStatusInEarthStud(airTermination.getLpsAirDescription());
+
+
+				List<LpsAirDiscription> lpsAirDiscription = airTermination.getLpsAirDescription();
+				for (LpsAirDiscription lpsAirDiscriptionItr : lpsAirDiscription) {
+					logger.debug("Building Count value adding for new buildings");
+					// Building count value adding for new buildings
+					if (lpsAirDiscriptionItr != null && lpsAirDiscriptionItr.getBuildingCount() == null) {
+						lpsAirDiscriptionItr.setBuildingCount(new Random().nextInt(999999999));
+					}
+				}				
 				airTermination.setUpdatedDate(LocalDateTime.now());
 				airTermination.setUpdatedBy(userFullName.findByUserName(airTermination.getUserName()));
 			    airTerminationLpsRepository.save(airTermination);
@@ -135,5 +183,5 @@ public class AirTerminationLpsServiceImpl implements AirTerminationLpsService {
 			throw new AirTerminationException("Invalid inputs");
 		}
 	}
-
+	
 }

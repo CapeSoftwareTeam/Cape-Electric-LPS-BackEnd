@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +35,7 @@ public class BasicLpsServiceImpl implements BasicLpsService {
 	@Autowired
 	private UserFullName userFullName;
 	
+	@Transactional
 	@Override
 	public BasicLps addBasicLpsDetails(BasicLps basicLps) throws BasicLpsException {
 		
@@ -76,6 +79,7 @@ public class BasicLpsServiceImpl implements BasicLpsService {
 		}
 	}
 	
+	@Transactional
 	@Override
 	public void updateBasicLpsDetails(BasicLps basicLps) throws BasicLpsException {
 

@@ -7,6 +7,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +50,7 @@ public class DownConductorServiceImpl implements DownConductorService{
 	@Autowired
 	private FindNonRemovedObjects findNonRemovedObjects;
 	
+	@Transactional
 	@Override
 	public void addDownConductorsDetails(DownConductorReport downConductorReport)
 			throws  DownConductorException{
@@ -113,6 +116,7 @@ public class DownConductorServiceImpl implements DownConductorService{
 		}
 	}
 	
+	@Transactional
 	@Override
 	public void updateDownConductorDetails(DownConductorReport downConductorReport) throws DownConductorException {
 
