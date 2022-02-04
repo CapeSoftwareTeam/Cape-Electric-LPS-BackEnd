@@ -26,7 +26,7 @@ public class AirExpansion implements Serializable {
 	private Integer expansionId;
 	
 	@Column(name = "FLAG")
-	private Boolean flag;
+	private String flag;
 
 	@Column(name = "PHYSICAL_INSPECTION_OBSERVATION")
 	private String physicalInspectionOb;
@@ -39,33 +39,45 @@ public class AirExpansion implements Serializable {
 
 	@Column(name = "STRIGHTCONNECTOR_PIECS_REMARKS")
 	private String strightConnectorPiecRe;
+	
+	@Column(name = "MATERIAL_OF_CONNECTOR_OBSERVATION")
+	private String materialOfConnectorOb;
+
+	@Column(name = "MATERIAL_OF_CONNECTOR_REMARKS")
+	private String materialOfConnectorRe;
 
 	@Column(name = "MATERIAL_OF_EXPANSIONPIECE_OBSERVATION")
 	private String materialOfExpansionOb;
 
 	@Column(name = "MATERIAL_OF_EXPANSIONPIECE_REMARKS")
 	private String materialOfExpansionRe;
+	
+	@Column(name = "INTERVAL_BETWEEN_EXPANSION_OBSERVATION")
+	private Integer intervalBwExpansionOb;
+
+	@Column(name = "INTERVAL_BETWEEN_EXPANSION_REMARKS")
+	private String intervalBwExpansionRe;
 
 	@Column(name = "TOTALNO_EXPANSIONPIECE_OBSERVATION")
-	private String totalNoExpansionOb;
+	private Integer totalNoExpansionOb;
 
 	@Column(name = "TOTALNO_EXPANSIONPIECE_REMARKS")
 	private String totalNoExpansionRe;
 
 	@Column(name = "INSP_NO_OBS")
-	private String inspectionNoOb;
+	private Integer inspectionNoOb;
 
 	@Column(name = "INSP_NO_REM")
 	private String inspectionNoRe;
 
 	@Column(name = "INSP_PASSED_NO_OBS")
-	private String inspectionPassedNoOb;
+	private Integer inspectionPassedNoOb;
 
 	@Column(name = "INSP_PASSED_NO_REM ")
 	private String inspectionPassedNoRe;
 
 	@Column(name = "INSP_FAILED_NO_OBS")
-	private String inspectionFailedNoOb;
+	private Integer inspectionFailedNoOb;
 
 	@Column(name = "INSP_FAILED_NO_REM")
 	private String inspectionFailedNoRe;
@@ -131,28 +143,12 @@ public class AirExpansion implements Serializable {
 		this.materialOfExpansionRe = materialOfExpansionRe;
 	}
 
-	public String getTotalNoExpansionOb() {
-		return totalNoExpansionOb;
-	}
-
-	public void setTotalNoExpansionOb(String totalNoExpansionOb) {
-		this.totalNoExpansionOb = totalNoExpansionOb;
-	}
-
 	public String getTotalNoExpansionRe() {
 		return totalNoExpansionRe;
 	}
 
 	public void setTotalNoExpansionRe(String totalNoExpansionRe) {
 		this.totalNoExpansionRe = totalNoExpansionRe;
-	}
-
-	public String getInspectionNoOb() {
-		return inspectionNoOb;
-	}
-
-	public void setInspectionNoOb(String inspectionNoOb) {
-		this.inspectionNoOb = inspectionNoOb;
 	}
 
 	public String getInspectionNoRe() {
@@ -163,28 +159,12 @@ public class AirExpansion implements Serializable {
 		this.inspectionNoRe = inspectionNoRe;
 	}
 
-	public String getInspectionPassedNoOb() {
-		return inspectionPassedNoOb;
-	}
-
-	public void setInspectionPassedNoOb(String inspectionPassedNoOb) {
-		this.inspectionPassedNoOb = inspectionPassedNoOb;
-	}
-
 	public String getInspectionPassedNoRe() {
 		return inspectionPassedNoRe;
 	}
 
 	public void setInspectionPassedNoRe(String inspectionPassedNoRe) {
 		this.inspectionPassedNoRe = inspectionPassedNoRe;
-	}
-
-	public String getInspectionFailedNoOb() {
-		return inspectionFailedNoOb;
-	}
-
-	public void setInspectionFailedNoOb(String inspectionFailedNoOb) {
-		this.inspectionFailedNoOb = inspectionFailedNoOb;
 	}
 
 	public String getInspectionFailedNoRe() {
@@ -204,12 +184,78 @@ public class AirExpansion implements Serializable {
 		this.lpsAirDescription = lpsAirDescription;
 	}
 
-	public Boolean getFlag() {
+
+	public String getFlag() {
 		return flag;
 	}
 
-	public void setFlag(Boolean flag) {
+	public void setFlag(String flag) {
 		this.flag = flag;
 	}
+
+	public String getMaterialOfConnectorOb() {
+		return materialOfConnectorOb;
+	}
+
+	public void setMaterialOfConnectorOb(String materialOfConnectorOb) {
+		this.materialOfConnectorOb = materialOfConnectorOb;
+	}
+
+	public String getMaterialOfConnectorRe() {
+		return materialOfConnectorRe;
+	}
+
+	public void setMaterialOfConnectorRe(String materialOfConnectorRe) {
+		this.materialOfConnectorRe = materialOfConnectorRe;
+	}
+
+	public Integer getIntervalBwExpansionOb() {
+		return intervalBwExpansionOb;
+	}
+
+	public void setIntervalBwExpansionOb(Integer intervalBwExpansionOb) {
+		this.intervalBwExpansionOb = intervalBwExpansionOb;
+	}
+
+	public String getIntervalBwExpansionRe() {
+		return intervalBwExpansionRe;
+	}
+
+	public void setIntervalBwExpansionRe(String intervalBwExpansionRe) {
+		this.intervalBwExpansionRe = intervalBwExpansionRe;
+	}
+
+	public Integer getTotalNoExpansionOb() {
+		return totalNoExpansionOb;
+	}
+
+	public void setTotalNoExpansionOb(Integer totalNoExpansionOb) {
+		this.totalNoExpansionOb = totalNoExpansionOb;
+	}
+
+	public Integer getInspectionNoOb() {
+		return inspectionNoOb;
+	}
+
+	public void setInspectionNoOb(Integer inspectionNoOb) {
+		this.inspectionNoOb = inspectionNoOb;
+	}
+
+	public Integer getInspectionPassedNoOb() {
+		return inspectionPassedNoOb;
+	}
+
+	public void setInspectionPassedNoOb(Integer inspectionPassedNoOb) {
+		this.inspectionPassedNoOb = inspectionPassedNoOb;
+	}
+
+	public Integer getInspectionFailedNoOb() {
+		return inspectionFailedNoOb;
+	}
+
+	public void setInspectionFailedNoOb(Integer inspectionFailedNoOb) {
+		this.inspectionFailedNoOb = inspectionFailedNoOb;
+	}
+	
 
 }

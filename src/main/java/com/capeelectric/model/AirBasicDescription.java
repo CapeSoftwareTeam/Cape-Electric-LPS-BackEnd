@@ -1,5 +1,6 @@
 package com.capeelectric.model;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -29,11 +30,14 @@ public class AirBasicDescription implements Serializable {
 	@Column(name = "AIR_BASIC_DESCRIPTION_ID")
 	private Integer airBasicDescriptionId;
 	
-	@Column(name = "APPROVED_COPYOF_DRAWING_OBSERVATION")
-	private String approvedDrawingObserv;
+	@Column(name = "FLAG")
+	private String flag;
 	
-	@Column(name = "APPROVED_COPYOF_DRAWING_REMARKS")
-	private String approvedDrawingRemarks;
+	@Column(name = "CONSULTANT_NAME_OBSERVATION")
+	private String consultantNameObserv;
+	
+	@Column(name = "CONSULTANT_NAME_REMARKS")
+	private String consultantNameRemarks;
 	
 	@Column(name = "ARCHITECT_NAMEINOBSERVATION")
 	private String architectNameObserv;
@@ -42,13 +46,13 @@ public class AirBasicDescription implements Serializable {
 	private String architectNameRemarks;
 	
 	@Column(name = "DATE_OF_DESIGN_OBSERVATION")
-	private String designDateObserv;
+	private LocalDateTime designDateObserv;
 	
 	@Column(name = "DATE_OF_DESIGN_REMARKS")
 	private String designDateRemarks;
 	
 	@Column(name = "DATEOF_APPROVAL_OB")
-	private String dateOfApprovalOb;
+	private LocalDateTime dateOfApprovalOb;
 	
 	@Column(name = "DATEOF_APPROVAL_REM")
 	private String dateOfApprovalRem;
@@ -77,11 +81,17 @@ public class AirBasicDescription implements Serializable {
 	@Column(name = "REMARKS_DEVIATION_CHECKING")
 	private String deviationRemarks;
 	
-	@Column(name = "OBSERVATION_QUALITY_OF_INSTALLATION")
-	private String installationQualityObserv;
+	@Column(name = "DEVIATION_INSTALLATION_OBSERVATION")
+	private String deviationInstallationObserv;
 	
-	@Column(name = "REMARKS_QUALITY_OF_INSTALLATION")
-	private String installationQualityRemarks;
+	@Column(name = "DEVIATION_INSTALLATION_REMARKS")
+	private String deviationInstallationRemarks;
+	
+	@Column(name = "COMPANY_NAME_OBSERVATION")
+	private String companyNameObserv;
+	
+	@Column(name = "COMPANY_NAME_REMARKS")
+	private String companyNameRemarks;
 	
 	@Column(name = "CONNECTION_MADE_BRAZINGOBSERVATION")
 	private String connectionMadeBraOb;
@@ -139,21 +149,6 @@ public class AirBasicDescription implements Serializable {
 		this.lpsAirDescription = lpsAirDescription;
 	}
 
-	public String getApprovedDrawingObserv() {
-		return approvedDrawingObserv;
-	}
-
-	public void setApprovedDrawingObserv(String approvedDrawingObserv) {
-		this.approvedDrawingObserv = approvedDrawingObserv;
-	}
-
-	public String getApprovedDrawingRemarks() {
-		return approvedDrawingRemarks;
-	}
-
-	public void setApprovedDrawingRemarks(String approvedDrawingRemarks) {
-		this.approvedDrawingRemarks = approvedDrawingRemarks;
-	}
 
 	public String getArchitectNameObserv() {
 		return architectNameObserv;
@@ -171,13 +166,6 @@ public class AirBasicDescription implements Serializable {
 		this.architectNameRemarks = architectNameRemarks;
 	}
 
-	public String getDesignDateObserv() {
-		return designDateObserv;
-	}
-
-	public void setDesignDateObserv(String designDateObserv) {
-		this.designDateObserv = designDateObserv;
-	}
 
 	public String getDesignDateRemarks() {
 		return designDateRemarks;
@@ -223,14 +211,6 @@ public class AirBasicDescription implements Serializable {
 		return revisionNoObserv;
 	}
 
-	public String getDateOfApprovalOb() {
-		return dateOfApprovalOb;
-	}
-
-	public void setDateOfApprovalOb(String dateOfApprovalOb) {
-		this.dateOfApprovalOb = dateOfApprovalOb;
-	}
-
 	public String getDateOfApprovalRem() {
 		return dateOfApprovalRem;
 	}
@@ -267,21 +247,6 @@ public class AirBasicDescription implements Serializable {
 		this.deviationRemarks = deviationRemarks;
 	}
 
-	public String getInstallationQualityObserv() {
-		return installationQualityObserv;
-	}
-
-	public void setInstallationQualityObserv(String installationQualityObserv) {
-		this.installationQualityObserv = installationQualityObserv;
-	}
-
-	public String getInstallationQualityRemarks() {
-		return installationQualityRemarks;
-	}
-
-	public void setInstallationQualityRemarks(String installationQualityRemarks) {
-		this.installationQualityRemarks = installationQualityRemarks;
-	}
 
 	public String getConnectionMadeBraOb() {
 		return connectionMadeBraOb;
@@ -362,5 +327,79 @@ public class AirBasicDescription implements Serializable {
 	public void setBondingEquipotentialRe(String bondingEquipotentialRe) {
 		this.bondingEquipotentialRe = bondingEquipotentialRe;
 	}
+
+	public String getConsultantNameObserv() {
+		return consultantNameObserv;
+	}
+
+	public void setConsultantNameObserv(String consultantNameObserv) {
+		this.consultantNameObserv = consultantNameObserv;
+	}
+
+	public String getConsultantNameRemarks() {
+		return consultantNameRemarks;
+	}
+
+	public void setConsultantNameRemarks(String consultantNameRemarks) {
+		this.consultantNameRemarks = consultantNameRemarks;
+	}
+
+	public LocalDateTime getDesignDateObserv() {
+		return designDateObserv;
+	}
+
+	public void setDesignDateObserv(LocalDateTime designDateObserv) {
+		this.designDateObserv = designDateObserv;
+	}
+
+	public LocalDateTime getDateOfApprovalOb() {
+		return dateOfApprovalOb;
+	}
+
+	public void setDateOfApprovalOb(LocalDateTime dateOfApprovalOb) {
+		this.dateOfApprovalOb = dateOfApprovalOb;
+	}
+
+	public String getDeviationInstallationObserv() {
+		return deviationInstallationObserv;
+	}
+
+	public void setDeviationInstallationObserv(String deviationInstallationObserv) {
+		this.deviationInstallationObserv = deviationInstallationObserv;
+	}
+
+	public String getDeviationInstallationRemarks() {
+		return deviationInstallationRemarks;
+	}
+
+	public void setDeviationInstallationRemarks(String deviationInstallationRemarks) {
+		this.deviationInstallationRemarks = deviationInstallationRemarks;
+	}
+
+	public String getCompanyNameObserv() {
+		return companyNameObserv;
+	}
+
+	public void setCompanyNameObserv(String companyNameObserv) {
+		this.companyNameObserv = companyNameObserv;
+	}
+
+	public String getCompanyNameRemarks() {
+		return companyNameRemarks;
+	}
+
+	public void setCompanyNameRemarks(String companyNameRemarks) {
+		this.companyNameRemarks = companyNameRemarks;
+	}
+
+	public String getFlag() {
+		return flag;
+	}
+
+	public void setFlag(String flag) {
+		this.flag = flag;
+	}
+	
+	
 
 }

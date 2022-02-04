@@ -46,6 +46,9 @@ public class LpsAirDiscription implements Serializable {
 	@Column(name = "BUILDING_TYPE")
 	private String buildingType;
 	
+	@Column(name = "BUILDING_TYPE_OTHERS")
+	private String buildingTypeOthers;
+	
 	@Column(name = "BUILDING_LENGTH")
 	private Integer buildingLength;
 	
@@ -55,8 +58,54 @@ public class LpsAirDiscription implements Serializable {
 	@Column(name = "BUILDING_HEIGHT")
 	private Integer buildingHeight;
 	
+	@Column(name = "PROTRUSION_HEIGHT")
+	private Integer protrusionHeight;
+	
 	@Column(name = "PROTECTION_LEVEL")
 	private String protectionLevel;
+	
+	@Column(name = "AIR_BASIC_AVAILABILITY_OB")
+	private String airBasicDescriptionAvailabilityOb;
+	
+	@Column(name = "AIR_VERTICAL_TERMINAL_AVAILABILITY_OB")
+	private String verticalAirTerminationAvailabilityOb;
+	
+	@Column(name = "AIR_CLAMPS_AVAILABILITY_OB")
+	private String airClampsAvailabilityOb;
+	
+	@Column(name = "AIR_CONNECTORS_AVAILABILITY_OB")
+	private String airConnectorsAvailabilityOb;
+	
+	@Column(name = "AIR_EXPANSION_AVAILABILITY_OB")
+	private String airExpansionAvailabilityOb;
+	
+	@Column(name = "AIR_HOLDER_AVAILABILITY_OB")
+	private String airHolderDescriptionAvailabilityOb;
+	
+	@Column(name = "AIR_MESH_AVAILABILITY_OB")
+	private String airMeshDescriptionAvailabilityOb;
+	
+	@Column(name = "AIR_BASIC_AVAILABILITY_REM")
+	private String airBasicDescriptionAvailabilityRem;
+	
+	@Column(name = "AIR_VERTICAL_TERMINAL_AVAILABILITY_REM")
+	private String verticalAirTerminationAvailabilityRem;
+	
+	@Column(name = "AIR_CLAMPS_AVAILABILITY_REM")
+	private String airClampsAvailabilityRem;
+	
+	@Column(name = "AIR_CONNECTORS_AVAILABILITY_REM")
+	private String airConnectorsAvailabilityRem;
+	
+	@Column(name = "AIR_EXPANSION_AVAILABILITY_REM")
+	private String airExpansionAvailabilityRem;
+	
+	@Column(name = "AIR_HOLDER_AVAILABILITY_REM")
+	private String airHolderDescriptionAvailabilityRem;
+	
+	@Column(name = "AIR_MESH_AVAILABILITY_REM")
+	private String airMeshDescriptionAvailabilityRem;
+	
 	
 	@Column(name = "FLAG")
 	private String flag;
@@ -91,7 +140,7 @@ public class LpsAirDiscription implements Serializable {
 	
 	@JsonBackReference
 	@ManyToOne
-	@JoinColumn(name = "AIR_Termination_DETAILS_ID")
+	@JoinColumn(name = "AIR_TERMINATION_DETAILS_ID")
 	private AirTermination airTerminationDetails;
 
 	public Integer getLpsAirDescId() {
@@ -164,6 +213,135 @@ public class LpsAirDiscription implements Serializable {
 
 	public void setProtectionLevel(String protectionLevel) {
 		this.protectionLevel = protectionLevel;
+	}
+	
+
+	public String getBuildingTypeOthers() {
+		return buildingTypeOthers;
+	}
+
+	public void setBuildingTypeOthers(String buildingTypeOthers) {
+		this.buildingTypeOthers = buildingTypeOthers;
+	}
+
+	public Integer getProtrusionHeight() {
+		return protrusionHeight;
+	}
+
+	public void setProtrusionHeight(Integer protrusionHeight) {
+		this.protrusionHeight = protrusionHeight;
+	}
+
+	public String getAirBasicDescriptionAvailabilityOb() {
+		return airBasicDescriptionAvailabilityOb;
+	}
+
+	public void setAirBasicDescriptionAvailabilityOb(String airBasicDescriptionAvailabilityOb) {
+		this.airBasicDescriptionAvailabilityOb = airBasicDescriptionAvailabilityOb;
+	}
+
+	public String getVerticalAirTerminationAvailabilityOb() {
+		return verticalAirTerminationAvailabilityOb;
+	}
+
+	public void setVerticalAirTerminationAvailabilityOb(String verticalAirTerminationAvailabilityOb) {
+		this.verticalAirTerminationAvailabilityOb = verticalAirTerminationAvailabilityOb;
+	}
+
+	public String getAirClampsAvailabilityOb() {
+		return airClampsAvailabilityOb;
+	}
+
+	public void setAirClampsAvailabilityOb(String airClampsAvailabilityOb) {
+		this.airClampsAvailabilityOb = airClampsAvailabilityOb;
+	}
+
+	public String getAirConnectorsAvailabilityOb() {
+		return airConnectorsAvailabilityOb;
+	}
+
+	public void setAirConnectorsAvailabilityOb(String airConnectorsAvailabilityOb) {
+		this.airConnectorsAvailabilityOb = airConnectorsAvailabilityOb;
+	}
+
+	public String getAirExpansionAvailabilityOb() {
+		return airExpansionAvailabilityOb;
+	}
+
+	public void setAirExpansionAvailabilityOb(String airExpansionAvailabilityOb) {
+		this.airExpansionAvailabilityOb = airExpansionAvailabilityOb;
+	}
+
+	public String getAirHolderDescriptionAvailabilityOb() {
+		return airHolderDescriptionAvailabilityOb;
+	}
+
+	public void setAirHolderDescriptionAvailabilityOb(String airHolderDescriptionAvailabilityOb) {
+		this.airHolderDescriptionAvailabilityOb = airHolderDescriptionAvailabilityOb;
+	}
+
+	public String getAirMeshDescriptionAvailabilityOb() {
+		return airMeshDescriptionAvailabilityOb;
+	}
+
+	public void setAirMeshDescriptionAvailabilityOb(String airMeshDescriptionAvailabilityOb) {
+		this.airMeshDescriptionAvailabilityOb = airMeshDescriptionAvailabilityOb;
+	}
+
+	public String getAirBasicDescriptionAvailabilityRem() {
+		return airBasicDescriptionAvailabilityRem;
+	}
+
+	public void setAirBasicDescriptionAvailabilityRem(String airBasicDescriptionAvailabilityRem) {
+		this.airBasicDescriptionAvailabilityRem = airBasicDescriptionAvailabilityRem;
+	}
+
+	public String getVerticalAirTerminationAvailabilityRem() {
+		return verticalAirTerminationAvailabilityRem;
+	}
+
+	public void setVerticalAirTerminationAvailabilityRem(String verticalAirTerminationAvailabilityRem) {
+		this.verticalAirTerminationAvailabilityRem = verticalAirTerminationAvailabilityRem;
+	}
+
+	public String getAirClampsAvailabilityRem() {
+		return airClampsAvailabilityRem;
+	}
+
+	public void setAirClampsAvailabilityRem(String airClampsAvailabilityRem) {
+		this.airClampsAvailabilityRem = airClampsAvailabilityRem;
+	}
+
+	public String getAirConnectorsAvailabilityRem() {
+		return airConnectorsAvailabilityRem;
+	}
+
+	public void setAirConnectorsAvailabilityRem(String airConnectorsAvailabilityRem) {
+		this.airConnectorsAvailabilityRem = airConnectorsAvailabilityRem;
+	}
+
+	public String getAirExpansionAvailabilityRem() {
+		return airExpansionAvailabilityRem;
+	}
+
+	public void setAirExpansionAvailabilityRem(String airExpansionAvailabilityRem) {
+		this.airExpansionAvailabilityRem = airExpansionAvailabilityRem;
+	}
+
+	public String getAirHolderDescriptionAvailabilityRem() {
+		return airHolderDescriptionAvailabilityRem;
+	}
+
+	public void setAirHolderDescriptionAvailabilityRem(String airHolderDescriptionAvailabilityRem) {
+		this.airHolderDescriptionAvailabilityRem = airHolderDescriptionAvailabilityRem;
+	}
+
+	public String getAirMeshDescriptionAvailabilityRem() {
+		return airMeshDescriptionAvailabilityRem;
+	}
+
+	public void setAirMeshDescriptionAvailabilityRem(String airMeshDescriptionAvailabilityRem) {
+		this.airMeshDescriptionAvailabilityRem = airMeshDescriptionAvailabilityRem;
 	}
 
 	public List<LpsVerticalAirTermination> getLpsVerticalAirTermination() {

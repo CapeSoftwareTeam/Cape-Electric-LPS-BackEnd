@@ -1,18 +1,22 @@
 package com.capeelectric.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "AIR_HOLDERS_DESCRIPTION_TABLE")
@@ -25,7 +29,7 @@ public class AirHolderDescription implements Serializable {
 	private Integer holderDescriptionId;
 
 	@Column(name = "FLAG")
-	private Boolean flag;
+	private String flag;
 
 	@Column(name = "PHYSICAL_INSPECTION_OBSERVATION")
 	private String physicalInspectionOb;
@@ -44,43 +48,7 @@ public class AirHolderDescription implements Serializable {
 
 	@Column(name = "CODUCTOR_HOLDER_REMARKS")
 	private String conductorHolderRe;
-	
-	@Column(name = "HOLDER_TYPE_OBSERVATION")
-	private String holderTypeOb;
-
-	@Column(name = "HOLDER_TYPE_REMARKS")
-	private String holderTypeRe;
-
-	@Column(name = "MATERIAL_OF_HOLDEROB")
-	private String materailOfHolderOb;
-
-	@Column(name = "MATERIAL_OF_HOLDERREM")
-	private String materailOfHolderRem;
-	
-	@Column(name = "TOTAL_HOLDERSNO_OBSERVATION")
-	private String totalHolderNoOb;
-
-	@Column(name = "TOTAL_HOLDERSNO_REMARKS")
-	private String totalHolderNoRe;
-	
-	@Column(name = "HO_INSP_NO_OBS")
-	private String holderInspNoOb;
-
-	@Column(name = "HO_INSP_NO_REM")
-	private String holderInspNoRe;
-
-	@Column(name = "HO_INSP_PASSED_NO_OBS")
-	private String holderInspPassedNoOb;
-
-	@Column(name = "HO_INSP_PASSED_NO_REM")
-	private String holderInspPassedNoRe;
-
-	@Column(name = "HO_INSP_FAILED_NO_OBS")
-	private String holderInspFailedNoOb;
-
-	@Column(name = "HO_INSP_FAILED_NO_REM")
-	private String holderInspFailedNoRe;
-	
+		
 	@Column(name = "MATERIAL_OFPARPET_HOLDEROB")
 	private String materailOfParpetHolderOb;
 
@@ -88,28 +56,32 @@ public class AirHolderDescription implements Serializable {
 	private String materailOfParpetHolderRem;
 
 	@Column(name = "TOTALPARPET_HOLDER_OBSERVATION")
-	private String totalParpetHolderNoOb;
+	private Integer totalParpetHolderNoOb;
 
 	@Column(name = "TOTALPARPET_HOLDER_REMARKS")
 	private String totalParpetHolderNoRe;
 
 	@Column(name = "PH_INSP_NO_OBS")
-	private String parpetInspectionNoOb;
+	private Integer parpetInspectionNoOb;
 
 	@Column(name = "PH_INSP_NO_REM")
 	private String parpetInspectionNoRe;
 
 	@Column(name = "PH_INSP_PASSED_NO_OBS")
-	private String parpetInspectionPassedNoOb;
+	private Integer parpetInspectionPassedNoOb;
 
 	@Column(name = "PH_INSP_PASSED_NO_REM")
 	private String parpetInspectionPassedNoRe;
 
 	@Column(name = "PH_INSP_FAILED_NO_OBS")
-	private String parpetInspectionFailedNoOb;
+	private Integer parpetInspectionFailedNoOb;
 
 	@Column(name = "PH_INSP_FAILED_NO_REM")
 	private String parpetInspectionFailedNoRe;
+	
+	@JsonManagedReference
+	@OneToMany(mappedBy = "airHolderDescription", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<AirHolderList> airHolderList;
 
 	@JsonBackReference
 	@ManyToOne(cascade = CascadeType.ALL)
@@ -118,22 +90,6 @@ public class AirHolderDescription implements Serializable {
 
 	public Integer getHolderDescriptionId() {
 		return holderDescriptionId;
-	}
-
-	public String getMaterailOfHolderOb() {
-		return materailOfHolderOb;
-	}
-
-	public void setMaterailOfHolderOb(String materailOfHolderOb) {
-		this.materailOfHolderOb = materailOfHolderOb;
-	}
-
-	public String getMaterailOfHolderRem() {
-		return materailOfHolderRem;
-	}
-
-	public void setMaterailOfHolderRem(String materailOfHolderRem) {
-		this.materailOfHolderRem = materailOfHolderRem;
 	}
 
 	public String getMaterailOfParpetHolderOb() {
@@ -150,14 +106,6 @@ public class AirHolderDescription implements Serializable {
 
 	public void setMaterailOfParpetHolderRem(String materailOfParpetHolderRem) {
 		this.materailOfParpetHolderRem = materailOfParpetHolderRem;
-	}
-
-	public String getHolderInspFailedNoRe() {
-		return holderInspFailedNoRe;
-	}
-
-	public void setHolderInspFailedNoRe(String holderInspFailedNoRe) {
-		this.holderInspFailedNoRe = holderInspFailedNoRe;
 	}
 
 	public void setHolderDescriptionId(Integer holderDescriptionId) {
@@ -212,45 +160,6 @@ public class AirHolderDescription implements Serializable {
 		this.conductorHolderRe = conductorHolderRe;
 	}
 
-	public String getHolderTypeOb() {
-		return holderTypeOb;
-	}
-
-	public void setHolderTypeOb(String holderTypeOb) {
-		this.holderTypeOb = holderTypeOb;
-	}
-
-	public String getHolderTypeRe() {
-		return holderTypeRe;
-	}
-
-	public void setHolderTypeRe(String holderTypeRe) {
-		this.holderTypeRe = holderTypeRe;
-	}
-
-	public String getTotalHolderNoOb() {
-		return totalHolderNoOb;
-	}
-
-	public void setTotalHolderNoOb(String totalHolderNoOb) {
-		this.totalHolderNoOb = totalHolderNoOb;
-	}
-
-	public String getTotalHolderNoRe() {
-		return totalHolderNoRe;
-	}
-
-	public void setTotalHolderNoRe(String totalHolderNoRe) {
-		this.totalHolderNoRe = totalHolderNoRe;
-	}
-
-	public String getTotalParpetHolderNoOb() {
-		return totalParpetHolderNoOb;
-	}
-
-	public void setTotalParpetHolderNoOb(String totalParpetHolderNoOb) {
-		this.totalParpetHolderNoOb = totalParpetHolderNoOb;
-	}
 
 	public String getTotalParpetHolderNoRe() {
 		return totalParpetHolderNoRe;
@@ -260,45 +169,6 @@ public class AirHolderDescription implements Serializable {
 		this.totalParpetHolderNoRe = totalParpetHolderNoRe;
 	}
 
-	public String getHolderInspNoOb() {
-		return holderInspNoOb;
-	}
-
-	public void setHolderInspNoOb(String holderInspNoOb) {
-		this.holderInspNoOb = holderInspNoOb;
-	}
-
-	public String getHolderInspNoRe() {
-		return holderInspNoRe;
-	}
-
-	public void setHolderInspNoRe(String holderInspNoRe) {
-		this.holderInspNoRe = holderInspNoRe;
-	}
-
-	public String getHolderInspPassedNoOb() {
-		return holderInspPassedNoOb;
-	}
-
-	public void setHolderInspPassedNoOb(String holderInspPassedNoOb) {
-		this.holderInspPassedNoOb = holderInspPassedNoOb;
-	}
-
-	public String getHolderInspFailedNoOb() {
-		return holderInspFailedNoOb;
-	}
-
-	public void setHolderInspFailedNoOb(String holderInspFailedNoOb) {
-		this.holderInspFailedNoOb = holderInspFailedNoOb;
-	}
-
-	public String getParpetInspectionNoOb() {
-		return parpetInspectionNoOb;
-	}
-
-	public void setParpetInspectionNoOb(String parpetInspectionNoOb) {
-		this.parpetInspectionNoOb = parpetInspectionNoOb;
-	}
 
 	public String getParpetInspectionNoRe() {
 		return parpetInspectionNoRe;
@@ -306,14 +176,6 @@ public class AirHolderDescription implements Serializable {
 
 	public void setParpetInspectionNoRe(String parpetInspectionNoRe) {
 		this.parpetInspectionNoRe = parpetInspectionNoRe;
-	}
-
-	public String getParpetInspectionPassedNoOb() {
-		return parpetInspectionPassedNoOb;
-	}
-
-	public void setParpetInspectionPassedNoOb(String parpetInspectionPassedNoOb) {
-		this.parpetInspectionPassedNoOb = parpetInspectionPassedNoOb;
 	}
 
 	public String getParpetInspectionPassedNoRe() {
@@ -324,28 +186,12 @@ public class AirHolderDescription implements Serializable {
 		this.parpetInspectionPassedNoRe = parpetInspectionPassedNoRe;
 	}
 
-	public String getParpetInspectionFailedNoOb() {
-		return parpetInspectionFailedNoOb;
-	}
-
-	public void setParpetInspectionFailedNoOb(String parpetInspectionFailedNoOb) {
-		this.parpetInspectionFailedNoOb = parpetInspectionFailedNoOb;
-	}
-
 	public String getParpetInspectionFailedNoRe() {
 		return parpetInspectionFailedNoRe;
 	}
 
 	public void setParpetInspectionFailedNoRe(String parpetInspectionFailedNoRe) {
 		this.parpetInspectionFailedNoRe = parpetInspectionFailedNoRe;
-	}
-
-	public String getHolderInspPassedNoRe() {
-		return holderInspPassedNoRe;
-	}
-
-	public void setHolderInspPassedNoRe(String holderInspPassedNoRe) {
-		this.holderInspPassedNoRe = holderInspPassedNoRe;
 	}
 
 	
@@ -355,14 +201,55 @@ public class AirHolderDescription implements Serializable {
 
 	public void setLpsAirDescription(LpsAirDiscription lpsAirDescription) {
 		this.lpsAirDescription = lpsAirDescription;
-	}
+	}	
 
-	public Boolean getFlag() {
+	public String getFlag() {
 		return flag;
 	}
 
-	public void setFlag(Boolean flag) {
+	public void setFlag(String flag) {
 		this.flag = flag;
 	}
 
+	public Integer getTotalParpetHolderNoOb() {
+		return totalParpetHolderNoOb;
+	}
+
+	public void setTotalParpetHolderNoOb(Integer totalParpetHolderNoOb) {
+		this.totalParpetHolderNoOb = totalParpetHolderNoOb;
+	}
+
+	public Integer getParpetInspectionNoOb() {
+		return parpetInspectionNoOb;
+	}
+
+	public void setParpetInspectionNoOb(Integer parpetInspectionNoOb) {
+		this.parpetInspectionNoOb = parpetInspectionNoOb;
+	}
+
+	public Integer getParpetInspectionPassedNoOb() {
+		return parpetInspectionPassedNoOb;
+	}
+
+	public void setParpetInspectionPassedNoOb(Integer parpetInspectionPassedNoOb) {
+		this.parpetInspectionPassedNoOb = parpetInspectionPassedNoOb;
+	}
+
+	public Integer getParpetInspectionFailedNoOb() {
+		return parpetInspectionFailedNoOb;
+	}
+
+	public void setParpetInspectionFailedNoOb(Integer parpetInspectionFailedNoOb) {
+		this.parpetInspectionFailedNoOb = parpetInspectionFailedNoOb;
+	}
+
+	public List<AirHolderList> getAirHolderList() {
+		return airHolderList;
+	}
+
+	public void setAirHolderList(List<AirHolderList> airHolderList) {
+		this.airHolderList = airHolderList;
+	}
+	
+	
 }

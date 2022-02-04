@@ -69,14 +69,29 @@ public class BasicLps implements Serializable {
 	@Column(name = "LOCATION")
 	private String location;
 	
-	@Column(name = "INSTALLATION_CONTRACTOR")
-	private String installationContractor;
-	
 	@Column(name = "INDUSTRY_TYPE")
 	private String industryType;
 	
 	@Column(name = "SOIL_RESISTIVITY")
 	private String soilResistivity;
+	
+	@Column(name = "NAME")
+	private String name;
+	
+	@Column(name = "COMPANY")
+	private String company;
+	
+	@Column(name = "DESIGNATION")
+	private String designation;
+	
+	@Column(name = "CONTACT_NUMBER")
+	private String contactNumber;
+	
+	@Column(name = "MAIL_ID")
+	private String mailId;
+	
+	@Column(name = "PREVIOUS_REPORT")
+	private String availabilityOfPreviousReport;
 	
 	@Column(name = "ALL_STEPS_COMPLETED")
 	private String allStepsCompleted;
@@ -175,20 +190,61 @@ public class BasicLps implements Serializable {
 		this.location = location;
 	}
 
-	public String getInstallationContractor() {
-		return installationContractor;
-	}
-
-	public void setInstallationContractor(String installationContractor) {
-		this.installationContractor = installationContractor;
-	}
-
 	public String getIndustryType() {
 		return industryType;
 	}
 
 	public void setIndustryType(String industryType) {
 		this.industryType = industryType;
+	}
+	
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getCompany() {
+		return company;
+	}
+
+	public void setCompany(String company) {
+		this.company = company;
+	}
+
+	public String getDesignation() {
+		return designation;
+	}
+
+	public void setDesignation(String designation) {
+		this.designation = designation;
+	}
+
+	public String getContactNumber() {
+		return contactNumber;
+	}
+
+	public void setContactNumber(String contactNumber) {
+		this.contactNumber = contactNumber;
+	}
+
+	public String getMailId() {
+		return mailId;
+	}
+
+	public void setMailId(String mailId) {
+		this.mailId = mailId;
+	}
+
+	public String getAvailabilityOfPreviousReport() {
+		return availabilityOfPreviousReport;
+	}
+
+	public void setAvailabilityOfPreviousReport(String availabilityOfPreviousReport) {
+		this.availabilityOfPreviousReport = availabilityOfPreviousReport;
 	}
 
 	public LocalDateTime getCreatedDate() {
