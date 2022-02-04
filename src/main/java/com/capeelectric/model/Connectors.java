@@ -25,7 +25,7 @@ public class Connectors implements Serializable {
 	private Integer connectorId;
 
 	@Column(name = "FLAG")
-	private Boolean flag;
+	private String flag;
 	
 	@Column(name = "PHYSICAL_INSPECTION_OB")
 	private String physicalInspectionOb;
@@ -46,31 +46,31 @@ public class Connectors implements Serializable {
 	private String materialConnectorRem;
 
 	@Column(name = "MAXCONNECTORS_DOWNCONDUCTORS_OB")
-	private String maxConnectorsDownConductorOb;
+	private Integer maxConnectorsDownConductorOb;
 
 	@Column(name = "MAXCONNECTORS_DOWNCONDUCTORS_REM")
 	private String maxConnectorsDownConductorRem;
 
 	@Column(name = "TOTALNO_CONNECTORS_OB")
-	private String totalNoConnectorsOb;
+	private Integer totalNoConnectorsOb;
 
 	@Column(name = "TOTALNO_CONNECTORS_REM")
 	private String totalNoConnectorsRem;
 
 	@Column(name = "INSPECTED_NO_OB")
-	private String inspectedNoOb;
+	private Integer inspectedNoOb;
 
 	@Column(name = "INSPECTED_NO_REM")
 	private String inspectedNoRem;
 
 	@Column(name = "INSPECTIONSPASSED_NO_OB")
-	private String inspectionPassedNoOb;
+	private Integer inspectionPassedNoOb;
 
 	@Column(name = "INSPECTIONSPASSED_NO_REM")
 	private String inspectionPassedNoRem;
 
 	@Column(name = "INSPECTIONFAILED_NO_OB")
-	private String inspectionFailedNoOb;
+	private Integer inspectionFailedNoOb;
 
 	@Column(name = "INSPECTIONFAILED_NO_REM")
 	private String inspectionFailedNoRem;
@@ -136,28 +136,12 @@ public class Connectors implements Serializable {
 		this.materialConnectorRem = materialConnectorRem;
 	}
 
-	public String getMaxConnectorsDownConductorOb() {
-		return maxConnectorsDownConductorOb;
-	}
-
-	public void setMaxConnectorsDownConductorOb(String maxConnectorsDownConductorOb) {
-		this.maxConnectorsDownConductorOb = maxConnectorsDownConductorOb;
-	}
-
 	public String getMaxConnectorsDownConductorRem() {
 		return maxConnectorsDownConductorRem;
 	}
 
 	public void setMaxConnectorsDownConductorRem(String maxConnectorsDownConductorRem) {
 		this.maxConnectorsDownConductorRem = maxConnectorsDownConductorRem;
-	}
-
-	public String getTotalNoConnectorsOb() {
-		return totalNoConnectorsOb;
-	}
-
-	public void setTotalNoConnectorsOb(String totalNoConnectorsOb) {
-		this.totalNoConnectorsOb = totalNoConnectorsOb;
 	}
 
 	public String getTotalNoConnectorsRem() {
@@ -168,14 +152,6 @@ public class Connectors implements Serializable {
 		this.totalNoConnectorsRem = totalNoConnectorsRem;
 	}
 
-	public String getInspectedNoOb() {
-		return inspectedNoOb;
-	}
-
-	public void setInspectedNoOb(String inspectedNoOb) {
-		this.inspectedNoOb = inspectedNoOb;
-	}
-
 	public String getInspectedNoRem() {
 		return inspectedNoRem;
 	}
@@ -184,28 +160,12 @@ public class Connectors implements Serializable {
 		this.inspectedNoRem = inspectedNoRem;
 	}
 
-	public String getInspectionPassedNoOb() {
-		return inspectionPassedNoOb;
-	}
-
-	public void setInspectionPassedNoOb(String inspectionPassedNoOb) {
-		this.inspectionPassedNoOb = inspectionPassedNoOb;
-	}
-
 	public String getInspectionPassedNoRem() {
 		return inspectionPassedNoRem;
 	}
 
 	public void setInspectionPassedNoRem(String inspectionPassedNoRem) {
 		this.inspectionPassedNoRem = inspectionPassedNoRem;
-	}
-
-	public String getInspectionFailedNoOb() {
-		return inspectionFailedNoOb;
-	}
-
-	public void setInspectionFailedNoOb(String inspectionFailedNoOb) {
-		this.inspectionFailedNoOb = inspectionFailedNoOb;
 	}
 
 	public String getInspectionFailedNoRem() {
@@ -224,12 +184,57 @@ public class Connectors implements Serializable {
 		this.downConductorDescription = downConductorDescription;
 	}
 
-	public Boolean getFlag() {
+	public String getFlag() {
 		return flag;
 	}
 
-	public void setFlag(Boolean flag) {
+	public void setFlag(String flag) {
 		this.flag = flag;
 	}
+
+	public Integer getMaxConnectorsDownConductorOb() {
+		return maxConnectorsDownConductorOb;
+	}
+
+	public void setMaxConnectorsDownConductorOb(Integer maxConnectorsDownConductorOb) {
+		this.maxConnectorsDownConductorOb = maxConnectorsDownConductorOb;
+	}
+
+	public Integer getTotalNoConnectorsOb() {
+		return totalNoConnectorsOb;
+	}
+
+	public void setTotalNoConnectorsOb(Integer totalNoConnectorsOb) {
+		this.totalNoConnectorsOb = totalNoConnectorsOb;
+	}
+
+	public Integer getInspectedNoOb() {
+		return inspectedNoOb;
+	}
+
+	public void setInspectedNoOb(Integer inspectedNoOb) {
+		this.inspectedNoOb = inspectedNoOb;
+	}
+
+	public Integer getInspectionPassedNoOb() {
+		return inspectionPassedNoOb;
+	}
+
+	public void setInspectionPassedNoOb(Integer inspectionPassedNoOb) {
+		this.inspectionPassedNoOb = inspectionPassedNoOb;
+	}
+
+	public Integer getInspectionFailedNoOb() {
+		return inspectionFailedNoOb;
+	}
+
+	public void setInspectionFailedNoOb(Integer inspectionFailedNoOb) {
+		this.inspectionFailedNoOb = inspectionFailedNoOb;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 
 }

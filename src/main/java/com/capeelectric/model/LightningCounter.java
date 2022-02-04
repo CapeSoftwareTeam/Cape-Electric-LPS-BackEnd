@@ -26,28 +26,28 @@ public class LightningCounter implements Serializable {
 	private Integer lightingCountersId;
 
 	@Column(name = "FLAG")
-	private Boolean flag;
+	private String flag;
 	
 	@Column(name = "THREADHOLD_CURRENT_OB")
-	private String threadHoldCurrentOb;
+	private Integer threadHoldCurrentOb;
 
 	@Column(name = "THREADHOLD_CURRENT_REM")
 	private String threadHoldCurrentRem;
 
 	@Column(name = "MAXIMUMWITHSTAND_CURRENT_OB")
-	private String maximumWithStandCurrentOb;
+	private Integer maximumWithStandCurrentOb;
 
 	@Column(name = "MAXIMUMWITHSTAND_CURRENT_REM")
 	private String maximumWithStandCurrentRem;
 
 	@Column(name = "COUNTS_OB")
-	private String countsOb;
+	private Integer countsOb;
 
 	@Column(name = "COUNTS_REM")
 	private String countsRem;
 
 	@Column(name = "BATTERY_LIFETIME_OB")
-	private String batteryLifeTimeOb;
+	private Integer batteryLifeTimeOb;
 
 	@Column(name = "BATTERY_LIFETIME_REM")
 	private String batteryLifeTimeRem;
@@ -71,25 +71,25 @@ public class LightningCounter implements Serializable {
 	private String conditionOfLightingCounterRem;
 
 	@Column(name = "TOTALNO_LIGHTNINGCOUNTER_OB")
-	private String totalNoLightingCounterOb;
+	private Integer totalNoLightingCounterOb;
 
 	@Column(name = "TOTALNO_LIGHTNINGCOUNTER_REM")
 	private String totalNoLightingCounterRem;
 
 	@Column(name = "INSPECTED_NO_OB")
-	private String inspectedNoOb;
+	private Integer inspectedNoOb;
 
 	@Column(name = "INSPECTED_NO_REM")
 	private String inspectedNoRem;
 
 	@Column(name = "INSPECTIONSPASSED_NO_OB")
-	private String inspectionPassedNoOb;
+	private Integer inspectionPassedNoOb;
 
 	@Column(name = "INSPECTIONSPASSED_NO_REM")
 	private String inspectionPassedNoRem;
 
 	@Column(name = "INSPECTIONFAILED_NO_OB")
-	private String inspectionFailedNoOb;
+	private Integer inspectionFailedNoOb;
 
 	@Column(name = "INSPECTIONFAILED_NO_REM")
 	private String inspectionFailedNoRem;
@@ -107,28 +107,12 @@ public class LightningCounter implements Serializable {
 		this.lightingCountersId = lightingCountersId;
 	}
 
-	public String getThreadHoldCurrentOb() {
-		return threadHoldCurrentOb;
-	}
-
-	public void setThreadHoldCurrentOb(String threadHoldCurrentOb) {
-		this.threadHoldCurrentOb = threadHoldCurrentOb;
-	}
-
 	public String getThreadHoldCurrentRem() {
 		return threadHoldCurrentRem;
 	}
 
 	public void setThreadHoldCurrentRem(String threadHoldCurrentRem) {
 		this.threadHoldCurrentRem = threadHoldCurrentRem;
-	}
-
-	public String getMaximumWithStandCurrentOb() {
-		return maximumWithStandCurrentOb;
-	}
-
-	public void setMaximumWithStandCurrentOb(String maximumWithStandCurrentOb) {
-		this.maximumWithStandCurrentOb = maximumWithStandCurrentOb;
 	}
 
 	public String getMaximumWithStandCurrentRem() {
@@ -139,28 +123,12 @@ public class LightningCounter implements Serializable {
 		this.maximumWithStandCurrentRem = maximumWithStandCurrentRem;
 	}
 
-	public String getCountsOb() {
-		return countsOb;
-	}
-
-	public void setCountsOb(String countsOb) {
-		this.countsOb = countsOb;
-	}
-
 	public String getCountsRem() {
 		return countsRem;
 	}
 
 	public void setCountsRem(String countsRem) {
 		this.countsRem = countsRem;
-	}
-
-	public String getBatteryLifeTimeOb() {
-		return batteryLifeTimeOb;
-	}
-
-	public void setBatteryLifeTimeOb(String batteryLifeTimeOb) {
-		this.batteryLifeTimeOb = batteryLifeTimeOb;
 	}
 
 	public String getBatteryLifeTimeRem() {
@@ -219,28 +187,12 @@ public class LightningCounter implements Serializable {
 		this.conditionOfLightingCounterRem = conditionOfLightingCounterRem;
 	}
 
-	public String getTotalNoLightingCounterOb() {
-		return totalNoLightingCounterOb;
-	}
-
-	public void setTotalNoLightingCounterOb(String totalNoLightingCounterOb) {
-		this.totalNoLightingCounterOb = totalNoLightingCounterOb;
-	}
-
 	public String getTotalNoLightingCounterRem() {
 		return totalNoLightingCounterRem;
 	}
 
 	public void setTotalNoLightingCounterRem(String totalNoLightingCounterRem) {
 		this.totalNoLightingCounterRem = totalNoLightingCounterRem;
-	}
-
-	public String getInspectedNoOb() {
-		return inspectedNoOb;
-	}
-
-	public void setInspectedNoOb(String inspectedNoOb) {
-		this.inspectedNoOb = inspectedNoOb;
 	}
 
 	public String getInspectedNoRem() {
@@ -251,28 +203,12 @@ public class LightningCounter implements Serializable {
 		this.inspectedNoRem = inspectedNoRem;
 	}
 
-	public String getInspectionPassedNoOb() {
-		return inspectionPassedNoOb;
-	}
-
-	public void setInspectionPassedNoOb(String inspectionPassedNoOb) {
-		this.inspectionPassedNoOb = inspectionPassedNoOb;
-	}
-
 	public String getInspectionPassedNoRem() {
 		return inspectionPassedNoRem;
 	}
 
 	public void setInspectionPassedNoRem(String inspectionPassedNoRem) {
 		this.inspectionPassedNoRem = inspectionPassedNoRem;
-	}
-
-	public String getInspectionFailedNoOb() {
-		return inspectionFailedNoOb;
-	}
-
-	public void setInspectionFailedNoOb(String inspectionFailedNoOb) {
-		this.inspectionFailedNoOb = inspectionFailedNoOb;
 	}
 
 	public String getInspectionFailedNoRem() {
@@ -291,12 +227,81 @@ public class LightningCounter implements Serializable {
 		this.downConductorDescription = downConductorDescription;
 	}
 
-	public Boolean getFlag() {
+	public String getFlag() {
 		return flag;
 	}
 
-	public void setFlag(Boolean flag) {
+	public void setFlag(String flag) {
 		this.flag = flag;
 	}
+
+	public Integer getThreadHoldCurrentOb() {
+		return threadHoldCurrentOb;
+	}
+
+	public void setThreadHoldCurrentOb(Integer threadHoldCurrentOb) {
+		this.threadHoldCurrentOb = threadHoldCurrentOb;
+	}
+
+	public Integer getMaximumWithStandCurrentOb() {
+		return maximumWithStandCurrentOb;
+	}
+
+	public void setMaximumWithStandCurrentOb(Integer maximumWithStandCurrentOb) {
+		this.maximumWithStandCurrentOb = maximumWithStandCurrentOb;
+	}
+
+	public Integer getCountsOb() {
+		return countsOb;
+	}
+
+	public void setCountsOb(Integer countsOb) {
+		this.countsOb = countsOb;
+	}
+
+	public Integer getBatteryLifeTimeOb() {
+		return batteryLifeTimeOb;
+	}
+
+	public void setBatteryLifeTimeOb(Integer batteryLifeTimeOb) {
+		this.batteryLifeTimeOb = batteryLifeTimeOb;
+	}
+
+	public Integer getTotalNoLightingCounterOb() {
+		return totalNoLightingCounterOb;
+	}
+
+	public void setTotalNoLightingCounterOb(Integer totalNoLightingCounterOb) {
+		this.totalNoLightingCounterOb = totalNoLightingCounterOb;
+	}
+
+	public Integer getInspectedNoOb() {
+		return inspectedNoOb;
+	}
+
+	public void setInspectedNoOb(Integer inspectedNoOb) {
+		this.inspectedNoOb = inspectedNoOb;
+	}
+
+	public Integer getInspectionPassedNoOb() {
+		return inspectionPassedNoOb;
+	}
+
+	public void setInspectionPassedNoOb(Integer inspectionPassedNoOb) {
+		this.inspectionPassedNoOb = inspectionPassedNoOb;
+	}
+
+	public Integer getInspectionFailedNoOb() {
+		return inspectionFailedNoOb;
+	}
+
+	public void setInspectionFailedNoOb(Integer inspectionFailedNoOb) {
+		this.inspectionFailedNoOb = inspectionFailedNoOb;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 
 }

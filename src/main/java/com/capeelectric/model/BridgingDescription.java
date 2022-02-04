@@ -26,7 +26,7 @@ public class BridgingDescription implements Serializable {
 	private Integer bridgingDescriptionId;
 	
 	@Column(name = "FLAG")
-	private Boolean flag;
+	private String flag;
 
 	@Column(name = "ENSURE_BRIDGINGCABLE_OB")
 	private String ensureBridgingCableOb;
@@ -45,27 +45,39 @@ public class BridgingDescription implements Serializable {
 
 	@Column(name = "BRIDGINGCABLE_CONNECTION_REM")
 	private String bridgingCableConnectionRem;
+	
+	@Column(name = "BRIDGINGCABLE_MATERIAL_OB")
+	private String bridgingCableMaterialOb;
 
+	@Column(name = "BRIDGINGCABLE_MATERIAL_REM")
+	private String bridgingCableMaterialRem;
+	
+	@Column(name = "BRIDGINGCABLE_SIZE_OB")
+	private String bridgingCableSizeOb;
+
+	@Column(name = "BRIDGINGCABLE_SIZE_REM")
+	private String bridgingCableSizeRem;
+	
 	@Column(name = "TOTALNO_BRIDGINGCABLE_OB")
-	private String totalNoBridgingCableOb;
+	private Integer totalNoBridgingCableOb;
 
 	@Column(name = "TOTALNO_BRIDGINGCABLE_REM")
 	private String totalNoBridgingCableRem;
 
 	@Column(name = "INSPECTED_NO_OB")
-	private String inspectedNoOb;
+	private Integer inspectedNoOb;
 
 	@Column(name = "INSPECTED_NO_REM")
 	private String inspectedNoRem;
 
 	@Column(name = "INSPECTIONSPASSED_NO_OB")
-	private String inspectionPassedNoOb;
+	private Integer inspectionPassedNoOb;
 
 	@Column(name = "INSPECTIONSPASSED_NO_REM")
 	private String inspectionPassedNoRem;
 
 	@Column(name = "INSPECTIONFAILED_NO_OB")
-	private String inspectionFailedNoOb;
+	private Integer inspectionFailedNoOb;
 
 	@Column(name = "INSPECTIONFAILED_NO_REM")
 	private String inspectionFailedNoRem;
@@ -131,13 +143,6 @@ public class BridgingDescription implements Serializable {
 		this.bridgingCableConnectionRem = bridgingCableConnectionRem;
 	}
 
-	public String getTotalNoBridgingCableOb() {
-		return totalNoBridgingCableOb;
-	}
-
-	public void setTotalNoBridgingCableOb(String totalNoBridgingCableOb) {
-		this.totalNoBridgingCableOb = totalNoBridgingCableOb;
-	}
 
 	public String getTotalNoBridgingCableRem() {
 		return totalNoBridgingCableRem;
@@ -145,14 +150,6 @@ public class BridgingDescription implements Serializable {
 
 	public void setTotalNoBridgingCableRem(String totalNoBridgingCableRem) {
 		this.totalNoBridgingCableRem = totalNoBridgingCableRem;
-	}
-
-	public String getInspectedNoOb() {
-		return inspectedNoOb;
-	}
-
-	public void setInspectedNoOb(String inspectedNoOb) {
-		this.inspectedNoOb = inspectedNoOb;
 	}
 
 	public String getInspectedNoRem() {
@@ -163,28 +160,12 @@ public class BridgingDescription implements Serializable {
 		this.inspectedNoRem = inspectedNoRem;
 	}
 
-	public String getInspectionPassedNoOb() {
-		return inspectionPassedNoOb;
-	}
-
-	public void setInspectionPassedNoOb(String inspectionPassedNoOb) {
-		this.inspectionPassedNoOb = inspectionPassedNoOb;
-	}
-
 	public String getInspectionPassedNoRem() {
 		return inspectionPassedNoRem;
 	}
 
 	public void setInspectionPassedNoRem(String inspectionPassedNoRem) {
 		this.inspectionPassedNoRem = inspectionPassedNoRem;
-	}
-
-	public String getInspectionFailedNoOb() {
-		return inspectionFailedNoOb;
-	}
-
-	public void setInspectionFailedNoOb(String inspectionFailedNoOb) {
-		this.inspectionFailedNoOb = inspectionFailedNoOb;
 	}
 
 	public String getInspectionFailedNoRem() {
@@ -203,12 +184,82 @@ public class BridgingDescription implements Serializable {
 		this.downConductorDescription = downConductorDescription;
 	}
 
-	public Boolean getFlag() {
+	public String getFlag() {
 		return flag;
 	}
 
-	public void setFlag(Boolean flag) {
+	public void setFlag(String flag) {
 		this.flag = flag;
 	}
+
+	public String getBridgingCableMaterialOb() {
+		return bridgingCableMaterialOb;
+	}
+
+	public void setBridgingCableMaterialOb(String bridgingCableMaterialOb) {
+		this.bridgingCableMaterialOb = bridgingCableMaterialOb;
+	}
+
+	public String getBridgingCableMaterialRem() {
+		return bridgingCableMaterialRem;
+	}
+
+	public void setBridgingCableMaterialRem(String bridgingCableMaterialRem) {
+		this.bridgingCableMaterialRem = bridgingCableMaterialRem;
+	}
+
+	public String getBridgingCableSizeOb() {
+		return bridgingCableSizeOb;
+	}
+
+	public void setBridgingCableSizeOb(String bridgingCableSizeOb) {
+		this.bridgingCableSizeOb = bridgingCableSizeOb;
+	}
+
+	public String getBridgingCableSizeRem() {
+		return bridgingCableSizeRem;
+	}
+
+	public void setBridgingCableSizeRem(String bridgingCableSizeRem) {
+		this.bridgingCableSizeRem = bridgingCableSizeRem;
+	}
+
+	public Integer getTotalNoBridgingCableOb() {
+		return totalNoBridgingCableOb;
+	}
+
+	public void setTotalNoBridgingCableOb(Integer totalNoBridgingCableOb) {
+		this.totalNoBridgingCableOb = totalNoBridgingCableOb;
+	}
+
+	public Integer getInspectedNoOb() {
+		return inspectedNoOb;
+	}
+
+	public void setInspectedNoOb(Integer inspectedNoOb) {
+		this.inspectedNoOb = inspectedNoOb;
+	}
+
+	public Integer getInspectionPassedNoOb() {
+		return inspectionPassedNoOb;
+	}
+
+	public void setInspectionPassedNoOb(Integer inspectionPassedNoOb) {
+		this.inspectionPassedNoOb = inspectionPassedNoOb;
+	}
+
+	public Integer getInspectionFailedNoOb() {
+		return inspectionFailedNoOb;
+	}
+
+	public void setInspectionFailedNoOb(Integer inspectionFailedNoOb) {
+		this.inspectionFailedNoOb = inspectionFailedNoOb;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	
+	
 
 }
