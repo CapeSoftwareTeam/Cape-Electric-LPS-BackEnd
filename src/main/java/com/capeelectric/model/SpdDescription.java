@@ -24,57 +24,97 @@ public class SpdDescription implements Serializable {
 	@Column(name = "SPDDESCRIPTION_ID")
 	private Integer SpdDescriptionId;
 	
-	@Column(name = "SPDDESCRIPTION_ROLE")
-	private String spdDescriptionRole;
+	@Column(name = "LOCATION")
+	private String location;
 	
-	@Column(name = "SPD_TYPE_OB")
-	private String spdTypeOb;
+	@Column(name = "PANEL_NAME")
+	private String panelName;
 	
-	@Column(name = "SPD_TYPE_RE")
-	private String spdTypeRe;
-
-    @Column(name = "SPD_APPLICATION_OB")
+	@Column(name = "FLAG")
+	private String flag;
+	
+	@Column(name = "SPD_MAKE_OBSERVATION")
+	private String spdMakeOb;
+	
+	@Column(name = "SPD_MAKE_REMARKS")
+	private String spdMakeRem;
+	
+	@Column(name = "SPD_MODEL_OBSERVATION")
+	private String spdModelOb;
+	
+	@Column(name = "SPD_MODEL_REMARKS")
+	private String spdModelRem;
+	
+	@Column(name = "SPD_CLASS_TYPE_OBSERVATION")
+	private String spdClassTypeOb;
+	
+	@Column(name = "SPD_CLASS_TYPE_REMARKS")
+	private String spdClassTypeRem;
+	
+	@Column(name = "SPD_APPLICATION_OBSERVATION")
 	private String spdApplicationOb;
 	
-	@Column(name = "SPD_APPLICATION_REM")
+	@Column(name = "SPD_APPLICATION_REMARKS")
 	private String spdApplicationRem;
-
-	@Column(name = "PANEL_NAME_OB")
-	private String panelNameOb;
-
-	@Column(name = "PANEL_NAME_REM")
-	private String panelNameRem;
 	
-	@Column(name = "INCOMING_RATING_OB")
-	private String incomingRatingOb;
-
-	@Column(name = "INCOMING_RATING_REM")
-	private String incomingRatingRem;
+	@Column(name = "SPD_MAIN_APPLICATION_OBSERVATION")
+	private String spdMainApplicationOb;
 	
-	@Column(name = "BACKUPFUSE_CHECK_OB")
-	private String backupFuseCheckOb;
+	@Column(name = "SPD_MAIN_APPLICATION_REMARKS")
+	private String spdMainApplicationRem;
 	
-	@Column(name = "BACKUPFUSE_CHECK_REM")
-	private String backupFuseCheckRem;
+	@Column(name = "PROPERCONNECTION_OBSERVATION")
+	private String properConnectionOb;
 	
-	@Column(name = "CONNECTING_WIRELENGTH_OB")
-	private String connectingWireLengthOb;
+	@Column(name = "PROPERCONNECTION_REMARKS")
+	private String properConnectionRem;
 	
-    @Column(name = "CONNECTING_WIRELENGTH_REM ")
-	private String connectingWireLengthRem;
+	@Column(name = "INCOMER_RATING_OBSERVATION")
+	private Integer incomerRatingOb;
 	
-	@Column(name = "CONNECTING_WIRESIZE_OB")
-	private String connectingWireSizeOb;
-
-	@Column(name = "CONNECTING_WIRESIZE_REM")
-	private String connectingWireSizeRem;
+	@Column(name = "INCOMER_RATING_REMARKS")
+	private String incomerRatingRem;
+	
+	@Column(name = "FUSE_BACKUP_OBSERVATION")
+	private Integer fuseBackUpOb;
+	
+	@Column(name = "FUSE_BACKUP_REMARKS")
+	private String fuseBackUpRem;
+	
+//	@Column(name = "INLINE_FUSE_BACKUP_OBSERVATION")
+//	private String inLinefuseBackUpOb;
+//	
+//	@Column(name = "INLINE_FUSE_BACKUP_REMARKS")
+//	private String inLinefuseBackUpRem;
+	
+	@Column(name = "CONNECTING_WIRE_LENGTH_PHASE_OBSERVATION")
+	private Integer lengthOfConnectingWirePhaseOb;
+	
+	@Column(name = "CONNECTING_WIRE_LENGTH_PHASE_REMARKS")
+	private String lengthOfConnectingWirePhaseRem;
+	
+	@Column(name = "CONNECTING_WIRE_LENGTH_PROTECTIVE_OBSERVATION")
+	private Integer lengthOfConnectingWireProtectiveOb;
+	
+	@Column(name = "CONNECTING_WIRE_LENGTH_PROTECTIVE_REMARKS")
+	private String lengthOfConnectingWireProtectiveRem;
+	
+	@Column(name = "CONNECTING_WIRE_SIZE_PHASE_OBSERVATION")
+	private Integer sizeOfConnectingWirePhaseOb;
+	
+	@Column(name = "CONNECTING_WIRE_SIZE_PHASE_REMARKS")
+	private String sizeOfConnectingWirePhaseRem;
+	
+	@Column(name = "CONNECTING_WIRE_SIZE_PROTECTIVE_OBSERVATION")
+	private Integer sizeOfConnectingWireProtectiveOb;
+	
+	@Column(name = "CONNECTING_WIRE_SIZE_PROTECTIVE_REMARKS")
+	private String sizeOfConnectingWireProtectiveRem;
 	
 	@JsonBackReference
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "SPD_ID")
 	private SPD spd;
-	
-	
 
 	public Integer getSpdDescriptionId() {
 		return SpdDescriptionId;
@@ -84,29 +124,76 @@ public class SpdDescription implements Serializable {
 		SpdDescriptionId = spdDescriptionId;
 	}
 
-	
-	public String getSpdDescriptionRole() {
-		return spdDescriptionRole;
+	public String getLocation() {
+		return location;
 	}
 
-	public void setSpdDescriptionRole(String spdDescriptionRole) {
-		this.spdDescriptionRole = spdDescriptionRole;
+	public void setLocation(String location) {
+		this.location = location;
 	}
 
-	public String getSpdTypeOb() {
-		return spdTypeOb;
+	public String getPanelName() {
+		return panelName;
 	}
 
-	public void setSpdTypeOb(String spdTypeOb) {
-		this.spdTypeOb = spdTypeOb;
+	public void setPanelName(String panelName) {
+		this.panelName = panelName;
 	}
 
-	public String getSpdTypeRe() {
-		return spdTypeRe;
+	public String getFlag() {
+		return flag;
 	}
 
-	public void setSpdTypeRe(String spdTypeRe) {
-		this.spdTypeRe = spdTypeRe;
+	public void setFlag(String flag) {
+		this.flag = flag;
+	}
+
+	public String getSpdMakeOb() {
+		return spdMakeOb;
+	}
+
+	public void setSpdMakeOb(String spdMakeOb) {
+		this.spdMakeOb = spdMakeOb;
+	}
+
+	public String getSpdMakeRem() {
+		return spdMakeRem;
+	}
+
+	public void setSpdMakeRem(String spdMakeRem) {
+		this.spdMakeRem = spdMakeRem;
+	}
+
+	public String getSpdModelOb() {
+		return spdModelOb;
+	}
+
+	public void setSpdModelOb(String spdModelOb) {
+		this.spdModelOb = spdModelOb;
+	}
+
+	public String getSpdModelRem() {
+		return spdModelRem;
+	}
+
+	public void setSpdModelRem(String spdModelRem) {
+		this.spdModelRem = spdModelRem;
+	}
+
+	public String getSpdClassTypeOb() {
+		return spdClassTypeOb;
+	}
+
+	public void setSpdClassTypeOb(String spdClassTypeOb) {
+		this.spdClassTypeOb = spdClassTypeOb;
+	}
+
+	public String getSpdClassTypeRem() {
+		return spdClassTypeRem;
+	}
+
+	public void setSpdClassTypeRem(String spdClassTypeRem) {
+		this.spdClassTypeRem = spdClassTypeRem;
 	}
 
 	public String getSpdApplicationOb() {
@@ -125,84 +212,132 @@ public class SpdDescription implements Serializable {
 		this.spdApplicationRem = spdApplicationRem;
 	}
 
-	public String getPanelNameOb() {
-		return panelNameOb;
+	public String getSpdMainApplicationOb() {
+		return spdMainApplicationOb;
 	}
 
-	public void setPanelNameOb(String panelNameOb) {
-		this.panelNameOb = panelNameOb;
+	public void setSpdMainApplicationOb(String spdMainApplicationOb) {
+		this.spdMainApplicationOb = spdMainApplicationOb;
 	}
 
-	public String getPanelNameRem() {
-		return panelNameRem;
+	public String getSpdMainApplicationRem() {
+		return spdMainApplicationRem;
 	}
 
-	public void setPanelNameRem(String panelNameRem) {
-		this.panelNameRem = panelNameRem;
+	public void setSpdMainApplicationRem(String spdMainApplicationRem) {
+		this.spdMainApplicationRem = spdMainApplicationRem;
 	}
 
-	public String getIncomingRatingOb() {
-		return incomingRatingOb;
+	public String getProperConnectionOb() {
+		return properConnectionOb;
 	}
 
-	public void setIncomingRatingOb(String incomingRatingOb) {
-		this.incomingRatingOb = incomingRatingOb;
+	public void setProperConnectionOb(String properConnectionOb) {
+		this.properConnectionOb = properConnectionOb;
 	}
 
-	public String getIncomingRatingRem() {
-		return incomingRatingRem;
+	public String getProperConnectionRem() {
+		return properConnectionRem;
 	}
 
-	public void setIncomingRatingRem(String incomingRatingRem) {
-		this.incomingRatingRem = incomingRatingRem;
+	public void setProperConnectionRem(String properConnectionRem) {
+		this.properConnectionRem = properConnectionRem;
 	}
 
-	public String getBackupFuseCheckOb() {
-		return backupFuseCheckOb;
+	public Integer getIncomerRatingOb() {
+		return incomerRatingOb;
 	}
 
-	public void setBackupFuseCheckOb(String backupFuseCheckOb) {
-		this.backupFuseCheckOb = backupFuseCheckOb;
+	public void setIncomerRatingOb(Integer incomerRatingOb) {
+		this.incomerRatingOb = incomerRatingOb;
 	}
 
-	public String getBackupFuseCheckRem() {
-		return backupFuseCheckRem;
+	public String getIncomerRatingRem() {
+		return incomerRatingRem;
 	}
 
-	public void setBackupFuseCheckRem(String backupFuseCheckRem) {
-		this.backupFuseCheckRem = backupFuseCheckRem;
+	public void setIncomerRatingRem(String incomerRatingRem) {
+		this.incomerRatingRem = incomerRatingRem;
 	}
 
-	public String getConnectingWireLengthOb() {
-		return connectingWireLengthOb;
+	public Integer getFuseBackUpOb() {
+		return fuseBackUpOb;
 	}
 
-	public void setConnectingWireLengthOb(String connectingWireLengthOb) {
-		this.connectingWireLengthOb = connectingWireLengthOb;
+	public void setFuseBackUpOb(Integer fuseBackUpOb) {
+		this.fuseBackUpOb = fuseBackUpOb;
 	}
 
-	public String getConnectingWireLengthRem() {
-		return connectingWireLengthRem;
+	public String getFuseBackUpRem() {
+		return fuseBackUpRem;
 	}
 
-	public void setConnectingWireLengthRem(String connectingWireLengthRem) {
-		this.connectingWireLengthRem = connectingWireLengthRem;
+	public void setFuseBackUpRem(String fuseBackUpRem) {
+		this.fuseBackUpRem = fuseBackUpRem;
 	}
 
-	public String getConnectingWireSizeOb() {
-		return connectingWireSizeOb;
+	public Integer getLengthOfConnectingWirePhaseOb() {
+		return lengthOfConnectingWirePhaseOb;
 	}
 
-	public void setConnectingWireSizeOb(String connectingWireSizeOb) {
-		this.connectingWireSizeOb = connectingWireSizeOb;
+	public void setLengthOfConnectingWirePhaseOb(Integer lengthOfConnectingWirePhaseOb) {
+		this.lengthOfConnectingWirePhaseOb = lengthOfConnectingWirePhaseOb;
 	}
 
-	public String getConnectingWireSizeRem() {
-		return connectingWireSizeRem;
+	public String getLengthOfConnectingWirePhaseRem() {
+		return lengthOfConnectingWirePhaseRem;
 	}
 
-	public void setConnectingWireSizeRem(String connectingWireSizeRem) {
-		this.connectingWireSizeRem = connectingWireSizeRem;
+	public void setLengthOfConnectingWirePhaseRem(String lengthOfConnectingWirePhaseRem) {
+		this.lengthOfConnectingWirePhaseRem = lengthOfConnectingWirePhaseRem;
+	}
+
+	public Integer getLengthOfConnectingWireProtectiveOb() {
+		return lengthOfConnectingWireProtectiveOb;
+	}
+
+	public void setLengthOfConnectingWireProtectiveOb(Integer lengthOfConnectingWireProtectiveOb) {
+		this.lengthOfConnectingWireProtectiveOb = lengthOfConnectingWireProtectiveOb;
+	}
+
+	public String getLengthOfConnectingWireProtectiveRem() {
+		return lengthOfConnectingWireProtectiveRem;
+	}
+
+	public void setLengthOfConnectingWireProtectiveRem(String lengthOfConnectingWireProtectiveRem) {
+		this.lengthOfConnectingWireProtectiveRem = lengthOfConnectingWireProtectiveRem;
+	}
+
+	public Integer getSizeOfConnectingWirePhaseOb() {
+		return sizeOfConnectingWirePhaseOb;
+	}
+
+	public void setSizeOfConnectingWirePhaseOb(Integer sizeOfConnectingWirePhaseOb) {
+		this.sizeOfConnectingWirePhaseOb = sizeOfConnectingWirePhaseOb;
+	}
+
+	public String getSizeOfConnectingWirePhaseRem() {
+		return sizeOfConnectingWirePhaseRem;
+	}
+
+	public void setSizeOfConnectingWirePhaseRem(String sizeOfConnectingWirePhaseRem) {
+		this.sizeOfConnectingWirePhaseRem = sizeOfConnectingWirePhaseRem;
+	}
+
+	public Integer getSizeOfConnectingWireProtectiveOb() {
+		return sizeOfConnectingWireProtectiveOb;
+	}
+
+	public void setSizeOfConnectingWireProtectiveOb(Integer sizeOfConnectingWireProtectiveOb) {
+		this.sizeOfConnectingWireProtectiveOb = sizeOfConnectingWireProtectiveOb;
+	}
+
+	public String getSizeOfConnectingWireProtectiveRem() {
+		return sizeOfConnectingWireProtectiveRem;
+	}
+
+	public void setSizeOfConnectingWireProtectiveRem(String sizeOfConnectingWireProtectiveRem) {
+		this.sizeOfConnectingWireProtectiveRem = sizeOfConnectingWireProtectiveRem;
 	}
 
 	public SPD getSpd() {
@@ -211,7 +346,12 @@ public class SpdDescription implements Serializable {
 
 	public void setSpd(SPD spd) {
 		this.spd = spd;
-	}	
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	
 	
 	
 }

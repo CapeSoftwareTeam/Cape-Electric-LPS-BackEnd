@@ -47,7 +47,13 @@ public class SeperationDistanceDescription implements Serializable {
 	private String buildingName;
 	
 	@Column(name = "FLAG")
-	private String flag;
+	private String flag;	
+	
+	@Column(name = "CALCULATED_SEPERATION_DISTANCE_OB")
+	private String calculatedSeperationDistanceOb;
+	
+	@Column(name = "CALCULATED_SEPERATION_DISTANCE_REM")
+	private String calculatedSeperationDistanceRem;
 		
 	@JsonManagedReference
 	@OneToMany(mappedBy = "seperationDistanceDescription", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -115,6 +121,27 @@ public class SeperationDistanceDescription implements Serializable {
 	public void setSeparateDistance(List<SeparateDistance> separateDistance) {
 		this.separateDistance = separateDistance;
 	}
+
+	public String getCalculatedSeperationDistanceOb() {
+		return calculatedSeperationDistanceOb;
+	}
+
+	public void setCalculatedSeperationDistanceOb(String calculatedSeperationDistanceOb) {
+		this.calculatedSeperationDistanceOb = calculatedSeperationDistanceOb;
+	}
+
+	public String getCalculatedSeperationDistanceRem() {
+		return calculatedSeperationDistanceRem;
+	}
+
+	public void setCalculatedSeperationDistanceRem(String calculatedSeperationDistanceRem) {
+		this.calculatedSeperationDistanceRem = calculatedSeperationDistanceRem;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 
 
 }

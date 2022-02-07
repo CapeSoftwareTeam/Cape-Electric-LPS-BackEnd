@@ -24,14 +24,13 @@ public class SeparateDistance implements Serializable {
 	private Integer seperationDistanceDescId;
 	
 	@Column(name = "FLAG")
-	private Boolean flag;
+	private String flag;
 	
 	@Column(name = "SEPERATION_DISTANCE_DESC")
 	private String seperationDistanceDesc;
 	
 	@Column(name = "SEPERATION_DISTANCE_OB")
-	private String seperationDistanceOb;
-	
+	private Integer seperationDistanceOb;
 	
 	@Column(name = "SEPERATION_DISTANCE_REM")
 	private String seperationDistanceRem;
@@ -58,11 +57,12 @@ public class SeparateDistance implements Serializable {
 		this.seperationDistanceDesc = seperationDistanceDesc;
 	}
 
-	public String getSeperationDistanceOb() {
+
+	public Integer getSeperationDistanceOb() {
 		return seperationDistanceOb;
 	}
 
-	public void setSeperationDistanceOb(String seperationDistanceOb) {
+	public void setSeperationDistanceOb(Integer seperationDistanceOb) {
 		this.seperationDistanceOb = seperationDistanceOb;
 	}
 
@@ -82,11 +82,11 @@ public class SeparateDistance implements Serializable {
 		this.seperationDistanceDescription = seperationDistanceDescription;
 	}
 
-	public Boolean getFlag() {
+	public String getFlag() {
 		return flag;
 	}
 
-	public void setFlag(Boolean flag) {
+	public void setFlag(String flag) {
 		this.flag = flag;
 	}
 

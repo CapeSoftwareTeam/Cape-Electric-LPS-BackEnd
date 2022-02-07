@@ -45,6 +45,48 @@ public class EarthStudDescription implements Serializable{
 	@Column(name = "FLAG")
 	private String flag;
 	
+	@Column(name = "AVAILABLE_EQUIPOTENTIAL_BONDING_OB")
+	private String availableEquipotentialBondingOb;
+	
+	@Column(name = "AVAILABLE_EQUIPOTENTIAL_BONDING_REM")
+	private String availableEquipotentialBondingRem;
+	
+	@Column(name = "NUMBER_OF_EQUIPOTENTIAL_BONDING_OB")
+	private String numberOfEquipotentialBondingOb;
+	
+	@Column(name = "NUMBER_OF_EQUIPOTENTIAL_BONDING_REM")
+	private String numberOfEquipotentialBondingRem;
+	
+	@Column(name = "SIZE_OF_EARTHING_CONDUCTOR_OB")
+	private String sizeOfEarthingConductorOb;
+	
+	@Column(name = "SIZE_OF_EARTHING_CONDUCTOR_REM")
+	private String sizeOfEarthingConductorRem;
+	
+	@Column(name = "CONCEPT_OF_EQUIPOTENTIAL_BONDING_OB")
+	private String conceptOfEquipotentialBondingOb;
+	
+	@Column(name = "CONCEPT_OF_EQUIPOTENTIAL_BONDING_REM")
+	private String conceptOfEquipotentialBondingRem;
+	
+	@Column(name = "MAINPROTECTIVE_EQUIPOTENTIAL_BONDING_OB")
+	private String mainProtectiveEquipotentialBondingOb;
+	
+	@Column(name = "MAINPROTECTIVE_EQUIPOTENTIAL_BONDING_REM")
+	private String mainProtectiveEquipotentialBondingRem;
+	
+	@Column(name = "SIZE_OF_MAINPROTECTIVE_OB")
+	private String sizeOfMainProtectiveOb;
+	
+	@Column(name = "SIZE_OF_MAINPROTECTIVE_REM")
+	private String sizeOfMainProtectiveRem;
+	
+	@Column(name = "SUPPLIMENTARY_MAINPROTECTIVE_OB")
+	private String supplimentaryMainProtectiveOb;
+	
+	@Column(name = "SUPPLIMENTARY_MAINPROTECTIVE_REM")
+	private String supplimentaryMainProtectiveRem;
+	
 	@Column(name = "EARTH_STUDVISIBILITYOB")
 	private String earthStudVisibilityOb;
 	
@@ -86,6 +128,119 @@ public class EarthStudDescription implements Serializable{
 
 	public void setEarthStudDescId(Integer earthStudDescId) {
 		this.earthStudDescId = earthStudDescId;
+	}
+	
+
+	public String getAvailableEquipotentialBondingOb() {
+		return availableEquipotentialBondingOb;
+	}
+
+	public void setAvailableEquipotentialBondingOb(String availableEquipotentialBondingOb) {
+		this.availableEquipotentialBondingOb = availableEquipotentialBondingOb;
+	}
+
+	public String getAvailableEquipotentialBondingRem() {
+		return availableEquipotentialBondingRem;
+	}
+
+	public void setAvailableEquipotentialBondingRem(String availableEquipotentialBondingRem) {
+		this.availableEquipotentialBondingRem = availableEquipotentialBondingRem;
+	}
+
+	public String getNumberOfEquipotentialBondingOb() {
+		return numberOfEquipotentialBondingOb;
+	}
+
+	public void setNumberOfEquipotentialBondingOb(String numberOfEquipotentialBondingOb) {
+		this.numberOfEquipotentialBondingOb = numberOfEquipotentialBondingOb;
+	}
+
+	public String getNumberOfEquipotentialBondingRem() {
+		return numberOfEquipotentialBondingRem;
+	}
+
+	public void setNumberOfEquipotentialBondingRem(String numberOfEquipotentialBondingRem) {
+		this.numberOfEquipotentialBondingRem = numberOfEquipotentialBondingRem;
+	}
+
+	public String getSizeOfEarthingConductorOb() {
+		return sizeOfEarthingConductorOb;
+	}
+
+	public void setSizeOfEarthingConductorOb(String sizeOfEarthingConductorOb) {
+		this.sizeOfEarthingConductorOb = sizeOfEarthingConductorOb;
+	}
+
+	public String getSizeOfEarthingConductorRem() {
+		return sizeOfEarthingConductorRem;
+	}
+
+	public void setSizeOfEarthingConductorRem(String sizeOfEarthingConductorRem) {
+		this.sizeOfEarthingConductorRem = sizeOfEarthingConductorRem;
+	}
+
+	public String getConceptOfEquipotentialBondingOb() {
+		return conceptOfEquipotentialBondingOb;
+	}
+
+	public void setConceptOfEquipotentialBondingOb(String conceptOfEquipotentialBondingOb) {
+		this.conceptOfEquipotentialBondingOb = conceptOfEquipotentialBondingOb;
+	}
+
+	public String getConceptOfEquipotentialBondingRem() {
+		return conceptOfEquipotentialBondingRem;
+	}
+
+	public void setConceptOfEquipotentialBondingRem(String conceptOfEquipotentialBondingRem) {
+		this.conceptOfEquipotentialBondingRem = conceptOfEquipotentialBondingRem;
+	}
+
+	public String getMainProtectiveEquipotentialBondingOb() {
+		return mainProtectiveEquipotentialBondingOb;
+	}
+
+	public void setMainProtectiveEquipotentialBondingOb(String mainProtectiveEquipotentialBondingOb) {
+		this.mainProtectiveEquipotentialBondingOb = mainProtectiveEquipotentialBondingOb;
+	}
+
+	public String getMainProtectiveEquipotentialBondingRem() {
+		return mainProtectiveEquipotentialBondingRem;
+	}
+
+	public void setMainProtectiveEquipotentialBondingRem(String mainProtectiveEquipotentialBondingRem) {
+		this.mainProtectiveEquipotentialBondingRem = mainProtectiveEquipotentialBondingRem;
+	}
+
+	public String getSizeOfMainProtectiveOb() {
+		return sizeOfMainProtectiveOb;
+	}
+
+	public void setSizeOfMainProtectiveOb(String sizeOfMainProtectiveOb) {
+		this.sizeOfMainProtectiveOb = sizeOfMainProtectiveOb;
+	}
+
+	public String getSizeOfMainProtectiveRem() {
+		return sizeOfMainProtectiveRem;
+	}
+
+	public void setSizeOfMainProtectiveRem(String sizeOfMainProtectiveRem) {
+		this.sizeOfMainProtectiveRem = sizeOfMainProtectiveRem;
+	}
+
+	public String getSupplimentaryMainProtectiveOb() {
+		return supplimentaryMainProtectiveOb;
+	}
+
+	public void setSupplimentaryMainProtectiveOb(String supplimentaryMainProtectiveOb) {
+		this.supplimentaryMainProtectiveOb = supplimentaryMainProtectiveOb;
+	}
+
+	public String getSupplimentaryMainProtectiveRem() {
+		return supplimentaryMainProtectiveRem;
+	}
+
+	public void setSupplimentaryMainProtectiveRem(String supplimentaryMainProtectiveRem) {
+		this.supplimentaryMainProtectiveRem = supplimentaryMainProtectiveRem;
 	}
 
 	public String getEarthStudVisibilityOb() {

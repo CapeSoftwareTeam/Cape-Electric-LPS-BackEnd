@@ -68,6 +68,36 @@ public class EarthingLpsDescription implements Serializable  {
 	@Column(name = "FLAG")
 	private String flag;
 	
+	@Column(name = "EARTHING_DESC_AVAILABILITY_OB")
+	private String earthingDescriptionAvailabilityOb;
+	
+	@Column(name = "EARTHING_DESC_AVAILABILITY_REM")
+	private String earthingDescriptionAvailabilityRem;
+	
+	@Column(name = "EARTHING_CLAMPS_AVAILABILITY_OB")
+	private String earthingClampsAvailabilityOb;
+	
+	@Column(name = "EARTHING_CLAMPS_AVAILABILITY_REM")
+	private String earthingClampsAvailabilityRem;
+	
+	@Column(name = "EARTHING_ELECTRODE_CHAMBER_AVAILABILITY_OB")
+	private String earthingElectrodeChamberAvailabilityOb;
+	
+	@Column(name = "EARTHING_ELECTRODE_CHAMBER_AVAILABILITY_REM")
+	private String earthingElectrodeChamberAvailabilityRem;
+	
+	@Column(name = "EARTHING_SYSTEM_AVAILABILITY_OB")
+	private String earthingSystemAvailabilityOb;
+	
+	@Column(name = "EARTHING_SYSTEM_AVAILABILITY_REM")
+	private String earthingSystemAvailabilityRem;
+	
+	@Column(name = "EARTHING_ELECTRODE_TESTING_AVAILABILITY_OB")
+	private String earthingElectrodeTestingAvailabilityOb;
+	
+	@Column(name = "EARTHING_ELECTRODE_TESTING_AVAILABILITY_REM")
+	private String earthingElectrodeTestingAvailabilityRem;
+	
 	@JsonManagedReference
 	@OneToMany(mappedBy = "earthingLpsDescription", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<EarthingDescription> earthingDescription;
@@ -83,6 +113,10 @@ public class EarthingLpsDescription implements Serializable  {
 	@JsonManagedReference
 	@OneToMany(mappedBy = "earthingLpsDescription", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<EarthingSystem> earthingSystem;
+	
+	@JsonManagedReference
+	@OneToMany(mappedBy = "earthingLpsDescription", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<EarthElectrodeTesting> earthElectrodeTesting;
 	
 //	@JsonManagedReference
 //	@OneToMany(mappedBy = "earthingLpsDescription", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -228,6 +262,95 @@ public class EarthingLpsDescription implements Serializable  {
 
 	public void setFlag(String flag) {
 		this.flag = flag;
+	}
+	
+
+	public String getEarthingDescriptionAvailabilityOb() {
+		return earthingDescriptionAvailabilityOb;
+	}
+
+	public void setEarthingDescriptionAvailabilityOb(String earthingDescriptionAvailabilityOb) {
+		this.earthingDescriptionAvailabilityOb = earthingDescriptionAvailabilityOb;
+	}
+
+	public String getEarthingDescriptionAvailabilityRem() {
+		return earthingDescriptionAvailabilityRem;
+	}
+
+	public void setEarthingDescriptionAvailabilityRem(String earthingDescriptionAvailabilityRem) {
+		this.earthingDescriptionAvailabilityRem = earthingDescriptionAvailabilityRem;
+	}
+
+	public String getEarthingClampsAvailabilityOb() {
+		return earthingClampsAvailabilityOb;
+	}
+
+	public void setEarthingClampsAvailabilityOb(String earthingClampsAvailabilityOb) {
+		this.earthingClampsAvailabilityOb = earthingClampsAvailabilityOb;
+	}
+
+	public String getEarthingClampsAvailabilityRem() {
+		return earthingClampsAvailabilityRem;
+	}
+
+	public void setEarthingClampsAvailabilityRem(String earthingClampsAvailabilityRem) {
+		this.earthingClampsAvailabilityRem = earthingClampsAvailabilityRem;
+	}
+
+	public String getEarthingElectrodeChamberAvailabilityOb() {
+		return earthingElectrodeChamberAvailabilityOb;
+	}
+
+	public void setEarthingElectrodeChamberAvailabilityOb(String earthingElectrodeChamberAvailabilityOb) {
+		this.earthingElectrodeChamberAvailabilityOb = earthingElectrodeChamberAvailabilityOb;
+	}
+
+	public String getEarthingElectrodeChamberAvailabilityRem() {
+		return earthingElectrodeChamberAvailabilityRem;
+	}
+
+	public void setEarthingElectrodeChamberAvailabilityRem(String earthingElectrodeChamberAvailabilityRem) {
+		this.earthingElectrodeChamberAvailabilityRem = earthingElectrodeChamberAvailabilityRem;
+	}
+
+	public String getEarthingSystemAvailabilityOb() {
+		return earthingSystemAvailabilityOb;
+	}
+
+	public void setEarthingSystemAvailabilityOb(String earthingSystemAvailabilityOb) {
+		this.earthingSystemAvailabilityOb = earthingSystemAvailabilityOb;
+	}
+
+	public String getEarthingSystemAvailabilityRem() {
+		return earthingSystemAvailabilityRem;
+	}
+
+	public void setEarthingSystemAvailabilityRem(String earthingSystemAvailabilityRem) {
+		this.earthingSystemAvailabilityRem = earthingSystemAvailabilityRem;
+	}
+
+	public String getEarthingElectrodeTestingAvailabilityOb() {
+		return earthingElectrodeTestingAvailabilityOb;
+	}
+
+	public void setEarthingElectrodeTestingAvailabilityOb(String earthingElectrodeTestingAvailabilityOb) {
+		this.earthingElectrodeTestingAvailabilityOb = earthingElectrodeTestingAvailabilityOb;
+	}
+
+	public String getEarthingElectrodeTestingAvailabilityRem() {
+		return earthingElectrodeTestingAvailabilityRem;
+	}
+
+	public void setEarthingElectrodeTestingAvailabilityRem(String earthingElectrodeTestingAvailabilityRem) {
+		this.earthingElectrodeTestingAvailabilityRem = earthingElectrodeTestingAvailabilityRem;
+	}
+
+	public List<EarthElectrodeTesting> getEarthElectrodeTesting() {
+		return earthElectrodeTesting;
+	}
+
+	public void setEarthElectrodeTesting(List<EarthElectrodeTesting> earthElectrodeTesting) {
+		this.earthElectrodeTesting = earthElectrodeTesting;
 	}
 
 	public static long getSerialversionuid() {
