@@ -61,6 +61,13 @@ public class BasicLpsController {
 		return new ResponseEntity<String>("Basic Lps Details Updated Successfully", HttpStatus.OK);
 	}
 	
-
+	@GetMapping("/health")
+	public ResponseEntity<?> health() throws Exception {
+	    try {
+	        return ResponseEntity.status(200).body("Ok");
+	    } catch (Exception e) {
+	        return (ResponseEntity<?>) ResponseEntity.internalServerError().body(e.getMessage());
+	    }
+	}
 	
 }
