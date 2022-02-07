@@ -467,7 +467,7 @@ public class FindNonRemovedObjects {
 		return unRemovedSpdDescription;
 	}
 	
-	//find non removed values for Seperation Distance	
+	//find non removed values for SEPERATION DISTANCE	
 	public List<SeperationDistanceDescription> findNonRemovedSeperationDistanceBuildings(SeperationDistanceReport seperationDistanceReport) {
 
 		ArrayList<SeperationDistanceDescription> seperationDistanceDescription = new ArrayList<SeperationDistanceDescription>();
@@ -484,7 +484,7 @@ public class FindNonRemovedObjects {
 		return seperationDistanceDescription;
 	}
 	
-	//find non removed values for Seperation Distance childs	
+	//find non removed values for SEPERATION DISTANCE childs	
 		public List<SeparateDistance> findNonRemovedSeperateDistance(List<SeparateDistance> separateDistanceList) {
 
 			ArrayList<SeparateDistance> unRemovedSeparateDistance = new ArrayList<SeparateDistance>();
@@ -499,6 +499,7 @@ public class FindNonRemovedObjects {
 			return unRemovedSeparateDistance;
 		}
 	
+	//find non removed values for EARTH STUD
 	public List<EarthStudDescription> findNonRemovedEarthStudBuildings(EarthStudReport earthStudReport) {
 
 		ArrayList<EarthStudDescription> earthStudDescription = new ArrayList<EarthStudDescription>();
