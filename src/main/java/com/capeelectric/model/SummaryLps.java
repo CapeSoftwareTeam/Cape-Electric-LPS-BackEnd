@@ -48,7 +48,7 @@ public class SummaryLps implements Serializable  {
 	private String userName;
 	
 	@Column(name = "SUMMARY_DATE")
-	private LocalDateTime summaryDate;
+	private String summaryDate;
 	
 	@Column(name = "INSPECTED_YEAR")
 	private Integer inspectedYear;
@@ -97,11 +97,12 @@ public class SummaryLps implements Serializable  {
 		this.userName = userName;
 	}
 
-	public LocalDateTime getSummaryDate() {
+
+	public String getSummaryDate() {
 		return summaryDate;
 	}
 
-	public void setSummaryDate(LocalDateTime summaryDate) {
+	public void setSummaryDate(String summaryDate) {
 		this.summaryDate = summaryDate;
 	}
 

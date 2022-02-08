@@ -46,13 +46,13 @@ public class AirBasicDescription implements Serializable {
 	private String architectNameRemarks;
 	
 	@Column(name = "DATE_OF_DESIGN_OBSERVATION")
-	private LocalDateTime designDateObserv;
+	private String designDateObserv;
 	
 	@Column(name = "DATE_OF_DESIGN_REMARKS")
 	private String designDateRemarks;
 	
 	@Column(name = "DATEOF_APPROVAL_OB")
-	private LocalDateTime dateOfApprovalOb;
+	private String dateOfApprovalOb;
 	
 	@Column(name = "DATEOF_APPROVAL_REM")
 	private String dateOfApprovalRem;
@@ -344,19 +344,20 @@ public class AirBasicDescription implements Serializable {
 		this.consultantNameRemarks = consultantNameRemarks;
 	}
 
-	public LocalDateTime getDesignDateObserv() {
+
+	public String getDesignDateObserv() {
 		return designDateObserv;
 	}
 
-	public void setDesignDateObserv(LocalDateTime designDateObserv) {
+	public void setDesignDateObserv(String designDateObserv) {
 		this.designDateObserv = designDateObserv;
 	}
 
-	public LocalDateTime getDateOfApprovalOb() {
+	public String getDateOfApprovalOb() {
 		return dateOfApprovalOb;
 	}
 
-	public void setDateOfApprovalOb(LocalDateTime dateOfApprovalOb) {
+	public void setDateOfApprovalOb(String dateOfApprovalOb) {
 		this.dateOfApprovalOb = dateOfApprovalOb;
 	}
 

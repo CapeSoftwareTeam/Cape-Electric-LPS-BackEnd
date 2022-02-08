@@ -51,7 +51,7 @@ public class SummaryLpsDeclaration implements Serializable {
 		private String address;
 		
 		@Column(name = "DATE")
-		private LocalDateTime date;
+		private String date;
 		
 		@JsonBackReference
 		@ManyToOne
@@ -114,11 +114,12 @@ public class SummaryLpsDeclaration implements Serializable {
 			this.address = address;
 		}
 
-		public LocalDateTime getDate() {
+
+		public String getDate() {
 			return date;
 		}
 
-		public void setDate(LocalDateTime date) {
+		public void setDate(String date) {
 			this.date = date;
 		}
 
