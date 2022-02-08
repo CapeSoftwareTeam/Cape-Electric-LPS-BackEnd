@@ -23,6 +23,7 @@ import com.capeelectric.model.SPD;
 import com.capeelectric.model.SeperationDistanceDescription;
 import com.capeelectric.model.SeperationDistanceReport;
 import com.capeelectric.model.SpdReport;
+import com.capeelectric.model.SummaryLps;
 import com.capeelectric.repository.AirTerminationLpsRepository;
 import com.capeelectric.repository.BasicLpsRepository;
 import com.capeelectric.repository.DownConductorRepository;
@@ -30,6 +31,7 @@ import com.capeelectric.repository.EarthStudRepository;
 import com.capeelectric.repository.EarthingLpsRepository;
 import com.capeelectric.repository.SPDRepository;
 import com.capeelectric.repository.SeperationDistanceRepository;
+import com.capeelectric.repository.SummaryLpsRepository;
 import com.capeelectric.service.FinalReportService;
 import com.capeelectric.util.FindNonRemovedObjects;
 
@@ -65,6 +67,9 @@ public class FinalReportServiceImpl implements FinalReportService {
 
 	@Autowired
 	private EarthStudRepository earthStudRepository;
+	
+	@Autowired
+	private SummaryLpsRepository summaryLpsRepository;
 
 	private LpsFinalReport lpsFinalReport;
 	
@@ -138,6 +143,11 @@ public class FinalReportServiceImpl implements FinalReportService {
 			logger.debug("fetching process started for EarthStudReport");
 			Optional<EarthStudReport> earthStudReport = earthStudRepository.findByBasicLpsId(basicLpsId);
 			logger.debug("EarthStudReport_fetching ended");
+			
+			// Earth Stud
+			logger.debug("fetching process started for Summary");
+			Optional<SummaryLps> summaryLps = summaryLpsRepository.findByBasicLpsId(basicLpsId);
+			logger.debug("Summary_fetching ended");
 
 			 if (basicLpsDetails.isPresent() && basicLpsDetails != null) {
 				lpsFinalReport.setBasicLps(basicLpsDetails.get());
@@ -176,9 +186,13 @@ public class FinalReportServiceImpl implements FinalReportService {
 					 earthStudReport.get().setEarthStudDescription(
 								findNonRemovedObject.findNonRemovedEarthStudBuildings(earthStudReport.get()));
 					lpsFinalReport.setEarthStudReport(earthStudReport.get());
+				}
+				 if (summaryLps.isPresent() && summaryLps != null) {
+					 summaryLps.get().setSummaryLpsBuildings(
+								findNonRemovedObject.findNonRemovedSummaryBuildings(summaryLps.get()));
+					lpsFinalReport.setSummaryLps(summaryLps.get());
 					logger.debug("Successfully Seven_Steps fetching Operation done");
 					return Optional.of(lpsFinalReport);
-
 				}
 			}
 

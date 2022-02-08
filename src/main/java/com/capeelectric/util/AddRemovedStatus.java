@@ -17,11 +17,13 @@ import com.capeelectric.model.EarthingLpsDescription;
 import com.capeelectric.model.LpsAirDiscription;
 import com.capeelectric.model.SPD;
 import com.capeelectric.model.SeperationDistanceDescription;
+import com.capeelectric.model.SummaryLpsBuildings;
 import com.capeelectric.repository.DownConductorListRepository;
 import com.capeelectric.repository.EarthStudListRepository;
 import com.capeelectric.repository.EarthingLpsListRepository;
 import com.capeelectric.repository.SPDListRepository;
 import com.capeelectric.repository.SeperationDistanceListRepository;
+import com.capeelectric.repository.SummaryLpsListRepository;
 import com.capeelectric.service.impl.AirTerminationLpsServiceImpl;
 
 /**
@@ -47,6 +49,9 @@ public class AddRemovedStatus {
 	
 	@Autowired
 	private EarthStudListRepository earthStudListRepository;
+	
+	@Autowired
+	private SummaryLpsListRepository summaryLpsListRepository;
 
 	//Method for adding R status in Down Conductors
 		public void addRemoveStatusInDownConductors(List<LpsAirDiscription> lpsAirDiscription)
@@ -172,4 +177,31 @@ public class AddRemovedStatus {
 				}
 			}
 		}
+		
+		//Method for adding R status in Earth Stud
+		public void addRemoveStatusInSummaryLps(List<LpsAirDiscription> lpsAirDiscription)
+				throws AirTerminationException {
+
+			for (LpsAirDiscription lpsAirDiscriptionItr : lpsAirDiscription) {
+				if (lpsAirDiscriptionItr != null && lpsAirDiscriptionItr.getBuildingCount() != null
+						&& lpsAirDiscriptionItr.getFlag().equalsIgnoreCase("R")) {
+					try {
+						SummaryLpsBuildings summaryLpsBuildingsRepo = summaryLpsListRepository.findByBuildingCount(lpsAirDiscriptionItr.getBuildingCount());
+						if (summaryLpsBuildingsRepo != null
+								&& summaryLpsBuildingsRepo.getBuildingCount().equals(lpsAirDiscriptionItr.getBuildingCount())) {
+							summaryLpsBuildingsRepo.setFlag("R");
+							summaryLpsListRepository.save(summaryLpsBuildingsRepo);
+						}
+					} catch (Exception e) {
+						logger.debug("Please check removed Air Termination Building data not available in Summary"
+								+ e.getMessage());
+						throw new AirTerminationException(
+								"Please check removed Air Termination Building data not available in Summary"
+										+ e.getMessage());
+					}
+				}
+			}
+		}
+		
+		
 }

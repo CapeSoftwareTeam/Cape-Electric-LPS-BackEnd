@@ -22,6 +22,7 @@ import com.capeelectric.exception.DownConductorException;
 import com.capeelectric.exception.EarthingLpsException;
 import com.capeelectric.model.DownConductorDescription;
 import com.capeelectric.model.EarthingLpsDescription;
+import com.capeelectric.model.EarthingReport;
 import com.capeelectric.service.impl.DownConductorServiceImpl;
 import com.capeelectric.service.impl.EarthingLpsServiceImpl;
 
@@ -37,37 +38,37 @@ public class EarthingLpsControllerTest {
 	@MockBean
 	private EarthingLpsServiceImpl earthingLpsServiceImpl;
 
-	private EarthingLpsDescription earthingLpsDescription;
+	private EarthingReport earthingReport;
 
 	{
-		earthingLpsDescription = new EarthingLpsDescription();
-		earthingLpsDescription.setBasicLpsId(1);
-		earthingLpsDescription.setUserName("LVsystem@gmail.com");
-		earthingLpsDescription.setUserName("Inspector@gmail.com");
-		earthingLpsDescription.setBasicLpsId(1);
+		earthingReport = new EarthingReport();
+		earthingReport.setBasicLpsId(1);
+		earthingReport.setUserName("LVsystem@gmail.com");
+		earthingReport.setUserName("Inspector@gmail.com");
+		earthingReport.setBasicLpsId(1);
 	}
 
 	@Test
 	public void testAddEarthingLpsDetails() throws EarthingLpsException {
 		logger.info("testAddEarthingLpsDetails Function Started");
 
-		doNothing().when(earthingLpsServiceImpl).addEarthingLpsDetails(earthingLpsDescription);
-		ResponseEntity<String> addAirTerminalsDetails = earthingLpsController.addEarthingLps(earthingLpsDescription);
-		equals(addAirTerminalsDetails.getBody());
+		doNothing().when(earthingLpsServiceImpl).addEarthingLpsDetails(earthingReport);
+		ResponseEntity<String> addEarthingReportDetails = earthingLpsController.addEarthingLps(earthingReport);
+		equals(addEarthingReportDetails.getBody());
 		logger.info("testAddEarthingLpsDetails Function Ended");
 	}
 
 	@Test
 	public void testRetrieveEarthingLps() throws EarthingLpsException {
-		List<EarthingLpsDescription> arrayList = new ArrayList<>();
-		arrayList.add(earthingLpsDescription);
+		List<EarthingReport> arrayList = new ArrayList<>();
+		arrayList.add(earthingReport);
 
 		logger.info("testRetrieveEarthingLpsDetails Function Started");
 
 		when(earthingLpsServiceImpl.retrieveEarthingLpsDetails("LVsystem@gmail.com", 12)).thenReturn(arrayList);
-		ResponseEntity<List<EarthingLpsDescription>> retrieveBasicLpsDetails = earthingLpsController
+		ResponseEntity<List<EarthingReport>> retrieveEarthingReportDetails = earthingLpsController
 				.retrieveEarthingLps("LVsystem@gmail.com", 12);
-		assertEquals(HttpStatus.OK, retrieveBasicLpsDetails.getStatusCode());
+		assertEquals(HttpStatus.OK, retrieveEarthingReportDetails.getStatusCode());
 
 		logger.info("testRetrieveEarthingLpsDetails Function Ended");
 
@@ -78,7 +79,7 @@ public class EarthingLpsControllerTest {
 
 		logger.info("testUpdateEarthingLpsDetails Function Started");
 		ResponseEntity<String> expectedResponseEntity = new ResponseEntity<String>(HttpStatus.OK);
-		ResponseEntity<String> actualResponseEntity = earthingLpsController.updateEarthingLps(earthingLpsDescription);
+		ResponseEntity<String> actualResponseEntity = earthingLpsController.updateEarthingLps(earthingReport);
 		assertEquals(actualResponseEntity.getStatusCode(), expectedResponseEntity.getStatusCode());
 		logger.info("testUpdateEarthingLpsDetails Function Ended");
 	}

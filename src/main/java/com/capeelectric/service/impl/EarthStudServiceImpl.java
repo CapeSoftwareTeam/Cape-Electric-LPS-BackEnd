@@ -18,32 +18,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.capeelectric.exception.AirTerminationException;
-import com.capeelectric.exception.BasicLpsException;
-import com.capeelectric.exception.DownConductorException;
 import com.capeelectric.exception.EarthStudException;
-import com.capeelectric.exception.EarthingLpsException;
-import com.capeelectric.exception.SPDException;
-import com.capeelectric.model.AirTermination;
 import com.capeelectric.model.BasicLps;
-import com.capeelectric.model.DownConductorDescription;
-import com.capeelectric.model.DownConductorReport;
 import com.capeelectric.model.EarthStudDescription;
 import com.capeelectric.model.EarthStudReport;
-import com.capeelectric.model.EarthingLpsDescription;
-import com.capeelectric.model.EarthingReport;
-import com.capeelectric.model.LpsAirDiscription;
-import com.capeelectric.model.SPD;
-import com.capeelectric.model.SeperationDistanceDescription;
-import com.capeelectric.model.SeperationDistanceReport;
-import com.capeelectric.model.SpdReport;
-import com.capeelectric.repository.AirTerminationLpsRepository;
 import com.capeelectric.repository.BasicLpsRepository;
-import com.capeelectric.repository.DownConductorRepository;
 import com.capeelectric.repository.EarthStudRepository;
-import com.capeelectric.repository.EarthingLpsRepository;
-import com.capeelectric.repository.SPDRepository;
-import com.capeelectric.repository.SeperationDistanceRepository;
 import com.capeelectric.service.EarthStudService;
 import com.capeelectric.service.PrintAirTerminationService;
 import com.capeelectric.service.PrintBasicLpsService;
@@ -101,25 +81,8 @@ public class EarthStudServiceImpl implements EarthStudService {
 	@Autowired
 	private BasicLpsRepository basicLpsRepository;
 
-	private BasicLps basicLps;
-
 	@Autowired
 	private UserFullName userFullName;
-
-	@Autowired
-	private DownConductorRepository downConductorRepository;
-
-	@Autowired
-	private EarthingLpsRepository earthingLpsRepository;
-
-	@Autowired
-	private SPDRepository spdRepository;
-
-	@Autowired
-	private AirTerminationLpsRepository airTerminationLpsRepository;
-
-	@Autowired
-	private SeperationDistanceRepository seperationDistanceRepository;
 	
 	@Autowired
 	private FindNonRemovedObjects findNonRemovedObjects;
@@ -127,59 +90,11 @@ public class EarthStudServiceImpl implements EarthStudService {
 	@Transactional
 	@Override
 	public void addEarthStudDetails(EarthStudReport earthStudReport)
-			throws EarthStudException, BasicLpsException, AirTerminationException, DownConductorException,
-			EarthingLpsException, SPDException, Exception {
+			throws EarthStudException {
 		if (earthStudReport != null && earthStudReport.getUserName() != null
 				&& !earthStudReport.getUserName().isEmpty() && earthStudReport.getBasicLpsId() != null
 				&& earthStudReport.getBasicLpsId() != 0) {
-			//For Basic Lps data
-			Optional<BasicLps> basicLpsDetails = basicLpsRepository
-					.findByBasicLpsId(earthStudReport.getBasicLpsId());
 			
-			//For Air Termination data
-			Optional<AirTermination> lpsAirDisc = airTerminationLpsRepository
-					.findByBasicLpsId(earthStudReport.getBasicLpsId());
-			
-			//For Down Conductor data
-			Optional<DownConductorReport> downConductorDetails = downConductorRepository
-					.findByBasicLpsId(earthStudReport.getBasicLpsId());
-			
-			//For Earthing Lps data
-			Optional<EarthingReport> earthingLpsDetails = earthingLpsRepository
-					.findByBasicLpsId(earthStudReport.getBasicLpsId());
-			
-			//For SPD data
-			Optional<SpdReport> spdDetails = spdRepository.findByBasicLpsId(earthStudReport.getBasicLpsId());
-			
-			//For Seperation Distance data
-			Optional<SeperationDistanceReport> separateDistanceDetails = seperationDistanceRepository
-					.findByBasicLpsId(earthStudReport.getBasicLpsId());
-
-			if (!basicLpsDetails.isPresent() && !lpsAirDisc.isPresent() && !downConductorDetails.isPresent()
-					&& !earthingLpsDetails.isPresent() && !separateDistanceDetails.isPresent()
-					&& !spdDetails.isPresent()) {
-				logger.error("Please enter details for all previous steps to proceed further");
-				throw new EarthStudException("Please enter details for all previous steps to proceed further");
-			} else if (!basicLpsDetails.isPresent()) {
-				logger.error("Please enter Basic Information step to proceed further");
-				throw new EarthStudException("Please enter Basic Information step to proceed further");
-			} else if (!lpsAirDisc.isPresent()) {
-				logger.error("Please enter Air Termination step to proceed further");
-				throw new EarthStudException("Please enter Air Termination step to proceed further");
-			} else if (!downConductorDetails.isPresent()) {
-				logger.error("Please enter Down Conductors step to proceed further");
-				throw new EarthStudException("Please enter Down Conductors step to proceed further");
-			} else if (!earthingLpsDetails.isPresent()) {
-				logger.error("Please enter Earthing step to proceed further");
-				throw new EarthStudException("Please enter Earthing step to proceed further");
-			} else if (!spdDetails.isPresent()) {
-				logger.error("Please enter SPD step to proceed further");
-				throw new EarthStudException("Please enter SPD step to proceed further");
-
-			} else if (!separateDistanceDetails.isPresent()) {
-				logger.error("Please enter Seperation Distance step to proceed further");
-				throw new EarthStudException("Please enter Seperation Distance step to proceed further");
-			}
 			Optional<BasicLps> basicLpsRepo = basicLpsRepository.findByBasicLpsId(earthStudReport.getBasicLpsId());
 			if (basicLpsRepo.isPresent()
 					&& basicLpsRepo.get().getBasicLpsId().equals(earthStudReport.getBasicLpsId())) {
@@ -197,21 +112,9 @@ public class EarthStudServiceImpl implements EarthStudService {
 						earthStudRepository.save(earthStudReport);
 						logger.debug("Earth Stud Report Details Successfully Saved in DB");
 						
-						basicLpsRepo = basicLpsRepository.findByBasicLpsId(earthStudReport.getBasicLpsId());
-						if (basicLpsRepo.isPresent()
-								&& basicLpsRepo.get().getBasicLpsId().equals(earthStudReport.getBasicLpsId())) {
-							basicLps = basicLpsRepo.get();
-							basicLps.setAllStepsCompleted("AllStepCompleted");
-							basicLpsRepository.save(basicLps);
-							logger.debug("Basic Lps Report Details Successfully Updated as All Steps Completed in DB");
-							
-						} else {
-							logger.error("Basic LPS Id Information not Available in Basic LPS Id Details");
-							throw new EarthStudException("Basic LPS Id Information not Available in Basic LPS Id Details");
-						}
 					} else {
 						logger.error("Please fill all the fields before clicking next button");
-						throw new EarthingLpsException("Please fill all the fields before clicking next button");
+						throw new EarthStudException("Please fill all the fields before clicking next button");
 					}
 				} else {
 					logger.error("Given Basic LPS Id is Not Registered in Basic LPS");

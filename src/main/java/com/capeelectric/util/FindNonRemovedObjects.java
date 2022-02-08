@@ -39,6 +39,8 @@ import com.capeelectric.model.SeperationDistanceDescription;
 import com.capeelectric.model.SeperationDistanceReport;
 import com.capeelectric.model.SpdDescription;
 import com.capeelectric.model.SpdReport;
+import com.capeelectric.model.SummaryLps;
+import com.capeelectric.model.SummaryLpsBuildings;
 import com.capeelectric.model.TestingJoint;
 import com.capeelectric.model.VerticalAirTerminationList;
 
@@ -514,4 +516,22 @@ public class FindNonRemovedObjects {
 		}
 		return earthStudDescription;
 	}
+	
+	//find non removed values for SUMMARY
+	public List<SummaryLpsBuildings> findNonRemovedSummaryBuildings(SummaryLps summaryLps) {
+
+		ArrayList<SummaryLpsBuildings> summaryLpsBuildings = new ArrayList<SummaryLpsBuildings>();
+		List<SummaryLpsBuildings> findNonSummaryLpsBuildings = summaryLps.getSummaryLpsBuildings();
+		for (SummaryLpsBuildings  summaryLpsBuildingsItr: findNonSummaryLpsBuildings) {
+			if (summaryLpsBuildingsItr.getFlag()==null || !summaryLpsBuildingsItr.getFlag().equalsIgnoreCase("R")) {
+				if(summaryLpsBuildingsItr.getFlag()==null) {
+					summaryLpsBuildingsItr.setFlag("N");
+				}
+				summaryLpsBuildings.add(summaryLpsBuildingsItr);			 
+			}
+		}
+		return summaryLpsBuildings;
+	}
+	
+	
 }

@@ -28,6 +28,7 @@ import com.capeelectric.repository.EarthStudListRepository;
 import com.capeelectric.repository.EarthingLpsListRepository;
 import com.capeelectric.repository.SPDListRepository;
 import com.capeelectric.repository.SeperationDistanceListRepository;
+import com.capeelectric.repository.SummaryLpsListRepository;
 import com.capeelectric.service.AirTerminationLpsService;
 import com.capeelectric.util.AddRemovedStatus;
 import com.capeelectric.util.FindNonRemovedObjects;
@@ -72,6 +73,9 @@ public class AirTerminationLpsServiceImpl implements AirTerminationLpsService {
 	
 	@Autowired
 	private EarthStudListRepository earthStudListRepository;
+	
+	@Autowired
+	private SummaryLpsListRepository summaryLpsListRepository;
 	
 	@Autowired
 	private AddRemovedStatus addRemovedStatus;
@@ -159,7 +163,7 @@ public class AirTerminationLpsServiceImpl implements AirTerminationLpsService {
 				addRemovedStatus.addRemoveStatusInSpd(airTermination.getLpsAirDescription());
 				addRemovedStatus.addRemoveStatusInSeperationDistance(airTermination.getLpsAirDescription());
 				addRemovedStatus.addRemoveStatusInEarthStud(airTermination.getLpsAirDescription());
-
+				addRemovedStatus.addRemoveStatusInSummaryLps(airTermination.getLpsAirDescription());
 
 				List<LpsAirDiscription> lpsAirDiscription = airTermination.getLpsAirDescription();
 				for (LpsAirDiscription lpsAirDiscriptionItr : lpsAirDiscription) {

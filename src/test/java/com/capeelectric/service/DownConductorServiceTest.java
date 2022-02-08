@@ -21,9 +21,15 @@ import com.capeelectric.exception.AirTerminationException;
 import com.capeelectric.exception.BasicLpsException;
 import com.capeelectric.exception.DownConductorException;
 import com.capeelectric.model.BasicLps;
+import com.capeelectric.model.BridgingDescription;
+import com.capeelectric.model.Connectors;
 import com.capeelectric.model.DownConductor;
 import com.capeelectric.model.DownConductorDescription;
+import com.capeelectric.model.DownConductorReport;
+import com.capeelectric.model.Holder;
+import com.capeelectric.model.LightningCounter;
 import com.capeelectric.model.LpsAirDiscription;
+import com.capeelectric.model.TestingJoint;
 import com.capeelectric.repository.BasicLpsRepository;
 import com.capeelectric.repository.DownConductorRepository;
 import com.capeelectric.service.impl.BasicLpsServiceImpl;
@@ -48,13 +54,49 @@ public class DownConductorServiceTest {
 	@MockBean
 	private UserFullName userFullName;
 
-	private DownConductorDescription downConductorDescription;
+	private DownConductorReport downConductorReport;
 
 	{
-		downConductorDescription = new DownConductorDescription();
-		downConductorDescription.setBasicLpsId(1);
-		downConductorDescription.setDownConduDescId(5);
-		downConductorDescription.setUserName("LVsystem@gmail.com");
+		downConductorReport = new DownConductorReport();
+		downConductorReport.setBasicLpsId(1);
+		downConductorReport.setDownConductorReportId(5);
+		downConductorReport.setUserName("LVsystem@gmail.com");
+		List<DownConductorDescription> downConductorDescriptionList = new ArrayList<DownConductorDescription>();
+		DownConductorDescription downConductorDescription = new DownConductorDescription();
+		downConductorDescription.setFlag("A");
+		
+		List<BridgingDescription> bridgingDescriptionList = new ArrayList<BridgingDescription>();
+		BridgingDescription bridgingDescription = new BridgingDescription();
+		bridgingDescriptionList.add(bridgingDescription);
+		
+		List<Holder> holderList = new ArrayList<Holder>();
+		Holder holder = new Holder();
+		holderList.add(holder);
+		
+		List<Connectors> connectorsList = new ArrayList<Connectors>();
+		Connectors connectors = new Connectors();
+		connectorsList.add(connectors);
+		
+		List<LightningCounter> lightningCounterList = new ArrayList<LightningCounter>();
+		LightningCounter lightningCounter = new LightningCounter();
+		lightningCounterList.add(lightningCounter);
+		
+		List<TestingJoint> testingJointList = new ArrayList<TestingJoint>();
+		TestingJoint testingJoint = new TestingJoint();
+		testingJointList.add(testingJoint);
+		
+		List<DownConductor> downConductorList = new ArrayList<DownConductor>();
+		DownConductor downConductor = new DownConductor();
+		downConductorList.add(downConductor);
+		
+		downConductorDescription.setBridgingDescription(bridgingDescriptionList);
+		downConductorDescription.setHolder(holderList);
+		downConductorDescription.setConnectors(connectorsList);
+		downConductorDescription.setLightningCounter(lightningCounterList);
+		downConductorDescription.setTestingJoint(testingJointList);
+		downConductorDescription.setDownConductor(downConductorList);
+		
+		downConductorDescriptionList.add(downConductorDescription);
 	}
 	private BasicLps basicLps;
 
@@ -68,23 +110,60 @@ public class DownConductorServiceTest {
 	public void testAddDownConductorsDetails() throws DownConductorException {
 
 		when(basicLpsRepository.findByBasicLpsId(1)).thenReturn(Optional.of(basicLps));
-		when(downConductorRepository.findByBasicLpsId(2)).thenReturn(Optional.of(downConductorDescription));
-		downConductorServiceImpl.addDownConductorsDetails(downConductorDescription);
+		when(downConductorRepository.findByBasicLpsId(2)).thenReturn(Optional.of(downConductorReport));
 		
-		when(downConductorRepository.findByBasicLpsId(1)).thenReturn(Optional.of(downConductorDescription));
+		downConductorReport.setDownConductorDescription(null);
+		DownConductorException basicLpsException_4 = Assertions.assertThrows(DownConductorException.class,
+				() -> downConductorServiceImpl.addDownConductorsDetails(downConductorReport));
+		assertEquals(basicLpsException_4.getMessage(),"Please fill all the fields before clicking next button");
+		
+		List<DownConductorDescription> downConductorDescriptionList = new ArrayList<DownConductorDescription>();
+		downConductorDescriptionList.add(new DownConductorDescription());
+		
+		List<BridgingDescription> bridgingDescriptionList = new ArrayList<BridgingDescription>();
+		bridgingDescriptionList.add(new BridgingDescription());
+				
+		List<Holder> holderList = new ArrayList<Holder>();
+		holderList.add(new Holder()); 
+		
+		List<Connectors> connectorsList = new ArrayList<Connectors>();
+		connectorsList.add(new Connectors());
+		
+		List<LightningCounter> lightningCounterList = new ArrayList<LightningCounter>();
+		lightningCounterList.add(new LightningCounter());
+		
+		List<TestingJoint> testingJointList = new ArrayList<TestingJoint>();
+		testingJointList.add(new TestingJoint());
+		
+		List<DownConductor> downConductorList = new ArrayList<DownConductor>();
+		downConductorList.add(new DownConductor());
+
+		DownConductorDescription downConductorDescription = downConductorDescriptionList.get(0);	
+		downConductorDescription.setBridgingDescription(bridgingDescriptionList);
+		downConductorDescription.setHolder(holderList);
+		downConductorDescription.setConnectors(connectorsList);
+		downConductorDescription.setLightningCounter(lightningCounterList);
+		downConductorDescription.setTestingJoint(testingJointList);
+		downConductorDescription.setDownConductor(downConductorList);
+	
+		downConductorDescriptionList.add(downConductorDescription);
+		downConductorReport.setDownConductorDescription(downConductorDescriptionList);		
+		downConductorServiceImpl.addDownConductorsDetails(downConductorReport);
+		
+		when(downConductorRepository.findByBasicLpsId(1)).thenReturn(Optional.of(downConductorReport));
 		DownConductorException basicLpsException_1 = Assertions.assertThrows(DownConductorException.class,
-				() -> downConductorServiceImpl.addDownConductorsDetails(downConductorDescription));
+				() -> downConductorServiceImpl.addDownConductorsDetails(downConductorReport));
 		assertEquals(basicLpsException_1.getMessage(),"Basic LPS Id Already Available.Create New Basic Id");
 
-		downConductorDescription.setBasicLpsId(3);
+		downConductorReport.setBasicLpsId(3);
 		DownConductorException basicLpsException_2 = Assertions.assertThrows(DownConductorException.class,
-				() -> downConductorServiceImpl.addDownConductorsDetails(downConductorDescription));
+				() -> downConductorServiceImpl.addDownConductorsDetails(downConductorReport));
 		assertEquals(basicLpsException_2.getMessage(),"Given Basic LPS Id is Not Registered in Basic LPS");
 		
 		logger.info("Invalid Present_flow");
-		downConductorDescription.setUserName(null);
+		downConductorReport.setUserName(null);
 		DownConductorException basicLpsException_3 = Assertions.assertThrows(DownConductorException.class,
-				() -> downConductorServiceImpl.addDownConductorsDetails(downConductorDescription));
+				() -> downConductorServiceImpl.addDownConductorsDetails(downConductorReport));
 		assertEquals(basicLpsException_3.getMessage(), "Invalid Inputs");
 		
 	}
@@ -92,8 +171,8 @@ public class DownConductorServiceTest {
 	@Test
 	public void testRetrieveDownConductorDetails() throws DownConductorException {
 
-		List<DownConductorDescription> arrayList = new ArrayList<DownConductorDescription>();
-		arrayList.add(downConductorDescription);
+		List<DownConductorReport> arrayList = new ArrayList<DownConductorReport>();
+		arrayList.add(downConductorReport);
 		when(downConductorRepository.findByUserNameAndBasicLpsId("LVsystem@gmail.com", 12)).thenReturn(arrayList);
 
 		logger.info("SuccessFlow of Retrieve DownConductorDetails");
@@ -104,7 +183,7 @@ public class DownConductorServiceTest {
 				() -> downConductorServiceImpl.retrieveDownConductorDetails(null, 12));
 		assertEquals(basicLpsException.getMessage(), "Invalid Inputs");
 
-		downConductorDescription.setUserName("LVsystem@gmail.com");
+		downConductorReport.setUserName("LVsystem@gmail.com");
 		DownConductorException basicLpsException_1 = Assertions.assertThrows(DownConductorException.class,
 				() -> downConductorServiceImpl.retrieveDownConductorDetails("abc@gmail.com", 12));
 		assertEquals(basicLpsException_1.getMessage(), "Given UserName & Id doesn't exist in Down Conductor Details");
@@ -113,24 +192,24 @@ public class DownConductorServiceTest {
 
 	@Test
 	public void testUpdateDownConductor() throws DownConductorException {
-		downConductorDescription.setUserName("LVsystem@gmail.com");
-		downConductorDescription.setDownConduDescId(1);
-		downConductorDescription.setBasicLpsId(1);
+		downConductorReport.setUserName("LVsystem@gmail.com");
+		downConductorReport.setDownConductorReportId(1);
+		downConductorReport.setBasicLpsId(1);
 
-		when(downConductorRepository.findById(1)).thenReturn(Optional.of(downConductorDescription));
-		downConductorServiceImpl.updateDownConductorDetails(downConductorDescription);
+		when(downConductorRepository.findById(1)).thenReturn(Optional.of(downConductorReport));
+		downConductorServiceImpl.updateDownConductorDetails(downConductorReport);
 
-		downConductorDescription.setBasicLpsId(null);
-		when(downConductorRepository.findById(2)).thenReturn(Optional.of(downConductorDescription));
+		downConductorReport.setBasicLpsId(null);
+		when(downConductorRepository.findById(2)).thenReturn(Optional.of(downConductorReport));
 		DownConductorException assertThrows_1 = Assertions.assertThrows(DownConductorException.class,
-				() -> downConductorServiceImpl.updateDownConductorDetails(downConductorDescription));
+				() -> downConductorServiceImpl.updateDownConductorDetails(downConductorReport));
 		assertEquals(assertThrows_1.getMessage(), "Invalid inputs");
 		
-		downConductorDescription.setBasicLpsId(2);
-		downConductorDescription.setDownConduDescId(50);
-		when(downConductorRepository.findById(20)).thenReturn(Optional.of(downConductorDescription));
+		downConductorReport.setBasicLpsId(2);
+		downConductorReport.setDownConductorReportId(50);
+		when(downConductorRepository.findById(20)).thenReturn(Optional.of(downConductorReport));
 		DownConductorException assertThrows_2 = Assertions.assertThrows(DownConductorException.class,
-				() -> downConductorServiceImpl.updateDownConductorDetails(downConductorDescription));
+				() -> downConductorServiceImpl.updateDownConductorDetails(downConductorReport));
 		assertEquals(assertThrows_2.getMessage(), "Given Basic LPS Id and Down Conductor Id is Invalid");
 
 	}

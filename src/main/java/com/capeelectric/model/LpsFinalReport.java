@@ -20,6 +20,9 @@ public class LpsFinalReport {
 
 	private SeperationDistanceReport seperationDistanceReport;
 
+	private SummaryLps summaryLps;
+
+	
 	public String getUserName() {
 		return userName;
 	}
@@ -91,6 +94,16 @@ public class LpsFinalReport {
 	public void setSeperationDistanceReport(SeperationDistanceReport seperationDistanceReport) {
 		this.seperationDistanceReport = seperationDistanceReport;
 	}
+
+	public SummaryLps getSummaryLps() {
+		return summaryLps;
+	}
+
+	public void setSummaryLps(SummaryLps summaryLps) {
+		this.summaryLps = summaryLps;
+	}
+	
+	
 	
 
 }

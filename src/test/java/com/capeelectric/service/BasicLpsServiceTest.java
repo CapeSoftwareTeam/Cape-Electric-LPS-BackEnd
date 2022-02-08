@@ -98,23 +98,22 @@ public class BasicLpsServiceTest {
 	@Test
 	public void testUpdateBasicLpsDetails() throws BasicLpsException {
 
-//		basicLps.setBasicLpsDescription(Set<basicLpsDescription>);
-//		basicLps.setUserName("LVsystem@gmail.com");
-//		basicLps.setBasicLpsId(1);
-//		when(basicLpsRepository.findById(1)).thenReturn(Optional.of(basicLps));
-//		basicLpsServiceImpl.updateBasicLpsDetails(basicLps);
+		basicLps.setUserName("LVsystem@gmail.com");
+		basicLps.setBasicLpsId(1);
+		when(basicLpsRepository.findById(1)).thenReturn(Optional.of(basicLps));
+		basicLpsServiceImpl.updateBasicLpsDetails(basicLps);
 
-//		when(basicLpsRepository.findByBasicLpsId(5)).thenReturn(Optional.of(basicLps));
-//		BasicLpsException assertThrows_1 = Assertions.assertThrows(BasicLpsException.class,
-//				() -> basicLpsServiceImpl.updateBasicLpsDetails(basicLps));
-//		assertEquals(assertThrows_1.getMessage(), "Given Basic LPS Id is Invalid");
-//		
-//
-//		basicLps.setBasicLpsId(null);
-//		when(basicLpsRepository.findById(1)).thenReturn(Optional.of(basicLps));
-//		BasicLpsException assertThrows_2 = Assertions.assertThrows(BasicLpsException.class,
-//				() -> basicLpsServiceImpl.updateBasicLpsDetails(basicLps));
-//		assertEquals(assertThrows_2.getMessage(), "Invalid inputs");
+		when(basicLpsRepository.findByBasicLpsId(5)).thenReturn(Optional.of(basicLps));
+		BasicLpsException assertThrows_1 = Assertions.assertThrows(BasicLpsException.class,
+				() -> basicLpsServiceImpl.updateBasicLpsDetails(basicLps));
+		assertEquals(assertThrows_1.getMessage(), "Given Basic LPS Id is Invalid");
+
+
+		basicLps.setBasicLpsId(null);
+		when(basicLpsRepository.findById(1)).thenReturn(Optional.of(basicLps));
+		BasicLpsException assertThrows_2 = Assertions.assertThrows(BasicLpsException.class,
+				() -> basicLpsServiceImpl.updateBasicLpsDetails(basicLps));
+		assertEquals(assertThrows_2.getMessage(), "Invalid inputs");
 
 	}
 

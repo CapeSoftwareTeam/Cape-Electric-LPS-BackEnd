@@ -22,6 +22,7 @@ import com.capeelectric.exception.DownConductorException;
 import com.capeelectric.exception.SPDException;
 import com.capeelectric.model.DownConductorDescription;
 import com.capeelectric.model.SPD;
+import com.capeelectric.model.SpdReport;
 import com.capeelectric.service.impl.DownConductorServiceImpl;
 import com.capeelectric.service.impl.SPDServiceImpl;
 
@@ -36,36 +37,36 @@ public class SPDControllerTest {
 	@MockBean
 	private SPDServiceImpl spdServiceImpl;
 
-	private SPD spdDesc;
+	private SpdReport spdReport;
 
 	{
-		spdDesc = new SPD();
-		spdDesc.setBasicLpsId(1);
-		spdDesc.setUserName("LVsystem@gmail.com");
-		spdDesc.setUserName("Inspector@gmail.com");
-		spdDesc.setBasicLpsId(1);
+		spdReport = new SpdReport();
+		spdReport.setBasicLpsId(1);
+		spdReport.setUserName("LVsystem@gmail.com");
+		spdReport.setUserName("Inspector@gmail.com");
+		spdReport.setBasicLpsId(1);
 	}
 
 	@Test
 	public void testAddSPDDetails() throws SPDException {
 		logger.info("testAddSPDDetails Function Started");
 
-		doNothing().when(spdServiceImpl).addSPDDetails(spdDesc);
-		ResponseEntity<String> addAirTerminalsDetails = spdController.addSPDDetails(spdDesc);
-		equals(addAirTerminalsDetails.getBody());
+		doNothing().when(spdServiceImpl).addSPDDetails(spdReport);
+		ResponseEntity<String> addSpdDetails = spdController.addSPDDetails(spdReport);
+		equals(addSpdDetails.getBody());
 		logger.info("testAddSPDDetails Function Ended");
 	}
 
 	@Test
 	public void testRetrieveSPDDetails() throws SPDException {
-		List<SPD> arrayList = new ArrayList<>();
-		arrayList.add(spdDesc);
+		List<SpdReport> arrayList = new ArrayList<>();
+		arrayList.add(spdReport);
 
 		logger.info("testRetrieveSPDDetails Function Started");
 
 		when(spdServiceImpl.retrieveSPDDetails("LVsystem@gmail.com", 12)).thenReturn(arrayList);
-		ResponseEntity<List<SPD>> retrieveBasicLpsDetails = spdController.retrieveSPDDetails("LVsystem@gmail.com", 12);
-		assertEquals(HttpStatus.OK, retrieveBasicLpsDetails.getStatusCode());
+		ResponseEntity<List<SpdReport>> retrieveSpdReportDetails = spdController.retrieveSPDDetails("LVsystem@gmail.com", 12);
+		assertEquals(HttpStatus.OK, retrieveSpdReportDetails.getStatusCode());
 
 		logger.info("testRetrieveSPDDetails Function Ended");
 
@@ -76,7 +77,7 @@ public class SPDControllerTest {
 
 		logger.info("testUpdateSPD Function Started");
 		ResponseEntity<String> expectedResponseEntity = new ResponseEntity<String>(HttpStatus.OK);
-		ResponseEntity<String> actualResponseEntity = spdController.updateSpdDetails(spdDesc);
+		ResponseEntity<String> actualResponseEntity = spdController.updateSpdDetails(spdReport);
 		assertEquals(actualResponseEntity.getStatusCode(), expectedResponseEntity.getStatusCode());
 		logger.info("testUpdateSPD Function Ended");
 	}
