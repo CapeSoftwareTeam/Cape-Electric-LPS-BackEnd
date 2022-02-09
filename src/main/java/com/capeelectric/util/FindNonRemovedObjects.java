@@ -35,6 +35,7 @@ import com.capeelectric.model.LpsAirDiscription;
 import com.capeelectric.model.LpsVerticalAirTermination;
 import com.capeelectric.model.SPD;
 import com.capeelectric.model.SeparateDistance;
+import com.capeelectric.model.SeparateDistanceDownConductors;
 import com.capeelectric.model.SeperationDistanceDescription;
 import com.capeelectric.model.SeperationDistanceReport;
 import com.capeelectric.model.SpdDescription;
@@ -480,6 +481,7 @@ public class FindNonRemovedObjects {
 					seperationDistanceDescriptionItr.setFlag("N");
 				}
 				seperationDistanceDescriptionItr.setSeparateDistance(findNonRemovedSeperateDistance(seperationDistanceDescriptionItr.getSeparateDistance()));
+				seperationDistanceDescriptionItr.setSeparateDistanceDownConductors(findNonRemovedSeperateDistanceDownConduct(seperationDistanceDescriptionItr.getSeparateDistanceDownConductors()));
 				seperationDistanceDescription.add(seperationDistanceDescriptionItr);			 
 			}
 		}
@@ -499,6 +501,20 @@ public class FindNonRemovedObjects {
 				}
 			}
 			return unRemovedSeparateDistance;
+		}
+		
+		public List<SeparateDistanceDownConductors> findNonRemovedSeperateDistanceDownConduct(List<SeparateDistanceDownConductors> separateDistanceDownList) {
+
+			ArrayList<SeparateDistanceDownConductors> unRemovedSeparateDistanceDown = new ArrayList<SeparateDistanceDownConductors>();
+			for (SeparateDistanceDownConductors separateDistanceDownConductors : separateDistanceDownList) {
+				if (separateDistanceDownConductors.getFlag() == null || !separateDistanceDownConductors.getFlag().equalsIgnoreCase("R")) {
+					if (separateDistanceDownConductors.getFlag() == null) {
+						separateDistanceDownConductors.setFlag("N");
+					}
+					unRemovedSeparateDistanceDown.add(separateDistanceDownConductors);
+				}
+			}
+			return unRemovedSeparateDistanceDown;
 		}
 	
 	//find non removed values for EARTH STUD

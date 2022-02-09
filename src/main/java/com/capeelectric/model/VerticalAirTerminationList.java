@@ -33,6 +33,18 @@ public class VerticalAirTerminationList implements Serializable {
 	@Column(name = "FLAG")
 	private String flag;
 	
+	@Column(name = "MATERIAL_OF_TERMINALOBSERVATION")
+	private String materialOfTerminalOb;
+
+	@Column(name = "MATERIAL_OF_TERMINALREMARKS")
+	private String materialOfTerminalRe;
+	
+	@Column(name = "SIZE_OF_TERMINALOBSERVATION")
+	private String sizeOfTerminalOb;
+
+	@Column(name = "SIZE_OF_TERMINALREMARKS")
+	private String sizeOfTerminalRe;
+	
 	@Column(name = "HEIGHT_OF_TERMINALOBSERVATION")
 	private Integer heightOfTerminalOb;
 
@@ -82,6 +94,42 @@ public class VerticalAirTerminationList implements Serializable {
 
 	public void setFlag(String flag) {
 		this.flag = flag;
+	}
+
+	public String getMaterialOfTerminalOb() {
+		return materialOfTerminalOb;
+	}
+
+	public void setMaterialOfTerminalOb(String materialOfTerminalOb) {
+		this.materialOfTerminalOb = materialOfTerminalOb;
+	}
+
+	public String getMaterialOfTerminalRe() {
+		return materialOfTerminalRe;
+	}
+
+	public void setMaterialOfTerminalRe(String materialOfTerminalRe) {
+		this.materialOfTerminalRe = materialOfTerminalRe;
+	}
+
+	public String getSizeOfTerminalOb() {
+		return sizeOfTerminalOb;
+	}
+
+	public void setSizeOfTerminalOb(String sizeOfTerminalOb) {
+		this.sizeOfTerminalOb = sizeOfTerminalOb;
+	}
+
+	public String getSizeOfTerminalRe() {
+		return sizeOfTerminalRe;
+	}
+
+	public void setSizeOfTerminalRe(String sizeOfTerminalRe) {
+		this.sizeOfTerminalRe = sizeOfTerminalRe;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 	public Integer getHeightOfTerminalOb() {

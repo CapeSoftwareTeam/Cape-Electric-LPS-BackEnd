@@ -59,6 +59,10 @@ public class SeperationDistanceDescription implements Serializable {
 	@OneToMany(mappedBy = "seperationDistanceDescription", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<SeparateDistance> separateDistance;
 	
+	@JsonManagedReference
+	@OneToMany(mappedBy = "seperationDistanceDescription", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<SeparateDistanceDownConductors> separateDistanceDownConductors;
+	
 	@JsonBackReference
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "SEPERATION_DISTANCE_REPORT_ID")
@@ -141,6 +145,16 @@ public class SeperationDistanceDescription implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+
+	public List<SeparateDistanceDownConductors> getSeparateDistanceDownConductors() {
+		return separateDistanceDownConductors;
+	}
+
+	public void setSeparateDistanceDownConductors(List<SeparateDistanceDownConductors> separateDistanceDownConductors) {
+		this.separateDistanceDownConductors = separateDistanceDownConductors;
+	}
+	
+	
 
 
 

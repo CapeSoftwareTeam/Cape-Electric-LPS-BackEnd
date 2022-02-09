@@ -37,18 +37,6 @@ public class LpsVerticalAirTermination implements Serializable {
 
 	@Column(name = "PHYSICAL_INSPECTIONREMARKS")
 	private String physicalInspectionRe;
-	
-	@Column(name = "MATERIAL_OF_TERMINALOBSERVATION")
-	private String materialOfTerminalOb;
-
-	@Column(name = "MATERIAL_OF_TERMINALREMARKS")
-	private String materialOfTerminalRe;
-	
-	@Column(name = "SIZE_OF_TERMINALOBSERVATION")
-	private String sizeOfTerminalOb;
-
-	@Column(name = "SIZE_OF_TERMINALREMARKS")
-	private String sizeOfTerminalRe;
 
 	@Column(name = "TOTAL_NUMBEROBSERVATION")
 	private Integer totalNumberOb;
@@ -98,38 +86,6 @@ public class LpsVerticalAirTermination implements Serializable {
 
 	public void setLpsVerticalAirTerminationId(Integer lpsVerticalAirTerminationId) {
 		this.lpsVerticalAirTerminationId = lpsVerticalAirTerminationId;
-	}
-
-	public String getSizeOfTerminalOb() {
-		return sizeOfTerminalOb;
-	}
-
-	public void setSizeOfTerminalOb(String sizeOfTerminalOb) {
-		this.sizeOfTerminalOb = sizeOfTerminalOb;
-	}
-
-	public String getSizeOfTerminalRe() {
-		return sizeOfTerminalRe;
-	}
-
-	public void setSizeOfTerminalRe(String sizeOfTerminalRe) {
-		this.sizeOfTerminalRe = sizeOfTerminalRe;
-	}
-
-	public String getMaterialOfTerminalOb() {
-		return materialOfTerminalOb;
-	}
-
-	public void setMaterialOfTerminalOb(String materialOfTerminalOb) {
-		this.materialOfTerminalOb = materialOfTerminalOb;
-	}
-
-	public String getMaterialOfTerminalRe() {
-		return materialOfTerminalRe;
-	}
-
-	public void setMaterialOfTerminalRe(String materialOfTerminalRe) {
-		this.materialOfTerminalRe = materialOfTerminalRe;
 	}
 
 	public String getPhysicalInspectionOb() {

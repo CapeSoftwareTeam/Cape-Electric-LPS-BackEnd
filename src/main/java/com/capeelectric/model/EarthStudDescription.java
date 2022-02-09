@@ -87,6 +87,12 @@ public class EarthStudDescription implements Serializable{
 	@Column(name = "SUPPLIMENTARY_MAINPROTECTIVE_REM")
 	private String supplimentaryMainProtectiveRem;
 	
+	@Column(name = "SIZE_OF_SUPPLIMENTARY_PROTECTIVE_OB")
+	private String sizeOfSupplimentaryProtectiveOb;
+	
+	@Column(name = "SIZE_OF_SUPPLIMENTARY_PROTECTIVE_REM")
+	private String sizeOfSupplimentaryProtectiveRem;
+	
 	@Column(name = "EARTH_STUDVISIBILITYOB")
 	private String earthStudVisibilityOb;
 	
@@ -361,6 +367,24 @@ public class EarthStudDescription implements Serializable{
 
 	public void setEarthStudReport(EarthStudReport earthStudReport) {
 		this.earthStudReport = earthStudReport;
+	}
+	
+	
+
+	public String getSizeOfSupplimentaryProtectiveOb() {
+		return sizeOfSupplimentaryProtectiveOb;
+	}
+
+	public void setSizeOfSupplimentaryProtectiveOb(String sizeOfSupplimentaryProtectiveOb) {
+		this.sizeOfSupplimentaryProtectiveOb = sizeOfSupplimentaryProtectiveOb;
+	}
+
+	public String getSizeOfSupplimentaryProtectiveRem() {
+		return sizeOfSupplimentaryProtectiveRem;
+	}
+
+	public void setSizeOfSupplimentaryProtectiveRem(String sizeOfSupplimentaryProtectiveRem) {
+		this.sizeOfSupplimentaryProtectiveRem = sizeOfSupplimentaryProtectiveRem;
 	}
 
 	public static long getSerialversionuid() {
