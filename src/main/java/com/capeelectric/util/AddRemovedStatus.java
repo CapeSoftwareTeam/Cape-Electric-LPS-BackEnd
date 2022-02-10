@@ -56,6 +56,7 @@ public class AddRemovedStatus {
 	//Method for adding R status in Down Conductors
 		public void addRemoveStatusInDownConductors(List<LpsAirDiscription> lpsAirDiscription)
 				throws AirTerminationException {
+			logger.info("Called addRemoveStatusInDownConductors function");
 
 			for (LpsAirDiscription lpsAirDiscriptionItr : lpsAirDiscription) {
 				if (lpsAirDiscriptionItr != null && lpsAirDiscriptionItr.getBuildingCount() != null
@@ -64,7 +65,9 @@ public class AddRemovedStatus {
 						DownConductorDescription downConductorDescriptionRepo = downConductorListRepository.findByBuildingCount(lpsAirDiscriptionItr.getBuildingCount());
 						if (downConductorDescriptionRepo != null
 								&& downConductorDescriptionRepo.getBuildingCount().equals(lpsAirDiscriptionItr.getBuildingCount())) {
+							logger.debug("downConductorDescriptionRepo available for building count:"+lpsAirDiscriptionItr.getBuildingCount());
 							downConductorDescriptionRepo.setFlag("R");
+							logger.debug("Building count:"+lpsAirDiscriptionItr.getBuildingCount()+"for Downconductor updated with status R");
 							downConductorListRepository.save(downConductorDescriptionRepo);
 						}
 					} catch (Exception e) {
@@ -76,11 +79,13 @@ public class AddRemovedStatus {
 					}
 				}
 			}
+			logger.info("Ended addRemoveStatusInDownConductors function");
 		} 
 		
 		//Method for adding R status in Earthing Lps
 		public void addRemoveStatusInEarthingLps(List<LpsAirDiscription> lpsAirDiscription)
 				throws AirTerminationException {
+			logger.info("Called addRemoveStatusInEarthingLps function");
 
 			for (LpsAirDiscription lpsAirDiscriptionItr : lpsAirDiscription) {
 				if (lpsAirDiscriptionItr != null && lpsAirDiscriptionItr.getBuildingCount() != null
@@ -89,7 +94,9 @@ public class AddRemovedStatus {
 						EarthingLpsDescription earthingLpsDescriptionRepo = earthingLpsListRepository.findByBuildingCount(lpsAirDiscriptionItr.getBuildingCount());
 						if (earthingLpsDescriptionRepo != null
 								&& earthingLpsDescriptionRepo.getBuildingCount().equals(lpsAirDiscriptionItr.getBuildingCount())) {
+							logger.debug("earthingLpsDescriptionRepo available for building count:"+lpsAirDiscriptionItr.getBuildingCount());
 							earthingLpsDescriptionRepo.setFlag("R");
+							logger.debug("Building count:"+lpsAirDiscriptionItr.getBuildingCount()+"for Earthing Lps updated with status R");
 							earthingLpsListRepository.save(earthingLpsDescriptionRepo);
 						}
 					} catch (Exception e) {
@@ -101,11 +108,13 @@ public class AddRemovedStatus {
 					}
 				}
 			}
+			logger.info("Ended addRemoveStatusInEarthingLps function");
 		}
 		
 		//Method for adding R status in SPD
 		public void addRemoveStatusInSpd(List<LpsAirDiscription> lpsAirDiscription)
 				throws AirTerminationException {
+			logger.info("Called addRemoveStatusInSpd function");
 
 			for (LpsAirDiscription lpsAirDiscriptionItr : lpsAirDiscription) {
 				if (lpsAirDiscriptionItr != null && lpsAirDiscriptionItr.getBuildingCount() != null
@@ -114,7 +123,9 @@ public class AddRemovedStatus {
 						SPD spdRepo = spdListRepository.findByBuildingCount(lpsAirDiscriptionItr.getBuildingCount());
 						if (spdRepo != null
 								&& spdRepo.getBuildingCount().equals(lpsAirDiscriptionItr.getBuildingCount())) {
+							logger.debug("spdRepo available for building count:"+lpsAirDiscriptionItr.getBuildingCount());
 							spdRepo.setFlag("R");
+							logger.debug("Building count:"+lpsAirDiscriptionItr.getBuildingCount()+"for SPD updated with status R");
 							spdListRepository.save(spdRepo);
 						}
 					} catch (Exception e) {
@@ -126,11 +137,13 @@ public class AddRemovedStatus {
 					}
 				}
 			}
+			logger.info("Ended addRemoveStatusInSpd function");
 		}
 		
 		//Method for adding R status in Seperation Distance
 		public void addRemoveStatusInSeperationDistance(List<LpsAirDiscription> lpsAirDiscription)
 				throws AirTerminationException {
+			logger.info("Called addRemoveStatusInSeperationDistance function");
 
 			for (LpsAirDiscription lpsAirDiscriptionItr : lpsAirDiscription) {
 				if (lpsAirDiscriptionItr != null && lpsAirDiscriptionItr.getBuildingCount() != null
@@ -139,7 +152,9 @@ public class AddRemovedStatus {
 						SeperationDistanceDescription seperationDistanceDescriptionRepo = seperationDistanceListRepository.findByBuildingCount(lpsAirDiscriptionItr.getBuildingCount());
 						if (seperationDistanceDescriptionRepo != null
 								&& seperationDistanceDescriptionRepo.getBuildingCount().equals(lpsAirDiscriptionItr.getBuildingCount())) {
+							logger.debug("seperationDistanceDescriptionRepo available for building count:"+lpsAirDiscriptionItr.getBuildingCount());
 							seperationDistanceDescriptionRepo.setFlag("R");
+							logger.debug("Building count:"+lpsAirDiscriptionItr.getBuildingCount()+"for Seperation Distance updated with status R");
 							seperationDistanceListRepository.save(seperationDistanceDescriptionRepo);
 						}
 					} catch (Exception e) {
@@ -151,11 +166,14 @@ public class AddRemovedStatus {
 					}
 				}
 			}
+			logger.info("Ended addRemoveStatusInSeperationDistance function");
+
 		}
 		
 		//Method for adding R status in Earth Stud
 		public void addRemoveStatusInEarthStud(List<LpsAirDiscription> lpsAirDiscription)
 				throws AirTerminationException {
+			logger.info("Called addRemoveStatusInEarthStud function");
 
 			for (LpsAirDiscription lpsAirDiscriptionItr : lpsAirDiscription) {
 				if (lpsAirDiscriptionItr != null && lpsAirDiscriptionItr.getBuildingCount() != null
@@ -164,7 +182,9 @@ public class AddRemovedStatus {
 						EarthStudDescription earthStudDescriptionRepo = earthStudListRepository.findByBuildingCount(lpsAirDiscriptionItr.getBuildingCount());
 						if (earthStudDescriptionRepo != null
 								&& earthStudDescriptionRepo.getBuildingCount().equals(lpsAirDiscriptionItr.getBuildingCount())) {
+							logger.debug("earthStudDescriptionRepo available for building count:"+lpsAirDiscriptionItr.getBuildingCount());
 							earthStudDescriptionRepo.setFlag("R");
+							logger.debug("Building count:"+lpsAirDiscriptionItr.getBuildingCount()+"for Earth Stud updated with status R");
 							earthStudListRepository.save(earthStudDescriptionRepo);
 						}
 					} catch (Exception e) {
@@ -176,11 +196,14 @@ public class AddRemovedStatus {
 					}
 				}
 			}
+			logger.info("Ended addRemoveStatusInEarthStud function");
+
 		}
 		
 		//Method for adding R status in Earth Stud
 		public void addRemoveStatusInSummaryLps(List<LpsAirDiscription> lpsAirDiscription)
 				throws AirTerminationException {
+			logger.info("Called addRemoveStatusInSummaryLps function");
 
 			for (LpsAirDiscription lpsAirDiscriptionItr : lpsAirDiscription) {
 				if (lpsAirDiscriptionItr != null && lpsAirDiscriptionItr.getBuildingCount() != null
@@ -189,7 +212,9 @@ public class AddRemovedStatus {
 						SummaryLpsBuildings summaryLpsBuildingsRepo = summaryLpsListRepository.findByBuildingCount(lpsAirDiscriptionItr.getBuildingCount());
 						if (summaryLpsBuildingsRepo != null
 								&& summaryLpsBuildingsRepo.getBuildingCount().equals(lpsAirDiscriptionItr.getBuildingCount())) {
+							logger.debug("summaryLpsBuildingsRepo available for building count:"+lpsAirDiscriptionItr.getBuildingCount());
 							summaryLpsBuildingsRepo.setFlag("R");
+							logger.debug("Building count:"+lpsAirDiscriptionItr.getBuildingCount()+"for Summary updated with status R");
 							summaryLpsListRepository.save(summaryLpsBuildingsRepo);
 						}
 					} catch (Exception e) {
@@ -201,6 +226,8 @@ public class AddRemovedStatus {
 					}
 				}
 			}
+			logger.info("Ended addRemoveStatusInSummaryLps function");
+
 		}
 		
 		

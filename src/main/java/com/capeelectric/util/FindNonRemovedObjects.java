@@ -3,6 +3,8 @@ package com.capeelectric.util;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Configuration;
 
 import com.capeelectric.model.AirBasicDescription;
@@ -54,9 +56,12 @@ import com.capeelectric.model.VerticalAirTerminationList;
 
 @Configuration
 public class FindNonRemovedObjects {
+	private static final Logger logger = LoggerFactory.getLogger(FindNonRemovedObjects.class);
+
 	
 	//find non removed values for LPS AIR TERMINATION
 	public List<LpsAirDiscription> findNonRemovedAirTerminationBuildings(AirTermination airTermination) {
+		logger.info("Called findNonRemovedAirTerminationBuildings function");
 
 		ArrayList<LpsAirDiscription> lpsAirDiscription = new ArrayList<LpsAirDiscription>();
 		List<LpsAirDiscription> findNonRemoveBuildings = airTermination.getLpsAirDescription();
@@ -76,11 +81,14 @@ public class FindNonRemovedObjects {
 				 
 			}
 		}
+		logger.info("Ended findNonRemovedAirTerminationBuildings function");
 		return lpsAirDiscription;
 	}
 	
 	//find non removed values for LPS AIR TERMINATION childs	
 	public List<LpsVerticalAirTermination> findNonRemovedVAT(List<LpsVerticalAirTermination> terminationList) {
+		logger.info("Called findNonRemovedVAT function");
+
 
 		ArrayList<LpsVerticalAirTermination> unRemovedVerticalAirTermination = new ArrayList<LpsVerticalAirTermination>();
 		for (LpsVerticalAirTermination lpsVerticalAirTerminationItr : terminationList) {
@@ -92,10 +100,12 @@ public class FindNonRemovedObjects {
 				unRemovedVerticalAirTermination.add(lpsVerticalAirTerminationItr);
 			}
 		}
+		logger.info("Ended findNonRemovedVAT function");
 		return unRemovedVerticalAirTermination;
 	}
 	
 	public List<VerticalAirTerminationList> findNonRemovedVATList(List<VerticalAirTerminationList> verticalAirTerminationList) {
+		logger.info("Called findNonRemovedVATList function");
 
 		ArrayList<VerticalAirTerminationList> unRemovedVerticalAirTerminationList = new ArrayList<VerticalAirTerminationList>();
 		for (VerticalAirTerminationList lpsVerticalAirTerminationListItr : verticalAirTerminationList) {
@@ -106,11 +116,12 @@ public class FindNonRemovedObjects {
 				unRemovedVerticalAirTerminationList.add(lpsVerticalAirTerminationListItr);
 			}
 		}
+		logger.info("Ended findNonRemovedVATList function");
 		return unRemovedVerticalAirTerminationList;
 	}
 	
 	public List<AirClamps> findNonRemovedAirClamps(List<AirClamps> listOfAirClamps) {
-
+		logger.info("Called findNonRemovedAirClamps function");
 		ArrayList<AirClamps> unRemovedAirClamps = new ArrayList<AirClamps>();
 		for (AirClamps airClamps : listOfAirClamps) {
 			if (airClamps.getFlag() == null || !airClamps.getFlag().equalsIgnoreCase("R")) {
@@ -120,10 +131,12 @@ public class FindNonRemovedObjects {
 				unRemovedAirClamps.add(airClamps);
 			}
 		}
+		logger.info("Ended findNonRemovedAirClamps function");
 		return unRemovedAirClamps;
 	}
 	
 	public List<AirConnectors> findNonRemovedAirConnectors(List<AirConnectors> listOfAirConnectors) {
+		logger.info("Called findNonRemovedAirConnectors function");
 
 		ArrayList<AirConnectors> unRemovedAirConnectors = new ArrayList<AirConnectors>();
 		for (AirConnectors airConnectors : listOfAirConnectors) {
@@ -134,10 +147,12 @@ public class FindNonRemovedObjects {
 				unRemovedAirConnectors.add(airConnectors);
 			}
 		}
+		logger.info("Ended findNonRemovedAirConnectors function");
 		return unRemovedAirConnectors;
 	}
 	
 	public List<AirExpansion> findNonRemovedAirExpansion(List<AirExpansion> listOfAirExpansion) {
+		logger.info("Called findNonRemovedAirExpansion function");
 
 		ArrayList<AirExpansion> unRemovedAirExpansion = new ArrayList<AirExpansion>();
 		for (AirExpansion airExpansion : listOfAirExpansion) {
@@ -148,10 +163,12 @@ public class FindNonRemovedObjects {
 				unRemovedAirExpansion.add(airExpansion);
 			}
 		}
+		logger.info("Ended findNonRemovedAirExpansion function");
 		return unRemovedAirExpansion;
 	}
 	
 	public List<AirHolderDescription> findNonRemovedAirHolder(List<AirHolderDescription> listOfAirHolder) {
+		logger.info("Called findNonRemovedAirHolder function");
 
 		ArrayList<AirHolderDescription> unRemovedAirHolderDescription = new ArrayList<AirHolderDescription>();
 		for (AirHolderDescription airHolderDescription : listOfAirHolder) {
@@ -163,10 +180,12 @@ public class FindNonRemovedObjects {
 				unRemovedAirHolderDescription.add(airHolderDescription);
 			}
 		}
+		logger.info("Ended findNonRemovedAirHolder function");
 		return unRemovedAirHolderDescription;
 	}
 	
 	public List<AirHolderList> findNonRemovedAirHolderList(List<AirHolderList> listOfAirHolder) {
+		logger.info("Called findNonRemovedAirHolderList function");
 
 		ArrayList<AirHolderList> unRemovedAirHolderList = new ArrayList<AirHolderList>();
 		for (AirHolderList airHolderList : listOfAirHolder) {
@@ -177,10 +196,12 @@ public class FindNonRemovedObjects {
 				unRemovedAirHolderList.add(airHolderList);
 			}
 		}
+		logger.info("Ended findNonRemovedAirHolderList function");
 		return unRemovedAirHolderList;
 	}
 	
 	public List<AirMeshDescription> findNonRemovedAirMesh(List<AirMeshDescription> listOfAirMesh) {
+		logger.info("Called findNonRemovedAirMesh function");
 
 		ArrayList<AirMeshDescription> unRemovedAirMeshDescription = new ArrayList<AirMeshDescription>();
 		for (AirMeshDescription airMeshDescription : listOfAirMesh) {
@@ -191,10 +212,12 @@ public class FindNonRemovedObjects {
 				unRemovedAirMeshDescription.add(airMeshDescription);
 			}
 		}
+		logger.info("Ended findNonRemovedAirMesh function");
 		return unRemovedAirMeshDescription;
 	}
 	
 	public List<AirBasicDescription> findNonRemovedAirBasic(List<AirBasicDescription> listOfAirBasic) {
+		logger.info("Called findNonRemovedAirBasic function");
 
 		ArrayList<AirBasicDescription> unRemovedAirBasicDescription = new ArrayList<AirBasicDescription>();
 		for (AirBasicDescription airBasicDescription : listOfAirBasic) {
@@ -205,11 +228,13 @@ public class FindNonRemovedObjects {
 				unRemovedAirBasicDescription.add(airBasicDescription);
 			}
 		}
+		logger.info("Ended findNonRemovedAirBasic function");
 		return unRemovedAirBasicDescription;
 	}
 
 	//find non removed values for DOWN CONDUCTORS childs	
 	public List<DownConductorDescription> findNonRemovedDownConductorsBuildings(DownConductorReport downConductorReport) {
+		logger.info("Called findNonRemovedDownConductorsBuildings function");
 
 		ArrayList<DownConductorDescription> downConductorDescription = new ArrayList<DownConductorDescription>();
 		List<DownConductorDescription> findNonRemoveBuildings = downConductorReport.getDownConductorDescription();
@@ -229,11 +254,13 @@ public class FindNonRemovedObjects {
 				 
 			}
 		}
+		logger.info("Ended findNonRemovedDownConductorsBuildings function");
 		return downConductorDescription;
 	}
 	
 	//find non removed values for DOWN CONDUCTORS childs	
 	public List<BridgingDescription> findNonRemovedBridgingDescription(List<BridgingDescription> bridgingDescriptionList) {
+		logger.info("Called findNonRemovedBridgingDescription function");
 
 		ArrayList<BridgingDescription> unRemovedBridgingDescription = new ArrayList<BridgingDescription>();
 		for (BridgingDescription bridgingDescription : bridgingDescriptionList) {
@@ -244,10 +271,12 @@ public class FindNonRemovedObjects {
 				unRemovedBridgingDescription.add(bridgingDescription);
 			}
 		}
+		logger.info("Ended findNonRemovedBridgingDescription function");
 		return unRemovedBridgingDescription;
 	}
 	
 	public List<Holder> findNonRemovedHolder(List<Holder> listOfHolder) {
+		logger.info("Called findNonRemovedHolder function");
 
 		ArrayList<Holder> unRemovedHolder = new ArrayList<Holder>();
 		for (Holder holder : listOfHolder) {
@@ -258,10 +287,12 @@ public class FindNonRemovedObjects {
 				unRemovedHolder.add(holder);
 			}
 		}
+		logger.info("Ended findNonRemovedHolder function");
 		return unRemovedHolder;
 	}
 	
 	public List<Connectors> findNonRemovedConnectors(List<Connectors> listOfConnectors) {
+		logger.info("Called findNonRemovedConnectors function");
 
 		ArrayList<Connectors> unRemovedConnectors = new ArrayList<Connectors>();
 		for (Connectors connectors : listOfConnectors) {
@@ -272,10 +303,12 @@ public class FindNonRemovedObjects {
 				unRemovedConnectors.add(connectors);
 			}
 		}
+		logger.info("Ended findNonRemovedConnectors function");
 		return unRemovedConnectors;
 	}
 	
 	public List<LightningCounter> findNonRemovedLightningCounter(List<LightningCounter> listOfLightningCounter) {
+		logger.info("Called findNonRemovedLightningCounter function");
 
 		ArrayList<LightningCounter> unRemovedLightningCounter = new ArrayList<LightningCounter>();
 		for (LightningCounter lightningCounter : listOfLightningCounter) {
@@ -286,10 +319,12 @@ public class FindNonRemovedObjects {
 				unRemovedLightningCounter.add(lightningCounter);
 			}
 		}
+		logger.info("Ended findNonRemovedLightningCounter function");
 		return unRemovedLightningCounter;
 	}
 	
 	public List<TestingJoint> findNonRemovedTestingJoint(List<TestingJoint> listOfTestingJoint) {
+		logger.info("Called findNonRemovedTestingJoint function");
 
 		ArrayList<TestingJoint> unRemovedTestingJoint = new ArrayList<TestingJoint>();
 		for (TestingJoint testingJoint : listOfTestingJoint) {
@@ -300,10 +335,12 @@ public class FindNonRemovedObjects {
 				unRemovedTestingJoint.add(testingJoint);
 			}
 		}
+		logger.info("Ended findNonRemovedTestingJoint function");
 		return unRemovedTestingJoint;
 	}
 	
 	public List<DownConductor> findNonDownConductor(List<DownConductor> listOfDownConductor) {
+		logger.info("Called findNonDownConductor function");
 
 		ArrayList<DownConductor> unRemovedDownConductor = new ArrayList<DownConductor>();
 		for (DownConductor downConductor : listOfDownConductor) {
@@ -314,11 +351,13 @@ public class FindNonRemovedObjects {
 				unRemovedDownConductor.add(downConductor);
 			}
 		}
+		logger.info("Ended findNonDownConductor function");
 		return unRemovedDownConductor;
 	}
 	
 	public List<DownConductorTesting> findNonRemovedDownConductorTesting(List<DownConductorTesting> listOfDownConductorTesting) {
-
+		logger.info("Called findNonRemovedDownConductorTesting function");
+		
 		ArrayList<DownConductorTesting> unRemovedDownConductorTesting = new ArrayList<DownConductorTesting>();
 		for (DownConductorTesting downConductorTesting : listOfDownConductorTesting) {
 			if (downConductorTesting.getFlag() == null || !downConductorTesting.getFlag().equalsIgnoreCase("R")) {
@@ -328,11 +367,13 @@ public class FindNonRemovedObjects {
 				unRemovedDownConductorTesting.add(downConductorTesting);
 			}
 		}
+		logger.info("Ended findNonRemovedDownConductorTesting function");
 		return unRemovedDownConductorTesting;
 	}
 	
 	//find non removed values for EARTHING LPS	
 	public List<EarthingLpsDescription> findNonRemovedEarthingLpsBuildings(EarthingReport earthingReport) {
+		logger.info("Called findNonRemovedEarthingLpsBuildings function");
 
 		ArrayList<EarthingLpsDescription> earthingLpsDescription = new ArrayList<EarthingLpsDescription>();
 		List<EarthingLpsDescription> findNonRemoveBuildings = earthingReport.getEarthingLpsDescription();
@@ -349,11 +390,13 @@ public class FindNonRemovedObjects {
 				earthingLpsDescription.add(earthingLpsDescriptionItr);			 
 			}
 		}
+		logger.info("Ended findNonRemovedEarthingLpsBuildings function");
 		return earthingLpsDescription;
 	}
 		
 		//find non removed values for EARTHING LPS childs	
 		public List<EarthingDescription> findNonRemovedEarthingDescription(List<EarthingDescription> earthingDescriptionList) {
+			logger.info("Called findNonRemovedEarthingDescription function");
 
 			ArrayList<EarthingDescription> unRemovedEarthingDescription = new ArrayList<EarthingDescription>();
 			for (EarthingDescription earthingDescription : earthingDescriptionList) {
@@ -365,10 +408,12 @@ public class FindNonRemovedObjects {
 					unRemovedEarthingDescription.add(earthingDescription);
 				}
 			}
+			logger.info("Ended findNonRemovedEarthingDescription function");
 			return unRemovedEarthingDescription;
 		}
 		
 		public List<EarthingDescriptionList> findNonRemovedEarthingDescriptionList(List<EarthingDescriptionList> earthingDescriptionList) {
+			logger.info("Called findNonRemovedEarthingDescriptionList function");
 
 			ArrayList<EarthingDescriptionList> unRemovedEarthingDescriptionList = new ArrayList<EarthingDescriptionList>();
 			for (EarthingDescriptionList earthingDescriptionListItr : earthingDescriptionList) {
@@ -379,10 +424,12 @@ public class FindNonRemovedObjects {
 					unRemovedEarthingDescriptionList.add(earthingDescriptionListItr);
 				}
 			}
+			logger.info("Ended findNonRemovedEarthingDescriptionList function");
 			return unRemovedEarthingDescriptionList;
 		}
 		
 		public List<EarthingClamps> findNonRemovedEarthingClamps(List<EarthingClamps> listOfEarthingClamps) {
+			logger.info("Called findNonRemovedEarthingClamps function");
 
 			ArrayList<EarthingClamps> unRemovedEarthingClamps = new ArrayList<EarthingClamps>();
 			for (EarthingClamps earthingClamps : listOfEarthingClamps) {
@@ -393,10 +440,12 @@ public class FindNonRemovedObjects {
 					unRemovedEarthingClamps.add(earthingClamps);
 				}
 			}
+			logger.info("Ended findNonRemovedEarthingClamps function");
 			return unRemovedEarthingClamps;
 		}
 		
 		public List<EarthElectrodeChamber> findNonRemovedEarthElectrodeChamber(List<EarthElectrodeChamber> listOfEarthElectrodeChamber) {
+			logger.info("Called findNonRemovedEarthElectrodeChamber function");
 
 			ArrayList<EarthElectrodeChamber> unRemovedEarthElectrodeChamber = new ArrayList<EarthElectrodeChamber>();
 			for (EarthElectrodeChamber earthElectrodeChamber : listOfEarthElectrodeChamber) {
@@ -407,10 +456,12 @@ public class FindNonRemovedObjects {
 					unRemovedEarthElectrodeChamber.add(earthElectrodeChamber);
 				}
 			}
+			logger.info("Ended findNonRemovedEarthElectrodeChamber function");
 			return unRemovedEarthElectrodeChamber;
 		}
 		
 		public List<EarthingSystem> findNonRemovedEarthingSystem(List<EarthingSystem> listOfEarthingSystem) {
+			logger.info("Called findNonRemovedEarthingSystem function");
 
 			ArrayList<EarthingSystem> unRemovedEarthingSystem = new ArrayList<EarthingSystem>();
 			for (EarthingSystem earthingSystem : listOfEarthingSystem) {
@@ -421,10 +472,12 @@ public class FindNonRemovedObjects {
 					unRemovedEarthingSystem.add(earthingSystem);
 				}
 			}
+			logger.info("Ended findNonRemovedEarthingSystem function");
 			return unRemovedEarthingSystem;
 		}
 		
 		public List<EarthElectrodeTesting> findNonRemovedEarthElectrodeTesting(List<EarthElectrodeTesting> listOfEarthElectrodeTesting) {
+			logger.info("Called findNonRemovedEarthElectrodeTesting function");
 
 			ArrayList<EarthElectrodeTesting> unRemovedEarthElectrodeTesting = new ArrayList<EarthElectrodeTesting>();
 			for (EarthElectrodeTesting earthElectrodeTesting : listOfEarthElectrodeTesting) {
@@ -435,11 +488,13 @@ public class FindNonRemovedObjects {
 					unRemovedEarthElectrodeTesting.add(earthElectrodeTesting);
 				}
 			}
+			logger.info("Ended findNonRemovedEarthElectrodeTesting function");
 			return unRemovedEarthElectrodeTesting;
 		}
 	
 	//find non removed values for SPD
 	public List<SPD> findNonRemovedSpdBuildings(SpdReport spdReport) {
+		logger.info("Called findNonRemovedSpdBuildings function");
 
 		ArrayList<SPD> spd = new ArrayList<SPD>();
 		List<SPD> findNonRemoveBuildings = spdReport.getSpd();
@@ -452,11 +507,13 @@ public class FindNonRemovedObjects {
 				spd.add(spdItr);			 
 			}
 		}
+		logger.info("Ended findNonRemovedSpdBuildings function");
 		return spd;
 	}
 	
 	//find non removed values for SPD childs	
 	public List<SpdDescription> findNonRemovedSpdDesc(List<SpdDescription> spdDescriptionList) {
+		logger.info("Called findNonRemovedSpdDesc function");
 
 		ArrayList<SpdDescription> unRemovedSpdDescription = new ArrayList<SpdDescription>();
 		for (SpdDescription spdDescriptionItr : spdDescriptionList) {
@@ -467,11 +524,13 @@ public class FindNonRemovedObjects {
 				unRemovedSpdDescription.add(spdDescriptionItr);
 			}
 		}
+		logger.info("Ended findNonRemovedSpdDesc function");
 		return unRemovedSpdDescription;
 	}
 	
 	//find non removed values for SEPERATION DISTANCE	
 	public List<SeperationDistanceDescription> findNonRemovedSeperationDistanceBuildings(SeperationDistanceReport seperationDistanceReport) {
+		logger.info("Called findNonRemovedSeperationDistanceBuildings function");
 
 		ArrayList<SeperationDistanceDescription> seperationDistanceDescription = new ArrayList<SeperationDistanceDescription>();
 		List<SeperationDistanceDescription> findNonRemoveBuildings = seperationDistanceReport.getSeperationDistanceDescription();
@@ -485,11 +544,13 @@ public class FindNonRemovedObjects {
 				seperationDistanceDescription.add(seperationDistanceDescriptionItr);			 
 			}
 		}
+		logger.info("Ended findNonRemovedSeperationDistanceBuildings function");
 		return seperationDistanceDescription;
 	}
 	
 	//find non removed values for SEPERATION DISTANCE childs	
 		public List<SeparateDistance> findNonRemovedSeperateDistance(List<SeparateDistance> separateDistanceList) {
+			logger.info("Called findNonRemovedSeperateDistance function");
 
 			ArrayList<SeparateDistance> unRemovedSeparateDistance = new ArrayList<SeparateDistance>();
 			for (SeparateDistance separateDistance : separateDistanceList) {
@@ -500,10 +561,12 @@ public class FindNonRemovedObjects {
 					unRemovedSeparateDistance.add(separateDistance);
 				}
 			}
+			logger.info("Ended findNonRemovedSeperateDistance function");
 			return unRemovedSeparateDistance;
 		}
 		
 		public List<SeparateDistanceDownConductors> findNonRemovedSeperateDistanceDownConduct(List<SeparateDistanceDownConductors> separateDistanceDownList) {
+			logger.info("Called findNonRemovedSeperateDistanceDownConduct function");
 
 			ArrayList<SeparateDistanceDownConductors> unRemovedSeparateDistanceDown = new ArrayList<SeparateDistanceDownConductors>();
 			for (SeparateDistanceDownConductors separateDistanceDownConductors : separateDistanceDownList) {
@@ -514,11 +577,13 @@ public class FindNonRemovedObjects {
 					unRemovedSeparateDistanceDown.add(separateDistanceDownConductors);
 				}
 			}
+			logger.info("Ended findNonRemovedSeperateDistanceDownConduct function");
 			return unRemovedSeparateDistanceDown;
 		}
 	
 	//find non removed values for EARTH STUD
 	public List<EarthStudDescription> findNonRemovedEarthStudBuildings(EarthStudReport earthStudReport) {
+		logger.info("Called findNonRemovedEarthStudBuildings function");
 
 		ArrayList<EarthStudDescription> earthStudDescription = new ArrayList<EarthStudDescription>();
 		List<EarthStudDescription> findNonRemoveBuildings = earthStudReport.getEarthStudDescription();
@@ -530,11 +595,13 @@ public class FindNonRemovedObjects {
 				earthStudDescription.add(earthStudDescriptionItr);			 
 			}
 		}
+		logger.info("Ended findNonRemovedEarthStudBuildings function");
 		return earthStudDescription;
 	}
 	
 	//find non removed values for SUMMARY
 	public List<SummaryLpsBuildings> findNonRemovedSummaryBuildings(SummaryLps summaryLps) {
+		logger.info("Called findNonRemovedSummaryBuildings function");
 
 		ArrayList<SummaryLpsBuildings> summaryLpsBuildings = new ArrayList<SummaryLpsBuildings>();
 		List<SummaryLpsBuildings> findNonSummaryLpsBuildings = summaryLps.getSummaryLpsBuildings();
@@ -546,6 +613,7 @@ public class FindNonRemovedObjects {
 				summaryLpsBuildings.add(summaryLpsBuildingsItr);			 
 			}
 		}
+		logger.info("Ended findNonRemovedSummaryBuildings function");
 		return summaryLpsBuildings;
 	}
 	

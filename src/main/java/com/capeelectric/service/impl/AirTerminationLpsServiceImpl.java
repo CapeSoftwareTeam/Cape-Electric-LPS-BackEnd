@@ -83,6 +83,8 @@ public class AirTerminationLpsServiceImpl implements AirTerminationLpsService {
 	@Transactional
 	@Override
 	public void addAirTerminationLpsDetails(AirTermination airTermination ) throws AirTerminationException {
+		logger.info("Called addAirTerminationLpsDetails function");
+
 		if (airTermination != null && airTermination.getUserName() != null && airTermination.getUserName() != "") {
 			Optional<BasicLps> basicLpsRepo = basicLpsRepository.findByBasicLpsId(airTermination.getBasicLpsId());
 			if(basicLpsRepo.isPresent()
@@ -121,12 +123,14 @@ public class AirTerminationLpsServiceImpl implements AirTerminationLpsService {
 			logger.error("Invalid Inputs");
 			throw new AirTerminationException("Invalid Inputs");
 		}
-
+		logger.info("Ended addAirTerminationLpsDetails function");
 	}
 
 	@Override
 	public List<AirTermination> retrieveAirTerminationLps(String userName, Integer basicLpsId)
 			throws AirTerminationException {
+		logger.info("Called retrieveAirTerminationLps function");
+
 		if (userName != null && basicLpsId != null) {
 			List<AirTermination> airTerminationLpsRepo = airTerminationLpsRepository
 					.findByUserNameAndBasicLpsId(userName, basicLpsId);
@@ -135,7 +139,9 @@ public class AirTerminationLpsServiceImpl implements AirTerminationLpsService {
 					airTerminationRepo.setLpsAirDescription(findNonRemovedObjects.findNonRemovedAirTerminationBuildings(airTerminationRepo));
 					logger.debug("Successfully done findNonRemovedAirTerminationBuildings() call");
 				}
+				logger.info("Ended retrieveAirTerminationLps function");
 				return airTerminationLpsRepo;
+				
 			} else {
 				logger.error("Given UserName & Id doesn't exist in Air Termination LPS Details");
 				throw new AirTerminationException("Given UserName & Id doesn't exist in Air Termination LPS Details");
@@ -143,13 +149,13 @@ public class AirTerminationLpsServiceImpl implements AirTerminationLpsService {
 		} else {
 			logger.error("Invalid Inputs");
 			throw new AirTerminationException("Invalid Inputs");
-		}
-
+		}		
 	}
 
 	@Transactional
 	@Override
 	public void updateAirTerminationLps(AirTermination airTermination) throws AirTerminationException {
+		logger.info("Called updateAirTerminationLps function");
 
 		if (airTermination != null && airTermination.getAirTerminationId() != null
 				&& airTermination.getAirTerminationId() != 0 && airTermination.getBasicLpsId() != null
@@ -186,6 +192,7 @@ public class AirTerminationLpsServiceImpl implements AirTerminationLpsService {
 			logger.error("Invalid inputs");
 			throw new AirTerminationException("Invalid inputs");
 		}
+		logger.info("Ended updateAirTerminationLps function");
 	}
 	
 }

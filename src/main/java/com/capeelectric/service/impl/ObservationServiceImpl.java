@@ -6,6 +6,9 @@ package com.capeelectric.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.capeelectric.model.AllStepsRemarks;
@@ -30,6 +33,8 @@ import com.capeelectric.util.FindNonRemovedRemarksObjects;
  */
 @Service
 public class ObservationServiceImpl implements ObservationService {
+	private static final Logger logger = LoggerFactory.getLogger(ObservationServiceImpl.class);
+
 	@Autowired
 	private AirTerminationRemarksRepository airTerminationRemarksRepository;
 
@@ -53,31 +58,47 @@ public class ObservationServiceImpl implements ObservationService {
 
 	@Override
 	public AllStepsRemarks retrieveObservationsInSummary(Integer basicLpsId) {
+		logger.info("Called retrieveObservationsInSummary function");
+
 		AllStepsRemarks allStepsRemarks = new AllStepsRemarks();
 
+		logger.debug("fetching process started for Air Termination Remarks");
 		List<AirTerminationRemarks> airTerminationRemarks = airTerminationRemarksRepository
 				.findByBasicLpsId(basicLpsId);
+		logger.debug("fetching process Ended for Air Termination Remarks");
 
+		logger.debug("fetching process started for Down Conductors Remarks");
 		List<DownConductorReportRemarks> downConductorReportRemarks = downConductorRemarksRepository
 				.findByBasicLpsId(basicLpsId);
-		
+		logger.debug("fetching process Ended for Down Conductors Remarks");
+
+		logger.debug("fetching process started for Earthing Lps Remarks");
 		List<EarthingReportRemarks> earthingReportRemarks = earthingLpsRemarksRepository
 				.findByBasicLpsId(basicLpsId);
+		logger.debug("fetching process Ended for Earthing Lps Remarks");
 		
+		logger.debug("fetching process started for SPD Remarks");
 		List<SPDReportRemarks> spdReportRemarks = spdRemarksRepository
 				.findByBasicLpsId(basicLpsId);
+		logger.debug("fetching process Ended for SPD Remarks");
 
+		logger.debug("fetching process started for Seperation Distance Remarks");
 		List<SeperationDistanceReportRemarks> seperationDistanceReportRemarks = seperationDistanceRemarksRepository
 				.findByBasicLpsId(basicLpsId);
-		
+		logger.debug("fetching process Ended for Seperation Distance Remarks");
+
+		logger.debug("fetching process started for Earth Stud Remarks");
 		List<EarthStudRemarksReport> earthStudRemarksReport = earthStudRemarksRepository
 				.findByBasicLpsId(basicLpsId);
+		logger.debug("fetching process Ended for Earth Stud Remarks");
+
 		
 		if (!airTerminationRemarks.isEmpty() && airTerminationRemarks != null) {
 			if (airTerminationRemarks.get(0).getLpsAirDiscription().size() > 0) {
 				airTerminationRemarks.get(0).setLpsAirDiscription(findNonRemovedRemarksObjects
 						.findNonRemovedAirTerminationBuildings(airTerminationRemarks.get(0)));
 			}
+			logger.debug("Air Termination Remarks fetched");
 			allStepsRemarks.setAirTermination(airTerminationRemarks);
 		}
 
@@ -86,6 +107,7 @@ public class ObservationServiceImpl implements ObservationService {
 				downConductorReportRemarks.get(0).setDownConductorDescription(findNonRemovedRemarksObjects
 						.findNonRemovedDownConductorsBuildings(downConductorReportRemarks.get(0)));
 			}
+			logger.debug("Down Conductors Remarks fetched");
 			allStepsRemarks.setDownConductorReport(downConductorReportRemarks);
 		}
 
@@ -94,6 +116,7 @@ public class ObservationServiceImpl implements ObservationService {
 				earthingReportRemarks.get(0).setEarthingLpsDescription(findNonRemovedRemarksObjects
 						.findNonRemovedEarthingLpsBuildings(earthingReportRemarks.get(0)));
 			}
+			logger.debug("Earthing Lps Remarks fetched");
 			allStepsRemarks.setEarthingReport(earthingReportRemarks);
 		}
 
@@ -102,6 +125,7 @@ public class ObservationServiceImpl implements ObservationService {
 				spdReportRemarks.get(0).setSpd(findNonRemovedRemarksObjects
 						.findNonRemovedSpdBuildings(spdReportRemarks.get(0)));
 			}
+			logger.debug("SPD Report Remarks fetched");
 			allStepsRemarks.setSpdReport(spdReportRemarks);
 		}
 
@@ -110,6 +134,7 @@ public class ObservationServiceImpl implements ObservationService {
 				seperationDistanceReportRemarks.get(0).setSeperationDistanceDescription(findNonRemovedRemarksObjects
 						.findNonRemovedSeperationDistanceBuildings(seperationDistanceReportRemarks.get(0)));
 			}
+			logger.debug("Seperation Distance Remarks fetched");
 			allStepsRemarks.setSeperationDistanceReport(seperationDistanceReportRemarks);
 		}
 
@@ -118,8 +143,11 @@ public class ObservationServiceImpl implements ObservationService {
 				earthStudRemarksReport.get(0).setEarthStudDescriptionRemarks(findNonRemovedRemarksObjects
 						.findNonRemovedEarthStudRemarksBuildings(earthStudRemarksReport.get(0)));
 			}
+			logger.debug("Earth Stud Remarks fetched");
 			allStepsRemarks.setEarthStudReport(earthStudRemarksReport);
 		}
+		
+		logger.info("Ended retrieveObservationsInSummary function");
 		return allStepsRemarks;
 	}
 

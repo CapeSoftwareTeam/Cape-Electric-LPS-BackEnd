@@ -53,6 +53,8 @@ public class SeperationDistanceServiceImpl implements SeperationDistanceService{
 	@Override
 	public void addSeperationDistance(SeperationDistanceReport seperationDistanceReport)
 			throws  SeperationDistanceException{
+		logger.info("Called addSeperationDistance function");
+
 		if (seperationDistanceReport != null && seperationDistanceReport.getUserName() != null
 				&& !seperationDistanceReport.getUserName().isEmpty() && seperationDistanceReport.getBasicLpsId() != null
 				&& seperationDistanceReport.getBasicLpsId() != 0) {
@@ -90,12 +92,14 @@ public class SeperationDistanceServiceImpl implements SeperationDistanceService{
 			logger.error("Invalid Inputs");
 			throw new SeperationDistanceException("Invalid Inputs");
 		}
-			
+		logger.info("Ended addSeperationDistance function");
+
 	}
 	
 	@Override
 	public List<SeperationDistanceReport> retrieveSeperationDetails(String userName, Integer basicLpsId)
 			throws SeperationDistanceException {
+		logger.info("Called retrieveSeperationDetails function");
 		if (userName != null) {
 			List<SeperationDistanceReport> seperationDistanceRepo = seperationDistanceRepository.findByUserNameAndBasicLpsId(userName,
 					basicLpsId);
@@ -104,6 +108,7 @@ public class SeperationDistanceServiceImpl implements SeperationDistanceService{
 					seperationDistanceReportItr.setSeperationDistanceDescription(findNonRemovedObjects.findNonRemovedSeperationDistanceBuildings(seperationDistanceReportItr));
 					logger.debug("Successfully done findNonRemovedSeperationDistanceBuildings() call");
 				}
+				logger.info("Ended retrieveSeperationDetails function");
 				return seperationDistanceRepo;
 			} else {
 				logger.error("Given UserName & Id doesn't exist in Seperation Distance Details");
@@ -118,7 +123,8 @@ public class SeperationDistanceServiceImpl implements SeperationDistanceService{
 	@Transactional
 	@Override
 	public void updateSeperationDetails(SeperationDistanceReport seperationDistanceReport) throws SeperationDistanceException {
-
+		logger.info("Called updateSeperationDetails function");
+		
 		if (seperationDistanceReport != null && seperationDistanceReport.getSeperationDistanceReportId() != null
 				&& seperationDistanceReport.getSeperationDistanceReportId() != 0 && seperationDistanceReport.getBasicLpsId() != null
 				&& seperationDistanceReport.getBasicLpsId() != 0) {
@@ -139,5 +145,6 @@ public class SeperationDistanceServiceImpl implements SeperationDistanceService{
 			logger.error("Invalid inputs");
 			throw new SeperationDistanceException("Invalid inputs");
 		}
+		logger.info("Ended updateSeperationDetails function");
 	}
 }

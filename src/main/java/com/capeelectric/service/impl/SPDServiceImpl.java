@@ -54,6 +54,8 @@ public class SPDServiceImpl implements SPDService{
 	@Override
 	public void addSPDDetails(SpdReport spdReport)
 			throws  SPDException{
+		logger.info("Called addSPDDetails function");
+
 		if (spdReport != null && spdReport.getUserName() != null
 				&& !spdReport.getUserName().isEmpty() && spdReport.getBasicLpsId() != null
 				&& spdReport.getBasicLpsId() != 0) {
@@ -90,12 +92,15 @@ public class SPDServiceImpl implements SPDService{
 			logger.error("Invalid Inputs");
 			throw new SPDException("Invalid Inputs");
 		}
-			
+		logger.info("Ended addSPDDetails function");
+
 	}
 	
 	@Override
 	public List<SpdReport> retrieveSPDDetails(String userName, Integer basicLpsId)
 			throws SPDException {
+		logger.info("Called retrieveSPDDetails function");
+
 		if (userName != null) {
 			List<SpdReport> spdRepo = spdRepository.findByUserNameAndBasicLpsId(userName,
 					basicLpsId);
@@ -104,6 +109,8 @@ public class SPDServiceImpl implements SPDService{
 					spdReportItr.setSpd(findNonRemovedObjects.findNonRemovedSpdBuildings(spdReportItr));
 					logger.debug("Successfully done findNonRemovedSpdBuildings() call");
 				}
+				logger.info("Ended retrieveSPDDetails function");
+
 				return spdRepo;
 			} else {
 				logger.error("Given UserName & Id doesn't exist in SPD Report Details");
@@ -118,6 +125,7 @@ public class SPDServiceImpl implements SPDService{
 	@Transactional
 	@Override
 	public void updateSpdDetails(SpdReport spdReport) throws SPDException {
+		logger.info("Called updateSpdDetails function");
 
 		if (spdReport != null && spdReport.getSpdReportId() != null
 				&& spdReport.getSpdReportId() != 0 && spdReport.getBasicLpsId() != null
@@ -139,5 +147,7 @@ public class SPDServiceImpl implements SPDService{
 			logger.error("Invalid inputs");
 			throw new SPDException("Invalid inputs");
 		}
+		logger.info("Ended updateSpdDetails function");
+
 	}
 }

@@ -91,6 +91,8 @@ public class EarthStudServiceImpl implements EarthStudService {
 	@Override
 	public void addEarthStudDetails(EarthStudReport earthStudReport)
 			throws EarthStudException {
+		logger.info("Called addEarthStudDetails function");
+
 		if (earthStudReport != null && earthStudReport.getUserName() != null
 				&& !earthStudReport.getUserName().isEmpty() && earthStudReport.getBasicLpsId() != null
 				&& earthStudReport.getBasicLpsId() != 0) {
@@ -151,12 +153,16 @@ public class EarthStudServiceImpl implements EarthStudService {
 			logger.error("Invalid Inputs");
 			throw new EarthStudException("Invalid Inputs");
 		}
+		logger.info("Ended addEarthStudDetails function");
+
 
 	}
 
 	@Override
 	public List<EarthStudReport> retrieveEarthStudDetails(String userName, Integer basicLpsId)
 			throws EarthStudException {
+		logger.info("Called retrieveEarthStudDetails function");
+
 		if (userName != null) {
 			List<EarthStudReport> earthStudRepo = earthStudRepository.findByUserNameAndBasicLpsId(userName,
 					basicLpsId);
@@ -165,6 +171,8 @@ public class EarthStudServiceImpl implements EarthStudService {
 					earthStudReportItr.setEarthStudDescription(findNonRemovedObjects.findNonRemovedEarthStudBuildings(earthStudReportItr));
 					logger.debug("Successfully done findNonRemovedEarthStudBuildings() call");
 				}
+				logger.info("Ended retrieveEarthStudDetails function");
+
 				return earthStudRepo;
 			} else {
 				logger.error("Given UserName & Id doesn't exist in Earth Stud Report Details");
@@ -179,6 +187,7 @@ public class EarthStudServiceImpl implements EarthStudService {
 	@Transactional
 	@Override
 	public void updateEarthStudDetails(EarthStudReport earthStudReport) throws EarthStudException {
+		logger.info("Called updateEarthStudDetails function");
 
 		if (earthStudReport != null && earthStudReport.getEarthStudReportId() != null
 				&& earthStudReport.getEarthStudReportId() != 0 && earthStudReport.getBasicLpsId() != null
@@ -200,6 +209,8 @@ public class EarthStudServiceImpl implements EarthStudService {
 			logger.error("Invalid inputs");
 			throw new EarthStudException("Invalid inputs");
 		}
+		logger.info("Ended updateEarthStudDetails function");
+
 	}
 
 	private static void mergePdfFiles(List<InputStream> inputPdfList, OutputStream outputStream,

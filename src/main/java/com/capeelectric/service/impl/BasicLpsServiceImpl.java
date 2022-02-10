@@ -38,6 +38,7 @@ public class BasicLpsServiceImpl implements BasicLpsService {
 	@Transactional
 	@Override
 	public BasicLps addBasicLpsDetails(BasicLps basicLps) throws BasicLpsException {
+		logger.info("Called addBasicLpsDetails function");
 		
 		if (basicLps != null && basicLps.getClientName() != null ) {
 			Optional<BasicLps> basicLpsDetailsRepo = basicLpsRepository.findByClientName(basicLps.getClientName());
@@ -47,6 +48,7 @@ public class BasicLpsServiceImpl implements BasicLpsService {
 					basicLps.setUpdatedDate(LocalDateTime.now());
 					basicLps.setCreatedBy(userFullName.findByUserName(basicLps.getUserName()));
 					basicLps.setUpdatedBy(userFullName.findByUserName(basicLps.getUserName()));
+					logger.info("Ended addBasicLpsDetails function");
 					return basicLpsRepository.save(basicLps);
 				}
 				else {
@@ -58,16 +60,20 @@ public class BasicLpsServiceImpl implements BasicLpsService {
 			logger.error("Invalid Inputs");
 			throw new BasicLpsException("Invalid Inputs");
 		}
+		
 	}
 	
 	@Override
 	public List<BasicLps> retrieveBasicLpsDetails(String userName, Integer basicLpsId)
 			throws BasicLpsException {
+		logger.info("Called retrieveBasicLpsDetails function");
+
 		if (userName != null) {
 			List<BasicLps> basicLpsDetailsRepo = basicLpsRepository.findByUserNameAndBasicLpsId(userName,
 					basicLpsId);
 			if (basicLpsDetailsRepo != null && !basicLpsDetailsRepo.isEmpty()) {	
 				logger.debug("Basic Client Repo data available");
+				logger.info("Ended retrieveBasicLpsDetails function");
 				return basicLpsDetailsRepo;
 			} else {
 				logger.error("Given UserName & Id doesn't exist in Basic Lps Details");
@@ -82,6 +88,7 @@ public class BasicLpsServiceImpl implements BasicLpsService {
 	@Transactional
 	@Override
 	public void updateBasicLpsDetails(BasicLps basicLps) throws BasicLpsException {
+		logger.info("Called updateBasicLpsDetails function");
 
 		if (basicLps != null && basicLps.getBasicLpsId() != null && basicLps.getBasicLpsId() != 0) {
 			Optional<BasicLps> basicLpsRepo = basicLpsRepository
@@ -102,6 +109,8 @@ public class BasicLpsServiceImpl implements BasicLpsService {
 			logger.error("Invalid Inputs");
 			throw new BasicLpsException("Invalid inputs");
 		}
+		logger.info("Ended updateBasicLpsDetails function");
+
 	}
 	
 }

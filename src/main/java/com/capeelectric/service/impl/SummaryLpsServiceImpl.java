@@ -88,7 +88,8 @@ public class SummaryLpsServiceImpl implements SummaryLpsService {
 	public void addSummaryLpsDetails(SummaryLps summaryLps)
 			throws SummaryLpsException, BasicLpsException, AirTerminationException, DownConductorException,
 			EarthingLpsException, SPDException, EarthStudException, Exception {
-		
+		logger.info("Called addSummaryLpsDetails function");
+
 		if (summaryLps != null && summaryLps.getUserName() != null
 				&& !summaryLps.getUserName().isEmpty() && summaryLps.getBasicLpsId() != null
 				&& summaryLps.getBasicLpsId() != 0) {
@@ -192,11 +193,14 @@ public class SummaryLpsServiceImpl implements SummaryLpsService {
 			logger.error("Invalid Inputs");
 			throw new SummaryLpsException("Invalid Inputs");
 		}
+		logger.info("Ended addSummaryLpsDetails function");
 	}
 
 	@Override
 	public List<SummaryLps> retrieveSummaryLpsDetails(String userName, Integer basicLpsId) throws SummaryLpsException {
 		if (userName != null) {
+			logger.info("Called retrieveSummaryLpsDetails function");
+
 			List<SummaryLps> summaryLpsRepo = summaryLpsRepository.findByUserNameAndBasicLpsId(userName,
 					basicLpsId);
 			if (summaryLpsRepo != null && !summaryLpsRepo.isEmpty()) {
@@ -204,6 +208,7 @@ public class SummaryLpsServiceImpl implements SummaryLpsService {
 					summaryLpsItr.setSummaryLpsBuildings(findNonRemovedObjects.findNonRemovedSummaryBuildings(summaryLpsItr));
 					logger.debug("Successfully done findNonRemovedSummaryBuildings() call");
 				}
+				logger.info("Ended retrieveSummaryLpsDetails function");
 				return summaryLpsRepo;
 			} else {
 				logger.error("Given UserName & Id doesn't exist in Summary Lps Report Details");

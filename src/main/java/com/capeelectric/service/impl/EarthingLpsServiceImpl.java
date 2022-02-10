@@ -55,6 +55,8 @@ public class EarthingLpsServiceImpl implements EarthingLpsService {
 	@Override
 	public void addEarthingLpsDetails(EarthingReport earthingReport)
 			throws  EarthingLpsException{
+		logger.info("Called addEarthingLpsDetails function");
+
 		if (earthingReport != null && earthingReport.getUserName() != null
 				&& !earthingReport.getUserName().isEmpty() && earthingReport.getBasicLpsId() != null
 				&& earthingReport.getBasicLpsId() != 0) {
@@ -93,12 +95,15 @@ public class EarthingLpsServiceImpl implements EarthingLpsService {
 			logger.error("Invalid Inputs");
 			throw new EarthingLpsException("Invalid Inputs");
 		}
-			
+		logger.info("Ended addEarthingLpsDetails function");
+	
 	}
 	
 	@Override
 	public List<EarthingReport> retrieveEarthingLpsDetails(String userName, Integer basicLpsId)
 			throws EarthingLpsException {
+		logger.info("Called retrieveEarthingLpsDetails function");
+
 		if (userName != null) {
 			List<EarthingReport> earthingLpsRepo = earthingLpsRepository.findByUserNameAndBasicLpsId(userName,
 					basicLpsId);
@@ -107,6 +112,7 @@ public class EarthingLpsServiceImpl implements EarthingLpsService {
 					earthingReportItr.setEarthingLpsDescription(findNonRemovedObjects.findNonRemovedEarthingLpsBuildings(earthingReportItr));
 					logger.debug("Successfully done findNonRemovedEarthingLpsBuildings() call");
 				}
+				logger.info("Ended retrieveEarthingLpsDetails function");
 				return earthingLpsRepo;
 			} else {
 				logger.error("Given UserName & Id doesn't exist in Earthing Report Details");
@@ -116,11 +122,13 @@ public class EarthingLpsServiceImpl implements EarthingLpsService {
 			logger.error("Invalid Inputs");
 			throw new EarthingLpsException("Invalid Inputs");
 		}
+
 	}
 	
 	@Transactional
 	@Override
 	public void updateEarthingLpsDetails(EarthingReport earthingReport) throws EarthingLpsException {
+		logger.info("Called updateEarthingLpsDetails function");
 
 		if (earthingReport != null && earthingReport.getEarthingReportId() != null
 				&& earthingReport.getEarthingReportId() != 0 && earthingReport.getBasicLpsId() != null
@@ -142,5 +150,7 @@ public class EarthingLpsServiceImpl implements EarthingLpsService {
 			logger.error("Invalid inputs");
 			throw new EarthingLpsException("Invalid inputs");
 		}
+		logger.info("Ended updateEarthingLpsDetails function");
+
 	}
 }

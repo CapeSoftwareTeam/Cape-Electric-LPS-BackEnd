@@ -54,6 +54,8 @@ public class DownConductorServiceImpl implements DownConductorService{
 	@Override
 	public void addDownConductorsDetails(DownConductorReport downConductorReport)
 			throws  DownConductorException{
+		logger.info("Called addDownConductorsDetails function");
+
 		if (downConductorReport != null && downConductorReport.getUserName() != null
 				&& !downConductorReport.getUserName().isEmpty() && downConductorReport.getBasicLpsId() != null
 				&& downConductorReport.getBasicLpsId() != 0) {
@@ -91,12 +93,15 @@ public class DownConductorServiceImpl implements DownConductorService{
 			logger.error("Invalid Inputs");
 			throw new DownConductorException("Invalid Inputs");
 		}
-			
+		logger.info("Ended addDownConductorsDetails function");
+		
 	}
 	
 	@Override
 	public List<DownConductorReport> retrieveDownConductorDetails(String userName, Integer basicLpsId)
 			throws DownConductorException {
+		logger.info("Called retrieveDownConductorDetails function");
+
 		if (userName != null) {
 			List<DownConductorReport> downConductorRepo = downConductorRepository.findByUserNameAndBasicLpsId(userName,
 					basicLpsId);
@@ -105,6 +110,7 @@ public class DownConductorServiceImpl implements DownConductorService{
 					downConductorReportItr.setDownConductorDescription(findNonRemovedObjects.findNonRemovedDownConductorsBuildings(downConductorReportItr));
 					logger.debug("Successfully done findNonRemovedDownConductorsBuildings() call");
 				}
+				logger.info("Ended retrieveDownConductorDetails function");
 				return downConductorRepo;
 			} else {
 				logger.error("Given UserName & Id doesn't exist in Down Conductor Details");
@@ -119,6 +125,7 @@ public class DownConductorServiceImpl implements DownConductorService{
 	@Transactional
 	@Override
 	public void updateDownConductorDetails(DownConductorReport downConductorReport) throws DownConductorException {
+		logger.info("Called updateDownConductorDetails function");
 
 		if (downConductorReport != null && downConductorReport.getDownConductorReportId() != null
 				&& downConductorReport.getDownConductorReportId() != 0 && downConductorReport.getBasicLpsId() != null
@@ -140,6 +147,7 @@ public class DownConductorServiceImpl implements DownConductorService{
 			logger.error("Invalid inputs");
 			throw new DownConductorException("Invalid inputs");
 		}
+		logger.info("Ended updateDownConductorDetails function");
 	}
 	
 }

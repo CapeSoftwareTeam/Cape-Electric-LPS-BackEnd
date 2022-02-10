@@ -102,6 +102,8 @@ public class FinalReportServiceImpl implements FinalReportService {
 	@Override
 	public Optional<LpsFinalReport> retrieveLpsReports(String userName, Integer basicLpsId)
 			throws FinalReportException {
+		logger.info("Called retrieveLpsReports function");
+
 		if (userName != null && basicLpsId != null) {
 			lpsFinalReport = new LpsFinalReport();
 			lpsFinalReport.setUserName(userName);
