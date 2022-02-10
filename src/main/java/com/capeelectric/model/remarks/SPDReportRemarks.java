@@ -1,4 +1,7 @@
-package com.capeelectric.model;
+/**
+ * 
+ */
+package com.capeelectric.model.remarks;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -13,30 +16,28 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import org.hibernate.annotations.NamedQueries;
-import org.hibernate.annotations.NamedQuery;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+/**
+ * @author CAPE-SOFTWARE
+ *
+ */
 @Entity
-@Table(name = "AIR_TERMINATION_DETAILS_TABLE")
-@NamedQueries(value = {
-		@NamedQuery(name = "AirTerminationLpsRepository.findByUserNameAndBasicLpsId", query = "select s from AirTermination s where s.userName=:userName and s.basicLpsId=:basicLpsId"),
-		@NamedQuery(name = "AirTerminationLpsRepository.findByBasicLpsId", query = "select s from AirTermination s where s.basicLpsId=:basicLpsId"),
-})
-public class AirTermination implements Serializable {
-
+@Table(name = "SPD_REPORT_TABLE")
+public class SPDReportRemarks implements Serializable  {
+	
 	private static final long serialVersionUID = 1L;
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "AIR_TERMINATION_DETAILS_ID")
-	private Integer airTerminationId;
+	@Column(name = "SPD_REPORT_ID")
+	private Integer spdReportId;
+	
+	@Column(name = "BASIC_LPS_ID")
+	private Integer basicLpsId;
 	
 	@Column(name = "USER_NAME")
 	private String userName;
-	
-	@Column(name = "BASIC_LPS_ID")
-	private Integer basicLpsId;   
 	
 	@Column(name = "CREATED_DATE")
 	private LocalDateTime createdDate;
@@ -51,24 +52,15 @@ public class AirTermination implements Serializable {
 	private LocalDateTime updatedDate;
 	
 	@JsonManagedReference
-	@OneToMany(mappedBy = "airTerminationDetails", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<LpsAirDiscription> lpsAirDescription;
+	@OneToMany(mappedBy = "spdReport", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<SPDRemarks> spd;
 
-	
-	public Integer getAirTerminationId() {
-		return airTerminationId;
+	public Integer getSpdReportId() {
+		return spdReportId;
 	}
 
-	public void setAirTerminationId(Integer airTerminationId) {
-		this.airTerminationId = airTerminationId;
-	}
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setSpdReportId(Integer spdReportId) {
+		this.spdReportId = spdReportId;
 	}
 
 	public Integer getBasicLpsId() {
@@ -77,6 +69,14 @@ public class AirTermination implements Serializable {
 
 	public void setBasicLpsId(Integer basicLpsId) {
 		this.basicLpsId = basicLpsId;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 	public LocalDateTime getCreatedDate() {
@@ -111,16 +111,17 @@ public class AirTermination implements Serializable {
 		this.updatedDate = updatedDate;
 	}
 
-	public List<LpsAirDiscription> getLpsAirDescription() {
-		return lpsAirDescription;
+	public List<SPDRemarks> getSpd() {
+		return spd;
 	}
 
-	public void setLpsAirDescription(List<LpsAirDiscription> lpsAirDescription) {
-		this.lpsAirDescription = lpsAirDescription;
+	public void setSpd(List<SPDRemarks> spd) {
+		this.spd = spd;
 	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+	
 	
 }

@@ -1,4 +1,7 @@
-package com.capeelectric.model;
+/**
+ * 
+ */
+package com.capeelectric.model.remarks;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -13,31 +16,29 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import org.hibernate.annotations.NamedQueries;
-import org.hibernate.annotations.NamedQuery;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+/**
+ * @author CAPE-SOFTWARE
+ *
+ */
 @Entity
-@Table(name = "AIR_TERMINATION_DETAILS_TABLE")
-@NamedQueries(value = {
-		@NamedQuery(name = "AirTerminationLpsRepository.findByUserNameAndBasicLpsId", query = "select s from AirTermination s where s.userName=:userName and s.basicLpsId=:basicLpsId"),
-		@NamedQuery(name = "AirTerminationLpsRepository.findByBasicLpsId", query = "select s from AirTermination s where s.basicLpsId=:basicLpsId"),
-})
-public class AirTermination implements Serializable {
-
+@Table(name = "SEPERATION_DISTANCE_REPORT_TABLE")
+public class SeperationDistanceReportRemarks implements Serializable  {
+	
 	private static final long serialVersionUID = 1L;
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "AIR_TERMINATION_DETAILS_ID")
-	private Integer airTerminationId;
+	@Column(name = "SEPERATION_DISTANCE_REPORT_ID")
+	private Integer seperationDistanceReportId;
+	
+	@Column(name = "BASIC_LPS_ID")
+	private Integer basicLpsId;
 	
 	@Column(name = "USER_NAME")
 	private String userName;
-	
-	@Column(name = "BASIC_LPS_ID")
-	private Integer basicLpsId;   
-	
+
 	@Column(name = "CREATED_DATE")
 	private LocalDateTime createdDate;
 	
@@ -51,24 +52,15 @@ public class AirTermination implements Serializable {
 	private LocalDateTime updatedDate;
 	
 	@JsonManagedReference
-	@OneToMany(mappedBy = "airTerminationDetails", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<LpsAirDiscription> lpsAirDescription;
+	@OneToMany(mappedBy = "seperationDistanceReport", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<SeperationDistanceDescriptionRemarks> seperationDistanceDescription;
 
-	
-	public Integer getAirTerminationId() {
-		return airTerminationId;
+	public Integer getSeperationDistanceReportId() {
+		return seperationDistanceReportId;
 	}
 
-	public void setAirTerminationId(Integer airTerminationId) {
-		this.airTerminationId = airTerminationId;
-	}
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setSeperationDistanceReportId(Integer seperationDistanceReportId) {
+		this.seperationDistanceReportId = seperationDistanceReportId;
 	}
 
 	public Integer getBasicLpsId() {
@@ -77,6 +69,14 @@ public class AirTermination implements Serializable {
 
 	public void setBasicLpsId(Integer basicLpsId) {
 		this.basicLpsId = basicLpsId;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 	public LocalDateTime getCreatedDate() {
@@ -111,16 +111,17 @@ public class AirTermination implements Serializable {
 		this.updatedDate = updatedDate;
 	}
 
-	public List<LpsAirDiscription> getLpsAirDescription() {
-		return lpsAirDescription;
+	public List<SeperationDistanceDescriptionRemarks> getSeperationDistanceDescription() {
+		return seperationDistanceDescription;
 	}
 
-	public void setLpsAirDescription(List<LpsAirDiscription> lpsAirDescription) {
-		this.lpsAirDescription = lpsAirDescription;
+	public void setSeperationDistanceDescription(List<SeperationDistanceDescriptionRemarks> seperationDistanceDescription) {
+		this.seperationDistanceDescription = seperationDistanceDescription;
 	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+	
 	
 }

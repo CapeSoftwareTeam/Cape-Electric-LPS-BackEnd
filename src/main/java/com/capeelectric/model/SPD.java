@@ -1,7 +1,6 @@
 package com.capeelectric.model;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.CascadeType;

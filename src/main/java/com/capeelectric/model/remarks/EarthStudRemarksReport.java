@@ -1,6 +1,8 @@
-package com.capeelectric.model;
+/**
+ * 
+ */
+package com.capeelectric.model.remarks;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -13,31 +15,35 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
 import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
+
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+/**
+ * @author CAPE-SOFTWARE
+ *
+ */
 @Entity
-@Table(name = "AIR_TERMINATION_DETAILS_TABLE")
+@Table(name = "EARTH_STUD_REPORT_TABLE")
 @NamedQueries(value = {
-		@NamedQuery(name = "AirTerminationLpsRepository.findByUserNameAndBasicLpsId", query = "select s from AirTermination s where s.userName=:userName and s.basicLpsId=:basicLpsId"),
-		@NamedQuery(name = "AirTerminationLpsRepository.findByBasicLpsId", query = "select s from AirTermination s where s.basicLpsId=:basicLpsId"),
+		@NamedQuery(name = "EarthStudRemarksRepository.findByUserNameAndBasicLpsId", query = "select s from EarthStudRemarksReport s where s.userName=:userName and s.basicLpsId=:basicLpsId"),
+		@NamedQuery(name = "EarthStudRemarksRepository.findByBasicLpsId", query = "select s from EarthStudRemarksReport s where s.basicLpsId=:basicLpsId"),
 })
-public class AirTermination implements Serializable {
-
-	private static final long serialVersionUID = 1L;
-
+public class EarthStudRemarksReport {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "AIR_TERMINATION_DETAILS_ID")
-	private Integer airTerminationId;
+	@Column(name = "EARTH_STUD_REPORT_ID")
+	private Integer earthStudReportId;
+	
+	@Column(name = "BASIC_LPS_ID")
+	private Integer basicLpsId;
 	
 	@Column(name = "USER_NAME")
 	private String userName;
-	
-	@Column(name = "BASIC_LPS_ID")
-	private Integer basicLpsId;   
-	
+
 	@Column(name = "CREATED_DATE")
 	private LocalDateTime createdDate;
 	
@@ -51,24 +57,17 @@ public class AirTermination implements Serializable {
 	private LocalDateTime updatedDate;
 	
 	@JsonManagedReference
-	@OneToMany(mappedBy = "airTerminationDetails", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<LpsAirDiscription> lpsAirDescription;
+	@OneToMany(mappedBy = "earthStudRemarksReport", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<EarthStudDescriptionRemarks> earthStudDescriptionRemarks;
 
 	
-	public Integer getAirTerminationId() {
-		return airTerminationId;
+
+	public Integer getEarthStudReportId() {
+		return earthStudReportId;
 	}
 
-	public void setAirTerminationId(Integer airTerminationId) {
-		this.airTerminationId = airTerminationId;
-	}
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setEarthStudReportId(Integer earthStudReportId) {
+		this.earthStudReportId = earthStudReportId;
 	}
 
 	public Integer getBasicLpsId() {
@@ -77,6 +76,14 @@ public class AirTermination implements Serializable {
 
 	public void setBasicLpsId(Integer basicLpsId) {
 		this.basicLpsId = basicLpsId;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 	public LocalDateTime getCreatedDate() {
@@ -111,16 +118,14 @@ public class AirTermination implements Serializable {
 		this.updatedDate = updatedDate;
 	}
 
-	public List<LpsAirDiscription> getLpsAirDescription() {
-		return lpsAirDescription;
+	public List<EarthStudDescriptionRemarks> getEarthStudDescriptionRemarks() {
+		return earthStudDescriptionRemarks;
 	}
 
-	public void setLpsAirDescription(List<LpsAirDiscription> lpsAirDescription) {
-		this.lpsAirDescription = lpsAirDescription;
+	public void setEarthStudDescriptionRemarks(List<EarthStudDescriptionRemarks> earthStudDescriptionRemarks) {
+		this.earthStudDescriptionRemarks = earthStudDescriptionRemarks;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
 	
+
 }

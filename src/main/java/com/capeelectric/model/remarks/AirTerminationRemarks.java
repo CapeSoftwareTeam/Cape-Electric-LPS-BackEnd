@@ -1,4 +1,7 @@
-package com.capeelectric.model;
+/**
+ * 
+ */
+package com.capeelectric.model.remarks;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -13,17 +16,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import org.hibernate.annotations.NamedQueries;
-import org.hibernate.annotations.NamedQuery;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+/**
+ * @author CAPE-SOFTWARE
+ *
+ */
 @Entity
 @Table(name = "AIR_TERMINATION_DETAILS_TABLE")
-@NamedQueries(value = {
-		@NamedQuery(name = "AirTerminationLpsRepository.findByUserNameAndBasicLpsId", query = "select s from AirTermination s where s.userName=:userName and s.basicLpsId=:basicLpsId"),
-		@NamedQuery(name = "AirTerminationLpsRepository.findByBasicLpsId", query = "select s from AirTermination s where s.basicLpsId=:basicLpsId"),
-})
-public class AirTermination implements Serializable {
+public class AirTerminationRemarks implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -52,9 +53,8 @@ public class AirTermination implements Serializable {
 	
 	@JsonManagedReference
 	@OneToMany(mappedBy = "airTerminationDetails", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<LpsAirDiscription> lpsAirDescription;
+	private List<LpsAirDiscriptionRemarks> lpsAirDiscription;
 
-	
 	public Integer getAirTerminationId() {
 		return airTerminationId;
 	}
@@ -111,16 +111,18 @@ public class AirTermination implements Serializable {
 		this.updatedDate = updatedDate;
 	}
 
-	public List<LpsAirDiscription> getLpsAirDescription() {
-		return lpsAirDescription;
+
+	public List<LpsAirDiscriptionRemarks> getLpsAirDiscription() {
+		return lpsAirDiscription;
 	}
 
-	public void setLpsAirDescription(List<LpsAirDiscription> lpsAirDescription) {
-		this.lpsAirDescription = lpsAirDescription;
+	public void setLpsAirDiscription(List<LpsAirDiscriptionRemarks> lpsAirDiscription) {
+		this.lpsAirDiscription = lpsAirDiscription;
 	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+	
 	
 }

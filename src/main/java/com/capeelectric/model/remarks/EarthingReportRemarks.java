@@ -1,4 +1,7 @@
-package com.capeelectric.model;
+/**
+ * 
+ */
+package com.capeelectric.model.remarks;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -13,37 +16,35 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import org.hibernate.annotations.NamedQueries;
-import org.hibernate.annotations.NamedQuery;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+/**
+ * @author CAPE-SOFTWARE
+ *
+ */
 @Entity
-@Table(name = "AIR_TERMINATION_DETAILS_TABLE")
-@NamedQueries(value = {
-		@NamedQuery(name = "AirTerminationLpsRepository.findByUserNameAndBasicLpsId", query = "select s from AirTermination s where s.userName=:userName and s.basicLpsId=:basicLpsId"),
-		@NamedQuery(name = "AirTerminationLpsRepository.findByBasicLpsId", query = "select s from AirTermination s where s.basicLpsId=:basicLpsId"),
-})
-public class AirTermination implements Serializable {
-
+@Table(name = "EARTHING_REPORT_TABLE")
+public class EarthingReportRemarks implements Serializable  {
+	
 	private static final long serialVersionUID = 1L;
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "AIR_TERMINATION_DETAILS_ID")
-	private Integer airTerminationId;
+	@Column(name = "EARTHING_REPORT_ID")
+	private Integer earthingReportId;
 	
 	@Column(name = "USER_NAME")
 	private String userName;
 	
 	@Column(name = "BASIC_LPS_ID")
-	private Integer basicLpsId;   
+	private Integer basicLpsId;
 	
 	@Column(name = "CREATED_DATE")
 	private LocalDateTime createdDate;
 	
 	@Column(name = "CREATED_BY")
 	private String createdBy;
-
+	
 	@Column(name = "UPDATED_BY")
 	private String updatedBy;
 	
@@ -51,16 +52,15 @@ public class AirTermination implements Serializable {
 	private LocalDateTime updatedDate;
 	
 	@JsonManagedReference
-	@OneToMany(mappedBy = "airTerminationDetails", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<LpsAirDiscription> lpsAirDescription;
+	@OneToMany(mappedBy = "earthingReport", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<EarthingLpsDescriptionRemarks> earthingLpsDescription;
 
-	
-	public Integer getAirTerminationId() {
-		return airTerminationId;
+	public Integer getEarthingReportId() {
+		return earthingReportId;
 	}
 
-	public void setAirTerminationId(Integer airTerminationId) {
-		this.airTerminationId = airTerminationId;
+	public void setEarthingReportId(Integer earthingReportId) {
+		this.earthingReportId = earthingReportId;
 	}
 
 	public String getUserName() {
@@ -111,16 +111,17 @@ public class AirTermination implements Serializable {
 		this.updatedDate = updatedDate;
 	}
 
-	public List<LpsAirDiscription> getLpsAirDescription() {
-		return lpsAirDescription;
+	public List<EarthingLpsDescriptionRemarks> getEarthingLpsDescription() {
+		return earthingLpsDescription;
 	}
 
-	public void setLpsAirDescription(List<LpsAirDiscription> lpsAirDescription) {
-		this.lpsAirDescription = lpsAirDescription;
+	public void setEarthingLpsDescription(List<EarthingLpsDescriptionRemarks> earthingLpsDescription) {
+		this.earthingLpsDescription = earthingLpsDescription;
 	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+	
 	
 }

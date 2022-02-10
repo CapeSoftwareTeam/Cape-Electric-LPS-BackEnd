@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.capeelectric.model;
+package com.capeelectric.model.remarks;
 
 import java.io.Serializable;
 import java.util.List;
@@ -17,7 +17,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -25,10 +24,9 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
  * @author CAPE-SOFTWARE
  *
  */
-
 @Entity
 @Table(name = "SEPERATION_DISTANCE_TABLE")
-public class SeperationDistanceDescription implements Serializable {
+public class SeperationDistanceDescriptionRemarks implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -48,25 +46,21 @@ public class SeperationDistanceDescription implements Serializable {
 	@Column(name = "FLAG")
 	private String flag;	
 	
-	@Column(name = "CALCULATED_SEPERATION_DISTANCE_OB")
-	private String calculatedSeperationDistanceOb;
-	
 	@Column(name = "CALCULATED_SEPERATION_DISTANCE_REM")
 	private String calculatedSeperationDistanceRem;
 		
 	@JsonManagedReference
 	@OneToMany(mappedBy = "seperationDistanceDescription", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<SeparateDistance> separateDistance;
+	private List<SeparateDistanceRemarks> separateDistance;
 	
 	@JsonManagedReference
 	@OneToMany(mappedBy = "seperationDistanceDescription", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<SeparateDistanceDownConductors> separateDistanceDownConductors;
+	private List<SeparateDistanceDownConductRemarks> separateDistanceDownConductors;
 	
 	@JsonBackReference
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "SEPERATION_DISTANCE_REPORT_ID")
-	private SeperationDistanceReport seperationDistanceReport;
-
+	private SeperationDistanceReportRemarks seperationDistanceReport;
 
 	public Integer getSeperationDistanceId() {
 		return seperationDistanceId;
@@ -75,7 +69,6 @@ public class SeperationDistanceDescription implements Serializable {
 	public void setSeperationDistanceId(Integer seperationDistanceId) {
 		this.seperationDistanceId = seperationDistanceId;
 	}
-
 
 	public Integer getBuildingNumber() {
 		return buildingNumber;
@@ -109,30 +102,6 @@ public class SeperationDistanceDescription implements Serializable {
 		this.flag = flag;
 	}
 
-	public SeperationDistanceReport getSeperationDistanceReport() {
-		return seperationDistanceReport;
-	}
-
-	public void setSeperationDistanceReport(SeperationDistanceReport seperationDistanceReport) {
-		this.seperationDistanceReport = seperationDistanceReport;
-	}
-
-	public List<SeparateDistance> getSeparateDistance() {
-		return separateDistance;
-	}
-
-	public void setSeparateDistance(List<SeparateDistance> separateDistance) {
-		this.separateDistance = separateDistance;
-	}
-
-	public String getCalculatedSeperationDistanceOb() {
-		return calculatedSeperationDistanceOb;
-	}
-
-	public void setCalculatedSeperationDistanceOb(String calculatedSeperationDistanceOb) {
-		this.calculatedSeperationDistanceOb = calculatedSeperationDistanceOb;
-	}
-
 	public String getCalculatedSeperationDistanceRem() {
 		return calculatedSeperationDistanceRem;
 	}
@@ -141,20 +110,33 @@ public class SeperationDistanceDescription implements Serializable {
 		this.calculatedSeperationDistanceRem = calculatedSeperationDistanceRem;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public List<SeparateDistanceRemarks> getSeparateDistance() {
+		return separateDistance;
 	}
 
-	public List<SeparateDistanceDownConductors> getSeparateDistanceDownConductors() {
+	public void setSeparateDistance(List<SeparateDistanceRemarks> separateDistance) {
+		this.separateDistance = separateDistance;
+	}
+
+	public List<SeparateDistanceDownConductRemarks> getSeparateDistanceDownConductors() {
 		return separateDistanceDownConductors;
 	}
 
-	public void setSeparateDistanceDownConductors(List<SeparateDistanceDownConductors> separateDistanceDownConductors) {
+	public void setSeparateDistanceDownConductors(List<SeparateDistanceDownConductRemarks> separateDistanceDownConductors) {
 		this.separateDistanceDownConductors = separateDistanceDownConductors;
+	}
+
+	public SeperationDistanceReportRemarks getSeperationDistanceReport() {
+		return seperationDistanceReport;
+	}
+
+	public void setSeperationDistanceReport(SeperationDistanceReportRemarks seperationDistanceReport) {
+		this.seperationDistanceReport = seperationDistanceReport;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 	
 	
-
-
-
 }
