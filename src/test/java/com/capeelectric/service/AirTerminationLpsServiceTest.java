@@ -24,11 +24,13 @@ import com.capeelectric.model.AirClamps;
 import com.capeelectric.model.AirConnectors;
 import com.capeelectric.model.AirExpansion;
 import com.capeelectric.model.AirHolderDescription;
+import com.capeelectric.model.AirHolderList;
 import com.capeelectric.model.AirMeshDescription;
 import com.capeelectric.model.AirTermination;
 import com.capeelectric.model.BasicLps;
 import com.capeelectric.model.LpsAirDiscription;
 import com.capeelectric.model.LpsVerticalAirTermination;
+import com.capeelectric.model.VerticalAirTerminationList;
 import com.capeelectric.repository.AirTerminationLpsRepository;
 import com.capeelectric.repository.BasicLpsRepository;
 import com.capeelectric.service.impl.AirTerminationLpsServiceImpl;
@@ -92,36 +94,60 @@ public class AirTerminationLpsServiceTest {
 		listofLpsAirDiscription.add(new LpsAirDiscription());
 		
 		ArrayList<LpsVerticalAirTermination> lpsVerticalAirTermination = new ArrayList<LpsVerticalAirTermination>();
-		lpsVerticalAirTermination.add(new LpsVerticalAirTermination());
+		LpsVerticalAirTermination lps = new LpsVerticalAirTermination();
+		lps.setFlag("A");
 		
-		ArrayList<LpsVerticalAirTermination> lps = new ArrayList<LpsVerticalAirTermination>();
-		lpsVerticalAirTermination.add(new LpsVerticalAirTermination());
+		ArrayList<VerticalAirTerminationList> verticalAirTerminationList = new ArrayList<VerticalAirTerminationList>();
+		VerticalAirTerminationList verticalLps = new VerticalAirTerminationList();
+		verticalLps.setFlag("A");
+		verticalAirTerminationList.add(verticalLps);		
+		lps.setVerticalAirTerminationList(verticalAirTerminationList);
+		lpsVerticalAirTermination.add(lps);
+	
+		ArrayList<AirClamps> airClampsList = new ArrayList<AirClamps>();
+		AirClamps airClamps = new AirClamps();
+		airClamps.setFlag("A");		
+		airClampsList.add(airClamps); 
 		
-		ArrayList<AirClamps> airClamps = new ArrayList<AirClamps>();
-		airClamps.add(new AirClamps());
+		ArrayList<AirConnectors> airConnectorsList = new ArrayList<AirConnectors>();
+		AirConnectors airConnectors = new AirConnectors();
+		airConnectors.setFlag("A");		
+		airConnectorsList.add(airConnectors);
 		
-		ArrayList<AirConnectors> airConnectors = new ArrayList<AirConnectors>();
-		airConnectors.add(new AirConnectors());
+		ArrayList<AirExpansion> airExpansionList = new ArrayList<AirExpansion>();
+		AirExpansion airExpansion = new AirExpansion();
+		airExpansion.setFlag("A");		
+		airExpansionList.add(airExpansion);
 		
-		ArrayList<AirExpansion> airExpansion = new ArrayList<AirExpansion>();
-		airExpansion.add(new AirExpansion());
+		ArrayList<AirHolderDescription> airHolderDescriptionList = new ArrayList<AirHolderDescription>();
+		AirHolderDescription airHolderDescription = new AirHolderDescription();
+		airHolderDescription.setFlag("A");	
 		
-		ArrayList<AirHolderDescription> airHolderDescription = new ArrayList<AirHolderDescription>();
-		airHolderDescription.add(new AirHolderDescription());
+		ArrayList<AirHolderList> listOfairHolderList = new ArrayList<AirHolderList>();
+		AirHolderList airHolderList = new AirHolderList();
+		airHolderList.setFlag("A");
+		listOfairHolderList.add(airHolderList);
+		airHolderDescription.setAirHolderList(listOfairHolderList);
+		airHolderDescriptionList.add(airHolderDescription);
 		
-		ArrayList<AirMeshDescription> airMeshDescription = new ArrayList<AirMeshDescription>();
-		airMeshDescription.add(new AirMeshDescription());
+		ArrayList<AirMeshDescription> airMeshDescriptionList = new ArrayList<AirMeshDescription>();
+		AirMeshDescription airMeshDescription = new AirMeshDescription();
+		airMeshDescription.setFlag("A");		
+		airMeshDescriptionList.add(airMeshDescription);
 		
-		ArrayList<AirBasicDescription> airBasicDescription = new ArrayList<AirBasicDescription>();
-		airBasicDescription.add(new AirBasicDescription());
+		ArrayList<AirBasicDescription> airBasicDescriptionList = new ArrayList<AirBasicDescription>();
+		AirBasicDescription airBasicDescription = new AirBasicDescription();
+		airBasicDescription.setFlag("A");		
+		airBasicDescriptionList.add(airBasicDescription);
 		
 		LpsAirDiscription lpsAirDiscription = listofLpsAirDiscription.get(0);
-		lpsAirDiscription.setAirClamps(airClamps);
-		lpsAirDiscription.setAirConnectors(airConnectors);
-		lpsAirDiscription.setAirExpansion(airExpansion);
-		lpsAirDiscription.setAirHolderDescription(airHolderDescription);
-		lpsAirDiscription.setAirMeshDescription(airMeshDescription);
-		lpsAirDiscription.setAirBasicDescription(airBasicDescription);
+		lpsAirDiscription.setLpsVerticalAirTermination(lpsVerticalAirTermination);
+		lpsAirDiscription.setAirClamps(airClampsList);
+		lpsAirDiscription.setAirConnectors(airConnectorsList);
+		lpsAirDiscription.setAirExpansion(airExpansionList);
+		lpsAirDiscription.setAirHolderDescription(airHolderDescriptionList);
+		lpsAirDiscription.setAirMeshDescription(airMeshDescriptionList);
+		lpsAirDiscription.setAirBasicDescription(airBasicDescriptionList);
 		
 		airTermination.setLpsAirDescription(listofLpsAirDiscription);
 

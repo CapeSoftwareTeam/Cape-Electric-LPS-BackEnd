@@ -16,9 +16,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-
-import com.capeelectric.exception.AirTerminationException;
-import com.capeelectric.exception.BasicLpsException;
 import com.capeelectric.exception.DownConductorException;
 import com.capeelectric.model.BasicLps;
 import com.capeelectric.model.BridgingDescription;
@@ -26,14 +23,14 @@ import com.capeelectric.model.Connectors;
 import com.capeelectric.model.DownConductor;
 import com.capeelectric.model.DownConductorDescription;
 import com.capeelectric.model.DownConductorReport;
+import com.capeelectric.model.DownConductorTesting;
 import com.capeelectric.model.Holder;
 import com.capeelectric.model.LightningCounter;
-import com.capeelectric.model.LpsAirDiscription;
 import com.capeelectric.model.TestingJoint;
 import com.capeelectric.repository.BasicLpsRepository;
 import com.capeelectric.repository.DownConductorRepository;
-import com.capeelectric.service.impl.BasicLpsServiceImpl;
 import com.capeelectric.service.impl.DownConductorServiceImpl;
+import com.capeelectric.util.FindNonRemovedObjects;
 import com.capeelectric.util.UserFullName;
 
 @ExtendWith(SpringExtension.class)
@@ -53,6 +50,9 @@ public class DownConductorServiceTest {
 	
 	@MockBean
 	private UserFullName userFullName;
+	
+	@MockBean
+	private FindNonRemovedObjects findNonRemovedObjects;
 
 	private DownConductorReport downConductorReport;
 
@@ -67,27 +67,38 @@ public class DownConductorServiceTest {
 		
 		List<BridgingDescription> bridgingDescriptionList = new ArrayList<BridgingDescription>();
 		BridgingDescription bridgingDescription = new BridgingDescription();
+		bridgingDescription.setFlag("A");
 		bridgingDescriptionList.add(bridgingDescription);
 		
 		List<Holder> holderList = new ArrayList<Holder>();
 		Holder holder = new Holder();
+		holder.setFlag("A");
 		holderList.add(holder);
 		
 		List<Connectors> connectorsList = new ArrayList<Connectors>();
 		Connectors connectors = new Connectors();
+		connectors.setFlag("A");
 		connectorsList.add(connectors);
 		
 		List<LightningCounter> lightningCounterList = new ArrayList<LightningCounter>();
 		LightningCounter lightningCounter = new LightningCounter();
+		lightningCounter.setFlag("A");
 		lightningCounterList.add(lightningCounter);
 		
 		List<TestingJoint> testingJointList = new ArrayList<TestingJoint>();
 		TestingJoint testingJoint = new TestingJoint();
+		testingJoint.setFlag("A");
 		testingJointList.add(testingJoint);
 		
 		List<DownConductor> downConductorList = new ArrayList<DownConductor>();
 		DownConductor downConductor = new DownConductor();
+		downConductor.setFlag("A");
 		downConductorList.add(downConductor);
+		
+		List<DownConductorTesting> downConductorTestingList = new ArrayList<DownConductorTesting>();
+		DownConductorTesting downConductorTesting = new DownConductorTesting();
+		downConductorTesting.setFlag("A");
+		downConductorTestingList.add(downConductorTesting);
 		
 		downConductorDescription.setBridgingDescription(bridgingDescriptionList);
 		downConductorDescription.setHolder(holderList);
@@ -95,6 +106,7 @@ public class DownConductorServiceTest {
 		downConductorDescription.setLightningCounter(lightningCounterList);
 		downConductorDescription.setTestingJoint(testingJointList);
 		downConductorDescription.setDownConductor(downConductorList);
+		downConductorDescription.setDownConductorTesting(downConductorTestingList);
 		
 		downConductorDescriptionList.add(downConductorDescription);
 	}
@@ -121,22 +133,39 @@ public class DownConductorServiceTest {
 		downConductorDescriptionList.add(new DownConductorDescription());
 		
 		List<BridgingDescription> bridgingDescriptionList = new ArrayList<BridgingDescription>();
-		bridgingDescriptionList.add(new BridgingDescription());
+		BridgingDescription bridgingDescription = new BridgingDescription();
+		bridgingDescription.setFlag("A");
+		bridgingDescriptionList.add(bridgingDescription);
 				
 		List<Holder> holderList = new ArrayList<Holder>();
-		holderList.add(new Holder()); 
+		Holder holder = new Holder();
+		holder.setFlag("A");
+		holderList.add(holder); 
 		
 		List<Connectors> connectorsList = new ArrayList<Connectors>();
-		connectorsList.add(new Connectors());
+		Connectors connectors = new Connectors();
+		connectors.setFlag("A");
+		connectorsList.add(connectors);
 		
 		List<LightningCounter> lightningCounterList = new ArrayList<LightningCounter>();
-		lightningCounterList.add(new LightningCounter());
+		LightningCounter lightningCounter = new LightningCounter();
+		lightningCounter.setFlag("A");
+		lightningCounterList.add(lightningCounter);
 		
 		List<TestingJoint> testingJointList = new ArrayList<TestingJoint>();
-		testingJointList.add(new TestingJoint());
+		TestingJoint testingJoint = new TestingJoint();
+		testingJoint.setFlag("A");
+		testingJointList.add(testingJoint);
 		
 		List<DownConductor> downConductorList = new ArrayList<DownConductor>();
-		downConductorList.add(new DownConductor());
+		DownConductor downConductor = new DownConductor();
+		downConductor.setFlag("A");
+		downConductorList.add(downConductor);
+		
+		List<DownConductorTesting> downConductorTestingList = new ArrayList<DownConductorTesting>();
+		DownConductorTesting downConductorTesting = new DownConductorTesting();
+		downConductorTesting.setFlag("A");
+		downConductorTestingList.add(downConductorTesting);
 
 		DownConductorDescription downConductorDescription = downConductorDescriptionList.get(0);	
 		downConductorDescription.setBridgingDescription(bridgingDescriptionList);
@@ -145,8 +174,9 @@ public class DownConductorServiceTest {
 		downConductorDescription.setLightningCounter(lightningCounterList);
 		downConductorDescription.setTestingJoint(testingJointList);
 		downConductorDescription.setDownConductor(downConductorList);
+		downConductorDescription.setDownConductorTesting(downConductorTestingList);		
+		downConductorDescription.setFlag("A");
 	
-		downConductorDescriptionList.add(downConductorDescription);
 		downConductorReport.setDownConductorDescription(downConductorDescriptionList);		
 		downConductorServiceImpl.addDownConductorsDetails(downConductorReport);
 		

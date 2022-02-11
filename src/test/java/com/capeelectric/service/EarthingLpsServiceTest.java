@@ -17,14 +17,20 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import com.capeelectric.exception.DownConductorException;
 import com.capeelectric.exception.EarthingLpsException;
-import com.capeelectric.exception.SPDException;
 import com.capeelectric.model.BasicLps;
+import com.capeelectric.model.EarthElectrodeChamber;
+import com.capeelectric.model.EarthElectrodeTesting;
+import com.capeelectric.model.EarthingClamps;
+import com.capeelectric.model.EarthingDescription;
+import com.capeelectric.model.EarthingDescriptionList;
 import com.capeelectric.model.EarthingLpsDescription;
+import com.capeelectric.model.EarthingReport;
+import com.capeelectric.model.EarthingSystem;
 import com.capeelectric.repository.BasicLpsRepository;
 import com.capeelectric.repository.EarthingLpsRepository;
 import com.capeelectric.service.impl.EarthingLpsServiceImpl;
+import com.capeelectric.util.FindNonRemovedObjects;
 import com.capeelectric.util.UserFullName;
 
 @ExtendWith(SpringExtension.class)
@@ -46,15 +52,62 @@ public class EarthingLpsServiceTest {
 	private BasicLpsRepository basicLpsRepository;
 	
 	@MockBean
+	private FindNonRemovedObjects findNonRemovedObjects;
+	
+	@MockBean
 	private UserFullName userFullName;
 
-	private EarthingLpsDescription earthingLpsDescription;
+	private EarthingReport earthingReport;
 
 	{
-		earthingLpsDescription = new EarthingLpsDescription();
-		earthingLpsDescription.setUserName("LVsystem@gmail.com");
-		earthingLpsDescription.setBasicLpsId(1);
-		earthingLpsDescription.setEarthingId(2);
+		earthingReport = new EarthingReport();
+		earthingReport.setUserName("LVsystem@gmail.com");
+		earthingReport.setBasicLpsId(1);
+		earthingReport.setEarthingReportId(2);
+		
+		List<EarthingLpsDescription> earthingLpsDescriptionList = new ArrayList<EarthingLpsDescription>();
+		EarthingLpsDescription earthingLpsDescription = new EarthingLpsDescription();
+		earthingLpsDescription.setFlag("A");
+		
+		List<EarthingDescription> earthingDescriptionList = new ArrayList<EarthingDescription>();
+		EarthingDescription earthingDescription = new EarthingDescription();
+		earthingDescription.setFlag("A");
+		
+		List<EarthingDescriptionList> listOfEarthingDescriptionList = new ArrayList<EarthingDescriptionList>();
+		EarthingDescriptionList earthingDescriptionLi = new EarthingDescriptionList();
+		earthingDescriptionLi.setFlag("A");	
+		listOfEarthingDescriptionList.add(earthingDescriptionLi);
+		
+		earthingDescription.setEarthingDescriptionList(listOfEarthingDescriptionList);
+		earthingDescriptionList.add(earthingDescription);
+		
+		List<EarthingClamps> earthingClampsList = new ArrayList<EarthingClamps>();
+		EarthingClamps earthingClamps = new EarthingClamps();
+		earthingClamps.setFlag("A");
+		earthingClampsList.add(earthingClamps);
+		
+		List<EarthElectrodeChamber> earthElectrodeChamberList = new ArrayList<EarthElectrodeChamber>();
+		EarthElectrodeChamber earthElectrodeChamber = new EarthElectrodeChamber();
+		earthElectrodeChamber.setFlag("A");
+		earthElectrodeChamberList.add(earthElectrodeChamber);
+		
+		List<EarthingSystem> earthingSystemList = new ArrayList<EarthingSystem>();
+		EarthingSystem earthingSystem = new EarthingSystem();
+		earthingSystem.setFlag("A");
+		earthingSystemList.add(earthingSystem);
+		
+		List<EarthElectrodeTesting> earthElectrodeTestingList = new ArrayList<EarthElectrodeTesting>();
+		EarthElectrodeTesting earthElectrodeTesting = new EarthElectrodeTesting();
+		earthElectrodeTesting.setFlag("A");
+		earthElectrodeTestingList.add(earthElectrodeTesting);
+		
+		earthingLpsDescription.setEarthingDescription(earthingDescriptionList);
+		earthingLpsDescription.setEarthingClamps(earthingClampsList);
+		earthingLpsDescription.setEarthingElectrodeChamber(earthElectrodeChamberList);
+		earthingLpsDescription.setEarthingSystem(earthingSystemList);
+		earthingLpsDescription.setEarthElectrodeTesting(earthElectrodeTestingList);
+		
+		earthingLpsDescriptionList.add(earthingLpsDescription);
 	}
 	
 	private BasicLps basicLps;
@@ -68,24 +121,74 @@ public class EarthingLpsServiceTest {
 	public void testAddEarthingLpsDetails() throws EarthingLpsException {
 
 		when(basicLpsRepository.findByBasicLpsId(1)).thenReturn(Optional.of(basicLps));
-		when(earthingLpsRepository.findByBasicLpsId(3)).thenReturn(Optional.of(earthingLpsDescription));
-		earthingLpsServiceImpl.addEarthingLpsDetails(earthingLpsDescription);
+		when(earthingLpsRepository.findByBasicLpsId(3)).thenReturn(Optional.of(earthingReport));
 		
-		when(earthingLpsRepository.findByBasicLpsId(1)).thenReturn(Optional.of(earthingLpsDescription));
+		earthingReport.setEarthingLpsDescription(null);
+		EarthingLpsException earthingLpsException_1 = Assertions.assertThrows(EarthingLpsException.class,
+				() -> earthingLpsServiceImpl.addEarthingLpsDetails(earthingReport));
+		assertEquals(earthingLpsException_1.getMessage(), "Please fill all the fields before clicking next button");
+		
+		List<EarthingLpsDescription> earthingLpsDescriptionList = new ArrayList<EarthingLpsDescription>();
+		earthingLpsDescriptionList.add(new EarthingLpsDescription());
+		
+		List<EarthingDescription> earthingDescriptionList = new ArrayList<EarthingDescription>();
+		EarthingDescription earthingDescription = new EarthingDescription();
+		earthingDescription.setFlag("A");
+		
+		List<EarthingDescriptionList> listOfEarthingDescriptionList = new ArrayList<EarthingDescriptionList>();
+		EarthingDescriptionList earthingDescriptionLi = new EarthingDescriptionList();
+		earthingDescriptionLi.setFlag("A");	
+		listOfEarthingDescriptionList.add(earthingDescriptionLi);
+		
+		earthingDescription.setEarthingDescriptionList(listOfEarthingDescriptionList);
+		earthingDescriptionList.add(earthingDescription);
+		
+		List<EarthingClamps> earthingClampsList = new ArrayList<EarthingClamps>();
+		EarthingClamps earthingClamps = new EarthingClamps();
+		earthingClamps.setFlag("A");
+		earthingClampsList.add(earthingClamps);
+		
+		List<EarthElectrodeChamber> earthElectrodeChamberList = new ArrayList<EarthElectrodeChamber>();
+		EarthElectrodeChamber earthElectrodeChamber = new EarthElectrodeChamber();
+		earthElectrodeChamber.setFlag("A");
+		earthElectrodeChamberList.add(earthElectrodeChamber);
+		
+		List<EarthingSystem> earthingSystemList = new ArrayList<EarthingSystem>();
+		EarthingSystem earthingSystem = new EarthingSystem();
+		earthingSystem.setFlag("A");
+		earthingSystemList.add(earthingSystem);
+		
+		List<EarthElectrodeTesting> earthElectrodeTestingList = new ArrayList<EarthElectrodeTesting>();
+		EarthElectrodeTesting earthElectrodeTesting = new EarthElectrodeTesting();
+		earthElectrodeTesting.setFlag("A");
+		earthElectrodeTestingList.add(earthElectrodeTesting);
+		
+		EarthingLpsDescription earthingLpsDescription = earthingLpsDescriptionList.get(0);	
+		earthingLpsDescription.setEarthingDescription(earthingDescriptionList);
+		earthingLpsDescription.setEarthingClamps(earthingClampsList);
+		earthingLpsDescription.setEarthingElectrodeChamber(earthElectrodeChamberList);
+		earthingLpsDescription.setEarthingSystem(earthingSystemList);
+		earthingLpsDescription.setEarthElectrodeTesting(earthElectrodeTestingList);
+		earthingLpsDescription.setFlag("A");
+	
+		earthingReport.setEarthingLpsDescription(earthingLpsDescriptionList);		
+		earthingLpsServiceImpl.addEarthingLpsDetails(earthingReport);
+		
+		when(earthingLpsRepository.findByBasicLpsId(1)).thenReturn(Optional.of(earthingReport));
 		EarthingLpsException earthingLpsException_2 = Assertions.assertThrows(EarthingLpsException.class,
-				() -> earthingLpsServiceImpl.addEarthingLpsDetails(earthingLpsDescription));
+				() -> earthingLpsServiceImpl.addEarthingLpsDetails(earthingReport));
 		assertEquals(earthingLpsException_2.getMessage(), "Basic LPS Id Already Available.Create New Basic Id");
 
 		basicLps.setBasicLpsId(5);
-		earthingLpsDescription.setBasicLpsId(5);
+		earthingReport.setBasicLpsId(5);
 		when(basicLpsRepository.findByBasicLpsId(1)).thenReturn(Optional.of(basicLps));
 		EarthingLpsException earthingLpsException_3 = Assertions.assertThrows(EarthingLpsException.class,
-				() -> earthingLpsServiceImpl.addEarthingLpsDetails(earthingLpsDescription));
+				() -> earthingLpsServiceImpl.addEarthingLpsDetails(earthingReport));
 		assertEquals(earthingLpsException_3.getMessage(), "Given Basic LPS Id is Not Registered in Basic LPS");	
 		
-		earthingLpsDescription.setUserName(null);
+		earthingReport.setUserName(null);
 		EarthingLpsException earthingLpsException_4 = Assertions.assertThrows(EarthingLpsException.class,
-				() -> earthingLpsServiceImpl.addEarthingLpsDetails(earthingLpsDescription));
+				() -> earthingLpsServiceImpl.addEarthingLpsDetails(earthingReport));
 		assertEquals(earthingLpsException_4.getMessage(), "Invalid Inputs");
 
 	}
@@ -93,41 +196,43 @@ public class EarthingLpsServiceTest {
 	@Test
 	public void testRetrieveEarthingLpsDetails() throws EarthingLpsException {
 
-		List<EarthingLpsDescription> arrayList = new ArrayList<EarthingLpsDescription>();
-		arrayList.add(earthingLpsDescription);
+		List<EarthingReport> arrayList = new ArrayList<EarthingReport>();
+		arrayList.add(earthingReport);
 		when(earthingLpsRepository.findByUserNameAndBasicLpsId("LVsystem@gmail.com", 12)).thenReturn(arrayList);
+		logger.info("SuccessFlow of retrieveEarthingLpsDetails ");
 		earthingLpsServiceImpl.retrieveEarthingLpsDetails("LVsystem@gmail.com", 12);
 
-		EarthingLpsException earthingLpsException = Assertions.assertThrows(EarthingLpsException.class,
-				() -> earthingLpsServiceImpl.retrieveEarthingLpsDetails("abc@gmail.com", 12));
-		assertEquals(earthingLpsException.getMessage(), "Given UserName & Id doesn't exist in Down Conductor Details");
-
+		logger.info("Invalid Input flow");
 		EarthingLpsException earthingLpsException_1 = Assertions.assertThrows(EarthingLpsException.class,
 				() -> earthingLpsServiceImpl.retrieveEarthingLpsDetails(null, 12));
 		assertEquals(earthingLpsException_1.getMessage(), "Invalid Inputs");
+		
+		EarthingLpsException earthingLpsException = Assertions.assertThrows(EarthingLpsException.class,
+				() -> earthingLpsServiceImpl.retrieveEarthingLpsDetails("abc@gmail.com", 12));
+		assertEquals(earthingLpsException.getMessage(), "Given UserName & Id doesn't exist in Earthing Report Details");
 
 	}
 
 	@Test
 	public void testUpdateEarthingLpsDetails() throws EarthingLpsException {
 
-		earthingLpsDescription.setUserName("LVsystem@gmail.com");
-		earthingLpsDescription.setEarthingId(1);
-		earthingLpsDescription.setBasicLpsId(1);
-		when(earthingLpsRepository.findById(1)).thenReturn(Optional.of(earthingLpsDescription));
-		earthingLpsServiceImpl.updateEarthingLpsDetails(earthingLpsDescription);
+		earthingReport.setUserName("LVsystem@gmail.com");
+		earthingReport.setEarthingReportId(1);
+		earthingReport.setBasicLpsId(1);
+		when(earthingLpsRepository.findById(1)).thenReturn(Optional.of(earthingReport));
+		earthingLpsServiceImpl.updateEarthingLpsDetails(earthingReport);
 
-		earthingLpsDescription.setBasicLpsId(2);
-		earthingLpsDescription.setEarthingId(50);
-		when(earthingLpsRepository.findById(20)).thenReturn(Optional.of(earthingLpsDescription));
+		earthingReport.setBasicLpsId(2);
+		earthingReport.setEarthingReportId(50);
+		when(earthingLpsRepository.findById(20)).thenReturn(Optional.of(earthingReport));
 		EarthingLpsException assertThrows_1 = Assertions.assertThrows(EarthingLpsException.class,
-				() -> earthingLpsServiceImpl.updateEarthingLpsDetails(earthingLpsDescription));
+				() -> earthingLpsServiceImpl.updateEarthingLpsDetails(earthingReport));
 		assertEquals(assertThrows_1.getMessage(), "Given Basic LPS Id and Earthing LPS Id is Invalid");
 		
-		earthingLpsDescription.setBasicLpsId(null);
-		when(earthingLpsRepository.findById(1)).thenReturn(Optional.of(earthingLpsDescription));
+		earthingReport.setBasicLpsId(null);
+		when(earthingLpsRepository.findById(1)).thenReturn(Optional.of(earthingReport));
 		EarthingLpsException assertThrows_2 = Assertions.assertThrows(EarthingLpsException.class,
-				() -> earthingLpsServiceImpl.updateEarthingLpsDetails(earthingLpsDescription));
+				() -> earthingLpsServiceImpl.updateEarthingLpsDetails(earthingReport));
 		assertEquals(assertThrows_2.getMessage(), "Invalid inputs");
 	}
 

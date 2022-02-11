@@ -16,19 +16,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-
-import com.capeelectric.exception.EarthingLpsException;
-import com.capeelectric.exception.SPDException;
 import com.capeelectric.exception.SeperationDistanceException;
 import com.capeelectric.model.BasicLps;
-import com.capeelectric.model.EarthingLpsDescription;
-import com.capeelectric.model.SPD;
+import com.capeelectric.model.SeparateDistance;
+import com.capeelectric.model.SeparateDistanceDownConductors;
 import com.capeelectric.model.SeperationDistanceDescription;
+import com.capeelectric.model.SeperationDistanceReport;
 import com.capeelectric.repository.BasicLpsRepository;
-import com.capeelectric.repository.SPDRepository;
 import com.capeelectric.repository.SeperationDistanceRepository;
-import com.capeelectric.service.impl.SPDServiceImpl;
 import com.capeelectric.service.impl.SeperationDistanceServiceImpl;
+import com.capeelectric.util.FindNonRemovedObjects;
 import com.capeelectric.util.UserFullName;
 
 @ExtendWith(SpringExtension.class)
@@ -46,6 +43,9 @@ public class SeperationDistanceServiceTest {
 
 	@MockBean
 	private SeperationDistanceException seperationDistanceException;
+	
+	@MockBean
+	private FindNonRemovedObjects findNonRemovedObjects;
 
 	@MockBean
 	private BasicLpsRepository basicLpsRepository;
@@ -53,13 +53,32 @@ public class SeperationDistanceServiceTest {
 	@MockBean
 	private UserFullName userFullName;
 
-	private SeperationDistanceDescription seperationDistanceDescription;
+	private SeperationDistanceReport seperationDistanceReport;
 
 	{
-		seperationDistanceDescription = new SeperationDistanceDescription();
-		seperationDistanceDescription.setBasicLpsId(1);
-		seperationDistanceDescription.setSeperationDistanceId(2);
-		seperationDistanceDescription.setUserName("LVsystem@gmail.com");
+		seperationDistanceReport = new SeperationDistanceReport();
+		seperationDistanceReport.setBasicLpsId(1);
+		seperationDistanceReport.setSeperationDistanceReportId(2);
+		seperationDistanceReport.setUserName("LVsystem@gmail.com");
+		
+		List<SeperationDistanceDescription> seperationDistanceDescriptionList = new ArrayList<SeperationDistanceDescription>();
+		SeperationDistanceDescription seperationDistanceDescription = new SeperationDistanceDescription();
+		seperationDistanceDescription.setFlag("A");
+		
+		List<SeparateDistance> separateDistanceList = new ArrayList<SeparateDistance>();
+		SeparateDistance separateDistance = new SeparateDistance();
+		separateDistance.setFlag("A");
+		separateDistanceList.add(separateDistance);
+		
+		List<SeparateDistanceDownConductors> separateDistanceDownConductorsList = new ArrayList<SeparateDistanceDownConductors>();
+		SeparateDistanceDownConductors separateDistanceDownConductors = new SeparateDistanceDownConductors();
+		separateDistanceDownConductors.setFlag("A");
+		separateDistanceDownConductorsList.add(separateDistanceDownConductors);
+		
+		seperationDistanceDescription.setSeparateDistance(separateDistanceList);
+		seperationDistanceDescription.setSeparateDistanceDownConductors(separateDistanceDownConductorsList);
+		
+		seperationDistanceDescriptionList.add(seperationDistanceDescription);
 	}
 	private BasicLps basicLps;
 	{
@@ -72,43 +91,68 @@ public class SeperationDistanceServiceTest {
 	public void testAddSeperationDistance() throws SeperationDistanceException {
 
 		when(basicLpsRepository.findByBasicLpsId(1)).thenReturn(Optional.of(basicLps));
-		when(seperationDistanceRepository.findByBasicLpsId(2)).thenReturn(Optional.of(seperationDistanceDescription));
-		seperationDistanceServiceImpl.addSeperationDistance(seperationDistanceDescription);
+		when(seperationDistanceRepository.findByBasicLpsId(2)).thenReturn(Optional.of(seperationDistanceReport));
 		
-		when(seperationDistanceRepository.findByBasicLpsId(1)).thenReturn(Optional.of(seperationDistanceDescription));
+		seperationDistanceReport.setSeperationDistanceDescription(null);
+		SeperationDistanceException seperationDistanceException_1 = Assertions.assertThrows(SeperationDistanceException.class,
+				() -> seperationDistanceServiceImpl.addSeperationDistance(seperationDistanceReport));
+		assertEquals(seperationDistanceException_1.getMessage(), "Please fill all the fields before clicking next button");
+		
+		List<SeperationDistanceDescription> seperationDistanceDescriptionList = new ArrayList<SeperationDistanceDescription>();
+		seperationDistanceDescriptionList.add(new SeperationDistanceDescription());
+		
+		List<SeparateDistance> separateDistanceList = new ArrayList<SeparateDistance>();
+		SeparateDistance separateDistance = new SeparateDistance();
+		separateDistance.setFlag("A");
+		separateDistanceList.add(separateDistance);
+		
+		List<SeparateDistanceDownConductors> separateDistanceDownConductorsList = new ArrayList<SeparateDistanceDownConductors>();
+		SeparateDistanceDownConductors separateDistanceDownConductors = new SeparateDistanceDownConductors();
+		separateDistanceDownConductors.setFlag("A");
+		separateDistanceDownConductorsList.add(separateDistanceDownConductors);
+		
+		SeperationDistanceDescription seperationDistanceDescription = seperationDistanceDescriptionList.get(0);
+		seperationDistanceDescription.setSeparateDistance(separateDistanceList);
+		seperationDistanceDescription.setSeparateDistanceDownConductors(separateDistanceDownConductorsList);
+		seperationDistanceDescription.setFlag("A");
+		
+		seperationDistanceReport.setSeperationDistanceDescription(seperationDistanceDescriptionList);
+		seperationDistanceServiceImpl.addSeperationDistance(seperationDistanceReport);
+		
+		when(seperationDistanceRepository.findByBasicLpsId(1)).thenReturn(Optional.of(seperationDistanceReport));
 		SeperationDistanceException seperationDistanceException = Assertions.assertThrows(SeperationDistanceException.class,
-				() -> seperationDistanceServiceImpl.addSeperationDistance(seperationDistanceDescription));
+				() -> seperationDistanceServiceImpl.addSeperationDistance(seperationDistanceReport));
 		assertEquals(seperationDistanceException.getMessage(), "Basic LPS Id Already Available.Create New Basic Id");
 
 		basicLps.setBasicLpsId(5);
-		seperationDistanceDescription.setBasicLpsId(5);
+		seperationDistanceReport.setBasicLpsId(5);
 		when(basicLpsRepository.findByBasicLpsId(1)).thenReturn(Optional.of(basicLps));
-		SeperationDistanceException earthingLpsException_3 = Assertions.assertThrows(SeperationDistanceException.class,
-				() -> seperationDistanceServiceImpl.addSeperationDistance(seperationDistanceDescription));
-		assertEquals(earthingLpsException_3.getMessage(), "Given Basic LPS Id is Not Registered in Basic LPS");	
-		
-		seperationDistanceDescription.setUserName(null);
 		SeperationDistanceException seperationDistanceException_2 = Assertions.assertThrows(SeperationDistanceException.class,
-				() -> seperationDistanceServiceImpl.addSeperationDistance(seperationDistanceDescription));
-		assertEquals(seperationDistanceException_2.getMessage(), "Invalid Inputs");
+				() -> seperationDistanceServiceImpl.addSeperationDistance(seperationDistanceReport));
+		assertEquals(seperationDistanceException_2.getMessage(), "Given Basic LPS Id is Not Registered in Basic LPS");	
+		
+		seperationDistanceReport.setUserName(null);
+		SeperationDistanceException seperationDistanceException_3 = Assertions.assertThrows(SeperationDistanceException.class,
+				() -> seperationDistanceServiceImpl.addSeperationDistance(seperationDistanceReport));
+		assertEquals(seperationDistanceException_3.getMessage(), "Invalid Inputs");
 
 	}
 	
 	@Test
 	public void testRetrieveSeperationDetails() throws  SeperationDistanceException {
 
-		List<SeperationDistanceDescription> arrayList = new ArrayList<SeperationDistanceDescription>();
-		arrayList.add(seperationDistanceDescription);
+		List<SeperationDistanceReport> arrayList = new ArrayList<SeperationDistanceReport>();
+		arrayList.add(seperationDistanceReport);
 		when(seperationDistanceRepository.findByUserNameAndBasicLpsId("LVsystem@gmail.com", 12)).thenReturn(arrayList);
 		seperationDistanceServiceImpl.retrieveSeperationDetails("LVsystem@gmail.com", 12);
 
 		SeperationDistanceException seperationDistanceException_1 = Assertions.assertThrows(SeperationDistanceException.class,
 				() -> seperationDistanceServiceImpl.retrieveSeperationDetails("abc@gmail.com", 12));
-		assertEquals(seperationDistanceException_1.getMessage(), "Given UserName & Id doesn't exist in Down Conductor Details");
+		assertEquals(seperationDistanceException_1.getMessage(), "Given UserName & Id doesn't exist in Seperation Distance Details");
 		
-		SeperationDistanceException earthingLpsException = Assertions.assertThrows(SeperationDistanceException.class,
+		SeperationDistanceException seperationDistanceException_2 = Assertions.assertThrows(SeperationDistanceException.class,
 				() -> seperationDistanceServiceImpl.retrieveSeperationDetails(null, 12));
-		assertEquals(earthingLpsException.getMessage(), "Invalid Inputs");
+		assertEquals(seperationDistanceException_2.getMessage(), "Invalid Inputs");
 
 	}
 	
@@ -116,24 +160,24 @@ public class SeperationDistanceServiceTest {
 	public void testUpdateSeperationDetails() throws SeperationDistanceException {
 
 		
-		seperationDistanceDescription.setUserName("LVsystem@gmail.com");
-		seperationDistanceDescription.setSeperationDistanceId(1);
-		seperationDistanceDescription.setBasicLpsId(1);
-		when(seperationDistanceRepository.findById(1)).thenReturn(Optional.of(seperationDistanceDescription));
-		seperationDistanceServiceImpl.updateSeperationDetails(seperationDistanceDescription);
+		seperationDistanceReport.setUserName("LVsystem@gmail.com");
+		seperationDistanceReport.setSeperationDistanceReportId(1);
+		seperationDistanceReport.setBasicLpsId(1);
+		when(seperationDistanceRepository.findById(1)).thenReturn(Optional.of(seperationDistanceReport));
+		seperationDistanceServiceImpl.updateSeperationDetails(seperationDistanceReport);
 		
-		seperationDistanceDescription.setBasicLpsId(2);
-		seperationDistanceDescription.setSeperationDistanceId(50);
-		when(seperationDistanceRepository.findById(20)).thenReturn(Optional.of(seperationDistanceDescription));
+		seperationDistanceReport.setBasicLpsId(2);
+		seperationDistanceReport.setSeperationDistanceReportId(50);
+		when(seperationDistanceRepository.findById(20)).thenReturn(Optional.of(seperationDistanceReport));
 		SeperationDistanceException assertThrows_1 = Assertions.assertThrows(SeperationDistanceException.class,
-				() -> seperationDistanceServiceImpl.updateSeperationDetails(seperationDistanceDescription));
+				() -> seperationDistanceServiceImpl.updateSeperationDetails(seperationDistanceReport));
 		assertEquals(assertThrows_1.getMessage(), "Given Basic LPS Id and Seperation Distance Id is Invalid");
 
-		when(seperationDistanceRepository.findByBasicLpsId(1)).thenReturn(Optional.of(seperationDistanceDescription));
-		seperationDistanceDescription.setBasicLpsId(null);
-		when(seperationDistanceRepository.findByBasicLpsId(1)).thenReturn(Optional.of(seperationDistanceDescription));
+		when(seperationDistanceRepository.findByBasicLpsId(1)).thenReturn(Optional.of(seperationDistanceReport));
+		seperationDistanceReport.setBasicLpsId(null);
+		when(seperationDistanceRepository.findByBasicLpsId(1)).thenReturn(Optional.of(seperationDistanceReport));
 		SeperationDistanceException assertThrows_2 = Assertions.assertThrows(SeperationDistanceException.class,
-				() -> seperationDistanceServiceImpl.updateSeperationDetails(seperationDistanceDescription));
+				() -> seperationDistanceServiceImpl.updateSeperationDetails(seperationDistanceReport));
 		assertEquals(assertThrows_2.getMessage(), "Invalid inputs");
 	}
 
