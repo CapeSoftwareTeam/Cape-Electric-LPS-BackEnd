@@ -119,13 +119,13 @@ public class EarthStudServiceImpl implements EarthStudService {
 						throw new EarthStudException("Please fill all the fields before clicking next button");
 					}
 				} else {
-					logger.error("Given Basic LPS Id is Not Registered in Basic LPS");
-					throw new EarthStudException("Given Basic LPS Id is Not Registered in Basic LPS");
+					logger.error("Basic LPS Id Already Available.Create New Basic Id");
+					throw new EarthStudException("Basic LPS Id Already Available.Create New Basic Id");
 				}
 
 			} else {
-				logger.error("Basic LPS Id Already Available.Create New Basic Id");
-				throw new EarthStudException("Basic LPS Id Already Available.Create New Basic Id");
+				logger.error("Given Basic LPS Id is Not Registered in Basic LPS");
+				throw new EarthStudException("Given Basic LPS Id is Not Registered in Basic LPS");
 			}
 
 //			printBasicLpsService.printBasicLps(earthStudDescription.getUserName(), earthStudDescription.getBasicLpsId(),
@@ -213,44 +213,30 @@ public class EarthStudServiceImpl implements EarthStudService {
 
 	}
 
-	private static void mergePdfFiles(List<InputStream> inputPdfList, OutputStream outputStream,
-			AWSS3ServiceImpl awss3ServiceImpl) throws Exception {
-		Document document = new Document();
-		List<PdfReader> readers = new ArrayList<PdfReader>();
-		int totalPages = 0;
-		Iterator<InputStream> pdfIterator = inputPdfList.iterator();
-		while (pdfIterator.hasNext()) {
-			InputStream pdf = pdfIterator.next();
-			PdfReader pdfReader = new PdfReader(pdf);
-			readers.add(pdfReader);
-			totalPages = totalPages + pdfReader.getNumberOfPages();
-		}
-		PdfWriter writer = PdfWriter.getInstance(document, outputStream);
-		Image image = Image.getInstance(awss3ServiceImpl.findByName("rush-logo.png"));
-		image.scaleToFit(185, 185);
-		image.setAbsolutePosition(-3, -9);
-
-		HeaderFooterPageEvent event = new HeaderFooterPageEvent();
-		writer.setPageEvent((PdfPageEvent) event);
-		document.open();
-		PdfContentByte pageContentByte = writer.getDirectContent();
-		PdfImportedPage pdfImportedPage;
-		int currentPdfReaderPage = 1;
-		Iterator<PdfReader> iteratorPDFReader = readers.iterator();
-		while (iteratorPDFReader.hasNext()) {
-			PdfReader pdfReader = iteratorPDFReader.next();
-			while (currentPdfReaderPage <= pdfReader.getNumberOfPages()) {
-				document.newPage();
-				document.add(image);
-				pdfImportedPage = writer.getImportedPage(pdfReader, currentPdfReaderPage);
-				pageContentByte.addTemplate(pdfImportedPage, 0, 0);
-				currentPdfReaderPage++;
-			}
-			currentPdfReaderPage = 1;
-		}
-		outputStream.flush();
-		document.close();
-		outputStream.close();
-	}
+	/*
+	 * private static void mergePdfFiles(List<InputStream> inputPdfList,
+	 * OutputStream outputStream, AWSS3ServiceImpl awss3ServiceImpl) throws
+	 * Exception { Document document = new Document(); List<PdfReader> readers = new
+	 * ArrayList<PdfReader>(); int totalPages = 0; Iterator<InputStream> pdfIterator
+	 * = inputPdfList.iterator(); while (pdfIterator.hasNext()) { InputStream pdf =
+	 * pdfIterator.next(); PdfReader pdfReader = new PdfReader(pdf);
+	 * readers.add(pdfReader); totalPages = totalPages +
+	 * pdfReader.getNumberOfPages(); } PdfWriter writer =
+	 * PdfWriter.getInstance(document, outputStream); Image image =
+	 * Image.getInstance(awss3ServiceImpl.findByName("rush-logo.png"));
+	 * image.scaleToFit(185, 185); image.setAbsolutePosition(-3, -9);
+	 * 
+	 * HeaderFooterPageEvent event = new HeaderFooterPageEvent();
+	 * writer.setPageEvent((PdfPageEvent) event); document.open(); PdfContentByte
+	 * pageContentByte = writer.getDirectContent(); PdfImportedPage pdfImportedPage;
+	 * int currentPdfReaderPage = 1; Iterator<PdfReader> iteratorPDFReader =
+	 * readers.iterator(); while (iteratorPDFReader.hasNext()) { PdfReader pdfReader
+	 * = iteratorPDFReader.next(); while (currentPdfReaderPage <=
+	 * pdfReader.getNumberOfPages()) { document.newPage(); document.add(image);
+	 * pdfImportedPage = writer.getImportedPage(pdfReader, currentPdfReaderPage);
+	 * pageContentByte.addTemplate(pdfImportedPage, 0, 0); currentPdfReaderPage++; }
+	 * currentPdfReaderPage = 1; } outputStream.flush(); document.close();
+	 * outputStream.close(); }
+	 */
 
 }
