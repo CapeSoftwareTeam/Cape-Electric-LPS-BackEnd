@@ -9,6 +9,8 @@ import com.capeelectric.model.EarthingLpsDescription;
 
 public interface PrintEarthingLpsService {
 
-	List<EarthingLpsDescription> printEarthingLpsDetails(String userName, Integer basicLpsId,Optional<BasicLps> basicLpsDetails, Optional<EarthingLpsDescription> earthingLpsDetails) throws EarthingLpsException;
+//	List<EarthingLpsDescription> printEarthingLpsDetails(String userName, Integer basicLpsId,Optional<BasicLps> basicLpsDetails, Optional<EarthingLpsDescription> earthingLpsDetails) throws EarthingLpsException;
+
+	List<EarthingLpsDescription> printEarthingLpsDetails1(String userName, Integer basicLpsId) throws EarthingLpsException;
 
 }

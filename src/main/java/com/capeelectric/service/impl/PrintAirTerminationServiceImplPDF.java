@@ -37,9 +37,16 @@ import com.itextpdf.text.pdf.PdfWriter;
 @Service
 public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationService {
 
-	@Override
-	public void printAirTermination(String userName, Integer basicLpsId,Optional<BasicLps> basicLpsDetails, Optional<LpsAirDiscription> lpsAirDisc) throws AirTerminationException {
-//		if (userName != null && !userName.isEmpty() && basicLpsId != null && basicLpsId != 0) {
+//	@Override
+//	public void printAirTermination(String userName, Integer basicLpsId,Optional<BasicLps> basicLpsDetails, Optional<LpsAirDiscription> lpsAirDisc) throws AirTerminationException {
+
+		@Override
+		public void printAirTermination1(String userName, Integer basicLpsId) throws AirTerminationException {
+
+			
+		
+
+		//		if (userName != null && !userName.isEmpty() && basicLpsId != null && basicLpsId != 0) {
 //			Document document = new Document(PageSize.A4, 68, 68, 62, 68);
 //
 //			try {

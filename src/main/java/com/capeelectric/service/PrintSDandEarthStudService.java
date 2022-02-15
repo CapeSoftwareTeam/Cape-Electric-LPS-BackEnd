@@ -8,7 +8,9 @@ import com.capeelectric.model.SeperationDistanceDescription;
 
 public interface PrintSDandEarthStudService {
 
-	public void printSDandEarthStud(String userName, Integer lpsId, Optional<BasicLps> basicLpsDetails,
-			Optional<SeperationDistanceDescription> separateDistanceDetails) throws EarthStudException;
+//	public void printSDandEarthStud(String userName, Integer lpsId, Optional<BasicLps> basicLpsDetails,
+//			Optional<SeperationDistanceDescription> separateDistanceDetails) throws EarthStudException;
+
+	public void printSDandEarthStud1(String userName, Integer lpsId) throws EarthStudException;
 
 }

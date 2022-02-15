@@ -28,9 +28,12 @@ import com.itextpdf.text.pdf.PdfWriter;
 @Service
 public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 
+//	@Override
+//	public List<EarthingLpsDescription> printEarthingLpsDetails(String userName, Integer basicLpsId,Optional<BasicLps> basicLpsDetails, Optional<EarthingLpsDescription> earthingLpsDetails)
+//			throws EarthingLpsException {
 
 	@Override
-	public List<EarthingLpsDescription> printEarthingLpsDetails(String userName, Integer basicLpsId,Optional<BasicLps> basicLpsDetails, Optional<EarthingLpsDescription> earthingLpsDetails)
+	public List<EarthingLpsDescription> printEarthingLpsDetails1(String userName, Integer basicLpsId)
 			throws EarthingLpsException {
 
 //		if (userName != null && !userName.isEmpty() && basicLpsId != null && basicLpsId != 0) {
@@ -1458,5 +1461,5 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 //		return table21;
 //	}
 //
-}
+	}
 }

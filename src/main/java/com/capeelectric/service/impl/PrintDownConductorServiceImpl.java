@@ -36,8 +36,16 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 	
 	private static final Logger logger = LoggerFactory.getLogger(PrintDownConductorServiceImpl.class);
 
+//	@Override
+//	public void printDownConductor(String userName, Integer lpsId,Optional<BasicLps> basicLpsDetails, Optional<DownConductorDescription> downConductorDetails) throws DownConductorException {
+
 	@Override
-	public void printDownConductor(String userName, Integer lpsId,Optional<BasicLps> basicLpsDetails, Optional<DownConductorDescription> downConductorDetails) throws DownConductorException {
+	public void printDownConductor1(String userName, Integer lpsId) throws DownConductorException {
+	
+	
+	
+	
+	
 //		if (userName != null && !userName.isEmpty() && lpsId != null && lpsId != 0) {
 //			Document document = new Document(PageSize.A4, 68, 68, 62, 68);
 //			try {

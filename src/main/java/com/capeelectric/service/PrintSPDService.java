@@ -8,5 +8,7 @@ import com.capeelectric.model.SPD;
 
 public interface PrintSPDService {
 
-	public void printSPD(String userName, Integer lpsId,Optional<BasicLps> basicLpsDetails, Optional<SPD> spdDetails )throws SPDException;
+//	public void printSPD(String userName, Integer lpsId,Optional<BasicLps> basicLpsDetails, Optional<SPD> spdDetails )throws SPDException;
+	
+	public void printSPD1(String userName, Integer lpsId)throws SPDException;
 }
