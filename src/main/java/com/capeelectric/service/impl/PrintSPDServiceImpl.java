@@ -27,8 +27,14 @@ import com.itextpdf.text.pdf.PdfWriter;
 @Service
 public class PrintSPDServiceImpl implements PrintSPDService {
 
+//	@Override
+//	public void printSPD(String userName, Integer lpsId,Optional<BasicLps> basicLpsDetails, Optional<SPD> spdDetails) throws SPDException {	
+	
 	@Override
-	public void printSPD(String userName, Integer lpsId,Optional<BasicLps> basicLpsDetails, Optional<SPD> spdDetails) throws SPDException {
+	public void printSPD1(String userName, Integer lpsId) throws SPDException {
+		
+		
+		
 //		if (userName != null && !userName.isEmpty() && lpsId != null && lpsId != 0) {
 //			Document document = new Document(PageSize.A4, 68, 68, 62, 68);
 //

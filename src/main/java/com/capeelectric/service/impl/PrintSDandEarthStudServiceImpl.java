@@ -33,9 +33,16 @@ public class PrintSDandEarthStudServiceImpl implements PrintSDandEarthStudServic
 	@Autowired
 	private EarthStudRepository earthStudRepository;
 
+//	@Override
+//	public void printSDandEarthStud(String userName, Integer lpsId, Optional<BasicLps> basicLpsDetails,
+//			Optional<SeperationDistanceDescription> separateDistanceDetails) throws EarthStudException {
+	
+	
 	@Override
-	public void printSDandEarthStud(String userName, Integer lpsId, Optional<BasicLps> basicLpsDetails,
-			Optional<SeperationDistanceDescription> separateDistanceDetails) throws EarthStudException {
+	public void printSDandEarthStud1(String userName, Integer lpsId) throws EarthStudException {
+	
+	
+	
 //		if (userName != null && !userName.isEmpty() && lpsId != null && lpsId != 0) {
 //			Document document = new Document(PageSize.A4, 68, 68, 62, 68);
 //

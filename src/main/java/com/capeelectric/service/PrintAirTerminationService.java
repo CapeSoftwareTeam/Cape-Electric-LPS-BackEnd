@@ -8,6 +8,9 @@ import com.capeelectric.model.LpsAirDiscription;
 
 public interface PrintAirTerminationService {
 
-	public void printAirTermination(String userName, Integer lpsId,Optional<BasicLps> basicLpsDetails, Optional<LpsAirDiscription> lpsAirDisc) throws AirTerminationException;
+//	public void printAirTermination(String userName, Integer lpsId,Optional<BasicLps> basicLpsDetails, Optional<LpsAirDiscription> lpsAirDisc) throws AirTerminationException;
 
+	public void printAirTermination1(String userName, Integer lpsId) throws AirTerminationException;
+
+	
 }
