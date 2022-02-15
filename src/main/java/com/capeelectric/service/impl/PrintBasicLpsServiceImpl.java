@@ -240,16 +240,30 @@ public class PrintBasicLpsServiceImpl implements PrintBasicLpsService {
 				Font font2 = new Font(BaseFont.createFont(), 10, Font.NORMAL | Font.BOLD, BaseColor.BLACK);
 				Font font3 = new Font(BaseFont.createFont(), 10, Font.NORMAL, BaseColor.BLACK);
 
+				PdfPTable tablemainhead = new PdfPTable(pointColumnWidths4);
+				tablemainhead.setWidthPercentage(100); // Width 100%
+				tablemainhead.setSpacingAfter(5f);
+
+				PdfPCell cellmainhead = new PdfPCell(
+						new Paragraph("Check list of lightning protection system", font1));
+				cellmainhead.setHorizontalAlignment(Element.ALIGN_CENTER);
+				cellmainhead.setGrayFill(0.92f);
+				cellmainhead.setFixedHeight(20f);
+				tablemainhead.addCell(cellmainhead);
+				document.add(tablemainhead);
+				
 				PdfPTable table = new PdfPTable(pointColumnWidths4);
 				table.setWidthPercentage(100); // Width 100%
 				table.setSpacingBefore(10f); // Space before table
 				table.setWidthPercentage(100);
+				
+				Font font11 = new Font(BaseFont.createFont(), 11, Font.NORMAL | Font.BOLD, BaseColor.BLACK);
 
 				PdfPCell cell = new PdfPCell(
-						new Paragraph("Check list of lightning protection system\r\n" + "Basic details ", font1));
+						new Paragraph("Basic details ", font11));
 				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 				cell.setGrayFill(0.92f);
-				cell.setFixedHeight(30f);
+				cell.setFixedHeight(20f);
 				table.addCell(cell);
 
 				document.add(table);
@@ -447,7 +461,6 @@ public class PrintBasicLpsServiceImpl implements PrintBasicLpsService {
 
 				document.add(table4);
 
-				Font font11 = new Font(BaseFont.createFont(), 10, Font.NORMAL | Font.BOLD, BaseColor.BLACK);
 
 				float[] pointColumnWidths30 = { 25F };
 
@@ -459,12 +472,10 @@ public class PrintBasicLpsServiceImpl implements PrintBasicLpsService {
 				PdfPCell cell30 = new PdfPCell(new Paragraph("Person who ordering the report", font11));
 				cell30.setHorizontalAlignment(Element.ALIGN_CENTER);
 				cell30.setGrayFill(0.92f);
+				cell30.setFixedHeight(20f);
 				table21.addCell(cell30);
 				document.add(table21);
 				
-				
-			
-
 				PdfPTable table5= new PdfPTable(pointColumnWidths1);
 				table5.setWidthPercentage(100); // Width 100%
 				// table1.setSpacingBefore(10f); // Space before table
@@ -476,7 +487,7 @@ public class PrintBasicLpsServiceImpl implements PrintBasicLpsService {
 				cell40.setGrayFill(0.92f);
 				table5.addCell(cell40);
 
-				PdfPCell cell43 = new PdfPCell(new Paragraph(basicLps1.getDealerContractorName(), font3));
+				PdfPCell cell43 = new PdfPCell(new Paragraph(basicLps1.getName(), font3));
 				cell43.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 				table5.addCell(cell43);
 				
