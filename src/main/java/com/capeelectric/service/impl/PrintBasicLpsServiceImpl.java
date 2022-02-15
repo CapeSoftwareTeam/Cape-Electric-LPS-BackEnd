@@ -355,8 +355,7 @@ public class PrintBasicLpsServiceImpl implements PrintBasicLpsService {
 				cell16.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 				table1.addCell(cell16);
 
-				PdfPCell cell151 = new PdfPCell(new Paragraph("Installation by CAPE /\r\n"
-						+ "Contractor/Dealer", font2));
+				PdfPCell cell151 = new PdfPCell(new Paragraph("Type of Industry", font2));
 				cell151.setHorizontalAlignment(Element.ALIGN_LEFT);
 //				cell151.setFixedHeight(25f);
 				cell151.setGrayFill(0.92f);
