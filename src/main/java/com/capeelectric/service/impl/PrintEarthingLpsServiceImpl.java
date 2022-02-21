@@ -454,54 +454,133 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 			cell3131.setHorizontalAlignment(Element.ALIGN_CENTER);
 			table7.addCell(cell3131);
 
-			// eartingDescTypeA Iteration
-			document.add(BasicDetailsTable6);
-			document.add(table2);
-			for (EarthingDescription earthDesc : earthDesc1) {
+			// select Type A
+			if (earthingLpsRepo.getEarthingTypeInOb().equals("Type A")) {
 
-				eartingDescTypeAiter(document, font, earthDesc);
-			}
+				// eartingDescTypeA Iteration
+				document.add(BasicDetailsTable6);
+				document.add(table2);
+				for (EarthingDescription earthDesc : earthDesc1) {
 
-			// earthingClamps
-			document.newPage();
-			document.add(BasicDetailsTable3);
-			document.add(table1);
-			document.add(table2);
-			for (EarthingClamps earthClamps : earthClamps1) {
+					eartingDescTypeAiter(document, font, earthDesc);
+				}
 
-				if (earthingLpsRepo.getEarthingClampsAvailabilityOb().equals("4")) {
+				// earthingClamps
+				document.newPage();
+				document.add(BasicDetailsTable3);
+				document.add(table1);
+				document.add(table2);
+				for (EarthingClamps earthClamps : earthClamps1) {
 
-					earthingClamps(document, earthClamps, font);
+					if (earthingLpsRepo.getEarthingClampsAvailabilityOb().equals("Applicable")) {
+
+						earthingClamps(document, earthClamps, font);
+					}
+				}
+
+				// earthElectrodeChamber
+				document.add(BasicDetailsTable4);
+				document.add(table18);
+				document.add(table2);
+				for (EarthElectrodeChamber earthElectrodeChamber : earthElectrodeChamber1) {
+
+					if (earthingLpsRepo.getEarthingElectrodeChamberAvailabilityOb().equals("Applicable")) {
+
+						earthElectrodeChamber(document, font, earthElectrodeChamber);
+					}
+				}
+
+				// earthElectrodeTesting Iteration
+				document.add(header);
+				document.add(header1);
+				document.add(table7);
+				for (EarthElectrodeTesting earthingElectrodeTesting : earthingElectrodeTesting1) {
+					earthElectrodeTestingIter(document, font, earthingElectrodeTesting);
 				}
 			}
 
-			// earthElectrodeChamber
-			document.add(BasicDetailsTable4);
-			document.add(table18);
-			document.add(table2);
-			for (EarthElectrodeChamber earthElectrodeChamber : earthElectrodeChamber1) {
+			// select Type-B (ring)
+			if (earthingLpsRepo.getEarthingTypeInOb().equals("Type-B (ring)")) {
+				// earthingSystemType-B Iteration
+				document.newPage();
+				document.add(table5);
+				document.add(table2);
+				for (EarthingSystem earthingSystem : earthingSystem1) {
 
-				if (earthingLpsRepo.getEarthingElectrodeChamberAvailabilityOb().equals("6")) {
+					earthingSystemTypeBiter(document, font, earthingSystem);
+				}
 
-					earthElectrodeChamber(document, font, earthElectrodeChamber);
+				// earthElectrodeTesting Iteration
+				document.add(header);
+				document.add(header1);
+				document.add(table7);
+				for (EarthElectrodeTesting earthingElectrodeTesting : earthingElectrodeTesting1) {
+					earthElectrodeTestingIter(document, font, earthingElectrodeTesting);
 				}
 			}
 
-			// earthingSystemType-B Iteration
-			document.newPage();
-			document.add(table5);
-			document.add(table2);
-			for (EarthingSystem earthingSystem : earthingSystem1) {
+			// select Type A & Type B combined
+			if (earthingLpsRepo.getEarthingTypeInOb().equals("Type A & Type B combined")) {
+				// eartingDescTypeA Iteration
+				document.add(BasicDetailsTable6);
+				document.add(table2);
+				for (EarthingDescription earthDesc : earthDesc1) {
 
-				earthingSystemTypeBiter(document, font, earthingSystem);
+					eartingDescTypeAiter(document, font, earthDesc);
+				}
+
+				// earthingClamps
+				document.newPage();
+				document.add(BasicDetailsTable3);
+				document.add(table1);
+				document.add(table2);
+				for (EarthingClamps earthClamps : earthClamps1) {
+
+					if (earthingLpsRepo.getEarthingClampsAvailabilityOb().equals("Applicable")) {
+
+						earthingClamps(document, earthClamps, font);
+					}
+				}
+
+				// earthElectrodeChamber
+				document.add(BasicDetailsTable4);
+				document.add(table18);
+				document.add(table2);
+				for (EarthElectrodeChamber earthElectrodeChamber : earthElectrodeChamber1) {
+
+					if (earthingLpsRepo.getEarthingElectrodeChamberAvailabilityOb().equals("Applicable")) {
+
+						earthElectrodeChamber(document, font, earthElectrodeChamber);
+					}
+				}
+
+				// earthingSystemType-B Iteration
+				document.newPage();
+				document.add(table5);
+				document.add(table2);
+				for (EarthingSystem earthingSystem : earthingSystem1) {
+
+					earthingSystemTypeBiter(document, font, earthingSystem);
+				}
+
+				// earthElectrodeTesting Iteration
+				document.add(header);
+				document.add(header1);
+				document.add(table7);
+				for (EarthElectrodeTesting earthingElectrodeTesting : earthingElectrodeTesting1) {
+					earthElectrodeTestingIter(document, font, earthingElectrodeTesting);
+				}
 			}
 
-			// earthElectrodeTesting Iteration
-			document.add(header);
-			document.add(header1);
-			document.add(table7);
-			for (EarthElectrodeTesting earthingElectrodeTesting : earthingElectrodeTesting1) {
-				earthElectrodeTestingIter(document, font, earthingElectrodeTesting);
+			// select Foundation
+			if (earthingLpsRepo.getEarthingTypeInOb().equals("Foundation")) {
+				// earthElectrodeTesting Iteration
+				document.add(header);
+				document.add(header1);
+				document.add(table7);
+				for (EarthElectrodeTesting earthingElectrodeTesting : earthingElectrodeTesting1) {
+					earthElectrodeTestingIter(document, font, earthingElectrodeTesting);
+				}
 			}
 
 			document.close();
