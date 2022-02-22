@@ -208,8 +208,9 @@ public class PrintSDandEarthStudServiceImpl implements PrintSDandEarthStudServic
 
 					int i = 1;
 					for (SeparateDistance separateDistanceIter1 : separateDistanceIter) {
-
-						separateDistanceIter(document, font1, separateDistanceIter1, i);
+						if (!separateDistanceIter1.getFlag().equals("R")) {
+							separateDistanceIter(document, font1, separateDistanceIter1, i);
+						}
 					}
 
 					PdfPTable table20 = new PdfPTable(pointColumnWidths30);
@@ -236,7 +237,9 @@ public class PrintSDandEarthStudServiceImpl implements PrintSDandEarthStudServic
 							.getSeparateDistanceDownConductors();
 
 					for (SeparateDistanceDownConductors separateDistanceDownIter1 : separateDistanceDownIter) {
-						separateDistanceDownIter(document, font1, i, separateDistanceDownIter1);
+						if (!separateDistanceDownIter1.getFlag().equals("R")) {
+							separateDistanceDownIter(document, font1, i, separateDistanceDownIter1);
+						}
 					}
 				}
 				List<EarthStudReport> earthStudReport1 = earthStudRepository.findByUserNameAndBasicLpsId(userName,

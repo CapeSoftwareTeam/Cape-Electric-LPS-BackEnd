@@ -1411,7 +1411,9 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 
 		// EarthingDescriptionList iteration
 		for (EarthingDescriptionList earthDesTypeAiter : earthDesTypeAiter1) {
-			earthDescListIter(document, font, pointColumnWidths1, earthDesTypeAiter);
+			if (!earthDesTypeAiter.getFlag().equals("R")) {
+				earthDescListIter(document, font, pointColumnWidths1, earthDesTypeAiter);
+			}
 		}
 
 		PdfPTable table206 = new PdfPTable(pointColumnWidths1);

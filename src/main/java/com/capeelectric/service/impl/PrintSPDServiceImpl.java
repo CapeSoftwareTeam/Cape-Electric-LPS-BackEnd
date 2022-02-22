@@ -255,7 +255,9 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 			document.add(sPDTable);
 
 			for (SpdDescription spdDesc : spdDesc1) {
-				spdDescIter(document, font11, font1, table2, spdDesc);
+				if (!spdDesc.getFlag().equals("R")) {
+					spdDescIter(document, font11, font1, table2, spdDesc);
+				}
 			}
 			document.close();
 			writer.close();
