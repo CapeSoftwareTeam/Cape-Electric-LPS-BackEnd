@@ -28,12 +28,6 @@ public class TestingJoint implements Serializable {
 	@Column(name = "FLAG")
 	private String flag;
 
-	@Column(name = "TESTJOINT_TYPE_OB")
-	private String testJointTypeOb;
-
-	@Column(name = "TESTJOINT_TYPE_REM")
-	private String testJointTypeRem;
-
 	@Column(name = "MATERIAL_TESTJOINT_OB")
 	private String materialTestJointOb;
 
@@ -105,22 +99,6 @@ public class TestingJoint implements Serializable {
 
 	public void setTestJointId(Integer testJointId) {
 		this.testJointId = testJointId;
-	}
-
-	public String getTestJointTypeOb() {
-		return testJointTypeOb;
-	}
-
-	public void setTestJointTypeOb(String testJointTypeOb) {
-		this.testJointTypeOb = testJointTypeOb;
-	}
-
-	public String getTestJointTypeRem() {
-		return testJointTypeRem;
-	}
-
-	public void setTestJointTypeRem(String testJointTypeRem) {
-		this.testJointTypeRem = testJointTypeRem;
 	}
 
 	public String getMaterialTestJointOb() {
