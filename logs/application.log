@@ -1,0 +1,64 @@
+2022-02-23T17:31:39.164+0530 INFO Starting LpsInspectionApplication using Java 1.8.0_271 on DESKTOP-PUJTA74 with PID 13136 (C:\Users\gopa0\sathish\backend\Cape-Electric-LPS-BackEnd\target\classes started by capeelectricsoftware in C:\Users\gopa0\sathish\backend\Cape-Electric-LPS-BackEnd)
+2022-02-23T17:31:39.168+0530 DEBUG Running with Spring Boot v2.5.5, Spring v5.3.10
+2022-02-23T17:31:39.168+0530 INFO No active profile set, falling back to default profiles: default
+2022-02-23T17:31:44.656+0530 DEBUG Filter 'jwtRequestFilter' configured for use
+2022-02-23T17:31:46.419+0530 INFO Started LpsInspectionApplication in 7.652 seconds (JVM running for 8.195)
+2022-02-23T17:34:04.646+0530 INFO Starting LpsInspectionApplication using Java 1.8.0_271 on DESKTOP-PUJTA74 with PID 14868 (C:\Users\gopa0\sathish\backend\Cape-Electric-LPS-BackEnd\target\classes started by capeelectricsoftware in C:\Users\gopa0\sathish\backend\Cape-Electric-LPS-BackEnd)
+2022-02-23T17:34:04.648+0530 DEBUG Running with Spring Boot v2.5.5, Spring v5.3.10
+2022-02-23T17:34:04.649+0530 INFO No active profile set, falling back to default profiles: default
+2022-02-23T17:34:10.700+0530 DEBUG Filter 'jwtRequestFilter' configured for use
+2022-02-23T17:34:13.482+0530 INFO Started LpsInspectionApplication in 9.202 seconds (JVM running for 9.755)
+2022-02-23T17:36:27.527+0530 INFO Starting LpsInspectionApplication using Java 1.8.0_271 on DESKTOP-PUJTA74 with PID 11424 (C:\Users\gopa0\sathish\backend\Cape-Electric-LPS-BackEnd\target\classes started by capeelectricsoftware in C:\Users\gopa0\sathish\backend\Cape-Electric-LPS-BackEnd)
+2022-02-23T17:36:27.531+0530 DEBUG Running with Spring Boot v2.5.5, Spring v5.3.10
+2022-02-23T17:36:27.531+0530 INFO No active profile set, falling back to default profiles: default
+2022-02-23T17:36:40.607+0530 DEBUG Filter 'jwtRequestFilter' configured for use
+2022-02-23T17:36:42.305+0530 INFO Started LpsInspectionApplication in 15.43 seconds (JVM running for 16.62)
+2022-02-23T17:38:31.708+0530 INFO Starting LpsInspectionApplication using Java 1.8.0_271 on DESKTOP-PUJTA74 with PID 19968 (C:\Users\gopa0\sathish\backend\Cape-Electric-LPS-BackEnd\target\classes started by capeelectricsoftware in C:\Users\gopa0\sathish\backend\Cape-Electric-LPS-BackEnd)
+2022-02-23T17:38:31.710+0530 DEBUG Running with Spring Boot v2.5.5, Spring v5.3.10
+2022-02-23T17:38:31.710+0530 INFO No active profile set, falling back to default profiles: default
+2022-02-23T17:38:38.393+0530 DEBUG Filter 'jwtRequestFilter' configured for use
+2022-02-23T17:38:40.214+0530 INFO Started LpsInspectionApplication in 9.008 seconds (JVM running for 9.532)
+2022-02-23T17:39:57.202+0530 INFO FinalReportAPI_started retrieveListOfBasicLps function UserName: sd@capeindia.net
+2022-02-23T17:39:57.207+0530 INFO Basic fetching process started
+2022-02-23T17:39:57.446+0530 INFO FinalReportAPI_started retrieveListOfBasicLps function UserName: sd@capeindia.net
+2022-02-23T17:39:57.446+0530 INFO Basic fetching process started
+2022-02-23T17:40:14.701+0530 INFO FinalReportAPI_started retrieveListOfBasicLps function UserName: sd@capeindia.net
+2022-02-23T17:40:14.701+0530 INFO Basic fetching process started
+2022-02-23T17:40:17.215+0530 INFO FinalReportAPI_started retrieveListOfBasicLps function UserName: sd@capeindia.net
+2022-02-23T17:40:17.215+0530 INFO Basic fetching process started
+2022-02-23T17:40:17.722+0530 INFO FinalReportAPI_started retrieveFinalLpsReport function userName: sd@capeindia.net,basicLpsId : 2
+2022-02-23T17:40:17.722+0530 DEBUG fetching process started for BasicLpsDetails_Information
+2022-02-23T17:40:17.727+0530 DEBUG BasicLpsDetails_Information fetching ended
+2022-02-23T17:40:17.727+0530 DEBUG fetching process started for LpsAirDiscription
+2022-02-23T17:40:17.739+0530 DEBUG LpsAirDiscription_fetching ended
+2022-02-23T17:40:17.739+0530 DEBUG fetching process started for DownConductorDescription
+2022-02-23T17:40:17.748+0530 DEBUG DownConductorDescription_fetching ended
+2022-02-23T17:40:17.749+0530 DEBUG fetching process started for EarthingLpsDescription
+2022-02-23T17:40:17.759+0530 DEBUG EarthingLpsDescription_fetching ended
+2022-02-23T17:40:17.759+0530 DEBUG fetching process started for SPD
+2022-02-23T17:40:17.770+0530 DEBUG SPD_fetching ended
+2022-02-23T17:40:17.770+0530 DEBUG fetching process started for SeperationDistanceDescription
+2022-02-23T17:40:17.780+0530 DEBUG SeperationDistanceDescription_fetching ended
+2022-02-23T17:40:17.780+0530 DEBUG fetching process started for EarthStud
+2022-02-23T17:40:17.790+0530 DEBUG  EarthStud_fetching ended
+2022-02-23T17:40:17.790+0530 DEBUG Successfully Seven_Steps fetching Operation done
+2022-02-23T17:40:17.916+0530 INFO FinalReportAPI_started retrieveListOfBasicLps function UserName: sd@capeindia.net
+2022-02-23T17:40:17.916+0530 INFO Basic fetching process started
+2022-02-23T17:40:20.216+0530 INFO FinalReportAPI_started retrieveFinalLpsReport function userName: sd@capeindia.net,basicLpsId : 2
+2022-02-23T17:40:20.216+0530 DEBUG fetching process started for BasicLpsDetails_Information
+2022-02-23T17:40:20.219+0530 DEBUG BasicLpsDetails_Information fetching ended
+2022-02-23T17:40:20.219+0530 DEBUG fetching process started for LpsAirDiscription
+2022-02-23T17:40:20.221+0530 DEBUG LpsAirDiscription_fetching ended
+2022-02-23T17:40:20.221+0530 DEBUG fetching process started for DownConductorDescription
+2022-02-23T17:40:20.223+0530 DEBUG DownConductorDescription_fetching ended
+2022-02-23T17:40:20.223+0530 DEBUG fetching process started for EarthingLpsDescription
+2022-02-23T17:40:20.225+0530 DEBUG EarthingLpsDescription_fetching ended
+2022-02-23T17:40:20.226+0530 DEBUG fetching process started for SPD
+2022-02-23T17:40:20.228+0530 DEBUG SPD_fetching ended
+2022-02-23T17:40:20.228+0530 DEBUG fetching process started for SeperationDistanceDescription
+2022-02-23T17:40:20.230+0530 DEBUG SeperationDistanceDescription_fetching ended
+2022-02-23T17:40:20.230+0530 DEBUG fetching process started for EarthStud
+2022-02-23T17:40:20.232+0530 DEBUG  EarthStud_fetching ended
+2022-02-23T17:40:20.233+0530 DEBUG Successfully Seven_Steps fetching Operation done
+2022-02-23T17:40:20.286+0530 INFO FinalReportAPI_started retrieveListOfBasicLps function UserName: sd@capeindia.net
+2022-02-23T17:40:20.286+0530 INFO Basic fetching process started
