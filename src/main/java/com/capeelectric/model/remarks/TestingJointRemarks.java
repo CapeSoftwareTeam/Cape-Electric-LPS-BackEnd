@@ -34,8 +34,6 @@ public class TestingJointRemarks implements Serializable {
 	@Column(name = "FLAG")
 	private String flag;
 
-	@Column(name = "TESTJOINT_TYPE_REM")
-	private String testJointTypeRem;
 
 	@Column(name = "MATERIAL_TESTJOINT_REM")
 	private String materialTestJointRem;
@@ -86,14 +84,6 @@ public class TestingJointRemarks implements Serializable {
 
 	public void setFlag(String flag) {
 		this.flag = flag;
-	}
-
-	public String getTestJointTypeRem() {
-		return testJointTypeRem;
-	}
-
-	public void setTestJointTypeRem(String testJointTypeRem) {
-		this.testJointTypeRem = testJointTypeRem;
 	}
 
 	public String getMaterialTestJointRem() {

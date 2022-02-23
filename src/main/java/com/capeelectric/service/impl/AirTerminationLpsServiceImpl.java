@@ -85,7 +85,7 @@ public class AirTerminationLpsServiceImpl implements AirTerminationLpsService {
 	public void addAirTerminationLpsDetails(AirTermination airTermination ) throws AirTerminationException {
 		logger.info("Called addAirTerminationLpsDetails function");
 
-		if (airTermination != null && airTermination.getUserName() != null && airTermination.getUserName() != "") {
+		if (airTermination != null && airTermination.getBasicLpsId() != null && airTermination.getUserName() != null && airTermination.getUserName() != "") {
 			Optional<BasicLps> basicLpsRepo = basicLpsRepository.findByBasicLpsId(airTermination.getBasicLpsId());
 			if(basicLpsRepo.isPresent()
 					&& basicLpsRepo.get().getBasicLpsId().equals(airTermination.getBasicLpsId())) {
