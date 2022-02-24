@@ -139,8 +139,8 @@ public class ObservationServiceImpl implements ObservationService {
 		}
 
 		if (!earthStudRemarksReport.isEmpty() && earthStudRemarksReport != null) {
-			if (earthStudRemarksReport.get(0).getEarthStudDescriptionRemarks().size() > 0) {
-				earthStudRemarksReport.get(0).setEarthStudDescriptionRemarks(findNonRemovedRemarksObjects
+			if (earthStudRemarksReport.get(0).getEarthStudDescription().size() > 0) {
+				earthStudRemarksReport.get(0).setEarthStudDescription(findNonRemovedRemarksObjects
 						.findNonRemovedEarthStudRemarksBuildings(earthStudRemarksReport.get(0)));
 			}
 			logger.debug("Earth Stud Remarks fetched");

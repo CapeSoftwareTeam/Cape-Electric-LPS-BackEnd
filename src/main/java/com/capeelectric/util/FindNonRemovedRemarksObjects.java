@@ -518,7 +518,7 @@ public class FindNonRemovedRemarksObjects {
 		public List<EarthStudDescriptionRemarks> findNonRemovedEarthStudRemarksBuildings(EarthStudRemarksReport earthStudReport) {
 
 			ArrayList<EarthStudDescriptionRemarks> earthStudDescription = new ArrayList<EarthStudDescriptionRemarks>();
-			List<EarthStudDescriptionRemarks> findNonRemoveBuildings = earthStudReport.getEarthStudDescriptionRemarks();
+			List<EarthStudDescriptionRemarks> findNonRemoveBuildings = earthStudReport.getEarthStudDescription();
 			for (EarthStudDescriptionRemarks  earthStudDescriptionItr: findNonRemoveBuildings) {
 				if (earthStudDescriptionItr.getFlag()==null || !earthStudDescriptionItr.getFlag().equalsIgnoreCase("R")) {
 					if(earthStudDescriptionItr.getFlag()==null) {

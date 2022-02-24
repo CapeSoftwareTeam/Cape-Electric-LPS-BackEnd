@@ -58,7 +58,7 @@ public class EarthStudRemarksReport {
 	
 	@JsonManagedReference
 	@OneToMany(mappedBy = "earthStudRemarksReport", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<EarthStudDescriptionRemarks> earthStudDescriptionRemarks;
+	private List<EarthStudDescriptionRemarks> earthStudDescription;
 
 	
 
@@ -118,14 +118,15 @@ public class EarthStudRemarksReport {
 		this.updatedDate = updatedDate;
 	}
 
-	public List<EarthStudDescriptionRemarks> getEarthStudDescriptionRemarks() {
-		return earthStudDescriptionRemarks;
+	public List<EarthStudDescriptionRemarks> getEarthStudDescription() {
+		return earthStudDescription;
 	}
 
-	public void setEarthStudDescriptionRemarks(List<EarthStudDescriptionRemarks> earthStudDescriptionRemarks) {
-		this.earthStudDescriptionRemarks = earthStudDescriptionRemarks;
+	public void setEarthStudDescription(List<EarthStudDescriptionRemarks> earthStudDescription) {
+		this.earthStudDescription = earthStudDescription;
 	}
 
+	
 	
 
 }
