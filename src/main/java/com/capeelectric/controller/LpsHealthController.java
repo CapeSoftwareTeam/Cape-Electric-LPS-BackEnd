@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/lps/v1")
-public class LpsBasicController {
+public class LpsHealthController {
 
 	@GetMapping(value = "/health")
 	public ResponseEntity<?> health() throws Exception {
