@@ -36,6 +36,9 @@ public class SummaryLpsObservation implements Serializable  {
 	@Column(name = "SUMMARY_LPS_OBSERVATION_ID")
 	private Integer summaryLpsObservationId;
 	
+	@Column(name = "HEADING")
+	private String heading;
+	
 	@Column(name = "SERIAL_NO")
 	private Integer serialNo;
 	
@@ -64,7 +67,15 @@ public class SummaryLpsObservation implements Serializable  {
 	public void setSummaryLpsObservationId(Integer summaryLpsObservationId) {
 		this.summaryLpsObservationId = summaryLpsObservationId;
 	}
+    
+	public String getHeading() {
+		return heading;
+	}
 
+	public void setHeading(String heading) {
+		this.heading = heading;
+	}
+	
 	public Integer getSerialNo() {
 		return serialNo;
 	}

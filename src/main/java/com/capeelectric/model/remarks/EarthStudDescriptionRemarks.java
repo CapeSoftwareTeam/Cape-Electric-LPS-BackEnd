@@ -71,6 +71,8 @@ public class EarthStudDescriptionRemarks implements Serializable{
 	@Column(name = "SUPPLIMENTARY_MAINPROTECTIVE_REM")
 	private String supplimentaryMainProtectiveRem;
 
+	@Column(name = "SIZE_OF_SUPPLIMENTARY_PROTECTIVE_REM")
+	private String sizeOfSupplimentaryProtectiveRem;
 	
 	@Column(name = "EARTH_STUDVISIBILITYREM")
 	private String earthStudVisibilityRem;
@@ -270,6 +272,23 @@ public class EarthStudDescriptionRemarks implements Serializable{
 		return serialVersionUID;
 	}
 
-	
+	public EarthStudRemarksReport getEarthStudRemarksReport() {
+		return earthStudRemarksReport;
+	}
+
+
+	public void setEarthStudRemarksReport(EarthStudRemarksReport earthStudRemarksReport) {
+		this.earthStudRemarksReport = earthStudRemarksReport;
+	}
+
+
+	public String getSizeOfSupplimentaryProtectiveRem() {
+		return sizeOfSupplimentaryProtectiveRem;
+	}
+
+
+	public void setSizeOfSupplimentaryProtectiveRem(String sizeOfSupplimentaryProtectiveRem) {
+		this.sizeOfSupplimentaryProtectiveRem = sizeOfSupplimentaryProtectiveRem;
+	}
 	
 }
