@@ -115,7 +115,7 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 			PdfPTable table100 = new PdfPTable(pointColumnWidths);
 
 			table100.setWidthPercentage(100); // Width 100%
-			table100.setSpacingBefore(10f); // Space before table
+			table100.setSpacingBefore(5f); // Space before table
 			table100.setSpacingAfter(5f); // Space after table
 			table100.setWidthPercentage(100);
 			table100.getDefaultCell().setBorder(0);
@@ -243,7 +243,7 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 
 			sPDTable.setWidthPercentage(100); // Width 100%
 			sPDTable.setSpacingBefore(10f); // Space before table
-			sPDTable.setSpacingAfter(5f); // Space after table
+//			sPDTable.setSpacingAfter(5f); // Space after table
 			sPDTable.getDefaultCell().setBorder(0);
 
 			PdfPCell arrangements1 = new PdfPCell(
@@ -286,7 +286,6 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 		table10.setWidthPercentage(100); // Width 100%
 		// table10.setSpacingBefore(10f); // Space before table
 		// table10.setSpacingAfter(5f); // Space after table
-		table10.setWidthPercentage(100);
 		table10.getDefaultCell().setBorder(0);
 
 		PdfPCell cell225 = new PdfPCell(new Paragraph("5", font1));
@@ -360,7 +359,7 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 		PdfPCell cell330 = new PdfPCell(new Paragraph(spdDesc.getSpdModelOb(), font1));
 		table11.addCell(cell330);
 
-		PdfPCell cell331 = new PdfPCell(new Paragraph(spdDesc.getSpdMakeRem(), font1));
+		PdfPCell cell331 = new PdfPCell(new Paragraph(spdDesc.getSpdModelRem(), font1));
 		table11.addCell(cell331);
 
 		PdfPCell cell332 = new PdfPCell(new Paragraph("Class Type", font1));

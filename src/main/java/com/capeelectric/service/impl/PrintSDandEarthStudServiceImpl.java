@@ -330,7 +330,7 @@ public class PrintSDandEarthStudServiceImpl implements PrintSDandEarthStudServic
 
 		PdfPCell cell206 = new PdfPCell(
 				new Paragraph("Whether equipotential bonding between LPS and MET is available", font1));
-		cell206.setFixedHeight(40f);
+//		cell206.setFixedHeight(40f);
 		cell206.setGrayFill(0.92f);
 		table205.addCell(cell206);
 
@@ -366,7 +366,7 @@ public class PrintSDandEarthStudServiceImpl implements PrintSDandEarthStudServic
 		table205.addCell(cell24);
 
 		PdfPCell cell23 = new PdfPCell(new Paragraph("Size of earthing conductor interconnecting LPS and MET", font1));
-		cell23.setFixedHeight(20f);
+//		cell23.setFixedHeight(20f);
 		cell23.setGrayFill(0.92f);
 		table205.addCell(cell23);
 
@@ -383,16 +383,16 @@ public class PrintSDandEarthStudServiceImpl implements PrintSDandEarthStudServic
 		cell37.setGrayFill(0.92f);
 		table205.addCell(cell37);
 
-		PdfPCell cell40 = new PdfPCell(new Paragraph("Size of earthing conductor interconnecting LPS and MET", font1));
-		cell40.setFixedHeight(20f);
+		PdfPCell cell40 = new PdfPCell(new Paragraph("Concept of protevtive equipotential bonding (for fault protection) carried out in the building", font1));
+//		cell40.setFixedHeight(20f);
 		cell40.setGrayFill(0.92f);
 		table205.addCell(cell40);
 
-		PdfPCell cell44 = new PdfPCell(new Paragraph(earthStudDesc.getSizeOfEarthingConductorOb(), font3));
+		PdfPCell cell44 = new PdfPCell(new Paragraph(earthStudDesc.getConceptOfEquipotentialBondingOb(), font3));
 		cell44.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table205.addCell(cell44);
 
-		PdfPCell cell47 = new PdfPCell(new Paragraph(earthStudDesc.getSizeOfEarthingConductorRem(), font3));
+		PdfPCell cell47 = new PdfPCell(new Paragraph(earthStudDesc.getConceptOfEquipotentialBondingRem(), font3));
 		cell47.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table205.addCell(cell47);
 
