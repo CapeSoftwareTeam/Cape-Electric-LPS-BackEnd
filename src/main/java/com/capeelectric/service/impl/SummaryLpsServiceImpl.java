@@ -148,12 +148,10 @@ public class SummaryLpsServiceImpl implements SummaryLpsService {
 				throw new SummaryLpsException("Please enter Equipotential Distance step to proceed further");
 			}
 			
-			if (basicLpsDetails.isPresent()
-					&& basicLpsDetails.get().getBasicLpsId().equals(summaryLps.getBasicLpsId())) {
+			if (basicLpsDetails.isPresent() && basicLpsDetails.get().getBasicLpsId().equals(summaryLps.getBasicLpsId())) {
 				Optional<SummaryLps> summaryLpsRepo = summaryLpsRepository
 						.findByBasicLpsId(summaryLps.getBasicLpsId());
-				if (!summaryLpsRepo.isPresent()
-						|| !summaryLpsRepo.get().getBasicLpsId().equals(summaryLps.getBasicLpsId())) {
+				if (!summaryLpsRepo.isPresent() || !summaryLpsRepo.get().getBasicLpsId().equals(summaryLps.getBasicLpsId())) {
 					
 					List<SummaryLpsBuildings> summaryLpsBuildings = summaryLps.getSummaryLpsBuildings();
 					if(summaryLpsBuildings != null && summaryLpsBuildings.size() > 0) {
@@ -181,14 +179,14 @@ public class SummaryLpsServiceImpl implements SummaryLpsService {
 						throw new SummaryLpsException("Please fill all the fields before clicking next button");
 					}
 				} else {
-					logger.error("Given Basic LPS Id is Not Registered in Basic LPS");
-					throw new SummaryLpsException("Given Basic LPS Id is Not Registered in Basic LPS");
+					logger.error("Basic LPS Id Already Available.Create New Basic Id");
+					throw new SummaryLpsException("Basic LPS Id Already Available.Create New Basic Id");
 				}
 
 			} else {
-				logger.error("Basic LPS Id Already Available.Create New Basic Id");
-				throw new SummaryLpsException("Basic LPS Id Already Available.Create New Basic Id");
-			}			
+				logger.error("Given Basic LPS Id is Not Registered in Basic LPS");
+				throw new SummaryLpsException("Given Basic LPS Id is Not Registered in Basic LPS");
+		      }			
 		} else {
 			logger.error("Invalid Inputs");
 			throw new SummaryLpsException("Invalid Inputs");
