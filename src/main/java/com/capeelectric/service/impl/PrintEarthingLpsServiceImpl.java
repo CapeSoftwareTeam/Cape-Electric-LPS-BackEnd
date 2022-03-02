@@ -1,4 +1,4 @@
-
+	
 package com.capeelectric.service.impl;
 
 import java.io.FileOutputStream;
@@ -80,14 +80,28 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 			document.open();
 
 			Font font11 = new Font(BaseFont.createFont(), 10, Font.NORMAL | Font.BOLD, BaseColor.BLACK);
+			
+			Font font12B = new Font(BaseFont.createFont(), 12, Font.NORMAL | Font.BOLD, BaseColor.BLACK);
 
 			Font font = new Font(BaseFont.createFont(), 10, Font.NORMAL, BaseColor.BLACK);
 
 			Font font2 = new Font(BaseFont.createFont(), 10, Font.NORMAL | Font.BOLD);
 			Font font3 = new Font(BaseFont.createFont(), 10, Font.NORMAL, BaseColor.BLACK);
 
+			
 			float[] pointColumnWidths5 = { 100F };
 
+			PdfPTable headertable = new PdfPTable(pointColumnWidths5);
+			headertable.setWidthPercentage(100); // Width 100%
+			headertable.setSpacingBefore(10f); // Space before table
+
+			PdfPCell label = new PdfPCell(
+					new Paragraph("Check list for Earthing of LPS \r\n" + "as per IS/IEC 62305", font12B));
+			label.setHorizontalAlignment(Element.ALIGN_CENTER);
+			label.setGrayFill(0.92f);
+//			label.setFixedHeight(20f);
+			headertable.addCell(label);
+			document.add(headertable);
 			PdfPTable BasicDetailsTable = new PdfPTable(pointColumnWidths5);
 
 			BasicDetailsTable.setWidthPercentage(100); // Width 100%
@@ -139,9 +153,8 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 			PdfPTable table100 = new PdfPTable(pointColumnWidths);
 
 			table100.setWidthPercentage(100); // Width 100%
-			table100.setSpacingBefore(10f); // Space before table
+			table100.setSpacingBefore(5f); // Space before table
 			table100.setSpacingAfter(5f); // Space after table
-			table100.setWidthPercentage(100);
 			table100.getDefaultCell().setBorder(0);
 
 			PdfPCell cell1 = new PdfPCell(

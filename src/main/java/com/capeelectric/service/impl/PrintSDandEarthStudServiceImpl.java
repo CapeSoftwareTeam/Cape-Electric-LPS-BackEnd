@@ -64,10 +64,23 @@ public class PrintSDandEarthStudServiceImpl implements PrintSDandEarthStudServic
 				List<SeperationDistanceDescription> separateDistanceDesc = separateDistance
 						.getSeperationDistanceDescription();
 
+				Font font12B = new Font(BaseFont.createFont(), 12, Font.NORMAL | Font.BOLD);
 				Font font2 = new Font(BaseFont.createFont(), 10, Font.NORMAL | Font.BOLD);
 				Font font3 = new Font(BaseFont.createFont(), 10, Font.NORMAL, BaseColor.BLACK);
 
 				float[] pointColumnWidths5 = { 100F };
+				
+				PdfPTable headertable = new PdfPTable(pointColumnWidths5);
+				headertable.setWidthPercentage(100); // Width 100%
+				headertable.setSpacingBefore(10f); // Space before table
+
+				PdfPCell label = new PdfPCell(new Paragraph(
+						"Check list for Seperation Distance System of LPS\r\n" + "as per IS/IEC 62305", font12B));
+				label.setHorizontalAlignment(Element.ALIGN_CENTER);
+				label.setGrayFill(0.92f);
+//				label.setFixedHeight(20f);
+				headertable.addCell(label);
+				document.add(headertable);
 
 				PdfPTable BasicDetailsTable = new PdfPTable(pointColumnWidths5);
 
@@ -122,7 +135,7 @@ public class PrintSDandEarthStudServiceImpl implements PrintSDandEarthStudServic
 					PdfPTable table100 = new PdfPTable(pointColumnWidths);
 
 					table100.setWidthPercentage(100); // Width 100%
-					table100.setSpacingBefore(10f); // Space before table
+					table100.setSpacingBefore(5f); // Space before table
 					table100.setSpacingAfter(5f); // Space after table
 					table100.setWidthPercentage(100);
 					table100.getDefaultCell().setBorder(0);
@@ -245,6 +258,21 @@ public class PrintSDandEarthStudServiceImpl implements PrintSDandEarthStudServic
 				List<EarthStudReport> earthStudReport1 = earthStudRepository.findByUserNameAndBasicLpsId(userName,
 						lpsId);
 				EarthStudReport earthStudReport = earthStudReport1.get(0);
+				
+				document.newPage();
+				
+				PdfPTable headerlabel1 = new PdfPTable(pointColumnWidths5);
+				headerlabel1.setWidthPercentage(100); // Width 100%
+				headerlabel1.setSpacingBefore(10f); // Space before table
+
+				PdfPCell headlabel = new PdfPCell(new Paragraph(
+						"Check list for Equipotential Bonding System of LPS\r\n" + "as per IS/IEC 62305", font12B));
+				headlabel.setHorizontalAlignment(Element.ALIGN_CENTER);
+				headlabel.setGrayFill(0.92f);
+//				headlabel.setFixedHeight(20f);
+				headerlabel1.addCell(headlabel);
+				document.add(headerlabel1);
+				
 
 				List<EarthStudDescription> earthStudDescription = earthStudReport.getEarthStudDescription();
 				for (EarthStudDescription earthStudDesc : earthStudDescription) {
@@ -273,7 +301,7 @@ public class PrintSDandEarthStudServiceImpl implements PrintSDandEarthStudServic
 	private PdfPTable earthStudIter(Document document, Font font3, Font font1, float[] pointColumnWidths30,
 			PdfPTable table2, EarthStudDescription earthStudDesc) throws DocumentException, IOException {
 
-		document.newPage();
+		
 		float[] pointColumnWidths = { 120F, 80F };
 		PdfPTable table100 = new PdfPTable(pointColumnWidths);
 

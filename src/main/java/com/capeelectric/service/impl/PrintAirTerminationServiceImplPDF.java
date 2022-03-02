@@ -377,12 +377,12 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 				PdfPCell cell24 = new PdfPCell(new Paragraph("SL.NO", font11));
 				cell24.setHorizontalAlignment(Element.ALIGN_CENTER);
 				cell24.setGrayFill(0.92f);
+				table3.addCell(cell24);
 
 				PdfPCell cell25 = new PdfPCell(new Paragraph("Description", font11));
 				cell25.setHorizontalAlignment(Element.ALIGN_CENTER);
 				cell25.setFixedHeight(20f);
 				cell25.setGrayFill(0.92f);
-				table3.addCell(cell24);
 				table3.addCell(cell25);
 
 				PdfPCell cell26 = new PdfPCell(new Paragraph("Observation", font11));

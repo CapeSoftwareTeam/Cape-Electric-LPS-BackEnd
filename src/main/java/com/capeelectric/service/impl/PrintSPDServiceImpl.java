@@ -59,10 +59,23 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 
 			document.open();
 
+			Font font12B = new Font(BaseFont.createFont(), 12, Font.NORMAL | Font.BOLD);
 			Font font2 = new Font(BaseFont.createFont(), 10, Font.NORMAL | Font.BOLD);
 			Font font3 = new Font(BaseFont.createFont(), 10, Font.NORMAL, BaseColor.BLACK);
 
 			float[] pointColumnWidths5 = { 100F };
+			
+			PdfPTable headertable = new PdfPTable(pointColumnWidths5);
+			headertable.setWidthPercentage(100); // Width 100%
+			headertable.setSpacingBefore(10f); // Space before table
+
+			PdfPCell label = new PdfPCell(new Paragraph(
+					"Check list for SPD System of LPS\r\n" + "as per IS/IEC 62305", font12B));
+			label.setHorizontalAlignment(Element.ALIGN_CENTER);
+			label.setGrayFill(0.92f);
+//			label.setFixedHeight(20f);
+			headertable.addCell(label);
+			document.add(headertable);
 
 			PdfPTable BasicDetailsTable = new PdfPTable(pointColumnWidths5);
 
