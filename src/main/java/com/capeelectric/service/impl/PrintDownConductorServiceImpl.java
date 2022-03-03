@@ -133,6 +133,8 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 
 // Down Conductor accordian Method 
 
+				document.newPage();
+				
 				float[] pointColumnWidths4 = { 25F, 150F, 55F, 50F };
 
 				PdfPTable downConductorHead = new PdfPTable(pointColumnWidths4);
@@ -271,6 +273,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 			
 
 // Bridging Accordian  Method		
+				document.newPage();
 
 				PdfPTable BridgingHead = new PdfPTable(pointColumnWidths4);
 				BridgingHead.setWidthPercentage(100); // Width 100%
@@ -337,7 +340,9 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 					}
 				}
 
-// Holders Accordian  Method		
+// Holders Accordian  Method
+				
+				document.newPage();
 
 				PdfPTable HoldersHead = new PdfPTable(pointColumnWidths4);
 				HoldersHead.setWidthPercentage(100); // Width 100%
@@ -406,6 +411,8 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 
 // Connectors Accordian  Method		
 
+				document.newPage();
+				
 				PdfPTable ConnectorsHead = new PdfPTable(pointColumnWidths4);
 				ConnectorsHead.setWidthPercentage(100); // Width 100%
 				ConnectorsHead.setSpacingBefore(5f); // Space before table
@@ -472,6 +479,8 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 				}
 
 // Lightning Counters Accordian  Method		
+				
+				document.newPage();
 
 				PdfPTable LightningCountersHead = new PdfPTable(pointColumnWidths4);
 				LightningCountersHead.setWidthPercentage(100); // Width 100%
@@ -539,6 +548,8 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 				}
 
 // Test Joints Accordian  Method		
+				
+				document.newPage();
 
 				PdfPTable TestJointsHead = new PdfPTable(pointColumnWidths4);
 				TestJointsHead.setWidthPercentage(100); // Width 100%
@@ -605,7 +616,9 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 					}
 				}
 
-// Testing of earth electrodes Accordian  Method		
+// Testing of earth electrodes Accordian  Method	
+				
+				document.newPage();
 
 				PdfPTable TestEarthElectrodeHead = new PdfPTable(pointColumnWidths4);
 				TestEarthElectrodeHead.setWidthPercentage(100); // Width 100%
