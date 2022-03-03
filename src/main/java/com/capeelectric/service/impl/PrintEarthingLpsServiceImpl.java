@@ -790,7 +790,7 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 		cell151.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table22.addCell(cell151);
 
-		PdfPCell cell152 = new PdfPCell(new Paragraph(earthClamps.getTotalNoClampsInRem().toString(), font));
+		PdfPCell cell152 = new PdfPCell(new Paragraph(earthClamps.getTotalNoClampsInRem(), font));
 		cell152.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table22.addCell(cell152);
 
@@ -808,7 +808,7 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 		cell155.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table22.addCell(cell155);
 
-		PdfPCell cell156 = new PdfPCell(new Paragraph(earthClamps.getInspectedClampsInRem().toString(), font));
+		PdfPCell cell156 = new PdfPCell(new Paragraph(earthClamps.getInspectedClampsInRem(), font));
 		cell156.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table22.addCell(cell156);
 
@@ -826,7 +826,7 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 		cell159.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table22.addCell(cell159);
 
-		PdfPCell cell160 = new PdfPCell(new Paragraph(earthClamps.getInspectionPassedInRem().toString(), font));
+		PdfPCell cell160 = new PdfPCell(new Paragraph(earthClamps.getInspectionPassedInRem(), font));
 		cell160.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table22.addCell(cell160);
 
@@ -844,7 +844,7 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 		cell163.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table22.addCell(cell163);
 
-		PdfPCell cell164 = new PdfPCell(new Paragraph(earthClamps.getInspectionFailedInRem().toString(), font));
+		PdfPCell cell164 = new PdfPCell(new Paragraph(earthClamps.getInspectionFailedInRem(), font));
 		cell164.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table22.addCell(cell164);
 
@@ -982,7 +982,7 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 		cell1911.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table202.addCell(cell1911);
 
-		PdfPCell cell192 = new PdfPCell(new Paragraph(earthElectrodeChamber.getTotalChamberNoRem().toString(), font));
+		PdfPCell cell192 = new PdfPCell(new Paragraph(earthElectrodeChamber.getTotalChamberNoRem(), font));
 		cell192.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table202.addCell(cell192);
 
