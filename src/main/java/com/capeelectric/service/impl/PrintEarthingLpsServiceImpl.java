@@ -481,7 +481,7 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 			cell3131.setHorizontalAlignment(Element.ALIGN_CENTER);
 			table7.addCell(cell3131);
 
-			// select Type A
+// select Type A
 			if (earthingLpsRepo.getEarthingTypeInOb().equals("Type A")) {
 
 				// eartingDescTypeA Iteration
@@ -528,7 +528,7 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 				}
 			}
 
-			// select Type-B (ring)
+// select Type-B (ring)
 			if (earthingLpsRepo.getEarthingTypeInOb().equals("Type-B (ring)")) {
 				// earthingSystemType-B Iteration
 				document.newPage();
@@ -548,7 +548,7 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 				}
 			}
 
-			// select Type A & Type B combined
+// select Type A & Type B combined
 			if (earthingLpsRepo.getEarthingTypeInOb().equals("Type A & Type B combined")) {
 				// eartingDescTypeA Iteration
 				document.add(BasicDetailsTable6);
@@ -603,7 +603,7 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 				}
 			}
 
-			// select Foundation
+// select Foundation
 			if (earthingLpsRepo.getEarthingTypeInOb().equals("Foundation")) {
 				// earthElectrodeTesting Iteration
 				document.add(header);

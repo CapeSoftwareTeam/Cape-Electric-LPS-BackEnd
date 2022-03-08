@@ -69,7 +69,7 @@ public class PrintSDandEarthStudServiceImpl implements PrintSDandEarthStudServic
 				Font font3 = new Font(BaseFont.createFont(), 10, Font.NORMAL, BaseColor.BLACK);
 
 				float[] pointColumnWidths5 = { 100F };
-				
+
 				PdfPTable headertable = new PdfPTable(pointColumnWidths5);
 				headertable.setWidthPercentage(100); // Width 100%
 				headertable.setSpacingBefore(10f); // Space before table
@@ -258,9 +258,9 @@ public class PrintSDandEarthStudServiceImpl implements PrintSDandEarthStudServic
 				List<EarthStudReport> earthStudReport1 = earthStudRepository.findByUserNameAndBasicLpsId(userName,
 						lpsId);
 				EarthStudReport earthStudReport = earthStudReport1.get(0);
-				
+
 				document.newPage();
-				
+
 				PdfPTable headerlabel1 = new PdfPTable(pointColumnWidths5);
 				headerlabel1.setWidthPercentage(100); // Width 100%
 				headerlabel1.setSpacingBefore(10f); // Space before table
@@ -272,7 +272,6 @@ public class PrintSDandEarthStudServiceImpl implements PrintSDandEarthStudServic
 //				headlabel.setFixedHeight(20f);
 				headerlabel1.addCell(headlabel);
 				document.add(headerlabel1);
-				
 
 				List<EarthStudDescription> earthStudDescription = earthStudReport.getEarthStudDescription();
 				for (EarthStudDescription earthStudDesc : earthStudDescription) {
@@ -301,7 +300,6 @@ public class PrintSDandEarthStudServiceImpl implements PrintSDandEarthStudServic
 	private PdfPTable earthStudIter(Document document, Font font3, Font font1, float[] pointColumnWidths30,
 			PdfPTable table2, EarthStudDescription earthStudDesc) throws DocumentException, IOException {
 
-		
 		float[] pointColumnWidths = { 120F, 80F };
 		PdfPTable table100 = new PdfPTable(pointColumnWidths);
 
@@ -370,113 +368,121 @@ public class PrintSDandEarthStudServiceImpl implements PrintSDandEarthStudServic
 		cell210.setHorizontalAlignment(Element.ALIGN_LEFT);
 		table205.addCell(cell210);
 
-		PdfPCell cell20 = new PdfPCell(new Paragraph("2", font1));
-		cell20.setHorizontalAlignment(Element.ALIGN_CENTER);
-		cell20.setGrayFill(0.92f);
-		table205.addCell(cell20);
+		if (earthStudDesc.getAvailableEquipotentialBondingOb().equalsIgnoreCase("Yes")) {
 
-		PdfPCell cell21 = new PdfPCell(new Paragraph("Number of Equipotential bondings", font1));
-		cell21.setFixedHeight(20f);
-		cell21.setGrayFill(0.92f);
-		table205.addCell(cell21);
+			PdfPCell cell20 = new PdfPCell(new Paragraph("2", font1));
+			cell20.setHorizontalAlignment(Element.ALIGN_CENTER);
+			cell20.setGrayFill(0.92f);
+			table205.addCell(cell20);
 
-		PdfPCell cell29 = new PdfPCell(new Paragraph(earthStudDesc.getNumberOfEquipotentialBondingOb(), font3));
-		cell29.setHorizontalAlignment(Element.ALIGN_LEFT);
-		table205.addCell(cell29);
+			PdfPCell cell21 = new PdfPCell(new Paragraph("Number of Equipotential bondings", font1));
+			cell21.setFixedHeight(20f);
+			cell21.setGrayFill(0.92f);
+			table205.addCell(cell21);
 
-		PdfPCell cell22 = new PdfPCell(new Paragraph(earthStudDesc.getNumberOfEquipotentialBondingRem(), font3));
-		cell22.setHorizontalAlignment(Element.ALIGN_LEFT);
-		table205.addCell(cell22);
+			PdfPCell cell29 = new PdfPCell(new Paragraph(earthStudDesc.getNumberOfEquipotentialBondingOb(), font3));
+			cell29.setHorizontalAlignment(Element.ALIGN_LEFT);
+			table205.addCell(cell29);
 
-		PdfPCell cell24 = new PdfPCell(new Paragraph("3", font1));
-		cell24.setHorizontalAlignment(Element.ALIGN_CENTER);
-		cell24.setGrayFill(0.92f);
-		table205.addCell(cell24);
+			PdfPCell cell22 = new PdfPCell(new Paragraph(earthStudDesc.getNumberOfEquipotentialBondingRem(), font3));
+			cell22.setHorizontalAlignment(Element.ALIGN_LEFT);
+			table205.addCell(cell22);
 
-		PdfPCell cell23 = new PdfPCell(new Paragraph("Size of earthing conductor interconnecting LPS and MET", font1));
+			PdfPCell cell24 = new PdfPCell(new Paragraph("3", font1));
+			cell24.setHorizontalAlignment(Element.ALIGN_CENTER);
+			cell24.setGrayFill(0.92f);
+			table205.addCell(cell24);
+
+			PdfPCell cell23 = new PdfPCell(
+					new Paragraph("Size of earthing conductor interconnecting LPS and MET", font1));
 //		cell23.setFixedHeight(20f);
-		cell23.setGrayFill(0.92f);
-		table205.addCell(cell23);
+			cell23.setGrayFill(0.92f);
+			table205.addCell(cell23);
 
-		PdfPCell cell35 = new PdfPCell(new Paragraph(earthStudDesc.getSizeOfEarthingConductorOb(), font3));
-		cell35.setHorizontalAlignment(Element.ALIGN_LEFT);
-		table205.addCell(cell35);
+			PdfPCell cell35 = new PdfPCell(new Paragraph(earthStudDesc.getSizeOfEarthingConductorOb(), font3));
+			cell35.setHorizontalAlignment(Element.ALIGN_LEFT);
+			table205.addCell(cell35);
 
-		PdfPCell cell36 = new PdfPCell(new Paragraph(earthStudDesc.getSizeOfEarthingConductorRem(), font3));
-		cell36.setHorizontalAlignment(Element.ALIGN_LEFT);
-		table205.addCell(cell36);
+			PdfPCell cell36 = new PdfPCell(new Paragraph(earthStudDesc.getSizeOfEarthingConductorRem(), font3));
+			cell36.setHorizontalAlignment(Element.ALIGN_LEFT);
+			table205.addCell(cell36);
 
-		PdfPCell cell37 = new PdfPCell(new Paragraph("4", font1));
-		cell37.setHorizontalAlignment(Element.ALIGN_CENTER);
-		cell37.setGrayFill(0.92f);
-		table205.addCell(cell37);
+			PdfPCell cell37 = new PdfPCell(new Paragraph("4", font1));
+			cell37.setHorizontalAlignment(Element.ALIGN_CENTER);
+			cell37.setGrayFill(0.92f);
+			table205.addCell(cell37);
 
-		PdfPCell cell40 = new PdfPCell(new Paragraph("Concept of protevtive equipotential bonding (for fault protection) carried out in the building", font1));
+			PdfPCell cell40 = new PdfPCell(new Paragraph(
+					"Concept of protevtive equipotential bonding (for fault protection) carried out in the building",
+					font1));
 //		cell40.setFixedHeight(20f);
-		cell40.setGrayFill(0.92f);
-		table205.addCell(cell40);
+			cell40.setGrayFill(0.92f);
+			table205.addCell(cell40);
 
-		PdfPCell cell44 = new PdfPCell(new Paragraph(earthStudDesc.getConceptOfEquipotentialBondingOb(), font3));
-		cell44.setHorizontalAlignment(Element.ALIGN_LEFT);
-		table205.addCell(cell44);
+			PdfPCell cell44 = new PdfPCell(new Paragraph(earthStudDesc.getConceptOfEquipotentialBondingOb(), font3));
+			cell44.setHorizontalAlignment(Element.ALIGN_LEFT);
+			table205.addCell(cell44);
 
-		PdfPCell cell47 = new PdfPCell(new Paragraph(earthStudDesc.getConceptOfEquipotentialBondingRem(), font3));
-		cell47.setHorizontalAlignment(Element.ALIGN_LEFT);
-		table205.addCell(cell47);
+			PdfPCell cell47 = new PdfPCell(new Paragraph(earthStudDesc.getConceptOfEquipotentialBondingRem(), font3));
+			cell47.setHorizontalAlignment(Element.ALIGN_LEFT);
+			table205.addCell(cell47);
 
-		PdfPCell cell43 = new PdfPCell(new Paragraph("5", font1));
-		cell43.setHorizontalAlignment(Element.ALIGN_CENTER);
-		cell43.setGrayFill(0.92f);
-		table205.addCell(cell43);
+			PdfPCell cell43 = new PdfPCell(new Paragraph("5", font1));
+			cell43.setHorizontalAlignment(Element.ALIGN_CENTER);
+			cell43.setGrayFill(0.92f);
+			table205.addCell(cell43);
 
-		PdfPCell cell50 = new PdfPCell(
-				new Paragraph("Main protective equipotential bonding at service entrance in numbers", font1));
-		cell50.setGrayFill(0.92f);
-		table205.addCell(cell50);
+			PdfPCell cell50 = new PdfPCell(
+					new Paragraph("Main protective equipotential bonding at service entrance in numbers", font1));
+			cell50.setGrayFill(0.92f);
+			table205.addCell(cell50);
 
-		PdfPCell cell51 = new PdfPCell(new Paragraph(earthStudDesc.getMainProtectiveEquipotentialBondingOb(), font3));
-		cell51.setHorizontalAlignment(Element.ALIGN_LEFT);
-		table205.addCell(cell51);
+			PdfPCell cell51 = new PdfPCell(
+					new Paragraph(earthStudDesc.getMainProtectiveEquipotentialBondingOb(), font3));
+			cell51.setHorizontalAlignment(Element.ALIGN_LEFT);
+			table205.addCell(cell51);
 
-		PdfPCell cell52 = new PdfPCell(new Paragraph(earthStudDesc.getMainProtectiveEquipotentialBondingRem(), font3));
-		cell52.setHorizontalAlignment(Element.ALIGN_LEFT);
-		table205.addCell(cell52);
+			PdfPCell cell52 = new PdfPCell(
+					new Paragraph(earthStudDesc.getMainProtectiveEquipotentialBondingRem(), font3));
+			cell52.setHorizontalAlignment(Element.ALIGN_LEFT);
+			table205.addCell(cell52);
 
-		PdfPCell cell54 = new PdfPCell(new Paragraph("6", font1));
-		cell54.setHorizontalAlignment(Element.ALIGN_CENTER);
-		cell54.setGrayFill(0.92f);
-		table205.addCell(cell54);
+			PdfPCell cell54 = new PdfPCell(new Paragraph("6", font1));
+			cell54.setHorizontalAlignment(Element.ALIGN_CENTER);
+			cell54.setGrayFill(0.92f);
+			table205.addCell(cell54);
 
-		PdfPCell cell55 = new PdfPCell(new Paragraph("Size of main protective equipotential bonding", font1));
-		cell55.setGrayFill(0.92f);
-		table205.addCell(cell55);
+			PdfPCell cell55 = new PdfPCell(new Paragraph("Size of main protective equipotential bonding", font1));
+			cell55.setGrayFill(0.92f);
+			table205.addCell(cell55);
 
-		PdfPCell cell56 = new PdfPCell(new Paragraph(earthStudDesc.getSizeOfMainProtectiveOb(), font3));
-		cell56.setHorizontalAlignment(Element.ALIGN_LEFT);
-		table205.addCell(cell56);
+			PdfPCell cell56 = new PdfPCell(new Paragraph(earthStudDesc.getSizeOfMainProtectiveOb(), font3));
+			cell56.setHorizontalAlignment(Element.ALIGN_LEFT);
+			table205.addCell(cell56);
 
-		PdfPCell cell57 = new PdfPCell(new Paragraph(earthStudDesc.getSizeOfMainProtectiveRem(), font3));
-		cell57.setHorizontalAlignment(Element.ALIGN_LEFT);
-		table205.addCell(cell57);
+			PdfPCell cell57 = new PdfPCell(new Paragraph(earthStudDesc.getSizeOfMainProtectiveRem(), font3));
+			cell57.setHorizontalAlignment(Element.ALIGN_LEFT);
+			table205.addCell(cell57);
 
-		PdfPCell cell58 = new PdfPCell(new Paragraph("7", font1));
-		cell58.setHorizontalAlignment(Element.ALIGN_CENTER);
-		cell58.setGrayFill(0.92f);
-		table205.addCell(cell58);
+			PdfPCell cell58 = new PdfPCell(new Paragraph("7", font1));
+			cell58.setHorizontalAlignment(Element.ALIGN_CENTER);
+			cell58.setGrayFill(0.92f);
+			table205.addCell(cell58);
 
-		PdfPCell cell59 = new PdfPCell(
-				new Paragraph("Supplimentary Protective equipotential bondding in numbers", font1));
-		cell59.setGrayFill(0.92f);
-		table205.addCell(cell59);
+			PdfPCell cell59 = new PdfPCell(
+					new Paragraph("Supplimentary Protective equipotential bondding in numbers", font1));
+			cell59.setGrayFill(0.92f);
+			table205.addCell(cell59);
 
-		PdfPCell cell60 = new PdfPCell(new Paragraph(earthStudDesc.getSupplimentaryMainProtectiveOb(), font3));
-		cell60.setHorizontalAlignment(Element.ALIGN_LEFT);
-		table205.addCell(cell60);
+			PdfPCell cell60 = new PdfPCell(new Paragraph(earthStudDesc.getSupplimentaryMainProtectiveOb(), font3));
+			cell60.setHorizontalAlignment(Element.ALIGN_LEFT);
+			table205.addCell(cell60);
 
-		PdfPCell cell61 = new PdfPCell(new Paragraph(earthStudDesc.getSupplimentaryMainProtectiveRem(), font3));
-		cell61.setHorizontalAlignment(Element.ALIGN_LEFT);
-		table205.addCell(cell61);
-
+			PdfPCell cell61 = new PdfPCell(new Paragraph(earthStudDesc.getSupplimentaryMainProtectiveRem(), font3));
+			cell61.setHorizontalAlignment(Element.ALIGN_LEFT);
+			table205.addCell(cell61);
+		}
+		
 		PdfPCell cell62 = new PdfPCell(new Paragraph("8", font1));
 		cell62.setHorizontalAlignment(Element.ALIGN_CENTER);
 		cell62.setGrayFill(0.92f);
