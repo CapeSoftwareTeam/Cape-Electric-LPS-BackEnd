@@ -45,7 +45,6 @@ use lv_safety_verification;
 		  		 	              
 		  );
 		  
-			lpsairdescription_table
           CREATE TABLE lpsairdescription_table(
                   LPSAIRDESCRIPTION_ID INT AUTO_INCREMENT,
                   AIR_TERMINATION_DETAILS_ID INT,
