@@ -61,7 +61,4 @@ public class BasicLpsController {
 		logger.info("Ended updateBasicLpsDetails function");
 		return new ResponseEntity<String>("Basic Lps Details Updated Successfully", HttpStatus.OK);
 	}
-	
-
-	
 }
