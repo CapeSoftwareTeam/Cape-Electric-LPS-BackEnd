@@ -5,19 +5,15 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.capeelectric.exception.EarthStudException;
-import com.capeelectric.model.BasicLps;
 import com.capeelectric.model.EarthStudDescription;
 import com.capeelectric.model.EarthStudReport;
 import com.capeelectric.model.SeparateDistance;
 import com.capeelectric.model.SeparateDistanceDownConductors;
 import com.capeelectric.model.SeperationDistanceDescription;
 import com.capeelectric.model.SeperationDistanceReport;
-import com.capeelectric.repository.EarthStudRepository;
-import com.capeelectric.repository.SeperationDistanceRepository;
 import com.capeelectric.service.PrintSDandEarthStudService;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
@@ -35,18 +31,18 @@ import com.itextpdf.text.pdf.PdfWriter;
 @Service
 public class PrintSDandEarthStudServiceImpl implements PrintSDandEarthStudService {
 
-	@Autowired
-	private EarthStudRepository earthStudRepository;
-
-	@Autowired
-	private SeperationDistanceRepository seperationDistanceRepository;
-
-//	@Override
-//	public void printSDandEarthStud(String userName, Integer lpsId, Optional<BasicLps> basicLpsDetails,
-//			Optional<SeperationDistanceDescription> separateDistanceDetails) throws EarthStudException {
+//	@Autowired
+//	private EarthStudRepository earthStudRepository;
+//
+//	@Autowired
+//	private SeperationDistanceRepository seperationDistanceRepository;
 
 	@Override
-	public void printSDandEarthStud1(String userName, Integer lpsId) throws EarthStudException {
+	public void printSDandEarthStud(String userName, Integer lpsId, 
+			Optional<SeperationDistanceReport> separateDistanceReport, Optional<EarthStudReport> earthStudDetails) throws EarthStudException {
+
+//	@Override
+//	public void printSDandEarthStud1(String userName, Integer lpsId) throws EarthStudException {
 
 		if (userName != null && !userName.isEmpty() && lpsId != null && lpsId != 0) {
 			Document document = new Document(PageSize.A4, 68, 68, 62, 68);
@@ -57,9 +53,10 @@ public class PrintSDandEarthStudServiceImpl implements PrintSDandEarthStudServic
 
 				document.open();
 
-				List<SeperationDistanceReport> separateDistance2 = seperationDistanceRepository
-						.findByUserNameAndBasicLpsId(userName, lpsId);
-				SeperationDistanceReport separateDistance = separateDistance2.get(0);
+//				List<SeperationDistanceReport> separateDistance2 = seperationDistanceRepository
+//						.findByUserNameAndBasicLpsId(userName, lpsId);
+			
+				SeperationDistanceReport separateDistance = separateDistanceReport.get();
 
 				List<SeperationDistanceDescription> separateDistanceDesc = separateDistance
 						.getSeperationDistanceDescription();
@@ -255,9 +252,12 @@ public class PrintSDandEarthStudServiceImpl implements PrintSDandEarthStudServic
 						}
 					}
 				}
-				List<EarthStudReport> earthStudReport1 = earthStudRepository.findByUserNameAndBasicLpsId(userName,
-						lpsId);
-				EarthStudReport earthStudReport = earthStudReport1.get(0);
+				
+				
+				
+//				List<EarthStudReport> earthStudReport1 = earthStudRepository.findByUserNameAndBasicLpsId(userName,
+//						lpsId);
+				EarthStudReport earthStudReport = earthStudDetails.get();
 
 				document.newPage();
 

@@ -8,13 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.capeelectric.exception.SummaryLpsException;
-import com.capeelectric.model.BasicLps;
 import com.capeelectric.model.SummaryLps;
 import com.capeelectric.model.SummaryLpsBuildings;
 import com.capeelectric.model.SummaryLpsDeclaration;
 import com.capeelectric.model.SummaryLpsInnerObservation;
 import com.capeelectric.model.SummaryLpsObservation;
-import com.capeelectric.repository.BasicLpsRepository;
 import com.capeelectric.repository.SummaryLpsRepository;
 import com.capeelectric.service.PrintSummaryLpsService;
 import com.itextpdf.text.BaseColor;
@@ -34,8 +32,8 @@ import com.itextpdf.text.pdf.PdfWriter;
 @Service
 public class PrintSummaryLpsServiceImpl implements PrintSummaryLpsService {
 
-	@Autowired
-	private BasicLpsRepository basicLpsRepository;
+//	@Autowired
+//	private BasicLpsRepository basicLpsRepository;
 
 	@Autowired
 	private SummaryLpsRepository summaryLpsRepository;
@@ -49,9 +47,6 @@ public class PrintSummaryLpsServiceImpl implements PrintSummaryLpsService {
 			try {
 
 				PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("LpsSummary.pdf"));
-
-				List<BasicLps> basicLps = basicLpsRepository.findByUserNameAndBasicLpsId(userName, basicLpsId);
-				BasicLps basicLps1 = basicLps.get(0);
 
 				List<SummaryLps> lpsSum = summaryLpsRepository.findByUserNameAndBasicLpsId(userName, basicLpsId);
 				SummaryLps lpsSummary = lpsSum.get(0);

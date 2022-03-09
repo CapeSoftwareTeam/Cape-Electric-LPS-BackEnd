@@ -1,23 +1,17 @@
 package com.capeelectric.service.impl;
 
 import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.capeelectric.exception.BasicLpsException;
 import com.capeelectric.model.BasicLps;
-import com.capeelectric.model.AirBasicDescription;
 import com.capeelectric.repository.BasicLpsRepository;
 import com.capeelectric.service.PrintBasicLpsService;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.PageSize;
@@ -35,8 +29,13 @@ public class PrintBasicLpsServiceImpl implements PrintBasicLpsService {
 	@Autowired
 	private BasicLpsRepository basicLpsRepository;
 
+//	@Override
+//	public void printBasicLps(String userName, Integer lpsId ) throws BasicLpsException {
+
 	@Override
-	public void printBasicLps(String userName, Integer lpsId) throws BasicLpsException {
+	public void printBasicLps(String userName, Integer lpsId, Optional<BasicLps> basicLpsDetails)
+			throws BasicLpsException {
+
 		if (userName != null && !userName.isEmpty() && lpsId != null && lpsId != 0) {
 			Document document = new Document(PageSize.A4, 68, 68, 62, 68);
 			// Optional<BasicLps> basicLpsDetails
@@ -44,7 +43,7 @@ public class PrintBasicLpsServiceImpl implements PrintBasicLpsService {
 
 				PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("BasicLps.pdf"));
 
-				Optional<BasicLps> basicLps = basicLpsRepository.findByBasicLpsId( lpsId);
+				Optional<BasicLps> basicLps = basicLpsRepository.findByBasicLpsId(lpsId);
 				BasicLps basicLps1 = basicLps.get();
 
 //				Set<AirBasicDescription> basicDesc = basicLps1.get();
@@ -244,23 +243,21 @@ public class PrintBasicLpsServiceImpl implements PrintBasicLpsService {
 				tablemainhead.setWidthPercentage(100); // Width 100%
 				tablemainhead.setSpacingAfter(5f);
 
-				PdfPCell cellmainhead = new PdfPCell(
-						new Paragraph("Check list of lightning protection system", font1));
+				PdfPCell cellmainhead = new PdfPCell(new Paragraph("Check list of lightning protection system", font1));
 				cellmainhead.setHorizontalAlignment(Element.ALIGN_CENTER);
 				cellmainhead.setGrayFill(0.92f);
 				cellmainhead.setFixedHeight(20f);
 				tablemainhead.addCell(cellmainhead);
 				document.add(tablemainhead);
-				
+
 				PdfPTable table = new PdfPTable(pointColumnWidths4);
 				table.setWidthPercentage(100); // Width 100%
 				table.setSpacingBefore(10f); // Space before table
 				table.setWidthPercentage(100);
-				
+
 				Font font11 = new Font(BaseFont.createFont(), 11, Font.NORMAL | Font.BOLD, BaseColor.BLACK);
 
-				PdfPCell cell = new PdfPCell(
-						new Paragraph("Basic details ", font11));
+				PdfPCell cell = new PdfPCell(new Paragraph("Basic details ", font11));
 				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 				cell.setGrayFill(0.92f);
 				cell.setFixedHeight(20f);
@@ -460,7 +457,6 @@ public class PrintBasicLpsServiceImpl implements PrintBasicLpsService {
 
 				document.add(table4);
 
-
 				float[] pointColumnWidths30 = { 25F };
 
 				PdfPTable table21 = new PdfPTable(pointColumnWidths30);
@@ -474,8 +470,8 @@ public class PrintBasicLpsServiceImpl implements PrintBasicLpsService {
 				cell30.setFixedHeight(20f);
 				table21.addCell(cell30);
 				document.add(table21);
-				
-				PdfPTable table5= new PdfPTable(pointColumnWidths1);
+
+				PdfPTable table5 = new PdfPTable(pointColumnWidths1);
 				table5.setWidthPercentage(100); // Width 100%
 				// table1.setSpacingBefore(10f); // Space before table
 				table5.setWidthPercentage(100);
@@ -489,7 +485,7 @@ public class PrintBasicLpsServiceImpl implements PrintBasicLpsService {
 				PdfPCell cell43 = new PdfPCell(new Paragraph(basicLps1.getName(), font3));
 				cell43.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 				table5.addCell(cell43);
-				
+
 				PdfPCell cell42 = new PdfPCell(new Paragraph("Company", font2));
 				cell42.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 				cell42.setFixedHeight(20f);
@@ -499,7 +495,7 @@ public class PrintBasicLpsServiceImpl implements PrintBasicLpsService {
 				PdfPCell cell44 = new PdfPCell(new Paragraph(basicLps1.getCompany(), font3));
 				cell44.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 				table5.addCell(cell44);
-				
+
 				PdfPCell cell45 = new PdfPCell(new Paragraph("Designation", font2));
 				cell45.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 				cell45.setFixedHeight(20f);
@@ -509,7 +505,7 @@ public class PrintBasicLpsServiceImpl implements PrintBasicLpsService {
 				PdfPCell cell46 = new PdfPCell(new Paragraph(basicLps1.getDesignation(), font3));
 				cell46.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 				table5.addCell(cell46);
-				
+
 				PdfPCell cell47 = new PdfPCell(new Paragraph("Contact Number", font2));
 				cell47.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 				cell47.setFixedHeight(20f);
@@ -519,7 +515,7 @@ public class PrintBasicLpsServiceImpl implements PrintBasicLpsService {
 				PdfPCell cell48 = new PdfPCell(new Paragraph(basicLps1.getContactNumber(), font3));
 				cell48.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 				table5.addCell(cell48);
-				
+
 				PdfPCell cell49 = new PdfPCell(new Paragraph("Mail Id", font2));
 				cell49.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 				cell49.setFixedHeight(20f);
@@ -529,7 +525,7 @@ public class PrintBasicLpsServiceImpl implements PrintBasicLpsService {
 				PdfPCell cell50 = new PdfPCell(new Paragraph(basicLps1.getMailId(), font3));
 				cell50.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 				table5.addCell(cell50);
-				
+
 				PdfPCell cell52 = new PdfPCell(new Paragraph("Availability of previous report", font2));
 				cell52.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 				cell52.setFixedHeight(20f);
@@ -540,11 +536,7 @@ public class PrintBasicLpsServiceImpl implements PrintBasicLpsService {
 				cell53.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
 				table5.addCell(cell53);
 
-                document.add(table5);
-
-
-				
-				
+				document.add(table5);
 
 //				for (AirBasicDescription basicDesc2 : basicDesc1) {
 //					basicDescription(basicDesc2, table21);
@@ -553,7 +545,7 @@ public class PrintBasicLpsServiceImpl implements PrintBasicLpsService {
 
 				document.close();
 				writer.close();
-				
+
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

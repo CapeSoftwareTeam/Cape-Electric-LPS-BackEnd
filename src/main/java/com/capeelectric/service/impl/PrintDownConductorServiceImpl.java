@@ -3,10 +3,10 @@ package com.capeelectric.service.impl;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.capeelectric.exception.DownConductorException;
@@ -19,7 +19,6 @@ import com.capeelectric.model.DownConductorTesting;
 import com.capeelectric.model.Holder;
 import com.capeelectric.model.LightningCounter;
 import com.capeelectric.model.TestingJoint;
-import com.capeelectric.repository.DownConductorRepository;
 import com.capeelectric.service.PrintDownConductorService;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
@@ -29,7 +28,6 @@ import com.itextpdf.text.Font;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
-import com.itextpdf.text.log.SysoCounter;
 import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.GrayColor;
 import com.itextpdf.text.pdf.PdfPCell;
@@ -44,14 +42,14 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 //	@Autowired
 //	private BasicLpsRepository basicLpsRepository;
 
-	@Autowired
-	private DownConductorRepository downConductorRepository;
-
-//	@Override
-//	public void printDownConductor(String userName, Integer lpsId,Optional<BasicLps> basicLpsDetails, Optional<DownConductorDescription> downConductorDetails) throws DownConductorException {
+//	@Autowired
+//	private DownConductorRepository downConductorRepository;
 
 	@Override
-	public void printDownConductor1(String userName, Integer lpsId) throws DownConductorException {
+	public void printDownConductor(String userName, Integer lpsId, Optional<DownConductorReport> downConductorDetails) throws DownConductorException {
+
+//	@Override
+//	public void printDownConductor1(String userName, Integer lpsId) throws DownConductorException {
 
 		if (userName != null && !userName.isEmpty() && lpsId != null && lpsId != 0) {
 			Document document = new Document(PageSize.A4, 68, 68, 62, 68);
@@ -62,9 +60,9 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 
 				PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("DownConductorLps.pdf"));
 
-				List<DownConductorReport> downLps = downConductorRepository.findByUserNameAndBasicLpsId(userName,
-						lpsId);
-				DownConductorReport downConductorReport = downLps.get(0);
+//				List<DownConductorReport> downLps = downConductorRepository.findByUserNameAndBasicLpsId(userName,
+//						lpsId);
+				DownConductorReport downConductorReport = downConductorDetails.get();
 
 				List<DownConductorDescription> downConductorDesc = downConductorReport.getDownConductorDescription();
 				DownConductorDescription downConDesc = downConductorDesc.get(0);

@@ -5,11 +5,9 @@ import java.io.FileOutputStream;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.capeelectric.exception.EarthingLpsException;
-import com.capeelectric.model.BasicLps;
 import com.capeelectric.model.EarthElectrodeChamber;
 import com.capeelectric.model.EarthElectrodeTesting;
 import com.capeelectric.model.EarthingClamps;
@@ -18,7 +16,6 @@ import com.capeelectric.model.EarthingDescriptionList;
 import com.capeelectric.model.EarthingLpsDescription;
 import com.capeelectric.model.EarthingReport;
 import com.capeelectric.model.EarthingSystem;
-import com.capeelectric.repository.EarthingLpsRepository;
 import com.capeelectric.service.PrintEarthingLpsService;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
@@ -36,16 +33,16 @@ import com.itextpdf.text.pdf.PdfWriter;
 @Service
 public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 
-	@Autowired
-	private EarthingLpsRepository earthingLpsRepository;
-
-//	@Override
-//	public List<EarthingLpsDescription> printEarthingLpsDetails(String userName, Integer basicLpsId,Optional<BasicLps> basicLpsDetails, Optional<EarthingLpsDescription> earthingLpsDetails)
-//			throws EarthingLpsException {
+//	@Autowired
+//	private EarthingLpsRepository earthingLpsRepository;
 
 	@Override
-	public List<EarthingLpsDescription> printEarthingLpsDetails1(String userName, Integer basicLpsId)
+	public List<EarthingLpsDescription> printEarthingLpsDetails(String userName, Integer basicLpsId, Optional<EarthingReport> earthingLpsDetails)
 			throws EarthingLpsException {
+
+//	@Override
+//	public List<EarthingLpsDescription> printEarthingLpsDetails1(String userName, Integer basicLpsId)
+//			throws EarthingLpsException {
 
 //		if (userName != null && !userName.isEmpty() && basicLpsId != null && basicLpsId != 0) {
 		Document document = new Document(PageSize.A4, 68, 68, 62, 68);
@@ -54,9 +51,9 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 
 			PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("EarthingLps.pdf"));
 
-			List<EarthingReport> earthingReport1 = earthingLpsRepository.findByUserNameAndBasicLpsId(userName,
-					basicLpsId);
-			EarthingReport earthingReport2 = earthingReport1.get(0);
+//			List<EarthingReport> earthingReport1 = earthingLpsRepository.findByUserNameAndBasicLpsId(userName,
+//					basicLpsId);
+			EarthingReport earthingReport2 = earthingLpsDetails.get();
 
 			List<EarthingLpsDescription> earthingLpsRepo1 = earthingReport2.getEarthingLpsDescription();
 			EarthingLpsDescription earthingLpsRepo = earthingLpsRepo1.get(0);

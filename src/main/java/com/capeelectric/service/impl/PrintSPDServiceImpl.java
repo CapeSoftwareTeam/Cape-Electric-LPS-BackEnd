@@ -5,16 +5,12 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.capeelectric.exception.SPDException;
-import com.capeelectric.model.BasicLps;
 import com.capeelectric.model.SPD;
 import com.capeelectric.model.SpdDescription;
 import com.capeelectric.model.SpdReport;
-import com.capeelectric.repository.EarthStudRepository;
-import com.capeelectric.repository.SPDRepository;
 import com.capeelectric.service.PrintSPDService;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
@@ -32,14 +28,14 @@ import com.itextpdf.text.pdf.PdfWriter;
 @Service
 public class PrintSPDServiceImpl implements PrintSPDService {
 
-//	@Override
-//	public void printSPD(String userName, Integer lpsId,Optional<BasicLps> basicLpsDetails, Optional<SPD> spdDetails) throws SPDException {	
-
-	@Autowired
-	private SPDRepository spdRepository;
-
+//	@Autowired
+//	private SPDRepository spdRepository;
+	
 	@Override
-	public void printSPD1(String userName, Integer lpsId) throws SPDException {
+	public void printSPD(String userName, Integer lpsId,Optional<SpdReport> spdDetails) throws SPDException {	
+
+//	@Override
+//	public void printSPD1(String userName, Integer lpsId) throws SPDException {
 
 //		if (userName != null && !userName.isEmpty() && lpsId != null && lpsId != 0) {
 		Document document = new Document(PageSize.A4, 68, 68, 62, 68);
@@ -48,9 +44,9 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 
 			PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("SPD.pdf"));
 
-			List<SpdReport> spdMain = spdRepository.findByUserNameAndBasicLpsId(userName, lpsId);
+//			List<SpdReport> spdMain = spdRepository.findByUserNameAndBasicLpsId(userName, lpsId);
 
-			SpdReport spdMain1 = spdMain.get(0);
+			SpdReport spdMain1 = spdDetails.get();
 
 			List<SPD> spd1 = spdMain1.getSpd();
 

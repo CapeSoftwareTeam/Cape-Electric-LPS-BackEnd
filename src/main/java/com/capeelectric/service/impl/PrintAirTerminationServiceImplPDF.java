@@ -21,7 +21,6 @@ import com.capeelectric.model.BasicLps;
 import com.capeelectric.model.LpsAirDiscription;
 import com.capeelectric.model.LpsVerticalAirTermination;
 import com.capeelectric.model.VerticalAirTerminationList;
-import com.capeelectric.repository.AirTerminationLpsRepository;
 import com.capeelectric.repository.BasicLpsRepository;
 import com.capeelectric.service.PrintAirTerminationService;
 import com.itextpdf.text.BaseColor;
@@ -44,14 +43,15 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 	@Autowired
 	private BasicLpsRepository basicLpsRepository;
 
-	@Autowired
-	private AirTerminationLpsRepository airTerminationLpsRepository;
-
-//	@Override
-//	public void printAirTermination(String userName, Integer basicLpsId,Optional<BasicLps> basicLpsDetails, Optional<LpsAirDiscription> lpsAirDisc) throws AirTerminationException {
+//	@Autowired
+//	private AirTerminationLpsRepository airTerminationLpsRepository;
 
 	@Override
-	public void printAirTermination1(String userName, Integer basicLpsId) throws AirTerminationException {
+	public void printAirTermination(String userName, Integer basicLpsId, Optional<AirTermination> lpsAirTermination)
+			throws AirTerminationException {
+
+//	@Override
+//	public void printAirTermination1(String userName, Integer basicLpsId) throws AirTerminationException {
 
 		if (userName != null && !userName.isEmpty() && basicLpsId != null && basicLpsId != 0) {
 			Document document = new Document(PageSize.A4, 68, 68, 62, 68);
@@ -63,12 +63,12 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 				List<BasicLps> basicLps = basicLpsRepository.findByUserNameAndBasicLpsId(userName, basicLpsId);
 				BasicLps basicLps1 = basicLps.get(0);
 
-				List<AirTermination> lpsAirDisc = airTerminationLpsRepository.findByUserNameAndBasicLpsId(userName,
-						basicLpsId);
-				AirTermination airTermination = lpsAirDisc.get(0);
+//				List<AirTermination> lpsAirDisc = airTerminationLpsRepository.findByUserNameAndBasicLpsId(userName,
+//						basicLpsId);
+				AirTermination airTermination = lpsAirTermination.get();
 
-				List<LpsAirDiscription> lpsAirTermination = airTermination.getLpsAirDescription();
-				LpsAirDiscription lpsAirTermination1 = lpsAirTermination.get(0);
+				List<LpsAirDiscription> lpsAirDiscription = airTermination.getLpsAirDescription();
+				LpsAirDiscription lpsAirTermination1 = lpsAirDiscription.get(0);
 
 				List<AirClamps> airCla = lpsAirTermination1.getAirClamps();
 //				AirClamps airClamps = airCla.get(0);
@@ -347,7 +347,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 				table1R.setSpacingBefore(5f); // Space before table
 //				table1R.setSpacingAfter(5f); // Space after table
 				table1R.getDefaultCell().setBorder(0);
-				
+
 				PdfPCell cell22 = new PdfPCell(
 						new Paragraph("Remarks:", new Font(BaseFont.createFont(), 10, Font.NORMAL)));
 				cell22.setBackgroundColor(new GrayColor(0.93f));
@@ -469,7 +469,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 				table6R.setSpacingBefore(5f); // Space before table
 //				table6R.setSpacingAfter(5f); // Space after table
 				table6R.getDefaultCell().setBorder(0);
-				
+
 				PdfPCell cell31 = new PdfPCell(
 						new Paragraph("Remarks:", new Font(BaseFont.createFont(), 10, Font.NORMAL)));
 				cell31.setBackgroundColor(new GrayColor(0.93f));
@@ -739,7 +739,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 //				meshHead.addCell(meshConductorLabel);
 //
 //				document.add(meshHead);
-				
+
 				document.newPage();
 
 				PdfPTable meshHead = new PdfPTable(pointColumnWidths41);
@@ -777,7 +777,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 				cell71.setBackgroundColor(new GrayColor(0.93f));
 				cell71.setBorder(PdfPCell.NO_BORDER);
 				table10.addCell(cell71);
-				
+
 				PdfPTable table10R = new PdfPTable(pointColumnWidths2);
 				table10R.setWidthPercentage(100); // Width 100%
 				table10R.setSpacingBefore(5f); // Space before table
@@ -1088,7 +1088,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 //				document.add(HoldersHead);
 
 				document.newPage();
-				
+
 				PdfPTable HoldersHead = new PdfPTable(pointColumnWidths41);
 				HoldersHead.setWidthPercentage(100); // Width 100%
 				HoldersHead.setSpacingBefore(10f); // Space before table
@@ -1129,7 +1129,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 				table12R.setSpacingBefore(5f); // Space before table
 //				table12R.setSpacingAfter(5f); // Space after table
 				table12R.getDefaultCell().setBorder(0);
-				
+
 				PdfPCell cell103 = new PdfPCell(
 						new Paragraph("Remarks:", new Font(BaseFont.createFont(), 10, Font.NORMAL)));
 				cell103.setBackgroundColor(new GrayColor(0.93f));
@@ -1242,11 +1242,11 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 							table13.addCell(cell39);
 						}
 
-						document.add(table13);				
+						document.add(table13);
 
-						int i= 1;
+						int i = 1;
 						for (AirHolderList airHolderList : airHolderL) {
-							
+
 							PdfPTable table52 = new PdfPTable(pointColumnWidths41);
 							table52.setWidthPercentage(100); // Width 100%
 //							table52.setSpacingBefore(5f); // Space before table
@@ -1259,9 +1259,9 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 							cell112.setFixedHeight(20f);
 							cell112.setColspan(4);
 							table52.addCell(cell112);
-							
+
 							PdfPTable table14 = HoldersItr(airHolderList, pointColumnWidths4, font1A);
-							
+
 							document.add(table52);
 							document.add(table14);
 							++i;
@@ -1430,7 +1430,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 //				clampsLabel.setBorder(PdfPCell.NO_BORDER);
 //				ClampsHead.addCell(clampsLabel);
 //				document.add(ClampsHead);
-				
+
 				document.newPage();
 
 				PdfPTable ClampsHead = new PdfPTable(pointColumnWidths41);
@@ -1472,7 +1472,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 				table16R.setSpacingBefore(5f); // Space before table
 //				table16R.setSpacingAfter(5f); // Space after table
 				table16R.getDefaultCell().setBorder(0);
-				
+
 				PdfPCell cell157 = new PdfPCell(
 						new Paragraph("Remarks:", new Font(BaseFont.createFont(), 10, Font.NORMAL)));
 				cell157.setBackgroundColor(new GrayColor(0.93f));
@@ -1795,7 +1795,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 //				expansionsLabel.setBorder(PdfPCell.NO_BORDER);
 //				expansionHead.addCell(expansionsLabel);
 //				document.add(expansionHead);
-				
+
 				document.newPage();
 
 				PdfPTable expansionHead = new PdfPTable(pointColumnWidths41);
@@ -1831,7 +1831,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 				cell134.setBackgroundColor(new GrayColor(0.93f));
 				cell134.setBorder(PdfPCell.NO_BORDER);
 				table18.addCell(cell134);
-				
+
 				PdfPTable table18R = new PdfPTable(pointColumnWidths2);
 				table18R.setWidthPercentage(100); // Width 100%
 				table18R.setSpacingBefore(5f); // Space before table
@@ -2051,8 +2051,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 						table17.addCell(cell123);
 
 						if (airExpansion.getInspectionNoRe() != null) {
-							PdfPCell cell38 = new PdfPCell(
-									new Paragraph(airExpansion.getInspectionNoRe(), font1A));
+							PdfPCell cell38 = new PdfPCell(new Paragraph(airExpansion.getInspectionNoRe(), font1A));
 							cell38.setHorizontalAlignment(Element.ALIGN_LEFT);
 							table17.addCell(cell38);
 						} else {
@@ -2136,7 +2135,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 //				connectorsLabel.setBorder(PdfPCell.NO_BORDER);
 //				connectorsHead.addCell(connectorsLabel);
 //				document.add(connectorsHead);
-				
+
 				document.newPage();
 
 				PdfPTable connectorsHead = new PdfPTable(pointColumnWidths41);
@@ -2178,7 +2177,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 				table19R.setSpacingBefore(5f); // Space before table
 //				table19R.setSpacingAfter(5f); // Space after table
 				table19R.getDefaultCell().setBorder(0);
-				
+
 				PdfPCell cell132 = new PdfPCell(
 						new Paragraph("Remarks:", new Font(BaseFont.createFont(), 10, Font.NORMAL)));
 				cell132.setBackgroundColor(new GrayColor(0.93f));
