@@ -4,6 +4,7 @@
 package com.capeelectric.service.impl;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -271,8 +272,7 @@ public class SummaryLpsServiceImpl implements SummaryLpsService {
 				return summaryLpsRepo;
 			} else {
 				logger.error("Given UserName & Id doesn't exist in Summary Lps Report Details");
-				throw new SummaryLpsException("Given UserName & Id doesn't exist in Summary Lps Report Details");
-			}
+				return new ArrayList<SummaryLps>();				}
 		} else {
 			logger.error("Invalid Inputs");
 			throw new SummaryLpsException("Invalid Inputs");

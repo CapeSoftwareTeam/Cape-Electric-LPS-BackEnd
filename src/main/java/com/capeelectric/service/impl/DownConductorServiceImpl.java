@@ -4,6 +4,7 @@
 package com.capeelectric.service.impl;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.capeelectric.exception.DownConductorException;
-import com.capeelectric.model.AirTermination;
 import com.capeelectric.model.BasicLps;
 import com.capeelectric.model.DownConductorDescription;
 import com.capeelectric.model.DownConductorReport;
@@ -114,7 +114,7 @@ public class DownConductorServiceImpl implements DownConductorService{
 				return downConductorRepo;
 			} else {
 				logger.error("Given UserName & Id doesn't exist in Down Conductor Details");
-				throw new DownConductorException("Given UserName & Id doesn't exist in Down Conductor Details");
+				return new ArrayList<DownConductorReport>();
 			}
 		} else {
 			logger.error("Invalid Inputs");

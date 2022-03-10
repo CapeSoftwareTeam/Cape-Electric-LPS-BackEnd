@@ -1,6 +1,7 @@
 package com.capeelectric.service.impl;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -77,7 +78,7 @@ public class BasicLpsServiceImpl implements BasicLpsService {
 				return basicLpsDetailsRepo;
 			} else {
 				logger.error("Given UserName & Id doesn't exist in Basic Lps Details");
-				throw new BasicLpsException("Given UserName & Id doesn't exist in Basic Lps Details");
+				return new ArrayList<BasicLps>();
 			}
 		} else {
 			logger.error("Invalid Inputs");

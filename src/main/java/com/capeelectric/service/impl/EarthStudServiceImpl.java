@@ -3,11 +3,8 @@
  */
 package com.capeelectric.service.impl;
 
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,15 +30,7 @@ import com.capeelectric.service.PrintFinalPDFService;
 import com.capeelectric.service.PrintSDandEarthStudService;
 import com.capeelectric.service.PrintSPDService;
 import com.capeelectric.util.FindNonRemovedObjects;
-import com.capeelectric.util.HeaderFooterPageEvent;
 import com.capeelectric.util.UserFullName;
-import com.itextpdf.text.Document;
-import com.itextpdf.text.Image;
-import com.itextpdf.text.pdf.PdfContentByte;
-import com.itextpdf.text.pdf.PdfImportedPage;
-import com.itextpdf.text.pdf.PdfPageEvent;
-import com.itextpdf.text.pdf.PdfReader;
-import com.itextpdf.text.pdf.PdfWriter;
 
 /**
  * This EarthStudServiceImpl service class doing save and retrieve operation
@@ -176,8 +165,7 @@ public class EarthStudServiceImpl implements EarthStudService {
 				return earthStudRepo;
 			} else {
 				logger.error("Given UserName & Id doesn't exist in Earth Stud Report Details");
-				throw new EarthStudException("Given UserName & Id doesn't exist in Earth Stud Report Details");
-			}
+				return new ArrayList<EarthStudReport>();			}
 		} else {
 			logger.error("Invalid Inputs");
 			throw new EarthStudException("Invalid Inputs");

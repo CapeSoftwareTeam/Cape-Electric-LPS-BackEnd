@@ -3,14 +3,13 @@
  */
 package com.capeelectric.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.capeelectric.model.AllStepsRemarks;
 import com.capeelectric.model.remarks.AirTerminationRemarks;
 import com.capeelectric.model.remarks.DownConductorReportRemarks;

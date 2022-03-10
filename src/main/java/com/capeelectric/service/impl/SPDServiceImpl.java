@@ -4,6 +4,7 @@
 package com.capeelectric.service.impl;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,13 +15,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.capeelectric.exception.EarthingLpsException;
 import com.capeelectric.exception.SPDException;
 import com.capeelectric.model.BasicLps;
-import com.capeelectric.model.EarthingLpsDescription;
-import com.capeelectric.model.EarthingReport;
 import com.capeelectric.model.SPD;
-import com.capeelectric.model.SpdDescription;
 import com.capeelectric.model.SpdReport;
 import com.capeelectric.repository.BasicLpsRepository;
 import com.capeelectric.repository.SPDRepository;
@@ -114,8 +111,7 @@ public class SPDServiceImpl implements SPDService{
 				return spdRepo;
 			} else {
 				logger.error("Given UserName & Id doesn't exist in SPD Report Details");
-				throw new SPDException("Given UserName & Id doesn't exist in SPD Report Details");
-			}
+				return new ArrayList<SpdReport>();			}
 		} else {
 			logger.error("Invalid Inputs");
 			throw new SPDException("Invalid Inputs");

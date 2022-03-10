@@ -4,6 +4,7 @@
 package com.capeelectric.service.impl;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,11 +15,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.capeelectric.exception.DownConductorException;
 import com.capeelectric.exception.EarthingLpsException;
 import com.capeelectric.model.BasicLps;
-import com.capeelectric.model.DownConductorDescription;
-import com.capeelectric.model.DownConductorReport;
 import com.capeelectric.model.EarthingLpsDescription;
 import com.capeelectric.model.EarthingReport;
 import com.capeelectric.repository.BasicLpsRepository;
@@ -116,8 +114,7 @@ public class EarthingLpsServiceImpl implements EarthingLpsService {
 				return earthingLpsRepo;
 			} else {
 				logger.error("Given UserName & Id doesn't exist in Earthing Report Details");
-				throw new EarthingLpsException("Given UserName & Id doesn't exist in Earthing Report Details");
-			}
+				return new ArrayList<EarthingReport>();			}
 		} else {
 			logger.error("Invalid Inputs");
 			throw new EarthingLpsException("Invalid Inputs");

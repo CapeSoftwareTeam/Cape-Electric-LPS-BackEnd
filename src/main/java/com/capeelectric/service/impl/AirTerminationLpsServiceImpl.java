@@ -1,6 +1,7 @@
 package com.capeelectric.service.impl;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
@@ -15,12 +16,7 @@ import org.springframework.stereotype.Service;
 import com.capeelectric.exception.AirTerminationException;
 import com.capeelectric.model.AirTermination;
 import com.capeelectric.model.BasicLps;
-import com.capeelectric.model.DownConductorDescription;
-import com.capeelectric.model.EarthStudDescription;
-import com.capeelectric.model.EarthingLpsDescription;
 import com.capeelectric.model.LpsAirDiscription;
-import com.capeelectric.model.SPD;
-import com.capeelectric.model.SeperationDistanceDescription;
 import com.capeelectric.repository.AirTerminationLpsRepository;
 import com.capeelectric.repository.BasicLpsRepository;
 import com.capeelectric.repository.DownConductorListRepository;
@@ -144,7 +140,7 @@ public class AirTerminationLpsServiceImpl implements AirTerminationLpsService {
 				
 			} else {
 				logger.error("Given UserName & Id doesn't exist in Air Termination LPS Details");
-				throw new AirTerminationException("Given UserName & Id doesn't exist in Air Termination LPS Details");
+				return new ArrayList<AirTermination>();
 			}
 		} else {
 			logger.error("Invalid Inputs");

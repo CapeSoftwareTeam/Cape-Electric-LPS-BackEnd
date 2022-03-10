@@ -4,6 +4,7 @@
 package com.capeelectric.service.impl;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,11 +15,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.capeelectric.exception.SPDException;
 import com.capeelectric.exception.SeperationDistanceException;
 import com.capeelectric.model.BasicLps;
-import com.capeelectric.model.EarthingLpsDescription;
-import com.capeelectric.model.EarthingReport;
 import com.capeelectric.model.SeperationDistanceDescription;
 import com.capeelectric.model.SeperationDistanceReport;
 import com.capeelectric.repository.BasicLpsRepository;
@@ -112,8 +110,7 @@ public class SeperationDistanceServiceImpl implements SeperationDistanceService{
 				return seperationDistanceRepo;
 			} else {
 				logger.error("Given UserName & Id doesn't exist in Seperation Distance Details");
-				throw new SeperationDistanceException("Given UserName & Id doesn't exist in Seperation Distance Details");
-			}
+				return new ArrayList<SeperationDistanceReport>();			}
 		} else {
 			logger.error("Invalid Inputs");
 			throw new SeperationDistanceException("Invalid Inputs");
