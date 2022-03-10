@@ -210,7 +210,7 @@ public class SummaryLpsServiceImpl implements SummaryLpsService {
 						logger.debug("PDF printAirTermination() function called successfully");
 
 						printDownConductorService.printDownConductor(summaryLps.getUserName(),
-								summaryLps.getBasicLpsId(), downConductorDetails);
+								summaryLps.getBasicLpsId(),basicLpsDetails, downConductorDetails);
 						logger.debug("PDF printDownConductor() function called successfully");
 
 						printEarthingLpsService.printEarthingLpsDetails(summaryLps.getUserName(),
