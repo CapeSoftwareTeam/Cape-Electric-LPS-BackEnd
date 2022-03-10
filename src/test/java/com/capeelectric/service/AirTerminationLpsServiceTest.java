@@ -19,11 +19,23 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.capeelectric.exception.AirTerminationException;
 import com.capeelectric.exception.EarthingLpsException;
+import com.capeelectric.model.AirBasicDescription;
+import com.capeelectric.model.AirClamps;
+import com.capeelectric.model.AirConnectors;
+import com.capeelectric.model.AirExpansion;
+import com.capeelectric.model.AirHolderDescription;
+import com.capeelectric.model.AirHolderList;
+import com.capeelectric.model.AirMeshDescription;
+import com.capeelectric.model.AirTermination;
 import com.capeelectric.model.BasicLps;
 import com.capeelectric.model.LpsAirDiscription;
+import com.capeelectric.model.LpsVerticalAirTermination;
+import com.capeelectric.model.VerticalAirTerminationList;
 import com.capeelectric.repository.AirTerminationLpsRepository;
 import com.capeelectric.repository.BasicLpsRepository;
 import com.capeelectric.service.impl.AirTerminationLpsServiceImpl;
+import com.capeelectric.util.AddRemovedStatus;
+import com.capeelectric.util.FindNonRemovedObjects;
 import com.capeelectric.util.UserFullName;
 
 @ExtendWith(SpringExtension.class)
@@ -43,17 +55,28 @@ public class AirTerminationLpsServiceTest {
 	
 	@MockBean
 	private AirTerminationException airTerminationException;
-
+	
+	@MockBean
+	private FindNonRemovedObjects findNonRemovedObjects;
+	
+	@MockBean
+	private AddRemovedStatus addRemovedStatus;
+	
 	@InjectMocks
 	private AirTerminationLpsServiceImpl airTerminationLpsServiceImpl;
 
-	private LpsAirDiscription lpsAirDiscription;
+	private AirTermination airTermination;
 
 	{
-		lpsAirDiscription = new LpsAirDiscription();
-		lpsAirDiscription.setBasicLpsId(1);
-		lpsAirDiscription.setUserName("Inspector@gmail.com");
-		lpsAirDiscription.setLpsAirDescId(2);
+		airTermination = new AirTermination();
+		airTermination.setBasicLpsId(1);
+		airTermination.setUserName("Inspector@gmail.com");
+		airTermination.setAirTerminationId(2);
+		LpsAirDiscription lpsAirDiscription = new LpsAirDiscription();
+		lpsAirDiscription.setFlag("A");
+		List<LpsAirDiscription> arrayList = new ArrayList<LpsAirDiscription>();
+		arrayList.add(lpsAirDiscription);
+		airTermination.setLpsAirDescription(arrayList);
 		
 	}
 	private BasicLps basicLps;
@@ -67,25 +90,86 @@ public class AirTerminationLpsServiceTest {
 
 	@Test
 	public void testAddAirTerminationLpsDetails() throws AirTerminationException {
-
-		when(basicLpsRepository.findByBasicLpsId(1)).thenReturn(Optional.of(basicLps));
-		when(airTerminationLpsRepository.findByBasicLpsId(2)).thenReturn(Optional.of(lpsAirDiscription));
-		airTerminationLpsServiceImpl.addAirTerminationLpsDetails(lpsAirDiscription);
+		List<LpsAirDiscription> listofLpsAirDiscription= new ArrayList<LpsAirDiscription>();
+		listofLpsAirDiscription.add(new LpsAirDiscription());
 		
-		when(airTerminationLpsRepository.findByBasicLpsId(1)).thenReturn(Optional.of(lpsAirDiscription));
+		ArrayList<LpsVerticalAirTermination> lpsVerticalAirTermination = new ArrayList<LpsVerticalAirTermination>();
+		LpsVerticalAirTermination lps = new LpsVerticalAirTermination();
+		lps.setFlag("A");
+		
+		ArrayList<VerticalAirTerminationList> verticalAirTerminationList = new ArrayList<VerticalAirTerminationList>();
+		VerticalAirTerminationList verticalLps = new VerticalAirTerminationList();
+		verticalLps.setFlag("A");
+		verticalAirTerminationList.add(verticalLps);		
+		lps.setVerticalAirTerminationList(verticalAirTerminationList);
+		lpsVerticalAirTermination.add(lps);
+	
+		ArrayList<AirClamps> airClampsList = new ArrayList<AirClamps>();
+		AirClamps airClamps = new AirClamps();
+		airClamps.setFlag("A");		
+		airClampsList.add(airClamps); 
+		
+		ArrayList<AirConnectors> airConnectorsList = new ArrayList<AirConnectors>();
+		AirConnectors airConnectors = new AirConnectors();
+		airConnectors.setFlag("A");		
+		airConnectorsList.add(airConnectors);
+		
+		ArrayList<AirExpansion> airExpansionList = new ArrayList<AirExpansion>();
+		AirExpansion airExpansion = new AirExpansion();
+		airExpansion.setFlag("A");		
+		airExpansionList.add(airExpansion);
+		
+		ArrayList<AirHolderDescription> airHolderDescriptionList = new ArrayList<AirHolderDescription>();
+		AirHolderDescription airHolderDescription = new AirHolderDescription();
+		airHolderDescription.setFlag("A");	
+		
+		ArrayList<AirHolderList> listOfairHolderList = new ArrayList<AirHolderList>();
+		AirHolderList airHolderList = new AirHolderList();
+		airHolderList.setFlag("A");
+		listOfairHolderList.add(airHolderList);
+		airHolderDescription.setAirHolderList(listOfairHolderList);
+		airHolderDescriptionList.add(airHolderDescription);
+		
+		ArrayList<AirMeshDescription> airMeshDescriptionList = new ArrayList<AirMeshDescription>();
+		AirMeshDescription airMeshDescription = new AirMeshDescription();
+		airMeshDescription.setFlag("A");		
+		airMeshDescriptionList.add(airMeshDescription);
+		
+		ArrayList<AirBasicDescription> airBasicDescriptionList = new ArrayList<AirBasicDescription>();
+		AirBasicDescription airBasicDescription = new AirBasicDescription();
+		airBasicDescription.setFlag("A");		
+		airBasicDescriptionList.add(airBasicDescription);
+		
+		LpsAirDiscription lpsAirDiscription = listofLpsAirDiscription.get(0);
+		lpsAirDiscription.setLpsVerticalAirTermination(lpsVerticalAirTermination);
+		lpsAirDiscription.setAirClamps(airClampsList);
+		lpsAirDiscription.setAirConnectors(airConnectorsList);
+		lpsAirDiscription.setAirExpansion(airExpansionList);
+		lpsAirDiscription.setAirHolderDescription(airHolderDescriptionList);
+		lpsAirDiscription.setAirMeshDescription(airMeshDescriptionList);
+		lpsAirDiscription.setAirBasicDescription(airBasicDescriptionList);
+		
+		airTermination.setLpsAirDescription(listofLpsAirDiscription);
+
+		
+		when(basicLpsRepository.findByBasicLpsId(1)).thenReturn(Optional.of(basicLps));
+		when(airTerminationLpsRepository.findByBasicLpsId(2)).thenReturn(Optional.of(airTermination));
+		airTerminationLpsServiceImpl.addAirTerminationLpsDetails(airTermination);
+		
+		when(airTerminationLpsRepository.findByBasicLpsId(1)).thenReturn(Optional.of(airTermination));
 		AirTerminationException basicLpsException_3 = Assertions.assertThrows(AirTerminationException.class,
-				() -> airTerminationLpsServiceImpl.addAirTerminationLpsDetails(lpsAirDiscription));
+				() -> airTerminationLpsServiceImpl.addAirTerminationLpsDetails(airTermination));
 		assertEquals(basicLpsException_3.getMessage(), "Given Basic LPS Id is already Available in Air Termination");
 
 		
 		basicLps.setBasicLpsId(10);
 		AirTerminationException basicLpsException_4 = Assertions.assertThrows(AirTerminationException.class,
-				() -> airTerminationLpsServiceImpl.addAirTerminationLpsDetails(lpsAirDiscription));
+				() -> airTerminationLpsServiceImpl.addAirTerminationLpsDetails(airTermination));
 		assertEquals(basicLpsException_4.getMessage(), "Given Basic LPS Id is Not Registered in Basic LPS");
 
-		lpsAirDiscription.setUserName(null);
+		airTermination.setUserName(null);
 		AirTerminationException basicLpsException_2 = Assertions.assertThrows(AirTerminationException.class,
-				() -> airTerminationLpsServiceImpl.addAirTerminationLpsDetails(lpsAirDiscription));
+				() -> airTerminationLpsServiceImpl.addAirTerminationLpsDetails(airTermination));
 		assertEquals(basicLpsException_2.getMessage(), "Invalid Inputs");
 		
 		
@@ -94,20 +178,21 @@ public class AirTerminationLpsServiceTest {
 	@Test
 	public void testRetrieveAirTerminationLps() throws AirTerminationException {
 
-		List<LpsAirDiscription> arrayList = new ArrayList<LpsAirDiscription>();
-		arrayList.add(lpsAirDiscription);
-		when(airTerminationLpsRepository.findByUserNameAndBasicLpsId("LVsystem@gmail.com", 12)).thenReturn(arrayList);
+		List<AirTermination> arrayList = new ArrayList<AirTermination>();
+		arrayList.add(airTermination);
+		when(airTerminationLpsRepository.findByUserNameAndBasicLpsId(airTermination.getUserName(), airTermination.getBasicLpsId())).thenReturn(arrayList);
 
 		logger.info("SuccessFlow of Retrieve  AirTerminationLps Obeject");
-		airTerminationLpsServiceImpl.retrieveAirTerminationLps("LVsystem@gmail.com", 12);
-
+		airTerminationLpsServiceImpl.retrieveAirTerminationLps(airTermination.getUserName(), airTermination.getBasicLpsId());
+		
 		logger.info("Invalid Input flow");
+		
 		AirTerminationException basicLpsException = Assertions.assertThrows(AirTerminationException.class,
 				() -> airTerminationLpsServiceImpl.retrieveAirTerminationLps(null, 12));
 		assertEquals(basicLpsException.getMessage(), "Invalid Inputs");
 		
 		logger.info("Given UserName & Id doesn't exist in Air Termination LPS Details");
-		List<LpsAirDiscription> arrayList_1 = new ArrayList<LpsAirDiscription>();
+		List<AirTermination> arrayList_1 = new ArrayList<AirTermination>();
 		when(airTerminationLpsRepository.findByUserNameAndBasicLpsId("test@gmail.com", 12)).thenReturn(arrayList_1);
 		AirTerminationException basicLpsException_2 = Assertions.assertThrows(AirTerminationException.class,
 				() -> airTerminationLpsServiceImpl.retrieveAirTerminationLps("test@gmail.com", 12));
@@ -118,22 +203,24 @@ public class AirTerminationLpsServiceTest {
 	@Test
 	public void testUpdateAirTerminationLps() throws AirTerminationException {
 
-		lpsAirDiscription.setUserName("LVsystem@gmail.com");
-		lpsAirDiscription.setLpsAirDescId(1);
-		lpsAirDiscription.setBasicLpsId(1);
-		when(airTerminationLpsRepository.findById(1)).thenReturn(Optional.of(lpsAirDiscription));
-		airTerminationLpsServiceImpl.updateAirTerminationLps(lpsAirDiscription);
+		airTermination.setUserName("LVsystem@gmail.com");
+		airTermination.setAirTerminationId(1);
+		when(airTerminationLpsRepository.findById(1)).thenReturn(Optional.of(airTermination));
+		airTerminationLpsServiceImpl.updateAirTerminationLps(airTermination);
 
-		lpsAirDiscription.setBasicLpsId(2);
-		lpsAirDiscription.setLpsAirDescId(50);
-		when(airTerminationLpsRepository.findById(20)).thenReturn(Optional.of(lpsAirDiscription));
+		AirTermination airTermination_1 = new AirTermination();
+		airTermination_1.setBasicLpsId(2);
+		airTermination_1.setAirTerminationId(50);
+		airTermination_1.setUserName("cape");
+		
+		when(airTerminationLpsRepository.findById(20)).thenReturn(Optional.of(airTermination));
 		AirTerminationException basicLpsException_2 = Assertions.assertThrows(AirTerminationException.class,
-				() -> airTerminationLpsServiceImpl.updateAirTerminationLps(lpsAirDiscription));
+				() -> airTerminationLpsServiceImpl.updateAirTerminationLps(airTermination_1));
 		assertEquals(basicLpsException_2.getMessage(), "Given Basic LPS Id and LPS Air Description Id is Invalid");
 		
-		lpsAirDiscription.setBasicLpsId(null);
+		airTermination.setBasicLpsId(null);
 		AirTerminationException assertThrows_1 = Assertions.assertThrows(AirTerminationException.class,
-				() -> airTerminationLpsServiceImpl.updateAirTerminationLps(lpsAirDiscription));
+				() -> airTerminationLpsServiceImpl.updateAirTerminationLps(airTermination));
 		assertEquals(assertThrows_1.getMessage(), "Invalid inputs");
 		
 	}

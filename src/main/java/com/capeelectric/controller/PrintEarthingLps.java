@@ -1,5 +1,5 @@
-package com.capeelectric.controller;
-
+//package com.capeelectric.controller;
+//
 //import java.util.List;
 //
 //import org.slf4j.Logger;
@@ -30,6 +30,6 @@ package com.capeelectric.controller;
 //			@PathVariable Integer basicLpsId) throws EarthingLpsException {
 //		logger.info("started printingEarthingLPS function UserName : {}, BasicLpsId : {}", userName, basicLpsId);
 //		return new ResponseEntity<List<EarthingLpsDescription>>(
-//				printEarthingLpsService.printEarthingLpsDetails(userName, basicLpsId), HttpStatus.OK);
+//				printEarthingLpsService.printEarthingLpsDetails1(userName, basicLpsId), HttpStatus.OK);
 //	}
 //}

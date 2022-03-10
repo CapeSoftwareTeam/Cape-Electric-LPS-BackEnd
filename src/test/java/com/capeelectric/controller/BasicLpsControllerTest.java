@@ -48,8 +48,8 @@ public class BasicLpsControllerTest {
 	public void testAddBasicLpsDetails() throws BasicLpsException {
 		logger.info("testAddBasicLpsDetails Function Started");
 
-		ResponseEntity<BasicLps> addAirTerminalsDetails = basicLpsController.addBasicLpsDetails(basicLps);
-		assertEquals(addAirTerminalsDetails.getStatusCode(), HttpStatus.CREATED);
+		ResponseEntity<BasicLps> addBasicLpsDetails = basicLpsController.addBasicLpsDetails(basicLps);
+		assertEquals(addBasicLpsDetails.getStatusCode(), HttpStatus.CREATED);
 	}
 
 	@Test

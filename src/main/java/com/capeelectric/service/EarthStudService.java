@@ -9,6 +9,7 @@ import com.capeelectric.exception.EarthStudException;
 import com.capeelectric.exception.EarthingLpsException;
 import com.capeelectric.exception.SPDException;
 import com.capeelectric.model.EarthStudDescription;
+import com.capeelectric.model.EarthStudReport;
 
 
 /**
@@ -17,11 +18,11 @@ import com.capeelectric.model.EarthStudDescription;
  */
 public interface EarthStudService {
 
-	public void addEarthStudDetails(EarthStudDescription earthStudDescription)
-			throws EarthStudException, BasicLpsException, AirTerminationException, DownConductorException, EarthingLpsException, SPDException, Exception;
+	public void addEarthStudDetails(EarthStudReport earthStudReport)
+			throws EarthStudException;
 
-	public List<EarthStudDescription> retrieveEarthStudDetails(String userName, Integer basicLpsId)
+	public List<EarthStudReport> retrieveEarthStudDetails(String userName, Integer basicLpsId)
 			throws EarthStudException;
 	
-	public void updateEarthStudDetails(EarthStudDescription earthStudDescription) throws EarthStudException;
+	public void updateEarthStudDetails(EarthStudReport earthStudReport) throws EarthStudException;
 }

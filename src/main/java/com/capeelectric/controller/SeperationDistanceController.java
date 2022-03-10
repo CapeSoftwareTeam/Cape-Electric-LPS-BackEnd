@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.capeelectric.exception.SeperationDistanceException;
 import com.capeelectric.model.SeperationDistanceDescription;
+import com.capeelectric.model.SeperationDistanceReport;
 import com.capeelectric.service.SeperationDistanceService;
 
 
@@ -37,30 +38,32 @@ public class SeperationDistanceController {
 	private SeperationDistanceService seperationDistanceService;
 	
 	@PostMapping("/addSeperationDistance")
-	public ResponseEntity<String> addSeperationDistance(@RequestBody  SeperationDistanceDescription seperationDistanceDesc)
+	public ResponseEntity<String> addSeperationDistance(@RequestBody  SeperationDistanceReport seperationDistanceReport)
 			throws SeperationDistanceException {
 		logger.info("called addSeperationDistance function UserName : {}, BasicLpsId : {}",
-				seperationDistanceDesc.getUserName(), seperationDistanceDesc.getBasicLpsId());
-		seperationDistanceService.addSeperationDistance(seperationDistanceDesc);
+				seperationDistanceReport.getUserName(), seperationDistanceReport.getBasicLpsId());
+		seperationDistanceService.addSeperationDistance(seperationDistanceReport);
+		logger.info("Ended addSeperationDistance function");
 		return new ResponseEntity<String>("Seperation Distance Details Sucessfully Saved",
 				HttpStatus.CREATED);
 	}
 
 	@GetMapping("/retrieveSeperationDistance/{userName}/{basicLpsId}")
-	public ResponseEntity<List<SeperationDistanceDescription>> retrieveSeperationDistance(@PathVariable String userName,
+	public ResponseEntity<List<SeperationDistanceReport>> retrieveSeperationDistance(@PathVariable String userName,
 			@PathVariable Integer basicLpsId) throws SeperationDistanceException {
 		logger.info("started retrieveSeperationDistance function UserName : {}, SiteId : {}", userName, basicLpsId);
-		return new ResponseEntity<List<SeperationDistanceDescription>>(
+		return new ResponseEntity<List<SeperationDistanceReport>>(
 				seperationDistanceService.retrieveSeperationDetails(userName, basicLpsId), HttpStatus.OK);
 	}
 	
 	@PutMapping("/updateSeperationDistance")
-	public ResponseEntity<String> updateSeperationDistance(@RequestBody SeperationDistanceDescription seperationDistanceDesc)
+	public ResponseEntity<String> updateSeperationDistance(@RequestBody SeperationDistanceReport seperationDistanceReport)
 			throws SeperationDistanceException {
-		logger.info("called updateSeperationDistance function UserName : {},BasicLpsId : {},SeperationDistanceDescId : {}",
-				seperationDistanceDesc.getUserName(), seperationDistanceDesc.getBasicLpsId(),
-				seperationDistanceDesc.getSeperationDistanceId());
-		seperationDistanceService.updateSeperationDetails(seperationDistanceDesc);
+		logger.info("called updateSeperationDistance function UserName : {},BasicLpsId : {},SeperationDistanceReportId : {}",
+				seperationDistanceReport.getUserName(), seperationDistanceReport.getBasicLpsId(),
+				seperationDistanceReport.getSeperationDistanceReportId());
+		seperationDistanceService.updateSeperationDetails(seperationDistanceReport);
+		logger.info("Ended updateSeperationDistance function");
 	   return new ResponseEntity<String>("SPD Details successfully Updated", HttpStatus.OK);
 	}
 }

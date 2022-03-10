@@ -22,6 +22,7 @@ import com.capeelectric.exception.SPDException;
 import com.capeelectric.exception.SeperationDistanceException;
 import com.capeelectric.model.SPD;
 import com.capeelectric.model.SeperationDistanceDescription;
+import com.capeelectric.model.SeperationDistanceReport;
 import com.capeelectric.service.impl.SPDServiceImpl;
 import com.capeelectric.service.impl.SeperationDistanceServiceImpl;
 
@@ -37,36 +38,36 @@ public class SeperationDistanceControllerTest {
 	@MockBean
 	private SeperationDistanceServiceImpl seperationDistanceServiceImpl;
 
-	private SeperationDistanceDescription seperationDistanceDescription;
+	private SeperationDistanceReport seperationDistanceReport;
 
 	{
-		seperationDistanceDescription = new SeperationDistanceDescription();
-		seperationDistanceDescription.setBasicLpsId(1);
-		seperationDistanceDescription.setUserName("LVsystem@gmail.com");
-		seperationDistanceDescription.setUserName("Inspector@gmail.com");
-		seperationDistanceDescription.setBasicLpsId(1);
+		seperationDistanceReport = new SeperationDistanceReport();
+		seperationDistanceReport.setBasicLpsId(1);
+		seperationDistanceReport.setUserName("LVsystem@gmail.com");
+		seperationDistanceReport.setUserName("Inspector@gmail.com");
+		seperationDistanceReport.setBasicLpsId(1);
 	}
 
 	@Test
 	public void testAddSeperationDistance() throws SeperationDistanceException {
 		logger.info("testAddSeperationDistance Function Started");
 
-		doNothing().when(seperationDistanceServiceImpl).addSeperationDistance(seperationDistanceDescription);
+		doNothing().when(seperationDistanceServiceImpl).addSeperationDistance(seperationDistanceReport);
 		ResponseEntity<String> addSeperationDistance = seperationDistanceController
-				.addSeperationDistance(seperationDistanceDescription);
+				.addSeperationDistance(seperationDistanceReport);
 		equals(addSeperationDistance.getBody());
 		logger.info("testAddSeperationDistance Function Ended");
 	}
 
 	@Test
 	public void testRetrieveSeperationDetails() throws SeperationDistanceException {
-		List<SeperationDistanceDescription> arrayList = new ArrayList<>();
-		arrayList.add(seperationDistanceDescription);
+		List<SeperationDistanceReport> arrayList = new ArrayList<>();
+		arrayList.add(seperationDistanceReport);
 
 		logger.info("testRetrieveSPDDetails Function Started");
 
 		when(seperationDistanceServiceImpl.retrieveSeperationDetails("LVsystem@gmail.com", 12)).thenReturn(arrayList);
-		ResponseEntity<List<SeperationDistanceDescription>> retrieveSeperationDistance = seperationDistanceController
+		ResponseEntity<List<SeperationDistanceReport>> retrieveSeperationDistance = seperationDistanceController
 				.retrieveSeperationDistance("LVsystem@gmail.com", 12);
 		assertEquals(HttpStatus.OK, retrieveSeperationDistance.getStatusCode());
 
@@ -80,7 +81,7 @@ public class SeperationDistanceControllerTest {
 		logger.info("testUpdateSeperationDetails Function Started");
 		ResponseEntity<String> expectedResponseEntity = new ResponseEntity<String>(HttpStatus.OK);
 		ResponseEntity<String> actualResponseEntity = seperationDistanceController
-				.updateSeperationDistance(seperationDistanceDescription);
+				.updateSeperationDistance(seperationDistanceReport);
 		assertEquals(actualResponseEntity.getStatusCode(), expectedResponseEntity.getStatusCode());
 		logger.info("testUpdateSeperationDetails Function Ended");
 	}

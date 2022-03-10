@@ -26,13 +26,7 @@ public class EarthingClamps implements Serializable {
 	private Integer earthingClampsId;
 
 	@Column(name = "FLAG")
-	private Boolean flag;
-	
-	@Column(name = "LOCATION_NUMBER")
-	private Integer locationNumber;
-
-	@Column(name = "LOCATION_NAME")
-	private String locationName;
+	private String flag;
 
 	@Column(name = "PHYSICAL_INSPECTIONINOB")
 	private String physicalInspectionInOb;
@@ -65,25 +59,25 @@ public class EarthingClamps implements Serializable {
 	private String materialOfClampsInRem;
 
 	@Column(name = "TOTALNO_CLAMPSINOB")
-	private String totalNoClampsInOb;
+	private Integer totalNoClampsInOb;
 
 	@Column(name = "TOTALNO_CLAMPSINREM")
 	private String totalNoClampsInRem;
 
 	@Column(name = "INSPECTED_CLAMPSINOB")
-	private String inspectedClampsInOb;
+	private Integer inspectedClampsInOb;
 
 	@Column(name = "INSPECTED_CLAMPSINREM")
 	private String inspectedClampsInRem;
 
 	@Column(name = "INSPECTED_PASSEDINOB")
-	private String inspectionPassedInOb;
+	private Integer inspectionPassedInOb;
 
 	@Column(name = "INSPECTED_PASSEDINREM")
 	private String inspectionPassedInRem;
 
 	@Column(name = "INSPECTED_FAILEDINOB")
-	private String inspectionFailedInOb;
+	private Integer inspectionFailedInOb;
 
 	@Column(name = "INSPECTED_FAILEDINREM")
 	private String inspectionFailedInRem;
@@ -97,21 +91,6 @@ public class EarthingClamps implements Serializable {
 		return earthingClampsId;
 	}
 
-	public Integer getLocationNumber() {
-		return locationNumber;
-	}
-
-	public void setLocationNumber(Integer locationNumber) {
-		this.locationNumber = locationNumber;
-	}
-
-	public String getLocationName() {
-		return locationName;
-	}
-
-	public void setLocationName(String locationName) {
-		this.locationName = locationName;
-	}
 
 	public void setEarthingClampsId(Integer earthingClampsId) {
 		this.earthingClampsId = earthingClampsId;
@@ -197,14 +176,6 @@ public class EarthingClamps implements Serializable {
 		this.materialOfClampsInRem = materialOfClampsInRem;
 	}
 
-	public String getTotalNoClampsInOb() {
-		return totalNoClampsInOb;
-	}
-
-	public void setTotalNoClampsInOb(String totalNoClampsInOb) {
-		this.totalNoClampsInOb = totalNoClampsInOb;
-	}
-
 	public String getTotalNoClampsInRem() {
 		return totalNoClampsInRem;
 	}
@@ -221,28 +192,12 @@ public class EarthingClamps implements Serializable {
 		this.earthingLpsDescription = earthingLpsDescription;
 	}
 
-	public String getInspectedClampsInOb() {
-		return inspectedClampsInOb;
-	}
-
-	public void setInspectedClampsInOb(String inspectedClampsInOb) {
-		this.inspectedClampsInOb = inspectedClampsInOb;
-	}
-
 	public String getInspectedClampsInRem() {
 		return inspectedClampsInRem;
 	}
 
 	public void setInspectedClampsInRem(String inspectedClampsInRem) {
 		this.inspectedClampsInRem = inspectedClampsInRem;
-	}
-
-	public String getInspectionPassedInOb() {
-		return inspectionPassedInOb;
-	}
-
-	public void setInspectionPassedInOb(String inspectionPassedInOb) {
-		this.inspectionPassedInOb = inspectionPassedInOb;
 	}
 
 	public String getInspectionPassedInRem() {
@@ -253,14 +208,6 @@ public class EarthingClamps implements Serializable {
 		this.inspectionPassedInRem = inspectionPassedInRem;
 	}
 
-	public String getInspectionFailedInOb() {
-		return inspectionFailedInOb;
-	}
-
-	public void setInspectionFailedInOb(String inspectionFailedInOb) {
-		this.inspectionFailedInOb = inspectionFailedInOb;
-	}
-
 	public String getInspectionFailedInRem() {
 		return inspectionFailedInRem;
 	}
@@ -269,12 +216,61 @@ public class EarthingClamps implements Serializable {
 		this.inspectionFailedInRem = inspectionFailedInRem;
 	}
 
-	public Boolean getFlag() {
+
+	public String getFlag() {
 		return flag;
 	}
 
-	public void setFlag(Boolean flag) {
+
+	public void setFlag(String flag) {
 		this.flag = flag;
 	}
+
+
+	public Integer getTotalNoClampsInOb() {
+		return totalNoClampsInOb;
+	}
+
+
+	public void setTotalNoClampsInOb(Integer totalNoClampsInOb) {
+		this.totalNoClampsInOb = totalNoClampsInOb;
+	}
+
+
+	public Integer getInspectedClampsInOb() {
+		return inspectedClampsInOb;
+	}
+
+
+	public void setInspectedClampsInOb(Integer inspectedClampsInOb) {
+		this.inspectedClampsInOb = inspectedClampsInOb;
+	}
+
+
+	public Integer getInspectionPassedInOb() {
+		return inspectionPassedInOb;
+	}
+
+
+	public void setInspectionPassedInOb(Integer inspectionPassedInOb) {
+		this.inspectionPassedInOb = inspectionPassedInOb;
+	}
+
+
+	public Integer getInspectionFailedInOb() {
+		return inspectionFailedInOb;
+	}
+
+
+	public void setInspectionFailedInOb(Integer inspectionFailedInOb) {
+		this.inspectionFailedInOb = inspectionFailedInOb;
+	}
+
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	
 
 }

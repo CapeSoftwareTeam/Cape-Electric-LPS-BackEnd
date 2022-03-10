@@ -4,18 +4,25 @@
 package com.capeelectric.service.impl;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import javax.transaction.Transactional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.capeelectric.exception.SPDException;
 import com.capeelectric.model.BasicLps;
 import com.capeelectric.model.SPD;
+import com.capeelectric.model.SpdReport;
 import com.capeelectric.repository.BasicLpsRepository;
 import com.capeelectric.repository.SPDRepository;
 import com.capeelectric.service.SPDService;
+import com.capeelectric.util.FindNonRemovedObjects;
 import com.capeelectric.util.UserFullName;
 
 /**
@@ -37,74 +44,106 @@ public class SPDServiceImpl implements SPDService{
 	@Autowired
 	private UserFullName userFullName;
 	
+	@Autowired
+	private FindNonRemovedObjects findNonRemovedObjects;
+	
+	@Transactional
 	@Override
-	public void addSPDDetails(SPD spdDesc)
+	public void addSPDDetails(SpdReport spdReport)
 			throws  SPDException{
-		if (spdDesc != null && spdDesc.getUserName() != null
-				&& !spdDesc.getUserName().isEmpty() && spdDesc.getBasicLpsId() != null
-				&& spdDesc.getBasicLpsId() != 0) {
-			Optional<BasicLps> basicLpsRepo = basicLpsRepository.findByBasicLpsId(spdDesc.getBasicLpsId());
+		logger.info("Called addSPDDetails function");
+
+		if (spdReport != null && spdReport.getUserName() != null
+				&& !spdReport.getUserName().isEmpty() && spdReport.getBasicLpsId() != null
+				&& spdReport.getBasicLpsId() != 0) {
+			Optional<BasicLps> basicLpsRepo = basicLpsRepository.findByBasicLpsId(spdReport.getBasicLpsId());
 			if(basicLpsRepo.isPresent()
-					&& basicLpsRepo.get().getBasicLpsId().equals(spdDesc.getBasicLpsId())) {
-				Optional<SPD> spdRepo = spdRepository
-						.findByBasicLpsId(spdDesc.getBasicLpsId());
+					&& basicLpsRepo.get().getBasicLpsId().equals(spdReport.getBasicLpsId())) {
+				Optional<SpdReport> spdRepo = spdRepository
+						.findByBasicLpsId(spdReport.getBasicLpsId());
 				if (!spdRepo.isPresent()
-						|| !spdRepo.get().getBasicLpsId().equals(spdDesc.getBasicLpsId())) {
-					
-					spdDesc.setCreatedDate(LocalDateTime.now());
-					spdDesc.setUpdatedDate(LocalDateTime.now());
-					spdDesc.setCreatedBy(userFullName.findByUserName(spdDesc.getUserName()));
-					spdDesc.setUpdatedBy(userFullName.findByUserName(spdDesc.getUserName()));
-					spdRepository.save(spdDesc);
+						|| !spdRepo.get().getBasicLpsId().equals(spdReport.getBasicLpsId())) {
+					List<SPD> spd = spdReport.getSpd();
+					if(spd != null && spd.size() > 0) {
+						spdReport.setCreatedDate(LocalDateTime.now());
+						spdReport.setUpdatedDate(LocalDateTime.now());
+						spdReport.setCreatedBy(userFullName.findByUserName(spdReport.getUserName()));
+						spdReport.setUpdatedBy(userFullName.findByUserName(spdReport.getUserName()));
+						spdRepository.save(spdReport);
+						logger.debug("SPD Report Details Successfully Saved in DB");
+					} else {
+						logger.error("Please fill all the fields before clicking next button");
+						throw new SPDException("Please fill all the fields before clicking next button");
+					}
 				} else {
+					logger.error("Basic LPS Id Already Available.Create New Basic Id");
 					throw new SPDException("Basic LPS Id Already Available.Create New Basic Id");
 				}
 			}
 			else {
+				logger.error("Given Basic LPS Id is Not Registered in Basic LPS");
 				throw new SPDException("Given Basic LPS Id is Not Registered in Basic LPS");
 			}
 		}
 		else {
+			logger.error("Invalid Inputs");
 			throw new SPDException("Invalid Inputs");
 		}
-			
+		logger.info("Ended addSPDDetails function");
+
 	}
 	
 	@Override
-	public List<SPD> retrieveSPDDetails(String userName, Integer basicLpsId)
+	public List<SpdReport> retrieveSPDDetails(String userName, Integer basicLpsId)
 			throws SPDException {
+		logger.info("Called retrieveSPDDetails function");
+
 		if (userName != null) {
-			List<SPD> spdRepo = spdRepository.findByUserNameAndBasicLpsId(userName,
+			List<SpdReport> spdRepo = spdRepository.findByUserNameAndBasicLpsId(userName,
 					basicLpsId);
-			if (spdRepo != null && !spdRepo.isEmpty()) {				
+			if (spdRepo != null && !spdRepo.isEmpty()) {
+				for(SpdReport spdReportItr : spdRepo) {
+					spdReportItr.setSpd(findNonRemovedObjects.findNonRemovedSpdBuildings(spdReportItr));
+					logger.debug("Successfully done findNonRemovedSpdBuildings() call");
+				}
+				logger.info("Ended retrieveSPDDetails function");
+
 				return spdRepo;
 			} else {
-				throw new SPDException("Given UserName & Id doesn't exist in Down Conductor Details");
-			}
+				logger.error("Given UserName & Id doesn't exist in SPD Report Details");
+				return new ArrayList<SpdReport>();			}
 		} else {
+			logger.error("Invalid Inputs");
 			throw new SPDException("Invalid Inputs");
 		}
 	}
 	
+	@Transactional
 	@Override
-	public void updateSpdDetails(SPD spdDesc) throws SPDException {
+	public void updateSpdDetails(SpdReport spdReport) throws SPDException {
+		logger.info("Called updateSpdDetails function");
 
-		if (spdDesc != null && spdDesc.getSpdId() != null
-				&& spdDesc.getSpdId() != 0 && spdDesc.getBasicLpsId() != null
-				&& spdDesc.getBasicLpsId() != 0) {
-			Optional<SPD> spdRepo = spdRepository
-					.findById(spdDesc.getSpdId());
+		if (spdReport != null && spdReport.getSpdReportId() != null
+				&& spdReport.getSpdReportId() != 0 && spdReport.getBasicLpsId() != null
+				&& spdReport.getBasicLpsId() != 0) {
+			Optional<SpdReport> spdRepo = spdRepository
+					.findById(spdReport.getSpdReportId());
 			if (spdRepo.isPresent()
-					&& spdRepo.get().getBasicLpsId().equals(spdDesc.getBasicLpsId())) {
-				spdDesc.setUpdatedDate(LocalDateTime.now());
-				spdDesc.setUpdatedBy(userFullName.findByUserName(spdDesc.getUserName()));
-				spdRepository.save(spdDesc);
+					&& spdRepo.get().getBasicLpsId().equals(spdReport.getBasicLpsId())) {
+				spdReport.setUpdatedDate(LocalDateTime.now());
+				spdReport.setUpdatedBy(userFullName.findByUserName(spdReport.getUserName()));
+				spdRepository.save(spdReport);
+				logger.debug("SPD Report Details Successfully Updated in DB");
 			} else {
+				logger.error("Given Basic LPS Id and SPD Id is Invalid");
 				throw new SPDException("Given Basic LPS Id and SPD Id is Invalid");
 			}
 
 		} else {
+			logger.error("Invalid inputs");
 			throw new SPDException("Invalid inputs");
 		}
+		logger.info("Ended updateSpdDetails function");
+
 	}
 }

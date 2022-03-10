@@ -1,5 +1,7 @@
 package com.capeelectric.model;
 
+import java.io.Serializable;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,8 +15,8 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 @Entity
 @Table(name = "SEPERATION_DISTANCE_DESCRIPTION_TABLE")
-public class SeparateDistance {
-	
+public class SeparateDistance implements Serializable {
+	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,14 +24,13 @@ public class SeparateDistance {
 	private Integer seperationDistanceDescId;
 	
 	@Column(name = "FLAG")
-	private Boolean flag;
+	private String flag;
 	
 	@Column(name = "SEPERATION_DISTANCE_DESC")
 	private String seperationDistanceDesc;
 	
 	@Column(name = "SEPERATION_DISTANCE_OB")
-	private String seperationDistanceOb;
-	
+	private Integer seperationDistanceOb;
 	
 	@Column(name = "SEPERATION_DISTANCE_REM")
 	private String seperationDistanceRem;
@@ -56,11 +57,12 @@ public class SeparateDistance {
 		this.seperationDistanceDesc = seperationDistanceDesc;
 	}
 
-	public String getSeperationDistanceOb() {
+
+	public Integer getSeperationDistanceOb() {
 		return seperationDistanceOb;
 	}
 
-	public void setSeperationDistanceOb(String seperationDistanceOb) {
+	public void setSeperationDistanceOb(Integer seperationDistanceOb) {
 		this.seperationDistanceOb = seperationDistanceOb;
 	}
 
@@ -80,11 +82,11 @@ public class SeparateDistance {
 		this.seperationDistanceDescription = seperationDistanceDescription;
 	}
 
-	public Boolean getFlag() {
+	public String getFlag() {
 		return flag;
 	}
 
-	public void setFlag(Boolean flag) {
+	public void setFlag(String flag) {
 		this.flag = flag;
 	}
 

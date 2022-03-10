@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.capeelectric.exception.SeperationDistanceException;
 import com.capeelectric.model.SeperationDistanceDescription;
+import com.capeelectric.model.SeperationDistanceReport;
 
 
 
@@ -16,11 +17,11 @@ import com.capeelectric.model.SeperationDistanceDescription;
  */
 public interface SeperationDistanceService {
 
-	public void addSeperationDistance(SeperationDistanceDescription seperationDistanceDesc)
+	public void addSeperationDistance(SeperationDistanceReport seperationDistanceReport)
 			throws SeperationDistanceException;
 
-	public List<SeperationDistanceDescription> retrieveSeperationDetails(String userName, Integer basicLpsId)
+	public List<SeperationDistanceReport> retrieveSeperationDetails(String userName, Integer basicLpsId)
 			throws SeperationDistanceException;
 	
-	public void updateSeperationDetails(SeperationDistanceDescription seperationDistanceDesc) throws SeperationDistanceException;
+	public void updateSeperationDetails(SeperationDistanceReport seperationDistanceReport) throws SeperationDistanceException;
 }

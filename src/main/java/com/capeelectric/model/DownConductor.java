@@ -10,7 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -27,13 +26,7 @@ public class DownConductor implements Serializable {
 	private Integer downConductorId;
 
 	@Column(name = "FLAG")
-	private Boolean flag;
-	
-	@Column(name = "LOCATION_NUMBER")
-	private Integer locationNumber;
-
-	@Column(name = "LOCATION_NAME")
-	private String locationName;
+	private String flag;
 
 	@Column(name = "PHYSICAL_INSPECTION_OB")
 	private String physicalInspectionOb;
@@ -70,6 +63,12 @@ public class DownConductor implements Serializable {
 
 	@Column(name = "DOWNCONDUCTOR_GUTTERS_REM")
 	private String downConductGutterRem;
+	
+	@Column(name = "INSTALLED_SHAFT_DOWNCONDUCTOR_OB")
+	private String installedShaftDownConductorOb;
+
+	@Column(name = "INSTALLED_SHAFT_DOWNCONDUCTOR_REM")
+	private String installedShaftDownConductorRem;
 
 	@Column(name = "ENSURE_DOWNCONDUCTOR_OB")
 	private String ensureDownCnoductOb;
@@ -84,40 +83,58 @@ public class DownConductor implements Serializable {
 	private String installationDownConductRem;
 
 	@Column(name = "MAXIMUM_DOWNCONDUCTOR_OB")
-	private String maximumDownConductOb;
+	private Integer maximumDownConductOb;
 
 	@Column(name = "MAXIMUM_DOWNCONDUCTOR_REM")
 	private String maximumDownConductRem;
 
 	@Column(name = "MINIMUM_DOWNCONDUCTOR_OB")
-	private String manimumDownConductOb;
+	private Integer manimumDownConductOb;
 
 	@Column(name = "MINIMUM_DOWNCONDUCTOR_REM")
 	private String manimumDownConductRem;
 
 	@Column(name = "TOTALNO_DOWNCONDUCTOR_OB")
-	private String totalNoDownConductOb;
+	private Integer totalNoDownConductOb;
 
 	@Column(name = "TOTALNO_DOWNCONDUCTOR_REM")
 	private String totalNoDownConductRem;
 
 	@Column(name = "INSPECTED_NO_OB")
-	private String inspectedNoOb;
+	private Integer inspectedNoOb;
 
 	@Column(name = "INSPECTED_NO_REM")
 	private String inspectedNoRem;
 
 	@Column(name = "INSPECTIONSPASSED_NO_OB")
-	private String inspectionPassedNoOb;
+	private Integer inspectionPassedNoOb;
 
 	@Column(name = "INSPECTIONSPASSED_NO_REM")
 	private String inspectionPassedNoRem;
 
 	@Column(name = "INSPECTIONFAILED_NO_OB")
-	private String inspectionFailedNoOb;
+	private Integer inspectionFailedNoOb;
 
 	@Column(name = "INSPECTIONFAILED_NO_REM")
 	private String inspectionFailedNoRem;
+	
+	@Column(name = "AVG_DANGEROUS_BENDS_OB")
+	private Integer averageBendsOb;
+
+	@Column(name = "AVG_DANGEROUS_BENDS_REM")
+	private String averageBendsRem;
+	
+	@Column(name = "TYPE_NATURAL_DOWN_CONDUCTORS_OB")
+	private String naturalDownCondutTypeOb;
+
+	@Column(name = "TYPE_NATURAL_DOWN_CONDUCTORS_REM")
+	private String naturalDownCondutTypeRem;
+	
+	@Column(name = "NATURAL_DOWN_CONDUCTORS_DIMENSION_OB")
+	private String naturalDownCondDimensionOb;
+
+	@Column(name = "NATURAL_DOWN_CONDUCTORS_DIMENSION_REM")
+	private String naturalDownCondDimensionRem;
 
 	@JsonBackReference
 	@ManyToOne(cascade = CascadeType.ALL)
@@ -130,22 +147,6 @@ public class DownConductor implements Serializable {
 
 	public void setDownConductorId(Integer downConductorId) {
 		this.downConductorId = downConductorId;
-	}
-
-	public Integer getLocationNumber() {
-		return locationNumber;
-	}
-
-	public void setLocationNumber(Integer locationNumber) {
-		this.locationNumber = locationNumber;
-	}
-
-	public String getLocationName() {
-		return locationName;
-	}
-
-	public void setLocationName(String locationName) {
-		this.locationName = locationName;
 	}
 
 	public String getPhysicalInspectionOb() {
@@ -276,13 +277,6 @@ public class DownConductor implements Serializable {
 		this.installationDownConductRem = installationDownConductRem;
 	}
 
-	public String getMaximumDownConductOb() {
-		return maximumDownConductOb;
-	}
-
-	public void setMaximumDownConductOb(String maximumDownConductOb) {
-		this.maximumDownConductOb = maximumDownConductOb;
-	}
 
 	public String getMaximumDownConductRem() {
 		return maximumDownConductRem;
@@ -290,14 +284,6 @@ public class DownConductor implements Serializable {
 
 	public void setMaximumDownConductRem(String maximumDownConductRem) {
 		this.maximumDownConductRem = maximumDownConductRem;
-	}
-
-	public String getManimumDownConductOb() {
-		return manimumDownConductOb;
-	}
-
-	public void setManimumDownConductOb(String manimumDownConductOb) {
-		this.manimumDownConductOb = manimumDownConductOb;
 	}
 
 	public String getManimumDownConductRem() {
@@ -308,28 +294,12 @@ public class DownConductor implements Serializable {
 		this.manimumDownConductRem = manimumDownConductRem;
 	}
 
-	public String getTotalNoDownConductOb() {
-		return totalNoDownConductOb;
-	}
-
-	public void setTotalNoDownConductOb(String totalNoDownConductOb) {
-		this.totalNoDownConductOb = totalNoDownConductOb;
-	}
-
 	public String getTotalNoDownConductRem() {
 		return totalNoDownConductRem;
 	}
 
 	public void setTotalNoDownConductRem(String totalNoDownConductRem) {
 		this.totalNoDownConductRem = totalNoDownConductRem;
-	}
-
-	public String getInspectedNoOb() {
-		return inspectedNoOb;
-	}
-
-	public void setInspectedNoOb(String inspectedNoOb) {
-		this.inspectedNoOb = inspectedNoOb;
 	}
 
 	public String getInspectedNoRem() {
@@ -340,28 +310,12 @@ public class DownConductor implements Serializable {
 		this.inspectedNoRem = inspectedNoRem;
 	}
 
-	public String getInspectionPassedNoOb() {
-		return inspectionPassedNoOb;
-	}
-
-	public void setInspectionPassedNoOb(String inspectionPassedNoOb) {
-		this.inspectionPassedNoOb = inspectionPassedNoOb;
-	}
-
 	public String getInspectionPassedNoRem() {
 		return inspectionPassedNoRem;
 	}
 
 	public void setInspectionPassedNoRem(String inspectionPassedNoRem) {
 		this.inspectionPassedNoRem = inspectionPassedNoRem;
-	}
-
-	public String getInspectionFailedNoOb() {
-		return inspectionFailedNoOb;
-	}
-
-	public void setInspectionFailedNoOb(String inspectionFailedNoOb) {
-		this.inspectionFailedNoOb = inspectionFailedNoOb;
 	}
 
 	public String getInspectionFailedNoRem() {
@@ -380,12 +334,130 @@ public class DownConductor implements Serializable {
 		this.downConductorDescription = downConductorDescription;
 	}
 
-	public Boolean getFlag() {
+	public String getFlag() {
 		return flag;
 	}
 
-	public void setFlag(Boolean flag) {
+	public void setFlag(String flag) {
 		this.flag = flag;
 	}
 
+	public String getInstalledShaftDownConductorOb() {
+		return installedShaftDownConductorOb;
+	}
+
+	public void setInstalledShaftDownConductorOb(String installedShaftDownConductorOb) {
+		this.installedShaftDownConductorOb = installedShaftDownConductorOb;
+	}
+
+	public String getInstalledShaftDownConductorRem() {
+		return installedShaftDownConductorRem;
+	}
+
+	public void setInstalledShaftDownConductorRem(String installedShaftDownConductorRem) {
+		this.installedShaftDownConductorRem = installedShaftDownConductorRem;
+	}
+
+	public Integer getMaximumDownConductOb() {
+		return maximumDownConductOb;
+	}
+
+	public void setMaximumDownConductOb(Integer maximumDownConductOb) {
+		this.maximumDownConductOb = maximumDownConductOb;
+	}
+
+	public Integer getManimumDownConductOb() {
+		return manimumDownConductOb;
+	}
+
+	public void setManimumDownConductOb(Integer manimumDownConductOb) {
+		this.manimumDownConductOb = manimumDownConductOb;
+	}
+
+	public Integer getTotalNoDownConductOb() {
+		return totalNoDownConductOb;
+	}
+
+	public void setTotalNoDownConductOb(Integer totalNoDownConductOb) {
+		this.totalNoDownConductOb = totalNoDownConductOb;
+	}
+
+	public Integer getInspectedNoOb() {
+		return inspectedNoOb;
+	}
+
+	public void setInspectedNoOb(Integer inspectedNoOb) {
+		this.inspectedNoOb = inspectedNoOb;
+	}
+
+	public Integer getInspectionPassedNoOb() {
+		return inspectionPassedNoOb;
+	}
+
+	public void setInspectionPassedNoOb(Integer inspectionPassedNoOb) {
+		this.inspectionPassedNoOb = inspectionPassedNoOb;
+	}
+
+	public Integer getInspectionFailedNoOb() {
+		return inspectionFailedNoOb;
+	}
+
+	public void setInspectionFailedNoOb(Integer inspectionFailedNoOb) {
+		this.inspectionFailedNoOb = inspectionFailedNoOb;
+	}
+	
+
+	public Integer getAverageBendsOb() {
+		return averageBendsOb;
+	}
+
+	public void setAverageBendsOb(Integer averageBendsOb) {
+		this.averageBendsOb = averageBendsOb;
+	}
+
+	public String getAverageBendsRem() {
+		return averageBendsRem;
+	}
+
+	public void setAverageBendsRem(String averageBendsRem) {
+		this.averageBendsRem = averageBendsRem;
+	}
+
+	public String getNaturalDownCondutTypeOb() {
+		return naturalDownCondutTypeOb;
+	}
+
+	public void setNaturalDownCondutTypeOb(String naturalDownCondutTypeOb) {
+		this.naturalDownCondutTypeOb = naturalDownCondutTypeOb;
+	}
+
+	public String getNaturalDownCondutTypeRem() {
+		return naturalDownCondutTypeRem;
+	}
+
+	public void setNaturalDownCondutTypeRem(String naturalDownCondutTypeRem) {
+		this.naturalDownCondutTypeRem = naturalDownCondutTypeRem;
+	}
+
+	public String getNaturalDownCondDimensionOb() {
+		return naturalDownCondDimensionOb;
+	}
+
+	public void setNaturalDownCondDimensionOb(String naturalDownCondDimensionOb) {
+		this.naturalDownCondDimensionOb = naturalDownCondDimensionOb;
+	}
+
+	public String getNaturalDownCondDimensionRem() {
+		return naturalDownCondDimensionRem;
+	}
+
+	public void setNaturalDownCondDimensionRem(String naturalDownCondDimensionRem) {
+		this.naturalDownCondDimensionRem = naturalDownCondDimensionRem;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	
 }

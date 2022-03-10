@@ -4,21 +4,14 @@
 package com.capeelectric.model;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.Set;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
 import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
-
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 /**
  * @author CAPE-SOFTWARE
@@ -69,29 +62,29 @@ public class BasicLps implements Serializable {
 	@Column(name = "LOCATION")
 	private String location;
 	
-	@Column(name = "INSTALLATION_CONTRACTOR")
-	private String installationContractor;
-	
 	@Column(name = "INDUSTRY_TYPE")
 	private String industryType;
 	
-	@Column(name = "BUILDING_TYPE")
-	private String buildingType;
-	
-	@Column(name = "BUILDING_LENGTH")
-	private String buildingLength;
-	
-	@Column(name = "BUILDING_WIDTH")
-	private String buildingWidth;
-	
-	@Column(name = "BUILDING_HEIGHT")
-	private String buildingHeight;
-	
-	@Column(name = "LEVEL_OF_PROTECTION")
-	private String levelOfProtection;
-	
 	@Column(name = "SOIL_RESISTIVITY")
 	private String soilResistivity;
+	
+	@Column(name = "NAME")
+	private String name;
+	
+	@Column(name = "COMPANY")
+	private String company;
+	
+	@Column(name = "DESIGNATION")
+	private String designation;
+	
+	@Column(name = "CONTACT_NUMBER")
+	private String contactNumber;
+	
+	@Column(name = "MAIL_ID")
+	private String mailId;
+	
+	@Column(name = "PREVIOUS_REPORT")
+	private String availabilityOfPreviousReport;
 	
 	@Column(name = "ALL_STEPS_COMPLETED")
 	private String allStepsCompleted;
@@ -107,19 +100,7 @@ public class BasicLps implements Serializable {
 	
 	@Column(name = "UPDATED_DATE")
 	private LocalDateTime updatedDate;
-
 	
-	@JsonManagedReference
-	@OneToMany(mappedBy = "basicLps", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private Set<BasicLpsDescription> basicLpsDescription;
-	
-	public String getLevelOfProtection() {
-		return levelOfProtection;
-	}
-
-	public void setLevelOfProtection(String levelOfProtection) {
-		this.levelOfProtection = levelOfProtection;
-	}
 
 	public String getSoilResistivity() {
 		return soilResistivity;
@@ -202,14 +183,6 @@ public class BasicLps implements Serializable {
 		this.location = location;
 	}
 
-	public String getInstallationContractor() {
-		return installationContractor;
-	}
-
-	public void setInstallationContractor(String installationContractor) {
-		this.installationContractor = installationContractor;
-	}
-
 	public String getIndustryType() {
 		return industryType;
 	}
@@ -217,39 +190,56 @@ public class BasicLps implements Serializable {
 	public void setIndustryType(String industryType) {
 		this.industryType = industryType;
 	}
-
-	public String getBuildingType() {
-		return buildingType;
-	}
-
-	public void setBuildingType(String buildingType) {
-		this.buildingType = buildingType;
-	}
-
-	public String getBuildingLength() {
-		return buildingLength;
-	}
-
-	public void setBuildingLength(String buildingLength) {
-		this.buildingLength = buildingLength;
-	}
-
-	public String getBuildingWidth() {
-		return buildingWidth;
-	}
-
-	public void setBuildingWidth(String buildingWidth) {
-		this.buildingWidth = buildingWidth;
-	}
-
-	public String getBuildingHeight() {
-		return buildingHeight;
-	}
-
-	public void setBuildingHeight(String buildingHeight) {
-		this.buildingHeight = buildingHeight;
-	}
 	
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getCompany() {
+		return company;
+	}
+
+	public void setCompany(String company) {
+		this.company = company;
+	}
+
+	public String getDesignation() {
+		return designation;
+	}
+
+	public void setDesignation(String designation) {
+		this.designation = designation;
+	}
+
+	public String getContactNumber() {
+		return contactNumber;
+	}
+
+	public void setContactNumber(String contactNumber) {
+		this.contactNumber = contactNumber;
+	}
+
+	public String getMailId() {
+		return mailId;
+	}
+
+	public void setMailId(String mailId) {
+		this.mailId = mailId;
+	}
+
+	public String getAvailabilityOfPreviousReport() {
+		return availabilityOfPreviousReport;
+	}
+
+	public void setAvailabilityOfPreviousReport(String availabilityOfPreviousReport) {
+		this.availabilityOfPreviousReport = availabilityOfPreviousReport;
+	}
+
 	public LocalDateTime getCreatedDate() {
 		return createdDate;
 	}
@@ -288,14 +278,6 @@ public class BasicLps implements Serializable {
 
 	public void setUserName(String userName) {
 		this.userName = userName;
-	}
-
-	public Set<BasicLpsDescription> getBasicLpsDescription() {
-		return basicLpsDescription;
-	}
-
-	public void setBasicLpsDescription(Set<BasicLpsDescription> basicLpsDescription) {
-		this.basicLpsDescription = basicLpsDescription;
 	}
 
 	public String getAllStepsCompleted() {

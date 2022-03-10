@@ -26,13 +26,7 @@ public class Holder implements Serializable {
 	private Integer holderId;
 
 	@Column(name = "FLAG")
-	private Boolean flag;
-	
-	@Column(name = "LOCATION_NUMBER")
-	private Integer locationNumber;
-
-	@Column(name = "LOCATION_NAME")
-	private String locationName;
+	private String flag;
 
 	@Column(name = "PHYSICAL_INSPECTION_OB")
 	private String physicalInspectionOb;
@@ -51,6 +45,12 @@ public class Holder implements Serializable {
 
 	@Column(name = "CONDUCTOR_HOLDED_REM")
 	private String conductorHoldedRem;
+	
+	@Column(name = "SUCCESSIVE_DISTANCE_OB")
+	private Integer successiveDistanceOb;
+
+	@Column(name = "SUCCESSIVE_DISTANCE_REM")
+	private String successiveDistanceRem;
 
 	@Column(name = "MATERIAL_HOLDER_OB")
 	private String materialHolderOb;
@@ -59,25 +59,25 @@ public class Holder implements Serializable {
 	private String materialHolderRem;
 
 	@Column(name = "TOTALNO_HOLDERS_OB")
-	private String totalNoHolderOb;
+	private Integer totalNoHolderOb;
 
 	@Column(name = "TOTALNO_HOLDERS_REM")
 	private String totalNoHolderRem;
 
 	@Column(name = "INSPECTED_NO_OB")
-	private String inspectedNoOb;
+	private Integer inspectedNoOb;
 
 	@Column(name = "INSPECTED_NO_REM")
 	private String inspectedNoRem;
 
 	@Column(name = "INSPECTIONSPASSED_NO_OB")
-	private String inspectionPassedNoOb;
+	private Integer inspectionPassedNoOb;
 
 	@Column(name = "INSPECTIONSPASSED_NO_REM")
 	private String inspectionPassedNoRem;
 
 	@Column(name = "INSPECTIONFAILED_NO_OB")
-	private String inspectionFailedNoOb;
+	private Integer inspectionFailedNoOb;
 
 	@Column(name = "INSPECTIONFAILED_NO_REM")
 	private String inspectionFailedNoRem;
@@ -89,22 +89,6 @@ public class Holder implements Serializable {
 
 	public Integer getHolderId() {
 		return holderId;
-	}
-
-	public Integer getLocationNumber() {
-		return locationNumber;
-	}
-
-	public void setLocationNumber(Integer locationNumber) {
-		this.locationNumber = locationNumber;
-	}
-
-	public String getLocationName() {
-		return locationName;
-	}
-
-	public void setLocationName(String locationName) {
-		this.locationName = locationName;
 	}
 
 	public void setHolderId(Integer holderId) {
@@ -175,28 +159,12 @@ public class Holder implements Serializable {
 		this.materialHolderRem = materialHolderRem;
 	}
 
-	public String getTotalNoHolderOb() {
-		return totalNoHolderOb;
-	}
-
-	public void setTotalNoHolderOb(String totalNoHolderOb) {
-		this.totalNoHolderOb = totalNoHolderOb;
-	}
-
 	public String getTotalNoHolderRem() {
 		return totalNoHolderRem;
 	}
 
 	public void setTotalNoHolderRem(String totalNoHolderRem) {
 		this.totalNoHolderRem = totalNoHolderRem;
-	}
-
-	public String getInspectedNoOb() {
-		return inspectedNoOb;
-	}
-
-	public void setInspectedNoOb(String inspectedNoOb) {
-		this.inspectedNoOb = inspectedNoOb;
 	}
 
 	public String getInspectedNoRem() {
@@ -207,28 +175,12 @@ public class Holder implements Serializable {
 		this.inspectedNoRem = inspectedNoRem;
 	}
 
-	public String getInspectionPassedNoOb() {
-		return inspectionPassedNoOb;
-	}
-
-	public void setInspectionPassedNoOb(String inspectionPassedNoOb) {
-		this.inspectionPassedNoOb = inspectionPassedNoOb;
-	}
-
 	public String getInspectionPassedNoRem() {
 		return inspectionPassedNoRem;
 	}
 
 	public void setInspectionPassedNoRem(String inspectionPassedNoRem) {
 		this.inspectionPassedNoRem = inspectionPassedNoRem;
-	}
-
-	public String getInspectionFailedNoOb() {
-		return inspectionFailedNoOb;
-	}
-
-	public void setInspectionFailedNoOb(String inspectionFailedNoOb) {
-		this.inspectionFailedNoOb = inspectionFailedNoOb;
 	}
 
 	public String getInspectionFailedNoRem() {
@@ -247,12 +199,65 @@ public class Holder implements Serializable {
 		this.downConductorDescription = downConductorDescription;
 	}
 
-	public Boolean getFlag() {
+	public String getFlag() {
 		return flag;
 	}
 
-	public void setFlag(Boolean flag) {
+	public void setFlag(String flag) {
 		this.flag = flag;
 	}
+
+	public Integer getSuccessiveDistanceOb() {
+		return successiveDistanceOb;
+	}
+
+	public void setSuccessiveDistanceOb(Integer successiveDistanceOb) {
+		this.successiveDistanceOb = successiveDistanceOb;
+	}
+
+	public String getSuccessiveDistanceRem() {
+		return successiveDistanceRem;
+	}
+
+	public void setSuccessiveDistanceRem(String successiveDistanceRem) {
+		this.successiveDistanceRem = successiveDistanceRem;
+	}
+
+	public Integer getTotalNoHolderOb() {
+		return totalNoHolderOb;
+	}
+
+	public void setTotalNoHolderOb(Integer totalNoHolderOb) {
+		this.totalNoHolderOb = totalNoHolderOb;
+	}
+
+	public Integer getInspectedNoOb() {
+		return inspectedNoOb;
+	}
+
+	public void setInspectedNoOb(Integer inspectedNoOb) {
+		this.inspectedNoOb = inspectedNoOb;
+	}
+
+	public Integer getInspectionPassedNoOb() {
+		return inspectionPassedNoOb;
+	}
+
+	public void setInspectionPassedNoOb(Integer inspectionPassedNoOb) {
+		this.inspectionPassedNoOb = inspectionPassedNoOb;
+	}
+
+	public Integer getInspectionFailedNoOb() {
+		return inspectionFailedNoOb;
+	}
+
+	public void setInspectionFailedNoOb(Integer inspectionFailedNoOb) {
+		this.inspectionFailedNoOb = inspectionFailedNoOb;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 
 }

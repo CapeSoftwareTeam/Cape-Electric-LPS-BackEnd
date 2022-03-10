@@ -25,7 +25,7 @@ public class AirClamps implements Serializable {
 	private Integer clampsId;
 	
 	@Column(name = "FLAG")
-	private Boolean flag;
+	private String flag;
 	
 	@Column(name = "PHYSICAL_INSPECTION_OBSERVATION")
 	private String physicalInspectionOb;
@@ -51,74 +51,61 @@ public class AirClamps implements Serializable {
 	@Column(name = "INTERCONNECTION_OF_CLAMPS_REMARKS")
 	private String interConnectionOfClampsRe;
 
-	@Column(name = "MATERIAL_OF_CLAMPS_OBSERVATION")
-	private String materialOfClampsOb;
+	@Column(name = "MATERIAL_OF_WALL_CLAMPS_OBSERVATION")
+	private String materialOfWallClampsOb;
 
-	@Column(name = "MATERIAL_OF_CLAMPS_REMARKS")
-	private String materialOfClampsRe;
+	@Column(name = "MATERIAL_OF_WALL_CLAMPS_REMARKS")
+	private String materialOfWallClampsRe;
+	
+	@Column(name = "MATERIAL_OF_FOLDING_CLAMPS_OBSERVATION")
+	private String materialOfFoldingClampsOb;
+
+	@Column(name = "MATERIAL_OF_FOLDING_CLAMPS_REMARKS")
+	private String materialOfFoldingClampsRe;
 
 	@Column(name = "TOTAL_CLAMPSNO_OBSERVATION")
-	private String totalClampsNoOb;
+	private Integer totalClampsNoOb;
 
 	@Column(name = "TOTAL_CLAMPSNO_REMARKS")
 	private String totalClampsNoRe;
 
 	@Column(name = "INSP_NO_OBS")
-	private String inspectionNoOb;
+	private Integer inspectionNoOb;
 
 	@Column(name = "INSP_NO_REM")
 	private String inspectionNoRe;
 
 	@Column(name = "INSP_PASSED_NO_OBS")
-	private String inspectionPassedOb;
+	private Integer inspectionPassedOb;
 
 	@Column(name = "INSP_PASSED_NO_REM")
 	private String inspectionPassedRe;
 
 	@Column(name = "INSP_FAILED_NO_OBS")
-	private String inspectionFailedReOb;
+	private Integer inspectionFailedReOb;
 
 	@Column(name = "INSP_FAILED_NO_REM")
 	private String inspectionFailedReRe;
 
-	@Column(name = "LOCATION_NUMBER")
-	private Integer locationNumber;
-
-	@Column(name = "LOCATION_NAME")
-	private String locationName;
-
 	@JsonBackReference
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "LPSAIRDESCRIPTION_ID")
-	private LpsAirDiscription lpsAirDes;
+	private LpsAirDiscription lpsAirDescription;
 
 	public Integer getClampsId() {
 		return clampsId;
 	}
 
-	public Integer getLocationNumber() {
-		return locationNumber;
-	}
 
-	public Boolean getFlag() {
+	public String getFlag() {
 		return flag;
 	}
 
-	public void setFlag(Boolean flag) {
+
+	public void setFlag(String flag) {
 		this.flag = flag;
 	}
 
-	public void setLocationNumber(Integer locationNumber) {
-		this.locationNumber = locationNumber;
-	}
-
-	public String getLocationName() {
-		return locationName;
-	}
-
-	public void setLocationName(String locationName) {
-		this.locationName = locationName;
-	}
 
 	public void setClampsId(Integer clampsId) {
 		this.clampsId = clampsId;
@@ -188,44 +175,12 @@ public class AirClamps implements Serializable {
 		this.interConnectionOfClampsRe = interConnectionOfClampsRe;
 	}
 
-	public String getMaterialOfClampsOb() {
-		return materialOfClampsOb;
-	}
-
-	public void setMaterialOfClampsOb(String materialOfClampsOb) {
-		this.materialOfClampsOb = materialOfClampsOb;
-	}
-
-	public String getMaterialOfClampsRe() {
-		return materialOfClampsRe;
-	}
-
-	public void setMaterialOfClampsRe(String materialOfClampsRe) {
-		this.materialOfClampsRe = materialOfClampsRe;
-	}
-
-	public String getTotalClampsNoOb() {
-		return totalClampsNoOb;
-	}
-
-	public void setTotalClampsNoOb(String totalClampsNoOb) {
-		this.totalClampsNoOb = totalClampsNoOb;
-	}
-
 	public String getTotalClampsNoRe() {
 		return totalClampsNoRe;
 	}
 
 	public void setTotalClampsNoRe(String totalClampsNoRe) {
 		this.totalClampsNoRe = totalClampsNoRe;
-	}
-
-	public String getInspectionNoOb() {
-		return inspectionNoOb;
-	}
-
-	public void setInspectionNoOb(String inspectionNoOb) {
-		this.inspectionNoOb = inspectionNoOb;
 	}
 
 	public String getInspectionNoRe() {
@@ -236,28 +191,12 @@ public class AirClamps implements Serializable {
 		this.inspectionNoRe = inspectionNoRe;
 	}
 
-	public String getInspectionPassedOb() {
-		return inspectionPassedOb;
-	}
-
-	public void setInspectionPassedOb(String inspectionPassedOb) {
-		this.inspectionPassedOb = inspectionPassedOb;
-	}
-
 	public String getInspectionPassedRe() {
 		return inspectionPassedRe;
 	}
 
 	public void setInspectionPassedRe(String inspectionPassedRe) {
 		this.inspectionPassedRe = inspectionPassedRe;
-	}
-
-	public String getInspectionFailedReOb() {
-		return inspectionFailedReOb;
-	}
-
-	public void setInspectionFailedReOb(String inspectionFailedReOb) {
-		this.inspectionFailedReOb = inspectionFailedReOb;
 	}
 
 	public String getInspectionFailedReRe() {
@@ -268,12 +207,76 @@ public class AirClamps implements Serializable {
 		this.inspectionFailedReRe = inspectionFailedReRe;
 	}
 
-	public LpsAirDiscription getLpsAirDes() {
-		return lpsAirDes;
+	public LpsAirDiscription getLpsAirDescription() {
+		return lpsAirDescription;
 	}
 
-	public void setLpsAirDes(LpsAirDiscription lpsAirDes) {
-		this.lpsAirDes = lpsAirDes;
+	public void setLpsAirDescription(LpsAirDiscription lpsAirDescription) {
+		this.lpsAirDescription = lpsAirDescription;
+	}
+
+	public String getMaterialOfWallClampsOb() {
+		return materialOfWallClampsOb;
+	}
+
+	public void setMaterialOfWallClampsOb(String materialOfWallClampsOb) {
+		this.materialOfWallClampsOb = materialOfWallClampsOb;
+	}
+
+	public String getMaterialOfWallClampsRe() {
+		return materialOfWallClampsRe;
+	}
+
+	public void setMaterialOfWallClampsRe(String materialOfWallClampsRe) {
+		this.materialOfWallClampsRe = materialOfWallClampsRe;
+	}
+
+	public String getMaterialOfFoldingClampsOb() {
+		return materialOfFoldingClampsOb;
+	}
+
+	public void setMaterialOfFoldingClampsOb(String materialOfFoldingClampsOb) {
+		this.materialOfFoldingClampsOb = materialOfFoldingClampsOb;
+	}
+
+	public String getMaterialOfFoldingClampsRe() {
+		return materialOfFoldingClampsRe;
+	}
+
+	public void setMaterialOfFoldingClampsRe(String materialOfFoldingClampsRe) {
+		this.materialOfFoldingClampsRe = materialOfFoldingClampsRe;
+	}
+
+	public Integer getTotalClampsNoOb() {
+		return totalClampsNoOb;
+	}
+
+	public void setTotalClampsNoOb(Integer totalClampsNoOb) {
+		this.totalClampsNoOb = totalClampsNoOb;
+	}
+
+	public Integer getInspectionNoOb() {
+		return inspectionNoOb;
+	}
+
+	public void setInspectionNoOb(Integer inspectionNoOb) {
+		this.inspectionNoOb = inspectionNoOb;
+	}
+
+	public Integer getInspectionPassedOb() {
+		return inspectionPassedOb;
+	}
+
+	public void setInspectionPassedOb(Integer inspectionPassedOb) {
+		this.inspectionPassedOb = inspectionPassedOb;
+	}
+
+	public Integer getInspectionFailedReOb() {
+		return inspectionFailedReOb;
+	}
+
+	public void setInspectionFailedReOb(Integer inspectionFailedReOb) {
+		this.inspectionFailedReOb = inspectionFailedReOb;
 	}
 
 }

@@ -8,9 +8,9 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.capeelectric.exception.SPDException;
-import com.capeelectric.model.BasicLps;
 import com.capeelectric.model.SPD;
 import com.capeelectric.model.SpdDescription;
+import com.capeelectric.model.SpdReport;
 import com.capeelectric.service.PrintSPDService;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
@@ -20,6 +20,7 @@ import com.itextpdf.text.Font;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.BaseFont;
+import com.itextpdf.text.pdf.GrayColor;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
@@ -27,824 +28,495 @@ import com.itextpdf.text.pdf.PdfWriter;
 @Service
 public class PrintSPDServiceImpl implements PrintSPDService {
 
+//	@Autowired
+//	private SPDRepository spdRepository;
+	
 	@Override
-	public void printSPD(String userName, Integer lpsId,Optional<BasicLps> basicLpsDetails, Optional<SPD> spdDetails) throws SPDException {
-		if (userName != null && !userName.isEmpty() && lpsId != null && lpsId != 0) {
-			Document document = new Document(PageSize.A4, 68, 68, 62, 68);
+	public void printSPD(String userName, Integer lpsId,Optional<SpdReport> spdDetails) throws SPDException {	
 
-			try {
+//	@Override
+//	public void printSPD1(String userName, Integer lpsId) throws SPDException {
 
-				PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("SPD.pdf"));
+//		if (userName != null && !userName.isEmpty() && lpsId != null && lpsId != 0) {
+		Document document = new Document(PageSize.A4, 68, 68, 62, 68);
+//
+		try {
 
-//				List<SPD> spdMain = spdRepository.findByUserNameAndBasicLpsId(userName, lpsId);
+			PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("SPD.pdf"));
+
+//			List<SpdReport> spdMain = spdRepository.findByUserNameAndBasicLpsId(userName, lpsId);
+
+			SpdReport spdMain1 = spdDetails.get();
+
+			List<SPD> spd1 = spdMain1.getSpd();
+
+			SPD spd = spd1.get(0);
+			List<SpdDescription> spdDesc1 = spd.getSpdDescription();
+
+			document.open();
+
+			Font font12B = new Font(BaseFont.createFont(), 12, Font.NORMAL | Font.BOLD);
+			Font font2 = new Font(BaseFont.createFont(), 10, Font.NORMAL | Font.BOLD);
+			Font font3 = new Font(BaseFont.createFont(), 10, Font.NORMAL, BaseColor.BLACK);
+
+			float[] pointColumnWidths5 = { 100F };
 			
-				SPD spdMain1 = spdDetails.get();
+			PdfPTable headertable = new PdfPTable(pointColumnWidths5);
+			headertable.setWidthPercentage(100); // Width 100%
+			headertable.setSpacingBefore(10f); // Space before table
 
-//				List<BasicLps> basicLps = basicLpsRepository.findByUserNameAndBasicLpsId(userName, lpsId);
-				BasicLps basicLps1 = basicLpsDetails.get();
+			PdfPCell label = new PdfPCell(new Paragraph(
+					"Check list for SPD System of LPS\r\n" + "as per IS/IEC 62305", font12B));
+			label.setHorizontalAlignment(Element.ALIGN_CENTER);
+			label.setGrayFill(0.92f);
+//			label.setFixedHeight(20f);
+			headertable.addCell(label);
+			document.add(headertable);
 
-				List<SpdDescription> spdDesc1 = spdMain1.getSpdDescription();
+			PdfPTable BasicDetailsTable = new PdfPTable(pointColumnWidths5);
 
-				document.open();
+			BasicDetailsTable.setWidthPercentage(100); // Width 100%
+			BasicDetailsTable.setSpacingBefore(10f); // Space before table
+			BasicDetailsTable.setSpacingAfter(5f); // Space after table
+			BasicDetailsTable.getDefaultCell().setBorder(0);
 
-				float[] pointColumnWidths40 = { 100F };
+			PdfPCell arrangements = new PdfPCell(
+					new Paragraph("Basic Details", new Font(BaseFont.createFont(), 11, Font.NORMAL | Font.BOLD)));
+			arrangements.setBackgroundColor(new GrayColor(0.82f));
+			arrangements.setHorizontalAlignment(Element.ALIGN_CENTER);
+			arrangements.setBorder(PdfPCell.NO_BORDER);
+			BasicDetailsTable.addCell(arrangements);
+			document.add(BasicDetailsTable);
 
-				PdfPTable headertable = new PdfPTable(pointColumnWidths40);
-				headertable.setWidthPercentage(100); // Width 100%
-				headertable.setSpacingBefore(10f); // Space before table
-				headertable.setWidthPercentage(100);
+			Font font11 = new Font(BaseFont.createFont(), 10, Font.NORMAL | Font.BOLD, BaseColor.BLACK);
+			Font font1 = new Font(BaseFont.createFont(), 10, Font.NORMAL, BaseColor.BLACK);
 
-				Font font1 = new Font(BaseFont.createFont(), 12, Font.NORMAL | Font.BOLD, BaseColor.BLACK);
-				Font font2 = new Font(BaseFont.createFont(), 10, Font.NORMAL | Font.BOLD, BaseColor.BLACK);
-				Font font3 = new Font(BaseFont.createFont(), 10, Font.NORMAL, BaseColor.BLACK);
+			float[] pointColumnWidths30 = { 30F, 145F, 55F, 50F };
 
-				PdfPCell label = new PdfPCell(
-						new Paragraph("Check list for SPD of LPS \r\n" + "as per IS/IEC 62305", font1));
-				label.setHorizontalAlignment(Element.ALIGN_CENTER);
-				label.setGrayFill(0.92f);
-				// label.setFixedHeight(20f);
-				headertable.addCell(label);
-				document.add(headertable);
+			PdfPTable table2 = new PdfPTable(pointColumnWidths30);
+			table2.setWidthPercentage(100); // Width 100%
+			table2.setSpacingBefore(10f); // Space before table
+			table2.setWidthPercentage(100);
 
-				float[] pointColumnWidths1 = { 30F, 70F };
+			PdfPCell cell30 = new PdfPCell(new Paragraph("SL.NO", font11));
+			cell30.setHorizontalAlignment(Element.ALIGN_CENTER);
+			cell30.setGrayFill(0.92f);
+			table2.addCell(cell30);
 
-				PdfPTable table11 = new PdfPTable(pointColumnWidths1);
-				table11.setWidthPercentage(100); // Width 100%
-				// table1.setSpacingBefore(10f); // Space before table
-				table11.setWidthPercentage(100);
+			PdfPCell cell311 = new PdfPCell(new Paragraph("Description", font11));
+			cell311.setHorizontalAlignment(Element.ALIGN_CENTER);
+			cell311.setFixedHeight(20f);
+			cell311.setGrayFill(0.92f);
+			table2.addCell(cell311);
 
-				PdfPCell cell11 = new PdfPCell(new Paragraph("Client Name", font2));
-				cell11.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
-				cell11.setFixedHeight(20f);
-				cell11.setGrayFill(0.92f);
-				table11.addCell(cell11);
+			PdfPCell cell32 = new PdfPCell(new Paragraph("Observation", font11));
+			cell32.setHorizontalAlignment(Element.ALIGN_CENTER);
+			cell32.setFixedHeight(20f);
+			cell32.setGrayFill(0.92f);
+			table2.addCell(cell32);
 
-				PdfPCell cell2 = new PdfPCell(new Paragraph(basicLps1.getClientName(), font3));
-				cell2.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
-				table11.addCell(cell2);
+			PdfPCell cell33 = new PdfPCell(new Paragraph("Remarks", font11));
+			cell33.setGrayFill(0.92f);
+			cell33.setHorizontalAlignment(Element.ALIGN_CENTER);
+			table2.addCell(cell33);
 
-				PdfPCell cell31 = new PdfPCell(new Paragraph("Project Name", font2));
-				cell31.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
-				cell31.setFixedHeight(20f);
-				cell31.setGrayFill(0.92f);
-				table11.addCell(cell31);
+			float[] pointColumnWidths = { 120F, 80F };
+			PdfPTable table100 = new PdfPTable(pointColumnWidths);
 
-				PdfPCell cell41 = new PdfPCell(new Paragraph(basicLps1.getProjectName(), font3));
-				cell41.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
-				table11.addCell(cell41);
+			table100.setWidthPercentage(100); // Width 100%
+			table100.setSpacingBefore(5f); // Space before table
+			table100.setSpacingAfter(5f); // Space after table
+			table100.setWidthPercentage(100);
+			table100.getDefaultCell().setBorder(0);
 
-				PdfPCell cell191 = new PdfPCell(new Paragraph("Type of Industry", font2));
-				cell191.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
-				cell191.setGrayFill(0.92f);
-				cell191.setFixedHeight(20f);
-				table11.addCell(cell191);
+			PdfPCell cell1 = new PdfPCell(
+					new Paragraph("Building Number:", new Font(BaseFont.createFont(), 11, Font.NORMAL | Font.BOLD)));
+			cell1.setBackgroundColor(new BaseColor(203, 183, 162));
+			cell1.setHorizontalAlignment(Element.ALIGN_LEFT);
+			cell1.setBorder(PdfPCell.NO_BORDER);
+			table100.addCell(cell1);
+			PdfPCell cell2 = new PdfPCell(new Paragraph(spd.getBuildingNumber().toString(),
+					new Font(BaseFont.createFont(), 10, Font.NORMAL | Font.BOLD)));
+			cell2.setHorizontalAlignment(Element.ALIGN_LEFT);
+			cell2.setBackgroundColor(new BaseColor(203, 183, 162));
+			cell2.setBorder(PdfPCell.NO_BORDER);
+			table100.addCell(cell2);
+			document.add(table100);
 
-				PdfPCell cell201 = new PdfPCell(new Paragraph(basicLps1.getIndustryType(), font3));
-				cell201.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
-				table11.addCell(cell201);
+			PdfPTable table1001 = new PdfPTable(pointColumnWidths);
 
-				PdfPCell cell211 = new PdfPCell(new Paragraph("Type of Building", font2));
-				cell211.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
-				cell211.setGrayFill(0.92f);
-				cell211.setFixedHeight(20f);
-				table11.addCell(cell211);
+			table1001.setWidthPercentage(100); // Width 100%
+			table1001.setSpacingBefore(5f); // Space before table
+			table1001.setSpacingAfter(5f); // Space after table
+			table1001.setWidthPercentage(100);
+			table1001.getDefaultCell().setBorder(0);
+			PdfPCell cell3 = new PdfPCell(
+					new Paragraph("Building Name:", new Font(BaseFont.createFont(), 11, Font.NORMAL | Font.BOLD)));
+			cell3.setBackgroundColor(new BaseColor(203, 183, 162));
+			cell3.setHorizontalAlignment(Element.ALIGN_LEFT);
+			cell3.setBorder(PdfPCell.NO_BORDER);
+			table1001.addCell(cell3);
+			PdfPCell cell4 = new PdfPCell(
+					new Paragraph(spd.getBuildingName(), new Font(BaseFont.createFont(), 10, Font.NORMAL | Font.BOLD)));
+			cell4.setHorizontalAlignment(Element.ALIGN_LEFT);
+			cell4.setBackgroundColor(new BaseColor(203, 183, 162));
+			cell4.setBorder(PdfPCell.NO_BORDER);
+			table1001.addCell(cell4);
+			document.add(table1001);
 
-				PdfPCell cell22 = new PdfPCell(new Paragraph(basicLps1.getBuildingType(), font3));
-				cell22.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
-				table11.addCell(cell22);
+			PdfPTable table205 = new PdfPTable(pointColumnWidths30);
+			table205.setWidthPercentage(100); // Width 100%
+			// table205.setSpacingBefore(20f); // Space before table
+			table205.setWidthPercentage(100);
 
-				document.add(table11);
+			PdfPCell cell205 = new PdfPCell(new Paragraph("1", font1));
+			cell205.setHorizontalAlignment(Element.ALIGN_CENTER);
+			cell205.setGrayFill(0.92f);
+			table205.addCell(cell205);
 
-				float[] pointColumnWidths20 = { 38.5F, 15F, 15F, 15F, 15F, 15F, 15F };
-				PdfPTable table31 = new PdfPTable(pointColumnWidths20);
-				table31.setWidthPercentage(100); // Width 100%
-				// table3.setSpacingBefore(10f); // Space before table
-				table31.setWidthPercentage(100);
+			PdfPCell cell206 = new PdfPCell(new Paragraph("Mains incoming panel", font1));
+			cell206.setGrayFill(0.92f);
+			table205.addCell(cell206);
 
-				PdfPCell cell23 = new PdfPCell(new Paragraph("Building Dimension", font2));
-				cell23.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
-				cell23.setGrayFill(0.92f);
-				cell23.setFixedHeight(20f);
-				table31.addCell(cell23);
-				PdfPCell cell1111 = new PdfPCell(new Paragraph("Length(m)", font2));
-				cell1111.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
-				cell1111.setGrayFill(0.92f);
-				cell1111.setFixedHeight(20f);
-				table31.addCell(cell1111);
-				PdfPCell cell112 = new PdfPCell(new Paragraph(basicLps1.getBuildingLength(), font3));
-				cell112.setHorizontalAlignment(Element.ALIGN_CENTER);
+			PdfPCell cell209 = new PdfPCell(new Paragraph(spd.getMainsIncomingOb(), font3));
+			cell209.setHorizontalAlignment(Element.ALIGN_LEFT);
+			table205.addCell(cell209);
 
-				cell112.setFixedHeight(20f);
-				table31.addCell(cell112);
+			PdfPCell cell210 = new PdfPCell(new Paragraph(spd.getMainsIncomingRem(), font3));
+			cell210.setHorizontalAlignment(Element.ALIGN_LEFT);
+			table205.addCell(cell210);
 
-				PdfPCell cell114 = new PdfPCell(new Paragraph("Width(m)", font2));
-				cell114.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
-				cell114.setGrayFill(0.92f);
-				cell114.setFixedHeight(20f);
-				table31.addCell(cell114);
+			PdfPCell cell20 = new PdfPCell(new Paragraph("2", font1));
+			cell20.setHorizontalAlignment(Element.ALIGN_CENTER);
+			cell20.setGrayFill(0.92f);
+			table205.addCell(cell20);
 
-				PdfPCell cell115 = new PdfPCell(new Paragraph(basicLps1.getBuildingWidth(), font3));
-				cell115.setHorizontalAlignment(Element.ALIGN_CENTER);
+			PdfPCell cell21 = new PdfPCell(new Paragraph("Total Number of mains incoming panels", font1));
+			cell21.setFixedHeight(20f);
+			cell21.setGrayFill(0.92f);
+			table205.addCell(cell21);
 
-				cell115.setFixedHeight(20f);
-				table31.addCell(cell115);
+			PdfPCell cell29 = new PdfPCell(new Paragraph(spd.getTotalMainsIncomingOb(), font3));
+			cell29.setHorizontalAlignment(Element.ALIGN_LEFT);
+			table205.addCell(cell29);
 
-				PdfPCell cell113 = new PdfPCell(new Paragraph("Height(m)", font2));
-				cell113.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
-				cell113.setGrayFill(0.92f);
-				cell1111.setFixedHeight(20f);
-				table31.addCell(cell113);
+			PdfPCell cell22 = new PdfPCell(new Paragraph(spd.getTotalMainsIncomingRem(), font3));
+			cell22.setHorizontalAlignment(Element.ALIGN_LEFT);
+			table205.addCell(cell22);
 
-				PdfPCell cell24 = new PdfPCell(new Paragraph(basicLps1.getBuildingHeight(), font3));
-				cell24.setHorizontalAlignment(Element.ALIGN_CENTER);
-				table31.addCell(cell24);
+			PdfPCell cell24 = new PdfPCell(new Paragraph("3", font1));
+			cell24.setHorizontalAlignment(Element.ALIGN_CENTER);
+			cell24.setGrayFill(0.92f);
+			table205.addCell(cell24);
 
-				document.add(table31);
+			PdfPCell cell23 = new PdfPCell(new Paragraph(
+					"Total Number of panels supplting power to outdoor equipment such as light fittings / air conditioner chiller units (not split AC outdoor unit)",
+					font1));
+			cell23.setFixedHeight(20f);
+			cell23.setGrayFill(0.92f);
+			table205.addCell(cell23);
 
-				PdfPTable table4 = new PdfPTable(pointColumnWidths1);
-				table4.setWidthPercentage(100); // Width 100%
-				// table4.setSpacingBefore(10f); // Space before table
-				table4.setWidthPercentage(100);
+			PdfPCell cell35 = new PdfPCell(new Paragraph(spd.getNoPannelSupplittingOb(), font3));
+			cell35.setHorizontalAlignment(Element.ALIGN_LEFT);
+			table205.addCell(cell35);
 
-				PdfPCell cell251 = new PdfPCell(new Paragraph("Level of protection", font2));
-				cell251.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
-				cell251.setFixedHeight(20f);
-				cell251.setGrayFill(0.92f);
-				table4.addCell(cell251);
+			PdfPCell cell36 = new PdfPCell(new Paragraph(spd.getNoPannelSupplittingRem(), font3));
+			cell36.setHorizontalAlignment(Element.ALIGN_LEFT);
+			table205.addCell(cell36);
 
-				PdfPCell cell26 = new PdfPCell(new Paragraph(basicLps1.getLevelOfProtection(), font3));
-				cell26.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
-				table4.addCell(cell26);
+			PdfPCell cell37 = new PdfPCell(new Paragraph("4", font1));
+			cell37.setHorizontalAlignment(Element.ALIGN_CENTER);
+			cell37.setGrayFill(0.92f);
+			table205.addCell(cell37);
 
-				PdfPCell cell27 = new PdfPCell(new Paragraph("Soil Resistivity (ohms)", font2));
-				cell27.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
-				cell27.setGrayFill(0.92f);
-				cell27.setFixedHeight(20f);
-				table4.addCell(cell27);
+			PdfPCell cell40 = new PdfPCell(
+					new Paragraph("Total Number of outdoor equipment and type each equipment", font1));
+			cell40.setFixedHeight(20f);
+			cell40.setGrayFill(0.92f);
+			table205.addCell(cell40);
 
-				PdfPCell cell28 = new PdfPCell(new Paragraph(basicLps1.getSoilResistivity(), font3));
-				cell28.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
-				table4.addCell(cell28);
+			PdfPCell cell44 = new PdfPCell(new Paragraph(spd.getTotalNoOutDoorRequipmentOb(), font3));
+			cell44.setHorizontalAlignment(Element.ALIGN_LEFT);
+			table205.addCell(cell44);
 
-				document.add(table4);
+			PdfPCell cell47 = new PdfPCell(new Paragraph(spd.getTotalNoOutDoorRequipmentRem(), font3));
+			cell47.setHorizontalAlignment(Element.ALIGN_LEFT);
+			table205.addCell(cell47);
 
-				Font font11 = new Font(BaseFont.createFont(), 10, Font.NORMAL | Font.BOLD, BaseColor.BLACK);
+			document.add(table2);
+			document.add(table205);
 
-				float[] pointColumnWidths30 = { 30F, 150F, 50F, 50F };
+			float[] pointColumnWidths2 = { 100F };
 
-				PdfPTable table = new PdfPTable(pointColumnWidths30);
-				table.setWidthPercentage(100); // Width 100%
-				table.setSpacingBefore(10f); // Space before table
-				table.setWidthPercentage(100);
+			PdfPTable sPDTable = new PdfPTable(pointColumnWidths2);
 
-				PdfPCell cell30 = new PdfPCell(new Paragraph("SL.NO", font11));
-				cell30.setHorizontalAlignment(Element.ALIGN_CENTER);
-				cell30.setGrayFill(0.92f);
-				cell30.setFixedHeight(20f);
-				table.addCell(cell30);
+			sPDTable.setWidthPercentage(100); // Width 100%
+			sPDTable.setSpacingBefore(10f); // Space before table
+//			sPDTable.setSpacingAfter(5f); // Space after table
+			sPDTable.getDefaultCell().setBorder(0);
 
-				PdfPCell cell311 = new PdfPCell(new Paragraph("Description", font11));
-				cell311.setHorizontalAlignment(Element.ALIGN_CENTER);
-				cell311.setFixedHeight(20f);
-				cell311.setGrayFill(0.92f);
-				table.addCell(cell311);
+			PdfPCell arrangements1 = new PdfPCell(
+					new Paragraph("SPD", new Font(BaseFont.createFont(), 11, Font.NORMAL | Font.BOLD)));
+			arrangements1.setBackgroundColor(new GrayColor(0.82f));
+			arrangements1.setHorizontalAlignment(Element.ALIGN_CENTER);
+			arrangements1.setBorder(PdfPCell.NO_BORDER);
+			sPDTable.addCell(arrangements1);
+			document.add(sPDTable);
 
-				PdfPCell cell32 = new PdfPCell(new Paragraph("Observation", font11));
-				cell32.setHorizontalAlignment(Element.ALIGN_CENTER);
-				cell32.setFixedHeight(20f);
-				cell32.setGrayFill(0.92f);
-				table.addCell(cell32);
-
-				PdfPCell cell33 = new PdfPCell(new Paragraph("Remarks", font11));
-				cell33.setGrayFill(0.92f);
-				cell33.setFixedHeight(20f);
-				cell33.setHorizontalAlignment(Element.ALIGN_CENTER);
-				table.addCell(cell33);
-
-				Font font = new Font(BaseFont.createFont(), 10, Font.NORMAL, BaseColor.BLACK);
-				Font font8 = new Font(BaseFont.createFont(), 8, Font.NORMAL, BaseColor.BLACK);
-
-				PdfPCell cell = new PdfPCell(new Paragraph("1", font));
-				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-//				cell.setFixedHeight(20f);
-				cell.setGrayFill(0.92f);
-				table.addCell(cell);
-
-				PdfPCell cell21 = new PdfPCell(new Paragraph("Mains incoming panel", font));
-				cell21.setHorizontalAlignment(Element.ALIGN_LEFT);
-//				cell21.setFixedHeight(20f);
-				cell21.setGrayFill(0.92f);
-				table.addCell(cell21);
-
-				PdfPCell cell3 = new PdfPCell(new Paragraph(spdMain1.getMainsIncomingOb(), font));
-				cell3.setHorizontalAlignment(Element.ALIGN_LEFT);
-				table.addCell(cell3);
-
-				PdfPCell cell4 = new PdfPCell(new Paragraph(spdMain1.getMainsIncomingRem(), font));
-				cell4.setHorizontalAlignment(Element.ALIGN_LEFT);
-				table.addCell(cell4);
-
-				PdfPCell cell34 = new PdfPCell(new Paragraph("2", font));
-				cell34.setHorizontalAlignment(Element.ALIGN_CENTER);
-//				cell34.setFixedHeight(20f);
-				cell34.setGrayFill(0.92f);
-				table.addCell(cell34);
-
-				PdfPCell cell35 = new PdfPCell(new Paragraph("Total Number of mains incoming panels", font));
-				cell35.setHorizontalAlignment(Element.ALIGN_LEFT);
-//				cell35.setFixedHeight(20f);
-				cell35.setGrayFill(0.92f);
-				table.addCell(cell35);
-
-				PdfPCell cell36 = new PdfPCell(new Paragraph(spdMain1.getTotalMainsIncomingOb(), font));
-				cell36.setHorizontalAlignment(Element.ALIGN_LEFT);
-//				cell36.setFixedHeight(20f);
-				table.addCell(cell36);
-
-				PdfPCell cell37 = new PdfPCell(new Paragraph(spdMain1.getTotalMainsIncomingRem(), font));
-//				cell37.setFixedHeight(20f);
-				cell37.setHorizontalAlignment(Element.ALIGN_LEFT);
-				table.addCell(cell37);
-
-				PdfPCell cell40 = new PdfPCell(new Paragraph("3", font));
-				cell40.setHorizontalAlignment(Element.ALIGN_CENTER);
-//				cell40.setFixedHeight(20f);
-				cell40.setGrayFill(0.92f);
-				table.addCell(cell40);
-
-				PdfPCell cell411 = new PdfPCell(new Paragraph(
-						"Total Number of panels supplying power to outdoor equipment such as light fittings / air conditioner chiller units (not split AC outdoor unit)",
-						font));
-				cell411.setHorizontalAlignment(Element.ALIGN_LEFT);
-//				cell411.setFixedHeight(20f);
-				cell411.setGrayFill(0.92f);
-				table.addCell(cell411);
-
-				PdfPCell cell42 = new PdfPCell(new Paragraph(spdMain1.getNoPannelSupplittingOb(), font));
-				cell42.setHorizontalAlignment(Element.ALIGN_LEFT);
-//				cell42.setFixedHeight(20f);
-				table.addCell(cell42);
-
-				PdfPCell cell43 = new PdfPCell(new Paragraph(spdMain1.getNoPannelSupplittingRem(), font));
-//				cell43.setFixedHeight(20f);
-				cell43.setHorizontalAlignment(Element.ALIGN_LEFT);
-				table.addCell(cell43);
-
-				PdfPCell cell44 = new PdfPCell(new Paragraph("4", font));
-				cell44.setHorizontalAlignment(Element.ALIGN_CENTER);
-//				cell43.setFixedHeight(20f);
-				cell44.setGrayFill(0.92f);
-				table.addCell(cell44);
-
-				PdfPCell cell45 = new PdfPCell(
-						new Paragraph("Total Number of outdoor equipment and each type equipment", font));
-				cell45.setHorizontalAlignment(Element.ALIGN_LEFT);
-//				cell45.setFixedHeight(20f);
-				cell45.setGrayFill(0.92f);
-				table.addCell(cell45);
-
-				PdfPCell cell46 = new PdfPCell(new Paragraph(spdMain1.getTotalNoOutDoorRequipmentOb(), font));
-				cell46.setHorizontalAlignment(Element.ALIGN_LEFT);
-//				cell46.setFixedHeight(20f);
-				table.addCell(cell46);
-
-				PdfPCell cell47 = new PdfPCell(new Paragraph(spdMain1.getTotalNoOutDoorRequipmentRem(), font));
-//				cell47.setFixedHeight(20f);
-				cell47.setHorizontalAlignment(Element.ALIGN_LEFT);
-				table.addCell(cell47);
-
-				PdfPCell cell441 = new PdfPCell(new Paragraph("Note", font11));
-				cell441.setHorizontalAlignment(Element.ALIGN_CENTER);
-//				cell43.setFixedHeight(20f);
-				cell441.setGrayFill(0.92f);
-				table.addCell(cell441);
-
-				PdfPCell cell451 = new PdfPCell(new Paragraph(
-						"SPD is necessary for each mains incoming panel and each electrical panel feeding power to an outdoor equipment",
-						font8));
-				cell451.setHorizontalAlignment(Element.ALIGN_LEFT);
-				cell451.setColspan(3);
-				cell451.setGrayFill(0.92f);
-				table.addCell(cell451);
-
-				for (SpdDescription spdDesc2 : spdDesc1) {
-
-					if (spdDesc2.getSpdDescriptionRole().equalsIgnoreCase("Mains_SPD")) {
-						mainsIncomingItr(document, spdDesc2, font11, table, font);
-					}
+			for (SpdDescription spdDesc : spdDesc1) {
+				if (!spdDesc.getFlag().equals("R")) {
+					spdDescIter(document, font11, font1, table2, spdDesc);
 				}
-
-				for (SpdDescription spdDesc2 : spdDesc1) {
-
-					if (spdDesc2.getSpdDescriptionRole().equalsIgnoreCase("Street_SPD")) {
-						streetLightIter(spdDesc2, font11, table, font);
-
-					}
-				}
-
-				for (SpdDescription spdDesc2 : spdDesc1) {
-
-					if (spdDesc2.getSpdDescriptionRole().equalsIgnoreCase("Other_SPD")) {
-						pannelFeedingPowerIter(spdDesc2, font11, table, font);
-
-					}
-				}
-
-				document.add(table);
-				document.close();
-				writer.close();
 			}
-
-			catch (Exception e) {
-				e.printStackTrace();
-			}
-
+			document.close();
+			writer.close();
 		}
 
-		else {
-			throw new SPDException("Invalid Inputs");
+		catch (Exception e) {
+			e.printStackTrace();
 		}
 
 	}
+//
+//		else {
+//			throw new SPDException("Invalid Inputs");
+//		}
+//
+//	}
+//
 
-	private void pannelFeedingPowerIter(SpdDescription spdDesc2, Font font11, PdfPTable table, Font font)
+	private void spdDescIter(Document document, Font font11, Font font1, PdfPTable table2, SpdDescription spdDesc)
 			throws DocumentException, IOException {
-		PdfPCell cell13 = new PdfPCell(new Paragraph("7", font11));
-		cell13.setHorizontalAlignment(Element.ALIGN_CENTER);
-		cell13.setGrayFill(0.92f);
-		table.addCell(cell13);
-
-		PdfPCell cell14 = new PdfPCell(new Paragraph(
-				"Other panels feeding power to outdoor equipment if more panels are available data from each panel is necessary)",
-				font11));
-		cell14.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
-		cell14.setGrayFill(0.92f);
-		cell14.setColspan(3);
-		table.addCell(cell14);
-
-		PdfPCell cell17 = new PdfPCell(new Paragraph("7.a", font));
-		cell17.setHorizontalAlignment(Element.ALIGN_RIGHT);
-		cell17.setGrayFill(0.92f);
-		table.addCell(cell17);
-
-		PdfPCell cell18 = new PdfPCell(new Paragraph("Type of SPD / Model", font));
-		cell18.setHorizontalAlignment(Element.ALIGN_LEFT);
-//		cell18.setFixedHeight(20f);
-		cell18.setGrayFill(0.92f);
-		table.addCell(cell18);
-
-		PdfPCell cell19 = new PdfPCell(new Paragraph(spdDesc2.getSpdTypeOb(), font));
-		cell19.setHorizontalAlignment(Element.ALIGN_LEFT);
-		table.addCell(cell19);
-
-		PdfPCell cell20 = new PdfPCell(new Paragraph(spdDesc2.getSpdTypeRe(), font));
-		cell20.setHorizontalAlignment(Element.ALIGN_LEFT);
-		table.addCell(cell20);
-
-		PdfPCell cell48 = new PdfPCell(new Paragraph("7.b", font));
-		cell48.setHorizontalAlignment(Element.ALIGN_RIGHT);
-		cell48.setGrayFill(0.92f);
-//		cell48.setFixedHeight(20f);
-		table.addCell(cell48);
-
-		PdfPCell cell49 = new PdfPCell(new Paragraph("Application", font));
-		cell49.setHorizontalAlignment(Element.ALIGN_LEFT);
-//		cell49.setFixedHeight(20f);
-		cell49.setGrayFill(0.92f);
-		table.addCell(cell49);
-
-		PdfPCell cell50 = new PdfPCell(new Paragraph(spdDesc2.getSpdApplicationOb(), font));
-		cell50.setHorizontalAlignment(Element.ALIGN_LEFT);
-//		cell50.setFixedHeight(20f);
-		table.addCell(cell50);
-
-		PdfPCell cell51 = new PdfPCell(new Paragraph(spdDesc2.getSpdApplicationRem(), font));
-//		cell51.setFixedHeight(20f);
-		cell51.setHorizontalAlignment(Element.ALIGN_LEFT);
-		table.addCell(cell51);
-
-		PdfPCell cell52 = new PdfPCell(new Paragraph("7.c", font));
-		cell52.setHorizontalAlignment(Element.ALIGN_RIGHT);
-		cell52.setGrayFill(0.92f);
-//		cell52.setFixedHeight(20f);
-		table.addCell(cell52);
-
-		PdfPCell cell53 = new PdfPCell(new Paragraph("Panel name", font));
-		cell53.setHorizontalAlignment(Element.ALIGN_LEFT);
-//		cell53.setFixedHeight(20f);
-		cell53.setGrayFill(0.92f);
-		table.addCell(cell53);
-
-		PdfPCell cell54 = new PdfPCell(new Paragraph(spdDesc2.getPanelNameOb(), font));
-		cell54.setHorizontalAlignment(Element.ALIGN_LEFT);
-//		cell54.setFixedHeight(20f);
-		table.addCell(cell54);
-
-		PdfPCell cell55 = new PdfPCell(new Paragraph(spdDesc2.getPanelNameRem(), font));
-		cell55.setHorizontalAlignment(Element.ALIGN_LEFT);
-		table.addCell(cell55);
-
-		PdfPCell cell56 = new PdfPCell(new Paragraph("7.d", font));
-		cell56.setHorizontalAlignment(Element.ALIGN_RIGHT);
-		cell56.setGrayFill(0.92f);
-		table.addCell(cell56);
-
-		PdfPCell cell57 = new PdfPCell(new Paragraph("Check incomer rating of the panel", font));
-		cell57.setHorizontalAlignment(Element.ALIGN_LEFT);
-//		cell57.setFixedHeight(20f);
-		cell57.setGrayFill(0.92f);
-		table.addCell(cell57);
-
-		PdfPCell cell58 = new PdfPCell(new Paragraph(spdDesc2.getIncomingRatingOb(), font));
-		cell58.setHorizontalAlignment(Element.ALIGN_LEFT);
-//		cell58.setFixedHeight(20f);
-		table.addCell(cell58);
-
-		PdfPCell cell59 = new PdfPCell(new Paragraph(spdDesc2.getIncomingRatingRem(), font));
-		cell59.setHorizontalAlignment(Element.ALIGN_LEFT);
-		table.addCell(cell59);
-
-		PdfPCell cell60 = new PdfPCell(new Paragraph("7.e", font));
-		cell60.setHorizontalAlignment(Element.ALIGN_RIGHT);
-		cell60.setGrayFill(0.92f);
-		table.addCell(cell60);
-
-		PdfPCell cell61 = new PdfPCell(new Paragraph("Check Back up fuse (A)", font));
-		cell61.setHorizontalAlignment(Element.ALIGN_LEFT);
-//		cell61.setFixedHeight(20f);
-		cell61.setGrayFill(0.92f);
-		table.addCell(cell61);
-
-		PdfPCell cell62 = new PdfPCell(new Paragraph(spdDesc2.getBackupFuseCheckOb(), font));
-		cell62.setHorizontalAlignment(Element.ALIGN_LEFT);
-//		cell62.setFixedHeight(20f);
-		table.addCell(cell62);
-
-		PdfPCell cell63 = new PdfPCell(new Paragraph(spdDesc2.getBackupFuseCheckRem(), font));
-		cell63.setHorizontalAlignment(Element.ALIGN_LEFT);
-		table.addCell(cell63);
-
-		PdfPCell cell64 = new PdfPCell(new Paragraph("7.f", font));
-		cell64.setHorizontalAlignment(Element.ALIGN_RIGHT);
-		cell64.setGrayFill(0.92f);
-		table.addCell(cell64);
-
-		PdfPCell cell65 = new PdfPCell(new Paragraph("Check Connecting wire length (m)", font));
-		cell65.setHorizontalAlignment(Element.ALIGN_LEFT);
-//		cell65.setFixedHeight(20f);
-		cell65.setGrayFill(0.92f);
-		table.addCell(cell65);
-
-		PdfPCell cell66 = new PdfPCell(new Paragraph(spdDesc2.getConnectingWireLengthOb(), font));
-		cell66.setHorizontalAlignment(Element.ALIGN_LEFT);
-//		cell66.setFixedHeight(20f);
-		table.addCell(cell66);
-
-		PdfPCell cell67 = new PdfPCell(new Paragraph(spdDesc2.getConnectingWireLengthRem(), font));
-		cell67.setHorizontalAlignment(Element.ALIGN_LEFT);
-		table.addCell(cell67);
-
-		PdfPCell cell68 = new PdfPCell(new Paragraph("7.g", font));
-		cell68.setHorizontalAlignment(Element.ALIGN_RIGHT);
-		cell68.setGrayFill(0.92f);
-		table.addCell(cell68);
-
-		PdfPCell cell69 = new PdfPCell(new Paragraph("Check Connecting wire size (Sq.mm)", font));
-		cell69.setHorizontalAlignment(Element.ALIGN_LEFT);
-//		cell69.setFixedHeight(20f);
-		cell69.setGrayFill(0.92f);
-		table.addCell(cell69);
-
-		PdfPCell cell70 = new PdfPCell(new Paragraph(spdDesc2.getConnectingWireSizeOb(), font));
-		cell70.setHorizontalAlignment(Element.ALIGN_LEFT);
-//		cell70.setFixedHeight(20f);
-		table.addCell(cell70);
-
-		PdfPCell cell71 = new PdfPCell(new Paragraph(spdDesc2.getConnectingWireSizeRem(), font));
-		cell71.setHorizontalAlignment(Element.ALIGN_LEFT);
-		table.addCell(cell71);
-
-	}
-
-	private void streetLightIter(SpdDescription spdDesc2, Font font11, PdfPTable table, Font font) {
-		PdfPCell cell13 = new PdfPCell(new Paragraph("6", font11));
-		cell13.setHorizontalAlignment(Element.ALIGN_CENTER);
-		cell13.setGrayFill(0.92f);
-		table.addCell(cell13);
-
-		PdfPCell cell14 = new PdfPCell(new Paragraph(
-				"Street light panel(if more panels are available data from each panel is necessary)", font11));
-		cell14.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
-		cell14.setFixedHeight(20f);
-		cell14.setColspan(3);
-		cell14.setGrayFill(0.92f);
-		table.addCell(cell14);
-
-		PdfPCell cell17 = new PdfPCell(new Paragraph("6.a", font));
-		cell17.setHorizontalAlignment(Element.ALIGN_RIGHT);
-		cell17.setGrayFill(0.92f);
-		table.addCell(cell17);
-
-		PdfPCell cell18 = new PdfPCell(new Paragraph("Type of SPD / Model", font));
-		cell18.setHorizontalAlignment(Element.ALIGN_LEFT);
-//		cell18.setFixedHeight(20f);
-		cell18.setGrayFill(0.92f);
-		table.addCell(cell18);
-
-		PdfPCell cell19 = new PdfPCell(new Paragraph(spdDesc2.getSpdTypeOb(), font));
-		cell19.setHorizontalAlignment(Element.ALIGN_LEFT);
-//		cell19.setFixedHeight(20f);
-		table.addCell(cell19);
-
-		PdfPCell cell20 = new PdfPCell(new Paragraph(spdDesc2.getSpdTypeRe(), font));
-		cell20.setHorizontalAlignment(Element.ALIGN_LEFT);
-//		cell20.setFixedHeight(20f);
-		table.addCell(cell20);
-
-		PdfPCell cell48 = new PdfPCell(new Paragraph("6.b", font));
-		cell48.setHorizontalAlignment(Element.ALIGN_RIGHT);
-		cell48.setGrayFill(0.92f);
-//		cell48.setFixedHeight(20f);
-		table.addCell(cell48);
-
-		PdfPCell cell49 = new PdfPCell(new Paragraph("Application", font));
-		cell49.setHorizontalAlignment(Element.ALIGN_LEFT);
-//		cell49.setFixedHeight(20f);
-		cell49.setGrayFill(0.92f);
-		table.addCell(cell49);
-
-		PdfPCell cell50 = new PdfPCell(new Paragraph(spdDesc2.getSpdApplicationOb(), font));
-		cell50.setHorizontalAlignment(Element.ALIGN_LEFT);
-//		cell50.setFixedHeight(20f);
-		table.addCell(cell50);
-
-		PdfPCell cell51 = new PdfPCell(new Paragraph(spdDesc2.getSpdApplicationRem(), font));
-//		cell51.setFixedHeight(20f);
-		cell51.setHorizontalAlignment(Element.ALIGN_LEFT);
-		table.addCell(cell51);
-
-		PdfPCell cell52 = new PdfPCell(new Paragraph("6.c", font));
-		cell52.setHorizontalAlignment(Element.ALIGN_RIGHT);
-		cell52.setGrayFill(0.92f);
-//		cell52.setFixedHeight(20f);
-		table.addCell(cell52);
-
-		PdfPCell cell53 = new PdfPCell(new Paragraph("Panel name", font));
-		cell53.setHorizontalAlignment(Element.ALIGN_LEFT);
-//		cell53.setFixedHeight(20f);
-		cell53.setGrayFill(0.92f);
-		table.addCell(cell53);
-
-		PdfPCell cell54 = new PdfPCell(new Paragraph(spdDesc2.getPanelNameOb(), font));
-		cell54.setHorizontalAlignment(Element.ALIGN_LEFT);
-//		cell54.setFixedHeight(20f);
-		table.addCell(cell54);
-
-		PdfPCell cell55 = new PdfPCell(new Paragraph(spdDesc2.getPanelNameRem(), font));
-		cell55.setHorizontalAlignment(Element.ALIGN_LEFT);
-		table.addCell(cell55);
-
-		PdfPCell cell56 = new PdfPCell(new Paragraph("6.d", font));
-		cell56.setHorizontalAlignment(Element.ALIGN_RIGHT);
-		cell56.setGrayFill(0.92f);
-		table.addCell(cell56);
-
-		PdfPCell cell57 = new PdfPCell(new Paragraph("Check incomer rating of the panel", font));
-		cell57.setHorizontalAlignment(Element.ALIGN_LEFT);
-//		cell57.setFixedHeight(20f);
-		cell57.setGrayFill(0.92f);
-		table.addCell(cell57);
-
-		PdfPCell cell58 = new PdfPCell(new Paragraph(spdDesc2.getIncomingRatingOb(), font));
-		cell58.setHorizontalAlignment(Element.ALIGN_LEFT);
-//		cell58.setFixedHeight(20f);
-		table.addCell(cell58);
-
-		PdfPCell cell59 = new PdfPCell(new Paragraph(spdDesc2.getIncomingRatingRem(), font));
-		cell59.setHorizontalAlignment(Element.ALIGN_LEFT);
-		table.addCell(cell59);
-
-		PdfPCell cell60 = new PdfPCell(new Paragraph("6.e", font));
-		cell60.setHorizontalAlignment(Element.ALIGN_RIGHT);
-		cell60.setGrayFill(0.92f);
-		table.addCell(cell60);
-
-		PdfPCell cell61 = new PdfPCell(new Paragraph("Check Back up fuse (A)", font));
-		cell61.setHorizontalAlignment(Element.ALIGN_LEFT);
-//		cell61.setFixedHeight(20f);
-		cell61.setGrayFill(0.92f);
-		table.addCell(cell61);
-
-		PdfPCell cell62 = new PdfPCell(new Paragraph(spdDesc2.getBackupFuseCheckOb(), font));
-		cell62.setHorizontalAlignment(Element.ALIGN_LEFT);
-//		cell62.setFixedHeight(20f);
-		table.addCell(cell62);
-
-		PdfPCell cell63 = new PdfPCell(new Paragraph(spdDesc2.getBackupFuseCheckRem(), font));
-		cell63.setHorizontalAlignment(Element.ALIGN_LEFT);
-		table.addCell(cell63);
-
-		PdfPCell cell64 = new PdfPCell(new Paragraph("6.f", font));
-		cell64.setHorizontalAlignment(Element.ALIGN_RIGHT);
-		cell64.setGrayFill(0.92f);
-		table.addCell(cell64);
-
-		PdfPCell cell65 = new PdfPCell(new Paragraph("Check Connecting wire length (m)", font));
-		cell65.setHorizontalAlignment(Element.ALIGN_LEFT);
-//		cell65.setFixedHeight(20f);
-		cell65.setGrayFill(0.92f);
-		table.addCell(cell65);
-
-		PdfPCell cell66 = new PdfPCell(new Paragraph(spdDesc2.getConnectingWireLengthOb(), font));
-		cell66.setHorizontalAlignment(Element.ALIGN_LEFT);
-//		cell66.setFixedHeight(20f);
-		table.addCell(cell66);
-
-		PdfPCell cell67 = new PdfPCell(new Paragraph(spdDesc2.getConnectingWireLengthRem(), font));
-		cell67.setHorizontalAlignment(Element.ALIGN_LEFT);
-		table.addCell(cell67);
-
-		PdfPCell cell68 = new PdfPCell(new Paragraph("6.g", font));
-		cell68.setHorizontalAlignment(Element.ALIGN_RIGHT);
-		cell68.setGrayFill(0.92f);
-		table.addCell(cell68);
-
-		PdfPCell cell69 = new PdfPCell(new Paragraph("Check Connecting wire size (Sq.mm)", font));
-		cell69.setHorizontalAlignment(Element.ALIGN_LEFT);
-//		cell69.setFixedHeight(20f);
-		cell69.setGrayFill(0.92f);
-		table.addCell(cell69);
-
-		PdfPCell cell70 = new PdfPCell(new Paragraph(spdDesc2.getConnectingWireSizeOb(), font));
-		cell70.setHorizontalAlignment(Element.ALIGN_LEFT);
-//		cell70.setFixedHeight(20f);
-		table.addCell(cell70);
-
-		PdfPCell cell71 = new PdfPCell(new Paragraph(spdDesc2.getConnectingWireSizeRem(), font));
-		cell71.setHorizontalAlignment(Element.ALIGN_LEFT);
-		table.addCell(cell71);
-	}
-
-	private void mainsIncomingItr(Document document, SpdDescription spdDesc2, Font font11, PdfPTable table, Font font)
-			throws DocumentException {
-		PdfPCell cell13 = new PdfPCell(new Paragraph("5", font11));
-		cell13.setHorizontalAlignment(Element.ALIGN_CENTER);
-		cell13.setGrayFill(0.92f);
-		table.addCell(cell13);
-
-		PdfPCell cell14 = new PdfPCell(new Paragraph(
-				"Mains incoming panel (if more panels are available data from each panel is necessary)", font11));
-		cell14.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
-		cell14.setFixedHeight(20f);
-		cell14.setGrayFill(0.92f);
-		cell14.setColspan(3);
-		table.addCell(cell14);
-
-		PdfPCell cell17 = new PdfPCell(new Paragraph("5.a", font));
-		cell17.setHorizontalAlignment(Element.ALIGN_RIGHT);
-//		cell17.setFixedHeight(20f);
-		cell17.setGrayFill(0.92f);
-		table.addCell(cell17);
-
-		PdfPCell cell18 = new PdfPCell(new Paragraph("Type of SPD / Model", font));
-		cell18.setHorizontalAlignment(Element.ALIGN_LEFT);
-//		cell18.setFixedHeight(20f);
-		cell18.setGrayFill(0.92f);
-		table.addCell(cell18);
-
-		PdfPCell cell19 = new PdfPCell(new Paragraph(spdDesc2.getSpdTypeOb(), font));
-		cell19.setHorizontalAlignment(Element.ALIGN_LEFT);
-//		cell19.setFixedHeight(20f);
-		table.addCell(cell19);
-
-		PdfPCell cell20 = new PdfPCell(new Paragraph(spdDesc2.getSpdTypeRe(), font));
-		cell20.setHorizontalAlignment(Element.ALIGN_LEFT);
-//		cell20.setFixedHeight(20f);
-		table.addCell(cell20);
-
-		PdfPCell cell48 = new PdfPCell(new Paragraph("5.b", font));
-		cell48.setHorizontalAlignment(Element.ALIGN_RIGHT);
-//		cell48.setFixedHeight(20f);
-		cell48.setGrayFill(0.92f);
-		table.addCell(cell48);
-
-		PdfPCell cell49 = new PdfPCell(new Paragraph("Application", font));
-		cell49.setHorizontalAlignment(Element.ALIGN_LEFT);
-//		cell49.setFixedHeight(20f);
-		cell49.setGrayFill(0.92f);
-		table.addCell(cell49);
-
-		PdfPCell cell50 = new PdfPCell(new Paragraph(spdDesc2.getSpdApplicationOb(), font));
-		cell50.setHorizontalAlignment(Element.ALIGN_LEFT);
-//		cell50.setFixedHeight(20f);
-		table.addCell(cell50);
-
-		PdfPCell cell51 = new PdfPCell(new Paragraph(spdDesc2.getSpdApplicationRem(), font));
-//		cell51.setFixedHeight(20f);
-		cell51.setHorizontalAlignment(Element.ALIGN_LEFT);
-		table.addCell(cell51);
-
-		PdfPCell cell52 = new PdfPCell(new Paragraph("5.c", font));
-		cell52.setHorizontalAlignment(Element.ALIGN_RIGHT);
-		cell52.setGrayFill(0.92f);
-//		cell52.setFixedHeight(20f);
-		table.addCell(cell52);
-
-		PdfPCell cell53 = new PdfPCell(new Paragraph("Panel name", font));
-		cell53.setHorizontalAlignment(Element.ALIGN_LEFT);
-//		cell53.setFixedHeight(20f);
-		cell53.setGrayFill(0.92f);
-		table.addCell(cell53);
-
-		PdfPCell cell54 = new PdfPCell(new Paragraph(spdDesc2.getPanelNameOb(), font));
-		cell54.setHorizontalAlignment(Element.ALIGN_LEFT);
-//		cell54.setFixedHeight(20f);
-		table.addCell(cell54);
-
-		PdfPCell cell55 = new PdfPCell(new Paragraph(spdDesc2.getPanelNameRem(), font));
-		cell55.setHorizontalAlignment(Element.ALIGN_LEFT);
-		table.addCell(cell55);
-
-		PdfPCell cell56 = new PdfPCell(new Paragraph("5.d", font));
-		cell56.setHorizontalAlignment(Element.ALIGN_RIGHT);
-		cell56.setGrayFill(0.92f);
-		table.addCell(cell56);
-
-		PdfPCell cell57 = new PdfPCell(new Paragraph("Check incomer rating of the panel", font));
-		cell57.setHorizontalAlignment(Element.ALIGN_LEFT);
-//		cell57.setFixedHeight(20f);
-		cell57.setGrayFill(0.92f);
-		table.addCell(cell57);
-
-		PdfPCell cell58 = new PdfPCell(new Paragraph(spdDesc2.getIncomingRatingOb(), font));
-		cell58.setHorizontalAlignment(Element.ALIGN_LEFT);
-//		cell58.setFixedHeight(20f);
-		table.addCell(cell58);
-
-		PdfPCell cell59 = new PdfPCell(new Paragraph(spdDesc2.getIncomingRatingRem(), font));
-		cell59.setHorizontalAlignment(Element.ALIGN_LEFT);
-		table.addCell(cell59);
-
-		PdfPCell cell60 = new PdfPCell(new Paragraph("5.e", font));
-		cell60.setHorizontalAlignment(Element.ALIGN_RIGHT);
-		cell60.setGrayFill(0.92f);
-		table.addCell(cell60);
-
-		PdfPCell cell61 = new PdfPCell(new Paragraph("Check Back up fuse (A)", font));
-		cell61.setHorizontalAlignment(Element.ALIGN_LEFT);
-//		cell61.setFixedHeight(20f);
-		cell61.setGrayFill(0.92f);
-		table.addCell(cell61);
-
-		PdfPCell cell62 = new PdfPCell(new Paragraph(spdDesc2.getBackupFuseCheckOb(), font));
-		cell62.setHorizontalAlignment(Element.ALIGN_LEFT);
-//		cell62.setFixedHeight(20f);
-		table.addCell(cell62);
-
-		PdfPCell cell63 = new PdfPCell(new Paragraph(spdDesc2.getBackupFuseCheckRem(), font));
-		cell63.setHorizontalAlignment(Element.ALIGN_LEFT);
-		table.addCell(cell63);
-
-		PdfPCell cell64 = new PdfPCell(new Paragraph("5.f", font));
-		cell64.setHorizontalAlignment(Element.ALIGN_RIGHT);
-		cell64.setGrayFill(0.92f);
-		table.addCell(cell64);
-
-		PdfPCell cell65 = new PdfPCell(new Paragraph("Check Connecting wire length (m)", font));
-		cell65.setHorizontalAlignment(Element.ALIGN_LEFT);
-//		cell65.setFixedHeight(20f);
-		cell65.setGrayFill(0.92f);
-		table.addCell(cell65);
-
-		PdfPCell cell66 = new PdfPCell(new Paragraph(spdDesc2.getConnectingWireLengthOb(), font));
-		cell66.setHorizontalAlignment(Element.ALIGN_LEFT);
-//		cell66.setFixedHeight(20f);
-		table.addCell(cell66);
-
-		PdfPCell cell67 = new PdfPCell(new Paragraph(spdDesc2.getConnectingWireLengthRem(), font));
-		cell67.setHorizontalAlignment(Element.ALIGN_LEFT);
-		table.addCell(cell67);
-
-		PdfPCell cell68 = new PdfPCell(new Paragraph("5.g", font));
-		cell68.setHorizontalAlignment(Element.ALIGN_RIGHT);
-		cell68.setGrayFill(0.92f);
-		table.addCell(cell68);
-
-		PdfPCell cell69 = new PdfPCell(new Paragraph("Check Connecting wire size (Sq.mm)", font));
-		cell69.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
-//		cell69.setFixedHeight(20f);
-		cell69.setGrayFill(0.92f);
-		table.addCell(cell69);
-
-		PdfPCell cell70 = new PdfPCell(new Paragraph(spdDesc2.getConnectingWireSizeOb(), font));
-		cell70.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
-//		cell70.setFixedHeight(20f);
-		table.addCell(cell70);
-
-		PdfPCell cell71 = new PdfPCell(new Paragraph(spdDesc2.getConnectingWireSizeRem(), font));
-		cell71.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
-		table.addCell(cell71);
 
+		document.add(table2);
+		float[] pointColumnWidths1 = { 24F, 80F, 120F };
+		PdfPTable table10 = new PdfPTable(pointColumnWidths1);
+
+		table10.setWidthPercentage(100); // Width 100%
+		// table10.setSpacingBefore(10f); // Space before table
+		// table10.setSpacingAfter(5f); // Space after table
+		table10.getDefaultCell().setBorder(0);
+
+		PdfPCell cell225 = new PdfPCell(new Paragraph("5", font1));
+		cell225.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell225.setRowspan(2);
+		cell225.setGrayFill(0.92f);
+		table10.addCell(cell225);
+
+		PdfPCell cell11 = new PdfPCell(
+				new Paragraph("Location:", new Font(BaseFont.createFont(), 11, Font.NORMAL | Font.BOLD)));
+		cell11.setBackgroundColor(new BaseColor(203, 183, 162));
+		cell11.setHorizontalAlignment(Element.ALIGN_LEFT);
+		// cell11.setBorder(PdfPCell.NO_BORDER);
+		table10.addCell(cell11);
+		PdfPCell cell222 = new PdfPCell(
+				new Paragraph(spdDesc.getLocation(), new Font(BaseFont.createFont(), 10, Font.NORMAL | Font.BOLD)));
+		cell222.setHorizontalAlignment(Element.ALIGN_LEFT);
+		cell222.setBackgroundColor(new BaseColor(203, 183, 162));
+		// cell222.setBorder(PdfPCell.NO_BORDER);
+		table10.addCell(cell222);
+
+		PdfPCell cell333 = new PdfPCell(
+				new Paragraph("Panel Name:", new Font(BaseFont.createFont(), 11, Font.NORMAL | Font.BOLD)));
+		cell333.setBackgroundColor(new BaseColor(203, 183, 162));
+		cell333.setHorizontalAlignment(Element.ALIGN_LEFT);
+		// cell333.setBorder(PdfPCell.NO_BORDER);
+		table10.addCell(cell333);
+		PdfPCell cell444 = new PdfPCell(
+				new Paragraph(spdDesc.getPanelName(), new Font(BaseFont.createFont(), 10, Font.NORMAL | Font.BOLD)));
+		cell444.setHorizontalAlignment(Element.ALIGN_LEFT);
+		cell444.setBackgroundColor(new BaseColor(203, 183, 162));
+		// cell444.setBorder(PdfPCell.NO_BORDER);
+		table10.addCell(cell444);
+
+		document.add(table10);
+
+		float[] pointColumnWidths3 = { 30F, 145F, 55F, 50F };
+		PdfPTable table11 = new PdfPTable(pointColumnWidths3);
+
+		table11.setWidthPercentage(100); // Width 100%
+		// table10.setSpacingBefore(10f); // Space before table
+		// table10.setSpacingAfter(5f); // Space after table
+		table11.setWidthPercentage(100);
+		table11.getDefaultCell().setBorder(0);
+
+		PdfPCell cell221 = new PdfPCell(new Paragraph("5(a)", font1));
+		cell221.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell221.setRowspan(5);
+		cell221.setGrayFill(0.92f);
+		table11.addCell(cell221);
+
+		PdfPCell cell223 = new PdfPCell(new Paragraph("* Details of SPD", font11));
+		cell223.setGrayFill(0.92f);
+		cell223.setColspan(3);
+		table11.addCell(cell223);
+
+		PdfPCell cell226 = new PdfPCell(new Paragraph("Make", font1));
+		cell226.setGrayFill(0.92f);
+		table11.addCell(cell226);
+
+		PdfPCell cell227 = new PdfPCell(new Paragraph(spdDesc.getSpdMakeOb(), font1));
+		table11.addCell(cell227);
+
+		PdfPCell cell228 = new PdfPCell(new Paragraph(spdDesc.getSpdMakeRem(), font1));
+		table11.addCell(cell228);
+
+		PdfPCell cell229 = new PdfPCell(new Paragraph("Model", font1));
+		cell229.setGrayFill(0.92f);
+		table11.addCell(cell229);
+
+		PdfPCell cell330 = new PdfPCell(new Paragraph(spdDesc.getSpdModelOb(), font1));
+		table11.addCell(cell330);
+
+		PdfPCell cell331 = new PdfPCell(new Paragraph(spdDesc.getSpdModelRem(), font1));
+		table11.addCell(cell331);
+
+		PdfPCell cell332 = new PdfPCell(new Paragraph("Class Type", font1));
+		cell332.setGrayFill(0.92f);
+		table11.addCell(cell332);
+
+		PdfPCell cell335 = new PdfPCell(new Paragraph(spdDesc.getSpdClassTypeOb(), font1));
+		table11.addCell(cell335);
+
+		PdfPCell cell336 = new PdfPCell(new Paragraph(spdDesc.getSpdClassTypeRem(), font1));
+		table11.addCell(cell336);
+
+		PdfPCell cell337 = new PdfPCell(new Paragraph("Application", font1));
+		cell337.setGrayFill(0.92f);
+		table11.addCell(cell337);
+
+		PdfPCell cell338 = new PdfPCell(new Paragraph(spdDesc.getSpdApplicationOb(), font1));
+		table11.addCell(cell338);
+
+		PdfPCell cell340 = new PdfPCell(new Paragraph(spdDesc.getSpdApplicationRem(), font1));
+		table11.addCell(cell340);
+
+		PdfPCell cell341 = new PdfPCell(new Paragraph("5(b)", font1));
+		cell341.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell341.setGrayFill(0.92f);
+		table11.addCell(cell341);
+
+		PdfPCell cell350 = new PdfPCell(new Paragraph("Application ", font1));
+		cell350.setGrayFill(0.92f);
+		table11.addCell(cell350);
+
+		PdfPCell cell351 = new PdfPCell(new Paragraph(spdDesc.getSpdMainApplicationOb(), font1));
+		table11.addCell(cell351);
+
+		PdfPCell cell352 = new PdfPCell(new Paragraph(spdDesc.getSpdMainApplicationRem(), font1));
+		table11.addCell(cell352);
+
+		PdfPCell cell353 = new PdfPCell(new Paragraph("5(c)", font1));
+		cell353.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell353.setGrayFill(0.92f);
+		table11.addCell(cell353);
+
+		PdfPCell cell354 = new PdfPCell(new Paragraph("Proper connection made based on application", font1));
+		cell354.setGrayFill(0.92f);
+		table11.addCell(cell354);
+
+		PdfPCell cell355 = new PdfPCell(new Paragraph(spdDesc.getProperConnectionOb(), font1));
+		table11.addCell(cell355);
+
+		PdfPCell cell356 = new PdfPCell(new Paragraph(spdDesc.getProperConnectionRem(), font1));
+		table11.addCell(cell356);
+
+		PdfPCell cell357 = new PdfPCell(new Paragraph("5(d)", font1));
+		cell357.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell357.setGrayFill(0.92f);
+		table11.addCell(cell357);
+
+		PdfPCell cell358 = new PdfPCell(new Paragraph("Incomer rating of the panel in A", font1));
+		cell358.setGrayFill(0.92f);
+		table11.addCell(cell358);
+
+		PdfPCell cell359 = new PdfPCell(new Paragraph(spdDesc.getIncomerRatingOb().toString(), font1));
+		table11.addCell(cell359);
+
+		PdfPCell cell360 = new PdfPCell(new Paragraph(spdDesc.getIncomerRatingRem(), font1));
+		table11.addCell(cell360);
+
+		PdfPCell cell361 = new PdfPCell(new Paragraph("5(e)", font1));
+		cell361.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell361.setGrayFill(0.92f);
+		table11.addCell(cell361);
+
+		PdfPCell cell362 = new PdfPCell(new Paragraph(
+				"	Back up fuse/MCB rating in A (Back up fuse in line with safety requirements at \"End of Life\")",
+				font1));
+		cell362.setGrayFill(0.92f);
+		table11.addCell(cell362);
+
+		PdfPCell cell363 = new PdfPCell(new Paragraph(spdDesc.getFuseBackUpOb().toString(), font1));
+		table11.addCell(cell363);
+
+		PdfPCell cell364 = new PdfPCell(new Paragraph(spdDesc.getFuseBackUpRem(), font1));
+		table11.addCell(cell364);
+
+		PdfPCell cell365 = new PdfPCell(new Paragraph("5(f)", font1));
+		cell365.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell365.setRowspan(3);
+		cell365.setGrayFill(0.92f);
+		table11.addCell(cell365);
+
+		PdfPCell cell366 = new PdfPCell(new Paragraph("	* Length of connecting wire in meters", font11));
+		cell366.setGrayFill(0.92f);
+		cell366.setColspan(3);
+		table11.addCell(cell366);
+
+		PdfPCell cell367 = new PdfPCell(new Paragraph("Phase", font1));
+		cell367.setGrayFill(0.92f);
+		table11.addCell(cell367);
+
+		PdfPCell cell368 = new PdfPCell(new Paragraph(spdDesc.getLengthOfConnectingWirePhaseOb().toString(), font1));
+		table11.addCell(cell368);
+
+		PdfPCell cell369 = new PdfPCell(new Paragraph(spdDesc.getLengthOfConnectingWirePhaseRem(), font1));
+		table11.addCell(cell369);
+
+		PdfPCell cell370 = new PdfPCell(new Paragraph("Protective conductor", font1));
+		cell370.setGrayFill(0.92f);
+		table11.addCell(cell370);
+
+		PdfPCell cell371 = new PdfPCell(
+				new Paragraph(spdDesc.getLengthOfConnectingWireProtectiveOb().toString(), font1));
+		table11.addCell(cell371);
+
+		PdfPCell cell372 = new PdfPCell(new Paragraph(spdDesc.getLengthOfConnectingWireProtectiveRem(), font1));
+		table11.addCell(cell372);
+
+		PdfPCell cell373 = new PdfPCell(new Paragraph("5(g)", font1));
+		cell373.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell373.setRowspan(3);
+		cell373.setGrayFill(0.92f);
+		table11.addCell(cell373);
+
+		PdfPCell cell374 = new PdfPCell(new Paragraph("* Size of connecting wire in sq.mm", font11));
+		cell374.setGrayFill(0.92f);
+		cell374.setColspan(3);
+		table11.addCell(cell374);
+
+		PdfPCell cell375 = new PdfPCell(new Paragraph("Phase", font1));
+		cell375.setGrayFill(0.92f);
+		table11.addCell(cell375);
+
+		PdfPCell cell376 = new PdfPCell(new Paragraph(spdDesc.getSizeOfConnectingWirePhaseOb().toString(), font1));
+		table11.addCell(cell376);
+
+		PdfPCell cell377 = new PdfPCell(new Paragraph(spdDesc.getSizeOfConnectingWirePhaseRem(), font1));
+		table11.addCell(cell377);
+
+		PdfPCell cell378 = new PdfPCell(new Paragraph("Protective conductor", font1));
+		cell378.setGrayFill(0.92f);
+		table11.addCell(cell378);
+
+		PdfPCell cell379 = new PdfPCell(new Paragraph(spdDesc.getSizeOfConnectingWireProtectiveOb().toString(), font1));
+		table11.addCell(cell379);
+
+		PdfPCell cell380 = new PdfPCell(new Paragraph(spdDesc.getSizeOfConnectingWireProtectiveRem(), font1));
+		table11.addCell(cell380);
+
+		document.add(table11);
 	}
 
 }

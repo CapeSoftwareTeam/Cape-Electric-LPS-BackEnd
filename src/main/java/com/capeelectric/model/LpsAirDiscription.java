@@ -1,7 +1,6 @@
 package com.capeelectric.model;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -11,23 +10,16 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.NamedQueries;
-import org.hibernate.annotations.NamedQuery;
-
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
 @Entity
 @Table(name = "LPSAIRDESCRIPTION_TABLE")
-
- 
-@NamedQueries(value = {
-		@NamedQuery(name = "AirTerminationLpsRepository.findByUserNameAndBasicLpsId", query = "select s from LpsAirDiscription s where s.userName=:userName and s.basicLpsId=:basicLpsId"),
-		@NamedQuery(name = "AirTerminationLpsRepository.findByBasicLpsId", query = "select s from LpsAirDiscription s where s.basicLpsId=:basicLpsId"),
-})
 public class LpsAirDiscription implements Serializable {
  
 	private static final long serialVersionUID = 1L;
@@ -37,92 +29,114 @@ public class LpsAirDiscription implements Serializable {
 	@Column(name = "LPSAIRDESCRIPTION_ID")
 	private Integer lpsAirDescId;
 	
-	@Column(name = "USER_NAME")
-	private String userName;
+	@Column(name = "BUILDING_NUMBER")
+	private Integer buildingNumber;
 	
-	@Column(name = "BASIC_LPS_ID")
-	private Integer basicLpsId;
+	@Column(name = "BUILDING_NAME")
+	private String buildingName;
 	
-    @Column(name = "CONNECTION_MADE_BRAZINGOBSERVATION")
-	private String connectionMadeBraOb;
+	@Column(name = "BUILDING_COUNT")
+	private Integer buildingCount;
 	
-	@Column(name = "CONNECTION_MADE_BRAZINGREMARKS")
-	private String connectionMadeBraRe;
-
-	@Column(name = "ELECTRICAL_EQUIPMENT_PLACEDOBSERVATION")
-	private String electricalEquipPlacedOb;
-
-	@Column(name = "ELECTRICAL_EQUIPMENT_PLACEDREMARKS")
-	private String electricalEquipPlacedRe;
+	@Column(name = "BUILDING_TYPE")
+	private String buildingType;
 	
-	@Column(name = "COMBUSTABLE_PARTOBSERVATION")
-	private String combustablePartOb;
-
+	@Column(name = "BUILDING_TYPE_OTHERS")
+	private String buildingTypeOthers;
 	
-	@Column(name = "COMBUSTABLE_PARTREMARKS")
-	private String combustablePartRe;
+	@Column(name = "BUILDING_LENGTH")
+	private Integer buildingLength;
 	
-	@Column(name = "TERMINATION_MESH_CONDUCTOROBSERVATION")
-	private String terminationMeshConductorOb;
-
-
-	@Column(name = "TERMINATION_MESH_CONDUCTORREMARKS")
-	private String terminationMeshConductorRe;
+	@Column(name = "BUILDING_WIDTH")
+	private Integer buildingWidth;
 	
-	@Column(name = "BONDING_EQUIPOTENTIALOBSERVATION")
-	private String bondingEquipotentialOb;
-
-
-	@Column(name = "BONDING_EQUIPOTENTIALREMARKS")
-	private String bondingEquipotentialRe;
-   
+	@Column(name = "BUILDING_HEIGHT")
+	private Integer buildingHeight;
 	
-	@Column(name = "CREATED_DATE")
-	private LocalDateTime createdDate;
+	@Column(name = "PROTRUSION_HEIGHT")
+	private Integer protrusionHeight;
 	
-	@Column(name = "CREATED_BY")
-	private String createdBy;
-
-	@Column(name = "UPDATED_BY")
-	private String updatedBy;
+	@Column(name = "PROTECTION_LEVEL")
+	private String protectionLevel;
 	
-	@Column(name = "UPDATED_DATE")
-	private LocalDateTime updatedDate;
+	@Column(name = "AIR_BASIC_AVAILABILITY_OB")
+	private String airBasicDescriptionAvailabilityOb;
+	
+	@Column(name = "AIR_VERTICAL_TERMINAL_AVAILABILITY_OB")
+	private String verticalAirTerminationAvailabilityOb;
+	
+	@Column(name = "AIR_CLAMPS_AVAILABILITY_OB")
+	private String airClampsAvailabilityOb;
+	
+	@Column(name = "AIR_CONNECTORS_AVAILABILITY_OB")
+	private String airConnectorsAvailabilityOb;
+	
+	@Column(name = "AIR_EXPANSION_AVAILABILITY_OB")
+	private String airExpansionAvailabilityOb;
+	
+	@Column(name = "AIR_HOLDER_AVAILABILITY_OB")
+	private String airHolderDescriptionAvailabilityOb;
+	
+	@Column(name = "AIR_MESH_AVAILABILITY_OB")
+	private String airMeshDescriptionAvailabilityOb;
+	
+	@Column(name = "AIR_BASIC_AVAILABILITY_REM")
+	private String airBasicDescriptionAvailabilityRem;
+	
+	@Column(name = "AIR_VERTICAL_TERMINAL_AVAILABILITY_REM")
+	private String verticalAirTerminationAvailabilityRem;
+	
+	@Column(name = "AIR_CLAMPS_AVAILABILITY_REM")
+	private String airClampsAvailabilityRem;
+	
+	@Column(name = "AIR_CONNECTORS_AVAILABILITY_REM")
+	private String airConnectorsAvailabilityRem;
+	
+	@Column(name = "AIR_EXPANSION_AVAILABILITY_REM")
+	private String airExpansionAvailabilityRem;
+	
+	@Column(name = "AIR_HOLDER_AVAILABILITY_REM")
+	private String airHolderDescriptionAvailabilityRem;
+	
+	@Column(name = "AIR_MESH_AVAILABILITY_REM")
+	private String airMeshDescriptionAvailabilityRem;
+	
+	
+	@Column(name = "FLAG")
+	private String flag;
 	
 	@JsonManagedReference
-	@OneToMany(mappedBy = "lpsAirDes", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "lpsAirDescription", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<LpsVerticalAirTermination>lpsVerticalAirTermination;
 	 
 	@JsonManagedReference
-	@OneToMany(mappedBy = "lpsAirDes", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "lpsAirDescription", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<AirClamps> airClamps;
 	 
 	@JsonManagedReference
-	@OneToMany(mappedBy = "lpsAirDes", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "lpsAirDescription", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<AirConnectors> airConnectors;
 	 
 	@JsonManagedReference
-	@OneToMany(mappedBy = "lpsAirDes", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "lpsAirDescription", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<AirExpansion> airExpansion;
 	 
 	@JsonManagedReference
-	@OneToMany(mappedBy = "lpsAirDes", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "lpsAirDescription", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<AirHolderDescription> airHolderDescription;
 	 
 	@JsonManagedReference
-	@OneToMany(mappedBy = "lpsAirDes", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "lpsAirDescription", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<AirMeshDescription> airMeshDescription;
 
-	 
+	@JsonManagedReference
+	@OneToMany(mappedBy = "lpsAirDescription", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<AirBasicDescription> airBasicDescription;
 	
-	
-	public String getCombustablePartOb() {
-		return combustablePartOb;
-	}
-
-	public void setCombustablePartOb(String combustablePartOb) {
-		this.combustablePartOb = combustablePartOb;
-	}
+	@JsonBackReference
+	@ManyToOne
+	@JoinColumn(name = "AIR_TERMINATION_DETAILS_ID")
+	private AirTermination airTerminationDetails;
 
 	public Integer getLpsAirDescId() {
 		return lpsAirDescId;
@@ -132,129 +146,197 @@ public class LpsAirDiscription implements Serializable {
 		this.lpsAirDescId = lpsAirDescId;
 	}
 
-	public String getConnectionMadeBraOb() {
-		return connectionMadeBraOb;
+	public Integer getBuildingNumber() {
+		return buildingNumber;
+	}
+
+	public void setBuildingNumber(Integer buildingNumber) {
+		this.buildingNumber = buildingNumber;
+	}
+
+	public String getBuildingName() {
+		return buildingName;
+	}
+
+	public void setBuildingName(String buildingName) {
+		this.buildingName = buildingName;
+	}
+
+	public Integer getBuildingCount() {
+		return buildingCount;
+	}
+
+	public void setBuildingCount(Integer buildingCount) {
+		this.buildingCount = buildingCount;
+	}
+
+	public String getBuildingType() {
+		return buildingType;
+	}
+
+	public void setBuildingType(String buildingType) {
+		this.buildingType = buildingType;
+	}
+
+	public Integer getBuildingLength() {
+		return buildingLength;
+	}
+
+	public void setBuildingLength(Integer buildingLength) {
+		this.buildingLength = buildingLength;
+	}
+
+	public Integer getBuildingWidth() {
+		return buildingWidth;
+	}
+
+	public void setBuildingWidth(Integer buildingWidth) {
+		this.buildingWidth = buildingWidth;
+	}
+
+	public Integer getBuildingHeight() {
+		return buildingHeight;
+	}
+
+	public void setBuildingHeight(Integer buildingHeight) {
+		this.buildingHeight = buildingHeight;
+	}
+
+	public String getProtectionLevel() {
+		return protectionLevel;
+	}
+
+	public void setProtectionLevel(String protectionLevel) {
+		this.protectionLevel = protectionLevel;
 	}
 	
-	
-	public Integer getBasicLpsId() {
-		return basicLpsId;
+
+	public String getBuildingTypeOthers() {
+		return buildingTypeOthers;
 	}
 
-	public void setBasicLpsId(Integer basicLpsId) {
-		this.basicLpsId = basicLpsId;
+	public void setBuildingTypeOthers(String buildingTypeOthers) {
+		this.buildingTypeOthers = buildingTypeOthers;
 	}
 
-	public String getUserName() {
-		return userName;
+	public Integer getProtrusionHeight() {
+		return protrusionHeight;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setProtrusionHeight(Integer protrusionHeight) {
+		this.protrusionHeight = protrusionHeight;
 	}
 
-	public String getCombustablePartRe() {
-		return combustablePartRe;
+	public String getAirBasicDescriptionAvailabilityOb() {
+		return airBasicDescriptionAvailabilityOb;
 	}
 
-	public void setCombustablePartRe(String combustablePartRe) {
-		this.combustablePartRe = combustablePartRe;
+	public void setAirBasicDescriptionAvailabilityOb(String airBasicDescriptionAvailabilityOb) {
+		this.airBasicDescriptionAvailabilityOb = airBasicDescriptionAvailabilityOb;
 	}
 
-	public void setConnectionMadeBraOb(String connectionMadeBraOb) {
-		this.connectionMadeBraOb = connectionMadeBraOb;
+	public String getVerticalAirTerminationAvailabilityOb() {
+		return verticalAirTerminationAvailabilityOb;
 	}
 
-	public String getConnectionMadeBraRe() {
-		return connectionMadeBraRe;
+	public void setVerticalAirTerminationAvailabilityOb(String verticalAirTerminationAvailabilityOb) {
+		this.verticalAirTerminationAvailabilityOb = verticalAirTerminationAvailabilityOb;
 	}
 
-	public void setConnectionMadeBraRe(String connectionMadeBraRe) {
-		this.connectionMadeBraRe = connectionMadeBraRe;
+	public String getAirClampsAvailabilityOb() {
+		return airClampsAvailabilityOb;
 	}
 
-	public String getElectricalEquipPlacedOb() {
-		return electricalEquipPlacedOb;
+	public void setAirClampsAvailabilityOb(String airClampsAvailabilityOb) {
+		this.airClampsAvailabilityOb = airClampsAvailabilityOb;
 	}
 
-	public void setElectricalEquipPlacedOb(String electricalEquipPlacedOb) {
-		this.electricalEquipPlacedOb = electricalEquipPlacedOb;
+	public String getAirConnectorsAvailabilityOb() {
+		return airConnectorsAvailabilityOb;
 	}
 
-	public String getElectricalEquipPlacedRe() {
-		return electricalEquipPlacedRe;
+	public void setAirConnectorsAvailabilityOb(String airConnectorsAvailabilityOb) {
+		this.airConnectorsAvailabilityOb = airConnectorsAvailabilityOb;
 	}
 
-	public void setElectricalEquipPlacedRe(String electricalEquipPlacedRe) {
-		this.electricalEquipPlacedRe = electricalEquipPlacedRe;
+	public String getAirExpansionAvailabilityOb() {
+		return airExpansionAvailabilityOb;
 	}
 
- 
-
-	public String getTerminationMeshConductorOb() {
-		return terminationMeshConductorOb;
+	public void setAirExpansionAvailabilityOb(String airExpansionAvailabilityOb) {
+		this.airExpansionAvailabilityOb = airExpansionAvailabilityOb;
 	}
 
-	public void setTerminationMeshConductorOb(String terminationMeshConductorOb) {
-		this.terminationMeshConductorOb = terminationMeshConductorOb;
-	}
-	
-	
-
-	public LocalDateTime getCreatedDate() {
-		return createdDate;
+	public String getAirHolderDescriptionAvailabilityOb() {
+		return airHolderDescriptionAvailabilityOb;
 	}
 
-	public void setCreatedDate(LocalDateTime createdDate) {
-		this.createdDate = createdDate;
+	public void setAirHolderDescriptionAvailabilityOb(String airHolderDescriptionAvailabilityOb) {
+		this.airHolderDescriptionAvailabilityOb = airHolderDescriptionAvailabilityOb;
 	}
 
-	public String getCreatedBy() {
-		return createdBy;
+	public String getAirMeshDescriptionAvailabilityOb() {
+		return airMeshDescriptionAvailabilityOb;
 	}
 
-	public void setCreatedBy(String createdBy) {
-		this.createdBy = createdBy;
+	public void setAirMeshDescriptionAvailabilityOb(String airMeshDescriptionAvailabilityOb) {
+		this.airMeshDescriptionAvailabilityOb = airMeshDescriptionAvailabilityOb;
 	}
 
-	public String getUpdatedBy() {
-		return updatedBy;
+	public String getAirBasicDescriptionAvailabilityRem() {
+		return airBasicDescriptionAvailabilityRem;
 	}
 
-	public void setUpdatedBy(String updatedBy) {
-		this.updatedBy = updatedBy;
+	public void setAirBasicDescriptionAvailabilityRem(String airBasicDescriptionAvailabilityRem) {
+		this.airBasicDescriptionAvailabilityRem = airBasicDescriptionAvailabilityRem;
 	}
 
-	public LocalDateTime getUpdatedDate() {
-		return updatedDate;
+	public String getVerticalAirTerminationAvailabilityRem() {
+		return verticalAirTerminationAvailabilityRem;
 	}
 
-	public void setUpdatedDate(LocalDateTime updatedDate) {
-		this.updatedDate = updatedDate;
+	public void setVerticalAirTerminationAvailabilityRem(String verticalAirTerminationAvailabilityRem) {
+		this.verticalAirTerminationAvailabilityRem = verticalAirTerminationAvailabilityRem;
 	}
 
-	public String getTerminationMeshConductorRe() {
-		return terminationMeshConductorRe;
+	public String getAirClampsAvailabilityRem() {
+		return airClampsAvailabilityRem;
 	}
 
-	public void setTerminationMeshConductorRe(String terminationMeshConductorRe) {
-		this.terminationMeshConductorRe = terminationMeshConductorRe;
+	public void setAirClampsAvailabilityRem(String airClampsAvailabilityRem) {
+		this.airClampsAvailabilityRem = airClampsAvailabilityRem;
 	}
 
-	public String getBondingEquipotentialOb() {
-		return bondingEquipotentialOb;
+	public String getAirConnectorsAvailabilityRem() {
+		return airConnectorsAvailabilityRem;
 	}
 
-	public void setBondingEquipotentialOb(String bondingEquipotentialOb) {
-		this.bondingEquipotentialOb = bondingEquipotentialOb;
+	public void setAirConnectorsAvailabilityRem(String airConnectorsAvailabilityRem) {
+		this.airConnectorsAvailabilityRem = airConnectorsAvailabilityRem;
 	}
 
-	public String getBondingEquipotentialRe() {
-		return bondingEquipotentialRe;
+	public String getAirExpansionAvailabilityRem() {
+		return airExpansionAvailabilityRem;
 	}
 
-	public void setBondingEquipotentialRe(String bondingEquipotentialRe) {
-		this.bondingEquipotentialRe = bondingEquipotentialRe;
+	public void setAirExpansionAvailabilityRem(String airExpansionAvailabilityRem) {
+		this.airExpansionAvailabilityRem = airExpansionAvailabilityRem;
+	}
+
+	public String getAirHolderDescriptionAvailabilityRem() {
+		return airHolderDescriptionAvailabilityRem;
+	}
+
+	public void setAirHolderDescriptionAvailabilityRem(String airHolderDescriptionAvailabilityRem) {
+		this.airHolderDescriptionAvailabilityRem = airHolderDescriptionAvailabilityRem;
+	}
+
+	public String getAirMeshDescriptionAvailabilityRem() {
+		return airMeshDescriptionAvailabilityRem;
+	}
+
+	public void setAirMeshDescriptionAvailabilityRem(String airMeshDescriptionAvailabilityRem) {
+		this.airMeshDescriptionAvailabilityRem = airMeshDescriptionAvailabilityRem;
 	}
 
 	public List<LpsVerticalAirTermination> getLpsVerticalAirTermination() {
@@ -305,10 +387,34 @@ public class LpsAirDiscription implements Serializable {
 		this.airMeshDescription = airMeshDescription;
 	}
 
+	public List<AirBasicDescription> getAirBasicDescription() {
+		return airBasicDescription;
+	}
+
+	public void setAirBasicDescription(List<AirBasicDescription> airBasicDescription) {
+		this.airBasicDescription = airBasicDescription;
+	}
+
+	public AirTermination getAirTerminationDetails() {
+		return airTerminationDetails;
+	}
+
+	public void setAirTerminationDetails(AirTermination airTerminationDetails) {
+		this.airTerminationDetails = airTerminationDetails;
+	}
+	
+
+	public String getFlag() {
+		return flag;
+	}
+
+	public void setFlag(String flag) {
+		this.flag = flag;
+	}
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 
-	
 	
 }

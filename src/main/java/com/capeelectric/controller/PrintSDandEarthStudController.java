@@ -25,7 +25,7 @@
 //	public ResponseEntity<String> printSDandEarthStud(@PathVariable String userName, @PathVariable Integer lpsId)
 //			throws EarthStudException {
 //		logger.info("called printBasicLps UserName: {},BasicLpsId : {}", userName, lpsId);
-//		printSDandEarthStudService.printSDandEarthStud(userName, lpsId);
+//		printSDandEarthStudService.printSDandEarthStud1(userName, lpsId);
 //		return new ResponseEntity<String>(HttpStatus.OK);
 //	}
 //}

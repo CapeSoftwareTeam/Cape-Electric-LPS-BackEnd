@@ -16,19 +16,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-
-import com.capeelectric.exception.EarthStudException;
-import com.capeelectric.exception.EarthingLpsException;
 import com.capeelectric.exception.SPDException;
 import com.capeelectric.model.BasicLps;
-import com.capeelectric.model.EarthStudDescription;
-import com.capeelectric.model.EarthingLpsDescription;
 import com.capeelectric.model.SPD;
+import com.capeelectric.model.SpdDescription;
+import com.capeelectric.model.SpdReport;
 import com.capeelectric.repository.BasicLpsRepository;
-import com.capeelectric.repository.EarthStudRepository;
 import com.capeelectric.repository.SPDRepository;
-import com.capeelectric.service.impl.EarthStudServiceImpl;
 import com.capeelectric.service.impl.SPDServiceImpl;
+import com.capeelectric.util.FindNonRemovedObjects;
 import com.capeelectric.util.UserFullName;
 
 @ExtendWith(SpringExtension.class)
@@ -45,6 +41,9 @@ public class SPDServiceTest {
 
 	@MockBean
 	private BasicLpsRepository basicLpsRepository;
+	
+	@MockBean
+	private FindNonRemovedObjects findNonRemovedObjects;
 
 	@MockBean
 	private SPDException spdException;
@@ -52,13 +51,26 @@ public class SPDServiceTest {
 	@MockBean
 	private UserFullName userFullName;
 
-	private SPD spd;
+	private SpdReport spdReport;
 
 	{
-		spd = new SPD();
-		spd.setBasicLpsId(1);
-		spd.setUserName("LVsystem@gmail.com");
-		spd.setSpdId(2);
+		spdReport = new SpdReport();
+		spdReport.setBasicLpsId(1);
+		spdReport.setUserName("LVsystem@gmail.com");
+		spdReport.setSpdReportId(2);
+		
+		List<SPD> spdList = new ArrayList<SPD>();
+		SPD spd = new SPD();
+		spd.setFlag("A");
+		
+		List<SpdDescription> spdDescriptionList = new ArrayList<SpdDescription>();
+		SpdDescription spdDescription = new SpdDescription();
+		spdDescription.setFlag("A");
+		spdDescriptionList.add(spdDescription);
+		
+		spd.setSpdDescription(spdDescriptionList);
+		spdList.add(spd);
+		
 	}
 
 	private BasicLps basicLps;
@@ -74,25 +86,42 @@ public class SPDServiceTest {
 	public void testAddSPDDetails() throws SPDException {
 
 		when(basicLpsRepository.findByBasicLpsId(1)).thenReturn(Optional.of(basicLps));
-		when(spdRepository.findByBasicLpsId(2)).thenReturn(Optional.of(spd));
-		spdServiceImpl.addSPDDetails(spd);
+		when(spdRepository.findByBasicLpsId(2)).thenReturn(Optional.of(spdReport));
+		spdReport.setSpd(null);
+		SPDException earthStudException_1 = Assertions.assertThrows(SPDException.class,
+				() -> spdServiceImpl.addSPDDetails(spdReport));
+		assertEquals(earthStudException_1.getMessage(), "Please fill all the fields before clicking next button");
+		
+		List<SPD> spdList = new ArrayList<SPD>();
+		spdList.add(new SPD());
+		
+		List<SpdDescription> spdDescriptionList = new ArrayList<SpdDescription>();
+		SpdDescription spdDescription = new SpdDescription();
+		spdDescription.setFlag("A");
+		spdDescriptionList.add(spdDescription);
+		
+		SPD spd =spdList.get(0);
+		spd.setSpdDescription(spdDescriptionList);
+		spd.setFlag("A");
+		spdReport.setSpd(spdList);
+		spdServiceImpl.addSPDDetails(spdReport);
 
 		when(basicLpsRepository.findByBasicLpsId(1)).thenReturn(Optional.of(basicLps));
-		when(spdRepository.findByBasicLpsId(1)).thenReturn(Optional.of(spd));
+		when(spdRepository.findByBasicLpsId(1)).thenReturn(Optional.of(spdReport));
 		SPDException earthStudException_2 = Assertions.assertThrows(SPDException.class,
-				() -> spdServiceImpl.addSPDDetails(spd));
+				() -> spdServiceImpl.addSPDDetails(spdReport));
 		assertEquals(earthStudException_2.getMessage(), "Basic LPS Id Already Available.Create New Basic Id");
 
 		basicLps.setBasicLpsId(5);
-		spd.setBasicLpsId(5);
+		spdReport.setBasicLpsId(5);
 		when(basicLpsRepository.findByBasicLpsId(1)).thenReturn(Optional.of(basicLps));
 		SPDException earthStudException_3 = Assertions.assertThrows(SPDException.class,
-				() -> spdServiceImpl.addSPDDetails(spd));
+				() -> spdServiceImpl.addSPDDetails(spdReport));
 		assertEquals(earthStudException_3.getMessage(), "Given Basic LPS Id is Not Registered in Basic LPS");
 
-		spd.setUserName(null);
+		spdReport.setUserName(null);
 		SPDException earthStudException_4 = Assertions.assertThrows(SPDException.class,
-				() -> spdServiceImpl.addSPDDetails(spd));
+				() -> spdServiceImpl.addSPDDetails(spdReport));
 		assertEquals(earthStudException_4.getMessage(), "Invalid Inputs");
 
 	}
@@ -100,14 +129,14 @@ public class SPDServiceTest {
 	@Test
 	public void testRetrieveSPDDetails() throws SPDException {
 
-		List<SPD> arrayList = new ArrayList<SPD>();
-		arrayList.add(spd);
+		List<SpdReport> arrayList = new ArrayList<SpdReport>();
+		arrayList.add(spdReport);
 		when(spdRepository.findByUserNameAndBasicLpsId("LVsystem@gmail.com", 12)).thenReturn(arrayList);
 		spdServiceImpl.retrieveSPDDetails("LVsystem@gmail.com", 12);
 
 		SPDException earthingLpsException = Assertions.assertThrows(SPDException.class,
 				() -> spdServiceImpl.retrieveSPDDetails("abc@gmail.com", 12));
-		assertEquals(earthingLpsException.getMessage(), "Given UserName & Id doesn't exist in Down Conductor Details");
+		assertEquals(earthingLpsException.getMessage(), "Given UserName & Id doesn't exist in SPD Report Details");
 
 		SPDException earthingLpsException_1 = Assertions.assertThrows(SPDException.class,
 				() -> spdServiceImpl.retrieveSPDDetails(null, 12));
@@ -118,23 +147,23 @@ public class SPDServiceTest {
 	@Test
 	public void testUpdateSpdDetails() throws SPDException {
 		
-		spd.setUserName("LVsystem@gmail.com");
-		spd.setSpdId(1);
-		spd.setBasicLpsId(1);
-		when(spdRepository.findById(1)).thenReturn(Optional.of(spd));
-		spdServiceImpl.updateSpdDetails(spd);
+		spdReport.setUserName("LVsystem@gmail.com");
+		spdReport.setSpdReportId(1);
+		spdReport.setBasicLpsId(1);
+		when(spdRepository.findById(1)).thenReturn(Optional.of(spdReport));
+		spdServiceImpl.updateSpdDetails(spdReport);
 		
-		spd.setBasicLpsId(1);
-		spd.setSpdId(20);
-		when(spdRepository.findById(30)).thenReturn(Optional.of(spd));
+		spdReport.setBasicLpsId(1);
+		spdReport.setSpdReportId(20);
+		when(spdRepository.findById(30)).thenReturn(Optional.of(spdReport));
 		SPDException assertThrows_1 = Assertions.assertThrows(SPDException.class,
-				() -> spdServiceImpl.updateSpdDetails(spd));
+				() -> spdServiceImpl.updateSpdDetails(spdReport));
 		assertEquals(assertThrows_1.getMessage(), "Given Basic LPS Id and SPD Id is Invalid");
 		
-		spd.setBasicLpsId(null);
-		when(spdRepository.findById(1)).thenReturn(Optional.of(spd));
+		spdReport.setBasicLpsId(null);
+		when(spdRepository.findById(1)).thenReturn(Optional.of(spdReport));
 		SPDException assertThrows_2 = Assertions.assertThrows(SPDException.class,
-				() -> spdServiceImpl.updateSpdDetails(spd));
+				() -> spdServiceImpl.updateSpdDetails(spdReport));
 		assertEquals(assertThrows_2.getMessage(), "Invalid inputs");
 	}
 

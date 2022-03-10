@@ -1,5 +1,5 @@
-package com.capeelectric.controller;
-
+//package com.capeelectric.controller;
+//
 //import org.slf4j.Logger;
 //import org.slf4j.LoggerFactory;
 //import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +27,7 @@ package com.capeelectric.controller;
 //	public ResponseEntity<String> printDownConductor(@PathVariable String userName, @PathVariable Integer lpsId)
 //			throws  DownConductorException {
 //		logger.info("called printDownConductor UserName: {},BasicLpsId : {}", userName, lpsId);
-//		printDownConductorService.printDownConductor(userName, lpsId);
+//		printDownConductorService.printDownConductor1(userName, lpsId);
 //		return new ResponseEntity<String>(HttpStatus.OK);
 //	}
 //

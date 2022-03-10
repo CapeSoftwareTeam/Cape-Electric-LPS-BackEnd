@@ -4,19 +4,25 @@
 package com.capeelectric.service.impl;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import javax.transaction.Transactional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.capeelectric.exception.EarthingLpsException;
 import com.capeelectric.model.BasicLps;
 import com.capeelectric.model.EarthingLpsDescription;
+import com.capeelectric.model.EarthingReport;
 import com.capeelectric.repository.BasicLpsRepository;
 import com.capeelectric.repository.EarthingLpsRepository;
 import com.capeelectric.service.EarthingLpsService;
+import com.capeelectric.util.FindNonRemovedObjects;
 import com.capeelectric.util.UserFullName;
 
 /**
@@ -40,75 +46,108 @@ public class EarthingLpsServiceImpl implements EarthingLpsService {
 	@Autowired
 	private UserFullName userFullName;
 	
+	@Autowired
+	private FindNonRemovedObjects findNonRemovedObjects;
+	
+	@Transactional
 	@Override
-	public void addEarthingLpsDetails(EarthingLpsDescription earthingLpsDesc)
+	public void addEarthingLpsDetails(EarthingReport earthingReport)
 			throws  EarthingLpsException{
-		if (earthingLpsDesc != null && earthingLpsDesc.getUserName() != null
-				&& !earthingLpsDesc.getUserName().isEmpty() && earthingLpsDesc.getBasicLpsId() != null
-				&& earthingLpsDesc.getBasicLpsId() != 0) {
+		logger.info("Called addEarthingLpsDetails function");
+
+		if (earthingReport != null && earthingReport.getUserName() != null
+				&& !earthingReport.getUserName().isEmpty() && earthingReport.getBasicLpsId() != null
+				&& earthingReport.getBasicLpsId() != 0) {
 			
-			Optional<BasicLps> basicLpsRepo = basicLpsRepository.findByBasicLpsId(earthingLpsDesc.getBasicLpsId());
+			Optional<BasicLps> basicLpsRepo = basicLpsRepository.findByBasicLpsId(earthingReport.getBasicLpsId());
 			if(basicLpsRepo.isPresent()
-					&& basicLpsRepo.get().getBasicLpsId().equals(earthingLpsDesc.getBasicLpsId())) {
-				Optional<EarthingLpsDescription> earthingLpsRepo = earthingLpsRepository
-						.findByBasicLpsId(earthingLpsDesc.getBasicLpsId());
+					&& basicLpsRepo.get().getBasicLpsId().equals(earthingReport.getBasicLpsId())) {
+				Optional<EarthingReport> earthingLpsRepo = earthingLpsRepository
+						.findByBasicLpsId(earthingReport.getBasicLpsId());
 				if (!earthingLpsRepo.isPresent()
-						|| !earthingLpsRepo.get().getBasicLpsId().equals(earthingLpsDesc.getBasicLpsId())) {
+						|| !earthingLpsRepo.get().getBasicLpsId().equals(earthingReport.getBasicLpsId())) {
+					List<EarthingLpsDescription> earthingLpsDescription = earthingReport.getEarthingLpsDescription();
+					if(earthingLpsDescription != null && earthingLpsDescription.size() > 0) {
+						earthingReport.setCreatedDate(LocalDateTime.now());
+						earthingReport.setUpdatedDate(LocalDateTime.now());
+						earthingReport.setCreatedBy(userFullName.findByUserName(earthingReport.getUserName()));
+						earthingReport.setUpdatedBy(userFullName.findByUserName(earthingReport.getUserName()));
+						earthingLpsRepository.save(earthingReport);
+						logger.debug("Earthing Report Details Successfully Saved in DB");
+					} else {
+						logger.error("Please fill all the fields before clicking next button");
+						throw new EarthingLpsException("Please fill all the fields before clicking next button");
+					}
 					
-					earthingLpsDesc.setCreatedDate(LocalDateTime.now());
-					earthingLpsDesc.setUpdatedDate(LocalDateTime.now());
-					earthingLpsDesc.setCreatedBy(userFullName.findByUserName(earthingLpsDesc.getUserName()));
-					earthingLpsDesc.setUpdatedBy(userFullName.findByUserName(earthingLpsDesc.getUserName()));
-					earthingLpsRepository.save(earthingLpsDesc);
 				} else {
+					logger.error("Basic LPS Id Already Available.Create New Basic Id");
 					throw new EarthingLpsException("Basic LPS Id Already Available.Create New Basic Id");
 				}
 			}
 			else {
+				logger.error("Given Basic LPS Id is Not Registered in Basic LPS");
 				throw new EarthingLpsException("Given Basic LPS Id is Not Registered in Basic LPS");
 			}
 		}
 		else {
+			logger.error("Invalid Inputs");
 			throw new EarthingLpsException("Invalid Inputs");
 		}
-			
+		logger.info("Ended addEarthingLpsDetails function");
+	
 	}
 	
 	@Override
-	public List<EarthingLpsDescription> retrieveEarthingLpsDetails(String userName, Integer basicLpsId)
+	public List<EarthingReport> retrieveEarthingLpsDetails(String userName, Integer basicLpsId)
 			throws EarthingLpsException {
+		logger.info("Called retrieveEarthingLpsDetails function");
+
 		if (userName != null) {
-			List<EarthingLpsDescription> earthingLpsRepo = earthingLpsRepository.findByUserNameAndBasicLpsId(userName,
+			List<EarthingReport> earthingLpsRepo = earthingLpsRepository.findByUserNameAndBasicLpsId(userName,
 					basicLpsId);
-			if (earthingLpsRepo != null && !earthingLpsRepo.isEmpty()) {				
+			if (earthingLpsRepo != null && !earthingLpsRepo.isEmpty()) {
+				for(EarthingReport earthingReportItr : earthingLpsRepo) {
+					earthingReportItr.setEarthingLpsDescription(findNonRemovedObjects.findNonRemovedEarthingLpsBuildings(earthingReportItr));
+					logger.debug("Successfully done findNonRemovedEarthingLpsBuildings() call");
+				}
+				logger.info("Ended retrieveEarthingLpsDetails function");
 				return earthingLpsRepo;
 			} else {
-				throw new EarthingLpsException("Given UserName & Id doesn't exist in Down Conductor Details");
-			}
+				logger.error("Given UserName & Id doesn't exist in Earthing Report Details");
+				return new ArrayList<EarthingReport>();			}
 		} else {
+			logger.error("Invalid Inputs");
 			throw new EarthingLpsException("Invalid Inputs");
 		}
+
 	}
 	
+	@Transactional
 	@Override
-	public void updateEarthingLpsDetails(EarthingLpsDescription earthingLpsDesc) throws EarthingLpsException {
+	public void updateEarthingLpsDetails(EarthingReport earthingReport) throws EarthingLpsException {
+		logger.info("Called updateEarthingLpsDetails function");
 
-		if (earthingLpsDesc != null && earthingLpsDesc.getEarthingId() != null
-				&& earthingLpsDesc.getEarthingId() != 0 && earthingLpsDesc.getBasicLpsId() != null
-				&& earthingLpsDesc.getBasicLpsId() != 0) {
-			Optional<EarthingLpsDescription> earthingLpsRepo = earthingLpsRepository
-					.findById(earthingLpsDesc.getEarthingId());
+		if (earthingReport != null && earthingReport.getEarthingReportId() != null
+				&& earthingReport.getEarthingReportId() != 0 && earthingReport.getBasicLpsId() != null
+				&& earthingReport.getBasicLpsId() != 0) {
+			Optional<EarthingReport> earthingLpsRepo = earthingLpsRepository
+					.findById(earthingReport.getEarthingReportId());
 			if (earthingLpsRepo.isPresent()
-					&& earthingLpsRepo.get().getBasicLpsId().equals(earthingLpsDesc.getBasicLpsId())) {
-				earthingLpsDesc.setUpdatedDate(LocalDateTime.now());
-				earthingLpsDesc.setUpdatedBy(userFullName.findByUserName(earthingLpsDesc.getUserName()));
-				earthingLpsRepository.save(earthingLpsDesc);
+					&& earthingLpsRepo.get().getBasicLpsId().equals(earthingReport.getBasicLpsId())) {
+				earthingReport.setUpdatedDate(LocalDateTime.now());
+				earthingReport.setUpdatedBy(userFullName.findByUserName(earthingReport.getUserName()));
+				earthingLpsRepository.save(earthingReport);
+				logger.debug("Earthing Report Details Successfully Updated in DB");
 			} else {
+				logger.error("Given Basic LPS Id and Earthing LPS Id is Invalid");
 				throw new EarthingLpsException("Given Basic LPS Id and Earthing LPS Id is Invalid");
 			}
 
 		} else {
+			logger.error("Invalid inputs");
 			throw new EarthingLpsException("Invalid inputs");
 		}
+		logger.info("Ended updateEarthingLpsDetails function");
+
 	}
 }

@@ -26,19 +26,7 @@ public class TestingJoint implements Serializable {
 	private Integer testJointId;
 
 	@Column(name = "FLAG")
-	private Boolean flag;
-	
-	@Column(name = "LOCATION_NUMBER")
-	private Integer locationNumber;
-
-	@Column(name = "LOCATION_NAME")
-	private String locationName;
-
-	@Column(name = "TESTJOINT_TYPE_OB")
-	private String testJointTypeOb;
-
-	@Column(name = "TESTJOINT_TYPE_REM")
-	private String testJointTypeRem;
+	private String flag;
 
 	@Column(name = "MATERIAL_TESTJOINT_OB")
 	private String materialTestJointOb;
@@ -69,27 +57,33 @@ public class TestingJoint implements Serializable {
 
 	@Column(name = "BIMETALLICISSUE_CHECK_REM")
 	private String bimetallicIssueCheckRem;
+	
+	@Column(name = "TOUCHING_CONDUCTORS_OB")
+	private String touchingConductorsOb;
+
+	@Column(name = "TOUCHING_CONDUCTORS_REM")
+	private String touchingConductorsRem;
 
 	@Column(name = "TOTALNO_OF_TESTJOINT_OB")
-	private String totalNoOfTestJointOB;
+	private Integer totalNoOfTestJointOB;
 
 	@Column(name = "TOTALNO_OF_TESTJOINT_REM")
 	private String totalNoOfTestJointRem;
 
 	@Column(name = "INSPECTED_NO_OB")
-	private String inspectedNoOb;
+	private Integer inspectedNoOb;
 
 	@Column(name = "INSPECTED_NO_REM")
 	private String inspectedNoRem;
 
 	@Column(name = "INSPECTIONSPASSED_NO_OB")
-	private String inspectionPassedNoOb;
+	private Integer inspectionPassedNoOb;
 
 	@Column(name = "INSPECTIONSPASSED_NO_REM")
 	private String inspectionPassedNoRem;
 
 	@Column(name = "INSPECTIONFAILED_NO_OB")
-	private String inspectionFailedNoOb;
+	private Integer inspectionFailedNoOb;
 
 	@Column(name = "INSPECTIONFAILED_NO_REM")
 	private String inspectionFailedNoRem;
@@ -103,40 +97,8 @@ public class TestingJoint implements Serializable {
 		return testJointId;
 	}
 
-	public Integer getLocationNumber() {
-		return locationNumber;
-	}
-
-	public void setLocationNumber(Integer locationNumber) {
-		this.locationNumber = locationNumber;
-	}
-
-	public String getLocationName() {
-		return locationName;
-	}
-
-	public void setLocationName(String locationName) {
-		this.locationName = locationName;
-	}
-
 	public void setTestJointId(Integer testJointId) {
 		this.testJointId = testJointId;
-	}
-
-	public String getTestJointTypeOb() {
-		return testJointTypeOb;
-	}
-
-	public void setTestJointTypeOb(String testJointTypeOb) {
-		this.testJointTypeOb = testJointTypeOb;
-	}
-
-	public String getTestJointTypeRem() {
-		return testJointTypeRem;
-	}
-
-	public void setTestJointTypeRem(String testJointTypeRem) {
-		this.testJointTypeRem = testJointTypeRem;
 	}
 
 	public String getMaterialTestJointOb() {
@@ -219,28 +181,12 @@ public class TestingJoint implements Serializable {
 		this.bimetallicIssueCheckRem = bimetallicIssueCheckRem;
 	}
 
-	public String getTotalNoOfTestJointOB() {
-		return totalNoOfTestJointOB;
-	}
-
-	public void setTotalNoOfTestJointOB(String totalNoOfTestJointOB) {
-		this.totalNoOfTestJointOB = totalNoOfTestJointOB;
-	}
-
 	public String getTotalNoOfTestJointRem() {
 		return totalNoOfTestJointRem;
 	}
 
 	public void setTotalNoOfTestJointRem(String totalNoOfTestJointRem) {
 		this.totalNoOfTestJointRem = totalNoOfTestJointRem;
-	}
-
-	public String getInspectedNoOb() {
-		return inspectedNoOb;
-	}
-
-	public void setInspectedNoOb(String inspectedNoOb) {
-		this.inspectedNoOb = inspectedNoOb;
 	}
 
 	public String getInspectedNoRem() {
@@ -251,14 +197,6 @@ public class TestingJoint implements Serializable {
 		this.inspectedNoRem = inspectedNoRem;
 	}
 
-	public String getInspectionPassedNoOb() {
-		return inspectionPassedNoOb;
-	}
-
-	public void setInspectionPassedNoOb(String inspectionPassedNoOb) {
-		this.inspectionPassedNoOb = inspectionPassedNoOb;
-	}
-
 	public String getInspectionPassedNoRem() {
 		return inspectionPassedNoRem;
 	}
@@ -267,13 +205,6 @@ public class TestingJoint implements Serializable {
 		this.inspectionPassedNoRem = inspectionPassedNoRem;
 	}
 
-	public String getInspectionFailedNoOb() {
-		return inspectionFailedNoOb;
-	}
-
-	public void setInspectionFailedNoOb(String inspectionFailedNoOb) {
-		this.inspectionFailedNoOb = inspectionFailedNoOb;
-	}
 
 	public String getInspectionFailedNoRem() {
 		return inspectionFailedNoRem;
@@ -291,12 +222,65 @@ public class TestingJoint implements Serializable {
 		this.downConductorDescription = downConductorDescription;
 	}
 
-	public Boolean getFlag() {
+	public String getFlag() {
 		return flag;
 	}
 
-	public void setFlag(Boolean flag) {
+	public void setFlag(String flag) {
 		this.flag = flag;
 	}
+
+	public String getTouchingConductorsOb() {
+		return touchingConductorsOb;
+	}
+
+	public void setTouchingConductorsOb(String touchingConductorsOb) {
+		this.touchingConductorsOb = touchingConductorsOb;
+	}
+
+	public String getTouchingConductorsRem() {
+		return touchingConductorsRem;
+	}
+
+	public void setTouchingConductorsRem(String touchingConductorsRem) {
+		this.touchingConductorsRem = touchingConductorsRem;
+	}
+
+	public Integer getTotalNoOfTestJointOB() {
+		return totalNoOfTestJointOB;
+	}
+
+	public void setTotalNoOfTestJointOB(Integer totalNoOfTestJointOB) {
+		this.totalNoOfTestJointOB = totalNoOfTestJointOB;
+	}
+
+	public Integer getInspectedNoOb() {
+		return inspectedNoOb;
+	}
+
+	public void setInspectedNoOb(Integer inspectedNoOb) {
+		this.inspectedNoOb = inspectedNoOb;
+	}
+
+	public Integer getInspectionPassedNoOb() {
+		return inspectionPassedNoOb;
+	}
+
+	public void setInspectionPassedNoOb(Integer inspectionPassedNoOb) {
+		this.inspectionPassedNoOb = inspectionPassedNoOb;
+	}
+
+	public Integer getInspectionFailedNoOb() {
+		return inspectionFailedNoOb;
+	}
+
+	public void setInspectionFailedNoOb(Integer inspectionFailedNoOb) {
+		this.inspectionFailedNoOb = inspectionFailedNoOb;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 
 }

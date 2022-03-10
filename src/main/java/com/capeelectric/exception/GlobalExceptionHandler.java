@@ -58,4 +58,10 @@ public class GlobalExceptionHandler {
 		ErrorMessage exceptionMessage = new ErrorMessage(e.getMessage(), e.getLocalizedMessage(), "404");
 		return new ResponseEntity<ErrorMessage>(exceptionMessage, new HttpHeaders(), HttpStatus.NOT_FOUND);
 	}
+	
+	@ExceptionHandler({ SummaryLpsException.class })
+	public ResponseEntity<ErrorMessage> handleSummaryLpsException(SummaryLpsException e) {
+		ErrorMessage exceptionMessage = new ErrorMessage(e.getMessage(), e.getLocalizedMessage(), "404");
+		return new ResponseEntity<ErrorMessage>(exceptionMessage, new HttpHeaders(), HttpStatus.NOT_FOUND);
+	}
 }

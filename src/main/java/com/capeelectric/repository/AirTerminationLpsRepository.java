@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import com.capeelectric.model.AirTermination;
 import com.capeelectric.model.LpsAirDiscription;
 
 
@@ -14,9 +15,9 @@ import com.capeelectric.model.LpsAirDiscription;
  *
  */
 @Repository
-public interface AirTerminationLpsRepository extends CrudRepository<LpsAirDiscription, Integer> {
+public interface AirTerminationLpsRepository extends CrudRepository<AirTermination, Integer> {
 
-	List<LpsAirDiscription> findByUserNameAndBasicLpsId(String userName, Integer basicLpsId);
+	List<AirTermination> findByUserNameAndBasicLpsId(String userName, Integer basicLpsId);
 	
-	Optional<LpsAirDiscription> findByBasicLpsId(Integer basicLpsId);
+	Optional<AirTermination> findByBasicLpsId(Integer basicLpsId);
 }
