@@ -1,6 +1,7 @@
 package com.capeelectric.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -194,10 +195,8 @@ public class AirTerminationLpsServiceTest {
 		logger.info("Given UserName & Id doesn't exist in Air Termination LPS Details");
 		List<AirTermination> arrayList_1 = new ArrayList<AirTermination>();
 		when(airTerminationLpsRepository.findByUserNameAndBasicLpsId("test@gmail.com", 12)).thenReturn(arrayList_1);
-		AirTerminationException basicLpsException_2 = Assertions.assertThrows(AirTerminationException.class,
-				() -> airTerminationLpsServiceImpl.retrieveAirTerminationLps("test@gmail.com", 12));
-		assertEquals(basicLpsException_2.getMessage(), "Given UserName & Id doesn't exist in Air Termination LPS Details");
-
+ 		 assertNotNull( airTerminationLpsServiceImpl.retrieveAirTerminationLps("test@gmail.com", 12));
+ 
 	}
 
 	@Test

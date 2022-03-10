@@ -1,6 +1,7 @@
 package com.capeelectric.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -206,11 +207,8 @@ public class EarthingLpsServiceTest {
 		EarthingLpsException earthingLpsException_1 = Assertions.assertThrows(EarthingLpsException.class,
 				() -> earthingLpsServiceImpl.retrieveEarthingLpsDetails(null, 12));
 		assertEquals(earthingLpsException_1.getMessage(), "Invalid Inputs");
-		
-		EarthingLpsException earthingLpsException = Assertions.assertThrows(EarthingLpsException.class,
-				() -> earthingLpsServiceImpl.retrieveEarthingLpsDetails("abc@gmail.com", 12));
-		assertEquals(earthingLpsException.getMessage(), "Given UserName & Id doesn't exist in Earthing Report Details");
 
+		assertNotNull(earthingLpsServiceImpl.retrieveEarthingLpsDetails("abc@gmail.com", 12));
 	}
 
 	@Test

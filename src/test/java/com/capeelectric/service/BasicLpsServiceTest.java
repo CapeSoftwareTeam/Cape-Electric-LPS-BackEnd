@@ -81,7 +81,7 @@ public class BasicLpsServiceTest {
 		logger.info("SuccessFlow of Retrieve LpsBasic Obeject");
 		basicLpsServiceImpl.retrieveBasicLpsDetails("LVsystem@gmail.com", 12);
 
-		logger.info("Invalid Input flow");
+		logger.info("Invalid Input flow"); 
 		BasicLpsException basicLpsException = Assertions.assertThrows(BasicLpsException.class,
 				() -> basicLpsServiceImpl.retrieveBasicLpsDetails(null, 12));
 		assertEquals(basicLpsException.getMessage(), "Invalid Inputs");
@@ -89,9 +89,9 @@ public class BasicLpsServiceTest {
 		List<BasicLps> arrayList1 = new ArrayList<BasicLps>();
 		when(basicLpsRepository.findByUserNameAndBasicLpsId("abc@gmail.com", 12)).thenReturn(arrayList1);
 		logger.info("Invalid Input flow");
-		BasicLpsException basicLpsException_1 = Assertions.assertThrows(BasicLpsException.class,
-				() -> basicLpsServiceImpl.retrieveBasicLpsDetails("abc@gmail.com", 12));
-		assertEquals(basicLpsException_1.getMessage(), "Given UserName & Id doesn't exist in Basic Lps Details");
+		 
+		List<BasicLps> lpsDetails = basicLpsServiceImpl.retrieveBasicLpsDetails("abc@gmail.com", 12);
+		assertEquals(lpsDetails, new ArrayList<BasicLps>());
 
 	}
 
