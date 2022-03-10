@@ -1,6 +1,7 @@
 package com.capeelectric.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -146,9 +147,7 @@ public class SeperationDistanceServiceTest {
 		when(seperationDistanceRepository.findByUserNameAndBasicLpsId("LVsystem@gmail.com", 12)).thenReturn(arrayList);
 		seperationDistanceServiceImpl.retrieveSeperationDetails("LVsystem@gmail.com", 12);
 
-		SeperationDistanceException seperationDistanceException_1 = Assertions.assertThrows(SeperationDistanceException.class,
-				() -> seperationDistanceServiceImpl.retrieveSeperationDetails("abc@gmail.com", 12));
-		assertEquals(seperationDistanceException_1.getMessage(), "Given UserName & Id doesn't exist in Seperation Distance Details");
+		assertNotNull(seperationDistanceServiceImpl.retrieveSeperationDetails("abc@gmail.com", 12));
 		
 		SeperationDistanceException seperationDistanceException_2 = Assertions.assertThrows(SeperationDistanceException.class,
 				() -> seperationDistanceServiceImpl.retrieveSeperationDetails(null, 12));

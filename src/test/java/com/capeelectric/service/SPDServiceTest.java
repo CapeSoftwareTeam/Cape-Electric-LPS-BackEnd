@@ -1,6 +1,8 @@
 package com.capeelectric.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -133,11 +135,9 @@ public class SPDServiceTest {
 		arrayList.add(spdReport);
 		when(spdRepository.findByUserNameAndBasicLpsId("LVsystem@gmail.com", 12)).thenReturn(arrayList);
 		spdServiceImpl.retrieveSPDDetails("LVsystem@gmail.com", 12);
-
-		SPDException earthingLpsException = Assertions.assertThrows(SPDException.class,
-				() -> spdServiceImpl.retrieveSPDDetails("abc@gmail.com", 12));
-		assertEquals(earthingLpsException.getMessage(), "Given UserName & Id doesn't exist in SPD Report Details");
-
+		
+		assertNotNull(spdServiceImpl.retrieveSPDDetails("abc@gmail.com", 12));
+		
 		SPDException earthingLpsException_1 = Assertions.assertThrows(SPDException.class,
 				() -> spdServiceImpl.retrieveSPDDetails(null, 12));
 		assertEquals(earthingLpsException_1.getMessage(), "Invalid Inputs");

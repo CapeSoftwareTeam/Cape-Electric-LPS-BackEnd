@@ -1,6 +1,7 @@
 package com.capeelectric.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -118,10 +119,8 @@ public class EarthStudServiceTest {
 		when(earthStudRepository.findByUserNameAndBasicLpsId("LVsystem@gmail.com", 12)).thenReturn(arrayList);
 		eartStudServiceImpl.retrieveEarthStudDetails("LVsystem@gmail.com", 12);
 
-		EarthStudException earthStudException_1 = Assertions.assertThrows(EarthStudException.class,
-				() -> eartStudServiceImpl.retrieveEarthStudDetails("abc@gmail.com", 12));
-		assertEquals(earthStudException_1.getMessage(), "Given UserName & Id doesn't exist in Earth Stud Report Details");
-		
+		assertNotNull(eartStudServiceImpl.retrieveEarthStudDetails("abc@gmail.com", 12));
+
 		EarthStudException earthStudException_2 = Assertions.assertThrows(EarthStudException.class,
 				() -> eartStudServiceImpl.retrieveEarthStudDetails(null, 12));
 		assertEquals(earthStudException_2.getMessage(), "Invalid Inputs");

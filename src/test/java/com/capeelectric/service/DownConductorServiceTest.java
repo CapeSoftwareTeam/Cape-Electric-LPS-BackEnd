@@ -1,6 +1,7 @@
 package com.capeelectric.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -214,9 +215,7 @@ public class DownConductorServiceTest {
 		assertEquals(basicLpsException.getMessage(), "Invalid Inputs");
 
 		downConductorReport.setUserName("LVsystem@gmail.com");
-		DownConductorException basicLpsException_1 = Assertions.assertThrows(DownConductorException.class,
-				() -> downConductorServiceImpl.retrieveDownConductorDetails("abc@gmail.com", 12));
-		assertEquals(basicLpsException_1.getMessage(), "Given UserName & Id doesn't exist in Down Conductor Details");
+		assertNotNull(downConductorServiceImpl.retrieveDownConductorDetails("abc@gmail.com", 12));
 
 	}
 
