@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.capeelectric.exception.DownConductorException;
+import com.capeelectric.model.BasicLps;
 import com.capeelectric.model.BridgingDescription;
 import com.capeelectric.model.Connectors;
 import com.capeelectric.model.DownConductor;
@@ -46,7 +47,8 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 //	private DownConductorRepository downConductorRepository;
 
 	@Override
-	public void printDownConductor(String userName, Integer lpsId, Optional<DownConductorReport> downConductorDetails) throws DownConductorException {
+	public void printDownConductor(String userName, Integer lpsId, Optional<BasicLps> basicLpsDetails,
+			Optional<DownConductorReport> downConductorDetails) throws DownConductorException {
 
 //	@Override
 //	public void printDownConductor1(String userName, Integer lpsId) throws DownConductorException {
@@ -56,7 +58,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 			try {
 
 //				List<BasicLps> basicLps = basicLpsRepository.findByUserNameAndBasicLpsId(userName, lpsId);
-//				BasicLps basicLps1 = basicLps.get(0);
+				BasicLps basicLps1 = basicLpsDetails.get();
 
 				PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("DownConductorLps.pdf"));
 
@@ -132,7 +134,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 // Down Conductor accordian Method 
 
 				document.newPage();
-				
+
 				float[] pointColumnWidths4 = { 25F, 150F, 55F, 50F };
 
 				PdfPTable downConductorHead = new PdfPTable(pointColumnWidths4);
@@ -171,7 +173,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 				cell71.setBackgroundColor(new GrayColor(0.93f));
 				cell71.setBorder(PdfPCell.NO_BORDER);
 				table10.addCell(cell71);
-				
+
 				PdfPTable table10R = new PdfPTable(pointColumnWidthsAvailability);
 				table10R.setWidthPercentage(100); // Width 100%
 				table10R.setSpacingBefore(5f); // Space before table
@@ -201,10 +203,9 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 						document.add(table1);
 					}
 				} else {
-					
-					
+
 					DownConductor downcondutor = downConductor.get(0);
-					
+
 					float[] pointColumnWidths30 = { 25F, 150F, 55F, 50F };
 
 					PdfPTable table1 = new PdfPTable(pointColumnWidths30);
@@ -212,8 +213,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 					table1.setSpacingBefore(10f); // Space before table
 					table1.setSpacingAfter(5f); // Space after table
 					table1.getDefaultCell().setBorder(0);
-					
-					
+
 					PdfPCell cell53 = new PdfPCell();
 					cell53.setPhrase(new Phrase("7(q)", font));
 					cell53.setHorizontalAlignment(Element.ALIGN_CENTER);
@@ -257,7 +257,8 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 					table1.addCell(cell58);
 
 					if (downcondutor.getNaturalDownCondDimensionRem() != null) {
-						PdfPCell cell48 = new PdfPCell(new Paragraph(downcondutor.getNaturalDownCondDimensionRem(), font));
+						PdfPCell cell48 = new PdfPCell(
+								new Paragraph(downcondutor.getNaturalDownCondDimensionRem(), font));
 						cell48.setHorizontalAlignment(Element.ALIGN_LEFT);
 						table1.addCell(cell48);
 					} else {
@@ -265,10 +266,9 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 						cell49.setHorizontalAlignment(Element.ALIGN_LEFT);
 						table1.addCell(cell49);
 					}
-						
+
 					document.add(table1);
 				}
-			
 
 // Bridging Accordian  Method		
 				document.newPage();
@@ -307,13 +307,13 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 				cell151.setBackgroundColor(new GrayColor(0.93f));
 				cell151.setBorder(PdfPCell.NO_BORDER);
 				table12.addCell(cell151);
-				
+
 				PdfPTable table12R = new PdfPTable(pointColumnWidthsAvailability);
 				table12R.setWidthPercentage(100); // Width 100%
 				table12R.setSpacingBefore(5f); // Space before table
 //				table12R.setSpacingAfter(5f); // Space after table
 				table12R.getDefaultCell().setBorder(0);
-				
+
 				PdfPCell cell72R = new PdfPCell(
 						new Paragraph("Remarks:", new Font(BaseFont.createFont(), 10, Font.NORMAL)));
 				cell72R.setBackgroundColor(new GrayColor(0.93f));
@@ -326,7 +326,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 				cell73R.setBackgroundColor(new GrayColor(0.93f));
 				cell73R.setBorder(PdfPCell.NO_BORDER);
 				table12R.addCell(cell73R);
-				
+
 				document.add(table12);
 				document.add(table12R);
 
@@ -339,7 +339,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 				}
 
 // Holders Accordian  Method
-				
+
 				document.newPage();
 
 				PdfPTable HoldersHead = new PdfPTable(pointColumnWidths4);
@@ -375,13 +375,13 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 				cell153.setBackgroundColor(new GrayColor(0.93f));
 				cell153.setBorder(PdfPCell.NO_BORDER);
 				table13.addCell(cell153);
-				
+
 				PdfPTable table13R = new PdfPTable(pointColumnWidthsAvailability);
 				table13R.setWidthPercentage(100); // Width 100%
 				table13R.setSpacingBefore(5f); // Space before table
 //				table13R.setSpacingAfter(5f); // Space after table
 				table13R.getDefaultCell().setBorder(0);
-				
+
 				PdfPCell cell7HR = new PdfPCell(
 						new Paragraph("Remarks:", new Font(BaseFont.createFont(), 10, Font.NORMAL)));
 				cell7HR.setBackgroundColor(new GrayColor(0.93f));
@@ -394,7 +394,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 				cell7H.setBackgroundColor(new GrayColor(0.93f));
 				cell7H.setBorder(PdfPCell.NO_BORDER);
 				table13R.addCell(cell7H);
-				
+
 				document.add(table13);
 				document.add(table13R);
 
@@ -410,7 +410,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 // Connectors Accordian  Method		
 
 				document.newPage();
-				
+
 				PdfPTable ConnectorsHead = new PdfPTable(pointColumnWidths4);
 				ConnectorsHead.setWidthPercentage(100); // Width 100%
 				ConnectorsHead.setSpacingBefore(5f); // Space before table
@@ -444,13 +444,13 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 				cell155.setBackgroundColor(new GrayColor(0.93f));
 				cell155.setBorder(PdfPCell.NO_BORDER);
 				table14.addCell(cell155);
-				
+
 				PdfPTable table14R = new PdfPTable(pointColumnWidthsAvailability);
 				table14R.setWidthPercentage(100); // Width 100%
 				table14R.setSpacingBefore(5f); // Space before table
 //				table14R.setSpacingAfter(5f); // Space after table
 				table14R.getDefaultCell().setBorder(0);
-				
+
 				PdfPCell cell7C = new PdfPCell(
 						new Paragraph("Remarks:", new Font(BaseFont.createFont(), 10, Font.NORMAL)));
 				cell7C.setBackgroundColor(new GrayColor(0.93f));
@@ -463,7 +463,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 				cell7CR.setBackgroundColor(new GrayColor(0.93f));
 				cell7CR.setBorder(PdfPCell.NO_BORDER);
 				table14R.addCell(cell7CR);
-				
+
 				document.add(table14);
 				document.add(table14R);
 
@@ -477,7 +477,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 				}
 
 // Lightning Counters Accordian  Method		
-				
+
 				document.newPage();
 
 				PdfPTable LightningCountersHead = new PdfPTable(pointColumnWidths4);
@@ -513,13 +513,13 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 				cell157.setBackgroundColor(new GrayColor(0.93f));
 				cell157.setBorder(PdfPCell.NO_BORDER);
 				table15.addCell(cell157);
-				
+
 				PdfPTable table15R = new PdfPTable(pointColumnWidthsAvailability);
 				table15R.setWidthPercentage(100); // Width 100%
 				table15R.setSpacingBefore(5f); // Space before table
 //				table15R.setSpacingAfter(5f); // Space after table
 				table15R.getDefaultCell().setBorder(0);
-				
+
 				PdfPCell cell7L = new PdfPCell(
 						new Paragraph("Remarks:", new Font(BaseFont.createFont(), 10, Font.NORMAL)));
 				cell7L.setBackgroundColor(new GrayColor(0.93f));
@@ -532,7 +532,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 				cell7LR.setBackgroundColor(new GrayColor(0.93f));
 				cell7LR.setBorder(PdfPCell.NO_BORDER);
 				table15R.addCell(cell7LR);
-				
+
 				document.add(table15);
 				document.add(table15R);
 
@@ -546,7 +546,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 				}
 
 // Test Joints Accordian  Method		
-				
+
 				document.newPage();
 
 				PdfPTable TestJointsHead = new PdfPTable(pointColumnWidths4);
@@ -582,13 +582,13 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 				cell159.setBackgroundColor(new GrayColor(0.93f));
 				cell159.setBorder(PdfPCell.NO_BORDER);
 				table16.addCell(cell159);
-				
+
 				PdfPTable table16R = new PdfPTable(pointColumnWidthsAvailability);
 				table16R.setWidthPercentage(100); // Width 100%
 				table16R.setSpacingBefore(5f); // Space before table
 //				table16R.setSpacingAfter(5f); // Space after table
 				table16R.getDefaultCell().setBorder(0);
-				
+
 				PdfPCell cell7T = new PdfPCell(
 						new Paragraph("Remarks:", new Font(BaseFont.createFont(), 10, Font.NORMAL)));
 				cell7T.setBackgroundColor(new GrayColor(0.93f));
@@ -601,7 +601,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 				cell7TR.setBackgroundColor(new GrayColor(0.93f));
 				cell7TR.setBorder(PdfPCell.NO_BORDER);
 				table16R.addCell(cell7TR);
-				
+
 				document.add(table16);
 				document.add(table16R);
 
@@ -614,141 +614,146 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 					}
 				}
 
-// Testing of earth electrodes Accordian  Method	
 				
-				document.newPage();
+// Testing of earth electrodes Accordian  Method
+				
+				if (basicLps1.getAvailabilityOfPreviousReport().equalsIgnoreCase("NO")) {
 
-				PdfPTable TestEarthElectrodeHead = new PdfPTable(pointColumnWidths4);
-				TestEarthElectrodeHead.setWidthPercentage(100); // Width 100%
-				TestEarthElectrodeHead.setSpacingBefore(5f); // Space before table
-				TestEarthElectrodeHead.setSpacingAfter(10f); // Space after table
+					document.newPage();
 
-				PdfPCell cell17 = new PdfPCell();
-				cell17.setPhrase(new Phrase("Testing of earth electrodes", font11B));
-				cell17.setHorizontalAlignment(Element.ALIGN_CENTER);
-				cell17.setBackgroundColor(new GrayColor(0.93f));
-				cell17.setFixedHeight(20f);
-				cell17.setColspan(4);
-				TestEarthElectrodeHead.addCell(cell17);
-				document.add(TestEarthElectrodeHead);
+					PdfPTable TestEarthElectrodeHead = new PdfPTable(pointColumnWidths4);
+					TestEarthElectrodeHead.setWidthPercentage(100); // Width 100%
+					TestEarthElectrodeHead.setSpacingBefore(5f); // Space before table
+					TestEarthElectrodeHead.setSpacingAfter(10f); // Space after table
 
-				PdfPTable table17 = new PdfPTable(pointColumnWidthsAvailability);
+					PdfPCell cell17 = new PdfPCell();
+					cell17.setPhrase(new Phrase("Testing of earth electrodes", font11B));
+					cell17.setHorizontalAlignment(Element.ALIGN_CENTER);
+					cell17.setBackgroundColor(new GrayColor(0.93f));
+					cell17.setFixedHeight(20f);
+					cell17.setColspan(4);
+					TestEarthElectrodeHead.addCell(cell17);
+					document.add(TestEarthElectrodeHead);
 
-				table17.setWidthPercentage(100); // Width 100%
+					PdfPTable table17 = new PdfPTable(pointColumnWidthsAvailability);
+
+					table17.setWidthPercentage(100); // Width 100%
 //				table17.setSpacingBefore(5f); // Space before table
 //				table17.setSpacingAfter(5f); // Space after table
-				table17.getDefaultCell().setBorder(0);
+					table17.getDefaultCell().setBorder(0);
 
-				PdfPCell cell160 = new PdfPCell(
-						new Paragraph("Availability:", new Font(BaseFont.createFont(), 10, Font.NORMAL)));
-				cell160.setBackgroundColor(new GrayColor(0.93f));
-				cell160.setHorizontalAlignment(Element.ALIGN_LEFT);
-				cell160.setBorder(PdfPCell.NO_BORDER);
-				table17.addCell(cell160);
-				PdfPCell cell161 = new PdfPCell(new Paragraph(downConDesc.getDownConductorTestingAvailabilityOb(),
-						new Font(BaseFont.createFont(), 10, Font.NORMAL)));
-				cell161.setHorizontalAlignment(Element.ALIGN_LEFT);
-				cell161.setBackgroundColor(new GrayColor(0.93f));
-				cell161.setBorder(PdfPCell.NO_BORDER);
-				table17.addCell(cell161);
-				
-				PdfPTable table17R = new PdfPTable(pointColumnWidthsAvailability);
-				table17R.setWidthPercentage(100); // Width 100%
-				table17R.setSpacingBefore(5f); // Space before table
+					PdfPCell cell160 = new PdfPCell(
+							new Paragraph("Availability:", new Font(BaseFont.createFont(), 10, Font.NORMAL)));
+					cell160.setBackgroundColor(new GrayColor(0.93f));
+					cell160.setHorizontalAlignment(Element.ALIGN_LEFT);
+					cell160.setBorder(PdfPCell.NO_BORDER);
+					table17.addCell(cell160);
+					PdfPCell cell161 = new PdfPCell(new Paragraph(downConDesc.getDownConductorTestingAvailabilityOb(),
+							new Font(BaseFont.createFont(), 10, Font.NORMAL)));
+					cell161.setHorizontalAlignment(Element.ALIGN_LEFT);
+					cell161.setBackgroundColor(new GrayColor(0.93f));
+					cell161.setBorder(PdfPCell.NO_BORDER);
+					table17.addCell(cell161);
+
+					PdfPTable table17R = new PdfPTable(pointColumnWidthsAvailability);
+					table17R.setWidthPercentage(100); // Width 100%
+					table17R.setSpacingBefore(5f); // Space before table
 //				table17R.setSpacingAfter(5f); // Space after table
-				table17R.getDefaultCell().setBorder(0);
-				
-				PdfPCell cell7TE = new PdfPCell(
-						new Paragraph("Remarks:", new Font(BaseFont.createFont(), 10, Font.NORMAL)));
-				cell7TE.setBackgroundColor(new GrayColor(0.93f));
-				cell7TE.setHorizontalAlignment(Element.ALIGN_LEFT);
-				cell7TE.setBorder(PdfPCell.NO_BORDER);
-				table17R.addCell(cell7TE);
-				PdfPCell cell7TER = new PdfPCell(new Paragraph(downConDesc.getDownConductorTestingAvailabilityRem(),
-						new Font(BaseFont.createFont(), 10, Font.NORMAL)));
-				cell7TER.setHorizontalAlignment(Element.ALIGN_LEFT);
-				cell7TER.setBackgroundColor(new GrayColor(0.93f));
-				cell7TER.setBorder(PdfPCell.NO_BORDER);
-				table17R.addCell(cell7TER);
-				
-				document.add(table17);
-				document.add(table17R);
+					table17R.getDefaultCell().setBorder(0);
 
-				if (downConDesc.getDownConductorTestingAvailabilityOb().equalsIgnoreCase("In Scope")) {
+					PdfPCell cell7TE = new PdfPCell(
+							new Paragraph("Remarks:", new Font(BaseFont.createFont(), 10, Font.NORMAL)));
+					cell7TE.setBackgroundColor(new GrayColor(0.93f));
+					cell7TE.setHorizontalAlignment(Element.ALIGN_LEFT);
+					cell7TE.setBorder(PdfPCell.NO_BORDER);
+					table17R.addCell(cell7TE);
+					PdfPCell cell7TER = new PdfPCell(new Paragraph(downConDesc.getDownConductorTestingAvailabilityRem(),
+							new Font(BaseFont.createFont(), 10, Font.NORMAL)));
+					cell7TER.setHorizontalAlignment(Element.ALIGN_LEFT);
+					cell7TER.setBackgroundColor(new GrayColor(0.93f));
+					cell7TER.setBorder(PdfPCell.NO_BORDER);
+					table17R.addCell(cell7TER);
 
-				Font font11 = new Font(BaseFont.createFont(), 10, Font.NORMAL | Font.BOLD, BaseColor.BLACK);
-				float[] pointColumnWidths9 = { 15, 40F, 35F, 35F, 50F };
+					document.add(table17);
+					document.add(table17R);
 
-				PdfPTable table18 = new PdfPTable(pointColumnWidths9);
-				table18.setWidthPercentage(100); // Width 100%
-				table18.setSpacingBefore(10f); // Space before table
-				table18.setWidthPercentage(100);
+					if (downConDesc.getDownConductorTestingAvailabilityOb().equalsIgnoreCase("In Scope")) {
 
-				PdfPCell cell301 = new PdfPCell(new Paragraph("SL.NO", font11));
-				cell301.setHorizontalAlignment(Element.ALIGN_CENTER);
-				cell301.setGrayFill(0.92f);
-				table18.addCell(cell301);
+						Font font11 = new Font(BaseFont.createFont(), 10, Font.NORMAL | Font.BOLD, BaseColor.BLACK);
+						float[] pointColumnWidths9 = { 15, 40F, 35F, 35F, 50F };
 
-				PdfPCell cell3111 = new PdfPCell(new Paragraph("Reference", font11));
-				cell3111.setHorizontalAlignment(Element.ALIGN_CENTER);
-				cell3111.setFixedHeight(20f);
-				cell3111.setGrayFill(0.92f);
-				table18.addCell(cell3111);
+						PdfPTable table18 = new PdfPTable(pointColumnWidths9);
+						table18.setWidthPercentage(100); // Width 100%
+						table18.setSpacingBefore(10f); // Space before table
+						table18.setWidthPercentage(100);
 
-				PdfPCell cell321 = new PdfPCell(new Paragraph("Length in mm", font11));
-				cell321.setHorizontalAlignment(Element.ALIGN_CENTER);
-				cell321.setFixedHeight(20f);
-				cell321.setGrayFill(0.92f);
-				table18.addCell(cell321);
+						PdfPCell cell301 = new PdfPCell(new Paragraph("SL.NO", font11));
+						cell301.setHorizontalAlignment(Element.ALIGN_CENTER);
+						cell301.setGrayFill(0.92f);
+						table18.addCell(cell301);
 
-				PdfPCell cell313 = new PdfPCell(new Paragraph("Resistance in m ohms", font11));
-				cell313.setGrayFill(0.92f);
-				cell313.setHorizontalAlignment(Element.ALIGN_CENTER);
-				table18.addCell(cell313);
+						PdfPCell cell3111 = new PdfPCell(new Paragraph("Reference", font11));
+						cell3111.setHorizontalAlignment(Element.ALIGN_CENTER);
+						cell3111.setFixedHeight(20f);
+						cell3111.setGrayFill(0.92f);
+						table18.addCell(cell3111);
 
-				PdfPCell cell332 = new PdfPCell(new Paragraph("Remarks", font11));
-				cell332.setHorizontalAlignment(Element.ALIGN_CENTER);
-				cell332.setFixedHeight(20f);
-				cell332.setGrayFill(0.92f);
-				table18.addCell(cell332);
-				
-				document.add(table18);
-				
-				for (DownConductorTesting downConductorTesting : downConductorTesting1) {
-					
+						PdfPCell cell321 = new PdfPCell(new Paragraph("Length in mm", font11));
+						cell321.setHorizontalAlignment(Element.ALIGN_CENTER);
+						cell321.setFixedHeight(20f);
+						cell321.setGrayFill(0.92f);
+						table18.addCell(cell321);
+
+						PdfPCell cell313 = new PdfPCell(new Paragraph("Resistance in m ohms", font11));
+						cell313.setGrayFill(0.92f);
+						cell313.setHorizontalAlignment(Element.ALIGN_CENTER);
+						table18.addCell(cell313);
+
+						PdfPCell cell332 = new PdfPCell(new Paragraph("Remarks", font11));
+						cell332.setHorizontalAlignment(Element.ALIGN_CENTER);
+						cell332.setFixedHeight(20f);
+						cell332.setGrayFill(0.92f);
+						table18.addCell(cell332);
+
+						document.add(table18);
+
+						for (DownConductorTesting downConductorTesting : downConductorTesting1) {
+
 //					float[] pointColumnWidths9 = { 25, 25F, 55F, 50F, 50F };
 
-					PdfPTable table19 = new PdfPTable(pointColumnWidths9);
-					table19.setWidthPercentage(100); // Width 100%
+							PdfPTable table19 = new PdfPTable(pointColumnWidths9);
+							table19.setWidthPercentage(100); // Width 100%
 
-					PdfPCell cell305 = new PdfPCell(new Paragraph(downConductorTesting.getSerialNo().toString(), font));
-					cell305.setHorizontalAlignment(Element.ALIGN_CENTER);
-					table19.addCell(cell305);
+							PdfPCell cell305 = new PdfPCell(
+									new Paragraph(downConductorTesting.getSerialNo().toString(), font));
+							cell305.setHorizontalAlignment(Element.ALIGN_CENTER);
+							table19.addCell(cell305);
 
-					PdfPCell cell31 = new PdfPCell(new Paragraph(downConductorTesting.getReference(), font));
-					cell31.setHorizontalAlignment(Element.ALIGN_LEFT);
+							PdfPCell cell31 = new PdfPCell(new Paragraph(downConductorTesting.getReference(), font));
+							cell31.setHorizontalAlignment(Element.ALIGN_LEFT);
 //					cell31.setFixedHeight(20f);
-					table19.addCell(cell31);
+							table19.addCell(cell31);
 
-					PdfPCell cell3213 = new PdfPCell(new Paragraph(downConductorTesting.getLength().toString(), font));
-					cell3213.setHorizontalAlignment(Element.ALIGN_CENTER);
+							PdfPCell cell3213 = new PdfPCell(
+									new Paragraph(downConductorTesting.getLength().toString(), font));
+							cell3213.setHorizontalAlignment(Element.ALIGN_CENTER);
 //					cell3213.setFixedHeight(20f);
-					table19.addCell(cell3213);
+							table19.addCell(cell3213);
 
-					PdfPCell cell90 = new PdfPCell(
-							new Paragraph(downConductorTesting.getResistance().toString(), font));
-					cell90.setHorizontalAlignment(Element.ALIGN_CENTER);
-					table19.addCell(cell90);
+							PdfPCell cell90 = new PdfPCell(
+									new Paragraph(downConductorTesting.getResistance().toString(), font));
+							cell90.setHorizontalAlignment(Element.ALIGN_CENTER);
+							table19.addCell(cell90);
 
-					PdfPCell cell3321 = new PdfPCell(new Paragraph(downConductorTesting.getRemarks(), font));
-					cell3321.setHorizontalAlignment(Element.ALIGN_LEFT);
+							PdfPCell cell3321 = new PdfPCell(new Paragraph(downConductorTesting.getRemarks(), font));
+							cell3321.setHorizontalAlignment(Element.ALIGN_LEFT);
 //					cell3321.setFixedHeight(20f);
-					table19.addCell(cell3321);
+							table19.addCell(cell3321);
 
-					document.add(table19);
+							document.add(table19);
+						}
+					}
 				}
-				}
-				
 
 				document.close();
 				writer.close();
@@ -766,7 +771,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 	}
 
 	private PdfPTable TestJointsItr(Font font, TestingJoint testingJoint) {
-		
+
 		float[] pointColumnWidths41 = { 25F, 150F, 55F, 50F };
 
 		PdfPTable table1 = new PdfPTable(pointColumnWidths41);
