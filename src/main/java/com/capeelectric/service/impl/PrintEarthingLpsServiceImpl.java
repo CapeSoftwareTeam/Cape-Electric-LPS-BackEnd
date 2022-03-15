@@ -1,13 +1,15 @@
-	
+
 package com.capeelectric.service.impl;
 
 import java.io.FileOutputStream;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.capeelectric.exception.EarthingLpsException;
+import com.capeelectric.model.BasicLps;
 import com.capeelectric.model.EarthElectrodeChamber;
 import com.capeelectric.model.EarthElectrodeTesting;
 import com.capeelectric.model.EarthingClamps;
@@ -16,6 +18,8 @@ import com.capeelectric.model.EarthingDescriptionList;
 import com.capeelectric.model.EarthingLpsDescription;
 import com.capeelectric.model.EarthingReport;
 import com.capeelectric.model.EarthingSystem;
+import com.capeelectric.repository.BasicLpsRepository;
+import com.capeelectric.repository.EarthingLpsRepository;
 import com.capeelectric.service.PrintEarthingLpsService;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
@@ -35,13 +39,17 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 
 //	@Autowired
 //	private EarthingLpsRepository earthingLpsRepository;
+//
+//	@Autowired
+//	private BasicLpsRepository basicLpsRepository;
 
 	@Override
-	public List<EarthingLpsDescription> printEarthingLpsDetails(String userName, Integer basicLpsId, Optional<EarthingReport> earthingLpsDetails)
+	public List<EarthingLpsDescription> printEarthingLpsDetails(String userName, Integer basicLpsId,
+			Optional<BasicLps> basicLpsDetails, Optional<EarthingReport> earthingLpsDetails)
 			throws EarthingLpsException {
 
 //	@Override
-//	public List<EarthingLpsDescription> printEarthingLpsDetails1(String userName, Integer basicLpsId)
+//	public List<EarthingLpsDescription> printEarthingLpsDetails(String userName, Integer basicLpsId)
 //			throws EarthingLpsException {
 
 //		if (userName != null && !userName.isEmpty() && basicLpsId != null && basicLpsId != 0) {
@@ -51,8 +59,13 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 
 			PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("EarthingLps.pdf"));
 
+//			List<BasicLps> basicLps = basicLpsRepository.findByUserNameAndBasicLpsId(userName, basicLpsId);
+//			BasicLps basicLps1 = basicLps.get(0);
+			BasicLps basicLps1 = basicLpsDetails.get();
+
 //			List<EarthingReport> earthingReport1 = earthingLpsRepository.findByUserNameAndBasicLpsId(userName,
 //					basicLpsId);
+//			EarthingReport earthingReport2 = earthingReport1.get(0);
 			EarthingReport earthingReport2 = earthingLpsDetails.get();
 
 			List<EarthingLpsDescription> earthingLpsRepo1 = earthingReport2.getEarthingLpsDescription();
@@ -77,7 +90,7 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 			document.open();
 
 			Font font11 = new Font(BaseFont.createFont(), 10, Font.NORMAL | Font.BOLD, BaseColor.BLACK);
-			
+
 			Font font12B = new Font(BaseFont.createFont(), 12, Font.NORMAL | Font.BOLD, BaseColor.BLACK);
 
 			Font font = new Font(BaseFont.createFont(), 10, Font.NORMAL, BaseColor.BLACK);
@@ -85,7 +98,6 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 			Font font2 = new Font(BaseFont.createFont(), 10, Font.NORMAL | Font.BOLD);
 			Font font3 = new Font(BaseFont.createFont(), 10, Font.NORMAL, BaseColor.BLACK);
 
-			
 			float[] pointColumnWidths5 = { 100F };
 
 			PdfPTable headertable = new PdfPTable(pointColumnWidths5);
@@ -283,7 +295,7 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 			arrangements1.setHorizontalAlignment(Element.ALIGN_CENTER);
 			arrangements1.setBorder(PdfPCell.NO_BORDER);
 			BasicDetailsTable3.addCell(arrangements1);
-			
+
 			float[] pointColumnWidths2 = { 120F, 80F };
 			PdfPTable table1 = new PdfPTable(pointColumnWidths2);
 
@@ -311,8 +323,7 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 			table1R.setSpacingBefore(5f); // Space before table
 //			table1R.setSpacingAfter(5f); // Space after table
 			table1R.getDefaultCell().setBorder(0);
-			
-			
+
 			PdfPCell cell22R = new PdfPCell(
 					new Paragraph("Remarks:", new Font(BaseFont.createFont(), 10, Font.NORMAL)));
 			cell22R.setBackgroundColor(new GrayColor(0.93f));
@@ -326,7 +337,6 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 			cell23R.setBorder(PdfPCell.NO_BORDER);
 			table1R.addCell(cell23R);
 
-			
 			float[] pointColumnWidths6 = { 100F };
 
 			PdfPTable BasicDetailsTable4 = new PdfPTable(pointColumnWidths6);
@@ -369,10 +379,8 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 			table18R.setSpacingBefore(5f); // Space before table
 //			table18R.setSpacingAfter(5f); // Space after table
 			table18R.getDefaultCell().setBorder(0);
-			
-			
-			PdfPCell cell2R = new PdfPCell(
-					new Paragraph("Remarks:", new Font(BaseFont.createFont(), 10, Font.NORMAL)));
+
+			PdfPCell cell2R = new PdfPCell(new Paragraph("Remarks:", new Font(BaseFont.createFont(), 10, Font.NORMAL)));
 			cell2R.setBackgroundColor(new GrayColor(0.93f));
 			cell2R.setHorizontalAlignment(Element.ALIGN_LEFT);
 			cell2R.setBorder(PdfPCell.NO_BORDER);
@@ -399,84 +407,6 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 			arrangements4.setHorizontalAlignment(Element.ALIGN_CENTER);
 			arrangements4.setBorder(PdfPCell.NO_BORDER);
 			table5.addCell(arrangements4);
-
-			PdfPTable header = new PdfPTable(pointColumnWidths10);
-
-			header.setWidthPercentage(100); // Width 100%
-			header.setSpacingBefore(10f); // Space before table
-			header.setSpacingAfter(5f); // Space after table
-			header.getDefaultCell().setBorder(0);
-
-			PdfPCell arrangements9 = new PdfPCell(new Paragraph("Testing of earth electrodes",
-					new Font(BaseFont.createFont(), 11, Font.NORMAL | Font.BOLD)));
-			arrangements9.setBackgroundColor(new GrayColor(0.82f));
-			arrangements9.setHorizontalAlignment(Element.ALIGN_CENTER);
-			arrangements9.setBorder(PdfPCell.NO_BORDER);
-			header.addCell(arrangements9);
-
-			PdfPTable header1 = new PdfPTable(pointColumnWidths10);
-
-			header1.setWidthPercentage(100); // Width 100%
-			header1.setSpacingBefore(5f); // Space before table
-			header1.setSpacingAfter(5f); // Space after table
-			header1.getDefaultCell().setBorder(0);
-
-			PdfPCell arrangements90 = new PdfPCell(
-					new Paragraph("8(a).Earth electrode resistance value (Table heading)",
-							new Font(BaseFont.createFont(), 11, Font.NORMAL | Font.BOLD)));
-			arrangements90.setBackgroundColor(new GrayColor(0.82f));
-			arrangements90.setHorizontalAlignment(Element.ALIGN_LEFT);
-			arrangements90.setBorder(PdfPCell.NO_BORDER);
-			header1.addCell(arrangements90);
-
-			float[] pointColumnWidths9 = { 25, 25F, 55F, 50F, 25F, 55F, 50F };
-
-			PdfPTable table7 = new PdfPTable(pointColumnWidths9);
-			table7.setWidthPercentage(100); // Width 100%
-			table7.setSpacingBefore(5f); // Space before table
-			table7.setWidthPercentage(100);
-
-			PdfPCell cell301 = new PdfPCell(new Paragraph("SL.NO", font11));
-			cell301.setHorizontalAlignment(Element.ALIGN_CENTER);
-			cell301.setGrayFill(0.92f);
-			table7.addCell(cell301);
-
-			PdfPCell cell3111 = new PdfPCell(
-					new Paragraph("Types of earth electrode(rod/pipe/flat/chemical pipe)", font11));
-			cell3111.setHorizontalAlignment(Element.ALIGN_CENTER);
-			cell3111.setFixedHeight(20f);
-			cell3111.setGrayFill(0.92f);
-			table7.addCell(cell3111);
-
-			PdfPCell cell321 = new PdfPCell(new Paragraph(
-					"Material of earth elctrode (copper/copper bonded steel/galvanised steel/galvanised iron/cast iron)",
-					font11));
-			cell321.setHorizontalAlignment(Element.ALIGN_CENTER);
-			cell321.setFixedHeight(20f);
-			cell321.setGrayFill(0.92f);
-			table7.addCell(cell321);
-
-			PdfPCell cell313 = new PdfPCell(new Paragraph("Size(diameter)of earth electrode (mm)", font11));
-			cell313.setGrayFill(0.92f);
-			cell313.setHorizontalAlignment(Element.ALIGN_CENTER);
-			table7.addCell(cell313);
-
-			PdfPCell cell332 = new PdfPCell(new Paragraph("Depth /length of earth electrode (m)", font11));
-			cell332.setHorizontalAlignment(Element.ALIGN_CENTER);
-			cell332.setFixedHeight(20f);
-			cell332.setGrayFill(0.92f);
-			table7.addCell(cell332);
-
-			PdfPCell cell3211 = new PdfPCell(new Paragraph("Electrode resistance to earth in (Ω)", font11));
-			cell3211.setHorizontalAlignment(Element.ALIGN_CENTER);
-			cell3211.setFixedHeight(20f);
-			cell3211.setGrayFill(0.92f);
-			table7.addCell(cell3211);
-
-			PdfPCell cell3131 = new PdfPCell(new Paragraph("Remarks", font11));
-			cell3131.setGrayFill(0.92f);
-			cell3131.setHorizontalAlignment(Element.ALIGN_CENTER);
-			table7.addCell(cell3131);
 
 // select Type A
 			if (earthingLpsRepo.getEarthingTypeInOb().equals("Type A")) {
@@ -517,15 +447,15 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 				}
 
 				// earthElectrodeTesting Iteration
-				document.add(header);
-				document.add(header1);
-				document.add(table7);
-				for (EarthElectrodeTesting earthingElectrodeTesting : earthingElectrodeTesting1) {
-					earthElectrodeTestingIter(document, font, earthingElectrodeTesting);
-				}
+//					document.add(header);
+//					document.add(header1);
+//					document.add(table7);
+//					for (EarthElectrodeTesting earthingElectrodeTesting : earthingElectrodeTesting1) {
+//						earthElectrodeTestingIter(document, font, earthingElectrodeTesting);
+//					}
 			}
 
-// select Type-B (ring)
+// 			select Type-B (ring)
 			if (earthingLpsRepo.getEarthingTypeInOb().equals("Type-B (ring)")) {
 				// earthingSystemType-B Iteration
 				document.newPage();
@@ -537,15 +467,15 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 				}
 
 				// earthElectrodeTesting Iteration
-				document.add(header);
-				document.add(header1);
-				document.add(table7);
-				for (EarthElectrodeTesting earthingElectrodeTesting : earthingElectrodeTesting1) {
-					earthElectrodeTestingIter(document, font, earthingElectrodeTesting);
-				}
+//				document.add(header);
+//				document.add(header1);
+//				document.add(table7);
+//				for (EarthElectrodeTesting earthingElectrodeTesting : earthingElectrodeTesting1) {
+//					earthElectrodeTestingIter(document, font, earthingElectrodeTesting);
+//				}
 			}
 
-// select Type A & Type B combined
+// 			select Type A & Type B combined
 			if (earthingLpsRepo.getEarthingTypeInOb().equals("Type A & Type B combined")) {
 				// eartingDescTypeA Iteration
 				document.add(BasicDetailsTable6);
@@ -591,23 +521,144 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 					earthingSystemTypeBiter(document, font, earthingSystem);
 				}
 
-				// earthElectrodeTesting Iteration
-				document.add(header);
-				document.add(header1);
-				document.add(table7);
-				for (EarthElectrodeTesting earthingElectrodeTesting : earthingElectrodeTesting1) {
-					earthElectrodeTestingIter(document, font, earthingElectrodeTesting);
-				}
+//				 earthElectrodeTesting Iteration
+//				document.add(header);
+//				document.add(header1);
+//				document.add(table7);
+//				for (EarthElectrodeTesting earthingElectrodeTesting : earthingElectrodeTesting1) {
+//					earthElectrodeTestingIter(document, font, earthingElectrodeTesting);
+//				}
 			}
 
-// select Foundation
-			if (earthingLpsRepo.getEarthingTypeInOb().equals("Foundation")) {
-				// earthElectrodeTesting Iteration
+// 			select Foundation
+//			if (earthingLpsRepo.getEarthingTypeInOb().equals("Foundation")) {
+//				// earthElectrodeTesting Iteration
+//				document.add(header);
+//				document.add(header1);
+//				document.add(table7);
+//				for (EarthElectrodeTesting earthingElectrodeTesting : earthingElectrodeTesting1) {
+//					earthElectrodeTestingIter(document, font, earthingElectrodeTesting);
+//				}
+//			}
+			
+			document.newPage();
+
+			if (basicLps1.getAvailabilityOfPreviousReport().equalsIgnoreCase("No")) {
+
+				PdfPTable header = new PdfPTable(pointColumnWidths10);
+				header.setWidthPercentage(100); // Width 100%
+				header.setSpacingBefore(10f); // Space before table
+				header.setSpacingAfter(5f); // Space after table
+				header.getDefaultCell().setBorder(0);
+
+				PdfPCell arrangements9 = new PdfPCell(new Paragraph("Testing of earth electrodes",
+						new Font(BaseFont.createFont(), 11, Font.NORMAL | Font.BOLD)));
+				arrangements9.setBackgroundColor(new GrayColor(0.82f));
+				arrangements9.setHorizontalAlignment(Element.ALIGN_CENTER);
+				arrangements9.setBorder(PdfPCell.NO_BORDER);
+				header.addCell(arrangements9);
+				
 				document.add(header);
-				document.add(header1);
-				document.add(table7);
-				for (EarthElectrodeTesting earthingElectrodeTesting : earthingElectrodeTesting1) {
-					earthElectrodeTestingIter(document, font, earthingElectrodeTesting);
+
+				float[] pointColumnWidthsAvailability = { 120F, 80F };
+
+				PdfPTable table17 = new PdfPTable(pointColumnWidthsAvailability);
+
+				table17.setWidthPercentage(100); // Width 100%
+//	        	table17.setSpacingBefore(5f); // Space before table
+//	         	table17.setSpacingAfter(5f); // Space after table
+				table17.getDefaultCell().setBorder(0);
+
+				PdfPCell cell160 = new PdfPCell(
+						new Paragraph("Availability:", new Font(BaseFont.createFont(), 10, Font.NORMAL)));
+				cell160.setBackgroundColor(new GrayColor(0.93f));
+				cell160.setHorizontalAlignment(Element.ALIGN_LEFT);
+				cell160.setBorder(PdfPCell.NO_BORDER);
+				table17.addCell(cell160);
+				PdfPCell cell161 = new PdfPCell(
+						new Paragraph(earthingLpsRepo.getEarthingElectrodeTestingAvailabilityOb(),
+								new Font(BaseFont.createFont(), 10, Font.NORMAL)));
+				cell161.setHorizontalAlignment(Element.ALIGN_LEFT);
+				cell161.setBackgroundColor(new GrayColor(0.93f));
+				cell161.setBorder(PdfPCell.NO_BORDER);
+				table17.addCell(cell161);
+
+				document.add(table17);
+
+				if (earthingLpsRepo.getEarthingElectrodeTestingAvailabilityOb().equalsIgnoreCase("In scope")) {
+
+					PdfPTable header1 = new PdfPTable(pointColumnWidths10);
+
+					header1.setWidthPercentage(100); // Width 100%
+					header1.setSpacingBefore(5f); // Space before table
+					header1.setSpacingAfter(5f); // Space after table
+					header1.getDefaultCell().setBorder(0);
+
+					PdfPCell arrangements90 = new PdfPCell(
+							new Paragraph("8(a).Earth electrode resistance value (Table heading)",
+									new Font(BaseFont.createFont(), 10, Font.NORMAL | Font.BOLD)));
+					arrangements90.setBackgroundColor(new GrayColor(0.82f));
+					arrangements90.setHorizontalAlignment(Element.ALIGN_LEFT);
+					arrangements90.setBorder(PdfPCell.NO_BORDER);
+					header1.addCell(arrangements90);
+					
+					document.add(header1);
+
+					float[] pointColumnWidths9 = { 25, 25F, 55F, 50F, 25F, 55F, 50F };
+
+					PdfPTable table7 = new PdfPTable(pointColumnWidths9);
+					table7.setWidthPercentage(100); // Width 100%
+					table7.setSpacingBefore(5f); // Space before table
+					table7.setWidthPercentage(100);
+
+					PdfPCell cell301 = new PdfPCell(new Paragraph("SL.NO", font11));
+					cell301.setHorizontalAlignment(Element.ALIGN_CENTER);
+					cell301.setGrayFill(0.92f);
+					table7.addCell(cell301);
+
+					PdfPCell cell3111 = new PdfPCell(
+							new Paragraph("Types of earth electrode(rod/pipe/flat/chemical pipe)", font11));
+					cell3111.setHorizontalAlignment(Element.ALIGN_CENTER);
+//			        cell3111.setFixedHeight(20f);
+					cell3111.setGrayFill(0.92f);
+					table7.addCell(cell3111);
+
+					PdfPCell cell321 = new PdfPCell(new Paragraph(
+							"Material of earth elctrode (copper/copper bonded steel/galvanised steel/galvanised iron/cast iron)",
+							font11));
+					cell321.setHorizontalAlignment(Element.ALIGN_CENTER);
+//			        cell321.setFixedHeight(20f);
+					cell321.setGrayFill(0.92f);
+					table7.addCell(cell321);
+
+					PdfPCell cell313 = new PdfPCell(new Paragraph("Size(diameter)of earth electrode (mm)", font11));
+					cell313.setGrayFill(0.92f);
+					cell313.setHorizontalAlignment(Element.ALIGN_CENTER);
+					table7.addCell(cell313);
+
+					PdfPCell cell332 = new PdfPCell(new Paragraph("Depth /length of earth electrode (m)", font11));
+					cell332.setHorizontalAlignment(Element.ALIGN_CENTER);
+//					cell332.setFixedHeight(20f);
+					cell332.setGrayFill(0.92f);
+					table7.addCell(cell332);
+
+					PdfPCell cell3211 = new PdfPCell(new Paragraph("Electrode resistance to earth in (Ω)", font11));
+					cell3211.setHorizontalAlignment(Element.ALIGN_CENTER);
+//					cell3211.setFixedHeight(20f);
+					cell3211.setGrayFill(0.92f);
+					table7.addCell(cell3211);
+
+					PdfPCell cell3131 = new PdfPCell(new Paragraph("Remarks", font11));
+					cell3131.setGrayFill(0.92f);
+					cell3131.setHorizontalAlignment(Element.ALIGN_CENTER);
+					table7.addCell(cell3131);
+
+					document.add(table7);
+					
+					for (EarthElectrodeTesting earthingElectrodeTesting : earthingElectrodeTesting1) {
+						earthElectrodeTestingIter(document, font, earthingElectrodeTesting);
+
+					}
 				}
 			}
 
@@ -1607,7 +1658,7 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 
 	private void earthDescListIter(Document document, Font font, float[] pointColumnWidths1,
 			EarthingDescriptionList earthDesTypeAiter) throws DocumentException {
-	
+
 		PdfPTable table204 = new PdfPTable(pointColumnWidths1);
 		table204.setWidthPercentage(100); // Width 100%
 		table204.setSpacingBefore(15f); // Space before table

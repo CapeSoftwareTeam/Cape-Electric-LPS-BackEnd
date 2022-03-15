@@ -21,6 +21,7 @@ import com.capeelectric.model.BasicLps;
 import com.capeelectric.model.LpsAirDiscription;
 import com.capeelectric.model.LpsVerticalAirTermination;
 import com.capeelectric.model.VerticalAirTerminationList;
+import com.capeelectric.repository.AirTerminationLpsRepository;
 import com.capeelectric.repository.BasicLpsRepository;
 import com.capeelectric.service.PrintAirTerminationService;
 import com.itextpdf.text.BaseColor;
@@ -43,15 +44,15 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 	@Autowired
 	private BasicLpsRepository basicLpsRepository;
 
-//	@Autowired
-//	private AirTerminationLpsRepository airTerminationLpsRepository;
+	@Autowired
+	private AirTerminationLpsRepository airTerminationLpsRepository;
 
 	@Override
 	public void printAirTermination(String userName, Integer basicLpsId, Optional<AirTermination> lpsAirTermination)
 			throws AirTerminationException {
 
 //	@Override
-//	public void printAirTermination1(String userName, Integer basicLpsId) throws AirTerminationException {
+//	public void printAirTermination(String userName, Integer basicLpsId) throws AirTerminationException {
 
 		if (userName != null && !userName.isEmpty() && basicLpsId != null && basicLpsId != 0) {
 			Document document = new Document(PageSize.A4, 68, 68, 62, 68);
@@ -63,9 +64,10 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 				List<BasicLps> basicLps = basicLpsRepository.findByUserNameAndBasicLpsId(userName, basicLpsId);
 				BasicLps basicLps1 = basicLps.get(0);
 
-//				List<AirTermination> lpsAirDisc = airTerminationLpsRepository.findByUserNameAndBasicLpsId(userName,
-//						basicLpsId);
-				AirTermination airTermination = lpsAirTermination.get();
+				List<AirTermination> lpsAirDisc = airTerminationLpsRepository.findByUserNameAndBasicLpsId(userName,
+						basicLpsId);
+				AirTermination airTermination = lpsAirDisc.get(0);
+//				AirTermination airTermination = lpsAirTermination.get();
 
 				List<LpsAirDiscription> lpsAirDiscription = airTermination.getLpsAirDescription();
 				LpsAirDiscription lpsAirTermination1 = lpsAirDiscription.get(0);
@@ -81,9 +83,9 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 
 				List<AirHolderDescription> airHolderdesc = lpsAirTermination1.getAirHolderDescription();
 				// for reference to chaild class only
-				AirHolderDescription airholders1 = airHolderdesc.get(0);
+//				AirHolderDescription airholders1 = airHolderdesc.get(0);
 
-				List<AirHolderList> airHolderL = airholders1.getAirHolderList();
+//				List<AirHolderList> airHolderL = airholders1.getAirHolderList();
 //				AirHolderList airHolderList1 = airHolderL.get(0);
 
 				List<AirMeshDescription> airMeshDesc = lpsAirTermination1.getAirMeshDescription();
@@ -94,10 +96,10 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 
 				List<LpsVerticalAirTermination> lpsVerticalAirTerm = lpsAirTermination1.getLpsVerticalAirTermination();
 //			    for reference to chaild class only
-				LpsVerticalAirTermination lpsVerticalAirTermination1 = lpsVerticalAirTerm.get(0);
-
-				List<VerticalAirTerminationList> VerticleAirTerminationL = lpsVerticalAirTermination1
-						.getVerticalAirTerminationList();
+//				LpsVerticalAirTermination lpsVerticalAirTermination1 = lpsVerticalAirTerm.get(0);
+//
+//				List<VerticalAirTerminationList> VerticleAirTerminationL = lpsVerticalAirTermination1
+//						.getVerticalAirTerminationList();
 //				VerticalAirTerminationList VerticleAirTerminationList = VerticleAirTerminationL.get(0);
 
 				document.open();
@@ -552,28 +554,30 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 
 						document.add(table8);
 
-						int i = 1;
-						for (VerticalAirTerminationList VerticalAirTerminationList : VerticleAirTerminationL) {
+						for (LpsVerticalAirTermination lpsVerticalAirTerm123 : lpsVerticalAirTerm) {
+							int i = 1;
+							for (VerticalAirTerminationList VerticalAirTerminationList : lpsVerticalAirTerm123
+									.getVerticalAirTerminationList()) {
 
-							PdfPTable table52 = new PdfPTable(pointColumnWidths41);
-							table52.setWidthPercentage(100); // Width 100%
+								PdfPTable table52 = new PdfPTable(pointColumnWidths41);
+								table52.setWidthPercentage(100); // Width 100%
 //							table52.setSpacingBefore(5f); // Space before table
-							table52.setSpacingAfter(5f); // Space after table
+								table52.setSpacingAfter(5f); // Space after table
 
-							PdfPCell cell112 = new PdfPCell();
-							cell112.setPhrase(new Phrase("Vertical list - " + i, font));
-							cell112.setHorizontalAlignment(Element.ALIGN_LEFT);
-							cell112.setBackgroundColor(new GrayColor(0.93f));
-							cell112.setFixedHeight(20f);
-							cell112.setColspan(4);
-							table52.addCell(cell112);
+								PdfPCell cell112 = new PdfPCell();
+								cell112.setPhrase(new Phrase("Vertical list - " + i, font));
+								cell112.setHorizontalAlignment(Element.ALIGN_LEFT);
+								cell112.setBackgroundColor(new GrayColor(0.93f));
+								cell112.setFixedHeight(20f);
+								cell112.setColspan(4);
+								table52.addCell(cell112);
 
-							PdfPTable table9 = VerticalAirTerminationItr(VerticalAirTerminationList, font1A);
-							document.add(table52);
-							document.add(table9);
-							++i;
+								PdfPTable table9 = VerticalAirTerminationItr(VerticalAirTerminationList, font1A);
+								document.add(table52);
+								document.add(table9);
+								++i;
+							}
 						}
-
 						PdfPTable tableNote = new PdfPTable(1);
 
 						tableNote.setWidthPercentage(100); // Width 100%
@@ -1244,27 +1248,31 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 
 						document.add(table13);
 
-						int i = 1;
-						for (AirHolderList airHolderList : airHolderL) {
+						for (AirHolderDescription airHolderdesc123 : airHolderdesc) {
 
-							PdfPTable table52 = new PdfPTable(pointColumnWidths41);
-							table52.setWidthPercentage(100); // Width 100%
-//							table52.setSpacingBefore(5f); // Space before table
-							table52.setSpacingAfter(5f); // Space after table
+							int i = 1;
+							for (AirHolderList airHolderList : airHolderdesc123.getAirHolderList()) {
+//								airHolderL) {
 
-							PdfPCell cell112 = new PdfPCell();
-							cell112.setPhrase(new Phrase("Holder list - " + i, font));
-							cell112.setHorizontalAlignment(Element.ALIGN_LEFT);
-							cell112.setBackgroundColor(new GrayColor(0.93f));
-							cell112.setFixedHeight(20f);
-							cell112.setColspan(4);
-							table52.addCell(cell112);
+								PdfPTable table52 = new PdfPTable(pointColumnWidths41);
+								table52.setWidthPercentage(100); // Width 100%
+//						     	table52.setSpacingBefore(5f); // Space before table
+								table52.setSpacingAfter(5f); // Space after table
 
-							PdfPTable table14 = HoldersItr(airHolderList, pointColumnWidths4, font1A);
+								PdfPCell cell112 = new PdfPCell();
+								cell112.setPhrase(new Phrase("Holder list - " + i, font));
+								cell112.setHorizontalAlignment(Element.ALIGN_LEFT);
+								cell112.setBackgroundColor(new GrayColor(0.93f));
+								cell112.setFixedHeight(20f);
+								cell112.setColspan(4);
+								table52.addCell(cell112);
 
-							document.add(table52);
-							document.add(table14);
-							++i;
+								PdfPTable table14 = HoldersItr(airHolderList, pointColumnWidths4, font1A);
+
+								document.add(table52);
+								document.add(table14);
+								++i;
+							}
 						}
 
 						PdfPTable table15 = new PdfPTable(pointColumnWidths4);
@@ -2927,9 +2935,15 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 		cell.setBackgroundColor(new GrayColor(0.93f));
 		table3.addCell(cell);
 
-		PdfPCell cell5 = new PdfPCell(new Paragraph(airBasicDesciption.getDesignDateObserv().toString(), font2));
-		cell5.setHorizontalAlignment(Element.ALIGN_LEFT);
-		table3.addCell(cell5);
+		if (airBasicDesciption.getDesignDateObserv() != null) {
+			PdfPCell cell5 = new PdfPCell(new Paragraph(airBasicDesciption.getDesignDateObserv().toString(), font2));
+			cell5.setHorizontalAlignment(Element.ALIGN_LEFT);
+			table3.addCell(cell5);
+		} else {
+			PdfPCell cell5 = new PdfPCell(new Paragraph("Not Available", font2));
+			cell5.setHorizontalAlignment(Element.ALIGN_LEFT);
+			table3.addCell(cell5);
+		}
 
 		if (airBasicDesciption.getDesignDateRemarks() != null) {
 			PdfPCell cell1 = new PdfPCell(new Paragraph(airBasicDesciption.getDesignDateRemarks(), font2));

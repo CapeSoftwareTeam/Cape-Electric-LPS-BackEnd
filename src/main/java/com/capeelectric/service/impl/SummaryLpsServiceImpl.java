@@ -205,16 +205,16 @@ public class SummaryLpsServiceImpl implements SummaryLpsService {
 								basicLpsDetails);
 						logger.debug("PDF printBasicLps() function called successfully");
 
-						printAirTerminationService.printAirTermination(summaryLps.getUserName(),
-								summaryLps.getBasicLpsId(), lpsAirDisc);
-						logger.debug("PDF printAirTermination() function called successfully");
+//						printAirTerminationService.printAirTermination(summaryLps.getUserName(),
+//								summaryLps.getBasicLpsId(), lpsAirDisc);
+//						logger.debug("PDF printAirTermination() function called successfully");
 
 						printDownConductorService.printDownConductor(summaryLps.getUserName(),
 								summaryLps.getBasicLpsId(),basicLpsDetails, downConductorDetails);
 						logger.debug("PDF printDownConductor() function called successfully");
 
 						printEarthingLpsService.printEarthingLpsDetails(summaryLps.getUserName(),
-								summaryLps.getBasicLpsId(), earthingLpsDetails);
+								summaryLps.getBasicLpsId(),basicLpsDetails, earthingLpsDetails);
 						logger.debug("PDF printTesting() function called successfully");
 
 						printSPDService.printSPD(summaryLps.getUserName(), summaryLps.getBasicLpsId(), spdDetails);

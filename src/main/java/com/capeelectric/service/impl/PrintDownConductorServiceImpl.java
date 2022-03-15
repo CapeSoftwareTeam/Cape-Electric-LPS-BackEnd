@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.capeelectric.exception.DownConductorException;
@@ -20,6 +21,8 @@ import com.capeelectric.model.DownConductorTesting;
 import com.capeelectric.model.Holder;
 import com.capeelectric.model.LightningCounter;
 import com.capeelectric.model.TestingJoint;
+import com.capeelectric.repository.BasicLpsRepository;
+import com.capeelectric.repository.DownConductorRepository;
 import com.capeelectric.service.PrintDownConductorService;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
@@ -42,7 +45,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 
 //	@Autowired
 //	private BasicLpsRepository basicLpsRepository;
-
+//
 //	@Autowired
 //	private DownConductorRepository downConductorRepository;
 
@@ -51,19 +54,21 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 			Optional<DownConductorReport> downConductorDetails) throws DownConductorException {
 
 //	@Override
-//	public void printDownConductor1(String userName, Integer lpsId) throws DownConductorException {
+//	public void printDownConductor(String userName, Integer lpsId) throws DownConductorException {
 
 		if (userName != null && !userName.isEmpty() && lpsId != null && lpsId != 0) {
 			Document document = new Document(PageSize.A4, 68, 68, 62, 68);
 			try {
 
 //				List<BasicLps> basicLps = basicLpsRepository.findByUserNameAndBasicLpsId(userName, lpsId);
+//				BasicLps basicLps1 = basicLps.get(0);
 				BasicLps basicLps1 = basicLpsDetails.get();
 
 				PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("DownConductorLps.pdf"));
 
 //				List<DownConductorReport> downLps = downConductorRepository.findByUserNameAndBasicLpsId(userName,
 //						lpsId);
+//				DownConductorReport downConductorReport = downLps.get(0);
 				DownConductorReport downConductorReport = downConductorDetails.get();
 
 				List<DownConductorDescription> downConductorDesc = downConductorReport.getDownConductorDescription();
@@ -627,7 +632,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 					TestEarthElectrodeHead.setSpacingAfter(10f); // Space after table
 
 					PdfPCell cell17 = new PdfPCell();
-					cell17.setPhrase(new Phrase("Testing of earth electrodes", font11B));
+					cell17.setPhrase(new Phrase("Testing of Down Conductors", font11B));
 					cell17.setHorizontalAlignment(Element.ALIGN_CENTER);
 					cell17.setBackgroundColor(new GrayColor(0.93f));
 					cell17.setFixedHeight(20f);
