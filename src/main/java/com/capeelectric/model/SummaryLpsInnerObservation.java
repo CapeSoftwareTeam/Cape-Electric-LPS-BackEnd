@@ -35,7 +35,7 @@ public class SummaryLpsInnerObservation implements Serializable  {
 	private String heading;
 	
 	@Column(name = "SERIAL_NO")
-	private Integer serialNo;
+	private String serialNo;
 	
 	@Column(name = "OBSERVATION")
 	private String observation;
@@ -67,11 +67,12 @@ public class SummaryLpsInnerObservation implements Serializable  {
 		this.heading = heading;
 	}
 	
-	public Integer getSerialNo() {
+
+	public String getSerialNo() {
 		return serialNo;
 	}
 
-	public void setSerialNo(Integer serialNo) {
+	public void setSerialNo(String serialNo) {
 		this.serialNo = serialNo;
 	}
 
