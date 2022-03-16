@@ -26,7 +26,7 @@ public class PrintSPDController {
 	public ResponseEntity<String> printSPD(@PathVariable String userName, @PathVariable Integer lpsId)
 			throws SPDException {
 		logger.info("called printSPD UserName: {},BasicLpsId : {}", userName, lpsId);
-//		printSPDService.printSPD1(userName, lpsId);
+//		printSPDService.printSPD(userName, lpsId);
 		return new ResponseEntity<String>(HttpStatus.OK);
 	}
 

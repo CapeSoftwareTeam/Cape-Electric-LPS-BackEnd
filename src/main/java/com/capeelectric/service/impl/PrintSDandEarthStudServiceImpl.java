@@ -43,7 +43,7 @@ public class PrintSDandEarthStudServiceImpl implements PrintSDandEarthStudServic
 			throws EarthStudException {
 
 //	@Override
-//	public void printSDandEarthStud1(String userName, Integer lpsId) throws EarthStudException {
+//	public void printSDandEarthStud(String userName, Integer lpsId) throws EarthStudException {
 
 		if (userName != null && !userName.isEmpty() && lpsId != null && lpsId != 0) {
 			Document document = new Document(PageSize.A4, 68, 68, 62, 68);
@@ -56,7 +56,7 @@ public class PrintSDandEarthStudServiceImpl implements PrintSDandEarthStudServic
 
 //				List<SeperationDistanceReport> separateDistance2 = seperationDistanceRepository
 //						.findByUserNameAndBasicLpsId(userName, lpsId);
-
+//				SeperationDistanceReport separateDistance = separateDistance2.get(0);
 				SeperationDistanceReport separateDistance = separateDistanceReport.get();
 
 				List<SeperationDistanceDescription> separateDistanceDesc = separateDistance
@@ -252,6 +252,7 @@ public class PrintSDandEarthStudServiceImpl implements PrintSDandEarthStudServic
 							separateDistanceDownIter(document, font1, i, separateDistanceDownIter1);
 						}
 					}
+					document.newPage();
 				}
 
 //				List<EarthStudReport> earthStudReport1 = earthStudRepository.findByUserNameAndBasicLpsId(userName,
@@ -270,12 +271,28 @@ public class PrintSDandEarthStudServiceImpl implements PrintSDandEarthStudServic
 //				headlabel.setFixedHeight(20f);
 				headerlabel1.addCell(headlabel);
 				document.add(headerlabel1);
-
+				
+//				List<EarthStudReport> earthStudDetails = earthStudRepository.findByUserNameAndBasicLpsId(userName, lpsId);
+//				EarthStudReport earthStudReport = earthStudDetails.get(0);
 				EarthStudReport earthStudReport = earthStudDetails.get();
 
 				List<EarthStudDescription> earthStudDescription = earthStudReport.getEarthStudDescription();
 
 				for (EarthStudDescription earthStudDesc : earthStudDescription) {
+					
+					PdfPTable BasicDetailsTable = new PdfPTable(1);
+					BasicDetailsTable.setWidthPercentage(100); // Width 100%
+					BasicDetailsTable.setSpacingBefore(10f); // Space before table
+//					BasicDetailsTable.setSpacingAfter(5f); // Space after table
+					BasicDetailsTable.getDefaultCell().setBorder(0);
+
+					PdfPCell arrangements = new PdfPCell(
+							new Paragraph("Basic Details", new Font(BaseFont.createFont(), 11, Font.NORMAL | Font.BOLD)));
+					arrangements.setBackgroundColor(new GrayColor(0.82f));
+					arrangements.setHorizontalAlignment(Element.ALIGN_CENTER);
+					arrangements.setBorder(PdfPCell.NO_BORDER);
+					BasicDetailsTable.addCell(arrangements);
+					document.add(BasicDetailsTable);
 
 					float[] pointColumnWidths30 = { 30F, 145F, 55F, 50F };
 
@@ -311,6 +328,8 @@ public class PrintSDandEarthStudServiceImpl implements PrintSDandEarthStudServic
 
 					document.add(table2);
 					document.add(table20);
+					
+					document.newPage();
 
 				}
 
@@ -538,19 +557,17 @@ public class PrintSDandEarthStudServiceImpl implements PrintSDandEarthStudServic
 		document.add(table205);
 
 		float[] pointColumnWidths3 = { 100F };
-
+		
 		PdfPTable table5 = new PdfPTable(pointColumnWidths3);
-
 		table5.setWidthPercentage(100); // Width 100%
 		table5.setSpacingBefore(10f); // Space before table
-		// table5.setSpacingAfter(10f); // Space after table
-		table5.getDefaultCell().setBorder(0);
+//		table5.setSpacingAfter(5f); // Space after table
 
 		PdfPCell arrangements1 = new PdfPCell(new Paragraph("Integrated LPS Tests During Construction",
 				new Font(BaseFont.createFont(), 11, Font.NORMAL | Font.BOLD)));
-		arrangements1.setBackgroundColor(new GrayColor(0.82f));
 		arrangements1.setHorizontalAlignment(Element.ALIGN_CENTER);
-		arrangements1.setBorder(PdfPCell.NO_BORDER);
+		arrangements1.setBackgroundColor(new GrayColor(0.93f));
+		arrangements1.setFixedHeight(20f);
 		table5.addCell(arrangements1);
 		document.add(table5);
 

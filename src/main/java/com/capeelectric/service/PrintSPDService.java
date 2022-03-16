@@ -9,5 +9,5 @@ public interface PrintSPDService {
 
 	public void printSPD(String userName, Integer lpsId, Optional<SpdReport> spdDetails) throws SPDException;
 
-//	public void printSPD1(String userName, Integer lpsId)throws SPDException;
+//	public void printSPD(String userName, Integer lpsId)throws SPDException;
 }

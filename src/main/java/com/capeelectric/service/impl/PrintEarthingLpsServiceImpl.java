@@ -28,6 +28,7 @@ import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.GrayColor;
 import com.itextpdf.text.pdf.PdfPCell;
@@ -69,35 +70,33 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 			EarthingReport earthingReport2 = earthingLpsDetails.get();
 
 			List<EarthingLpsDescription> earthingLpsRepo1 = earthingReport2.getEarthingLpsDescription();
-			EarthingLpsDescription earthingLpsRepo = earthingLpsRepo1.get(0);
+//			EarthingLpsDescription earthingLpsRepo = earthingLpsRepo1.get(0);
 
-			List<EarthingClamps> earthClamps1 = earthingLpsRepo.getEarthingClamps();
-			// EarthingClamps earthClamps=earthClamps1.get(0);
+//			List<EarthingClamps> earthClamps1 = earthingLpsRepo.getEarthingClamps();
+//			// EarthingClamps earthClamps=earthClamps1.get(0);
 
-			List<EarthingDescription> earthDesc1 = earthingLpsRepo.getEarthingDescription();
-			// EarthingDescription earthDesc=earthDesc1.get(0);
+//			List<EarthingDescription> earthDesc1 = earthingLpsRepo.getEarthingDescription();
+//			// EarthingDescription earthDesc=earthDesc1.get(0);
 
-			List<EarthElectrodeChamber> earthElectrodeChamber1 = earthingLpsRepo.getEarthingElectrodeChamber();
-			// EarthElectrodeChamber earthElectrodeChamber=earthElectrodeChamber1.get(0);
+//			List<EarthElectrodeChamber> earthElectrodeChamber1 = earthingLpsRepo.getEarthingElectrodeChamber();
+//			// EarthElectrodeChamber earthElectrodeChamber=earthElectrodeChamber1.get(0);
 
-			List<EarthingSystem> earthingSystem1 = earthingLpsRepo.getEarthingSystem();
-			// EarthingSystem earthingSystem=earthingSystem1.get(0);
+//			List<EarthingSystem> earthingSystem1 = earthingLpsRepo.getEarthingSystem();
+//			// EarthingSystem earthingSystem=earthingSystem1.get(0);
 
-			List<EarthElectrodeTesting> earthingElectrodeTesting1 = earthingLpsRepo.getEarthElectrodeTesting();
-			// EarthElectrodeTesting earthingElectrodeTesting =
-			// earthingElectrodeTesting1.get(0);
+//			List<EarthElectrodeTesting> earthingElectrodeTesting1 = earthingLpsRepo.getEarthElectrodeTesting();
+//			// EarthElectrodeTesting earthingElectrodeTesting =
+//			// earthingElectrodeTesting1.get(0);
 
 			document.open();
 
 			Font font11 = new Font(BaseFont.createFont(), 10, Font.NORMAL | Font.BOLD, BaseColor.BLACK);
-
 			Font font12B = new Font(BaseFont.createFont(), 12, Font.NORMAL | Font.BOLD, BaseColor.BLACK);
-
 			Font font = new Font(BaseFont.createFont(), 10, Font.NORMAL, BaseColor.BLACK);
-
-			Font font2 = new Font(BaseFont.createFont(), 10, Font.NORMAL | Font.BOLD);
 			Font font3 = new Font(BaseFont.createFont(), 10, Font.NORMAL, BaseColor.BLACK);
 
+			Font font11B = new Font(BaseFont.createFont(), 11, Font.NORMAL | Font.BOLD, BaseColor.BLACK);
+			
 			float[] pointColumnWidths5 = { 100F };
 
 			PdfPTable headertable = new PdfPTable(pointColumnWidths5);
@@ -111,415 +110,469 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 //			label.setFixedHeight(20f);
 			headertable.addCell(label);
 			document.add(headertable);
-			PdfPTable BasicDetailsTable = new PdfPTable(pointColumnWidths5);
 
-			BasicDetailsTable.setWidthPercentage(100); // Width 100%
-			BasicDetailsTable.setSpacingBefore(10f); // Space before table
-			BasicDetailsTable.setSpacingAfter(5f); // Space after table
-			BasicDetailsTable.getDefaultCell().setBorder(0);
+			for (EarthingLpsDescription earthingLpsRepo : earthingLpsRepo1) {
 
-			PdfPCell arrangements = new PdfPCell(
-					new Paragraph("Basic Details", new Font(BaseFont.createFont(), 11, Font.NORMAL | Font.BOLD)));
-			arrangements.setBackgroundColor(new GrayColor(0.82f));
-			arrangements.setHorizontalAlignment(Element.ALIGN_CENTER);
-			arrangements.setBorder(PdfPCell.NO_BORDER);
-			BasicDetailsTable.addCell(arrangements);
-			document.add(BasicDetailsTable);
+				PdfPTable BasicDetailsTable = new PdfPTable(pointColumnWidths5);
+				BasicDetailsTable.setWidthPercentage(100); // Width 100%
+				BasicDetailsTable.setSpacingBefore(10f); // Space before table
+				BasicDetailsTable.setSpacingAfter(5f); // Space after table
+				BasicDetailsTable.getDefaultCell().setBorder(0);
 
+				PdfPCell arrangements = new PdfPCell(
+						new Paragraph("Basic Details", new Font(BaseFont.createFont(), 11, Font.NORMAL | Font.BOLD)));
+				arrangements.setBackgroundColor(new GrayColor(0.82f));
+				arrangements.setHorizontalAlignment(Element.ALIGN_CENTER);
+				arrangements.setBorder(PdfPCell.NO_BORDER);
+				BasicDetailsTable.addCell(arrangements);
+				document.add(BasicDetailsTable);
+				
 //				Font font11 = new Font(BaseFont.createFont(), 10, Font.NORMAL | Font.BOLD, BaseColor.BLACK);
-			Font font1 = new Font(BaseFont.createFont(), 10, Font.NORMAL, BaseColor.BLACK);
+				Font font1 = new Font(BaseFont.createFont(), 10, Font.NORMAL, BaseColor.BLACK);
 
-			float[] pointColumnWidths30 = { 30F, 145F, 55F, 50F };
+				float[] pointColumnWidths30 = { 30F, 145F, 55F, 50F };
 
-			PdfPTable table2 = new PdfPTable(pointColumnWidths30);
-			table2.setWidthPercentage(100); // Width 100%
-			table2.setSpacingBefore(5f); // Space before table
-			table2.setWidthPercentage(100);
+				PdfPTable table2 = new PdfPTable(pointColumnWidths30);
+				table2.setWidthPercentage(100); // Width 100%
+				table2.setSpacingBefore(5f); // Space before table
+				table2.setWidthPercentage(100);
 
-			PdfPCell cell30 = new PdfPCell(new Paragraph("SL.NO", font11));
-			cell30.setHorizontalAlignment(Element.ALIGN_CENTER);
-			cell30.setGrayFill(0.92f);
-			table2.addCell(cell30);
+				PdfPCell cell30 = new PdfPCell(new Paragraph("SL.NO", font11));
+				cell30.setHorizontalAlignment(Element.ALIGN_CENTER);
+				cell30.setGrayFill(0.92f);
+				table2.addCell(cell30);
 
-			PdfPCell cell311 = new PdfPCell(new Paragraph("Description", font11));
-			cell311.setHorizontalAlignment(Element.ALIGN_CENTER);
-			cell311.setFixedHeight(20f);
-			cell311.setGrayFill(0.92f);
-			table2.addCell(cell311);
+				PdfPCell cell311 = new PdfPCell(new Paragraph("Description", font11));
+				cell311.setHorizontalAlignment(Element.ALIGN_CENTER);
+				cell311.setFixedHeight(20f);
+				cell311.setGrayFill(0.92f);
+				table2.addCell(cell311);
 
-			PdfPCell cell32 = new PdfPCell(new Paragraph("Observation", font11));
-			cell32.setHorizontalAlignment(Element.ALIGN_CENTER);
-			cell32.setFixedHeight(20f);
-			cell32.setGrayFill(0.92f);
-			table2.addCell(cell32);
+				PdfPCell cell32 = new PdfPCell(new Paragraph("Observation", font11));
+				cell32.setHorizontalAlignment(Element.ALIGN_CENTER);
+				cell32.setFixedHeight(20f);
+				cell32.setGrayFill(0.92f);
+				table2.addCell(cell32);
 
-			PdfPCell cell33 = new PdfPCell(new Paragraph("Remarks", font11));
-			cell33.setGrayFill(0.92f);
-			cell33.setHorizontalAlignment(Element.ALIGN_CENTER);
-			table2.addCell(cell33);
+				PdfPCell cell33 = new PdfPCell(new Paragraph("Remarks", font11));
+				cell33.setGrayFill(0.92f);
+				cell33.setHorizontalAlignment(Element.ALIGN_CENTER);
+				table2.addCell(cell33);
 
-			float[] pointColumnWidths = { 120F, 80F };
-			PdfPTable table100 = new PdfPTable(pointColumnWidths);
+				float[] pointColumnWidths = { 120F, 80F };
+				PdfPTable table100 = new PdfPTable(pointColumnWidths);
 
-			table100.setWidthPercentage(100); // Width 100%
-			table100.setSpacingBefore(5f); // Space before table
-			table100.setSpacingAfter(5f); // Space after table
-			table100.getDefaultCell().setBorder(0);
+				table100.setWidthPercentage(100); // Width 100%
+				table100.setSpacingBefore(5f); // Space before table
+				table100.setSpacingAfter(5f); // Space after table
+				table100.getDefaultCell().setBorder(0);
 
-			PdfPCell cell1 = new PdfPCell(
-					new Paragraph("Building Number:", new Font(BaseFont.createFont(), 11, Font.NORMAL | Font.BOLD)));
-			cell1.setBackgroundColor(new BaseColor(203, 183, 162));
-			cell1.setHorizontalAlignment(Element.ALIGN_LEFT);
-			cell1.setBorder(PdfPCell.NO_BORDER);
-			table100.addCell(cell1);
-			PdfPCell cell2 = new PdfPCell(new Paragraph(earthingLpsRepo.getBuildingNumber().toString(),
-					new Font(BaseFont.createFont(), 10, Font.NORMAL | Font.BOLD)));
-			cell2.setHorizontalAlignment(Element.ALIGN_LEFT);
-			cell2.setBackgroundColor(new BaseColor(203, 183, 162));
-			cell2.setBorder(PdfPCell.NO_BORDER);
-			table100.addCell(cell2);
-			document.add(table100);
+				PdfPCell cell1 = new PdfPCell(new Paragraph("Building Number:",
+						new Font(BaseFont.createFont(), 11, Font.NORMAL | Font.BOLD)));
+				cell1.setBackgroundColor(new BaseColor(203, 183, 162));
+				cell1.setHorizontalAlignment(Element.ALIGN_LEFT);
+				cell1.setBorder(PdfPCell.NO_BORDER);
+				table100.addCell(cell1);
+				PdfPCell cell2 = new PdfPCell(new Paragraph(earthingLpsRepo.getBuildingNumber().toString(),
+						new Font(BaseFont.createFont(), 10, Font.NORMAL | Font.BOLD)));
+				cell2.setHorizontalAlignment(Element.ALIGN_LEFT);
+				cell2.setBackgroundColor(new BaseColor(203, 183, 162));
+				cell2.setBorder(PdfPCell.NO_BORDER);
+				table100.addCell(cell2);
+				document.add(table100);
 
-			PdfPTable table1001 = new PdfPTable(pointColumnWidths);
+				PdfPTable table1001 = new PdfPTable(pointColumnWidths);
 
-			table1001.setWidthPercentage(100); // Width 100%
-			table1001.setSpacingBefore(5f); // Space before table
-			table1001.setSpacingAfter(5f); // Space after table
-			table1001.setWidthPercentage(100);
-			table1001.getDefaultCell().setBorder(0);
-			PdfPCell cell3 = new PdfPCell(
-					new Paragraph("Building Name:", new Font(BaseFont.createFont(), 11, Font.NORMAL | Font.BOLD)));
-			cell3.setBackgroundColor(new BaseColor(203, 183, 162));
-			cell3.setHorizontalAlignment(Element.ALIGN_LEFT);
-			cell3.setBorder(PdfPCell.NO_BORDER);
-			table1001.addCell(cell3);
-			PdfPCell cell4 = new PdfPCell(new Paragraph(earthingLpsRepo.getBuildingName(),
-					new Font(BaseFont.createFont(), 10, Font.NORMAL | Font.BOLD)));
-			cell4.setHorizontalAlignment(Element.ALIGN_LEFT);
-			cell4.setBackgroundColor(new BaseColor(203, 183, 162));
-			cell4.setBorder(PdfPCell.NO_BORDER);
-			table1001.addCell(cell4);
-			document.add(table1001);
+				table1001.setWidthPercentage(100); // Width 100%
+				table1001.setSpacingBefore(5f); // Space before table
+				table1001.setSpacingAfter(5f); // Space after table
+				table1001.setWidthPercentage(100);
+				table1001.getDefaultCell().setBorder(0);
+				PdfPCell cell3 = new PdfPCell(
+						new Paragraph("Building Name:", new Font(BaseFont.createFont(), 11, Font.NORMAL | Font.BOLD)));
+				cell3.setBackgroundColor(new BaseColor(203, 183, 162));
+				cell3.setHorizontalAlignment(Element.ALIGN_LEFT);
+				cell3.setBorder(PdfPCell.NO_BORDER);
+				table1001.addCell(cell3);
+				PdfPCell cell4 = new PdfPCell(new Paragraph(earthingLpsRepo.getBuildingName(),
+						new Font(BaseFont.createFont(), 10, Font.NORMAL | Font.BOLD)));
+				cell4.setHorizontalAlignment(Element.ALIGN_LEFT);
+				cell4.setBackgroundColor(new BaseColor(203, 183, 162));
+				cell4.setBorder(PdfPCell.NO_BORDER);
+				table1001.addCell(cell4);
+				document.add(table1001);
 
-			PdfPTable table205 = new PdfPTable(pointColumnWidths30);
-			table205.setWidthPercentage(100); // Width 100%
-			// table205.setSpacingBefore(20f); // Space before table
-			table205.setWidthPercentage(100);
+				PdfPTable table205 = new PdfPTable(pointColumnWidths30);
+				table205.setWidthPercentage(100); // Width 100%
+				// table205.setSpacingBefore(20f); // Space before table
+				table205.setWidthPercentage(100);
 
-			PdfPCell cell205 = new PdfPCell(new Paragraph("1", font1));
-			cell205.setHorizontalAlignment(Element.ALIGN_CENTER);
-			cell205.setGrayFill(0.92f);
-			table205.addCell(cell205);
+				PdfPCell cell205 = new PdfPCell(new Paragraph("1", font1));
+				cell205.setHorizontalAlignment(Element.ALIGN_CENTER);
+				cell205.setGrayFill(0.92f);
+				table205.addCell(cell205);
 
-			PdfPCell cell206 = new PdfPCell(new Paragraph("Type of Earthing (Type-A/Type-B/both)", font1));
-			cell206.setGrayFill(0.92f);
-			table205.addCell(cell206);
+				PdfPCell cell206 = new PdfPCell(new Paragraph("Type of Earthing (Type-A/Type-B/both)", font1));
+				cell206.setGrayFill(0.92f);
+				table205.addCell(cell206);
 
-			PdfPCell cell209 = new PdfPCell(new Paragraph(earthingLpsRepo.getEarthingTypeInOb(), font3));
-			cell209.setHorizontalAlignment(Element.ALIGN_LEFT);
-			table205.addCell(cell209);
+				PdfPCell cell209 = new PdfPCell(new Paragraph(earthingLpsRepo.getEarthingTypeInOb(), font3));
+				cell209.setHorizontalAlignment(Element.ALIGN_LEFT);
+				table205.addCell(cell209);
 
-			PdfPCell cell210 = new PdfPCell(new Paragraph(earthingLpsRepo.getEarthingTypeInRem(), font3));
-			cell210.setHorizontalAlignment(Element.ALIGN_LEFT);
-			table205.addCell(cell210);
+				PdfPCell cell210 = new PdfPCell(new Paragraph(earthingLpsRepo.getEarthingTypeInRem(), font3));
+				cell210.setHorizontalAlignment(Element.ALIGN_LEFT);
+				table205.addCell(cell210);
 
-			PdfPCell cell20 = new PdfPCell(new Paragraph("2", font1));
-			cell20.setHorizontalAlignment(Element.ALIGN_CENTER);
-			cell20.setGrayFill(0.92f);
-			table205.addCell(cell20);
+				PdfPCell cell20 = new PdfPCell(new Paragraph("2", font1));
+				cell20.setHorizontalAlignment(Element.ALIGN_CENTER);
+				cell20.setGrayFill(0.92f);
+				table205.addCell(cell20);
 
-			PdfPCell cell21 = new PdfPCell(new Paragraph(
-					"Check for bimetallic issue (connections between dissimilar metals are not allowed)", font1));
-			cell21.setFixedHeight(20f);
-			cell21.setGrayFill(0.92f);
-			table205.addCell(cell21);
+				PdfPCell cell21 = new PdfPCell(new Paragraph(
+						"Check for bimetallic issue (connections between dissimilar metals are not allowed)", font1));
+				cell21.setFixedHeight(20f);
+				cell21.setGrayFill(0.92f);
+				table205.addCell(cell21);
 
-			PdfPCell cell29 = new PdfPCell(new Paragraph(earthingLpsRepo.getBimetallicIssueInOb(), font3));
-			cell29.setHorizontalAlignment(Element.ALIGN_LEFT);
-			table205.addCell(cell29);
+				PdfPCell cell29 = new PdfPCell(new Paragraph(earthingLpsRepo.getBimetallicIssueInOb(), font3));
+				cell29.setHorizontalAlignment(Element.ALIGN_LEFT);
+				table205.addCell(cell29);
 
-			PdfPCell cell22 = new PdfPCell(new Paragraph(earthingLpsRepo.getBimetallicIssueInRem(), font3));
-			cell22.setHorizontalAlignment(Element.ALIGN_LEFT);
-			table205.addCell(cell22);
+				PdfPCell cell22 = new PdfPCell(new Paragraph(earthingLpsRepo.getBimetallicIssueInRem(), font3));
+				cell22.setHorizontalAlignment(Element.ALIGN_LEFT);
+				table205.addCell(cell22);
 
-			PdfPCell cell24 = new PdfPCell(new Paragraph("3", font1));
-			cell24.setHorizontalAlignment(Element.ALIGN_CENTER);
-			cell24.setGrayFill(0.92f);
-			table205.addCell(cell24);
+				PdfPCell cell24 = new PdfPCell(new Paragraph("3", font1));
+				cell24.setHorizontalAlignment(Element.ALIGN_CENTER);
+				cell24.setGrayFill(0.92f);
+				table205.addCell(cell24);
 
-			PdfPCell cell23 = new PdfPCell(
-					new Paragraph("Connections made by brazing/welding/crimping /seaming/screwing/bolting", font1));
-			cell23.setFixedHeight(20f);
-			cell23.setGrayFill(0.92f);
-			table205.addCell(cell23);
+				PdfPCell cell23 = new PdfPCell(
+						new Paragraph("Connections made by brazing/welding/crimping /seaming/screwing/bolting", font1));
+				cell23.setFixedHeight(20f);
+				cell23.setGrayFill(0.92f);
+				table205.addCell(cell23);
 
-			PdfPCell cell35 = new PdfPCell(new Paragraph(earthingLpsRepo.getBrazingConnectInOb(), font3));
-			cell35.setHorizontalAlignment(Element.ALIGN_LEFT);
-			table205.addCell(cell35);
+				PdfPCell cell35 = new PdfPCell(new Paragraph(earthingLpsRepo.getBrazingConnectInOb(), font3));
+				cell35.setHorizontalAlignment(Element.ALIGN_LEFT);
+				table205.addCell(cell35);
 
-			PdfPCell cell36 = new PdfPCell(new Paragraph(earthingLpsRepo.getBrazingConnectInRem(), font3));
-			cell36.setHorizontalAlignment(Element.ALIGN_LEFT);
-			table205.addCell(cell36);
+				PdfPCell cell36 = new PdfPCell(new Paragraph(earthingLpsRepo.getBrazingConnectInRem(), font3));
+				cell36.setHorizontalAlignment(Element.ALIGN_LEFT);
+				table205.addCell(cell36);
 
-			document.add(table2);
-			document.add(table205);
+				document.add(table2);
+				document.add(table205);
 
-			float[] pointColumnWidths10 = { 100F };
+				float[] pointColumnWidths10 = { 100F };
 
-			PdfPTable BasicDetailsTable6 = new PdfPTable(pointColumnWidths10);
+//				PdfPTable BasicDetailsTable6 = new PdfPTable(pointColumnWidths10);
+//
+//				BasicDetailsTable6.setWidthPercentage(100); // Width 100%
+//				BasicDetailsTable6.setSpacingBefore(10f); // Space before table
+//				BasicDetailsTable6.setSpacingAfter(5f); // Space after table
+//				BasicDetailsTable6.getDefaultCell().setBorder(0);
+//
+//				PdfPCell arrangements7 = new PdfPCell(new Paragraph("Type-A earthing system",
+//						new Font(BaseFont.createFont(), 11, Font.NORMAL | Font.BOLD)));
+//				arrangements7.setBackgroundColor(new GrayColor(0.82f));
+//				arrangements7.setHorizontalAlignment(Element.ALIGN_CENTER);
+//				arrangements7.setBorder(PdfPCell.NO_BORDER);
+//				BasicDetailsTable6.addCell(arrangements7);
+				
+				PdfPTable BasicDetailsTable6 = new PdfPTable(pointColumnWidths10);
+				BasicDetailsTable6.setWidthPercentage(100); // Width 100%
+				BasicDetailsTable6.setSpacingBefore(10f); // Space before table
+				BasicDetailsTable6.setSpacingAfter(5f); // Space after table
 
-			BasicDetailsTable6.setWidthPercentage(100); // Width 100%
-			BasicDetailsTable6.setSpacingBefore(10f); // Space before table
-			BasicDetailsTable6.setSpacingAfter(5f); // Space after table
-			BasicDetailsTable6.getDefaultCell().setBorder(0);
+				PdfPCell arrangements7 = new PdfPCell();
+				arrangements7.setPhrase(new Phrase("Type-A earthing system", font11B));
+				arrangements7.setHorizontalAlignment(Element.ALIGN_CENTER);
+				arrangements7.setBackgroundColor(new GrayColor(0.93f));
+				arrangements7.setFixedHeight(20f);
+				arrangements7.setColspan(4);
+				BasicDetailsTable6.addCell(arrangements7);
 
-			PdfPCell arrangements7 = new PdfPCell(new Paragraph("Type-A earthing system",
-					new Font(BaseFont.createFont(), 11, Font.NORMAL | Font.BOLD)));
-			arrangements7.setBackgroundColor(new GrayColor(0.82f));
-			arrangements7.setHorizontalAlignment(Element.ALIGN_CENTER);
-			arrangements7.setBorder(PdfPCell.NO_BORDER);
-			BasicDetailsTable6.addCell(arrangements7);
+				float[] pointColumnWidths4 = { 100F };
 
-			float[] pointColumnWidths4 = { 100F };
+//				PdfPTable BasicDetailsTable3 = new PdfPTable(pointColumnWidths4);
+//				BasicDetailsTable3.setWidthPercentage(100); // Width 100%
+//				BasicDetailsTable3.setSpacingBefore(10f); // Space before table
+//				BasicDetailsTable3.setSpacingAfter(5f); // Space after table
+//				BasicDetailsTable3.getDefaultCell().setBorder(0);
+//
+//				PdfPCell arrangements1 = new PdfPCell(
+//						new Paragraph("Clamps", new Font(BaseFont.createFont(), 11, Font.NORMAL | Font.BOLD)));
+//				arrangements1.setBackgroundColor(new GrayColor(0.82f));
+//				arrangements1.setHorizontalAlignment(Element.ALIGN_CENTER);
+//				arrangements1.setBorder(PdfPCell.NO_BORDER);
+//				BasicDetailsTable3.addCell(arrangements1);
+				
+				PdfPTable BasicDetailsTable3 = new PdfPTable(pointColumnWidths4);
+				BasicDetailsTable3.setWidthPercentage(100); // Width 100%
+				BasicDetailsTable3.setSpacingBefore(10f); // Space before table
+				BasicDetailsTable3.setSpacingAfter(10f); // Space after table
 
-			PdfPTable BasicDetailsTable3 = new PdfPTable(pointColumnWidths4);
+				PdfPCell arrangements1 = new PdfPCell();
+				arrangements1.setPhrase(new Phrase("Clamps", font11B));
+				arrangements1.setHorizontalAlignment(Element.ALIGN_CENTER);
+				arrangements1.setBackgroundColor(new GrayColor(0.93f));
+				arrangements1.setFixedHeight(20f);
+				arrangements1.setColspan(4);
+				BasicDetailsTable3.addCell(arrangements1);
 
-			BasicDetailsTable3.setWidthPercentage(100); // Width 100%
-			BasicDetailsTable3.setSpacingBefore(10f); // Space before table
-			BasicDetailsTable3.setSpacingAfter(5f); // Space after table
-			BasicDetailsTable3.getDefaultCell().setBorder(0);
+				float[] pointColumnWidths2 = { 120F, 80F };
+				PdfPTable table1 = new PdfPTable(pointColumnWidths2);
 
-			PdfPCell arrangements1 = new PdfPCell(
-					new Paragraph("Clamps", new Font(BaseFont.createFont(), 11, Font.NORMAL | Font.BOLD)));
-			arrangements1.setBackgroundColor(new GrayColor(0.82f));
-			arrangements1.setHorizontalAlignment(Element.ALIGN_CENTER);
-			arrangements1.setBorder(PdfPCell.NO_BORDER);
-			BasicDetailsTable3.addCell(arrangements1);
-
-			float[] pointColumnWidths2 = { 120F, 80F };
-			PdfPTable table1 = new PdfPTable(pointColumnWidths2);
-
-			table1.setWidthPercentage(100); // Width 100%
+				table1.setWidthPercentage(100); // Width 100%
 //			table2.setSpacingBefore(5f); // Space before table
 //			table2.setSpacingAfter(5f); // Space after table
-			table1.getDefaultCell().setBorder(0);
+				table1.getDefaultCell().setBorder(0);
 
-			PdfPCell cell11 = new PdfPCell(
-					new Paragraph("Availability:", new Font(BaseFont.createFont(), 10, Font.NORMAL)));
-			cell11.setBackgroundColor(new GrayColor(0.93f));
-			cell11.setHorizontalAlignment(Element.ALIGN_LEFT);
-			cell11.setBorder(PdfPCell.NO_BORDER);
-			table1.addCell(cell11);
-			PdfPCell cell11A = new PdfPCell(new Paragraph(earthingLpsRepo.getEarthingClampsAvailabilityOb(),
-					new Font(BaseFont.createFont(), 10, Font.NORMAL)));
-			cell11A.setHorizontalAlignment(Element.ALIGN_LEFT);
-			cell11A.setBackgroundColor(new GrayColor(0.93f));
-			cell11A.setBorder(PdfPCell.NO_BORDER);
-			table1.addCell(cell11A);
+				PdfPCell cell11 = new PdfPCell(
+						new Paragraph("Availability:", new Font(BaseFont.createFont(), 10, Font.NORMAL)));
+				cell11.setBackgroundColor(new GrayColor(0.93f));
+				cell11.setHorizontalAlignment(Element.ALIGN_LEFT);
+				cell11.setBorder(PdfPCell.NO_BORDER);
+				table1.addCell(cell11);
+				PdfPCell cell11A = new PdfPCell(new Paragraph(earthingLpsRepo.getEarthingClampsAvailabilityOb(),
+						new Font(BaseFont.createFont(), 10, Font.NORMAL)));
+				cell11A.setHorizontalAlignment(Element.ALIGN_LEFT);
+				cell11A.setBackgroundColor(new GrayColor(0.93f));
+				cell11A.setBorder(PdfPCell.NO_BORDER);
+				table1.addCell(cell11A);
 
-			PdfPTable table1R = new PdfPTable(pointColumnWidths2);
+				PdfPTable table1R = new PdfPTable(pointColumnWidths2);
+				table1R.setWidthPercentage(100); // Width 100%
+				table1R.setSpacingBefore(5f); // Space before table
+//				table1R.setSpacingAfter(5f); // Space after table
+				table1R.getDefaultCell().setBorder(0);
 
-			table1R.setWidthPercentage(100); // Width 100%
-			table1R.setSpacingBefore(5f); // Space before table
-//			table1R.setSpacingAfter(5f); // Space after table
-			table1R.getDefaultCell().setBorder(0);
+				PdfPCell cell22R = new PdfPCell(
+						new Paragraph("Remarks:", new Font(BaseFont.createFont(), 10, Font.NORMAL)));
+				cell22R.setBackgroundColor(new GrayColor(0.93f));
+				cell22R.setHorizontalAlignment(Element.ALIGN_LEFT);
+				cell22R.setBorder(PdfPCell.NO_BORDER);
+				table1R.addCell(cell22R);
+				PdfPCell cell23R = new PdfPCell(new Paragraph(earthingLpsRepo.getEarthingClampsAvailabilityRem(),
+						new Font(BaseFont.createFont(), 10, Font.NORMAL)));
+				cell23R.setHorizontalAlignment(Element.ALIGN_LEFT);
+				cell23R.setBackgroundColor(new GrayColor(0.93f));
+				cell23R.setBorder(PdfPCell.NO_BORDER);
+				table1R.addCell(cell23R);
 
-			PdfPCell cell22R = new PdfPCell(
-					new Paragraph("Remarks:", new Font(BaseFont.createFont(), 10, Font.NORMAL)));
-			cell22R.setBackgroundColor(new GrayColor(0.93f));
-			cell22R.setHorizontalAlignment(Element.ALIGN_LEFT);
-			cell22R.setBorder(PdfPCell.NO_BORDER);
-			table1R.addCell(cell22R);
-			PdfPCell cell23R = new PdfPCell(new Paragraph(earthingLpsRepo.getEarthingClampsAvailabilityRem(),
-					new Font(BaseFont.createFont(), 10, Font.NORMAL)));
-			cell23R.setHorizontalAlignment(Element.ALIGN_LEFT);
-			cell23R.setBackgroundColor(new GrayColor(0.93f));
-			cell23R.setBorder(PdfPCell.NO_BORDER);
-			table1R.addCell(cell23R);
+				float[] pointColumnWidths6 = { 100F };
 
-			float[] pointColumnWidths6 = { 100F };
+//				PdfPTable BasicDetailsTable4 = new PdfPTable(pointColumnWidths6);
+//				BasicDetailsTable4.setWidthPercentage(100); // Width 100%
+//				BasicDetailsTable4.setSpacingBefore(10f); // Space before table
+//				BasicDetailsTable4.setSpacingAfter(5f); // Space after table
+//				BasicDetailsTable4.getDefaultCell().setBorder(0);
+//
+//				PdfPCell arrangements2 = new PdfPCell(new Paragraph("Earth electrode chambers",
+//						new Font(BaseFont.createFont(), 11, Font.NORMAL | Font.BOLD)));
+//				arrangements2.setBackgroundColor(new GrayColor(0.82f));
+//				arrangements2.setHorizontalAlignment(Element.ALIGN_CENTER);
+//				arrangements2.setBorder(PdfPCell.NO_BORDER);
+//				BasicDetailsTable4.addCell(arrangements2);
+				
+				PdfPTable BasicDetailsTable4 = new PdfPTable(pointColumnWidths4);
+				BasicDetailsTable4.setWidthPercentage(100); // Width 100%
+				BasicDetailsTable4.setSpacingBefore(10f); // Space before table
+				BasicDetailsTable4.setSpacingAfter(10f); // Space after table
 
-			PdfPTable BasicDetailsTable4 = new PdfPTable(pointColumnWidths6);
+				PdfPCell arrangements2 = new PdfPCell();
+				arrangements2.setPhrase(new Phrase("Earth electrode chambers", font11B));
+				arrangements2.setHorizontalAlignment(Element.ALIGN_CENTER);
+				arrangements2.setBackgroundColor(new GrayColor(0.93f));
+				arrangements2.setFixedHeight(20f);
+				arrangements2.setColspan(4);
+				BasicDetailsTable4.addCell(arrangements2);
+				
 
-			BasicDetailsTable4.setWidthPercentage(100); // Width 100%
-			BasicDetailsTable4.setSpacingBefore(10f); // Space before table
-			BasicDetailsTable4.setSpacingAfter(5f); // Space after table
-			BasicDetailsTable4.getDefaultCell().setBorder(0);
+				PdfPTable table18 = new PdfPTable(pointColumnWidths2);
 
-			PdfPCell arrangements2 = new PdfPCell(new Paragraph("Earth electrode chambers",
-					new Font(BaseFont.createFont(), 11, Font.NORMAL | Font.BOLD)));
-			arrangements2.setBackgroundColor(new GrayColor(0.82f));
-			arrangements2.setHorizontalAlignment(Element.ALIGN_CENTER);
-			arrangements2.setBorder(PdfPCell.NO_BORDER);
-			BasicDetailsTable4.addCell(arrangements2);
-
-			PdfPTable table18 = new PdfPTable(pointColumnWidths2);
-
-			table18.setWidthPercentage(100); // Width 100%
+				table18.setWidthPercentage(100); // Width 100%
 //			table18.setSpacingBefore(5f); // Space before table
 //			table18.setSpacingAfter(5f); // Space after table
-			table18.getDefaultCell().setBorder(0);
+				table18.getDefaultCell().setBorder(0);
 
-			PdfPCell cell1A = new PdfPCell(
-					new Paragraph("Availability:", new Font(BaseFont.createFont(), 10, Font.NORMAL)));
-			cell1A.setBackgroundColor(new GrayColor(0.93f));
-			cell1A.setHorizontalAlignment(Element.ALIGN_LEFT);
-			cell1A.setBorder(PdfPCell.NO_BORDER);
-			table18.addCell(cell1A);
-			PdfPCell cell12A = new PdfPCell(new Paragraph(earthingLpsRepo.getEarthingClampsAvailabilityOb(),
-					new Font(BaseFont.createFont(), 10, Font.NORMAL)));
-			cell12A.setHorizontalAlignment(Element.ALIGN_LEFT);
-			cell12A.setBackgroundColor(new GrayColor(0.93f));
-			cell12A.setBorder(PdfPCell.NO_BORDER);
-			table18.addCell(cell12A);
+				PdfPCell cell1A = new PdfPCell(
+						new Paragraph("Availability:", new Font(BaseFont.createFont(), 10, Font.NORMAL)));
+				cell1A.setBackgroundColor(new GrayColor(0.93f));
+				cell1A.setHorizontalAlignment(Element.ALIGN_LEFT);
+				cell1A.setBorder(PdfPCell.NO_BORDER);
+				table18.addCell(cell1A);
+				PdfPCell cell12A = new PdfPCell(new Paragraph(earthingLpsRepo.getEarthingClampsAvailabilityOb(),
+						new Font(BaseFont.createFont(), 10, Font.NORMAL)));
+				cell12A.setHorizontalAlignment(Element.ALIGN_LEFT);
+				cell12A.setBackgroundColor(new GrayColor(0.93f));
+				cell12A.setBorder(PdfPCell.NO_BORDER);
+				table18.addCell(cell12A);
 
-			PdfPTable table18R = new PdfPTable(pointColumnWidths2);
+				PdfPTable table18R = new PdfPTable(pointColumnWidths2);
 
-			table18R.setWidthPercentage(100); // Width 100%
-			table18R.setSpacingBefore(5f); // Space before table
+				table18R.setWidthPercentage(100); // Width 100%
+				table18R.setSpacingBefore(5f); // Space before table
 //			table18R.setSpacingAfter(5f); // Space after table
-			table18R.getDefaultCell().setBorder(0);
+				table18R.getDefaultCell().setBorder(0);
 
-			PdfPCell cell2R = new PdfPCell(new Paragraph("Remarks:", new Font(BaseFont.createFont(), 10, Font.NORMAL)));
-			cell2R.setBackgroundColor(new GrayColor(0.93f));
-			cell2R.setHorizontalAlignment(Element.ALIGN_LEFT);
-			cell2R.setBorder(PdfPCell.NO_BORDER);
-			table18R.addCell(cell2R);
-			PdfPCell cell222R = new PdfPCell(new Paragraph(earthingLpsRepo.getEarthingClampsAvailabilityRem(),
-					new Font(BaseFont.createFont(), 10, Font.NORMAL)));
-			cell222R.setHorizontalAlignment(Element.ALIGN_LEFT);
-			cell222R.setBackgroundColor(new GrayColor(0.93f));
-			cell222R.setBorder(PdfPCell.NO_BORDER);
-			table18R.addCell(cell222R);
+				PdfPCell cell2R = new PdfPCell(
+						new Paragraph("Remarks:", new Font(BaseFont.createFont(), 10, Font.NORMAL)));
+				cell2R.setBackgroundColor(new GrayColor(0.93f));
+				cell2R.setHorizontalAlignment(Element.ALIGN_LEFT);
+				cell2R.setBorder(PdfPCell.NO_BORDER);
+				table18R.addCell(cell2R);
+				PdfPCell cell222R = new PdfPCell(new Paragraph(earthingLpsRepo.getEarthingClampsAvailabilityRem(),
+						new Font(BaseFont.createFont(), 10, Font.NORMAL)));
+				cell222R.setHorizontalAlignment(Element.ALIGN_LEFT);
+				cell222R.setBackgroundColor(new GrayColor(0.93f));
+				cell222R.setBorder(PdfPCell.NO_BORDER);
+				table18R.addCell(cell222R);
 
-			float[] pointColumnWidths8 = { 100F };
+				float[] pointColumnWidths8 = { 100F };
 
-			PdfPTable table5 = new PdfPTable(pointColumnWidths8);
+//				PdfPTable table5 = new PdfPTable(pointColumnWidths8);
+//				table5.setWidthPercentage(100); // Width 100%
+//				table5.setSpacingBefore(10f); // Space before table
+//				table5.setSpacingAfter(5f); // Space after table
+//				table5.getDefaultCell().setBorder(0);
+//
+//				PdfPCell arrangements4 = new PdfPCell(new Paragraph("Type-B earthing system",
+//						new Font(BaseFont.createFont(), 11, Font.NORMAL | Font.BOLD)));
+//				arrangements4.setBackgroundColor(new GrayColor(0.82f));
+//				arrangements4.setHorizontalAlignment(Element.ALIGN_CENTER);
+//				arrangements4.setBorder(PdfPCell.NO_BORDER);
+//				table5.addCell(arrangements4);
+				
+				PdfPTable table5 = new PdfPTable(pointColumnWidths8);
+				table5.setWidthPercentage(100); // Width 100%
+				table5.setSpacingBefore(10f); // Space before table
+				table5.setSpacingAfter(5f); // Space after table
 
-			table5.setWidthPercentage(100); // Width 100%
-			table5.setSpacingBefore(10f); // Space before table
-			table5.setSpacingAfter(5f); // Space after table
-			table5.getDefaultCell().setBorder(0);
-
-			PdfPCell arrangements4 = new PdfPCell(new Paragraph("Type-B earthing system",
-					new Font(BaseFont.createFont(), 11, Font.NORMAL | Font.BOLD)));
-			arrangements4.setBackgroundColor(new GrayColor(0.82f));
-			arrangements4.setHorizontalAlignment(Element.ALIGN_CENTER);
-			arrangements4.setBorder(PdfPCell.NO_BORDER);
-			table5.addCell(arrangements4);
+				PdfPCell arrangements4 = new PdfPCell();
+				arrangements4.setPhrase(new Phrase("Type-B earthing system", font11B));
+				arrangements4.setHorizontalAlignment(Element.ALIGN_CENTER);
+				arrangements4.setBackgroundColor(new GrayColor(0.93f));
+				arrangements4.setFixedHeight(20f);
+				arrangements4.setColspan(4);
+				table5.addCell(arrangements4);
 
 // select Type A
-			if (earthingLpsRepo.getEarthingTypeInOb().equals("Type A")) {
+				if (earthingLpsRepo.getEarthingTypeInOb().equals("Type A")) {
 
-				// eartingDescTypeA Iteration
-				document.add(BasicDetailsTable6);
-				document.add(table2);
-				for (EarthingDescription earthDesc : earthDesc1) {
+					// eartingDescTypeA Iteration
+					document.add(BasicDetailsTable6);
+					document.add(table2);
+					for (EarthingDescription earthDesc : earthingLpsRepo.getEarthingDescription()) {
 
-					eartingDescTypeAiter(document, font, earthDesc);
-				}
-
-				// earthingClamps
-//				document.newPage();
-				document.add(BasicDetailsTable3);
-				document.add(table1);
-				document.add(table1R);
-				document.add(table2);
-				for (EarthingClamps earthClamps : earthClamps1) {
-
-					if (earthingLpsRepo.getEarthingClampsAvailabilityOb().equals("Applicable")) {
-
-						earthingClamps(document, earthClamps, font);
+						eartingDescTypeAiter(document, font, earthDesc);
 					}
-				}
 
-				// earthElectrodeChamber
-				document.add(BasicDetailsTable4);
-				document.add(table18);
-				document.add(table18R);
-				document.add(table2);
-				for (EarthElectrodeChamber earthElectrodeChamber : earthElectrodeChamber1) {
+					// earthingClamps
+//					document.newPage();
+					document.add(BasicDetailsTable3);
+					document.add(table1);
+					document.add(table1R);
+//					document.add(table2);
+					for (EarthingClamps earthClamps : earthingLpsRepo.getEarthingClamps()) {
 
-					if (earthingLpsRepo.getEarthingElectrodeChamberAvailabilityOb().equals("Applicable")) {
-
-						earthElectrodeChamber(document, font, earthElectrodeChamber);
+						if (earthingLpsRepo.getEarthingClampsAvailabilityOb().equals("Applicable")) {
+							document.add(table2);
+							earthingClamps(document, earthClamps, font);
+						}
 					}
-				}
 
-				// earthElectrodeTesting Iteration
+					// earthElectrodeChamber
+					document.newPage();
+					document.add(BasicDetailsTable4);
+					document.add(table18);
+					document.add(table18R);
+//					document.add(table2);
+					for (EarthElectrodeChamber earthElectrodeChamber : earthingLpsRepo.getEarthingElectrodeChamber()) {
+
+						if (earthingLpsRepo.getEarthingElectrodeChamberAvailabilityOb().equals("Applicable")) {
+							document.add(table2);
+							earthElectrodeChamber(document, font, earthElectrodeChamber);
+						}
+					}
+
+					// earthElectrodeTesting Iteration
 //					document.add(header);
 //					document.add(header1);
 //					document.add(table7);
 //					for (EarthElectrodeTesting earthingElectrodeTesting : earthingElectrodeTesting1) {
 //						earthElectrodeTestingIter(document, font, earthingElectrodeTesting);
 //					}
-			}
-
-// 			select Type-B (ring)
-			if (earthingLpsRepo.getEarthingTypeInOb().equals("Type-B (ring)")) {
-				// earthingSystemType-B Iteration
-				document.newPage();
-				document.add(table5);
-				document.add(table2);
-				for (EarthingSystem earthingSystem : earthingSystem1) {
-
-					earthingSystemTypeBiter(document, font, earthingSystem);
 				}
 
-				// earthElectrodeTesting Iteration
+// 			select Type-B (ring)
+				if (earthingLpsRepo.getEarthingTypeInOb().equals("Type-B (ring)")) {
+					// earthingSystemType-B Iteration
+					document.newPage();
+					document.add(table5);
+					document.add(table2);
+					for (EarthingSystem earthingSystem : earthingLpsRepo.getEarthingSystem()) {
+
+						earthingSystemTypeBiter(document, font, earthingSystem);
+					}
+
+					// earthElectrodeTesting Iteration
 //				document.add(header);
 //				document.add(header1);
 //				document.add(table7);
 //				for (EarthElectrodeTesting earthingElectrodeTesting : earthingElectrodeTesting1) {
 //					earthElectrodeTestingIter(document, font, earthingElectrodeTesting);
 //				}
-			}
+				}
 
 // 			select Type A & Type B combined
-			if (earthingLpsRepo.getEarthingTypeInOb().equals("Type A & Type B combined")) {
-				// eartingDescTypeA Iteration
-				document.add(BasicDetailsTable6);
-				document.add(table2);
-				for (EarthingDescription earthDesc : earthDesc1) {
+				if (earthingLpsRepo.getEarthingTypeInOb().equals("Type A & Type B combined")) {
+					// eartingDescTypeA Iteration
+					document.add(BasicDetailsTable6);
+					document.add(table2);
+					for (EarthingDescription earthDesc : earthingLpsRepo.getEarthingDescription()) {
 
-					eartingDescTypeAiter(document, font, earthDesc);
-				}
-
-				// earthingClamps
-				document.newPage();
-				document.add(BasicDetailsTable3);
-				document.add(table1);
-				document.add(table1R);
-				document.add(table2);
-				for (EarthingClamps earthClamps : earthClamps1) {
-
-					if (earthingLpsRepo.getEarthingClampsAvailabilityOb().equals("Applicable")) {
-
-						earthingClamps(document, earthClamps, font);
+						eartingDescTypeAiter(document, font, earthDesc);
 					}
-				}
 
-				// earthElectrodeChamber
-				document.add(BasicDetailsTable4);
-				document.add(table18);
-				document.add(table18R);
-				document.add(table2);
-				for (EarthElectrodeChamber earthElectrodeChamber : earthElectrodeChamber1) {
+					// earthingClamps
+					document.newPage();
+					document.add(BasicDetailsTable3);
+					document.add(table1);
+					document.add(table1R);
+//					document.add(table2);
+					for (EarthingClamps earthClamps : earthingLpsRepo.getEarthingClamps()) {
 
-					if (earthingLpsRepo.getEarthingElectrodeChamberAvailabilityOb().equals("Applicable")) {
-
-						earthElectrodeChamber(document, font, earthElectrodeChamber);
+						if (earthingLpsRepo.getEarthingClampsAvailabilityOb().equals("Applicable")) {
+							document.add(table2);
+							earthingClamps(document, earthClamps, font);
+						}
 					}
-				}
 
-				// earthingSystemType-B Iteration
-				document.newPage();
-				document.add(table5);
-				document.add(table2);
-				for (EarthingSystem earthingSystem : earthingSystem1) {
+					// earthElectrodeChamber
+					document.newPage();
+					document.add(BasicDetailsTable4);
+					document.add(table18);
+					document.add(table18R);
+//					document.add(table2);
+					for (EarthElectrodeChamber earthElectrodeChamber : earthingLpsRepo.getEarthingElectrodeChamber()) {
 
-					earthingSystemTypeBiter(document, font, earthingSystem);
-				}
+						if (earthingLpsRepo.getEarthingElectrodeChamberAvailabilityOb().equals("Applicable")) {
+							document.add(table2);
+							earthElectrodeChamber(document, font, earthElectrodeChamber);
+						}
+					}
+
+					// earthingSystemType-B Iteration
+					document.newPage();
+					document.add(table5);
+					document.add(table2);
+					for (EarthingSystem earthingSystem : earthingLpsRepo.getEarthingSystem()) {
+
+						earthingSystemTypeBiter(document, font, earthingSystem);
+					}
 
 //				 earthElectrodeTesting Iteration
 //				document.add(header);
@@ -528,7 +581,7 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 //				for (EarthElectrodeTesting earthingElectrodeTesting : earthingElectrodeTesting1) {
 //					earthElectrodeTestingIter(document, font, earthingElectrodeTesting);
 //				}
-			}
+				}
 
 // 			select Foundation
 //			if (earthingLpsRepo.getEarthingTypeInOb().equals("Foundation")) {
@@ -540,128 +593,142 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 //					earthElectrodeTestingIter(document, font, earthingElectrodeTesting);
 //				}
 //			}
-			
-			document.newPage();
 
-			if (basicLps1.getAvailabilityOfPreviousReport().equalsIgnoreCase("No")) {
+				document.newPage();
 
-				PdfPTable header = new PdfPTable(pointColumnWidths10);
-				header.setWidthPercentage(100); // Width 100%
-				header.setSpacingBefore(10f); // Space before table
-				header.setSpacingAfter(5f); // Space after table
-				header.getDefaultCell().setBorder(0);
+				if (basicLps1.getAvailabilityOfPreviousReport().equalsIgnoreCase("No")) {
 
-				PdfPCell arrangements9 = new PdfPCell(new Paragraph("Testing of earth electrodes",
-						new Font(BaseFont.createFont(), 11, Font.NORMAL | Font.BOLD)));
-				arrangements9.setBackgroundColor(new GrayColor(0.82f));
-				arrangements9.setHorizontalAlignment(Element.ALIGN_CENTER);
-				arrangements9.setBorder(PdfPCell.NO_BORDER);
-				header.addCell(arrangements9);
-				
-				document.add(header);
+//					PdfPTable header = new PdfPTable(pointColumnWidths10);
+//					header.setWidthPercentage(100); // Width 100%
+//					header.setSpacingBefore(10f); // Space before table
+//					header.setSpacingAfter(5f); // Space after table
+//					header.getDefaultCell().setBorder(0);
+//
+//					PdfPCell arrangements9 = new PdfPCell(new Paragraph("Testing of earth electrodes",
+//							new Font(BaseFont.createFont(), 11, Font.NORMAL | Font.BOLD)));
+//					arrangements9.setBackgroundColor(new GrayColor(0.82f));
+//					arrangements9.setHorizontalAlignment(Element.ALIGN_CENTER);
+//					arrangements9.setBorder(PdfPCell.NO_BORDER);
+//					header.addCell(arrangements9);
+					
+					PdfPTable header = new PdfPTable(pointColumnWidths10);
+					header.setWidthPercentage(100); // Width 100%
+					header.setSpacingBefore(10f); // Space before table
+					header.setSpacingAfter(10f); // Space after table
 
-				float[] pointColumnWidthsAvailability = { 120F, 80F };
+					PdfPCell arrangements9 = new PdfPCell();
+					arrangements9.setPhrase(new Phrase("Testing of earth electrodes", font11B));
+					arrangements9.setHorizontalAlignment(Element.ALIGN_CENTER);
+					arrangements9.setBackgroundColor(new GrayColor(0.93f));
+					arrangements9.setFixedHeight(20f);
+					arrangements9.setColspan(4);
+					header.addCell(arrangements9);
 
-				PdfPTable table17 = new PdfPTable(pointColumnWidthsAvailability);
+					document.add(header);
 
-				table17.setWidthPercentage(100); // Width 100%
+					float[] pointColumnWidthsAvailability = { 120F, 80F };
+
+					PdfPTable table17 = new PdfPTable(pointColumnWidthsAvailability);
+
+					table17.setWidthPercentage(100); // Width 100%
 //	        	table17.setSpacingBefore(5f); // Space before table
 //	         	table17.setSpacingAfter(5f); // Space after table
-				table17.getDefaultCell().setBorder(0);
+					table17.getDefaultCell().setBorder(0);
 
-				PdfPCell cell160 = new PdfPCell(
-						new Paragraph("Availability:", new Font(BaseFont.createFont(), 10, Font.NORMAL)));
-				cell160.setBackgroundColor(new GrayColor(0.93f));
-				cell160.setHorizontalAlignment(Element.ALIGN_LEFT);
-				cell160.setBorder(PdfPCell.NO_BORDER);
-				table17.addCell(cell160);
-				PdfPCell cell161 = new PdfPCell(
-						new Paragraph(earthingLpsRepo.getEarthingElectrodeTestingAvailabilityOb(),
-								new Font(BaseFont.createFont(), 10, Font.NORMAL)));
-				cell161.setHorizontalAlignment(Element.ALIGN_LEFT);
-				cell161.setBackgroundColor(new GrayColor(0.93f));
-				cell161.setBorder(PdfPCell.NO_BORDER);
-				table17.addCell(cell161);
+					PdfPCell cell160 = new PdfPCell(
+							new Paragraph("Availability:", new Font(BaseFont.createFont(), 10, Font.NORMAL)));
+					cell160.setBackgroundColor(new GrayColor(0.93f));
+					cell160.setHorizontalAlignment(Element.ALIGN_LEFT);
+					cell160.setBorder(PdfPCell.NO_BORDER);
+					table17.addCell(cell160);
+					PdfPCell cell161 = new PdfPCell(
+							new Paragraph(earthingLpsRepo.getEarthingElectrodeTestingAvailabilityOb(),
+									new Font(BaseFont.createFont(), 10, Font.NORMAL)));
+					cell161.setHorizontalAlignment(Element.ALIGN_LEFT);
+					cell161.setBackgroundColor(new GrayColor(0.93f));
+					cell161.setBorder(PdfPCell.NO_BORDER);
+					table17.addCell(cell161);
 
-				document.add(table17);
+					document.add(table17);
 
-				if (earthingLpsRepo.getEarthingElectrodeTestingAvailabilityOb().equalsIgnoreCase("In scope")) {
+					if (earthingLpsRepo.getEarthingElectrodeTestingAvailabilityOb().equalsIgnoreCase("In scope")) {
 
-					PdfPTable header1 = new PdfPTable(pointColumnWidths10);
+						PdfPTable header1 = new PdfPTable(pointColumnWidths10);
 
-					header1.setWidthPercentage(100); // Width 100%
-					header1.setSpacingBefore(5f); // Space before table
-					header1.setSpacingAfter(5f); // Space after table
-					header1.getDefaultCell().setBorder(0);
+						header1.setWidthPercentage(100); // Width 100%
+						header1.setSpacingBefore(5f); // Space before table
+						header1.setSpacingAfter(5f); // Space after table
+						header1.getDefaultCell().setBorder(0);
 
-					PdfPCell arrangements90 = new PdfPCell(
-							new Paragraph("8(a).Earth electrode resistance value (Table heading)",
-									new Font(BaseFont.createFont(), 10, Font.NORMAL | Font.BOLD)));
-					arrangements90.setBackgroundColor(new GrayColor(0.82f));
-					arrangements90.setHorizontalAlignment(Element.ALIGN_LEFT);
-					arrangements90.setBorder(PdfPCell.NO_BORDER);
-					header1.addCell(arrangements90);
-					
-					document.add(header1);
+						PdfPCell arrangements90 = new PdfPCell(
+								new Paragraph("8(a).Earth electrode resistance value (Table heading)",
+										new Font(BaseFont.createFont(), 10, Font.NORMAL | Font.BOLD)));
+						arrangements90.setBackgroundColor(new GrayColor(0.82f));
+						arrangements90.setHorizontalAlignment(Element.ALIGN_LEFT);
+						arrangements90.setBorder(PdfPCell.NO_BORDER);
+						header1.addCell(arrangements90);
 
-					float[] pointColumnWidths9 = { 25, 25F, 55F, 50F, 25F, 55F, 50F };
+						document.add(header1);
 
-					PdfPTable table7 = new PdfPTable(pointColumnWidths9);
-					table7.setWidthPercentage(100); // Width 100%
-					table7.setSpacingBefore(5f); // Space before table
-					table7.setWidthPercentage(100);
+						float[] pointColumnWidths9 = { 25, 25F, 55F, 50F, 25F, 55F, 50F };
 
-					PdfPCell cell301 = new PdfPCell(new Paragraph("SL.NO", font11));
-					cell301.setHorizontalAlignment(Element.ALIGN_CENTER);
-					cell301.setGrayFill(0.92f);
-					table7.addCell(cell301);
+						PdfPTable table7 = new PdfPTable(pointColumnWidths9);
+						table7.setWidthPercentage(100); // Width 100%
+						table7.setSpacingBefore(5f); // Space before table
+						table7.setWidthPercentage(100);
 
-					PdfPCell cell3111 = new PdfPCell(
-							new Paragraph("Types of earth electrode(rod/pipe/flat/chemical pipe)", font11));
-					cell3111.setHorizontalAlignment(Element.ALIGN_CENTER);
+						PdfPCell cell301 = new PdfPCell(new Paragraph("SL.NO", font11));
+						cell301.setHorizontalAlignment(Element.ALIGN_CENTER);
+						cell301.setGrayFill(0.92f);
+						table7.addCell(cell301);
+
+						PdfPCell cell3111 = new PdfPCell(
+								new Paragraph("Types of earth electrode(rod/pipe/flat/chemical pipe)", font11));
+						cell3111.setHorizontalAlignment(Element.ALIGN_CENTER);
 //			        cell3111.setFixedHeight(20f);
-					cell3111.setGrayFill(0.92f);
-					table7.addCell(cell3111);
+						cell3111.setGrayFill(0.92f);
+						table7.addCell(cell3111);
 
-					PdfPCell cell321 = new PdfPCell(new Paragraph(
-							"Material of earth elctrode (copper/copper bonded steel/galvanised steel/galvanised iron/cast iron)",
-							font11));
-					cell321.setHorizontalAlignment(Element.ALIGN_CENTER);
+						PdfPCell cell321 = new PdfPCell(new Paragraph(
+								"Material of earth elctrode (copper/copper bonded steel/galvanised steel/galvanised iron/cast iron)",
+								font11));
+						cell321.setHorizontalAlignment(Element.ALIGN_CENTER);
 //			        cell321.setFixedHeight(20f);
-					cell321.setGrayFill(0.92f);
-					table7.addCell(cell321);
+						cell321.setGrayFill(0.92f);
+						table7.addCell(cell321);
 
-					PdfPCell cell313 = new PdfPCell(new Paragraph("Size(diameter)of earth electrode (mm)", font11));
-					cell313.setGrayFill(0.92f);
-					cell313.setHorizontalAlignment(Element.ALIGN_CENTER);
-					table7.addCell(cell313);
+						PdfPCell cell313 = new PdfPCell(new Paragraph("Size(diameter)of earth electrode (mm)", font11));
+						cell313.setGrayFill(0.92f);
+						cell313.setHorizontalAlignment(Element.ALIGN_CENTER);
+						table7.addCell(cell313);
 
-					PdfPCell cell332 = new PdfPCell(new Paragraph("Depth /length of earth electrode (m)", font11));
-					cell332.setHorizontalAlignment(Element.ALIGN_CENTER);
+						PdfPCell cell332 = new PdfPCell(new Paragraph("Depth /length of earth electrode (m)", font11));
+						cell332.setHorizontalAlignment(Element.ALIGN_CENTER);
 //					cell332.setFixedHeight(20f);
-					cell332.setGrayFill(0.92f);
-					table7.addCell(cell332);
+						cell332.setGrayFill(0.92f);
+						table7.addCell(cell332);
 
-					PdfPCell cell3211 = new PdfPCell(new Paragraph("Electrode resistance to earth in (Ω)", font11));
-					cell3211.setHorizontalAlignment(Element.ALIGN_CENTER);
+						PdfPCell cell3211 = new PdfPCell(new Paragraph("Electrode resistance to earth in (Ω)", font11));
+						cell3211.setHorizontalAlignment(Element.ALIGN_CENTER);
 //					cell3211.setFixedHeight(20f);
-					cell3211.setGrayFill(0.92f);
-					table7.addCell(cell3211);
+						cell3211.setGrayFill(0.92f);
+						table7.addCell(cell3211);
 
-					PdfPCell cell3131 = new PdfPCell(new Paragraph("Remarks", font11));
-					cell3131.setGrayFill(0.92f);
-					cell3131.setHorizontalAlignment(Element.ALIGN_CENTER);
-					table7.addCell(cell3131);
+						PdfPCell cell3131 = new PdfPCell(new Paragraph("Remarks", font11));
+						cell3131.setGrayFill(0.92f);
+						cell3131.setHorizontalAlignment(Element.ALIGN_CENTER);
+						table7.addCell(cell3131);
 
-					document.add(table7);
-					
-					for (EarthElectrodeTesting earthingElectrodeTesting : earthingElectrodeTesting1) {
-						earthElectrodeTestingIter(document, font, earthingElectrodeTesting);
+						document.add(table7);
 
+						for (EarthElectrodeTesting earthingElectrodeTesting : earthingLpsRepo.getEarthElectrodeTesting()) {
+							earthElectrodeTestingIter(document, font, earthingElectrodeTesting);
+
+						}
 					}
 				}
+				document.newPage();
 			}
-
 			document.close();
 			writer.close();
 

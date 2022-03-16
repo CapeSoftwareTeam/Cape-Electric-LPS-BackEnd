@@ -5,12 +5,14 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.capeelectric.exception.SPDException;
 import com.capeelectric.model.SPD;
 import com.capeelectric.model.SpdDescription;
 import com.capeelectric.model.SpdReport;
+import com.capeelectric.repository.SPDRepository;
 import com.capeelectric.service.PrintSPDService;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
@@ -35,7 +37,7 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 	public void printSPD(String userName, Integer lpsId, Optional<SpdReport> spdDetails) throws SPDException {
 
 //	@Override
-//	public void printSPD1(String userName, Integer lpsId) throws SPDException {
+//	public void printSPD(String userName, Integer lpsId) throws SPDException {
 
 //		if (userName != null && !userName.isEmpty() && lpsId != null && lpsId != 0) {
 		Document document = new Document(PageSize.A4, 68, 68, 62, 68);
@@ -45,7 +47,7 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 			PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("SPD.pdf"));
 
 //			List<SpdReport> spdMain = spdRepository.findByUserNameAndBasicLpsId(userName, lpsId);
-
+//			SpdReport spdMain1 = spdMain.get(0);
 			SpdReport spdMain1 = spdDetails.get();
 
 			List<SPD> spd1 = spdMain1.getSpd();
@@ -74,7 +76,7 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 			document.add(headertable);
 
 			for (SPD spd : spd1) {
-
+				
 				PdfPTable BasicDetailsTable = new PdfPTable(pointColumnWidths5);
 
 				BasicDetailsTable.setWidthPercentage(100); // Width 100%
@@ -266,11 +268,11 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 				document.add(sPDTable);
 
 				for (SpdDescription spdDesc : spd.getSpdDescription()) {
-					if (!spdDesc.getFlag().equals("R")) {
+					if (!spdDesc.getFlag().equalsIgnoreCase("R")) {
 						spdDescIter(document, font11, font1, table2, spdDesc);
 					}
 				}
-
+				document.newPage();
 			}
 
 			document.close();
