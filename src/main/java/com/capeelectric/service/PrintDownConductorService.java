@@ -13,6 +13,6 @@ public interface PrintDownConductorService {
 	public void printDownConductor(String userName, Integer lpsId,Optional<BasicLps> basicLpsDetails, Optional<DownConductorReport> downConductorDetails)
 			throws DownConductorException;
 
-//	public void printDownConductor1(String userName, Integer lpsId)throws DownConductorException;
+//	public void printDownConductor(String userName, Integer lpsId)throws DownConductorException;
 
 }

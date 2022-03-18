@@ -214,7 +214,7 @@ public class SummaryLpsServiceImpl implements SummaryLpsService {
 						logger.debug("PDF printDownConductor() function called successfully");
 
 						printEarthingLpsService.printEarthingLpsDetails(summaryLps.getUserName(),
-								summaryLps.getBasicLpsId(), earthingLpsDetails);
+								summaryLps.getBasicLpsId(),basicLpsDetails, earthingLpsDetails);
 						logger.debug("PDF printTesting() function called successfully");
 
 						printSPDService.printSPD(summaryLps.getUserName(), summaryLps.getBasicLpsId(), spdDetails);

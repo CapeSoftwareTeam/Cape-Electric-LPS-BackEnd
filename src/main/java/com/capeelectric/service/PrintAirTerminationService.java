@@ -12,7 +12,7 @@ public interface PrintAirTerminationService {
 	public void printAirTermination(String userName, Integer basicLpsId, Optional<AirTermination> lpsAirDisc)
 			throws AirTerminationException;
 
-//	public void printAirTermination1(String userName, Integer lpsId) throws AirTerminationException;
+//	public void printAirTermination(String userName, Integer lpsId) throws AirTerminationException;
 
 	
 }

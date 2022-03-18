@@ -12,6 +12,6 @@ public interface PrintSDandEarthStudService {
 			Optional<SeperationDistanceReport> separateDistanceDetails, Optional<EarthStudReport> earthStudDetails)
 			throws EarthStudException;
 
-//	public void printSDandEarthStud1(String userName, Integer lpsId) throws EarthStudException;
+//	public void printSDandEarthStud(String userName, Integer lpsId) throws EarthStudException;
 
 }

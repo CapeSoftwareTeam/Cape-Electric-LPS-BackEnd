@@ -38,11 +38,12 @@ public class PrintSDandEarthStudServiceImpl implements PrintSDandEarthStudServic
 //	private SeperationDistanceRepository seperationDistanceRepository;
 
 	@Override
-	public void printSDandEarthStud(String userName, Integer lpsId, 
-			Optional<SeperationDistanceReport> separateDistanceReport, Optional<EarthStudReport> earthStudDetails) throws EarthStudException {
+	public void printSDandEarthStud(String userName, Integer lpsId,
+			Optional<SeperationDistanceReport> separateDistanceReport, Optional<EarthStudReport> earthStudDetails)
+			throws EarthStudException {
 
 //	@Override
-//	public void printSDandEarthStud1(String userName, Integer lpsId) throws EarthStudException {
+//	public void printSDandEarthStud(String userName, Integer lpsId) throws EarthStudException {
 
 		if (userName != null && !userName.isEmpty() && lpsId != null && lpsId != 0) {
 			Document document = new Document(PageSize.A4, 68, 68, 62, 68);
@@ -55,7 +56,7 @@ public class PrintSDandEarthStudServiceImpl implements PrintSDandEarthStudServic
 
 //				List<SeperationDistanceReport> separateDistance2 = seperationDistanceRepository
 //						.findByUserNameAndBasicLpsId(userName, lpsId);
-			
+//				SeperationDistanceReport separateDistance = separateDistance2.get(0);
 				SeperationDistanceReport separateDistance = separateDistanceReport.get();
 
 				List<SeperationDistanceDescription> separateDistanceDesc = separateDistance
@@ -79,54 +80,54 @@ public class PrintSDandEarthStudServiceImpl implements PrintSDandEarthStudServic
 				headertable.addCell(label);
 				document.add(headertable);
 
-				PdfPTable BasicDetailsTable = new PdfPTable(pointColumnWidths5);
-
-				BasicDetailsTable.setWidthPercentage(100); // Width 100%
-				BasicDetailsTable.setSpacingBefore(10f); // Space before table
-				BasicDetailsTable.setSpacingAfter(5f); // Space after table
-				BasicDetailsTable.getDefaultCell().setBorder(0);
-
-				PdfPCell arrangements = new PdfPCell(
-						new Paragraph("Basic Details", new Font(BaseFont.createFont(), 11, Font.NORMAL | Font.BOLD)));
-				arrangements.setBackgroundColor(new GrayColor(0.82f));
-				arrangements.setHorizontalAlignment(Element.ALIGN_CENTER);
-				arrangements.setBorder(PdfPCell.NO_BORDER);
-				BasicDetailsTable.addCell(arrangements);
-				document.add(BasicDetailsTable);
-
 				Font font11 = new Font(BaseFont.createFont(), 10, Font.NORMAL | Font.BOLD, BaseColor.BLACK);
 				Font font1 = new Font(BaseFont.createFont(), 10, Font.NORMAL, BaseColor.BLACK);
 
-				float[] pointColumnWidths30 = { 30F, 145F, 55F, 50F };
-
-				PdfPTable table2 = new PdfPTable(pointColumnWidths30);
-				table2.setWidthPercentage(100); // Width 100%
-				table2.setSpacingBefore(10f); // Space before table
-				table2.setWidthPercentage(100);
-
-				PdfPCell cell30 = new PdfPCell(new Paragraph("SL.NO", font11));
-				cell30.setHorizontalAlignment(Element.ALIGN_CENTER);
-				cell30.setGrayFill(0.92f);
-				table2.addCell(cell30);
-
-				PdfPCell cell311 = new PdfPCell(new Paragraph("Description", font11));
-				cell311.setHorizontalAlignment(Element.ALIGN_CENTER);
-				cell311.setFixedHeight(20f);
-				cell311.setGrayFill(0.92f);
-				table2.addCell(cell311);
-
-				PdfPCell cell32 = new PdfPCell(new Paragraph("Observation", font11));
-				cell32.setHorizontalAlignment(Element.ALIGN_CENTER);
-				cell32.setFixedHeight(20f);
-				cell32.setGrayFill(0.92f);
-				table2.addCell(cell32);
-
-				PdfPCell cell33 = new PdfPCell(new Paragraph("Remarks", font11));
-				cell33.setGrayFill(0.92f);
-				cell33.setHorizontalAlignment(Element.ALIGN_CENTER);
-				table2.addCell(cell33);
-
 				for (SeperationDistanceDescription separateDistance1 : separateDistanceDesc) {
+
+					PdfPTable BasicDetailsTable = new PdfPTable(pointColumnWidths5);
+
+					BasicDetailsTable.setWidthPercentage(100); // Width 100%
+					BasicDetailsTable.setSpacingBefore(10f); // Space before table
+					BasicDetailsTable.setSpacingAfter(5f); // Space after table
+					BasicDetailsTable.getDefaultCell().setBorder(0);
+
+					PdfPCell arrangements = new PdfPCell(new Paragraph("Basic Details",
+							new Font(BaseFont.createFont(), 11, Font.NORMAL | Font.BOLD)));
+					arrangements.setBackgroundColor(new GrayColor(0.82f));
+					arrangements.setHorizontalAlignment(Element.ALIGN_CENTER);
+					arrangements.setBorder(PdfPCell.NO_BORDER);
+					BasicDetailsTable.addCell(arrangements);
+					document.add(BasicDetailsTable);
+
+					float[] pointColumnWidths30 = { 30F, 145F, 55F, 50F };
+
+					PdfPTable table2 = new PdfPTable(pointColumnWidths30);
+					table2.setWidthPercentage(100); // Width 100%
+					table2.setSpacingBefore(10f); // Space before table
+					table2.setWidthPercentage(100);
+
+					PdfPCell cell30 = new PdfPCell(new Paragraph("SL.NO", font11));
+					cell30.setHorizontalAlignment(Element.ALIGN_CENTER);
+					cell30.setGrayFill(0.92f);
+					table2.addCell(cell30);
+
+					PdfPCell cell311 = new PdfPCell(new Paragraph("Description", font11));
+					cell311.setHorizontalAlignment(Element.ALIGN_CENTER);
+					cell311.setFixedHeight(20f);
+					cell311.setGrayFill(0.92f);
+					table2.addCell(cell311);
+
+					PdfPCell cell32 = new PdfPCell(new Paragraph("Observation", font11));
+					cell32.setHorizontalAlignment(Element.ALIGN_CENTER);
+					cell32.setFixedHeight(20f);
+					cell32.setGrayFill(0.92f);
+					table2.addCell(cell32);
+
+					PdfPCell cell33 = new PdfPCell(new Paragraph("Remarks", font11));
+					cell33.setGrayFill(0.92f);
+					cell33.setHorizontalAlignment(Element.ALIGN_CENTER);
+					table2.addCell(cell33);
 
 					float[] pointColumnWidths = { 120F, 80F };
 					PdfPTable table100 = new PdfPTable(pointColumnWidths);
@@ -251,13 +252,11 @@ public class PrintSDandEarthStudServiceImpl implements PrintSDandEarthStudServic
 							separateDistanceDownIter(document, font1, i, separateDistanceDownIter1);
 						}
 					}
+					document.newPage();
 				}
-				
-				
-				
+
 //				List<EarthStudReport> earthStudReport1 = earthStudRepository.findByUserNameAndBasicLpsId(userName,
 //						lpsId);
-				EarthStudReport earthStudReport = earthStudDetails.get();
 
 				document.newPage();
 
@@ -272,14 +271,66 @@ public class PrintSDandEarthStudServiceImpl implements PrintSDandEarthStudServic
 //				headlabel.setFixedHeight(20f);
 				headerlabel1.addCell(headlabel);
 				document.add(headerlabel1);
+				
+//				List<EarthStudReport> earthStudDetails = earthStudRepository.findByUserNameAndBasicLpsId(userName, lpsId);
+//				EarthStudReport earthStudReport = earthStudDetails.get(0);
+				EarthStudReport earthStudReport = earthStudDetails.get();
 
 				List<EarthStudDescription> earthStudDescription = earthStudReport.getEarthStudDescription();
+
 				for (EarthStudDescription earthStudDesc : earthStudDescription) {
+					
+					PdfPTable BasicDetailsTable = new PdfPTable(1);
+					BasicDetailsTable.setWidthPercentage(100); // Width 100%
+					BasicDetailsTable.setSpacingBefore(10f); // Space before table
+//					BasicDetailsTable.setSpacingAfter(5f); // Space after table
+					BasicDetailsTable.getDefaultCell().setBorder(0);
+
+					PdfPCell arrangements = new PdfPCell(
+							new Paragraph("Basic Details", new Font(BaseFont.createFont(), 11, Font.NORMAL | Font.BOLD)));
+					arrangements.setBackgroundColor(new GrayColor(0.82f));
+					arrangements.setHorizontalAlignment(Element.ALIGN_CENTER);
+					arrangements.setBorder(PdfPCell.NO_BORDER);
+					BasicDetailsTable.addCell(arrangements);
+					document.add(BasicDetailsTable);
+
+					float[] pointColumnWidths30 = { 30F, 145F, 55F, 50F };
+
+					PdfPTable table2 = new PdfPTable(pointColumnWidths30);
+					table2.setWidthPercentage(100); // Width 100%
+					table2.setSpacingBefore(10f); // Space before table
+					table2.setWidthPercentage(100);
+
+					PdfPCell cell30 = new PdfPCell(new Paragraph("SL.NO", font11));
+					cell30.setHorizontalAlignment(Element.ALIGN_CENTER);
+					cell30.setGrayFill(0.92f);
+					table2.addCell(cell30);
+
+					PdfPCell cell311 = new PdfPCell(new Paragraph("Description", font11));
+					cell311.setHorizontalAlignment(Element.ALIGN_CENTER);
+					cell311.setFixedHeight(20f);
+					cell311.setGrayFill(0.92f);
+					table2.addCell(cell311);
+
+					PdfPCell cell32 = new PdfPCell(new Paragraph("Observation", font11));
+					cell32.setHorizontalAlignment(Element.ALIGN_CENTER);
+					cell32.setFixedHeight(20f);
+					cell32.setGrayFill(0.92f);
+					table2.addCell(cell32);
+
+					PdfPCell cell33 = new PdfPCell(new Paragraph("Remarks", font11));
+					cell33.setGrayFill(0.92f);
+					cell33.setHorizontalAlignment(Element.ALIGN_CENTER);
+					table2.addCell(cell33);
+
 					PdfPTable table20 = earthStudIter(document, font3, font1, pointColumnWidths30, table2,
 							earthStudDesc);
 
 					document.add(table2);
 					document.add(table20);
+					
+					document.newPage();
+
 				}
 
 				document.close();
@@ -291,7 +342,9 @@ public class PrintSDandEarthStudServiceImpl implements PrintSDandEarthStudServic
 
 		}
 
-		else {
+		else
+
+		{
 			throw new EarthStudException("Invalid Inputs");
 		}
 
@@ -482,7 +535,7 @@ public class PrintSDandEarthStudServiceImpl implements PrintSDandEarthStudServic
 			cell61.setHorizontalAlignment(Element.ALIGN_LEFT);
 			table205.addCell(cell61);
 		}
-		
+
 		PdfPCell cell62 = new PdfPCell(new Paragraph("8", font1));
 		cell62.setHorizontalAlignment(Element.ALIGN_CENTER);
 		cell62.setGrayFill(0.92f);
@@ -504,19 +557,17 @@ public class PrintSDandEarthStudServiceImpl implements PrintSDandEarthStudServic
 		document.add(table205);
 
 		float[] pointColumnWidths3 = { 100F };
-
+		
 		PdfPTable table5 = new PdfPTable(pointColumnWidths3);
-
 		table5.setWidthPercentage(100); // Width 100%
 		table5.setSpacingBefore(10f); // Space before table
-		// table5.setSpacingAfter(10f); // Space after table
-		table5.getDefaultCell().setBorder(0);
+//		table5.setSpacingAfter(5f); // Space after table
 
 		PdfPCell arrangements1 = new PdfPCell(new Paragraph("Integrated LPS Tests During Construction",
 				new Font(BaseFont.createFont(), 11, Font.NORMAL | Font.BOLD)));
-		arrangements1.setBackgroundColor(new GrayColor(0.82f));
 		arrangements1.setHorizontalAlignment(Element.ALIGN_CENTER);
-		arrangements1.setBorder(PdfPCell.NO_BORDER);
+		arrangements1.setBackgroundColor(new GrayColor(0.93f));
+		arrangements1.setFixedHeight(20f);
 		table5.addCell(arrangements1);
 		document.add(table5);
 
