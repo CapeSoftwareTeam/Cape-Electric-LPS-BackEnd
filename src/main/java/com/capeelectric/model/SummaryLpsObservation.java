@@ -55,10 +55,6 @@ public class SummaryLpsObservation implements Serializable  {
 	@ManyToOne
 	@JoinColumn(name = "SUMMARY_LPS_BUILDINGS_ID")
 	private SummaryLpsBuildings summaryLpsBuildings;
-	
-	@JsonManagedReference
-	@OneToMany(mappedBy = "summaryLpsObservation", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<SummaryLpsInnerObservation> summaryLpsInnerObservation;
 
 	public Integer getSummaryLpsObservationId() {
 		return summaryLpsObservationId;
@@ -114,14 +110,6 @@ public class SummaryLpsObservation implements Serializable  {
 
 	public void setSummaryLpsBuildings(SummaryLpsBuildings summaryLpsBuildings) {
 		this.summaryLpsBuildings = summaryLpsBuildings;
-	}
-
-	public List<SummaryLpsInnerObservation> getSummaryLpsInnerObservation() {
-		return summaryLpsInnerObservation;
-	}
-
-	public void setSummaryLpsInnerObservation(List<SummaryLpsInnerObservation> summaryLpsInnerObservation) {
-		this.summaryLpsInnerObservation = summaryLpsInnerObservation;
 	}
 
 	public static long getSerialversionuid() {
