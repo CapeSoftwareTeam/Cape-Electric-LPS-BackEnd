@@ -206,7 +206,7 @@ public class SummaryLpsServiceImpl implements SummaryLpsService {
 						logger.debug("PDF printBasicLps() function called successfully");
 
 						printAirTerminationService.printAirTermination(summaryLps.getUserName(),
-								summaryLps.getBasicLpsId(), lpsAirDisc);
+								summaryLps.getBasicLpsId(),basicLpsDetails, lpsAirDisc);
 						logger.debug("PDF printAirTermination() function called successfully");
 
 						printDownConductorService.printDownConductor(summaryLps.getUserName(),
@@ -217,11 +217,11 @@ public class SummaryLpsServiceImpl implements SummaryLpsService {
 								summaryLps.getBasicLpsId(),basicLpsDetails, earthingLpsDetails);
 						logger.debug("PDF printTesting() function called successfully");
 
-						printSPDService.printSPD(summaryLps.getUserName(), summaryLps.getBasicLpsId(), spdDetails);
+						printSPDService.printSPD(summaryLps.getUserName(), summaryLps.getBasicLpsId(),basicLpsDetails, spdDetails );
 						logger.debug("PDF printSPD() function called successfully");
 
 						printSDandEarthStudService.printSDandEarthStud(summaryLps.getUserName(),
-								summaryLps.getBasicLpsId(), separateDistanceDetails, earthStudDetails);
+								summaryLps.getBasicLpsId(),basicLpsDetails, separateDistanceDetails, earthStudDetails);
 						logger.debug("PDF printSDandEarthStud() function called successfully");
 
 						printSummaryLpsService.printLpsSummaryDetails(summaryLps.getUserName(),
