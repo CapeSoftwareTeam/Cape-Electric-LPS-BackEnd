@@ -24,12 +24,12 @@ public class PrintEarthingLps {
 	
 	@Autowired
 	private PrintEarthingLpsService printEarthingLpsService;
-
-//	@GetMapping("/printEarthingLps/{userName}/{basicLpsId}")
-//	public ResponseEntity<List<EarthingLpsDescription>> printEarthingLps(@PathVariable String userName,
-//			@PathVariable Integer basicLpsId) throws EarthingLpsException {
-//		logger.info("started printingEarthingLPS function UserName : {}, BasicLpsId : {}", userName, basicLpsId);
-//		return new ResponseEntity<List<EarthingLpsDescription>>(
-//				printEarthingLpsService.printEarthingLpsDetails(userName, basicLpsId), HttpStatus.OK);
-//	}
+	
+	@GetMapping("/printEarthingLps/{userName}/{basicLpsId}")
+	public ResponseEntity<List<EarthingLpsDescription>> printEarthingLps(@PathVariable String userName,
+			@PathVariable Integer basicLpsId) throws EarthingLpsException {
+		logger.info("called printingEarthingLPS UserName: {},BasicLpsId : {}", userName, basicLpsId);
+//		printEarthingLpsService.printEarthingLpsDetails(userName, basicLpsId);
+		return new ResponseEntity<List<EarthingLpsDescription>>(HttpStatus.OK);
+	}
 }
