@@ -17,7 +17,4 @@ public interface FinalReportService {
 	List<BasicLps> retrieveListOfBasicLps(String userName) throws FinalReportException;
 
 	Optional<LpsFinalReport> retrieveLpsReports(String userName, Integer basicLpsId) throws FinalReportException;
-	
-	List<BasicLps> retrieveAllBasicLps() throws FinalReportException;
-
 }
