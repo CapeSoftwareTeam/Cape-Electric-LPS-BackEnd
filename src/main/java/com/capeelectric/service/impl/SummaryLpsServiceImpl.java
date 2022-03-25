@@ -225,7 +225,7 @@ public class SummaryLpsServiceImpl implements SummaryLpsService {
 						logger.debug("PDF printSDandEarthStud() function called successfully");
 
 						printSummaryLpsService.printLpsSummaryDetails(summaryLps.getUserName(),
-								summaryLps.getBasicLpsId(), basicLpsDetails);
+								summaryLps.getBasicLpsId());
 						logger.debug("PDF printLpsSummaryDetails() function called successfully");
 
 						printFinalPDFService.printFinalPDF(summaryLps.getUserName(), summaryLps.getBasicLpsId(),
