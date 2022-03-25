@@ -205,5 +205,10 @@ public class FinalReportServiceImpl implements FinalReportService {
 		}
 		return Optional.of(lpsFinalReport);
 	}
+	
+	@Override
+	public List<BasicLps> retrieveAllBasicLps() throws FinalReportException {
+		return (List<BasicLps>) basicLpsRepository.findAll();
+	}
 
 }
