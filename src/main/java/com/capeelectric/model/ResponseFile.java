@@ -10,9 +10,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.NamedQueries;
+import org.hibernate.annotations.NamedQuery;
+
 @Entity
 @Table(name = "FILE_UPLOAD_LPS_TABLE")
-public class ResponseFile implements Serializable{
+@NamedQueries(value = {
+		@NamedQuery(name = "FileDBRepository.findByLpsId", query = "select s from ResponseFile s where s.lpsId=:lpsId"),
+
+})
+public class ResponseFile implements Serializable {
 
 	/**
 	 * 
@@ -35,9 +42,9 @@ public class ResponseFile implements Serializable{
 
 	@Column(name = "DATA")
 	private Blob data;
-	
-	@Column(name = "UPLOADAIR")
-	private String uploadAir;
+
+	@Column(name = "COMPONENT_NAME")
+	private String componentName;
 
 	public Integer getFileId() {
 		return fileId;
@@ -54,7 +61,6 @@ public class ResponseFile implements Serializable{
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
 	}
-	
 
 	public Integer getLpsId() {
 		return lpsId;
@@ -80,12 +86,12 @@ public class ResponseFile implements Serializable{
 		this.data = data;
 	}
 
-	public String getUploadAir() {
-		return uploadAir;
+	public String getComponentName() {
+		return componentName;
 	}
 
-	public void setUploadAir(String uploadAir) {
-		this.uploadAir = uploadAir;
+	public void setComponentName(String componentName) {
+		this.componentName = componentName;
 	}
 
 }

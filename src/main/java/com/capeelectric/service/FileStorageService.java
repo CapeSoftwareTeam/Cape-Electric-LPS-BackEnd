@@ -3,7 +3,7 @@ package com.capeelectric.service;
 import java.io.IOException;
 import java.sql.Blob;
 import java.sql.SQLException;
-import java.util.Optional;
+import java.util.List;
 
 import javax.sql.rowset.serial.SerialException;
 
@@ -25,7 +25,8 @@ public class FileStorageService {
 	@Autowired
 	private FileDBRepository fileDBRepository;
 
-	public void store(MultipartFile file, Integer lpsId) throws IOException, SerialException, SQLException {
+	public void store(MultipartFile file, Integer lpsId, String componentName)
+			throws IOException, SerialException, SQLException {
 		String fileName = StringUtils.cleanPath(file.getOriginalFilename());
 		Blob blob = new javax.sql.rowset.serial.SerialBlob(IOUtils.toByteArray(file.getInputStream()));
 		ResponseFile FileDB = new ResponseFile();
@@ -33,13 +34,14 @@ public class FileStorageService {
 		FileDB.setFileName(fileName);
 		FileDB.setData(blob);
 		FileDB.setFileType(file.getContentType());
+		FileDB.setComponentName(componentName);
 		logger.debug("File Saved In DB");
 		fileDBRepository.save(FileDB);
 	}
 
-	public ResponseFile downloadFile(Integer lpsId) throws IOException {
+	public ResponseFile downloadFile(Integer lpsId, String componentName) throws IOException {
 		if (lpsId != null && lpsId != 0) {
-			ResponseFile fileDB = fileDBRepository.findByLpsId(lpsId).get();
+			ResponseFile fileDB = fileDBRepository.findByLpsIdAndComponentName(lpsId, componentName);
 			if (fileDB != null && fileDB.getLpsId().equals(lpsId)) {
 				return fileDB;
 			} else {
@@ -53,10 +55,10 @@ public class FileStorageService {
 
 	}
 
-	public void removeFile(Integer lpsId) throws IOException {
-		if (lpsId != null && lpsId != 0) {
-			ResponseFile fileDB = fileDBRepository.findByLpsId(lpsId).get();
-			if (fileDB != null && fileDB.getLpsId().equals(lpsId)) {
+	public void removeFile(Integer fileId) throws IOException {
+		if (fileId != null && fileId != 0) {
+			ResponseFile fileDB = fileDBRepository.findById(fileId).get();
+			if (fileDB != null && fileDB.getFileId().equals(fileId)) {
 				logger.info("File Deleted");
 				fileDBRepository.delete(fileDB);
 			} else {
@@ -77,7 +79,7 @@ public class FileStorageService {
 			if (fileDB != null && fileDB.getFileId().equals(fileId)) {
 				String fileName = StringUtils.cleanPath(file.getOriginalFilename());
 				Blob blob = new javax.sql.rowset.serial.SerialBlob(IOUtils.toByteArray(file.getInputStream()));
-				//fileDB.setEmcId(emcId);
+				// fileDB.setEmcId(emcId);
 				fileDB.setFileName(fileName);
 				fileDB.setData(blob);
 				fileDB.setFileType(file.getContentType());
@@ -94,15 +96,11 @@ public class FileStorageService {
 
 	}
 
-	public ResponseFile retrieveFileNameByLpsId(Integer lpsId) throws IOException {
+	public List<ResponseFile> retrieveFileNameByLpsId(Integer lpsId) throws IOException {
 		if (lpsId != null && lpsId != 0) {
-			Optional<ResponseFile> fileDB = fileDBRepository.findByLpsId(lpsId);
-			if(fileDB.isPresent()) {
-				if (fileDB.get() != null && fileDB.get().getLpsId().equals(lpsId)) {
-					return fileDB.get();
-				} else {
-					logger.error("File Not Present");
-				}
+			List<ResponseFile> fileDB = fileDBRepository.findByLpsId(lpsId);
+			if (!fileDB.isEmpty()) {
+				return fileDB;
 			}
 		} else {
 			logger.error("Id Not Present");

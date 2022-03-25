@@ -3,7 +3,9 @@ package com.capeelectric.controller;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
@@ -30,25 +32,25 @@ import com.capeelectric.service.FileStorageService;
 
 @RestController
 @RequestMapping("/api/lps/v2")
-public class FileUploadController<V> {
+public class FileUploadController {
 	private static final Logger logger = LoggerFactory.getLogger(FileUploadController.class);
 	@Autowired
 	private FileStorageService storageService;
 
-	@PostMapping("/upload/{lpsId}")
-	public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file, @PathVariable Integer lpsId)
-			throws IOException, SerialException, SQLException {
+	@PostMapping("/upload/{lpsId}/{componentName}")
+	public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file, @PathVariable Integer lpsId,
+			@PathVariable String componentName) throws IOException, SerialException, SQLException {
 		logger.debug("File Upload Start");
-		storageService.store(file, lpsId);
+		storageService.store(file, lpsId, componentName);
 		logger.debug("File Upload 	End");
 		return new ResponseEntity<String>("File  Upload Successfully", HttpStatus.OK);
 	}
 
-	@GetMapping("/downloadFile/{lpsId}")
-	public ResponseEntity<String> downloadFile(@PathVariable Integer lpsId, HttpServletResponse response)
-			throws IOException, SQLException {
-		logger.debug("DownloadFile File Start lpsId : {}", lpsId);
-		ResponseFile fileDB = storageService.downloadFile(lpsId);
+	@GetMapping("/downloadFile/{lpsId}/{componentName}")
+	public ResponseEntity<String> downloadFile(@PathVariable Integer lpsId, HttpServletResponse response,
+			@PathVariable String componentName) throws IOException, SQLException {
+		logger.debug("DownloadFile File Start lpsId : {}", lpsId, componentName);
+		ResponseFile fileDB = storageService.downloadFile(lpsId, componentName);
 		response.setHeader("Content-Disposition", "inline; fileDB.getfileId()=\"" + fileDB.getFileId() + "\"");
 		OutputStream out = response.getOutputStream();
 		response.setContentType(fileDB.getFileName());
@@ -60,19 +62,29 @@ public class FileUploadController<V> {
 	}
 
 	@GetMapping("/retrieveFileName/{lpsId}")
-	public ResponseEntity<Map> retrieveFileNameByLpsId(@PathVariable Integer lpsId) throws IOException, SQLException {
+	public ResponseEntity<List<Map>> retrieveFileNameByLpsId(@PathVariable Integer lpsId)
+			throws IOException, SQLException {
 		logger.debug("Retrieve File Start lpsId : {}", lpsId);
-		ResponseFile fileDB = storageService.retrieveFileNameByLpsId(lpsId);
-		if(null != fileDB) {
-			HashMap<String, String> hashMap = new HashMap<>();
-			hashMap.put("fileId", fileDB.getFileId().toString());
-			hashMap.put("fileType", fileDB.getFileType());
-			hashMap.put("fileLpsId", fileDB.getLpsId().toString());
-			hashMap.put("fileName", fileDB.getFileName());
-			return new ResponseEntity<Map>(hashMap, HttpStatus.OK);
+		List<ResponseFile> fileDB = storageService.retrieveFileNameByLpsId(lpsId);
+
+		if (null != fileDB) {
+			List<Map> list = new ArrayList();
+			for (ResponseFile responseFile : fileDB) {
+				if (null != responseFile) {
+					HashMap<String, String> hashMap = new HashMap<>();
+					hashMap.put("fileId", responseFile.getFileId().toString());
+					hashMap.put("fileType", responseFile.getFileType());
+					hashMap.put("fileLpsId", responseFile.getLpsId().toString());
+					hashMap.put("fileName", responseFile.getFileName());
+					hashMap.put("componentName", responseFile.getComponentName());
+					list.add(hashMap);
+				}
+
+			}
+			return new ResponseEntity<List<Map>>(list, HttpStatus.OK);
 		}
 		return null;
-		
+
 	}
 
 	@PutMapping("/updateFile/{fileId}")
@@ -84,10 +96,10 @@ public class FileUploadController<V> {
 		return new ResponseEntity<String>("File Updated Successfully", HttpStatus.OK);
 	}
 
-	@DeleteMapping("/removeFile/{lpsId}")
-	public ResponseEntity<String> removeFile(@PathVariable Integer lpsId) throws IOException {
+	@DeleteMapping("/removeFile/{fileId}")
+	public ResponseEntity<String> removeFile(@PathVariable Integer fileId) throws IOException {
 		logger.debug("Remove File Start");
-		storageService.removeFile(lpsId);
+		storageService.removeFile(fileId);
 		logger.debug("Remove File End");
 		return new ResponseEntity<String>("File  Deleted Successfully", HttpStatus.OK);
 	}
