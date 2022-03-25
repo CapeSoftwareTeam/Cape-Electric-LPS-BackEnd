@@ -12,11 +12,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.capeelectric.exception.EarthingLpsException;
 import com.capeelectric.exception.SummaryLpsException;
-import com.capeelectric.model.EarthingLpsDescription;
 import com.capeelectric.model.SummaryLps;
-import com.capeelectric.service.PrintEarthingLpsService;
 import com.capeelectric.service.PrintSummaryLpsService;
 
 @RestController
@@ -32,7 +29,7 @@ public class PrintLpsSummaryController {
 	public ResponseEntity<List<SummaryLps>> printEarthingLps(@PathVariable String userName,
 			@PathVariable Integer basicLpsId) throws SummaryLpsException {
 		logger.info("started printingEarthingLPS function UserName : {}, BasicLpsId : {}", userName, basicLpsId);
-		printSummaryLpsService.printLpsSummaryDetails(userName, basicLpsId);
+//		printSummaryLpsService.printLpsSummaryDetails(userName, basicLpsId);
 		return new ResponseEntity<List<SummaryLps>>(HttpStatus.OK);
 	}
 }

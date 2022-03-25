@@ -3,15 +3,19 @@ package com.capeelectric.service.impl;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.capeelectric.exception.SummaryLpsException;
+import com.capeelectric.model.BasicLps;
+import com.capeelectric.model.LpsAirDiscription;
 import com.capeelectric.model.SummaryLps;
 import com.capeelectric.model.SummaryLpsBuildings;
 import com.capeelectric.model.SummaryLpsDeclaration;
 import com.capeelectric.model.SummaryLpsObservation;
+import com.capeelectric.repository.BasicLpsRepository;
 import com.capeelectric.repository.SummaryLpsRepository;
 import com.capeelectric.service.PrintSummaryLpsService;
 import com.itextpdf.text.BaseColor;
@@ -38,7 +42,10 @@ public class PrintSummaryLpsServiceImpl implements PrintSummaryLpsService {
 	private SummaryLpsRepository summaryLpsRepository;
 
 	@Override
-	public List<SummaryLps> printLpsSummaryDetails(String userName, Integer basicLpsId) throws SummaryLpsException {
+	public List<SummaryLps> printLpsSummaryDetails(String userName, Integer basicLpsId, Optional<BasicLps> basicLpsDetails) throws SummaryLpsException {
+
+//	@Override
+//	public List<SummaryLps> printLpsSummaryDetails(String userName, Integer basicLpsId) throws SummaryLpsException {
 
 		if (userName != null && !userName.isEmpty() && basicLpsId != null && basicLpsId != 0) {
 			Document document = new Document(PageSize.A4, 68, 68, 62, 68);
@@ -46,6 +53,10 @@ public class PrintSummaryLpsServiceImpl implements PrintSummaryLpsService {
 			try {
 
 				PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("LpsSummary.pdf"));
+
+//				Optional<BasicLps> basicLps = basicLpsRepository.findByBasicLpsId(basicLpsId);
+//				BasicLps basicLps1 = basicLps.get();
+				BasicLps basicLps1 = basicLpsDetails.get();
 
 				List<SummaryLps> lpsSum = summaryLpsRepository.findByUserNameAndBasicLpsId(userName, basicLpsId);
 				SummaryLps lpsSummary = lpsSum.get(0);
@@ -67,64 +78,67 @@ public class PrintSummaryLpsServiceImpl implements PrintSummaryLpsService {
 				Font font10N = new Font(BaseFont.createFont(), 10, Font.NORMAL, BaseColor.BLACK);
 				Font font9 = new Font(BaseFont.createFont(), 9, Font.NORMAL, BaseColor.BLACK);
 
-				float[] pointColumnWidths40 = { 100F };
-
-				PdfPTable headertable = new PdfPTable(pointColumnWidths40);
-				headertable.setWidthPercentage(100); // Width 100%
-				headertable.setSpacingBefore(10f); // Space before table
-
-				PdfPCell label = new PdfPCell(new Paragraph("Summary", font12B));
-				label.setHorizontalAlignment(Element.ALIGN_CENTER);
-				label.setGrayFill(0.92f);
-				label.setFixedHeight(20f);
-				headertable.addCell(label);
-
-				document.add(headertable);
-
 				for (SummaryLpsBuildings summaryLPsBuilding : summaryLPsBuild) {
+
+//				    this method for Adding the Main Header Fields for Every Page
+					MainHeaderPropertiesLabel(document, basicLps1, summaryLPsBuilding);
+
+					float[] pointColumnWidths40 = { 100F };
+
+					PdfPTable headertable = new PdfPTable(pointColumnWidths40);
+					headertable.setWidthPercentage(100); // Width 100%
+					headertable.setSpacingBefore(10f); // Space before table
+
+					PdfPCell label = new PdfPCell(new Paragraph("Summary", font12B));
+					label.setHorizontalAlignment(Element.ALIGN_CENTER);
+					label.setGrayFill(0.92f);
+					label.setFixedHeight(20f);
+					headertable.addCell(label);
+
+					document.add(headertable);
 
 					float[] pointColumnWidths = { 120F, 80F };
 
 					PdfPTable table1 = new PdfPTable(pointColumnWidths);
 
-					table1.setWidthPercentage(100); // Width 100%
-					table1.setSpacingBefore(10f); // Space before table
-					table1.setSpacingAfter(5f); // Space after table
-					table1.getDefaultCell().setBorder(0);
-
-					PdfPCell cell1 = new PdfPCell(new Paragraph("Building number:",
-							new Font(BaseFont.createFont(), 10, Font.NORMAL | Font.BOLD)));
-					cell1.setBackgroundColor(new BaseColor(203, 183, 162));
-					cell1.setHorizontalAlignment(Element.ALIGN_LEFT);
-					cell1.setBorder(PdfPCell.NO_BORDER);
-					table1.addCell(cell1);
-					PdfPCell cell2 = new PdfPCell(new Paragraph(summaryLPsBuilding.getBuildingNumber().toString(),
-							new Font(BaseFont.createFont(), 10, Font.NORMAL | Font.BOLD)));
-					cell2.setHorizontalAlignment(Element.ALIGN_LEFT);
-					cell2.setBackgroundColor(new BaseColor(203, 183, 162));
-					cell2.setBorder(PdfPCell.NO_BORDER);
-					table1.addCell(cell2);
-					document.add(table1);
-
-					PdfPTable table2 = new PdfPTable(pointColumnWidths);
-
-					table2.setWidthPercentage(100); // Width 100%
-					table2.setSpacingBefore(5f); // Space before table
-					table2.setSpacingAfter(5f); // Space after table
-					table2.getDefaultCell().setBorder(0);
-					PdfPCell cell3 = new PdfPCell(new Paragraph("Building name:",
-							new Font(BaseFont.createFont(), 10, Font.NORMAL | Font.BOLD)));
-					cell3.setBackgroundColor(new BaseColor(203, 183, 162));
-					cell3.setHorizontalAlignment(Element.ALIGN_LEFT);
-					cell3.setBorder(PdfPCell.NO_BORDER);
-					table2.addCell(cell3);
-					PdfPCell cell4 = new PdfPCell(new Paragraph(summaryLPsBuilding.getBuildingName(),
-							new Font(BaseFont.createFont(), 10, Font.NORMAL | Font.BOLD)));
-					cell4.setHorizontalAlignment(Element.ALIGN_LEFT);
-					cell4.setBackgroundColor(new BaseColor(203, 183, 162));
-					cell4.setBorder(PdfPCell.NO_BORDER);
-					table2.addCell(cell4);
-					document.add(table2);
+//					table1.setWidthPercentage(100); // Width 100%
+//					table1.setSpacingBefore(10f); // Space before table
+//					table1.setSpacingAfter(5f); // Space after table
+//					table1.getDefaultCell().setBorder(0);
+//
+//					PdfPCell cell1 = new PdfPCell(new Paragraph("Building number:",
+//							new Font(BaseFont.createFont(), 10, Font.NORMAL | Font.BOLD)));
+//					cell1.setBackgroundColor(new BaseColor(203, 183, 162));
+//					cell1.setHorizontalAlignment(Element.ALIGN_LEFT);
+//					cell1.setBorder(PdfPCell.NO_BORDER);
+//					table1.addCell(cell1);
+//					PdfPCell cell2 = new PdfPCell(new Paragraph(summaryLPsBuilding.getBuildingNumber().toString(),
+//							new Font(BaseFont.createFont(), 10, Font.NORMAL | Font.BOLD)));
+//					cell2.setHorizontalAlignment(Element.ALIGN_LEFT);
+//					cell2.setBackgroundColor(new BaseColor(203, 183, 162));
+//					cell2.setBorder(PdfPCell.NO_BORDER);
+//					table1.addCell(cell2);
+//					document.add(table1);
+//
+//					PdfPTable table2 = new PdfPTable(pointColumnWidths);
+//
+//					table2.setWidthPercentage(100); // Width 100%
+//					table2.setSpacingBefore(5f); // Space before table
+//					table2.setSpacingAfter(5f); // Space after table
+//					table2.getDefaultCell().setBorder(0);
+//					PdfPCell cell3 = new PdfPCell(new Paragraph("Building name:",
+//							new Font(BaseFont.createFont(), 10, Font.NORMAL | Font.BOLD)));
+//					cell3.setBackgroundColor(new BaseColor(203, 183, 162));
+//					cell3.setHorizontalAlignment(Element.ALIGN_LEFT);
+//					cell3.setBorder(PdfPCell.NO_BORDER);
+//					table2.addCell(cell3);
+//					PdfPCell cell4 = new PdfPCell(new Paragraph(summaryLPsBuilding.getBuildingName(),
+//							new Font(BaseFont.createFont(), 10, Font.NORMAL | Font.BOLD)));
+//					cell4.setHorizontalAlignment(Element.ALIGN_LEFT);
+//					cell4.setBackgroundColor(new BaseColor(203, 183, 162));
+//					cell4.setBorder(PdfPCell.NO_BORDER);
+//					table2.addCell(cell4);
+//					document.add(table2);
 
 					PdfPTable SRtable = new PdfPTable(pointColumnWidths40);
 					SRtable.setWidthPercentage(100); // Width 100%
@@ -137,10 +151,8 @@ public class PrintSummaryLpsServiceImpl implements PrintSummaryLpsService {
 					SRtable.addCell(label2);
 					document.add(SRtable);
 
-					
 // ================================================ > AIR TERMINATION	 START HERE <=========================================================
-					
-					
+
 					PdfPTable AirTerminationlabel = new PdfPTable(pointColumnWidths40);
 					AirTerminationlabel.setWidthPercentage(100); // Width 100%
 					AirTerminationlabel.setSpacingBefore(10f); // Space before table
@@ -170,13 +182,13 @@ public class PrintSummaryLpsServiceImpl implements PrintSummaryLpsService {
 					}
 					document.add(AirBAsicDetails);
 
-					// Observation And Recommendation Heading Label				
+					// Observation And Recommendation Heading Label
 					float[] pointColumnWidths4 = { 50F, 50F };
 
 					PdfPTable table3 = new PdfPTable(pointColumnWidths4);
 					table3.setWidthPercentage(100); // Width 100%
 					table3.setSpacingBefore(10f); // Space before table
-					//table3.setSpacingAfter(10f);
+					// table3.setSpacingAfter(10f);
 					table3.setWidthPercentage(100);
 
 					PdfPCell cell6 = new PdfPCell(new Paragraph("Observations", font10B));
@@ -194,10 +206,10 @@ public class PrintSummaryLpsServiceImpl implements PrintSummaryLpsService {
 
 					PdfPTable table4 = new PdfPTable(pointColumnWidths4);
 					table4.setWidthPercentage(100); // Width 100%
-					//table4.setSpacingBefore(5f); // Space before table
-					//table4.setSpacingAfter(10f);
+					// table4.setSpacingBefore(5f); // Space before table
+					// table4.setSpacingAfter(10f);
 
-					// AT_Basic Details Observation And Recommendation List with Iteration	
+					// AT_Basic Details Observation And Recommendation List with Iteration
 					for (SummaryLpsObservation summaryLpsObser1 : summaryLPsBuilding.getSummaryLpsObservation()) {
 
 						if (summaryLpsObser1.getObservationComponentDetails().contains("airBasicDescription")) {
@@ -217,13 +229,13 @@ public class PrintSummaryLpsServiceImpl implements PrintSummaryLpsService {
 					}
 					document.add(table4);
 
-					// Verticle Termination Main Heading  Label
+					// Verticle Termination Main Heading Label
 					PdfPTable AirVerticlelabel = new PdfPTable(pointColumnWidths40);
 					AirVerticlelabel.setWidthPercentage(100); // Width 100%
 					AirVerticlelabel.setSpacingBefore(10f); // Space before table
 
 					for (SummaryLpsObservation summaryLpsHeading : summaryLPsBuilding.getSummaryLpsObservation()) {
-					
+
 						if (summaryLpsHeading.getHeading().equalsIgnoreCase("AT_Vertical Observation")) {
 
 							PdfPCell headerlabel1 = new PdfPCell(
@@ -236,7 +248,7 @@ public class PrintSummaryLpsServiceImpl implements PrintSummaryLpsService {
 					}
 					document.add(AirVerticlelabel);
 
-					// Verticle Termination main Remarks Only one main filed display				
+					// Verticle Termination main Remarks Only one main filed display
 					PdfPTable table5 = new PdfPTable(pointColumnWidths4);
 					table5.setWidthPercentage(100); // Width 100%
 					table5.setSpacingBefore(10f); // Space before table
@@ -265,7 +277,7 @@ public class PrintSummaryLpsServiceImpl implements PrintSummaryLpsService {
 					AirVerticleListLabel.setSpacingBefore(5f); // Space before table
 					AirVerticleListLabel.setSpacingAfter(5F); // Space After table
 
-					// Verticle Termination List With Iteration 
+					// Verticle Termination List With Iteration
 					for (SummaryLpsObservation summaryLpsObservation : summaryLPsBuilding.getSummaryLpsObservation()) {
 
 						if (summaryLpsObservation.getHeading().contains("AT_Vertical List")) {
@@ -298,7 +310,7 @@ public class PrintSummaryLpsServiceImpl implements PrintSummaryLpsService {
 					}
 					document.add(AirVerticleListLabel);
 
-					// Verticle Termination main Remarks  
+					// Verticle Termination main Remarks
 
 					PdfPTable table6 = new PdfPTable(pointColumnWidths4);
 					table6.setWidthPercentage(100); // Width 100%
@@ -325,7 +337,7 @@ public class PrintSummaryLpsServiceImpl implements PrintSummaryLpsService {
 					}
 					document.add(table6);
 
-					// Mesh Observation Main Heading  Label
+					// Mesh Observation Main Heading Label
 					PdfPTable MeshObservationHeader = new PdfPTable(pointColumnWidths40);
 					MeshObservationHeader.setWidthPercentage(100); // Width 100%
 					MeshObservationHeader.setSpacingBefore(10f); // Space before table
@@ -346,7 +358,7 @@ public class PrintSummaryLpsServiceImpl implements PrintSummaryLpsService {
 					PdfPTable table7 = new PdfPTable(pointColumnWidths4);
 					table7.setWidthPercentage(100); // Width 100%
 					table7.setSpacingBefore(10f); // Space before table
-					//table7.setSpacingAfter(10f);
+					// table7.setSpacingAfter(10f);
 
 					// Mesh Conductor Observation And Recommendation List with Iteration
 					for (SummaryLpsObservation summaryLpsObser1 : summaryLPsBuilding.getSummaryLpsObservation()) {
@@ -367,7 +379,7 @@ public class PrintSummaryLpsServiceImpl implements PrintSummaryLpsService {
 					}
 					document.add(table7);
 
-					// Holder Observation Main Heading  Label
+					// Holder Observation Main Heading Label
 					PdfPTable HolderObservationHeader = new PdfPTable(pointColumnWidths40);
 					HolderObservationHeader.setWidthPercentage(100); // Width 100%
 					HolderObservationHeader.setSpacingBefore(10f); // Space before table
@@ -386,7 +398,7 @@ public class PrintSummaryLpsServiceImpl implements PrintSummaryLpsService {
 					}
 					document.add(HolderObservationHeader);
 
-					// Hoders main Remarks 			
+					// Hoders main Remarks
 					PdfPTable table8 = new PdfPTable(pointColumnWidths4);
 					table8.setWidthPercentage(100); // Width 100%
 					table8.setSpacingBefore(10f); // Space before table
@@ -420,7 +432,7 @@ public class PrintSummaryLpsServiceImpl implements PrintSummaryLpsService {
 					HoldersObservListHeader.setSpacingBefore(5f); // Space before table
 					HoldersObservListHeader.setSpacingAfter(5F); // Space After table
 
-					// Hoders Observation List With Iteration 
+					// Hoders Observation List With Iteration
 					for (SummaryLpsObservation summaryLpsObservation : summaryLPsBuilding.getSummaryLpsObservation()) {
 
 						if (summaryLpsObservation.getHeading().contains("AT_Holder List")) {
@@ -451,7 +463,7 @@ public class PrintSummaryLpsServiceImpl implements PrintSummaryLpsService {
 					}
 					document.add(HoldersObservListHeader);
 
-					// Hoders Observation main Remarks  
+					// Hoders Observation main Remarks
 
 					PdfPTable table9 = new PdfPTable(pointColumnWidths4);
 					table9.setWidthPercentage(100); // Width 100%
@@ -483,7 +495,7 @@ public class PrintSummaryLpsServiceImpl implements PrintSummaryLpsService {
 					}
 					document.add(table9);
 
-					// Clamps Observation Main Heading  Label
+					// Clamps Observation Main Heading Label
 					PdfPTable ClampsObserHeader = new PdfPTable(pointColumnWidths40);
 					ClampsObserHeader.setWidthPercentage(100); // Width 100%
 					ClampsObserHeader.setSpacingBefore(10f); // Space before table
@@ -504,7 +516,7 @@ public class PrintSummaryLpsServiceImpl implements PrintSummaryLpsService {
 					PdfPTable table10 = new PdfPTable(pointColumnWidths4);
 					table10.setWidthPercentage(100); // Width 100%
 					table10.setSpacingBefore(10f); // Space before table
-					//table10.setSpacingAfter(10f);
+					// table10.setSpacingAfter(10f);
 
 					// Clamps Observation And Recommendation List with Iteration
 					for (SummaryLpsObservation summaryLpsObser1 : summaryLPsBuilding.getSummaryLpsObservation()) {
@@ -525,7 +537,7 @@ public class PrintSummaryLpsServiceImpl implements PrintSummaryLpsService {
 					}
 					document.add(table10);
 
-					// Expansion Observation Main Heading  Label
+					// Expansion Observation Main Heading Label
 					PdfPTable ExpansionObserHeader = new PdfPTable(pointColumnWidths40);
 					ExpansionObserHeader.setWidthPercentage(100); // Width 100%
 					ExpansionObserHeader.setSpacingBefore(10f); // Space before table
@@ -547,7 +559,7 @@ public class PrintSummaryLpsServiceImpl implements PrintSummaryLpsService {
 					PdfPTable table11 = new PdfPTable(pointColumnWidths4);
 					table11.setWidthPercentage(100); // Width 100%
 					table11.setSpacingBefore(10f); // Space before table
-					//table11.setSpacingAfter(10f);
+					// table11.setSpacingAfter(10f);
 
 					// Expansion Observation And Recommendation List with Iteration
 					for (SummaryLpsObservation summaryLpsObser1 : summaryLPsBuilding.getSummaryLpsObservation()) {
@@ -567,7 +579,7 @@ public class PrintSummaryLpsServiceImpl implements PrintSummaryLpsService {
 					}
 					document.add(table11);
 
-					// Connectors Observation Main Heading  Label
+					// Connectors Observation Main Heading Label
 					PdfPTable ConnectorsObserHeader = new PdfPTable(pointColumnWidths40);
 					ConnectorsObserHeader.setWidthPercentage(100); // Width 100%
 					ConnectorsObserHeader.setSpacingBefore(10f); // Space before table
@@ -589,7 +601,7 @@ public class PrintSummaryLpsServiceImpl implements PrintSummaryLpsService {
 					PdfPTable table12 = new PdfPTable(pointColumnWidths4);
 					table12.setWidthPercentage(100); // Width 100%
 					table12.setSpacingBefore(10f); // Space before table
-					//table12.setSpacingAfter(10f);
+					// table12.setSpacingAfter(10f);
 
 					// Connectors Observation And Recommendation List with Iteration
 					for (SummaryLpsObservation summaryLpsObser1 : summaryLPsBuilding.getSummaryLpsObservation()) {
@@ -610,8 +622,11 @@ public class PrintSummaryLpsServiceImpl implements PrintSummaryLpsService {
 					document.add(table12);
 
 // ============================================== > DOWN CONDUCTOR START HERE <============================================================					
-   
+
 					document.newPage();
+
+//				    this method for Adding the Main Header Fields for Every Page
+					MainHeaderPropertiesLabel(document, basicLps1, summaryLPsBuilding);
 
 					PdfPTable DownConductorlabel = new PdfPTable(pointColumnWidths40);
 					DownConductorlabel.setWidthPercentage(100); // Width 100%
@@ -665,8 +680,8 @@ public class PrintSummaryLpsServiceImpl implements PrintSummaryLpsService {
 
 					PdfPTable table14 = new PdfPTable(pointColumnWidths4);
 					table14.setWidthPercentage(100); // Width 100%
-					//table14.setSpacingBefore(5f); // Space before table
-					//table14.setSpacingAfter(10f);
+					// table14.setSpacingBefore(5f); // Space before table
+					// table14.setSpacingAfter(10f);
 
 					// DC_Basic Details Observation And Recommendation List with Iteration
 					for (SummaryLpsObservation summaryLpsObser1 : summaryLPsBuilding.getSummaryLpsObservation()) {
@@ -688,7 +703,7 @@ public class PrintSummaryLpsServiceImpl implements PrintSummaryLpsService {
 					}
 					document.add(table14);
 
-					// Downconductors Observation Main Heading  Label
+					// Downconductors Observation Main Heading Label
 					PdfPTable DownconductorsObserHeader = new PdfPTable(pointColumnWidths40);
 					DownconductorsObserHeader.setWidthPercentage(100); // Width 100%
 					DownconductorsObserHeader.setSpacingBefore(10f); // Space before table
@@ -709,7 +724,7 @@ public class PrintSummaryLpsServiceImpl implements PrintSummaryLpsService {
 					PdfPTable table15 = new PdfPTable(pointColumnWidths4);
 					table15.setWidthPercentage(100); // Width 100%
 					table15.setSpacingBefore(10f); // Space before table
-					//table15.setSpacingAfter(10f);
+					// table15.setSpacingAfter(10f);
 
 					// Downconductors Observation And Recommendation List with Iteration
 					for (SummaryLpsObservation summaryLpsObser1 : summaryLPsBuilding.getSummaryLpsObservation()) {
@@ -730,7 +745,7 @@ public class PrintSummaryLpsServiceImpl implements PrintSummaryLpsService {
 					}
 					document.add(table15);
 
-					// Bridging Observation Main Heading  Label
+					// Bridging Observation Main Heading Label
 					PdfPTable BridgingObserHeader = new PdfPTable(pointColumnWidths40);
 					BridgingObserHeader.setWidthPercentage(100); // Width 100%
 					BridgingObserHeader.setSpacingBefore(10f); // Space before table
@@ -751,7 +766,7 @@ public class PrintSummaryLpsServiceImpl implements PrintSummaryLpsService {
 					PdfPTable table16 = new PdfPTable(pointColumnWidths4);
 					table16.setWidthPercentage(100); // Width 100%
 					table16.setSpacingBefore(10f); // Space before table
-					//table16.setSpacingAfter(10f);
+					// table16.setSpacingAfter(10f);
 
 					// Bridging Observation And Recommendation List with Iteration
 					for (SummaryLpsObservation summaryLpsObser1 : summaryLPsBuilding.getSummaryLpsObservation()) {
@@ -771,7 +786,7 @@ public class PrintSummaryLpsServiceImpl implements PrintSummaryLpsService {
 					}
 					document.add(table16);
 
-					// Holder Observation Main Heading  Label
+					// Holder Observation Main Heading Label
 					PdfPTable HolderObserHeader = new PdfPTable(pointColumnWidths40);
 					HolderObserHeader.setWidthPercentage(100); // Width 100%
 					HolderObserHeader.setSpacingBefore(10f); // Space before table
@@ -792,7 +807,7 @@ public class PrintSummaryLpsServiceImpl implements PrintSummaryLpsService {
 					PdfPTable table17 = new PdfPTable(pointColumnWidths4);
 					table17.setWidthPercentage(100); // Width 100%
 					table17.setSpacingBefore(10f); // Space before table
-					//table17.setSpacingAfter(10f);
+					// table17.setSpacingAfter(10f);
 
 					// Bridging Observation And Recommendation List with Iteration
 					for (SummaryLpsObservation summaryLpsObser1 : summaryLPsBuilding.getSummaryLpsObservation()) {
@@ -812,7 +827,7 @@ public class PrintSummaryLpsServiceImpl implements PrintSummaryLpsService {
 					}
 					document.add(table17);
 
-					// Connectors Observation Main Heading  Label
+					// Connectors Observation Main Heading Label
 					PdfPTable ConnectorObserHeader = new PdfPTable(pointColumnWidths40);
 					ConnectorObserHeader.setWidthPercentage(100); // Width 100%
 					ConnectorObserHeader.setSpacingBefore(10f); // Space before table
@@ -833,7 +848,7 @@ public class PrintSummaryLpsServiceImpl implements PrintSummaryLpsService {
 					PdfPTable table18 = new PdfPTable(pointColumnWidths4);
 					table18.setWidthPercentage(100); // Width 100%
 					table18.setSpacingBefore(10f); // Space before table
-					//table18.setSpacingAfter(10f);
+					// table18.setSpacingAfter(10f);
 
 					// Connectors Observation And Recommendation List with Iteration
 					for (SummaryLpsObservation summaryLpsObser1 : summaryLPsBuilding.getSummaryLpsObservation()) {
@@ -853,7 +868,7 @@ public class PrintSummaryLpsServiceImpl implements PrintSummaryLpsService {
 					}
 					document.add(table18);
 
-					// TestingJoint Observation Main Heading  Label
+					// TestingJoint Observation Main Heading Label
 					PdfPTable TestingJointObserHeader = new PdfPTable(pointColumnWidths40);
 					TestingJointObserHeader.setWidthPercentage(100); // Width 100%
 					TestingJointObserHeader.setSpacingBefore(10f); // Space before table
@@ -874,7 +889,7 @@ public class PrintSummaryLpsServiceImpl implements PrintSummaryLpsService {
 					PdfPTable table19 = new PdfPTable(pointColumnWidths4);
 					table19.setWidthPercentage(100); // Width 100%
 					table19.setSpacingBefore(10f); // Space before table
-					//table19.setSpacingAfter(10f);
+					// table19.setSpacingAfter(10f);
 
 					// TestingJoint Observation And Recommendation List with Iteration
 					for (SummaryLpsObservation summaryLpsObser1 : summaryLPsBuilding.getSummaryLpsObservation()) {
@@ -894,7 +909,7 @@ public class PrintSummaryLpsServiceImpl implements PrintSummaryLpsService {
 					}
 					document.add(table19);
 
-					// LightningCounter Observation Main Heading  Label
+					// LightningCounter Observation Main Heading Label
 					PdfPTable LightningCounterObserHeader = new PdfPTable(pointColumnWidths40);
 					LightningCounterObserHeader.setWidthPercentage(100); // Width 100%
 					LightningCounterObserHeader.setSpacingBefore(10f); // Space before table
@@ -915,7 +930,7 @@ public class PrintSummaryLpsServiceImpl implements PrintSummaryLpsService {
 					PdfPTable table20 = new PdfPTable(pointColumnWidths4);
 					table20.setWidthPercentage(100); // Width 100%
 					table20.setSpacingBefore(10f); // Space before table
-					//table20.setSpacingAfter(10f);
+					// table20.setSpacingAfter(10f);
 
 					// LightningCounter Observation And Recommendation List with Iteration
 					for (SummaryLpsObservation summaryLpsObser1 : summaryLPsBuilding.getSummaryLpsObservation()) {
@@ -935,7 +950,7 @@ public class PrintSummaryLpsServiceImpl implements PrintSummaryLpsService {
 					}
 					document.add(table20);
 
-					// DownConductorTesting Observation Main Heading  Label
+					// DownConductorTesting Observation Main Heading Label
 					PdfPTable DownConducTestObserHeader = new PdfPTable(pointColumnWidths40);
 					DownConducTestObserHeader.setWidthPercentage(100); // Width 100%
 					DownConducTestObserHeader.setSpacingBefore(10f); // Space before table
@@ -956,7 +971,7 @@ public class PrintSummaryLpsServiceImpl implements PrintSummaryLpsService {
 					PdfPTable table21 = new PdfPTable(pointColumnWidths4);
 					table21.setWidthPercentage(100); // Width 100%
 					table21.setSpacingBefore(10f); // Space before table
-					//table21.setSpacingAfter(10f);
+					// table21.setSpacingAfter(10f);
 
 					// DownConductorTesting Observation And Recommendation List with Iteration
 					for (SummaryLpsObservation summaryLpsObser1 : summaryLPsBuilding.getSummaryLpsObservation()) {
@@ -976,11 +991,12 @@ public class PrintSummaryLpsServiceImpl implements PrintSummaryLpsService {
 					}
 					document.add(table21);
 
-					
 // ============================================== > EARTHING START HERE <================================================================
 
-					
 					document.newPage();
+
+//				    this method for Adding the Main Header Fields for Every Page
+					MainHeaderPropertiesLabel(document, basicLps1, summaryLPsBuilding);
 
 					PdfPTable Earthinglabel = new PdfPTable(pointColumnWidths40);
 					Earthinglabel.setWidthPercentage(100); // Width 100%
@@ -1011,12 +1027,12 @@ public class PrintSummaryLpsServiceImpl implements PrintSummaryLpsService {
 					}
 					document.add(ETBAsicDetails);
 
-					// Earthing Observation And Recommendation Heading Label				
+					// Earthing Observation And Recommendation Heading Label
 
 					PdfPTable table22 = new PdfPTable(pointColumnWidths4);
 					table22.setWidthPercentage(100); // Width 100%
 					table22.setSpacingBefore(10f); // Space before table
-					//table22.setSpacingAfter(10f);
+					// table22.setSpacingAfter(10f);
 
 					PdfPCell cell10 = new PdfPCell(new Paragraph("Observations", font10B));
 					cell10.setHorizontalAlignment(Element.ALIGN_CENTER);
@@ -1033,8 +1049,8 @@ public class PrintSummaryLpsServiceImpl implements PrintSummaryLpsService {
 
 					PdfPTable table23 = new PdfPTable(pointColumnWidths4);
 					table23.setWidthPercentage(100); // Width 100%
-					//table23.setSpacingBefore(5f); // Space before table
-					//table23.setSpacingAfter(10f);
+					// table23.setSpacingBefore(5f); // Space before table
+					// table23.setSpacingAfter(10f);
 
 					// ET_Basic Details Observation And Recommendation List with Iteration
 					for (SummaryLpsObservation summaryLpsObser1 : summaryLPsBuilding.getSummaryLpsObservation()) {
@@ -1059,13 +1075,13 @@ public class PrintSummaryLpsServiceImpl implements PrintSummaryLpsService {
 					ET_TypeBHeadingDetails.setWidthPercentage(100); // Width 100%
 					ET_TypeBHeadingDetails.setSpacingBefore(10f); // Space before table
 
-					// EarthingDescription Observation Main Heading  Label
+					// EarthingDescription Observation Main Heading Label
 					PdfPTable EarthingDescObserHeader = new PdfPTable(pointColumnWidths40);
 					EarthingDescObserHeader.setWidthPercentage(100); // Width 100%
 					EarthingDescObserHeader.setSpacingBefore(10f); // Space before table
 
 					for (SummaryLpsObservation summaryLpsHeading : summaryLPsBuilding.getSummaryLpsObservation()) {
-					
+
 						if (summaryLpsHeading.getHeading().equalsIgnoreCase("EarthingDescription Observation")) {
 
 							PdfPCell headerlabel1 = new PdfPCell(
@@ -1081,16 +1097,21 @@ public class PrintSummaryLpsServiceImpl implements PrintSummaryLpsService {
 					PdfPTable table24 = new PdfPTable(pointColumnWidths4);
 					table24.setWidthPercentage(100); // Width 100%
 					table24.setSpacingBefore(10f); // Space before table
-					//table24.setSpacingAfter(10f);
+					// table24.setSpacingAfter(10f);
 
 					// EarthingDescription Observation And Recommendation List with Iteration
 					for (SummaryLpsObservation summaryLpsObser1 : summaryLPsBuilding.getSummaryLpsObservation()) {
-					
-						if (summaryLpsObser1.getObservationComponentDetails().equalsIgnoreCase("earthingDescriptionMain0")
-								|| summaryLpsObser1.getObservationComponentDetails().equalsIgnoreCase("earthingDescriptionMain1")
-								|| summaryLpsObser1.getObservationComponentDetails().equalsIgnoreCase("earthingDescriptionMain2")
-								|| summaryLpsObser1.getObservationComponentDetails().equalsIgnoreCase("earthingDescriptionMain3")
-								|| summaryLpsObser1.getObservationComponentDetails().equalsIgnoreCase("earthingDescriptionMain4")) {
+
+						if (summaryLpsObser1.getObservationComponentDetails()
+								.equalsIgnoreCase("earthingDescriptionMain0")
+								|| summaryLpsObser1.getObservationComponentDetails()
+										.equalsIgnoreCase("earthingDescriptionMain1")
+								|| summaryLpsObser1.getObservationComponentDetails()
+										.equalsIgnoreCase("earthingDescriptionMain2")
+								|| summaryLpsObser1.getObservationComponentDetails()
+										.equalsIgnoreCase("earthingDescriptionMain3")
+								|| summaryLpsObser1.getObservationComponentDetails()
+										.equalsIgnoreCase("earthingDescriptionMain4")) {
 
 							PdfPCell cell105 = new PdfPCell();
 							cell105.setPhrase(new Phrase(summaryLpsObser1.getObservation(), font10N));
@@ -1111,39 +1132,39 @@ public class PrintSummaryLpsServiceImpl implements PrintSummaryLpsService {
 					EarthingDescListHeader.setSpacingBefore(10f); // Space before table
 					EarthingDescListHeader.setSpacingAfter(5F); // Space After table
 
-					// EarthingDescription Observation List With Iteration 
+					// EarthingDescription Observation List With Iteration
 					for (SummaryLpsObservation summaryLpsObservation : summaryLPsBuilding.getSummaryLpsObservation()) {
 
-							if (summaryLpsObservation.getHeading().contains("EarthingDescription List")) {
+						if (summaryLpsObservation.getHeading().contains("EarthingDescription List")) {
 
-								PdfPCell headerlabel1 = new PdfPCell(
-										new Paragraph(summaryLpsObservation.getHeading(), font10B));
-								headerlabel1.setHorizontalAlignment(Element.ALIGN_CENTER);
-								headerlabel1.setGrayFill(0.92f);
-								headerlabel1.setColspan(2);
-								headerlabel1.setFixedHeight(20f);
-								EarthingDescListHeader.addCell(headerlabel1);
+							PdfPCell headerlabel1 = new PdfPCell(
+									new Paragraph(summaryLpsObservation.getHeading(), font10B));
+							headerlabel1.setHorizontalAlignment(Element.ALIGN_CENTER);
+							headerlabel1.setGrayFill(0.92f);
+							headerlabel1.setColspan(2);
+							headerlabel1.setFixedHeight(20f);
+							EarthingDescListHeader.addCell(headerlabel1);
 
-							}
+						}
 
-							if (summaryLpsObservation.getObservationComponentDetails()
-									.contains("earthingDescriptionList")) {
+						if (summaryLpsObservation.getObservationComponentDetails()
+								.contains("earthingDescriptionList")) {
 
-								PdfPCell cell105 = new PdfPCell();
-								cell105.setPhrase(new Phrase(summaryLpsObservation.getObservation(), font10N));
-								cell105.setHorizontalAlignment(Element.ALIGN_LEFT);
-								cell105.setBackgroundColor(new GrayColor(0.93f));
-								EarthingDescListHeader.addCell(cell105);
+							PdfPCell cell105 = new PdfPCell();
+							cell105.setPhrase(new Phrase(summaryLpsObservation.getObservation(), font10N));
+							cell105.setHorizontalAlignment(Element.ALIGN_LEFT);
+							cell105.setBackgroundColor(new GrayColor(0.93f));
+							EarthingDescListHeader.addCell(cell105);
 
-								PdfPCell cell37 = new PdfPCell(
-										new Paragraph(summaryLpsObservation.getRecommendation(), font10N));
-								cell37.setHorizontalAlignment(Element.ALIGN_LEFT);
-								EarthingDescListHeader.addCell(cell37);
+							PdfPCell cell37 = new PdfPCell(
+									new Paragraph(summaryLpsObservation.getRecommendation(), font10N));
+							cell37.setHorizontalAlignment(Element.ALIGN_LEFT);
+							EarthingDescListHeader.addCell(cell37);
 						}
 					}
 					document.add(EarthingDescListHeader);
 
-					// EarthingDescription Observation main Remarks  
+					// EarthingDescription Observation main Remarks
 
 					PdfPTable table25 = new PdfPTable(pointColumnWidths4);
 					table25.setWidthPercentage(100); // Width 100%
@@ -1151,13 +1172,18 @@ public class PrintSummaryLpsServiceImpl implements PrintSummaryLpsService {
 					table25.setSpacingAfter(5f);
 
 					for (SummaryLpsObservation summaryLpsObser2 : summaryLPsBuilding.getSummaryLpsObservation()) {
-						
+
 						if (summaryLpsObser2.getObservationComponentDetails().contains("earthingDescriptionMain")
-								&& !summaryLpsObser2.getObservationComponentDetails().equalsIgnoreCase("earthingDescriptionMain0")
-								&& !summaryLpsObser2.getObservationComponentDetails().equalsIgnoreCase("earthingDescriptionMain1")
-								&& !summaryLpsObser2.getObservationComponentDetails().equalsIgnoreCase("earthingDescriptionMain2")
-								&& !summaryLpsObser2.getObservationComponentDetails().equalsIgnoreCase("earthingDescriptionMain3")
-								&& !summaryLpsObser2.getObservationComponentDetails().equalsIgnoreCase("earthingDescriptionMain4")) {
+								&& !summaryLpsObser2.getObservationComponentDetails()
+										.equalsIgnoreCase("earthingDescriptionMain0")
+								&& !summaryLpsObser2.getObservationComponentDetails()
+										.equalsIgnoreCase("earthingDescriptionMain1")
+								&& !summaryLpsObser2.getObservationComponentDetails()
+										.equalsIgnoreCase("earthingDescriptionMain2")
+								&& !summaryLpsObser2.getObservationComponentDetails()
+										.equalsIgnoreCase("earthingDescriptionMain3")
+								&& !summaryLpsObser2.getObservationComponentDetails()
+										.equalsIgnoreCase("earthingDescriptionMain4")) {
 
 							PdfPCell cell105 = new PdfPCell();
 							cell105.setPhrase(new Phrase(summaryLpsObser2.getObservation(), font10N));
@@ -1174,7 +1200,7 @@ public class PrintSummaryLpsServiceImpl implements PrintSummaryLpsService {
 					}
 					document.add(table25);
 
-					// EarthingClamps Observation Observation Main Heading  Label
+					// EarthingClamps Observation Observation Main Heading Label
 					PdfPTable EarthingClampsObserHeader = new PdfPTable(pointColumnWidths40);
 					EarthingClampsObserHeader.setWidthPercentage(100); // Width 100%
 					EarthingClampsObserHeader.setSpacingBefore(10f); // Space before table
@@ -1195,9 +1221,9 @@ public class PrintSummaryLpsServiceImpl implements PrintSummaryLpsService {
 					PdfPTable table26 = new PdfPTable(pointColumnWidths4);
 					table26.setWidthPercentage(100); // Width 100%
 					table26.setSpacingBefore(10f); // Space before table
-					//table26.setSpacingAfter(10f);
+					// table26.setSpacingAfter(10f);
 
-					 	// Earthing Clamps Observation And Recommendation List with Iteration
+					// Earthing Clamps Observation And Recommendation List with Iteration
 					for (SummaryLpsObservation summaryLpsObser1 : summaryLPsBuilding.getSummaryLpsObservation()) {
 						if (summaryLpsObser1.getObservationComponentDetails().contains("earthingClamps")) {
 
@@ -1215,7 +1241,7 @@ public class PrintSummaryLpsServiceImpl implements PrintSummaryLpsService {
 					}
 					document.add(table26);
 
-					// EarthingElectrodeChamber Observation Main Heading  Label
+					// EarthingElectrodeChamber Observation Main Heading Label
 					PdfPTable EarthingElectrodeChamberHeader = new PdfPTable(pointColumnWidths40);
 					EarthingElectrodeChamberHeader.setWidthPercentage(100); // Width 100%
 					EarthingElectrodeChamberHeader.setSpacingBefore(10f); // Space before table
@@ -1236,7 +1262,7 @@ public class PrintSummaryLpsServiceImpl implements PrintSummaryLpsService {
 					PdfPTable table27 = new PdfPTable(pointColumnWidths4);
 					table27.setWidthPercentage(100); // Width 100%
 					table27.setSpacingBefore(10f); // Space before table
-					//table27.setSpacingAfter(10f);
+					// table27.setSpacingAfter(10f);
 
 					// EarthElectrodeChamber Observation And Recommendation List with Iteration
 					for (SummaryLpsObservation summaryLpsObser1 : summaryLPsBuilding.getSummaryLpsObservation()) {
@@ -1270,12 +1296,12 @@ public class PrintSummaryLpsServiceImpl implements PrintSummaryLpsService {
 					}
 					document.add(ET_TypeBHeadingDetails);
 
-					//	Earthing if Type B(ring) Display the 
+					// Earthing if Type B(ring) Display the
 
 					PdfPTable tableTypeB = new PdfPTable(pointColumnWidths4);
 					tableTypeB.setWidthPercentage(100); // Width 100%
 					tableTypeB.setSpacingBefore(10f); // Space before table
-					//tableTypeB.setSpacingAfter(10f);
+					// tableTypeB.setSpacingAfter(10f);
 
 					for (SummaryLpsObservation summaryLpsObser3 : summaryLPsBuilding.getSummaryLpsObservation()) {
 
@@ -1296,7 +1322,7 @@ public class PrintSummaryLpsServiceImpl implements PrintSummaryLpsService {
 					}
 					document.add(tableTypeB);
 
-					// EarthElectrodeTesting Observation Main Heading  Label
+					// EarthElectrodeTesting Observation Main Heading Label
 					PdfPTable EarthElectrodeTestingHeader = new PdfPTable(pointColumnWidths40);
 					EarthElectrodeTestingHeader.setWidthPercentage(100); // Width 100%
 					EarthElectrodeTestingHeader.setSpacingBefore(10f); // Space before table
@@ -1305,7 +1331,7 @@ public class PrintSummaryLpsServiceImpl implements PrintSummaryLpsService {
 						if (summaryLpsHeading.getHeading().equalsIgnoreCase("EarthElectrodeTesting Observation")) {
 
 							PdfPCell headerlabel1 = new PdfPCell(
-									new Paragraph( summaryLpsHeading.getHeading(), font10B));
+									new Paragraph(summaryLpsHeading.getHeading(), font10B));
 							headerlabel1.setHorizontalAlignment(Element.ALIGN_LEFT);
 							headerlabel1.setGrayFill(0.92f);
 							headerlabel1.setFixedHeight(20f);
@@ -1317,7 +1343,7 @@ public class PrintSummaryLpsServiceImpl implements PrintSummaryLpsService {
 					PdfPTable table28 = new PdfPTable(pointColumnWidths4);
 					table28.setWidthPercentage(100); // Width 100%
 					table28.setSpacingBefore(10f); // Space before table
-					//table28.setSpacingAfter(10f);
+					// table28.setSpacingAfter(10f);
 
 					// EarthElectrodeTesting Observation And Recommendation List with Iteration
 					for (SummaryLpsObservation summaryLpsObser4 : summaryLPsBuilding.getSummaryLpsObservation()) {
@@ -1337,11 +1363,12 @@ public class PrintSummaryLpsServiceImpl implements PrintSummaryLpsService {
 					}
 					document.add(table28);
 
-		
 // ==================================================== > SPD START HERE <=====================================================================					
-		
-					
+
 					document.newPage();
+
+//				    this method for Adding the Main Header Fields for Every Page
+					MainHeaderPropertiesLabel(document, basicLps1, summaryLPsBuilding);
 
 					PdfPTable SPDlabel = new PdfPTable(pointColumnWidths40);
 					SPDlabel.setWidthPercentage(100); // Width 100%
@@ -1372,12 +1399,12 @@ public class PrintSummaryLpsServiceImpl implements PrintSummaryLpsService {
 					}
 					document.add(SPDDetailsObserv);
 
-					// SPD Observation And Recommendation Heading Label				
+					// SPD Observation And Recommendation Heading Label
 
 					PdfPTable table29 = new PdfPTable(pointColumnWidths4);
 					table29.setWidthPercentage(100); // Width 100%
 					table29.setSpacingBefore(10f); // Space before table
-					//table29.setSpacingAfter(10f);
+					// table29.setSpacingAfter(10f);
 
 					PdfPCell cell12 = new PdfPCell(new Paragraph("Observations", font10B));
 					cell12.setHorizontalAlignment(Element.ALIGN_CENTER);
@@ -1394,8 +1421,8 @@ public class PrintSummaryLpsServiceImpl implements PrintSummaryLpsService {
 
 					PdfPTable table30 = new PdfPTable(pointColumnWidths4);
 					table30.setWidthPercentage(100); // Width 100%
-					//table30.setSpacingBefore(5f); // Space before table
-					//table30.setSpacingAfter(10f);
+					// table30.setSpacingBefore(5f); // Space before table
+					// table30.setSpacingAfter(10f);
 
 					// SPD Details Observation And Recommendation List with Iteration
 					for (SummaryLpsObservation summaryLpsObser1 : summaryLPsBuilding.getSummaryLpsObservation()) {
@@ -1421,42 +1448,43 @@ public class PrintSummaryLpsServiceImpl implements PrintSummaryLpsService {
 					SPDListHeader.setSpacingBefore(10f); // Space before table
 					SPDListHeader.setSpacingAfter(5F); // Space After table
 
-					// SPD List Observation List With Iteration 
+					// SPD List Observation List With Iteration
 					for (SummaryLpsObservation summaryLpsObservation : summaryLPsBuilding.getSummaryLpsObservation()) {
 
-							if (summaryLpsObservation.getHeading().contains("SPD List")) {
+						if (summaryLpsObservation.getHeading().contains("SPD List")) {
 
-								PdfPCell headerlabel1 = new PdfPCell(
-										new Paragraph(summaryLpsObservation.getHeading(), font10B));
-								headerlabel1.setHorizontalAlignment(Element.ALIGN_CENTER);
-								headerlabel1.setGrayFill(0.92f);
-								headerlabel1.setColspan(2);
-								headerlabel1.setFixedHeight(20f);
-								SPDListHeader.addCell(headerlabel1);
+							PdfPCell headerlabel1 = new PdfPCell(
+									new Paragraph(summaryLpsObservation.getHeading(), font10B));
+							headerlabel1.setHorizontalAlignment(Element.ALIGN_CENTER);
+							headerlabel1.setGrayFill(0.92f);
+							headerlabel1.setColspan(2);
+							headerlabel1.setFixedHeight(20f);
+							SPDListHeader.addCell(headerlabel1);
 
-							}
+						}
 
-							if (summaryLpsObservation.getObservationComponentDetails()
-									.contains("spdDescription")) {
+						if (summaryLpsObservation.getObservationComponentDetails().contains("spdDescription")) {
 
-								PdfPCell cell105 = new PdfPCell();
-								cell105.setPhrase(new Phrase(summaryLpsObservation.getObservation(), font10N));
-								cell105.setHorizontalAlignment(Element.ALIGN_LEFT);
-								cell105.setBackgroundColor(new GrayColor(0.93f));
-								SPDListHeader.addCell(cell105);
+							PdfPCell cell105 = new PdfPCell();
+							cell105.setPhrase(new Phrase(summaryLpsObservation.getObservation(), font10N));
+							cell105.setHorizontalAlignment(Element.ALIGN_LEFT);
+							cell105.setBackgroundColor(new GrayColor(0.93f));
+							SPDListHeader.addCell(cell105);
 
-								PdfPCell cell37 = new PdfPCell(
-										new Paragraph(summaryLpsObservation.getRecommendation(), font10N));
-								cell37.setHorizontalAlignment(Element.ALIGN_LEFT);
-								SPDListHeader.addCell(cell37);
+							PdfPCell cell37 = new PdfPCell(
+									new Paragraph(summaryLpsObservation.getRecommendation(), font10N));
+							cell37.setHorizontalAlignment(Element.ALIGN_LEFT);
+							SPDListHeader.addCell(cell37);
 						}
 					}
 					document.add(SPDListHeader);
 
-					
 // ================================================== > SEPARATION DISTANCE START HERE <========================================================
-					
+
 					document.newPage();
+
+//				    this method for Adding the Main Header Fields for Every Page
+					MainHeaderPropertiesLabel(document, basicLps1, summaryLPsBuilding);
 
 					PdfPTable SeparationDistancelabel = new PdfPTable(pointColumnWidths40);
 					SeparationDistancelabel.setWidthPercentage(100); // Width 100%
@@ -1487,12 +1515,12 @@ public class PrintSummaryLpsServiceImpl implements PrintSummaryLpsService {
 					}
 					document.add(SeparationDistObserv);
 
-					// SeparationDistance Observation And Recommendation Heading Label				
+					// SeparationDistance Observation And Recommendation Heading Label
 
 					PdfPTable table31 = new PdfPTable(pointColumnWidths4);
 					table31.setWidthPercentage(100); // Width 100%
 					table31.setSpacingBefore(10f); // Space before table
-					//table31.setSpacingAfter(10f);
+					// table31.setSpacingAfter(10f);
 
 					PdfPCell cell14 = new PdfPCell(new Paragraph("Observations", font10B));
 					cell14.setHorizontalAlignment(Element.ALIGN_CENTER);
@@ -1509,8 +1537,8 @@ public class PrintSummaryLpsServiceImpl implements PrintSummaryLpsService {
 
 					PdfPTable table32 = new PdfPTable(pointColumnWidths4);
 					table32.setWidthPercentage(100); // Width 100%
-					//table32.setSpacingBefore(5f); // Space before table
-					//table32.setSpacingAfter(10f);
+					// table32.setSpacingBefore(5f); // Space before table
+					// table32.setSpacingAfter(10f);
 
 					// SeparationDistance Observation And Recommendation List with Iteration
 					for (SummaryLpsObservation summaryLpsObser1 : summaryLPsBuilding.getSummaryLpsObservation()) {
@@ -1537,34 +1565,33 @@ public class PrintSummaryLpsServiceImpl implements PrintSummaryLpsService {
 					SeparationDistObserHeader.setSpacingBefore(10f); // Space before table
 					SeparationDistObserHeader.setSpacingAfter(5F); // Space After table
 
-					// SeparationDistance List Observation List With Iteration 
+					// SeparationDistance List Observation List With Iteration
 					for (SummaryLpsObservation summaryLpsObservation : summaryLPsBuilding.getSummaryLpsObservation()) {
 
-							if (summaryLpsObservation.getHeading().contains("SeparateDistance Observation")) {
+						if (summaryLpsObservation.getHeading().contains("SeparateDistance Observation")) {
 
-								PdfPCell headerlabel1 = new PdfPCell(
-										new Paragraph(summaryLpsObservation.getHeading(), font10B));
-								headerlabel1.setHorizontalAlignment(Element.ALIGN_CENTER);
-								headerlabel1.setGrayFill(0.92f);
-								headerlabel1.setColspan(2);
-								headerlabel1.setFixedHeight(20f);
-								SeparationDistObserHeader.addCell(headerlabel1);
+							PdfPCell headerlabel1 = new PdfPCell(
+									new Paragraph(summaryLpsObservation.getHeading(), font10B));
+							headerlabel1.setHorizontalAlignment(Element.ALIGN_CENTER);
+							headerlabel1.setGrayFill(0.92f);
+							headerlabel1.setColspan(2);
+							headerlabel1.setFixedHeight(20f);
+							SeparationDistObserHeader.addCell(headerlabel1);
 
-							}
+						}
 
-							if (summaryLpsObservation.getObservationComponentDetails()
-									.contains("separateDistanceDesc")) {
+						if (summaryLpsObservation.getObservationComponentDetails().contains("separateDistanceDesc")) {
 
-								PdfPCell cell105 = new PdfPCell();
-								cell105.setPhrase(new Phrase(summaryLpsObservation.getObservation(), font10N));
-								cell105.setHorizontalAlignment(Element.ALIGN_LEFT);
-								cell105.setBackgroundColor(new GrayColor(0.93f));
-								SeparationDistObserHeader.addCell(cell105);
+							PdfPCell cell105 = new PdfPCell();
+							cell105.setPhrase(new Phrase(summaryLpsObservation.getObservation(), font10N));
+							cell105.setHorizontalAlignment(Element.ALIGN_LEFT);
+							cell105.setBackgroundColor(new GrayColor(0.93f));
+							SeparationDistObserHeader.addCell(cell105);
 
-								PdfPCell cell37 = new PdfPCell(
-										new Paragraph(summaryLpsObservation.getRecommendation(), font10N));
-								cell37.setHorizontalAlignment(Element.ALIGN_LEFT);
-								SeparationDistObserHeader.addCell(cell37);
+							PdfPCell cell37 = new PdfPCell(
+									new Paragraph(summaryLpsObservation.getRecommendation(), font10N));
+							cell37.setHorizontalAlignment(Element.ALIGN_LEFT);
+							SeparationDistObserHeader.addCell(cell37);
 						}
 					}
 					document.add(SeparationDistObserHeader);
@@ -1574,45 +1601,44 @@ public class PrintSummaryLpsServiceImpl implements PrintSummaryLpsService {
 					SeparationDistDownHeader.setSpacingBefore(10f); // Space before table
 					SeparationDistDownHeader.setSpacingAfter(5F); // Space After table
 
-					// SeparationDistance List Observation List With Iteration 
+					// SeparationDistance List Observation List With Iteration
 					for (SummaryLpsObservation summaryLpsObservation : summaryLPsBuilding.getSummaryLpsObservation()) {
 
-							if (summaryLpsObservation.getHeading()
-									.contains("SeparationDistanceDown Observation")) {
+						if (summaryLpsObservation.getHeading().contains("SeparationDistanceDown Observation")) {
 
-								PdfPCell headerlabel1 = new PdfPCell(
-										new Paragraph(summaryLpsObservation.getHeading(), font10B));
-								headerlabel1.setHorizontalAlignment(Element.ALIGN_CENTER);
-								headerlabel1.setGrayFill(0.92f);
-								headerlabel1.setColspan(2);
-								headerlabel1.setFixedHeight(20f);
-								SeparationDistDownHeader.addCell(headerlabel1);
+							PdfPCell headerlabel1 = new PdfPCell(
+									new Paragraph(summaryLpsObservation.getHeading(), font10B));
+							headerlabel1.setHorizontalAlignment(Element.ALIGN_CENTER);
+							headerlabel1.setGrayFill(0.92f);
+							headerlabel1.setColspan(2);
+							headerlabel1.setFixedHeight(20f);
+							SeparationDistDownHeader.addCell(headerlabel1);
 
-							}
+						}
 
-							if (summaryLpsObservation.getObservationComponentDetails()
-									.contains("separateDistanceDownConductors")) {
+						if (summaryLpsObservation.getObservationComponentDetails()
+								.contains("separateDistanceDownConductors")) {
 
-								PdfPCell cell105 = new PdfPCell();
-								cell105.setPhrase(new Phrase(summaryLpsObservation.getObservation(), font10N));
-								cell105.setHorizontalAlignment(Element.ALIGN_LEFT);
-								cell105.setBackgroundColor(new GrayColor(0.93f));
-								SeparationDistDownHeader.addCell(cell105);
+							PdfPCell cell105 = new PdfPCell();
+							cell105.setPhrase(new Phrase(summaryLpsObservation.getObservation(), font10N));
+							cell105.setHorizontalAlignment(Element.ALIGN_LEFT);
+							cell105.setBackgroundColor(new GrayColor(0.93f));
+							SeparationDistDownHeader.addCell(cell105);
 
-								PdfPCell cell37 = new PdfPCell(
-										new Paragraph(summaryLpsObservation.getRecommendation(), font10N));
-								cell37.setHorizontalAlignment(Element.ALIGN_LEFT);
-								SeparationDistDownHeader.addCell(cell37);
+							PdfPCell cell37 = new PdfPCell(
+									new Paragraph(summaryLpsObservation.getRecommendation(), font10N));
+							cell37.setHorizontalAlignment(Element.ALIGN_LEFT);
+							SeparationDistDownHeader.addCell(cell37);
 						}
 					}
 					document.add(SeparationDistDownHeader);
 
-					
-					
 //  ================================================= > EQUIPOTENTIAL BONDING START HERE < =====================================================					
 
-
 					document.newPage();
+
+//				    this method for Adding the Main Header Fields for Every Page
+					MainHeaderPropertiesLabel(document, basicLps1, summaryLPsBuilding);
 
 					PdfPTable Equipotentialbondinglabel = new PdfPTable(pointColumnWidths40);
 					Equipotentialbondinglabel.setWidthPercentage(100); // Width 100%
@@ -1643,12 +1669,12 @@ public class PrintSummaryLpsServiceImpl implements PrintSummaryLpsService {
 					}
 					document.add(EquipotentialbondingObser);
 
-					// Equipotential bonding Observation And Recommendation Heading Label				
+					// Equipotential bonding Observation And Recommendation Heading Label
 
 					PdfPTable table33 = new PdfPTable(pointColumnWidths4);
 					table33.setWidthPercentage(100); // Width 100%
 					table33.setSpacingBefore(10f); // Space before table
-					//table33.setSpacingAfter(10f);
+					// table33.setSpacingAfter(10f);
 
 					PdfPCell cell16 = new PdfPCell(new Paragraph("Observations", font10B));
 					cell16.setHorizontalAlignment(Element.ALIGN_CENTER);
@@ -1665,8 +1691,8 @@ public class PrintSummaryLpsServiceImpl implements PrintSummaryLpsService {
 
 					PdfPTable table34 = new PdfPTable(pointColumnWidths4);
 					table34.setWidthPercentage(100); // Width 100%
-					//table34.setSpacingBefore(5f); // Space before table
-					//table34.setSpacingAfter(10f);
+					// table34.setSpacingBefore(5f); // Space before table
+					// table34.setSpacingAfter(10f);
 
 					// Equipotential bonding Observation And Recommendation List with Iteration
 					for (SummaryLpsObservation summaryLpsObser1 : summaryLPsBuilding.getSummaryLpsObservation()) {
@@ -1696,7 +1722,7 @@ public class PrintSummaryLpsServiceImpl implements PrintSummaryLpsService {
 					PdfPTable table35 = new PdfPTable(pointColumnWidths4);
 					table35.setWidthPercentage(100); // Width 100%
 					table35.setSpacingBefore(10f); // Space before table
-					//table35.setSpacingAfter(10f);
+					// table35.setSpacingAfter(10f);
 
 					// Equipotential bonding Observation And Recommendation List with Iteration
 					for (SummaryLpsObservation summaryLpsObser1 : summaryLPsBuilding.getSummaryLpsObservation()) {
@@ -1724,9 +1750,19 @@ public class PrintSummaryLpsServiceImpl implements PrintSummaryLpsService {
 
 					document.newPage();
 				}
+				
+				
+
+//  ================================================= > RECOMMENDATIONS && DECLARATION START HERE < =====================================================
 
 				document.newPage();
+				
+				SummaryLpsBuildings summaryLpsBuilding1 = summaryLPsBuild.get(0);
+//			    this method for Adding the Main Header Fields for Every Page
+				MainHeaderPropertiesLabel(document, basicLps1, summaryLpsBuilding1);
 
+				float[] pointColumnWidths40 = { 100F };
+				
 				PdfPTable RecommendationTable = new PdfPTable(pointColumnWidths40);
 				RecommendationTable.setWidthPercentage(100); // Width 100%
 				RecommendationTable.setSpacingBefore(10f); // Space before table
@@ -1743,13 +1779,13 @@ public class PrintSummaryLpsServiceImpl implements PrintSummaryLpsService {
 				PdfPTable table36 = new PdfPTable(pointColumnWidths1); // 3 columns.
 				table36.setWidthPercentage(100); // Width 100%
 				table36.setSpacingBefore(10f); // Space before table
-				//table7.setSpacingAfter(10f); // Space after table
+				// table7.setSpacingAfter(10f); // Space after table
 				table36.getDefaultCell().setBorder(0);
 
 				PdfPTable table37 = new PdfPTable(pointColumnWidths1); // 3 columns.
 				table37.setWidthPercentage(100); // Width 100%
 				table37.setSpacingBefore(10f); // Space before table
-				//table37.setSpacingAfter(10f); // Space after table
+				// table37.setSpacingAfter(10f); // Space after table
 				table37.getDefaultCell().setBorder(0);
 
 				for (SummaryLps summary : lpsSum) {
@@ -1831,6 +1867,27 @@ public class PrintSummaryLpsServiceImpl implements PrintSummaryLpsService {
 			throw new SummaryLpsException("Invalid Inputs");
 		}
 		return null;
+	}
+
+	private void MainHeaderPropertiesLabel(Document document, BasicLps basicLps1,
+			SummaryLpsBuildings summaryLPsBuilding) throws DocumentException, IOException {
+		float[] pointColumnWidths200 = { 100F };
+
+		PdfPTable table1111 = new PdfPTable(pointColumnWidths200);
+		table1111.setWidthPercentage(100); // Width 100%
+//						    table1111.setSpacingBefore(5f); // Space before table
+//						    table1111.setSpacingAfter(f); // Space after table
+		table1111.getDefaultCell().setBorder(0);
+
+		PdfPCell arrangements1001 = new PdfPCell(new Paragraph(
+				basicLps1.getProjectName() + " / " + summaryLPsBuilding.getBuildingName() + " / "
+						+ summaryLPsBuilding.getBuildingNumber().toString(),
+				new Font(BaseFont.createFont(), 8, Font.NORMAL | Font.NORMAL)));
+//							arrangements1001.setBackgroundColor(new BaseColor(203, 183, 162));
+		arrangements1001.setHorizontalAlignment(Element.ALIGN_RIGHT);
+		arrangements1001.setBorder(PdfPCell.NO_BORDER);
+		table1111.addCell(arrangements1001);
+		document.add(table1111);
 	}
 
 	private void addRow(PdfPTable table9, String string, String string2) throws DocumentException, IOException {
