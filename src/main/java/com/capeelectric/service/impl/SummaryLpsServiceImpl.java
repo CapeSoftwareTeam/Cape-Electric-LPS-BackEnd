@@ -192,7 +192,7 @@ public class SummaryLpsServiceImpl implements SummaryLpsService {
 					summaryLpsRepository.save(summaryLps);
 					logger.debug("Summary Lps Report Details Successfully Saved in DB");
 
-					if (isSubmitted) {
+					if (!isSubmitted) {
 						uploadPdfDetails(summaryLps.getUserName(), summaryLps.getBasicLpsId(), lpsAirDisc,
 								downConductorDetails, earthingLpsDetails, spdDetails, separateDistanceDetails,
 								earthStudDetails);
@@ -288,7 +288,7 @@ public class SummaryLpsServiceImpl implements SummaryLpsService {
 			if (basicLpsDetails.isPresent()
 					&& basicLpsDetails.get().getBasicLpsId().equals(summaryLps.getBasicLpsId())) {
 
-				Optional<SummaryLps> summaryRepo = summaryLpsRepository.findByBasicLpsId(summaryLps.getSummaryLpsId());
+				Optional<SummaryLps> summaryRepo = summaryLpsRepository.findById(summaryLps.getSummaryLpsId());
 				if (summaryRepo.isPresent()
 						&& summaryRepo.get().getSummaryLpsId().equals(summaryLps.getSummaryLpsId())) {
 					summaryLps.setUpdatedDate(LocalDateTime.now());
@@ -296,7 +296,7 @@ public class SummaryLpsServiceImpl implements SummaryLpsService {
 					summaryLpsRepository.save(summaryLps);
 					logger.debug("Summary Lps Report Details Successfully Updated in DB");
 
-					if (isSubmitted) {
+					if (!isSubmitted) {
 						uploadPdfDetails(summaryLps.getUserName(), summaryLps.getBasicLpsId(), lpsAirDisc,
 								downConductorDetails, earthingLpsDetails, spdDetails, separateDistanceDetails,
 								earthStudDetails);
