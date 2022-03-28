@@ -32,7 +32,7 @@ public class PrintLpsSummaryController {
 	public ResponseEntity<List<SummaryLps>> printEarthingLps(@PathVariable String userName,
 			@PathVariable Integer basicLpsId) throws SummaryLpsException {
 		logger.info("started printingEarthingLPS function UserName : {}, BasicLpsId : {}", userName, basicLpsId);
-		printSummaryLpsService.printLpsSummaryDetails(userName, basicLpsId);
+//		printSummaryLpsService.printLpsSummaryDetails(userName, basicLpsId);
 		return new ResponseEntity<List<SummaryLps>>(HttpStatus.OK);
 	}
 }
