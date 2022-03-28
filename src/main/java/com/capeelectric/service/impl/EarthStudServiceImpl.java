@@ -102,6 +102,8 @@ public class EarthStudServiceImpl implements EarthStudService {
 						earthStudReport.setUpdatedBy(userFullName.findByUserName(earthStudReport.getUserName()));
 						earthStudRepository.save(earthStudReport);
 						logger.debug("Earth Stud Report Details Successfully Saved in DB");
+						userFullName.addUpdatedByandDate(earthStudReport.getBasicLpsId(),userFullName.findByUserName(earthStudReport.getUserName()));
+						logger.debug("Basic Lps UpdatedBy and UpdatedDate by EarthStud");
 						
 					} else {
 						logger.error("Please fill all the fields before clicking next button");
@@ -188,6 +190,8 @@ public class EarthStudServiceImpl implements EarthStudService {
 				earthStudReport.setUpdatedBy(userFullName.findByUserName(earthStudReport.getUserName()));
 				earthStudRepository.save(earthStudReport);
 				logger.debug("Earth Stud Report Details Successfully Updated in DB");
+				userFullName.addUpdatedByandDate(earthStudReport.getBasicLpsId(),userFullName.findByUserName(earthStudReport.getUserName()));
+				logger.debug("Basic Lps UpdatedBy and UpdatedDate by EarthStud");
 			} else {
 				logger.error("Given Basic LPS Id and Earth Stud Id is Invalid");
 				throw new EarthStudException("Given Basic LPS Id and Earth Stud Id is Invalid");

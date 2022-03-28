@@ -74,6 +74,8 @@ public class EarthingLpsServiceImpl implements EarthingLpsService {
 						earthingReport.setUpdatedBy(userFullName.findByUserName(earthingReport.getUserName()));
 						earthingLpsRepository.save(earthingReport);
 						logger.debug("Earthing Report Details Successfully Saved in DB");
+						userFullName.addUpdatedByandDate(earthingReport.getBasicLpsId(),userFullName.findByUserName(earthingReport.getUserName()));
+						logger.debug("Basic Lps UpdatedBy and UpdatedDate by Earthing");
 					} else {
 						logger.error("Please fill all the fields before clicking next button");
 						throw new EarthingLpsException("Please fill all the fields before clicking next button");
@@ -138,6 +140,8 @@ public class EarthingLpsServiceImpl implements EarthingLpsService {
 				earthingReport.setUpdatedBy(userFullName.findByUserName(earthingReport.getUserName()));
 				earthingLpsRepository.save(earthingReport);
 				logger.debug("Earthing Report Details Successfully Updated in DB");
+				userFullName.addUpdatedByandDate(earthingReport.getBasicLpsId(),userFullName.findByUserName(earthingReport.getUserName()));
+				logger.debug("Basic Lps UpdatedBy and UpdatedDate by Earthing");
 			} else {
 				logger.error("Given Basic LPS Id and Earthing LPS Id is Invalid");
 				throw new EarthingLpsException("Given Basic LPS Id and Earthing LPS Id is Invalid");

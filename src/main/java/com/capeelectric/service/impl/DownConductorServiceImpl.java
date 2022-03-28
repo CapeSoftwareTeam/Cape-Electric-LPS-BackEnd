@@ -75,6 +75,8 @@ public class DownConductorServiceImpl implements DownConductorService{
 						downConductorReport.setUpdatedBy(userFullName.findByUserName(downConductorReport.getUserName()));
 						downConductorRepository.save(downConductorReport);
 						logger.debug("Down Conductor Details Successfully Saved in DB");
+						userFullName.addUpdatedByandDate(downConductorReport.getBasicLpsId(),userFullName.findByUserName(downConductorReport.getUserName()));
+						logger.debug("Basic Lps UpdatedBy and UpdatedDate by DownConductor");
 					} else {
 						logger.error("Please fill all the fields before clicking next button");
 						throw new DownConductorException("Please fill all the fields before clicking next button");
@@ -138,6 +140,8 @@ public class DownConductorServiceImpl implements DownConductorService{
 				downConductorReport.setUpdatedBy(userFullName.findByUserName(downConductorReport.getUserName()));
 				downConductorRepository.save(downConductorReport);
 				logger.debug("Down Conductor Details Updated Successfully in DB");
+				userFullName.addUpdatedByandDate(downConductorReport.getBasicLpsId(),userFullName.findByUserName(downConductorReport.getUserName()));
+				logger.debug("Basic Lps UpdatedBy and UpdatedDate by DownConductor");
 			} else {
 				logger.error("Given Basic LPS Id and Down Conductor Id is Invalid");
 				throw new DownConductorException("Given Basic LPS Id and Down Conductor Id is Invalid");
