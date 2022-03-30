@@ -191,6 +191,8 @@ public class SummaryLpsServiceImpl implements SummaryLpsService {
 					summaryLps.setUpdatedBy(userFullName.findByUserName(summaryLps.getUserName()));
 					summaryLpsRepository.save(summaryLps);
 					logger.debug("Summary Lps Report Details Successfully Saved in DB");
+					userFullName.addUpdatedByandDate(summaryLps.getBasicLpsId(),userFullName.findByUserName(summaryLps.getUserName()));
+					logger.debug("Basic Lps UpdatedBy and UpdatedDate by Summary");
 
 					if (!isSubmitted) {
 						uploadPdfDetails(summaryLps.getUserName(), summaryLps.getBasicLpsId(), lpsAirDisc,
@@ -295,6 +297,8 @@ public class SummaryLpsServiceImpl implements SummaryLpsService {
 					summaryLps.setUpdatedBy(userFullName.findByUserName(summaryLps.getUserName()));
 					summaryLpsRepository.save(summaryLps);
 					logger.debug("Summary Lps Report Details Successfully Updated in DB");
+					userFullName.addUpdatedByandDate(summaryLps.getBasicLpsId(),userFullName.findByUserName(summaryLps.getUserName()));
+					logger.debug("Basic Lps UpdatedBy and UpdatedDate by Summary");
 
 					if (!isSubmitted) {
 						uploadPdfDetails(summaryLps.getUserName(), summaryLps.getBasicLpsId(), lpsAirDisc,
