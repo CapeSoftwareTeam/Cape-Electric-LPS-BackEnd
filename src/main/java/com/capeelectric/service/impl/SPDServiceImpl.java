@@ -71,6 +71,8 @@ public class SPDServiceImpl implements SPDService{
 						spdReport.setUpdatedBy(userFullName.findByUserName(spdReport.getUserName()));
 						spdRepository.save(spdReport);
 						logger.debug("SPD Report Details Successfully Saved in DB");
+						userFullName.addUpdatedByandDate(spdReport.getBasicLpsId(),userFullName.findByUserName(spdReport.getUserName()));
+						logger.debug("Basic Lps UpdatedBy and UpdatedDate by SPD");
 					} else {
 						logger.error("Please fill all the fields before clicking next button");
 						throw new SPDException("Please fill all the fields before clicking next button");
@@ -134,6 +136,8 @@ public class SPDServiceImpl implements SPDService{
 				spdReport.setUpdatedBy(userFullName.findByUserName(spdReport.getUserName()));
 				spdRepository.save(spdReport);
 				logger.debug("SPD Report Details Successfully Updated in DB");
+				userFullName.addUpdatedByandDate(spdReport.getBasicLpsId(),userFullName.findByUserName(spdReport.getUserName()));
+				logger.debug("Basic Lps UpdatedBy and UpdatedDate by SPD");
 			} else {
 				logger.error("Given Basic LPS Id and SPD Id is Invalid");
 				throw new SPDException("Given Basic LPS Id and SPD Id is Invalid");

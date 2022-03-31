@@ -100,6 +100,10 @@ public class AirTerminationLpsServiceImpl implements AirTerminationLpsService {
 					try {
 						airTerminationLpsRepository.save(airTermination);
 						logger.debug("Air Termination Successfully Saved in DB");
+						userFullName.addUpdatedByandDate(airTermination.getBasicLpsId(),airTermination.getUserName());
+						logger.debug("Basic Lps Updated By and Updated Date by AirTermination");
+						userFullName.addUpdatedByandDate(airTermination.getBasicLpsId(),userFullName.findByUserName(airTermination.getUserName()));
+						logger.debug("Basic Lps UpdatedBy and UpdatedDate by AirTermination");
 					}catch(Exception e) {
 						logger.error("Not able to save Air Termination data "+e.getMessage());
 						throw new AirTerminationException("Not able to save Air Termination data "+e.getMessage());
@@ -179,6 +183,8 @@ public class AirTerminationLpsServiceImpl implements AirTerminationLpsService {
 				airTermination.setUpdatedBy(userFullName.findByUserName(airTermination.getUserName()));
 			    airTerminationLpsRepository.save(airTermination);
 				logger.debug("Air Termination successfully updated into DB");
+				userFullName.addUpdatedByandDate(airTermination.getBasicLpsId(),userFullName.findByUserName(airTermination.getUserName()));
+				logger.debug("Basic Lps Updated By and Updated Date by AirTermination");
 			} else {
 				logger.error("Given Basic LPS Id and LPS Air Description Id is Invalid");
 				throw new AirTerminationException("Given Basic LPS Id and LPS Air Description Id is Invalid");

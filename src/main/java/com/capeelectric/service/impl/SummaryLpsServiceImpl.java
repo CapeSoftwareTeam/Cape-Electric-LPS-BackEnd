@@ -117,7 +117,7 @@ public class SummaryLpsServiceImpl implements SummaryLpsService {
 
 	@Transactional
 	@Override
-	public void addSummaryLpsDetails(SummaryLps summaryLps)
+	public String addSummaryLpsDetails(SummaryLps summaryLps,Boolean isSubmitted)
 			throws SummaryLpsException, BasicLpsException, AirTerminationException, DownConductorException,
 			EarthingLpsException, SPDException, EarthStudException, Exception {
 		logger.info("Called addSummaryLpsDetails function");
@@ -180,7 +180,7 @@ public class SummaryLpsServiceImpl implements SummaryLpsService {
 
 			if (basicLpsDetails.isPresent()
 					&& basicLpsDetails.get().getBasicLpsId().equals(summaryLps.getBasicLpsId())) {
-				Optional<SummaryLps> summaryLpsRepo = summaryLpsRepository.findByBasicLpsId(summaryLps.getBasicLpsId());
+				//Optional<SummaryLps> summaryLpsRepo = summaryLpsRepository.findByBasicLpsId(summaryLps.getBasicLpsId());
 //				if (!summaryLpsRepo.isPresent() || !summaryLpsRepo.get().getBasicLpsId().equals(summaryLps.getBasicLpsId())) {
 
 				List<SummaryLpsBuildings> summaryLpsBuildings = summaryLps.getSummaryLpsBuildings();
@@ -191,51 +191,19 @@ public class SummaryLpsServiceImpl implements SummaryLpsService {
 					summaryLps.setUpdatedBy(userFullName.findByUserName(summaryLps.getUserName()));
 					summaryLpsRepository.save(summaryLps);
 					logger.debug("Summary Lps Report Details Successfully Saved in DB");
+					userFullName.addUpdatedByandDate(summaryLps.getBasicLpsId(),userFullName.findByUserName(summaryLps.getUserName()));
+					logger.debug("Basic Lps UpdatedBy and UpdatedDate by Summary");
 
-					basicLpsDetails = basicLpsRepository.findByBasicLpsId(summaryLps.getBasicLpsId());
-					if (basicLpsDetails.isPresent()
-							&& basicLpsDetails.get().getBasicLpsId().equals(summaryLps.getBasicLpsId())) {
-						basicLps = basicLpsDetails.get();
-						basicLps.setAllStepsCompleted("AllStepCompleted");
-						basicLpsRepository.save(basicLps);
-						logger.debug("Basic Lps Report Details Successfully Updated as All Steps Completed in DB");
-
-// LPS PDF upload OnSubmit time							
-						printBasicLpsService.printBasicLps(summaryLps.getUserName(), summaryLps.getBasicLpsId(),
-								basicLpsDetails);
-						logger.debug("PDF printBasicLps() function called successfully");
-
-						printAirTerminationService.printAirTermination(summaryLps.getUserName(),
-								summaryLps.getBasicLpsId(),basicLpsDetails, lpsAirDisc);
-						logger.debug("PDF printAirTermination() function called successfully");
-
-						printDownConductorService.printDownConductor(summaryLps.getUserName(),
-								summaryLps.getBasicLpsId(),basicLpsDetails, downConductorDetails);
-						logger.debug("PDF printDownConductor() function called successfully");
-
-						printEarthingLpsService.printEarthingLpsDetails(summaryLps.getUserName(),
-								summaryLps.getBasicLpsId(),basicLpsDetails, earthingLpsDetails);
-						logger.debug("PDF printTesting() function called successfully");
-
-						printSPDService.printSPD(summaryLps.getUserName(), summaryLps.getBasicLpsId(),basicLpsDetails, spdDetails );
-						logger.debug("PDF printSPD() function called successfully");
-
-						printSDandEarthStudService.printSDandEarthStud(summaryLps.getUserName(),
-								summaryLps.getBasicLpsId(),basicLpsDetails, separateDistanceDetails, earthStudDetails);
-						logger.debug("PDF printSDandEarthStud() function called successfully");
-
-						printSummaryLpsService.printLpsSummaryDetails(summaryLps.getUserName(),
-								summaryLps.getBasicLpsId(),basicLpsDetails);
-						logger.debug("PDF printLpsSummaryDetails() function called successfully");
-
-						printFinalPDFService.printFinalPDF(summaryLps.getUserName(), summaryLps.getBasicLpsId(),
-								basicLps.getProjectName());
-						logger.debug("PDF printFinalPDF() function called successfully");
-
-					} else {
-						logger.error("Basic LPS Id Information not Available in Basic LPS Id Details");
-						throw new SummaryLpsException("Basic LPS Id Information not Available in Basic LPS Id Details");
+					if (!isSubmitted) {
+						uploadPdfDetails(summaryLps.getUserName(), summaryLps.getBasicLpsId(), lpsAirDisc,
+								downConductorDetails, earthingLpsDetails, spdDetails, separateDistanceDetails,
+								earthStudDetails);
+						return "Summary Lps Details Sucessfully Submitted";
 					}
+					else {
+						return "Summary Lps Details Sucessfully Saved";
+					}
+
 				} else {
 					logger.error("Please fill all the fields before clicking next button");
 					throw new SummaryLpsException("Please fill all the fields before clicking next button");
@@ -253,8 +221,111 @@ public class SummaryLpsServiceImpl implements SummaryLpsService {
 			logger.error("Invalid Inputs");
 			throw new SummaryLpsException("Invalid Inputs");
 		}
-		logger.info("Ended addSummaryLpsDetails function");
 	}
+	
+	@Transactional
+	@Override
+	public String updateSummaryLpsDetails(SummaryLps summaryLps,Boolean isSubmitted)
+			throws SummaryLpsException, BasicLpsException, AirTerminationException, DownConductorException,
+			EarthingLpsException, SPDException, EarthStudException, Exception {
+		logger.info("Called updateSummaryLpsDetails function");
+
+		if (summaryLps != null && summaryLps.getUserName() != null && !summaryLps.getUserName().isEmpty()
+				&& summaryLps.getBasicLpsId() != null && summaryLps.getBasicLpsId() != 0) {
+
+			// For Basic Lps data
+			Optional<BasicLps> basicLpsDetails = basicLpsRepository.findByBasicLpsId(summaryLps.getBasicLpsId());
+
+			// For Air Termination data
+			Optional<AirTermination> lpsAirDisc = airTerminationLpsRepository
+					.findByBasicLpsId(summaryLps.getBasicLpsId());
+
+			// For Down Conductor data
+			Optional<DownConductorReport> downConductorDetails = downConductorRepository
+					.findByBasicLpsId(summaryLps.getBasicLpsId());
+
+			// For Earthing Lps data
+			Optional<EarthingReport> earthingLpsDetails = earthingLpsRepository
+					.findByBasicLpsId(summaryLps.getBasicLpsId());
+
+			// For SPD data
+			Optional<SpdReport> spdDetails = spdRepository.findByBasicLpsId(summaryLps.getBasicLpsId());
+
+			// For Seperation Distance data
+			Optional<SeperationDistanceReport> separateDistanceDetails = seperationDistanceRepository
+					.findByBasicLpsId(summaryLps.getBasicLpsId());
+
+
+			// For Earth Stud data
+			Optional<EarthStudReport> earthStudDetails = earthStudRepository
+					.findByBasicLpsId(summaryLps.getBasicLpsId());
+
+			if (!basicLpsDetails.isPresent() && !lpsAirDisc.isPresent() && !downConductorDetails.isPresent()
+					&& !earthingLpsDetails.isPresent() && !separateDistanceDetails.isPresent()
+					&& !spdDetails.isPresent() && !earthStudDetails.isPresent()) {
+				logger.error("Please enter details for all previous steps to proceed further");
+				throw new SummaryLpsException("Please enter details for all previous steps to proceed further");
+			} else if (!basicLpsDetails.isPresent()) {
+				logger.error("Please enter Basic Information step to proceed further");
+				throw new SummaryLpsException("Please enter Basic Information step to proceed further");
+			} else if (!lpsAirDisc.isPresent()) {
+				logger.error("Please enter Air Termination step to proceed further");
+				throw new SummaryLpsException("Please enter Air Termination step to proceed further");
+			} else if (!downConductorDetails.isPresent()) {
+				logger.error("Please enter Down Conductors step to proceed further");
+				throw new SummaryLpsException("Please enter Down Conductors step to proceed further");
+			} else if (!earthingLpsDetails.isPresent()) {
+				logger.error("Please enter Earthing step to proceed further");
+				throw new SummaryLpsException("Please enter Earthing step to proceed further");
+			} else if (!spdDetails.isPresent()) {
+				logger.error("Please enter SPD step to proceed further");
+				throw new SummaryLpsException("Please enter SPD step to proceed further");
+			} else if (!separateDistanceDetails.isPresent()) {
+				logger.error("Please enter Seperation Distance step to proceed further");
+				throw new SummaryLpsException("Please enter Seperation Distance step to proceed further");
+			} else if (!earthStudDetails.isPresent()) {
+				logger.error("Please enter Equipotential Distance step to proceed further");
+				throw new SummaryLpsException("Please enter Equipotential Distance step to proceed further");
+			}
+
+			if (basicLpsDetails.isPresent()
+					&& basicLpsDetails.get().getBasicLpsId().equals(summaryLps.getBasicLpsId())) {
+
+				Optional<SummaryLps> summaryRepo = summaryLpsRepository.findById(summaryLps.getSummaryLpsId());
+				if (summaryRepo.isPresent()
+						&& summaryRepo.get().getSummaryLpsId().equals(summaryLps.getSummaryLpsId())) {
+					summaryLps.setUpdatedDate(LocalDateTime.now());
+					summaryLps.setUpdatedBy(userFullName.findByUserName(summaryLps.getUserName()));
+					summaryLpsRepository.save(summaryLps);
+					logger.debug("Summary Lps Report Details Successfully Updated in DB");
+					userFullName.addUpdatedByandDate(summaryLps.getBasicLpsId(),userFullName.findByUserName(summaryLps.getUserName()));
+					logger.debug("Basic Lps UpdatedBy and UpdatedDate by Summary");
+
+					if (!isSubmitted) {
+						uploadPdfDetails(summaryLps.getUserName(), summaryLps.getBasicLpsId(), lpsAirDisc,
+								downConductorDetails, earthingLpsDetails, spdDetails, separateDistanceDetails,
+								earthStudDetails);
+						return "Summary Lps Details Sucessfully Submitted";
+					} else {
+						return "Summary Lps Details Sucessfully Updated";
+					}
+
+				} else {
+					logger.error("Please fill all the fields before clicking next button");
+					throw new SummaryLpsException("Please fill all the fields before clicking next button");
+				}
+
+			} else {
+				logger.error("Given Basic LPS Id is Not Registered in Basic LPS");
+				throw new SummaryLpsException("Given Basic LPS Id is Not Registered in Basic LPS");
+			}
+		} else {
+			logger.error("Invalid Inputs");
+			throw new SummaryLpsException("Invalid Inputs");
+		}
+	}
+
+
 
 	@Override
 	public List<SummaryLps> retrieveSummaryLpsDetails(String userName, Integer basicLpsId) throws SummaryLpsException {
@@ -276,6 +347,49 @@ public class SummaryLpsServiceImpl implements SummaryLpsService {
 		} else {
 			logger.error("Invalid Inputs");
 			throw new SummaryLpsException("Invalid Inputs");
+		}
+	}
+	
+	private void uploadPdfDetails(String userName,Integer basicLpsId, Optional<AirTermination> lpsAirDisc, Optional<DownConductorReport> downConductorDetails, Optional<EarthingReport> earthingLpsDetails, Optional<SpdReport> spdDetails, Optional<SeperationDistanceReport> separateDistanceDetails, Optional<EarthStudReport> earthStudDetails) 
+			throws BasicLpsException, AirTerminationException, DownConductorException, EarthingLpsException,
+			SPDException, EarthStudException, SummaryLpsException, Exception {
+
+		Optional<BasicLps> basicLpsDetails = basicLpsRepository.findByBasicLpsId(basicLpsId);
+		if (basicLpsDetails.isPresent() && basicLpsDetails.get().getBasicLpsId().equals(basicLpsId)) {
+			basicLps = basicLpsDetails.get();
+			basicLps.setAllStepsCompleted("AllStepCompleted");
+			basicLpsRepository.save(basicLps);
+			logger.debug("Basic Lps Report Details Successfully Updated as All Steps Completed in DB");
+
+//LPS PDF upload OnSubmit time							
+			printBasicLpsService.printBasicLps(userName, basicLpsId, basicLpsDetails);
+			logger.debug("PDF printBasicLps() function called successfully");
+
+			printAirTerminationService.printAirTermination(userName, basicLpsId, basicLpsDetails, lpsAirDisc);
+			logger.debug("PDF printAirTermination() function called successfully");
+
+			printDownConductorService.printDownConductor(userName, basicLpsId, basicLpsDetails, downConductorDetails);
+			logger.debug("PDF printDownConductor() function called successfully");
+
+			printEarthingLpsService.printEarthingLpsDetails(userName, basicLpsId, basicLpsDetails, earthingLpsDetails);
+			logger.debug("PDF printTesting() function called successfully");
+
+			printSPDService.printSPD(userName, basicLpsId, basicLpsDetails, spdDetails);
+			logger.debug("PDF printSPD() function called successfully");
+
+			printSDandEarthStudService.printSDandEarthStud(userName, basicLpsId, basicLpsDetails,
+					separateDistanceDetails, earthStudDetails);
+			logger.debug("PDF printSDandEarthStud() function called successfully");
+
+			printSummaryLpsService.printLpsSummaryDetails(userName, basicLpsId);
+			logger.debug("PDF printLpsSummaryDetails() function called successfully");
+
+			printFinalPDFService.printFinalPDF(userName, basicLpsId, basicLps.getProjectName());
+			logger.debug("PDF printFinalPDF() function called successfully");
+
+		} else {
+			logger.error("Basic LPS Id Information not Available in Basic LPS Id Details");
+			throw new SummaryLpsException("Basic LPS Id Information not Available in Basic LPS Id Details");
 		}
 	}
 }

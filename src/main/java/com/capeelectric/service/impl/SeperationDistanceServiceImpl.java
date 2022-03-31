@@ -72,6 +72,8 @@ public class SeperationDistanceServiceImpl implements SeperationDistanceService{
 						seperationDistanceReport.setUpdatedBy(userFullName.findByUserName(seperationDistanceReport.getUserName()));
 						seperationDistanceRepository.save(seperationDistanceReport);
 						logger.debug("Seperation Distance Report Details Successfully Saved in DB");
+						userFullName.addUpdatedByandDate(seperationDistanceReport.getBasicLpsId(),userFullName.findByUserName(seperationDistanceReport.getUserName()));
+						logger.debug("Basic Lps UpdatedBy and UpdatedDate by SeperationDistance");
 					} else {
 						logger.error("Please fill all the fields before clicking next button");
 						throw new SeperationDistanceException("Please fill all the fields before clicking next button");
@@ -133,6 +135,8 @@ public class SeperationDistanceServiceImpl implements SeperationDistanceService{
 				seperationDistanceReport.setUpdatedBy(userFullName.findByUserName(seperationDistanceReport.getUserName()));
 				seperationDistanceRepository.save(seperationDistanceReport);
 				logger.debug("Seperation Distance Report Details Successfully Updated in DB");
+				userFullName.addUpdatedByandDate(seperationDistanceReport.getBasicLpsId(),userFullName.findByUserName(seperationDistanceReport.getUserName()));
+				logger.debug("Basic Lps UpdatedBy and UpdatedDate by SeperationDistance");
 			} else {
 				logger.error("Given Basic LPS Id and Seperation Distance Id is Invalid");
 				throw new SeperationDistanceException("Given Basic LPS Id and Seperation Distance Id is Invalid");
