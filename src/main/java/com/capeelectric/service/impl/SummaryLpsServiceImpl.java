@@ -381,7 +381,7 @@ public class SummaryLpsServiceImpl implements SummaryLpsService {
 					separateDistanceDetails, earthStudDetails);
 			logger.debug("PDF printSDandEarthStud() function called successfully");
 
-			printSummaryLpsService.printLpsSummaryDetails(userName, basicLpsId);
+			printSummaryLpsService.printLpsSummaryDetails(userName, basicLpsId, basicLpsDetails);
 			logger.debug("PDF printLpsSummaryDetails() function called successfully");
 
 			printFinalPDFService.printFinalPDF(userName, basicLpsId, basicLps.getProjectName());
