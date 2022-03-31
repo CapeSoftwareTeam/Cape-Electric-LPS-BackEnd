@@ -255,6 +255,7 @@ public class SummaryLpsServiceImpl implements SummaryLpsService {
 			Optional<SeperationDistanceReport> separateDistanceDetails = seperationDistanceRepository
 					.findByBasicLpsId(summaryLps.getBasicLpsId());
 
+
 			// For Earth Stud data
 			Optional<EarthStudReport> earthStudDetails = earthStudRepository
 					.findByBasicLpsId(summaryLps.getBasicLpsId());
