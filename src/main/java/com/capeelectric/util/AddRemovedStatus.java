@@ -74,6 +74,8 @@ public class AddRemovedStatus {
 								+ lpsAirDiscriptionItr.getBuildingCount());
 						Boolean flagSave = false;
 						if (lpsAirDiscriptionItr.getFlag().equalsIgnoreCase("R")) {
+							logger.debug("Building count:" + lpsAirDiscriptionItr.getBuildingCount()
+									+ "for Downconductor updated with status R");
 							downConductorDescriptionRepo.setFlag("R");
 							flagSave = true;
 						} else if (!downConductorDescriptionRepo.getBuildingName()
@@ -83,12 +85,13 @@ public class AddRemovedStatus {
 							downConductorDescriptionRepo.setBuildingNumber(lpsAirDiscriptionItr.getBuildingNumber());
 							downConductorDescriptionRepo.setBuildingName(lpsAirDiscriptionItr.getBuildingName());
 							flagSave = true;
+							logger.debug(
+									"DownConductors Lps BuildingName && BuildingNumber modified based on Airtermination");
 						}
 
 						if (flagSave) {
-							logger.debug("Building count:" + lpsAirDiscriptionItr.getBuildingCount()
-									+ "for Downconductor updated with status R");
 							downConductorListRepository.save(downConductorDescriptionRepo);
+							logger.debug("DownConductors Lps successfully updated in DB");
 						}
 
 					}
@@ -119,6 +122,8 @@ public class AddRemovedStatus {
 						Boolean flagSave = false;
 
 						if (lpsAirDiscriptionItr.getFlag().equalsIgnoreCase("R")) {
+							logger.debug("Building count:" + lpsAirDiscriptionItr.getBuildingCount()
+									+ "for Earthing Lps updated with status R");
 							earthingLpsDescriptionRepo.setFlag("R");
 							flagSave = true;
 						}
@@ -130,12 +135,14 @@ public class AddRemovedStatus {
 							earthingLpsDescriptionRepo.setBuildingNumber(lpsAirDiscriptionItr.getBuildingNumber());
 							earthingLpsDescriptionRepo.setBuildingName(lpsAirDiscriptionItr.getBuildingName());
 							flagSave = true;
+							logger.debug(
+									"Earthing Lps BuildingName && BuildingNumber modified based on Airtermination");
+
 						}
 
 						if (flagSave) {
-							logger.debug("Building count:" + lpsAirDiscriptionItr.getBuildingCount()
-									+ "for Earthing Lps updated with status R");
 							earthingLpsListRepository.save(earthingLpsDescriptionRepo);
+							logger.debug("Earthing Lps successfully updated in DB");
 						}
 
 					}
@@ -163,6 +170,8 @@ public class AddRemovedStatus {
 						Boolean flagSave = false;
 
 						if (lpsAirDiscriptionItr.getFlag().equalsIgnoreCase("R")) {
+							logger.debug("Building count:" + lpsAirDiscriptionItr.getBuildingCount()
+									+ "for SPD Lps updated with status R");
 							spdRepo.setFlag("R");
 							flagSave = true;
 						}
@@ -172,12 +181,12 @@ public class AddRemovedStatus {
 							spdRepo.setBuildingNumber(lpsAirDiscriptionItr.getBuildingNumber());
 							spdRepo.setBuildingName(lpsAirDiscriptionItr.getBuildingName());
 							flagSave = true;
+							logger.debug("Spd Lps BuildingName && BuildingNumber modified based on Airtermination");
 						}
 
 						if (flagSave) {
-							logger.debug("Building count:" + lpsAirDiscriptionItr.getBuildingCount()
-									+ "for Earthing Lps updated with status R");
 							spdListRepository.save(spdRepo);
+							logger.debug("Spd Lps successfully updated in DB");
 						}
 					}
 				} catch (Exception e) {
@@ -208,6 +217,8 @@ public class AddRemovedStatus {
 						Boolean flagSave = false;
 
 						if (lpsAirDiscriptionItr.getFlag().equalsIgnoreCase("R")) {
+							logger.debug("Building count:" + lpsAirDiscriptionItr.getBuildingCount()
+									+ "for Seperation Lps updated with status R");
 							seperationDistanceDescriptionRepo.setFlag("R");
 							flagSave = true;
 						} else if (!seperationDistanceDescriptionRepo.getBuildingName()
@@ -218,12 +229,13 @@ public class AddRemovedStatus {
 									.setBuildingNumber(lpsAirDiscriptionItr.getBuildingNumber());
 							seperationDistanceDescriptionRepo.setBuildingName(lpsAirDiscriptionItr.getBuildingName());
 							flagSave = true;
+							logger.debug(
+									"SeperationDistance Lps BuildingName && BuildingNumber modified based on Airtermination");
 						}
 
 						if (flagSave) {
-							logger.debug("Building count:" + lpsAirDiscriptionItr.getBuildingCount()
-									+ "for Earthing Lps updated with status R");
 							seperationDistanceListRepository.save(seperationDistanceDescriptionRepo);
+							logger.debug("SeperationDistance Lps successfully updated in DB");
 						}
 					}
 				} catch (Exception e) {
@@ -256,6 +268,8 @@ public class AddRemovedStatus {
 						Boolean flagSave = false;
 
 						if (lpsAirDiscriptionItr.getFlag().equalsIgnoreCase("R")) {
+							logger.debug("Building count:" + lpsAirDiscriptionItr.getBuildingCount()
+									+ "for Earth Lps updated with status R");
 							earthStudDescriptionRepo.setFlag("R");
 							flagSave = true;
 						}
@@ -267,12 +281,13 @@ public class AddRemovedStatus {
 							earthStudDescriptionRepo.setBuildingNumber(lpsAirDiscriptionItr.getBuildingNumber());
 							earthStudDescriptionRepo.setBuildingName(lpsAirDiscriptionItr.getBuildingName());
 							flagSave = true;
+							logger.debug(
+									"EarthStud Lps BuildingName && BuildingNumber modified based on Airtermination");
 						}
 
 						if (flagSave) {
-							logger.debug("Building count:" + lpsAirDiscriptionItr.getBuildingCount()
-									+ "for Earthing Lps updated with status R");
 							earthStudListRepository.save(earthStudDescriptionRepo);
+							logger.debug("EarthStud Lps successfully updated in DB");
 						}
 					}
 				} catch (Exception e) {
@@ -288,7 +303,7 @@ public class AddRemovedStatus {
 
 	}
 
-	// Method for adding R status in Earth Stud
+	// Method for adding R status in summary
 	public void addRemoveStatusInSummaryLps(List<LpsAirDiscription> lpsAirDiscription, String userName,
 			Integer basiclpsId) throws AirTerminationException {
 		logger.info("Called addRemoveStatusInSummaryLps function");
@@ -297,8 +312,7 @@ public class AddRemovedStatus {
 			if (lpsAirDiscriptionItr != null && lpsAirDiscriptionItr.getBuildingCount() != null
 					&& lpsAirDiscriptionItr.getFlag().equalsIgnoreCase("R")) {
 				try {
-					// SummaryLpsBuildings summaryLpsBuildingsRepo = summaryLpsListRepository
-					// .findByBuildingCount(lpsAirDiscriptionItr.getBuildingCount());
+
 					List<SummaryLps> summaryLpsRepo = summaryLpsRepository.findByUserNameAndBasicLpsId(userName,
 							basiclpsId);
 
@@ -311,8 +325,13 @@ public class AddRemovedStatus {
 								Boolean flagSave = false;
 
 								if (lpsAirDiscriptionItr.getFlag().equalsIgnoreCase("R")) {
+									logger.debug("Building count:" + lpsAirDiscriptionItr.getBuildingCount()
+											+ "for summary Lps updated with status R");
 									summaryLpsBuilding.setFlag("R");
 									flagSave = true;
+									logger.debug(
+											"Summary Lps BuildingName && BuildingNumber modified based on Airtermination");
+
 								}
 
 								else if (!summaryLpsBuilding.getBuildingName()
@@ -322,11 +341,11 @@ public class AddRemovedStatus {
 									summaryLpsBuilding.setBuildingNumber(lpsAirDiscriptionItr.getBuildingNumber());
 									summaryLpsBuilding.setBuildingName(lpsAirDiscriptionItr.getBuildingName());
 									flagSave = true;
+
 								}
 
 								if (flagSave) {
-									logger.debug("Building count:" + lpsAirDiscriptionItr.getBuildingCount()
-											+ "for Earthing Lps updated with status R");
+									logger.debug("Summary Lps successfully updated in DB");
 									summaryLpsListRepository.save(summaryLpsBuilding);
 								}
 							}
@@ -357,9 +376,9 @@ public class AddRemovedStatus {
 				for (SummaryLpsBuildings summaryLpsBuildings : summaryLpsData.getSummaryLpsBuildings()) {
 					summaryLpsBuildings.setFlag("R");
 				}
-
 				summaryLpsData.setFlag("R");
 				summaryLpsRepository.save(summaryLpsData);
+				logger.debug("Summary Lps successfully updated in DB");
 			}
 		}
 		logger.info("Ended removeSummaryLps function");
