@@ -17,6 +17,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+import com.capeelectric.exception.AirTerminationException;
 import com.capeelectric.exception.EarthStudException;
 import com.capeelectric.model.BasicLps;
 import com.capeelectric.model.EarthStudDescription;
@@ -77,7 +79,7 @@ public class EarthStudServiceTest {
 	
 	
 	@Test
-	public void testAddEarthStudDetails() throws EarthStudException {
+	public void testAddEarthStudDetails() throws EarthStudException, AirTerminationException {
 		when(basicLpsRepository.findByBasicLpsId(1)).thenReturn(Optional.of(basicLps));
 		when(earthStudRepository.findByBasicLpsId(2)).thenReturn(Optional.of(earthStudReport));
 		
@@ -128,7 +130,7 @@ public class EarthStudServiceTest {
 	}
 
 	@Test
-	public void testUpdateEarthStudDetails() throws EarthStudException {
+	public void testUpdateEarthStudDetails() throws EarthStudException, AirTerminationException {
 
 		earthStudReport.setUserName("LVsystem@gmail.com");
 		earthStudReport.setEarthStudReportId(1);

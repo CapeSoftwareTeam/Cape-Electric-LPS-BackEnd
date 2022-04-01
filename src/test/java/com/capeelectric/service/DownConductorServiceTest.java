@@ -17,6 +17,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+import com.capeelectric.exception.AirTerminationException;
 import com.capeelectric.exception.DownConductorException;
 import com.capeelectric.model.BasicLps;
 import com.capeelectric.model.BridgingDescription;
@@ -120,7 +122,7 @@ public class DownConductorServiceTest {
 		
 	}
 	@Test
-	public void testAddDownConductorsDetails() throws DownConductorException {
+	public void testAddDownConductorsDetails() throws DownConductorException, AirTerminationException {
 
 		when(basicLpsRepository.findByBasicLpsId(1)).thenReturn(Optional.of(basicLps));
 		when(downConductorRepository.findByBasicLpsId(2)).thenReturn(Optional.of(downConductorReport));
@@ -220,7 +222,7 @@ public class DownConductorServiceTest {
 	}
 
 	@Test
-	public void testUpdateDownConductor() throws DownConductorException {
+	public void testUpdateDownConductor() throws DownConductorException, AirTerminationException {
 		downConductorReport.setUserName("LVsystem@gmail.com");
 		downConductorReport.setDownConductorReportId(1);
 		downConductorReport.setBasicLpsId(1);

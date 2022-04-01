@@ -18,6 +18,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+import com.capeelectric.exception.AirTerminationException;
 import com.capeelectric.exception.SPDException;
 import com.capeelectric.model.BasicLps;
 import com.capeelectric.model.SPD;
@@ -85,7 +87,7 @@ public class SPDServiceTest {
 	}
 
 	@Test
-	public void testAddSPDDetails() throws SPDException {
+	public void testAddSPDDetails() throws SPDException, AirTerminationException {
 
 		when(basicLpsRepository.findByBasicLpsId(1)).thenReturn(Optional.of(basicLps));
 		when(spdRepository.findByBasicLpsId(2)).thenReturn(Optional.of(spdReport));
@@ -145,7 +147,7 @@ public class SPDServiceTest {
 	}
 
 	@Test
-	public void testUpdateSpdDetails() throws SPDException {
+	public void testUpdateSpdDetails() throws SPDException, AirTerminationException {
 		
 		spdReport.setUserName("LVsystem@gmail.com");
 		spdReport.setSpdReportId(1);
