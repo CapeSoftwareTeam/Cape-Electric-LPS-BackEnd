@@ -214,7 +214,7 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 					cell21.setGrayFill(0.92f);
 					table205.addCell(cell21);
 
-					PdfPCell cell29 = new PdfPCell(new Paragraph(spd.getTotalMainsIncomingOb(), font3));
+					PdfPCell cell29 = new PdfPCell(new Paragraph(spd.getTotalMainsIncomingOb().toString(), font3));
 					cell29.setHorizontalAlignment(Element.ALIGN_LEFT);
 					table205.addCell(cell29);
 
@@ -253,7 +253,7 @@ public class PrintSPDServiceImpl implements PrintSPDService {
 					cell40.setGrayFill(0.92f);
 					table205.addCell(cell40);
 
-					PdfPCell cell44 = new PdfPCell(new Paragraph(spd.getTotalNoOutDoorRequipmentOb(), font3));
+					PdfPCell cell44 = new PdfPCell(new Paragraph(spd.getTotalNoOutDoorRequipmentOb().toString(), font3));
 					cell44.setHorizontalAlignment(Element.ALIGN_LEFT);
 					table205.addCell(cell44);
 
