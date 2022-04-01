@@ -26,6 +26,7 @@ import com.capeelectric.model.EarthStudReport;
 import com.capeelectric.repository.BasicLpsRepository;
 import com.capeelectric.repository.EarthStudRepository;
 import com.capeelectric.service.impl.EarthStudServiceImpl;
+import com.capeelectric.util.AddRemovedStatus;
 import com.capeelectric.util.FindNonRemovedObjects;
 import com.capeelectric.util.UserFullName;
 
@@ -54,6 +55,9 @@ public class EarthStudServiceTest {
 	@MockBean
 	private UserFullName userFullName;
 
+	@MockBean
+	private AddRemovedStatus addRemovedStatus;
+	
 	private EarthStudReport earthStudReport;
 
 	{

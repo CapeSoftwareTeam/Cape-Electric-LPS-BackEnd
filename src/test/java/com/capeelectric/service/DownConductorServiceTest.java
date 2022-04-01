@@ -33,6 +33,7 @@ import com.capeelectric.model.TestingJoint;
 import com.capeelectric.repository.BasicLpsRepository;
 import com.capeelectric.repository.DownConductorRepository;
 import com.capeelectric.service.impl.DownConductorServiceImpl;
+import com.capeelectric.util.AddRemovedStatus;
 import com.capeelectric.util.FindNonRemovedObjects;
 import com.capeelectric.util.UserFullName;
 
@@ -56,6 +57,9 @@ public class DownConductorServiceTest {
 	
 	@MockBean
 	private FindNonRemovedObjects findNonRemovedObjects;
+	
+	@MockBean
+	private AddRemovedStatus addRemovedStatus;
 
 	private DownConductorReport downConductorReport;
 

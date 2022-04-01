@@ -32,6 +32,7 @@ import com.capeelectric.model.EarthingSystem;
 import com.capeelectric.repository.BasicLpsRepository;
 import com.capeelectric.repository.EarthingLpsRepository;
 import com.capeelectric.service.impl.EarthingLpsServiceImpl;
+import com.capeelectric.util.AddRemovedStatus;
 import com.capeelectric.util.FindNonRemovedObjects;
 import com.capeelectric.util.UserFullName;
 
@@ -58,6 +59,9 @@ public class EarthingLpsServiceTest {
 	
 	@MockBean
 	private UserFullName userFullName;
+	
+	@MockBean
+	private AddRemovedStatus addRemovedStatus;
 
 	private EarthingReport earthingReport;
 

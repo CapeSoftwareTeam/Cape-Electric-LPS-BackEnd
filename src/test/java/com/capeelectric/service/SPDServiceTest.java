@@ -2,7 +2,6 @@ package com.capeelectric.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -28,6 +27,7 @@ import com.capeelectric.model.SpdReport;
 import com.capeelectric.repository.BasicLpsRepository;
 import com.capeelectric.repository.SPDRepository;
 import com.capeelectric.service.impl.SPDServiceImpl;
+import com.capeelectric.util.AddRemovedStatus;
 import com.capeelectric.util.FindNonRemovedObjects;
 import com.capeelectric.util.UserFullName;
 
@@ -56,6 +56,9 @@ public class SPDServiceTest {
 	private UserFullName userFullName;
 
 	private SpdReport spdReport;
+	
+	@MockBean
+	private AddRemovedStatus addRemovedStatus;
 
 	{
 		spdReport = new SpdReport();

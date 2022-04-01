@@ -28,6 +28,7 @@ import com.capeelectric.model.SeperationDistanceReport;
 import com.capeelectric.repository.BasicLpsRepository;
 import com.capeelectric.repository.SeperationDistanceRepository;
 import com.capeelectric.service.impl.SeperationDistanceServiceImpl;
+import com.capeelectric.util.AddRemovedStatus;
 import com.capeelectric.util.FindNonRemovedObjects;
 import com.capeelectric.util.UserFullName;
 
@@ -56,6 +57,9 @@ public class SeperationDistanceServiceTest {
 	@MockBean
 	private UserFullName userFullName;
 
+	@MockBean
+	private AddRemovedStatus addRemovedStatus;
+	
 	private SeperationDistanceReport seperationDistanceReport;
 
 	{
