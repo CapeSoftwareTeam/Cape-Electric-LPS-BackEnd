@@ -18,12 +18,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import com.capeelectric.exception.SPDException;
+import com.capeelectric.exception.AirTerminationException;
 import com.capeelectric.exception.SeperationDistanceException;
-import com.capeelectric.model.SPD;
-import com.capeelectric.model.SeperationDistanceDescription;
 import com.capeelectric.model.SeperationDistanceReport;
-import com.capeelectric.service.impl.SPDServiceImpl;
 import com.capeelectric.service.impl.SeperationDistanceServiceImpl;
 
 @ExtendWith(SpringExtension.class)
@@ -49,7 +46,7 @@ public class SeperationDistanceControllerTest {
 	}
 
 	@Test
-	public void testAddSeperationDistance() throws SeperationDistanceException {
+	public void testAddSeperationDistance() throws SeperationDistanceException, AirTerminationException {
 		logger.info("testAddSeperationDistance Function Started");
 
 		doNothing().when(seperationDistanceServiceImpl).addSeperationDistance(seperationDistanceReport);
@@ -76,7 +73,7 @@ public class SeperationDistanceControllerTest {
 	}
 
 	@Test
-	public void testUpdateSeperationDetails() throws SeperationDistanceException {
+	public void testUpdateSeperationDetails() throws SeperationDistanceException, AirTerminationException {
 
 		logger.info("testUpdateSeperationDetails Function Started");
 		ResponseEntity<String> expectedResponseEntity = new ResponseEntity<String>(HttpStatus.OK);

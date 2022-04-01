@@ -18,12 +18,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import com.capeelectric.exception.DownConductorException;
+import com.capeelectric.exception.AirTerminationException;
 import com.capeelectric.exception.SPDException;
-import com.capeelectric.model.DownConductorDescription;
-import com.capeelectric.model.SPD;
 import com.capeelectric.model.SpdReport;
-import com.capeelectric.service.impl.DownConductorServiceImpl;
 import com.capeelectric.service.impl.SPDServiceImpl;
 
 @ExtendWith(SpringExtension.class)
@@ -48,7 +45,7 @@ public class SPDControllerTest {
 	}
 
 	@Test
-	public void testAddSPDDetails() throws SPDException {
+	public void testAddSPDDetails() throws SPDException, AirTerminationException {
 		logger.info("testAddSPDDetails Function Started");
 
 		doNothing().when(spdServiceImpl).addSPDDetails(spdReport);
@@ -73,7 +70,7 @@ public class SPDControllerTest {
 	}
 
 	@Test
-	public void testUpdateSPD() throws SPDException {
+	public void testUpdateSPD() throws SPDException, AirTerminationException {
 
 		logger.info("testUpdateSPD Function Started");
 		ResponseEntity<String> expectedResponseEntity = new ResponseEntity<String>(HttpStatus.OK);
