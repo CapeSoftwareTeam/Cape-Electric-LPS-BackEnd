@@ -19,10 +19,10 @@ import com.capeelectric.model.EarthStudReport;
 public interface EarthStudService {
 
 	public void addEarthStudDetails(EarthStudReport earthStudReport)
-			throws EarthStudException;
+			throws EarthStudException, AirTerminationException;
 
 	public List<EarthStudReport> retrieveEarthStudDetails(String userName, Integer basicLpsId)
 			throws EarthStudException;
 	
-	public void updateEarthStudDetails(EarthStudReport earthStudReport) throws EarthStudException;
+	public void updateEarthStudDetails(EarthStudReport earthStudReport) throws EarthStudException, AirTerminationException;
 }

@@ -148,7 +148,7 @@ public class FinalReportServiceImpl implements FinalReportService {
 			
 			// Earth Stud
 			logger.debug("fetching process started for Summary");
-			Optional<SummaryLps> summaryLps = summaryLpsRepository.findByBasicLpsId(basicLpsId);
+			Optional<SummaryLps> summaryLps = summaryLpsRepository.findByBasicLpsIdAndFlag(basicLpsId,"A");
 			logger.debug("Summary_fetching ended");
 
 			 if (basicLpsDetails.isPresent() && basicLpsDetails != null) {

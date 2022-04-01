@@ -170,6 +170,7 @@ public class AirTerminationLpsServiceImpl implements AirTerminationLpsService {
 				addRemovedStatus.addRemoveStatusInSeperationDistance(airTermination.getLpsAirDescription());
 				addRemovedStatus.addRemoveStatusInEarthStud(airTermination.getLpsAirDescription());
 				addRemovedStatus.addRemoveStatusInSummaryLps(airTermination.getLpsAirDescription());
+				addRemovedStatus.removeSummaryLps(airTermination.getUserName(),airTermination.getBasicLpsId());
 
 				List<LpsAirDiscription> lpsAirDiscription = airTermination.getLpsAirDescription();
 				for (LpsAirDiscription lpsAirDiscriptionItr : lpsAirDiscription) {

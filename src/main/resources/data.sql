@@ -985,6 +985,7 @@ use lv_safety_verification;
 				            USER_NAME VARCHAR(225),
 				            SUMMARY_DATE VARCHAR(225),
 				            INSPECTED_YEAR INT,
+				            FLAG VARCHAR(20),
 				            CREATED_BY VARCHAR(255),
 						    CREATED_DATE datetime,
 						    UPDATED_BY VARCHAR(255),

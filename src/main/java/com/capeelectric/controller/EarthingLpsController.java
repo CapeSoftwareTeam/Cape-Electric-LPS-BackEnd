@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.capeelectric.exception.AirTerminationException;
 import com.capeelectric.exception.EarthingLpsException;
 import com.capeelectric.model.EarthingLpsDescription;
 import com.capeelectric.model.EarthingReport;
@@ -39,7 +40,7 @@ private static final Logger logger = LoggerFactory.getLogger(EarthingLpsControll
 	
 	@PostMapping("/addEarthingLps")
 	public ResponseEntity<String> addEarthingLps(@RequestBody   EarthingReport earthingReport)
-			throws EarthingLpsException {
+			throws EarthingLpsException, AirTerminationException {
 		logger.info("called addEarthingLps function UserName : {}, BasicLpsId : {}",
 				earthingReport.getUserName(), earthingReport.getBasicLpsId());
 		earthingLpsService.addEarthingLpsDetails(earthingReport);
@@ -58,7 +59,7 @@ private static final Logger logger = LoggerFactory.getLogger(EarthingLpsControll
 	
 	@PutMapping("/updateEarthingLps")
 	public ResponseEntity<String> updateEarthingLps(@RequestBody EarthingReport earthingReport)
-			throws EarthingLpsException {
+			throws EarthingLpsException, AirTerminationException {
 		logger.info("called updateEarthingLps function UserName : {},BasicLpsId : {},EarthingReportId : {}",
 				earthingReport.getUserName(), earthingReport.getBasicLpsId(),
 				earthingReport.getEarthingReportId());
