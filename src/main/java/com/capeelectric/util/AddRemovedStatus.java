@@ -3,6 +3,8 @@
  */
 package com.capeelectric.util;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -17,6 +19,7 @@ import com.capeelectric.model.EarthingLpsDescription;
 import com.capeelectric.model.LpsAirDiscription;
 import com.capeelectric.model.SPD;
 import com.capeelectric.model.SeperationDistanceDescription;
+import com.capeelectric.model.SummaryLps;
 import com.capeelectric.model.SummaryLpsBuildings;
 import com.capeelectric.repository.DownConductorListRepository;
 import com.capeelectric.repository.EarthStudListRepository;
@@ -24,6 +27,7 @@ import com.capeelectric.repository.EarthingLpsListRepository;
 import com.capeelectric.repository.SPDListRepository;
 import com.capeelectric.repository.SeperationDistanceListRepository;
 import com.capeelectric.repository.SummaryLpsListRepository;
+import com.capeelectric.repository.SummaryLpsRepository;
 import com.capeelectric.service.impl.AirTerminationLpsServiceImpl;
 
 /**
@@ -52,6 +56,9 @@ public class AddRemovedStatus {
 	
 	@Autowired
 	private SummaryLpsListRepository summaryLpsListRepository;
+	
+	@Autowired
+	private SummaryLpsRepository summaryLpsRepository;
 
 	//Method for adding R status in Down Conductors
 		public void addRemoveStatusInDownConductors(List<LpsAirDiscription> lpsAirDiscription)
@@ -230,5 +237,24 @@ public class AddRemovedStatus {
 
 		}
 		
-		
+		// Method for adding R status in summaryLps
+		public void removeSummaryLps(String userName, Integer basiclpsId)
+				throws AirTerminationException {
+			logger.info("Called removeSummaryLps function");
+
+			List<SummaryLps> summaryLps = summaryLpsRepository.findByUserNameAndBasicLpsId(userName, basiclpsId);
+			for (SummaryLps summaryLpsData : summaryLps) {
+                            
+				if (!summaryLpsData.getFlag().equalsIgnoreCase("R")) {
+					 for (SummaryLpsBuildings summaryLpsBuildings : summaryLpsData.getSummaryLpsBuildings()) {
+						 summaryLpsBuildings.setFlag("R");
+					}
+					
+					summaryLpsData.setFlag("R");
+					summaryLpsRepository.save(summaryLpsData);
+				}
+			}
+			logger.info("Ended removeSummaryLps function");
+
+		}
 }
