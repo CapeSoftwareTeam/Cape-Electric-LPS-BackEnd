@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.capeelectric.exception.AirTerminationException;
 import com.capeelectric.exception.DownConductorException;
 import com.capeelectric.model.DownConductorDescription;
 import com.capeelectric.model.DownConductorReport;
@@ -39,7 +40,7 @@ public class DownConductorController {
 	
 	@PostMapping("/addDownConductor")
 	public ResponseEntity<String> addDownConductors(@RequestBody  DownConductorReport downConductorReport)
-			throws DownConductorException {
+			throws DownConductorException, AirTerminationException {
 		logger.info("called addDownConductors function UserName : {}, SiteId : {}",
 				downConductorReport.getUserName(), downConductorReport.getBasicLpsId());
 		downConductorService.addDownConductorsDetails(downConductorReport);
@@ -58,7 +59,7 @@ public class DownConductorController {
 	
 	@PutMapping("/updateDownConductor")
 	public ResponseEntity<String> updateDownConductor(@RequestBody DownConductorReport downConductorReport)
-			throws DownConductorException {
+			throws DownConductorException, AirTerminationException {
 		logger.info("called updateDownConductor function UserName : {},BasicLpsId : {},DownConductorReportId : {}",
 				downConductorReport.getUserName(), downConductorReport.getBasicLpsId(),
 				downConductorReport.getDownConductorReportId());

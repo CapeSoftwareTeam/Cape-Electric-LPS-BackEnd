@@ -18,5 +18,5 @@ public interface SummaryLpsRepository extends CrudRepository<SummaryLps, Integer
 
 	public List<SummaryLps> findByUserNameAndBasicLpsId(String userName, Integer basicLpsId);
 
-	public Optional<SummaryLps> findByBasicLpsId(Integer basicLpsId);
+	public Optional<SummaryLps> findByBasicLpsIdAndFlag(Integer basicLpsId,String flag);
 }

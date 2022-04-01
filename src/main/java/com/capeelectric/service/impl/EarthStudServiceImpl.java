@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.capeelectric.exception.AirTerminationException;
 import com.capeelectric.exception.EarthStudException;
 import com.capeelectric.model.BasicLps;
 import com.capeelectric.model.EarthStudDescription;
@@ -29,6 +30,7 @@ import com.capeelectric.service.PrintEarthingLpsService;
 import com.capeelectric.service.PrintFinalPDFService;
 import com.capeelectric.service.PrintSDandEarthStudService;
 import com.capeelectric.service.PrintSPDService;
+import com.capeelectric.util.AddRemovedStatus;
 import com.capeelectric.util.FindNonRemovedObjects;
 import com.capeelectric.util.UserFullName;
 
@@ -75,11 +77,14 @@ public class EarthStudServiceImpl implements EarthStudService {
 	
 	@Autowired
 	private FindNonRemovedObjects findNonRemovedObjects;
+	
+	@Autowired
+	private AddRemovedStatus addRemovedStatus;
 
 	@Transactional
 	@Override
 	public void addEarthStudDetails(EarthStudReport earthStudReport)
-			throws EarthStudException {
+			throws EarthStudException, AirTerminationException {
 		logger.info("Called addEarthStudDetails function");
 
 		if (earthStudReport != null && earthStudReport.getUserName() != null
@@ -101,6 +106,8 @@ public class EarthStudServiceImpl implements EarthStudService {
 						earthStudReport.setCreatedBy(userFullName.findByUserName(earthStudReport.getUserName()));
 						earthStudReport.setUpdatedBy(userFullName.findByUserName(earthStudReport.getUserName()));
 						earthStudRepository.save(earthStudReport);
+						addRemovedStatus.removeSummaryLps(earthStudReport.getUserName(),earthStudReport.getBasicLpsId());
+
 						logger.debug("Earth Stud Report Details Successfully Saved in DB");
 						userFullName.addUpdatedByandDate(earthStudReport.getBasicLpsId(),userFullName.findByUserName(earthStudReport.getUserName()));
 						logger.debug("Basic Lps UpdatedBy and UpdatedDate by EarthStud");
@@ -176,7 +183,7 @@ public class EarthStudServiceImpl implements EarthStudService {
 
 	@Transactional
 	@Override
-	public void updateEarthStudDetails(EarthStudReport earthStudReport) throws EarthStudException {
+	public void updateEarthStudDetails(EarthStudReport earthStudReport) throws EarthStudException, AirTerminationException {
 		logger.info("Called updateEarthStudDetails function");
 
 		if (earthStudReport != null && earthStudReport.getEarthStudReportId() != null
@@ -188,6 +195,8 @@ public class EarthStudServiceImpl implements EarthStudService {
 					&& earthStudRepo.get().getBasicLpsId().equals(earthStudReport.getBasicLpsId())) {
 				earthStudReport.setUpdatedDate(LocalDateTime.now());
 				earthStudReport.setUpdatedBy(userFullName.findByUserName(earthStudReport.getUserName()));
+				addRemovedStatus.removeSummaryLps(earthStudReport.getUserName(),earthStudReport.getBasicLpsId());
+
 				earthStudRepository.save(earthStudReport);
 				logger.debug("Earth Stud Report Details Successfully Updated in DB");
 				userFullName.addUpdatedByandDate(earthStudReport.getBasicLpsId(),userFullName.findByUserName(earthStudReport.getUserName()));

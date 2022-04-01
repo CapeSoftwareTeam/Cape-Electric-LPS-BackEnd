@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.capeelectric.exception.AirTerminationException;
 import com.capeelectric.exception.SPDException;
 import com.capeelectric.model.SPD;
 import com.capeelectric.model.SpdReport;
@@ -41,7 +42,7 @@ public class SPDController {
 	
 	@PostMapping("/addSPDDetails")
 	public ResponseEntity<String> addSPDDetails(@RequestBody  SpdReport spdReport)
-			throws SPDException {
+			throws SPDException, AirTerminationException {
 		logger.info("called addSPDDetails function UserName : {}, BasicLpsId : {}",
 				spdReport.getUserName(), spdReport.getBasicLpsId());
 		SPDService.addSPDDetails(spdReport);
@@ -60,7 +61,7 @@ public class SPDController {
 	
 	@PutMapping("/updateSpdDetails")
 	public ResponseEntity<String> updateSpdDetails(@RequestBody SpdReport spdReport)
-			throws SPDException {
+			throws SPDException, AirTerminationException {
 		logger.info("called updateSpdDetails function UserName : {},BasicLpsId : {},SpdReportId : {}",
 				spdReport.getUserName(), spdReport.getBasicLpsId(),
 				spdReport.getSpdReportId());
