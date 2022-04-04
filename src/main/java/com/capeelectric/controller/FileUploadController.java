@@ -37,20 +37,22 @@ public class FileUploadController {
 	@Autowired
 	private FileStorageService storageService;
 
-	@PostMapping("/upload/{lpsId}/{componentName}")
+	@PostMapping("/upload/{lpsId}/{componentName}/{index}")
 	public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file, @PathVariable Integer lpsId,
-			@PathVariable String componentName) throws IOException, SerialException, SQLException {
+			@PathVariable String componentName, @PathVariable Integer index)
+			throws IOException, SerialException, SQLException {
 		logger.debug("File Upload Start");
-		storageService.store(file, lpsId, componentName);
+
+		storageService.store(file, lpsId, componentName, index);
 		logger.debug("File Upload 	End");
 		return new ResponseEntity<String>("File  Upload Successfully", HttpStatus.OK);
 	}
 
-	@GetMapping("/downloadFile/{lpsId}/{componentName}")
+	@GetMapping("/downloadFile/{lpsId}/{componentName}/{index}")
 	public ResponseEntity<String> downloadFile(@PathVariable Integer lpsId, HttpServletResponse response,
-			@PathVariable String componentName) throws IOException, SQLException {
+			@PathVariable String componentName, @PathVariable Integer index) throws IOException, SQLException {
 		logger.debug("DownloadFile File Start lpsId : {}", lpsId, componentName);
-		ResponseFile fileDB = storageService.downloadFile(lpsId, componentName);
+		ResponseFile fileDB = storageService.downloadFile(lpsId, componentName, index);
 		response.setHeader("Content-Disposition", "inline; fileDB.getfileId()=\"" + fileDB.getFileId() + "\"");
 		OutputStream out = response.getOutputStream();
 		response.setContentType(fileDB.getFileName());
@@ -77,6 +79,7 @@ public class FileUploadController {
 					hashMap.put("fileLpsId", responseFile.getLpsId().toString());
 					hashMap.put("fileName", responseFile.getFileName());
 					hashMap.put("componentName", responseFile.getComponentName());
+					hashMap.put("index", responseFile.getIndex().toString());
 					list.add(hashMap);
 				}
 
@@ -87,11 +90,28 @@ public class FileUploadController {
 
 	}
 
-	@PutMapping("/updateFile/{fileId}")
-	public ResponseEntity<String> updateFile(@RequestParam("file") MultipartFile file, @PathVariable Integer fileId)
+//	@PutMapping("/updateFile/{lpsId}/{componentName}/{index}")
+//	public ResponseEntity<String> updateFile(@RequestParam("file") MultipartFile file, @PathVariable Integer lpsId,@PathVariable String componentName,@PathVariable Integer index)
+//			throws IOException, SerialException, SQLException {
+//		logger.debug("UpdateFile File Start");
+//		storageService.updateFile(file, lpsId, componentName,index);
+//		logger.debug("UpdateFile File End");
+//		return new ResponseEntity<String>("File Updated Successfully", HttpStatus.OK);
+//	}
+//
+//	@DeleteMapping("/removeFile/{lpsId}/{componentName}/{index}")
+//	public ResponseEntity<String> removeFile(@PathVariable Integer lpsId,@PathVariable String componentName,@PathVariable Integer index) throws IOException {
+//		logger.debug("Remove File Start");
+//		storageService.removeFile(lpsId, componentName,index );
+//		logger.debug("Remove File End");
+//		return new ResponseEntity<String>("File  Deleted Successfully", HttpStatus.OK);
+//	}
+
+	@PutMapping("/updateFile/{componentName}/{fileId}")
+	public ResponseEntity<String> updateFile(@RequestParam("file") MultipartFile file,@PathVariable String componentName, @PathVariable Integer fileId)
 			throws IOException, SerialException, SQLException {
 		logger.debug("UpdateFile File Start");
-		storageService.updateFile(file, fileId);
+		storageService.updateFile(file,componentName, fileId);
 		logger.debug("UpdateFile File End");
 		return new ResponseEntity<String>("File Updated Successfully", HttpStatus.OK);
 	}

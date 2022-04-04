@@ -61,7 +61,16 @@ public class LpsVerticalAirTermination implements Serializable {
 
 	@Column(name = "INSP_FAILED_NO_REM")
 	private String inspFaileddNoRe;
-	
+
+	@Column(name = "FILE_NAME_VAIR")
+	private String fileNameVAir;
+
+	@Column(name = "FILE_TYPE_VAIR")
+	private String fileTypeVAir;
+
+	@Column(name = "FILE_ID_VAIR")
+	private Integer fileIdVAir;
+
 	@JsonManagedReference
 	@OneToMany(mappedBy = "lpsVerticalAirTermination", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<VerticalAirTerminationList> verticalAirTerminationList;
@@ -73,7 +82,7 @@ public class LpsVerticalAirTermination implements Serializable {
 
 	public Integer getLpsVerticalAirTerminationId() {
 		return lpsVerticalAirTerminationId;
-	}	
+	}
 
 	public String getFlag() {
 		return flag;
@@ -82,7 +91,6 @@ public class LpsVerticalAirTermination implements Serializable {
 	public void setFlag(String flag) {
 		this.flag = flag;
 	}
-
 
 	public void setLpsVerticalAirTerminationId(Integer lpsVerticalAirTerminationId) {
 		this.lpsVerticalAirTerminationId = lpsVerticalAirTerminationId;
@@ -183,6 +191,29 @@ public class LpsVerticalAirTermination implements Serializable {
 	public void setVerticalAirTerminationList(List<VerticalAirTerminationList> verticalAirTerminationList) {
 		this.verticalAirTerminationList = verticalAirTerminationList;
 	}
-	
+
+	public String getFileNameVAir() {
+		return fileNameVAir;
+	}
+
+	public void setFileNameVAir(String fileNameVAir) {
+		this.fileNameVAir = fileNameVAir;
+	}
+
+	public String getFileTypeVAir() {
+		return fileTypeVAir;
+	}
+
+	public void setFileTypeVAir(String fileTypeVAir) {
+		this.fileTypeVAir = fileTypeVAir;
+	}
+
+	public Integer getFileIdVAir() {
+		return fileIdVAir;
+	}
+
+	public void setFileIdVAir(Integer fileIdVAir) {
+		this.fileIdVAir = fileIdVAir;
+	}
 
 }

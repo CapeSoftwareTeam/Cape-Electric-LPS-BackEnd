@@ -1,5 +1,8 @@
 package com.capeelectric.model;
+
 import java.io.Serializable;
+import java.sql.Blob;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,80 +23,83 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 @Entity
 @Table(name = "AIR_BASIC_DESCRIPTION_TABLE")
 public class AirBasicDescription implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "AIR_BASIC_DESCRIPTION_ID")
 	private Integer airBasicDescriptionId;
-	
+
 	@Column(name = "FLAG")
 	private String flag;
-	
+
 	@Column(name = "CONSULTANT_NAME_OBSERVATION")
 	private String consultantNameObserv;
-	
+
 	@Column(name = "CONSULTANT_NAME_REMARKS")
 	private String consultantNameRemarks;
-	
+
 	@Column(name = "ARCHITECT_NAMEINOBSERVATION")
 	private String architectNameObserv;
-	
+
 	@Column(name = "ARCHITECT_NAMEINREMARKS")
 	private String architectNameRemarks;
-	
+
+	@Column(name = "AIR_TERMINATIONFILE")
+	private String airterminationFile;
+
 	@Column(name = "DATE_OF_DESIGN_OBSERVATION")
 	private String designDateObserv;
-	
+
 	@Column(name = "DATE_OF_DESIGN_REMARKS")
 	private String designDateRemarks;
-	
+
 	@Column(name = "DATEOF_APPROVAL_OB")
 	private String dateOfApprovalOb;
-	
+
 	@Column(name = "DATEOF_APPROVAL_REM")
 	private String dateOfApprovalRem;
 
 	@Column(name = "OBSERVATION_APPROVED_BY")
 	private String approvedByObserv;
-	
+
 	@Column(name = "REMARKS_APPROVED_BY")
 	private String approvedByRemarks;
-	
+
 	@Column(name = "OBSERVATION_DRAWING_NUMBER")
 	private String drawingObserv;
-	
+
 	@Column(name = "REMARKS_DRAWING_NUMBER")
 	private String drawingRemarks;
-	
+
 	@Column(name = "OBSERVATION_REVISION_NUMBER")
 	private String revisionNoObserv;
-	
+
 	@Column(name = "REMARKS_REVISION_NUMBER")
 	private String revisionNoRemarks;
-	
+
 	@Column(name = "OBSERVATION_DEVIATION_CHECKING")
 	private String deviationObserv;
-	
+
 	@Column(name = "REMARKS_DEVIATION_CHECKING")
 	private String deviationRemarks;
-	
+
 	@Column(name = "DEVIATION_INSTALLATION_OBSERVATION")
 	private String deviationInstallationObserv;
-	
+
 	@Column(name = "DEVIATION_INSTALLATION_REMARKS")
 	private String deviationInstallationRemarks;
-	
+
 	@Column(name = "COMPANY_NAME_OBSERVATION")
 	private String companyNameObserv;
-	
+
 	@Column(name = "COMPANY_NAME_REMARKS")
 	private String companyNameRemarks;
-	
+
 	@Column(name = "CONNECTION_MADE_BRAZINGOBSERVATION")
 	private String connectionMadeBraOb;
-	
+
 	@Column(name = "CONNECTION_MADE_BRAZINGREMARKS")
 	private String connectionMadeBraRe;
 
@@ -102,33 +108,38 @@ public class AirBasicDescription implements Serializable {
 
 	@Column(name = "ELECTRICAL_EQUIPMENT_PLACEDREMARKS")
 	private String electricalEquipPlacedRe;
-	
+
 	@Column(name = "COMBUSTABLE_PARTOBSERVATION")
 	private String combustablePartOb;
 
 	@Column(name = "COMBUSTABLE_PARTREMARKS")
 	private String combustablePartRe;
-	
+
 	@Column(name = "TERMINATION_MESH_CONDUCTOROBSERVATION")
 	private String terminationMeshConductorOb;
 
-
 	@Column(name = "TERMINATION_MESH_CONDUCTORREMARKS")
 	private String terminationMeshConductorRe;
-	
+
+	@Column(name = "FILE_NAME")
+	private String fileName;
+
+	@Column(name = "FILE_TYPE")
+	private String fileType;
+
+	@Column(name = "FILE_Id")
+	private String fileId;
+
 	@Column(name = "BONDING_EQUIPOTENTIALOBSERVATION")
 	private String bondingEquipotentialOb;
-
 
 	@Column(name = "BONDING_EQUIPOTENTIALREMARKS")
 	private String bondingEquipotentialRe;
 
-		
 	@JsonBackReference
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "LPSAIRDESCRIPTION_ID")
 	private LpsAirDiscription lpsAirDescription;
-
 
 	public Integer getAirBasicDescriptionId() {
 		return airBasicDescriptionId;
@@ -138,7 +149,6 @@ public class AirBasicDescription implements Serializable {
 		this.airBasicDescriptionId = airBasicDescriptionId;
 	}
 
-
 	public LpsAirDiscription getLpsAirDescription() {
 		return lpsAirDescription;
 	}
@@ -146,7 +156,6 @@ public class AirBasicDescription implements Serializable {
 	public void setLpsAirDescription(LpsAirDiscription lpsAirDescription) {
 		this.lpsAirDescription = lpsAirDescription;
 	}
-
 
 	public String getArchitectNameObserv() {
 		return architectNameObserv;
@@ -163,7 +172,6 @@ public class AirBasicDescription implements Serializable {
 	public void setArchitectNameRemarks(String architectNameRemarks) {
 		this.architectNameRemarks = architectNameRemarks;
 	}
-
 
 	public String getDesignDateRemarks() {
 		return designDateRemarks;
@@ -244,7 +252,6 @@ public class AirBasicDescription implements Serializable {
 	public void setDeviationRemarks(String deviationRemarks) {
 		this.deviationRemarks = deviationRemarks;
 	}
-
 
 	public String getConnectionMadeBraOb() {
 		return connectionMadeBraOb;
@@ -342,7 +349,6 @@ public class AirBasicDescription implements Serializable {
 		this.consultantNameRemarks = consultantNameRemarks;
 	}
 
-
 	public String getDesignDateObserv() {
 		return designDateObserv;
 	}
@@ -397,6 +403,38 @@ public class AirBasicDescription implements Serializable {
 
 	public void setFlag(String flag) {
 		this.flag = flag;
+	}
+
+	public String getAirterminationFile() {
+		return airterminationFile;
+	}
+
+	public void setAirterminationFile(String airterminationFile) {
+		this.airterminationFile = airterminationFile;
+	}
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+
+	public String getFileType() {
+		return fileType;
+	}
+
+	public void setFileType(String fileType) {
+		this.fileType = fileType;
+	}
+
+	public String getFileId() {
+		return fileId;
+	}
+
+	public void setFileId(String fileId) {
+		this.fileId = fileId;
 	}
 	
 	

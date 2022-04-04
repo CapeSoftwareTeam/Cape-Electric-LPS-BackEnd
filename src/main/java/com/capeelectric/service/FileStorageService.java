@@ -25,23 +25,24 @@ public class FileStorageService {
 	@Autowired
 	private FileDBRepository fileDBRepository;
 
-	public void store(MultipartFile file, Integer lpsId, String componentName)
+	public void store(MultipartFile file, Integer lpsId, String componentName, Integer index)
 			throws IOException, SerialException, SQLException {
 		String fileName = StringUtils.cleanPath(file.getOriginalFilename());
 		Blob blob = new javax.sql.rowset.serial.SerialBlob(IOUtils.toByteArray(file.getInputStream()));
-		ResponseFile FileDB = new ResponseFile();
-		FileDB.setLpsId(lpsId);
-		FileDB.setFileName(fileName);
-		FileDB.setData(blob);
-		FileDB.setFileType(file.getContentType());
-		FileDB.setComponentName(componentName);
+		ResponseFile fileDB = new ResponseFile();
+		fileDB.setLpsId(lpsId);
+		fileDB.setFileName(fileName);
+		fileDB.setData(blob);
+		fileDB.setFileType(file.getContentType());
+		fileDB.setComponentName(componentName);
+		fileDB.setIndex(index);
 		logger.debug("File Saved In DB");
-		fileDBRepository.save(FileDB);
+		fileDBRepository.save(fileDB);
 	}
 
-	public ResponseFile downloadFile(Integer lpsId, String componentName) throws IOException {
-		if (lpsId != null && lpsId != 0) {
-			ResponseFile fileDB = fileDBRepository.findByLpsIdAndComponentName(lpsId, componentName);
+	public ResponseFile downloadFile(Integer lpsId, String componentName, Integer index) throws IOException {
+		if (lpsId != null && lpsId != 0 && index != null) {
+			ResponseFile fileDB = fileDBRepository.findByLpsIdAndComponentNameAndIndex(lpsId, componentName, index);
 			if (fileDB != null && fileDB.getLpsId().equals(lpsId)) {
 				return fileDB;
 			} else {
@@ -73,7 +74,8 @@ public class FileStorageService {
 
 	}
 
-	public void updateFile(MultipartFile file, Integer fileId) throws SerialException, SQLException, IOException {
+	public void updateFile(MultipartFile file, String componentName, Integer fileId)
+			throws SerialException, SQLException, IOException {
 		if (fileId != null && fileId != 0) {
 			ResponseFile fileDB = fileDBRepository.findById(fileId).get();
 			if (fileDB != null && fileDB.getFileId().equals(fileId)) {
@@ -83,6 +85,7 @@ public class FileStorageService {
 				fileDB.setFileName(fileName);
 				fileDB.setData(blob);
 				fileDB.setFileType(file.getContentType());
+				fileDB.setComponentName(componentName);
 				logger.debug("File Update In DB");
 				fileDBRepository.save(fileDB);
 			} else {
@@ -95,6 +98,49 @@ public class FileStorageService {
 		}
 
 	}
+
+//	public void removeFile(Integer lpsId, String componentName, Integer index) throws IOException {
+//		if (lpsId != null&&componentName != null) {
+//			ResponseFile fileDB = fileDBRepository.findByLpsIdAndComponentNameAndIndex(lpsId,componentName,index);
+//			if (fileDB != null && fileDB.getLpsId().equals(lpsId)) {
+//				logger.info("File Deleted");
+//				fileDBRepository.delete(fileDB);
+//			} else {
+//				logger.error("File Not Preset");
+//				throw new IOException("File Not Preset");
+//			}
+//
+//		} else {
+//			logger.error("Id Not Preset");
+//			throw new IOException("Id Not Preset");
+//		}
+//
+//	}
+//
+//	public void updateFile(MultipartFile file, Integer lpsId, String componentName, Integer index) throws SerialException, SQLException, IOException {
+//		if (lpsId != null && lpsId != 0) {
+//			ResponseFile fileDB = fileDBRepository.findByLpsIdAndComponentNameAndIndex(lpsId,componentName,index);
+//			if (fileDB != null && fileDB.getLpsId().equals(lpsId)) {
+//				String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+//				Blob blob = new javax.sql.rowset.serial.SerialBlob(IOUtils.toByteArray(file.getInputStream()));
+//				// fileDB.setEmcId(emcId);
+//				fileDB.setFileName(fileName);
+//				fileDB.setData(blob);
+//				fileDB.setFileType(file.getContentType());
+//				fileDB.setComponentName(componentName);
+//				fileDB.setIndex(index);
+//				logger.debug("File Update In DB");
+//				fileDBRepository.save(fileDB);
+//			} else {
+//				logger.error("File Not Preset");
+//				throw new IOException("File Not Preset");
+//			}
+//		} else {
+//			logger.error("Id Not Preset");
+//			throw new IOException("Id Not Preset");
+//		}
+//
+//	}
 
 	public List<ResponseFile> retrieveFileNameByLpsId(Integer lpsId) throws IOException {
 		if (lpsId != null && lpsId != 0) {
