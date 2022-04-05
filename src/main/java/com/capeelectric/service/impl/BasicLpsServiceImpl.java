@@ -36,6 +36,8 @@ public class BasicLpsServiceImpl implements BasicLpsService {
 	@Autowired
 	private UserFullName userFullName;
 	
+	private BasicLps basicLps;
+	
 	@Transactional
 	@Override
 	public BasicLps addBasicLpsDetails(BasicLps basicLps) throws BasicLpsException {
@@ -112,6 +114,37 @@ public class BasicLpsServiceImpl implements BasicLpsService {
 			throw new BasicLpsException("Invalid inputs");
 		}
 		logger.info("Ended updateBasicLpsDetails function");
+
+	}
+	
+	
+	@Transactional
+	@Override
+	public void updateBasicLpsDetailsStatus(Integer basicLpsId) throws BasicLpsException {
+		logger.info("Called updateBasicLpsDetailsStatus function");
+
+		if (basicLpsId != null && basicLpsId != 0) {
+			Optional<BasicLps> basicLpsRepo = basicLpsRepository
+					.findByBasicLpsId(basicLpsId);
+			if (basicLpsRepo.isPresent()
+					&& basicLpsRepo.get().getBasicLpsId().equals(basicLpsId)) {
+				basicLps = basicLpsRepo.get();
+				basicLps.setStatus("InActive");
+//				basicLps.setUpdatedDate(LocalDateTime.now());
+//				basicLps.setUpdatedBy(userFullName.findByUserName(basicLps.getUserName()));
+				basicLpsRepository.save(basicLps);
+				logger.debug("Basic Lps successfully Updated in DB with InActive Status");
+
+			} else {
+				logger.error("Given Basic LPS Id is Invalid");
+				throw new BasicLpsException("Given Basic LPS Id is Invalid");
+			}
+
+		} else {
+			logger.error("Invalid Inputs");
+			throw new BasicLpsException("Invalid inputs");
+		}
+		logger.info("Ended updateBasicLpsDetailsStatus function");
 
 	}
 	

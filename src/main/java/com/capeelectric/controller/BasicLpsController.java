@@ -61,4 +61,16 @@ public class BasicLpsController {
 		logger.info("Ended updateBasicLpsDetails function");
 		return new ResponseEntity<String>("Basic Lps Details Updated Successfully", HttpStatus.OK);
 	}
+	
+	@PutMapping("/updateStatus/{basicLpsId}")
+	public ResponseEntity<String> updateBasicLpsDetailsStatus(@PathVariable Integer basicLpsId)
+			throws BasicLpsException {
+		logger.info("called updateBasicLpsDetailsStatus function BasicLpsId : {}", 
+				basicLpsId);
+		basicLpsService.updateBasicLpsDetailsStatus(basicLpsId);
+		logger.info("Ended updateBasicLpsDetailsStatus function");
+		return new ResponseEntity<String>("Basic Lps status Details Updated Successfully", HttpStatus.OK);
+	}
+	
+	
 }
