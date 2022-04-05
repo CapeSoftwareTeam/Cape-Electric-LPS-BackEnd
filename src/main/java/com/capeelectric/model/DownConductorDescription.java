@@ -25,47 +25,46 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
  *
  */
 
-
 @Entity
 @Table(name = "DOWNCONDUCTORDESCRIPTION_TABLE")
-public class DownConductorDescription  implements Serializable  {
-private static final long serialVersionUID = 1L;
-	
+public class DownConductorDescription implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "DOWNCONDUCTORDESCRIPTION_ID")
 	private Integer downConduDescId;
-	
+
 	@Column(name = "BUILDING_NAME")
 	private String buildingName;
-	
+
 	@Column(name = "BUILDING_NUMBER")
 	private Integer buildingNumber;
-	
+
 	@Column(name = "BUILDING_COUNT")
 	private Integer buildingCount;
-	
+
 	@Column(name = "FLAG")
 	private String flag;
-	
+
 	@Column(name = "BI_METALLICISSUE_OB")
 	private String biMetallicIssueOb;
-	
+
 	@Column(name = "BI_METALLICISSUE_REM")
 	private String biMetallicIssueRem;
-	
+
 	@Column(name = "WARNINGNOTICE_GROUNDLEVEL_OB")
 	private String warningNoticeGroundLevelOb;
-	
+
 	@Column(name = "WARNINGNOTICE_GROUNDLEVEL_REM")
 	private String warningNoticeGroundLevelRem;
-	
+
 	@Column(name = "INSULATION_PRESENCE_OB")
 	private String insulationPresenceOb;
-	
+
 	@Column(name = "INSULATION_PRESENCE_REM")
 	private String insulationPresenceRem;
-	
+
 	@Column(name = "NOPOWER_DOWNCONDUCTOR_OB")
 	private String noPowerDownConductorOb;
 
@@ -74,100 +73,106 @@ private static final long serialVersionUID = 1L;
 
 	@Column(name = "CONNECTIONSMADE_BY_BRAZING_OB")
 	private String connectMadeBrazingOb;
-	
+
 	@Column(name = "CONNECTIONSMADE_BY_BRAZING_REM")
 	private String connectMadeBrazingRem;
-	 
+
 	@Column(name = "CHEMICAL_SPRINKLER_OB")
 	private String chemicalSprinklerOb;
-	 
+
 	@Column(name = "CHEMICAL_SPRINKLER_REM")
 	private String chemicalSprinklerRem;
-		 
+
 	@Column(name = "COMBUSTIBLEMATERIAL_WALL_OB")
 	private String cobustMaterialWallOB;
-	
+
 	@Column(name = "COMBUSTIBLEMATERIAL_WALL_REM")
 	private String cobustMaterialWallRem;
-	
+
 	@Column(name = "BRIDGING_DESC_AVAILABILITY_OB")
 	private String bridgingDescriptionAvailabilityOb;
-	
+
 	@Column(name = "BRIDGING_DESC_AVAILABILITY_REM")
 	private String bridgingDescriptionAvailabilityRem;
-	
+
 	@Column(name = "HOLDER_AVAILABILITY_OB")
 	private String holderAvailabilityOb;
-	
+
 	@Column(name = "HOLDER_AVAILABILITY_REM")
 	private String holderAvailabilityRem;
-	
+
 	@Column(name = "CONNECTORS_AVAILABILITY_OB")
 	private String connectorsAvailabilityOb;
-	
+
 	@Column(name = "CONNECTORS_AVAILABILITY_REM")
 	private String connectorsAvailabilityRem;
-	
+
 	@Column(name = "LIGHTNING_COUNTERS_AVAILABILITY_OB")
 	private String lightningCounterAvailabilityOb;
-	
+
 	@Column(name = "LIGHTNING_COUNTERS_AVAILABILITY_REM")
 	private String lightningCounterAvailabilityRem;
-	
+
 	@Column(name = "TESTING_JOINT_AVAILABILITY_OB")
 	private String testingJointAvailabilityOb;
-	
+
 	@Column(name = "TESTING_JOINT_AVAILABILITY_REM")
 	private String testingJointAvailabilityRem;
-	
+
 	@Column(name = "DOWNCONDUCTOR_AVAILABILITY_OB")
 	private String downConductorAvailabilityOb;
-	
+
 	@Column(name = "DOWNCONDUCTOR_AVAILABILITY_REM")
 	private String downConductorAvailabilityRem;
-	
+
 	@Column(name = "DOWNCONDUCTOR_TESTING_AVAILABILITY_OB")
 	private String downConductorTestingAvailabilityOb;
-	
+
 	@Column(name = "DOWNCONDUCTOR_TESTING_AVAILABILITY_REM")
 	private String downConductorTestingAvailabilityRem;
-	
-	
+
+	@Column(name = "FILE_NAME1")
+	private String fileName1;
+
+	@Column(name = "FILE_TYPE1")
+	private String fileType1;
+
+	@Column(name = "FILE_ID1")
+	private Integer fileId1;
+
 	@JsonManagedReference
 	@OneToMany(mappedBy = "downConductorDescription", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<BridgingDescription>bridgingDescription;
-	
+	private List<BridgingDescription> bridgingDescription;
+
 	@JsonManagedReference
 	@OneToMany(mappedBy = "downConductorDescription", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Holder> holder;
-	
+
 	@JsonManagedReference
 	@OneToMany(mappedBy = "downConductorDescription", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Connectors> connectors;
-	
-	
+
 	@JsonManagedReference
 	@OneToMany(mappedBy = "downConductorDescription", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<LightningCounter> lightningCounter;
-	
+
 	@JsonManagedReference
 	@OneToMany(mappedBy = "downConductorDescription", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<TestingJoint> testingJoint;
-	
+
 	@JsonManagedReference
 	@OneToMany(mappedBy = "downConductorDescription", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<DownConductor> downConductor;
-	
+
 	@JsonManagedReference
 	@OneToMany(mappedBy = "downConductorDescription", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<DownConductorTesting> downConductorTesting;
-	
+
 	@JsonBackReference
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "DOWN_CONDUCTOR_REPORT_ID")
 	private DownConductorReport downConductorReport;
-	
-	
+
 	public Integer getDownConduDescId() {
 		return downConduDescId;
 	}
@@ -375,7 +380,7 @@ private static final long serialVersionUID = 1L;
 	public void setFlag(String flag) {
 		this.flag = flag;
 	}
-	
+
 	public String getBridgingDescriptionAvailabilityOb() {
 		return bridgingDescriptionAvailabilityOb;
 	}
@@ -499,5 +504,29 @@ private static final long serialVersionUID = 1L;
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
+
+	public String getFileName1() {
+		return fileName1;
+	}
+
+	public void setFileName1(String fileName1) {
+		this.fileName1 = fileName1;
+	}
+
+	public String getFileType1() {
+		return fileType1;
+	}
+
+	public void setFileType1(String fileType1) {
+		this.fileType1 = fileType1;
+	}
+
+	public Integer getFileId1() {
+		return fileId1;
+	}
+
+	public void setFileId1(Integer fileId1) {
+		this.fileId1 = fileId1;
+	}
+
 }

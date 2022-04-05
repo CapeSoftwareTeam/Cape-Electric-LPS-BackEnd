@@ -145,15 +145,6 @@ public class DownConductor implements Serializable {
 	@Column(name = "FILE_ID")
 	private Integer fileId;
 
-	@Column(name = "FILE_NAME1")
-	private String fileName1;
-
-	@Column(name = "FILE_TYPE1")
-	private String fileType1;
-
-	@Column(name = "FILE_ID1")
-	private Integer fileId1;
-
 	@JsonBackReference
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "DOWNCONDUCTORDESCRIPTION_ID")
@@ -497,30 +488,6 @@ public class DownConductor implements Serializable {
 
 	public void setFileId(Integer fileId) {
 		this.fileId = fileId;
-	}
-
-	public String getFileName1() {
-		return fileName1;
-	}
-
-	public void setFileName1(String fileName1) {
-		this.fileName1 = fileName1;
-	}
-
-	public String getFileType1() {
-		return fileType1;
-	}
-
-	public void setFileType1(String fileType1) {
-		this.fileType1 = fileType1;
-	}
-
-	public Integer getFileId1() {
-		return fileId1;
-	}
-
-	public void setFileId1(Integer fileId1) {
-		this.fileId1 = fileId1;
 	}
 
 }
