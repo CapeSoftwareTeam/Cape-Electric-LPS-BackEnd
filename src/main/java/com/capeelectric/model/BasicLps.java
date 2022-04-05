@@ -89,6 +89,9 @@ public class BasicLps implements Serializable {
 	@Column(name = "ALL_STEPS_COMPLETED")
 	private String allStepsCompleted;
 	
+	@Column(name = "STATUS")
+	private String status;
+	
 	@Column(name = "CREATED_DATE")
 	private LocalDateTime createdDate;
 	
@@ -287,7 +290,19 @@ public class BasicLps implements Serializable {
 	public void setAllStepsCompleted(String allStepsCompleted) {
 		this.allStepsCompleted = allStepsCompleted;
 	}
-	
-	
 
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	
+	
+	
 }

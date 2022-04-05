@@ -24,6 +24,7 @@ use lv_safety_verification;
 						SOIL_RESISTIVITY VARCHAR(225),
 						USER_NAME VARCHAR(225),
 						ALL_STEPS_COMPLETED VARCHAR(20),
+						STATUS VARCHAR(50),
 						CREATED_BY VARCHAR(255),
 					    CREATED_DATE datetime,
 					    UPDATED_BY VARCHAR(255),

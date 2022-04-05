@@ -45,6 +45,7 @@ public class BasicLpsServiceImpl implements BasicLpsService {
 			Optional<BasicLps> basicLpsDetailsRepo = basicLpsRepository.findByClientName(basicLps.getClientName());
 			logger.debug("Basic Client Repo data available");
 				if(!basicLpsDetailsRepo.isPresent()) {
+					basicLps.setStatus("Active");
 					basicLps.setCreatedDate(LocalDateTime.now());
 					basicLps.setUpdatedDate(LocalDateTime.now());
 					basicLps.setCreatedBy(userFullName.findByUserName(basicLps.getUserName()));
