@@ -36,7 +36,7 @@ public class BasicLpsServiceImpl implements BasicLpsService {
 	@Autowired
 	private UserFullName userFullName;
 	
-	private BasicLps basicLps;
+	private BasicLps basicLpsData;
 	
 	@Transactional
 	@Override
@@ -120,19 +120,19 @@ public class BasicLpsServiceImpl implements BasicLpsService {
 	
 	@Transactional
 	@Override
-	public void updateBasicLpsDetailsStatus(Integer basicLpsId) throws BasicLpsException {
+	public void updateBasicLpsDetailsStatus(BasicLps basicLps) throws BasicLpsException {
 		logger.info("Called updateBasicLpsDetailsStatus function");
 
-		if (basicLpsId != null && basicLpsId != 0) {
+		if (basicLps != null && basicLps.getBasicLpsId() != null && basicLps.getBasicLpsId() != 0) {
 			Optional<BasicLps> basicLpsRepo = basicLpsRepository
-					.findByBasicLpsId(basicLpsId);
+					.findByBasicLpsId(basicLps.getBasicLpsId());
 			if (basicLpsRepo.isPresent()
-					&& basicLpsRepo.get().getBasicLpsId().equals(basicLpsId)) {
-				basicLps = basicLpsRepo.get();
-				basicLps.setStatus("InActive");
-//				basicLps.setUpdatedDate(LocalDateTime.now());
-//				basicLps.setUpdatedBy(userFullName.findByUserName(basicLps.getUserName()));
-				basicLpsRepository.save(basicLps);
+					&& basicLpsRepo.get().getBasicLpsId().equals(basicLps.getBasicLpsId())) {
+				basicLpsData = basicLpsRepo.get();
+				basicLpsData.setStatus("InActive");
+				basicLpsData.setUpdatedDate(LocalDateTime.now());
+				basicLpsData.setUpdatedBy(userFullName.findByUserName(basicLps.getUserName()));
+				basicLpsRepository.save(basicLpsData);
 				logger.debug("Basic Lps successfully Updated in DB with InActive Status");
 
 			} else {

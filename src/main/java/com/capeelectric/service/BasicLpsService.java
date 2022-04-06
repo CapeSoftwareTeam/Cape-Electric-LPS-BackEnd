@@ -19,6 +19,6 @@ public interface BasicLpsService {
 		
 	public void updateBasicLpsDetails(BasicLps basicLps) throws BasicLpsException;
 	
-	public void updateBasicLpsDetailsStatus(Integer basicLpsId) throws BasicLpsException;
+	public void updateBasicLpsDetailsStatus(BasicLps basicLps) throws BasicLpsException;
 
 }
