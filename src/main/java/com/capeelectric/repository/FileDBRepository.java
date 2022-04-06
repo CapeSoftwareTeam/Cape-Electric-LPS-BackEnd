@@ -11,9 +11,6 @@ import com.capeelectric.model.ResponseFile;
 
 public interface FileDBRepository extends CrudRepository<ResponseFile, Integer> {
 	List<ResponseFile> findByLpsId(Integer lpsId);
-
-//	ResponseFile findByLpsIdAndComponentName(Integer lpsId, String componentName);
-
-	ResponseFile findByLpsIdAndComponentNameAndIndex(Integer lpsId, String componentName, Integer index);
+	ResponseFile findByLpsIdAndComponentNameAndFileName(Integer lpsId, String componentName, String fileName);
 
 }

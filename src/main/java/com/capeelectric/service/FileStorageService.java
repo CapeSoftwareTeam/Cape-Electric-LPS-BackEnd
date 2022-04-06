@@ -40,9 +40,9 @@ public class FileStorageService {
 		fileDBRepository.save(fileDB);
 	}
 
-	public ResponseFile downloadFile(Integer lpsId, String componentName, Integer index) throws IOException {
-		if (lpsId != null && lpsId != 0 && index != null) {
-			ResponseFile fileDB = fileDBRepository.findByLpsIdAndComponentNameAndIndex(lpsId, componentName, index);
+	public ResponseFile downloadFile(Integer lpsId, String componentName, String fileName) throws IOException {
+		if (lpsId != null && lpsId != 0 && fileName != null) {
+			ResponseFile fileDB = fileDBRepository.findByLpsIdAndComponentNameAndFileName(lpsId, componentName, fileName);
 			if (fileDB != null && fileDB.getLpsId().equals(lpsId)) {
 				return fileDB;
 			} else {

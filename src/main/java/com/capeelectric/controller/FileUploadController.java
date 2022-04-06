@@ -48,11 +48,11 @@ public class FileUploadController {
 		return new ResponseEntity<String>("File  Upload Successfully", HttpStatus.OK);
 	}
 
-	@GetMapping("/downloadFile/{lpsId}/{componentName}/{index}")
+	@GetMapping("/downloadFile/{lpsId}/{componentName}/{fileName}")
 	public ResponseEntity<String> downloadFile(@PathVariable Integer lpsId, HttpServletResponse response,
-			@PathVariable String componentName, @PathVariable Integer index) throws IOException, SQLException {
+			@PathVariable String componentName, @PathVariable String fileName) throws IOException, SQLException {
 		logger.debug("DownloadFile File Start lpsId : {}", lpsId, componentName);
-		ResponseFile fileDB = storageService.downloadFile(lpsId, componentName, index);
+		ResponseFile fileDB = storageService.downloadFile(lpsId, componentName, fileName);
 		response.setHeader("Content-Disposition", "inline; fileDB.getfileId()=\"" + fileDB.getFileId() + "\"");
 		OutputStream out = response.getOutputStream();
 		response.setContentType(fileDB.getFileName());
