@@ -136,6 +136,9 @@ public class DownConductor implements Serializable {
 	@Column(name = "NATURAL_DOWN_CONDUCTORS_DIMENSION_REM")
 	private String naturalDownCondDimensionRem;
 
+	@Column(name = "ITR_INDEX")
+	private Integer index;
+	
 	@Column(name = "FILE_NAME")
 	private String fileName;
 
@@ -490,4 +493,12 @@ public class DownConductor implements Serializable {
 		this.fileId = fileId;
 	}
 
+	public Integer getIndex() {
+		return index;
+	}
+
+	public void setIndex(Integer index) {
+		this.index = index;
+	}
+	
 }

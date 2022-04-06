@@ -131,6 +131,9 @@ public class DownConductorDescription implements Serializable {
 	@Column(name = "DOWNCONDUCTOR_TESTING_AVAILABILITY_REM")
 	private String downConductorTestingAvailabilityRem;
 
+	@Column(name = "ITR_INDEX")
+	private Integer index;
+
 	@Column(name = "FILE_NAME1")
 	private String fileName1;
 
@@ -527,6 +530,14 @@ public class DownConductorDescription implements Serializable {
 
 	public void setFileId1(Integer fileId1) {
 		this.fileId1 = fileId1;
+	}
+
+	public Integer getIndex() {
+		return index;
+	}
+
+	public void setIndex(Integer index) {
+		this.index = index;
 	}
 
 }
