@@ -69,7 +69,7 @@ public class BasicLpsController {
 				basicLps.getBasicLpsId());
 		basicLpsService.updateBasicLpsDetailsStatus(basicLps);
 		logger.info("Ended updateBasicLpsDetailsStatus function");
-		return new ResponseEntity<String>("Basic Lps status Details Updated Successfully", HttpStatus.OK);
+		return new ResponseEntity<String>("Basic Lps has been successfully deleted", HttpStatus.OK);
 	}
 	
 	
