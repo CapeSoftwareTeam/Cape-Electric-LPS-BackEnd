@@ -1,13 +1,25 @@
 package com.capeelectric.service.impl;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.sql.Blob;
 import java.util.List;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import com.amazonaws.auth.AWSStaticCredentialsProvider;
+import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.regions.Regions;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+import com.amazonaws.services.s3.model.AmazonS3Exception;
+import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.capeelectric.exception.AirTerminationException;
 import com.capeelectric.model.AirBasicDescription;
 import com.capeelectric.model.AirClamps;
@@ -20,18 +32,17 @@ import com.capeelectric.model.AirTermination;
 import com.capeelectric.model.BasicLps;
 import com.capeelectric.model.LpsAirDiscription;
 import com.capeelectric.model.LpsVerticalAirTermination;
+import com.capeelectric.model.ResponseFile;
 import com.capeelectric.model.VerticalAirTerminationList;
-import com.capeelectric.repository.AirTerminationLpsRepository;
-import com.capeelectric.repository.BasicLpsRepository;
+import com.capeelectric.repository.FileDBRepository;
 import com.capeelectric.service.PrintAirTerminationService;
-import com.capeelectric.service.PrintFinalPDFService;
-import com.capeelectric.util.HeaderFooterPageEvent;
+import com.capeelectric.util.Constants;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
-import com.itextpdf.text.Image;
+import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
@@ -39,24 +50,38 @@ import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.GrayColor;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
-import com.itextpdf.text.pdf.PdfPageEvent;
 import com.itextpdf.text.pdf.PdfWriter;
 
 @Service
 public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationService {
 
-//	@Autowired
-//	private BasicLpsRepository basicLpsRepository;
+	private static final Logger logger = LoggerFactory.getLogger(PrintAirTerminationServiceImplPDF.class);
 
 //	@Autowired
+//	private BasicLpsRepository basicLpsRepository;
+//
+//	@Autowired
 //	private AirTerminationLpsRepository airTerminationLpsRepository;
+
+	@Value("${s3.lps.file.upload.bucket.name}")
+	private String s3LpsFileUploadBucketName;
+
+	@Value("${access.key.id}")
+	private String accessKeyId;
+
+	@Value("${access.key.secret}")
+	private String accessKeySecret;
+
+	@Autowired
+	private FileDBRepository fileDBRepository;
 
 	@Override
 	public void printAirTermination(String userName, Integer basicLpsId,Optional<BasicLps> basicLpsDetails ,Optional<AirTermination> lpsAirTermination)
 			throws AirTerminationException {
 
 //	@Override
-//	public void printAirTermination(String userName, Integer basicLpsId) throws AirTerminationException {
+////	public void printAirTermination(String userName, Integer basicLpsId) throws AirTerminationException {
+		//
 
 		if (userName != null && !userName.isEmpty() && basicLpsId != null && basicLpsId != 0) {
 			Document document = new Document(PageSize.A4, 68, 68, 62, 68);
@@ -72,6 +97,16 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 //				List<AirTermination> lpsAirDisc = airTerminationLpsRepository.findByUserNameAndBasicLpsId(userName,
 //						basicLpsId);
 //				AirTermination airTermination = lpsAirDisc.get(0);
+
+				List<ResponseFile> fileDB = fileDBRepository.findByLpsId(basicLpsId);
+
+				for (ResponseFile fileiter : fileDB) {
+					Blob blob = fileiter.getData();
+					byte[] bytes = blob.getBytes(1l, (int) blob.length());
+					FileOutputStream fileout = new FileOutputStream(fileiter.getFileName());
+					fileout.write(bytes);
+				}
+
 				AirTermination airTermination = lpsAirTermination.get();
 
 				List<LpsAirDiscription> lpsAirDiscription = airTermination.getLpsAirDescription();
@@ -420,7 +455,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 
 //						this method for Adding the Main Header Fields for Every Page
 						MainHeaderPropertiesLabel(document, basicLps1, lpsAirTermination1);
-						
+
 						float[] pointColumnWidths41 = { 25F, 150F, 55F, 50F };
 
 						PdfPTable table5 = new PdfPTable(pointColumnWidths41);
@@ -569,6 +604,53 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 										PdfPCell cell39 = new PdfPCell(new Paragraph("Not Available", font1A));
 										cell39.setHorizontalAlignment(Element.ALIGN_LEFT);
 										table8.addCell(cell39);
+									}
+
+									try {
+										// Create a S3 client with in-program credential
+										BasicAWSCredentials awsCreds = new BasicAWSCredentials(accessKeyId,
+												accessKeySecret);
+										AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
+												.withRegion(Regions.AP_SOUTH_1)
+												.withCredentials(new AWSStaticCredentialsProvider(awsCreds)).build();
+										// Uploading the PDF File in AWS S3 Bucket with folderName + fileNameInS3
+										if (lpsVerticalAirTermination.getFileNameVAir().length() > 0) {
+											PutObjectRequest request = new PutObjectRequest(s3LpsFileUploadBucketName,
+													"LPS_AirTerminationVerticalAirTerminationUploadedFile Name_"
+															.concat(lpsVerticalAirTermination.getFileNameVAir()),
+													new File(lpsVerticalAirTermination.getFileNameVAir()));
+											s3Client.putObject(request);
+											logger.info(
+													"AirTermination VerticalAirTermination file Upload done in AWS s3");
+
+											PdfPCell cell7322 = new PdfPCell(new Paragraph(
+													"Paste these url to Browser and download/view the uploaded file in LPS  Vertical Air Terminal:",
+													font1A));
+											// cell73.setGrayFill(0.92f);
+											// cell7322.setBorder(PdfPCell.NO_BORDER);
+											cell7322.setColspan(4);
+											table8.addCell(cell7322);
+
+											PdfPCell cell732 = new PdfPCell(new Paragraph(
+													Constants.LPS_FILE_UPLOAD_DOMAIN + "/"
+															+ "LPS_AirTerminationVerticalAirTerminationUploadedFile Name_"
+																	.concat(lpsVerticalAirTermination
+																			.getFileNameVAir()),
+													FontFactory.getFont(FontFactory.HELVETICA, 6, Font.UNDERLINE,
+															BaseColor.BLUE)));
+											cell732.setGrayFill(0.92f);
+											// cell732.setBorder(PdfPCell.NO_BORDER);
+											cell732.setColspan(4);
+											cell732.setFixedHeight(13f);
+											table8.addCell(cell732);
+										} else {
+											logger.error("AirTermination VerticalAirTermination  no file available");
+											throw new Exception(
+													"AirTermination VerticalAirTermination  no file available");
+										}
+
+									} catch (AmazonS3Exception e) {
+										e.printStackTrace();
 									}
 
 									document.add(table8);
@@ -771,7 +853,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 
 //						this method for Adding the Main Header Fields for Every Page
 						MainHeaderPropertiesLabel(document, basicLps1, lpsAirTermination1);
-						
+
 						PdfPTable meshHead = new PdfPTable(pointColumnWidths41);
 						meshHead.setWidthPercentage(100); // Width 100%
 						meshHead.setSpacingBefore(5f); // Space before table
@@ -1135,7 +1217,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 
 //						this method for Adding the Main Header Fields for Every Page
 						MainHeaderPropertiesLabel(document, basicLps1, lpsAirTermination1);
-						
+
 						PdfPTable HoldersHead = new PdfPTable(pointColumnWidths41);
 						HoldersHead.setWidthPercentage(100); // Width 100%
 						HoldersHead.setSpacingBefore(5f); // Space before table
@@ -1498,7 +1580,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 
 //						this method for Adding the Main Header Fields for Every Page
 						MainHeaderPropertiesLabel(document, basicLps1, lpsAirTermination1);
-						
+
 						PdfPTable ClampsHead = new PdfPTable(pointColumnWidths41);
 						ClampsHead.setWidthPercentage(100); // Width 100%
 						ClampsHead.setSpacingBefore(5f); // Space before table
@@ -1879,7 +1961,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 
 //						this method for Adding the Main Header Fields for Every Page
 						MainHeaderPropertiesLabel(document, basicLps1, lpsAirTermination1);
-						
+
 						PdfPTable expansionHead = new PdfPTable(pointColumnWidths41);
 						expansionHead.setWidthPercentage(100); // Width 100%
 						expansionHead.setSpacingBefore(5f); // Space before table
@@ -2207,6 +2289,50 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 										cell39.setHorizontalAlignment(Element.ALIGN_LEFT);
 										table17.addCell(cell39);
 									}
+
+									try {
+										// Create a S3 client with in-program credential
+										BasicAWSCredentials awsCreds = new BasicAWSCredentials(accessKeyId,
+												accessKeySecret);
+										AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
+												.withRegion(Regions.AP_SOUTH_1)
+												.withCredentials(new AWSStaticCredentialsProvider(awsCreds)).build();
+										// Uploading the PDF File in AWS S3 Bucket with folderName + fileNameInS3
+										if (airExpansion.getFileName_EP().length() > 0) {
+											PutObjectRequest request = new PutObjectRequest(s3LpsFileUploadBucketName,
+													"LPS_AirTerminationAirExpansionUploadedFile Name_"
+															.concat(airExpansion.getFileName_EP()),
+													new File(airExpansion.getFileName_EP()));
+											s3Client.putObject(request);
+											logger.info("AirTermination AirExpansion file Upload done in AWS s3");
+
+											PdfPCell cell7322 = new PdfPCell(new Paragraph(
+													"Paste these url to Browser and download/view the uploaded file in LPS Air Terminal Air Expansion:",
+													font1A));
+											// cell73.setGrayFill(0.92f);
+											// cell7322.setBorder(PdfPCell.NO_BORDER);
+											cell7322.setColspan(4);
+											table17.addCell(cell7322);
+
+											PdfPCell cell732 = new PdfPCell(new Paragraph(
+													Constants.LPS_FILE_UPLOAD_DOMAIN + "/"
+															+ "LPS_AirTerminationAirExpansionUploadedFile Name_"
+																	.concat(airExpansion.getFileName_EP()),
+													FontFactory.getFont(FontFactory.HELVETICA, 6, Font.UNDERLINE,
+															BaseColor.BLUE)));
+											cell732.setGrayFill(0.92f);
+											// cell732.setBorder(PdfPCell.NO_BORDER);
+											cell732.setColspan(4);
+											cell732.setFixedHeight(13f);
+											table17.addCell(cell732);
+										} else {
+											logger.error("AirTermination AirExpansion  no file available");
+											throw new Exception("AirTermination AirExpansion  no file available");
+										}
+
+									} catch (AmazonS3Exception e) {
+										e.printStackTrace();
+									}
 									document.add(table17);
 								}
 							}
@@ -2232,7 +2358,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 
 //						this method for Adding the Main Header Fields for Every Page
 						MainHeaderPropertiesLabel(document, basicLps1, lpsAirTermination1);
-						
+
 						PdfPTable connectorsHead = new PdfPTable(pointColumnWidths41);
 						connectorsHead.setWidthPercentage(100); // Width 100%
 						connectorsHead.setSpacingBefore(5f); // Space before table
@@ -2606,8 +2732,6 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 		}
 	}
 
-
-
 	private void MainHeaderPropertiesLabel(Document document, BasicLps basicLps1, LpsAirDiscription lpsAirTermination1)
 			throws DocumentException, IOException {
 		float[] pointColumnWidths200 = { 100F };
@@ -2619,7 +2743,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 		table1111.getDefaultCell().setBorder(0);
 
 		PdfPCell arrangements1001 = new PdfPCell(new Paragraph(
-				basicLps1.getProjectName() + " / " + lpsAirTermination1.getBuildingName()  + " / "
+				basicLps1.getProjectName() + " / " + lpsAirTermination1.getBuildingName() + " / "
 						+ lpsAirTermination1.getBuildingNumber().toString(),
 				new Font(BaseFont.createFont(), 8, Font.NORMAL | Font.NORMAL)));
 //						arrangements1001.setBackgroundColor(new BaseColor(203, 183, 162));
@@ -2628,8 +2752,6 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 		table1111.addCell(arrangements1001);
 		document.add(table1111);
 	}
-
-	
 
 	private PdfPTable HoldersItr(AirHolderList airHolderList, float[] pointColumnWidths4, Font font1A) {
 		PdfPTable table14 = new PdfPTable(pointColumnWidths4);
@@ -2997,7 +3119,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 	}
 
 	private void tableData(PdfPTable table3, AirBasicDescription airBasicDesciption, Document document)
-			throws DocumentException, IOException {
+			throws Exception {
 
 		Font font1 = new Font(BaseFont.createFont(), 10, Font.NORMAL, BaseColor.BLACK);
 		Font font2 = new Font(BaseFont.createFont(), 10, Font.NORMAL, BaseColor.BLACK);
@@ -3347,6 +3469,45 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 			PdfPCell cell1 = new PdfPCell(new Paragraph("Not Available", font2));
 			cell1.setHorizontalAlignment(Element.ALIGN_LEFT);
 			table3.addCell(cell1);
+		}
+
+		try {
+			// Create a S3 client with in-program credential
+			BasicAWSCredentials awsCreds = new BasicAWSCredentials(accessKeyId, accessKeySecret);
+			AmazonS3 s3Client = AmazonS3ClientBuilder.standard().withRegion(Regions.AP_SOUTH_1)
+					.withCredentials(new AWSStaticCredentialsProvider(awsCreds)).build();
+			// Uploading the PDF File in AWS S3 Bucket with folderName + fileNameInS3
+			if (airBasicDesciption.getFileName().length() > 0) {
+				PutObjectRequest request = new PutObjectRequest(s3LpsFileUploadBucketName,
+						"LPS_AirTerminationBasicDetailsUploadedFile Name_".concat(airBasicDesciption.getFileName()),
+						new File(airBasicDesciption.getFileName()));
+				s3Client.putObject(request);
+				logger.info("AirTermination BasicDetails file Upload done in AWS s3");
+
+				PdfPCell cell7322 = new PdfPCell(new Paragraph(
+						"Paste these url to Browser and download/view the uploaded file in LPS BasicDetails:", font2));
+				// cell73.setGrayFill(0.92f);
+				// cell7322.setBorder(PdfPCell.NO_BORDER);
+				cell7322.setColspan(4);
+				table3.addCell(cell7322);
+
+				PdfPCell cell732 = new PdfPCell(new Paragraph(
+						Constants.LPS_FILE_UPLOAD_DOMAIN + "/"
+								+ "LPS_AirTerminationBasicDetailsUploadedFile Name_"
+										.concat(airBasicDesciption.getFileName()),
+						FontFactory.getFont(FontFactory.HELVETICA, 6, Font.UNDERLINE, BaseColor.BLUE)));
+				cell732.setGrayFill(0.92f);
+				// cell732.setBorder(PdfPCell.NO_BORDER);
+				cell732.setColspan(4);
+				cell732.setFixedHeight(13f);
+				table3.addCell(cell732);
+			} else {
+				logger.error("There is no file available");
+				throw new Exception("There is no file  available");
+			}
+
+		} catch (AmazonS3Exception e) {
+			e.printStackTrace();
 		}
 
 		cell.setPhrase(new Phrase("5"));

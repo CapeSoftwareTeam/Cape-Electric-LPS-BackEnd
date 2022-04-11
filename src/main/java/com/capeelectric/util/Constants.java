@@ -33,4 +33,6 @@ public class Constants {
 	public static final String AWS_EMAIL_PORT = String.valueOf(587);
 	
 	public static final String EMAIL_SUBJECT = "SOLVE Electrical Safety Digital TIC Platform";
+	
+	public static final String LPS_FILE_UPLOAD_DOMAIN = "https://d1at8p3f3q7v0j.cloudfront.net";
 }
