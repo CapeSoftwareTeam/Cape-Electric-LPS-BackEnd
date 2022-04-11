@@ -90,6 +90,9 @@ public class AirExpansion implements Serializable {
 
 	@Column(name = "FILE_ID_EP")
 	private Integer fileId_EP;
+	
+	@Column(name = "FILE_SIZE")
+	private String fileSize;
 
 	@JsonBackReference
 	@ManyToOne(cascade = CascadeType.ALL)
@@ -286,6 +289,14 @@ public class AirExpansion implements Serializable {
 
 	public void setFileId_EP(Integer fileId_EP) {
 		this.fileId_EP = fileId_EP;
+	}
+
+	public String getFileSize() {
+		return fileSize;
+	}
+
+	public void setFileSize(String fileSize) {
+		this.fileSize = fileSize;
 	}
 
 }

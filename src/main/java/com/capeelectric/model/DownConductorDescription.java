@@ -142,6 +142,9 @@ public class DownConductorDescription implements Serializable {
 
 	@Column(name = "FILE_ID1")
 	private Integer fileId1;
+	
+	@Column(name = "FILE_SIZE")
+	private String fileSize;
 
 	@JsonManagedReference
 	@OneToMany(mappedBy = "downConductorDescription", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -540,4 +543,12 @@ public class DownConductorDescription implements Serializable {
 		this.index = index;
 	}
 
+	public String getFileSize() {
+		return fileSize;
+	}
+
+	public void setFileSize(String fileSize) {
+		this.fileSize = fileSize;
+	}
+	
 }

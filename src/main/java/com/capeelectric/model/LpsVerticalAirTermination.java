@@ -70,6 +70,9 @@ public class LpsVerticalAirTermination implements Serializable {
 
 	@Column(name = "FILE_ID_VAIR")
 	private Integer fileIdVAir;
+	
+	@Column(name = "FILE_SIZE")
+	private String fileSize;
 
 	@JsonManagedReference
 	@OneToMany(mappedBy = "lpsVerticalAirTermination", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -214,6 +217,14 @@ public class LpsVerticalAirTermination implements Serializable {
 
 	public void setFileIdVAir(Integer fileIdVAir) {
 		this.fileIdVAir = fileIdVAir;
+	}
+
+	public String getFileSize() {
+		return fileSize;
+	}
+
+	public void setFileSize(String fileSize) {
+		this.fileSize = fileSize;
 	}
 
 }

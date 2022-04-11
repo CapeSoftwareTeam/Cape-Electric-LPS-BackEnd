@@ -123,6 +123,17 @@ public class AirBasicDescription implements Serializable {
 
 	@Column(name = "FILE_NAME")
 	private String fileName;
+	
+	@Column(name = "FILE_SIZE")
+	private String fileSize;
+
+	public String getFileSize() {
+		return fileSize;
+	}
+
+	public void setFileSize(String fileSize) {
+		this.fileSize = fileSize;
+	}
 
 	@Column(name = "FILE_TYPE")
 	private String fileType;
