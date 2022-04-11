@@ -147,6 +147,9 @@ public class DownConductor implements Serializable {
 
 	@Column(name = "FILE_ID")
 	private Integer fileId;
+	
+	@Column(name = "FILE_SIZE")
+	private String fileSize;
 
 	@JsonBackReference
 	@ManyToOne(cascade = CascadeType.ALL)
@@ -500,5 +503,15 @@ public class DownConductor implements Serializable {
 	public void setIndex(Integer index) {
 		this.index = index;
 	}
+
+	public String getFileSize() {
+		return fileSize;
+	}
+
+	public void setFileSize(String fileSize) {
+		this.fileSize = fileSize;
+	}
+
+		
 	
 }
