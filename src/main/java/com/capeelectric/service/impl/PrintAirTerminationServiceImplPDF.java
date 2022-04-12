@@ -36,6 +36,7 @@ import com.capeelectric.model.ResponseFile;
 import com.capeelectric.model.VerticalAirTerminationList;
 import com.capeelectric.repository.FileDBRepository;
 import com.capeelectric.service.PrintAirTerminationService;
+import com.capeelectric.util.AWSS3Configuration;
 import com.capeelectric.util.Constants;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
@@ -66,11 +67,8 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 	@Value("${s3.lps.file.upload.bucket.name}")
 	private String s3LpsFileUploadBucketName;
 
-	@Value("${access.key.id}")
-	private String accessKeyId;
-
-	@Value("${access.key.secret}")
-	private String accessKeySecret;
+	@Autowired
+	AWSS3Configuration AWSS3configuration;
 
 	@Autowired
 	private FileDBRepository fileDBRepository;
@@ -607,12 +605,13 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 									}
 
 									try {
-										// Create a S3 client with in-program credential
-										BasicAWSCredentials awsCreds = new BasicAWSCredentials(accessKeyId,
-												accessKeySecret);
-										AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
-												.withRegion(Regions.AP_SOUTH_1)
-												.withCredentials(new AWSStaticCredentialsProvider(awsCreds)).build();
+//										// Create a S3 client with in-program credential
+//										BasicAWSCredentials awsCreds = new BasicAWSCredentials(accessKeyId,
+//												accessKeySecret);
+//										AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
+//												.withRegion(Regions.AP_SOUTH_1)
+//												.withCredentials(new AWSStaticCredentialsProvider(awsCreds)).build();
+										AmazonS3 s3Client=AWSS3configuration.getAmazonS3Client();
 										// Uploading the PDF File in AWS S3 Bucket with folderName + fileNameInS3
 										if (lpsVerticalAirTermination.getFileNameVAir().length() > 0) {
 											PutObjectRequest request = new PutObjectRequest(s3LpsFileUploadBucketName,
@@ -2291,12 +2290,13 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 									}
 
 									try {
-										// Create a S3 client with in-program credential
-										BasicAWSCredentials awsCreds = new BasicAWSCredentials(accessKeyId,
-												accessKeySecret);
-										AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
-												.withRegion(Regions.AP_SOUTH_1)
-												.withCredentials(new AWSStaticCredentialsProvider(awsCreds)).build();
+//										// Create a S3 client with in-program credential
+//										BasicAWSCredentials awsCreds = new BasicAWSCredentials(accessKeyId,
+//												accessKeySecret);
+//										AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
+//												.withRegion(Regions.AP_SOUTH_1)
+//												.withCredentials(new AWSStaticCredentialsProvider(awsCreds)).build();
+										AmazonS3 s3Client=AWSS3configuration.getAmazonS3Client();
 										// Uploading the PDF File in AWS S3 Bucket with folderName + fileNameInS3
 										if (airExpansion.getFileName_EP().length() > 0) {
 											PutObjectRequest request = new PutObjectRequest(s3LpsFileUploadBucketName,
@@ -3472,10 +3472,11 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 		}
 
 		try {
-			// Create a S3 client with in-program credential
-			BasicAWSCredentials awsCreds = new BasicAWSCredentials(accessKeyId, accessKeySecret);
-			AmazonS3 s3Client = AmazonS3ClientBuilder.standard().withRegion(Regions.AP_SOUTH_1)
-					.withCredentials(new AWSStaticCredentialsProvider(awsCreds)).build();
+//			// Create a S3 client with in-program credential
+//			BasicAWSCredentials awsCreds = new BasicAWSCredentials(accessKeyId, accessKeySecret);
+//			AmazonS3 s3Client = AmazonS3ClientBuilder.standard().withRegion(Regions.AP_SOUTH_1)
+//					.withCredentials(new AWSStaticCredentialsProvider(awsCreds)).build();
+			AmazonS3 s3Client=AWSS3configuration.getAmazonS3Client();
 			// Uploading the PDF File in AWS S3 Bucket with folderName + fileNameInS3
 			if (airBasicDesciption.getFileName().length() > 0) {
 				PutObjectRequest request = new PutObjectRequest(s3LpsFileUploadBucketName,

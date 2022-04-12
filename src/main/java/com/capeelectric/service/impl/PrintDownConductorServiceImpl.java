@@ -32,6 +32,7 @@ import com.capeelectric.model.LightningCounter;
 import com.capeelectric.model.TestingJoint;
 import com.capeelectric.repository.DownConductorRepository;
 import com.capeelectric.service.PrintDownConductorService;
+import com.capeelectric.util.AWSS3Configuration;
 import com.capeelectric.util.Constants;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
@@ -62,12 +63,9 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 	@Value("${s3.lps.file.upload.bucket.name}")
 	private String s3LpsFileUploadBucketName;
 
-	@Value("${access.key.id}")
-	private String accessKeyId;
-
-	@Value("${access.key.secret}")
-	private String accessKeySecret;
-
+	@Autowired
+	AWSS3Configuration AWSS3configuration;
+	
 	@Override
 	public void printDownConductor(String userName, Integer lpsId, Optional<BasicLps> basicLpsDetails,
 			Optional<DownConductorReport> downConductorDetails) throws DownConductorException {
@@ -319,11 +317,12 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 								table1.getDefaultCell().setBorder(0);
 
 								try {
-									// Create a S3 client with in-program credential
-									BasicAWSCredentials awsCreds = new BasicAWSCredentials(accessKeyId,
-											accessKeySecret);
-									AmazonS3 s3Client = AmazonS3ClientBuilder.standard().withRegion(Regions.AP_SOUTH_1)
-											.withCredentials(new AWSStaticCredentialsProvider(awsCreds)).build();
+//									// Create a S3 client with in-program credential
+//									BasicAWSCredentials awsCreds = new BasicAWSCredentials(accessKeyId,
+//											accessKeySecret);
+//									AmazonS3 s3Client = AmazonS3ClientBuilder.standard().withRegion(Regions.AP_SOUTH_1)
+//											.withCredentials(new AWSStaticCredentialsProvider(awsCreds)).build();
+									AmazonS3 s3Client=AWSS3configuration.getAmazonS3Client();
 									// Uploading the PDF File in AWS S3 Bucket with folderName + fileNameInS3
 									if (downConDesc.getFileName1().length() > 0) {
 										PutObjectRequest request = new PutObjectRequest(s3LpsFileUploadBucketName,
@@ -2252,9 +2251,10 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 
 		try {
 			// Create a S3 client with in-program credential
-			BasicAWSCredentials awsCreds = new BasicAWSCredentials(accessKeyId, accessKeySecret);
-			AmazonS3 s3Client = AmazonS3ClientBuilder.standard().withRegion(Regions.AP_SOUTH_1)
-					.withCredentials(new AWSStaticCredentialsProvider(awsCreds)).build();
+//			BasicAWSCredentials awsCreds = new BasicAWSCredentials(accessKeyId, accessKeySecret);
+//			AmazonS3 s3Client = AmazonS3ClientBuilder.standard().withRegion(Regions.AP_SOUTH_1)
+//					.withCredentials(new AWSStaticCredentialsProvider(awsCreds)).build();
+			AmazonS3 s3Client=AWSS3configuration.getAmazonS3Client();
 			// Uploading the PDF File in AWS S3 Bucket with folderName + fileNameInS3
 			if (downConductor11.getFileName().length() > 0) {
 				PutObjectRequest request = new PutObjectRequest(s3LpsFileUploadBucketName,
