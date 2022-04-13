@@ -164,48 +164,48 @@ public class PrintEarthingLpsServiceImpl implements PrintEarthingLpsService {
 					cell33.setHorizontalAlignment(Element.ALIGN_CENTER);
 					table2.addCell(cell33);
 
-					float[] pointColumnWidths = { 120F, 80F };
-					PdfPTable table100 = new PdfPTable(pointColumnWidths);
-
-					table100.setWidthPercentage(100); // Width 100%
-					table100.setSpacingBefore(5f); // Space before table
-					table100.setSpacingAfter(5f); // Space after table
-					table100.getDefaultCell().setBorder(0);
-
-					PdfPCell cell1 = new PdfPCell(new Paragraph("Building Number:",
-							new Font(BaseFont.createFont(), 11, Font.NORMAL | Font.BOLD)));
-					cell1.setBackgroundColor(new BaseColor(203, 183, 162));
-					cell1.setHorizontalAlignment(Element.ALIGN_LEFT);
-					cell1.setBorder(PdfPCell.NO_BORDER);
-					table100.addCell(cell1);
-					PdfPCell cell2 = new PdfPCell(new Paragraph(earthingLpsRepo.getBuildingNumber().toString(),
-							new Font(BaseFont.createFont(), 10, Font.NORMAL | Font.BOLD)));
-					cell2.setHorizontalAlignment(Element.ALIGN_LEFT);
-					cell2.setBackgroundColor(new BaseColor(203, 183, 162));
-					cell2.setBorder(PdfPCell.NO_BORDER);
-					table100.addCell(cell2);
-					document.add(table100);
-
-					PdfPTable table1001 = new PdfPTable(pointColumnWidths);
-
-					table1001.setWidthPercentage(100); // Width 100%
-					table1001.setSpacingBefore(5f); // Space before table
-					table1001.setSpacingAfter(5f); // Space after table
-					table1001.setWidthPercentage(100);
-					table1001.getDefaultCell().setBorder(0);
-					PdfPCell cell3 = new PdfPCell(new Paragraph("Building Name:",
-							new Font(BaseFont.createFont(), 11, Font.NORMAL | Font.BOLD)));
-					cell3.setBackgroundColor(new BaseColor(203, 183, 162));
-					cell3.setHorizontalAlignment(Element.ALIGN_LEFT);
-					cell3.setBorder(PdfPCell.NO_BORDER);
-					table1001.addCell(cell3);
-					PdfPCell cell4 = new PdfPCell(new Paragraph(earthingLpsRepo.getBuildingName(),
-							new Font(BaseFont.createFont(), 10, Font.NORMAL | Font.BOLD)));
-					cell4.setHorizontalAlignment(Element.ALIGN_LEFT);
-					cell4.setBackgroundColor(new BaseColor(203, 183, 162));
-					cell4.setBorder(PdfPCell.NO_BORDER);
-					table1001.addCell(cell4);
-					document.add(table1001);
+//					float[] pointColumnWidths = { 120F, 80F };
+//					PdfPTable table100 = new PdfPTable(pointColumnWidths);
+//
+//					table100.setWidthPercentage(100); // Width 100%
+//					table100.setSpacingBefore(5f); // Space before table
+//					table100.setSpacingAfter(5f); // Space after table
+//					table100.getDefaultCell().setBorder(0);
+//
+//					PdfPCell cell1 = new PdfPCell(new Paragraph("Building Number:",
+//							new Font(BaseFont.createFont(), 11, Font.NORMAL | Font.BOLD)));
+//					cell1.setBackgroundColor(new BaseColor(203, 183, 162));
+//					cell1.setHorizontalAlignment(Element.ALIGN_LEFT);
+//					cell1.setBorder(PdfPCell.NO_BORDER);
+//					table100.addCell(cell1);
+//					PdfPCell cell2 = new PdfPCell(new Paragraph(earthingLpsRepo.getBuildingNumber().toString(),
+//							new Font(BaseFont.createFont(), 10, Font.NORMAL | Font.BOLD)));
+//					cell2.setHorizontalAlignment(Element.ALIGN_LEFT);
+//					cell2.setBackgroundColor(new BaseColor(203, 183, 162));
+//					cell2.setBorder(PdfPCell.NO_BORDER);
+//					table100.addCell(cell2);
+//					document.add(table100);
+//
+//					PdfPTable table1001 = new PdfPTable(pointColumnWidths);
+//
+//					table1001.setWidthPercentage(100); // Width 100%
+//					table1001.setSpacingBefore(5f); // Space before table
+//					table1001.setSpacingAfter(5f); // Space after table
+//					table1001.setWidthPercentage(100);
+//					table1001.getDefaultCell().setBorder(0);
+//					PdfPCell cell3 = new PdfPCell(new Paragraph("Building Name:",
+//							new Font(BaseFont.createFont(), 11, Font.NORMAL | Font.BOLD)));
+//					cell3.setBackgroundColor(new BaseColor(203, 183, 162));
+//					cell3.setHorizontalAlignment(Element.ALIGN_LEFT);
+//					cell3.setBorder(PdfPCell.NO_BORDER);
+//					table1001.addCell(cell3);
+//					PdfPCell cell4 = new PdfPCell(new Paragraph(earthingLpsRepo.getBuildingName(),
+//							new Font(BaseFont.createFont(), 10, Font.NORMAL | Font.BOLD)));
+//					cell4.setHorizontalAlignment(Element.ALIGN_LEFT);
+//					cell4.setBackgroundColor(new BaseColor(203, 183, 162));
+//					cell4.setBorder(PdfPCell.NO_BORDER);
+//					table1001.addCell(cell4);
+//					document.add(table1001);
 
 					PdfPTable table205 = new PdfPTable(pointColumnWidths30);
 					table205.setWidthPercentage(100); // Width 100%

@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.capeelectric.exception.AirTerminationException;
 import com.capeelectric.exception.EarthingLpsException;
 import com.capeelectric.model.BasicLps;
 import com.capeelectric.model.EarthingLpsDescription;
@@ -22,6 +23,7 @@ import com.capeelectric.model.EarthingReport;
 import com.capeelectric.repository.BasicLpsRepository;
 import com.capeelectric.repository.EarthingLpsRepository;
 import com.capeelectric.service.EarthingLpsService;
+import com.capeelectric.util.AddRemovedStatus;
 import com.capeelectric.util.FindNonRemovedObjects;
 import com.capeelectric.util.UserFullName;
 
@@ -49,10 +51,13 @@ public class EarthingLpsServiceImpl implements EarthingLpsService {
 	@Autowired
 	private FindNonRemovedObjects findNonRemovedObjects;
 	
+	@Autowired
+	private AddRemovedStatus addRemovedStatus;
+	
 	@Transactional
 	@Override
 	public void addEarthingLpsDetails(EarthingReport earthingReport)
-			throws  EarthingLpsException{
+			throws  EarthingLpsException, AirTerminationException{
 		logger.info("Called addEarthingLpsDetails function");
 
 		if (earthingReport != null && earthingReport.getUserName() != null
@@ -72,8 +77,12 @@ public class EarthingLpsServiceImpl implements EarthingLpsService {
 						earthingReport.setUpdatedDate(LocalDateTime.now());
 						earthingReport.setCreatedBy(userFullName.findByUserName(earthingReport.getUserName()));
 						earthingReport.setUpdatedBy(userFullName.findByUserName(earthingReport.getUserName()));
+						addRemovedStatus.removeSummaryLps(earthingReport.getUserName(),earthingReport.getBasicLpsId());
+
 						earthingLpsRepository.save(earthingReport);
 						logger.debug("Earthing Report Details Successfully Saved in DB");
+						userFullName.addUpdatedByandDate(earthingReport.getBasicLpsId(),userFullName.findByUserName(earthingReport.getUserName()));
+						logger.debug("Basic Lps UpdatedBy and UpdatedDate by Earthing");
 					} else {
 						logger.error("Please fill all the fields before clicking next button");
 						throw new EarthingLpsException("Please fill all the fields before clicking next button");
@@ -124,7 +133,7 @@ public class EarthingLpsServiceImpl implements EarthingLpsService {
 	
 	@Transactional
 	@Override
-	public void updateEarthingLpsDetails(EarthingReport earthingReport) throws EarthingLpsException {
+	public void updateEarthingLpsDetails(EarthingReport earthingReport) throws EarthingLpsException, AirTerminationException {
 		logger.info("Called updateEarthingLpsDetails function");
 
 		if (earthingReport != null && earthingReport.getEarthingReportId() != null
@@ -136,8 +145,12 @@ public class EarthingLpsServiceImpl implements EarthingLpsService {
 					&& earthingLpsRepo.get().getBasicLpsId().equals(earthingReport.getBasicLpsId())) {
 				earthingReport.setUpdatedDate(LocalDateTime.now());
 				earthingReport.setUpdatedBy(userFullName.findByUserName(earthingReport.getUserName()));
+				addRemovedStatus.removeSummaryLps(earthingReport.getUserName(),earthingReport.getBasicLpsId());
+
 				earthingLpsRepository.save(earthingReport);
 				logger.debug("Earthing Report Details Successfully Updated in DB");
+				userFullName.addUpdatedByandDate(earthingReport.getBasicLpsId(),userFullName.findByUserName(earthingReport.getUserName()));
+				logger.debug("Basic Lps UpdatedBy and UpdatedDate by Earthing");
 			} else {
 				logger.error("Given Basic LPS Id and Earthing LPS Id is Invalid");
 				throw new EarthingLpsException("Given Basic LPS Id and Earthing LPS Id is Invalid");

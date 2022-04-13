@@ -36,6 +36,8 @@ public class BasicLpsServiceImpl implements BasicLpsService {
 	@Autowired
 	private UserFullName userFullName;
 	
+	private BasicLps basicLpsData;
+	
 	@Transactional
 	@Override
 	public BasicLps addBasicLpsDetails(BasicLps basicLps) throws BasicLpsException {
@@ -45,6 +47,7 @@ public class BasicLpsServiceImpl implements BasicLpsService {
 			Optional<BasicLps> basicLpsDetailsRepo = basicLpsRepository.findByClientName(basicLps.getClientName());
 			logger.debug("Basic Client Repo data available");
 				if(!basicLpsDetailsRepo.isPresent()) {
+					basicLps.setStatus("Active");
 					basicLps.setCreatedDate(LocalDateTime.now());
 					basicLps.setUpdatedDate(LocalDateTime.now());
 					basicLps.setCreatedBy(userFullName.findByUserName(basicLps.getUserName()));
@@ -111,6 +114,37 @@ public class BasicLpsServiceImpl implements BasicLpsService {
 			throw new BasicLpsException("Invalid inputs");
 		}
 		logger.info("Ended updateBasicLpsDetails function");
+
+	}
+	
+	
+	@Transactional
+	@Override
+	public void updateBasicLpsDetailsStatus(BasicLps basicLps) throws BasicLpsException {
+		logger.info("Called updateBasicLpsDetailsStatus function");
+
+		if (basicLps != null && basicLps.getBasicLpsId() != null && basicLps.getBasicLpsId() != 0) {
+			Optional<BasicLps> basicLpsRepo = basicLpsRepository
+					.findByBasicLpsId(basicLps.getBasicLpsId());
+			if (basicLpsRepo.isPresent()
+					&& basicLpsRepo.get().getBasicLpsId().equals(basicLps.getBasicLpsId())) {
+				basicLpsData = basicLpsRepo.get();
+				basicLpsData.setStatus("InActive");
+				basicLpsData.setUpdatedDate(LocalDateTime.now());
+				basicLpsData.setUpdatedBy(userFullName.findByUserName(basicLps.getUserName()));
+				basicLpsRepository.save(basicLpsData);
+				logger.debug("Basic Lps successfully Updated in DB with InActive Status");
+
+			} else {
+				logger.error("Given Basic LPS Id is Invalid");
+				throw new BasicLpsException("Given Basic LPS Id is Invalid");
+			}
+
+		} else {
+			logger.error("Invalid Inputs");
+			throw new BasicLpsException("Invalid inputs");
+		}
+		logger.info("Ended updateBasicLpsDetailsStatus function");
 
 	}
 	

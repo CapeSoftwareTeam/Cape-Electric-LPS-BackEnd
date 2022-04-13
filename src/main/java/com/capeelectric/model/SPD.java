@@ -46,7 +46,7 @@ public class SPD implements Serializable {
 	private String mainsIncomingRem;
 	
 	@Column(name = "TOTALMAINS_INCOMING_OB")
-	private String totalMainsIncomingOb;
+	private Integer totalMainsIncomingOb;
 	
 	
 	@Column(name = "TOTALMAINS_INCOMING_REM")
@@ -59,7 +59,7 @@ public class SPD implements Serializable {
 	private String noPannelSupplittingRem;
 
 	@Column(name = "TOTAL_NO_OUTDOOREQUIPMENT_OB")
-	private String totalNoOutDoorRequipmentOb;
+	private Integer totalNoOutDoorRequipmentOb;
 	
 	@Column(name = "TOTAL_NO_OUTDOOREQUIPMENT_REM")
 	private String totalNoOutDoorRequipmentRem;
@@ -97,12 +97,21 @@ public class SPD implements Serializable {
 		this.mainsIncomingRem = mainsIncomingRem;
 	}
 
-	public String getTotalMainsIncomingOb() {
+
+	public Integer getTotalMainsIncomingOb() {
 		return totalMainsIncomingOb;
 	}
 
-	public void setTotalMainsIncomingOb(String totalMainsIncomingOb) {
+	public void setTotalMainsIncomingOb(Integer totalMainsIncomingOb) {
 		this.totalMainsIncomingOb = totalMainsIncomingOb;
+	}
+
+	public Integer getTotalNoOutDoorRequipmentOb() {
+		return totalNoOutDoorRequipmentOb;
+	}
+
+	public void setTotalNoOutDoorRequipmentOb(Integer totalNoOutDoorRequipmentOb) {
+		this.totalNoOutDoorRequipmentOb = totalNoOutDoorRequipmentOb;
 	}
 
 	public String getTotalMainsIncomingRem() {
@@ -127,14 +136,6 @@ public class SPD implements Serializable {
 
 	public void setNoPannelSupplittingRem(String noPannelSupplittingRem) {
 		this.noPannelSupplittingRem = noPannelSupplittingRem;
-	}
-
-	public String getTotalNoOutDoorRequipmentOb() {
-		return totalNoOutDoorRequipmentOb;
-	}
-
-	public void setTotalNoOutDoorRequipmentOb(String totalNoOutDoorRequipmentOb) {
-		this.totalNoOutDoorRequipmentOb = totalNoOutDoorRequipmentOb;
 	}
 
 	public String getTotalNoOutDoorRequipmentRem() {

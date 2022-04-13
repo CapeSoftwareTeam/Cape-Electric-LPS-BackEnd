@@ -40,15 +40,26 @@ public class SummaryLpsController {
 	@Autowired
 	private SummaryLpsService summaryLpsService;
 	
-	@PostMapping("/addSummaryLps")
-	public ResponseEntity<String> addSummaryLps(@RequestBody  SummaryLps summaryLps)
+	@PostMapping("/addSummaryLps/{isSubmitted}")
+	public ResponseEntity<String> addSummaryLps(@RequestBody SummaryLps summaryLps,@PathVariable Boolean isSubmitted)
 			throws SummaryLpsException, BasicLpsException, AirTerminationException, DownConductorException, EarthingLpsException, SPDException,EarthStudException, Exception {
 		logger.info("called addSummaryLps function UserName : {}, BasicLpsId : {}",
 				summaryLps.getUserName(), summaryLps.getBasicLpsId());
-		summaryLpsService.addSummaryLpsDetails(summaryLps);
+		String addSummaryLpsDetails = summaryLpsService.addSummaryLpsDetails(summaryLps,isSubmitted);
 		logger.info("Ended addSummaryLps function");
-		return new ResponseEntity<String>("Summary Lps Details Sucessfully Submitted",
+		return new ResponseEntity<String>(addSummaryLpsDetails,
 				HttpStatus.CREATED);
+	}
+	
+	@PostMapping("/updateSummaryLps/{isSubmitted}")
+	public ResponseEntity<String> updateSummaryLps(@RequestBody SummaryLps summaryLps,@PathVariable Boolean isSubmitted)
+			throws SummaryLpsException, BasicLpsException, AirTerminationException, DownConductorException, EarthingLpsException, SPDException,EarthStudException, Exception {
+		logger.info("called updateSummaryLps function UserName : {}, BasicLpsId : {}",
+				summaryLps.getUserName(), summaryLps.getBasicLpsId());
+		String updateSummaryLpsDetails = summaryLpsService.updateSummaryLpsDetails(summaryLps,isSubmitted);
+		logger.info("Ended updateSummaryLps function");
+		return new ResponseEntity<String>(updateSummaryLpsDetails,
+				HttpStatus.ACCEPTED);
 	}
 
 	@GetMapping("/retrieveSummaryLps/{userName}/{basicLpsId}")

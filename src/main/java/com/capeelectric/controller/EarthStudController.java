@@ -65,7 +65,7 @@ public class EarthStudController {
 	
 	@PutMapping("/updateEarthStud")
 	public ResponseEntity<String> updateEarthStud(@RequestBody EarthStudReport earthStudReport)
-			throws EarthStudException {
+			throws EarthStudException, AirTerminationException {
 		logger.info("called updateEarthStud function UserName : {},BasicLpsId : {},EarthStudReportId : {}",
 				earthStudReport.getUserName(), earthStudReport.getBasicLpsId(),
 				earthStudReport.getEarthStudReportId());

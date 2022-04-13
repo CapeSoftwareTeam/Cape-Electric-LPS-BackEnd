@@ -18,12 +18,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import com.capeelectric.exception.DownConductorException;
+import com.capeelectric.exception.AirTerminationException;
 import com.capeelectric.exception.EarthingLpsException;
-import com.capeelectric.model.DownConductorDescription;
-import com.capeelectric.model.EarthingLpsDescription;
 import com.capeelectric.model.EarthingReport;
-import com.capeelectric.service.impl.DownConductorServiceImpl;
 import com.capeelectric.service.impl.EarthingLpsServiceImpl;
 
 @ExtendWith(SpringExtension.class)
@@ -49,7 +46,7 @@ public class EarthingLpsControllerTest {
 	}
 
 	@Test
-	public void testAddEarthingLpsDetails() throws EarthingLpsException {
+	public void testAddEarthingLpsDetails() throws EarthingLpsException, AirTerminationException {
 		logger.info("testAddEarthingLpsDetails Function Started");
 
 		doNothing().when(earthingLpsServiceImpl).addEarthingLpsDetails(earthingReport);
@@ -75,7 +72,7 @@ public class EarthingLpsControllerTest {
 	}
 
 	@Test
-	public void testUpdateEarthingLpsDetails() throws EarthingLpsException {
+	public void testUpdateEarthingLpsDetails() throws EarthingLpsException, AirTerminationException {
 
 		logger.info("testUpdateEarthingLpsDetails Function Started");
 		ResponseEntity<String> expectedResponseEntity = new ResponseEntity<String>(HttpStatus.OK);

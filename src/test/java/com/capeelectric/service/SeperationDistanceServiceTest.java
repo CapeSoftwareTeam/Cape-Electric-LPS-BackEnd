@@ -17,6 +17,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+import com.capeelectric.exception.AirTerminationException;
 import com.capeelectric.exception.SeperationDistanceException;
 import com.capeelectric.model.BasicLps;
 import com.capeelectric.model.SeparateDistance;
@@ -26,6 +28,7 @@ import com.capeelectric.model.SeperationDistanceReport;
 import com.capeelectric.repository.BasicLpsRepository;
 import com.capeelectric.repository.SeperationDistanceRepository;
 import com.capeelectric.service.impl.SeperationDistanceServiceImpl;
+import com.capeelectric.util.AddRemovedStatus;
 import com.capeelectric.util.FindNonRemovedObjects;
 import com.capeelectric.util.UserFullName;
 
@@ -54,6 +57,9 @@ public class SeperationDistanceServiceTest {
 	@MockBean
 	private UserFullName userFullName;
 
+	@MockBean
+	private AddRemovedStatus addRemovedStatus;
+	
 	private SeperationDistanceReport seperationDistanceReport;
 
 	{
@@ -89,7 +95,7 @@ public class SeperationDistanceServiceTest {
 	}
 	
 	@Test
-	public void testAddSeperationDistance() throws SeperationDistanceException {
+	public void testAddSeperationDistance() throws SeperationDistanceException, AirTerminationException {
 
 		when(basicLpsRepository.findByBasicLpsId(1)).thenReturn(Optional.of(basicLps));
 		when(seperationDistanceRepository.findByBasicLpsId(2)).thenReturn(Optional.of(seperationDistanceReport));
@@ -156,7 +162,7 @@ public class SeperationDistanceServiceTest {
 	}
 	
 	@Test
-	public void testUpdateSeperationDetails() throws SeperationDistanceException {
+	public void testUpdateSeperationDetails() throws SeperationDistanceException, AirTerminationException {
 
 		
 		seperationDistanceReport.setUserName("LVsystem@gmail.com");

@@ -18,6 +18,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import com.capeelectric.exception.AirTerminationException;
 import com.capeelectric.exception.EarthingLpsException;
 import com.capeelectric.model.BasicLps;
 import com.capeelectric.model.EarthElectrodeChamber;
@@ -31,6 +32,7 @@ import com.capeelectric.model.EarthingSystem;
 import com.capeelectric.repository.BasicLpsRepository;
 import com.capeelectric.repository.EarthingLpsRepository;
 import com.capeelectric.service.impl.EarthingLpsServiceImpl;
+import com.capeelectric.util.AddRemovedStatus;
 import com.capeelectric.util.FindNonRemovedObjects;
 import com.capeelectric.util.UserFullName;
 
@@ -57,6 +59,9 @@ public class EarthingLpsServiceTest {
 	
 	@MockBean
 	private UserFullName userFullName;
+	
+	@MockBean
+	private AddRemovedStatus addRemovedStatus;
 
 	private EarthingReport earthingReport;
 
@@ -119,7 +124,7 @@ public class EarthingLpsServiceTest {
 	}
 
 	@Test
-	public void testAddEarthingLpsDetails() throws EarthingLpsException {
+	public void testAddEarthingLpsDetails() throws EarthingLpsException, AirTerminationException {
 
 		when(basicLpsRepository.findByBasicLpsId(1)).thenReturn(Optional.of(basicLps));
 		when(earthingLpsRepository.findByBasicLpsId(3)).thenReturn(Optional.of(earthingReport));
@@ -212,7 +217,7 @@ public class EarthingLpsServiceTest {
 	}
 
 	@Test
-	public void testUpdateEarthingLpsDetails() throws EarthingLpsException {
+	public void testUpdateEarthingLpsDetails() throws EarthingLpsException, AirTerminationException {
 
 		earthingReport.setUserName("LVsystem@gmail.com");
 		earthingReport.setEarthingReportId(1);

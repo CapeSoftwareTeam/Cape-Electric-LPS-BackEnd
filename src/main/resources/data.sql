@@ -24,6 +24,7 @@ use lv_safety_verification;
 						SOIL_RESISTIVITY VARCHAR(225),
 						USER_NAME VARCHAR(225),
 						ALL_STEPS_COMPLETED VARCHAR(20),
+						STATUS VARCHAR(50),
 						CREATED_BY VARCHAR(255),
 					    CREATED_DATE datetime,
 					    UPDATED_BY VARCHAR(255),
@@ -985,6 +986,7 @@ use lv_safety_verification;
 				            USER_NAME VARCHAR(225),
 				            SUMMARY_DATE VARCHAR(225),
 				            INSPECTED_YEAR INT,
+				            FLAG VARCHAR(20),
 				            CREATED_BY VARCHAR(255),
 						    CREATED_DATE datetime,
 						    UPDATED_BY VARCHAR(255),
@@ -1033,3 +1035,15 @@ use lv_safety_verification;
 	               CONSTRAINT PK_SUMMARY_LPS_OBSERVATION_ID  PRIMARY KEY(SUMMARY_LPS_OBSERVATION_ID),
 	               CONSTRAINT FK_SUMMARY_LPS_OBSERVATION_SUMMARY_LPS_BUILDINGS_ID FOREIGN KEY(SUMMARY_LPS_BUILDINGS_ID) REFERENCES summary_lps_buildings_table(SUMMARY_LPS_BUILDINGS_ID) ON DELETE CASCADE
 	        );
+	        
+	        
+-----------> FILE_UPLOAD_TABLE <----------
+   CREATE TABLE file_upload_lps_table(
+				FILE_ID INT AUTO_INCREMENT,
+				FILE_NAME VARCHAR(255),
+				LPS_ID INT,
+				COMPONENT_NAME VARCHAR(255),
+				FILE_TYPE VARCHAR(255),
+				DATA LONGBLOB,
+				CONSTRAINT PK_FILE_ID   PRIMARY KEY(FILE_ID)
+				)

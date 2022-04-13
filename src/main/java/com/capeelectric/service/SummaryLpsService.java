@@ -20,9 +20,13 @@ import com.capeelectric.model.SummaryLps;
  */
 public interface SummaryLpsService {
 
-	public void addSummaryLpsDetails(SummaryLps summaryLps)
-			throws SummaryLpsException, BasicLpsException, AirTerminationException, DownConductorException, EarthingLpsException, SPDException,EarthStudException, Exception;
+	public String addSummaryLpsDetails(SummaryLps summaryLps, Boolean isSubmitted)
+			throws SummaryLpsException, BasicLpsException, AirTerminationException, DownConductorException,
+			EarthingLpsException, SPDException, EarthStudException, Exception;
 
-	public List<SummaryLps> retrieveSummaryLpsDetails(String userName, Integer basicLpsId)
-			throws SummaryLpsException;
+	public String updateSummaryLpsDetails(SummaryLps summaryLps, Boolean isSubmitted)
+			throws SummaryLpsException, BasicLpsException, AirTerminationException, DownConductorException,
+			EarthingLpsException, SPDException, EarthStudException, Exception;
+
+	public List<SummaryLps> retrieveSummaryLpsDetails(String userName, Integer basicLpsId) throws SummaryLpsException;
 }

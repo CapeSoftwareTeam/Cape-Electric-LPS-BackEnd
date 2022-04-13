@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.capeelectric.exception.AirTerminationException;
 import com.capeelectric.exception.SeperationDistanceException;
 import com.capeelectric.model.BasicLps;
 import com.capeelectric.model.SeperationDistanceDescription;
@@ -22,6 +23,7 @@ import com.capeelectric.model.SeperationDistanceReport;
 import com.capeelectric.repository.BasicLpsRepository;
 import com.capeelectric.repository.SeperationDistanceRepository;
 import com.capeelectric.service.SeperationDistanceService;
+import com.capeelectric.util.AddRemovedStatus;
 import com.capeelectric.util.FindNonRemovedObjects;
 import com.capeelectric.util.UserFullName;
 
@@ -47,10 +49,13 @@ public class SeperationDistanceServiceImpl implements SeperationDistanceService{
 	@Autowired
 	private FindNonRemovedObjects findNonRemovedObjects;
 	
+	@Autowired
+	private AddRemovedStatus addRemovedStatus;
+	
 	@Transactional
 	@Override
 	public void addSeperationDistance(SeperationDistanceReport seperationDistanceReport)
-			throws  SeperationDistanceException{
+			throws  SeperationDistanceException, AirTerminationException{
 		logger.info("Called addSeperationDistance function");
 
 		if (seperationDistanceReport != null && seperationDistanceReport.getUserName() != null
@@ -70,8 +75,12 @@ public class SeperationDistanceServiceImpl implements SeperationDistanceService{
 						seperationDistanceReport.setUpdatedDate(LocalDateTime.now());
 						seperationDistanceReport.setCreatedBy(userFullName.findByUserName(seperationDistanceReport.getUserName()));
 						seperationDistanceReport.setUpdatedBy(userFullName.findByUserName(seperationDistanceReport.getUserName()));
+						addRemovedStatus.removeSummaryLps(seperationDistanceReport.getUserName(),seperationDistanceReport.getBasicLpsId());
+
 						seperationDistanceRepository.save(seperationDistanceReport);
 						logger.debug("Seperation Distance Report Details Successfully Saved in DB");
+						userFullName.addUpdatedByandDate(seperationDistanceReport.getBasicLpsId(),userFullName.findByUserName(seperationDistanceReport.getUserName()));
+						logger.debug("Basic Lps UpdatedBy and UpdatedDate by SeperationDistance");
 					} else {
 						logger.error("Please fill all the fields before clicking next button");
 						throw new SeperationDistanceException("Please fill all the fields before clicking next button");
@@ -119,7 +128,7 @@ public class SeperationDistanceServiceImpl implements SeperationDistanceService{
 	
 	@Transactional
 	@Override
-	public void updateSeperationDetails(SeperationDistanceReport seperationDistanceReport) throws SeperationDistanceException {
+	public void updateSeperationDetails(SeperationDistanceReport seperationDistanceReport) throws SeperationDistanceException, AirTerminationException {
 		logger.info("Called updateSeperationDetails function");
 		
 		if (seperationDistanceReport != null && seperationDistanceReport.getSeperationDistanceReportId() != null
@@ -131,8 +140,11 @@ public class SeperationDistanceServiceImpl implements SeperationDistanceService{
 					&& seperationDistanceRepo.get().getBasicLpsId().equals(seperationDistanceReport.getBasicLpsId())) {
 				seperationDistanceReport.setUpdatedDate(LocalDateTime.now());
 				seperationDistanceReport.setUpdatedBy(userFullName.findByUserName(seperationDistanceReport.getUserName()));
+				addRemovedStatus.removeSummaryLps(seperationDistanceReport.getUserName(),seperationDistanceReport.getBasicLpsId());
 				seperationDistanceRepository.save(seperationDistanceReport);
 				logger.debug("Seperation Distance Report Details Successfully Updated in DB");
+				userFullName.addUpdatedByandDate(seperationDistanceReport.getBasicLpsId(),userFullName.findByUserName(seperationDistanceReport.getUserName()));
+				logger.debug("Basic Lps UpdatedBy and UpdatedDate by SeperationDistance");
 			} else {
 				logger.error("Given Basic LPS Id and Seperation Distance Id is Invalid");
 				throw new SeperationDistanceException("Given Basic LPS Id and Seperation Distance Id is Invalid");

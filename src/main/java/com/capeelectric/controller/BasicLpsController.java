@@ -61,4 +61,16 @@ public class BasicLpsController {
 		logger.info("Ended updateBasicLpsDetails function");
 		return new ResponseEntity<String>("Basic Lps Details Updated Successfully", HttpStatus.OK);
 	}
+	
+	@PutMapping("/updateBasicLpsStatus")
+	public ResponseEntity<String> updateBasicLpsDetailsStatus(@RequestBody BasicLps basicLps)
+			throws BasicLpsException {
+		logger.info("called updateBasicLpsDetailsStatus function UserName : {},BasicLpsId : {}", basicLps.getUserName(),
+				basicLps.getBasicLpsId());
+		basicLpsService.updateBasicLpsDetailsStatus(basicLps);
+		logger.info("Ended updateBasicLpsDetailsStatus function");
+		return new ResponseEntity<String>("Basic Lps has been successfully deleted", HttpStatus.OK);
+	}
+	
+	
 }

@@ -24,10 +24,7 @@ import com.capeelectric.exception.DownConductorException;
 import com.capeelectric.exception.EarthStudException;
 import com.capeelectric.exception.EarthingLpsException;
 import com.capeelectric.exception.SPDException;
-import com.capeelectric.model.DownConductorDescription;
-import com.capeelectric.model.EarthStudDescription;
 import com.capeelectric.model.EarthStudReport;
-import com.capeelectric.service.impl.DownConductorServiceImpl;
 import com.capeelectric.service.impl.EarthStudServiceImpl;
 
 @ExtendWith(SpringExtension.class)
@@ -79,7 +76,7 @@ public class EarthStudControllerTest {
 	}
 
 	@Test
-	public void testUpdateEarthStud() throws EarthStudException {
+	public void testUpdateEarthStud() throws EarthStudException, AirTerminationException {
 
 		logger.info("testUpdateEarthStud Function Started");
 		ResponseEntity<String> expectedResponseEntity = new ResponseEntity<String>(HttpStatus.OK);
