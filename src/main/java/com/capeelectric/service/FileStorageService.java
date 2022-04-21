@@ -3,6 +3,7 @@ package com.capeelectric.service;
 import java.io.IOException;
 import java.sql.Blob;
 import java.sql.SQLException;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.sql.rowset.serial.SerialException;
@@ -59,9 +60,26 @@ public class FileStorageService {
 	public void removeFile(Integer fileId) throws IOException {
 		if (fileId != null && fileId != 0) {
 			ResponseFile fileDB = fileDBRepository.findById(fileId).get();
+			List<ResponseFile> responseFileRepo = fileDBRepository.findByLpsId(fileDB.getLpsId());
+
 			if (fileDB != null && fileDB.getFileId().equals(fileId)) {
-				logger.info("File Deleted");
-				fileDBRepository.delete(fileDB);
+				for (ResponseFile responseFile : responseFileRepo) {
+					if(fileDB.getIndex() == responseFile.getIndex()) {
+						logger.info("File Deleted");
+						fileDBRepository.delete(responseFile);
+					}
+					else if(fileDB.getIndex()<responseFile.getIndex()) {
+						if (fileDB.getIndex().equals(0)) {
+							responseFile.setIndex(responseFile.getIndex()-1);
+						} else {
+							responseFile.setIndex(responseFile.getIndex()-fileDB.getIndex());
+						}
+						
+						fileDBRepository.save(responseFile);
+					}
+			}
+				
+			 
 			} else {
 				logger.error("File Not Preset");
 				throw new IOException("File Not Preset");
@@ -152,5 +170,43 @@ public class FileStorageService {
 			logger.error("Id Not Present");
 		}
 		return null;
+	}
+
+	public void updateFileId(Integer basicLpsId, Integer index) {
+		// TODO Auto-generated method stub
+		if (basicLpsId != null && basicLpsId != 0) {
+			List<ResponseFile> fileDB = fileDBRepository.findByLpsId(basicLpsId);
+			for (ResponseFile responseFile : fileDB) {
+				if(index == responseFile.getIndex()) {
+					fileDBRepository.delete(responseFile);
+				}
+				else if(index<responseFile.getIndex()) {
+					if (index.equals(0)) {
+						responseFile.setIndex(responseFile.getIndex()-1);	
+					} else {
+						responseFile.setIndex(responseFile.getIndex()-index);
+					}
+					
+//					fileDBRepository.save(responseFile);
+				}
+				}
+		} else {
+			logger.error("Id Not Present");
+		}
+	}
+
+	public void updateAllFileId(List<String> listOfResponseFile, Integer basicLpsId) {
+		// TODO Auto-generated method stub
+		List<ResponseFile> fileRepo = fileDBRepository.findByLpsId(basicLpsId);
+		for (ResponseFile responseFile : fileRepo) {
+			for (String fileIdList:listOfResponseFile) {
+			String[] split = fileIdList.split("-");
+			;
+				if(responseFile.getFileId().equals(Integer.parseInt(split[0]))) {
+					responseFile.setIndex(Integer.parseInt(split[1]));
+				}
+			}
+		}
+		fileDBRepository.saveAll(fileRepo);
 	}
 }

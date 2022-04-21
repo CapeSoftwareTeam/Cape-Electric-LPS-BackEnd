@@ -146,6 +146,9 @@ public class AirBasicDescription implements Serializable {
 
 	@Column(name = "BONDING_EQUIPOTENTIALREMARKS")
 	private String bondingEquipotentialRe;
+	
+	@Column(name = "FILE_INDEX")
+	private Integer fileIndex;
 
 	@JsonBackReference
 	@ManyToOne(cascade = CascadeType.ALL)
@@ -446,6 +449,14 @@ public class AirBasicDescription implements Serializable {
 
 	public void setFileId(String fileId) {
 		this.fileId = fileId;
+	}
+
+	public Integer getFileIndex() {
+		return fileIndex;
+	}
+
+	public void setFileIndex(Integer fileIndex) {
+		this.fileIndex = fileIndex;
 	}
 	
 	
