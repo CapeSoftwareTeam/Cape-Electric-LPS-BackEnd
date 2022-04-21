@@ -92,7 +92,7 @@ public class FileStorageService {
 
 	}
 
-	public void updateFile(MultipartFile file, String componentName, Integer fileId)
+	public void updateFile(MultipartFile file, String componentName, Integer fileId,Integer index)
 			throws SerialException, SQLException, IOException {
 		if (fileId != null && fileId != 0) {
 			ResponseFile fileDB = fileDBRepository.findById(fileId).get();
@@ -104,6 +104,7 @@ public class FileStorageService {
 				fileDB.setData(blob);
 				fileDB.setFileType(file.getContentType());
 				fileDB.setComponentName(componentName);
+				fileDB.setIndex(index);
 				logger.debug("File Update In DB");
 				fileDBRepository.save(fileDB);
 			} else {

@@ -108,11 +108,11 @@ public class FileUploadController {
 //		return new ResponseEntity<String>("File  Deleted Successfully", HttpStatus.OK);
 //	}
 
-	@PutMapping("/updateFile/{componentName}/{fileId}")
-	public ResponseEntity<String> updateFile(@RequestParam("file") MultipartFile file,@PathVariable String componentName, @PathVariable Integer fileId)
+	@PutMapping("/updateFile/{componentName}/{fileId}/{index}")
+	public ResponseEntity<String> updateFile(@RequestParam("file") MultipartFile file,@PathVariable String componentName, @PathVariable Integer fileId, @PathVariable Integer index)
 			throws IOException, SerialException, SQLException {
 		logger.debug("UpdateFile File Start");
-		storageService.updateFile(file,componentName, fileId);
+		storageService.updateFile(file,componentName, fileId,index);
 		logger.debug("UpdateFile File End");
 		return new ResponseEntity<String>("File Updated Successfully", HttpStatus.OK);
 	}
