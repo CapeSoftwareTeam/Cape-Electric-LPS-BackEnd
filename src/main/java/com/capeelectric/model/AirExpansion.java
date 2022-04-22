@@ -89,7 +89,7 @@ public class AirExpansion implements Serializable {
 	private String fileType_EP;
 
 	@Column(name = "FILE_ID_EP")
-	private Integer fileId_EP;
+	private Integer fileIdEP;
 	
 	@Column(name = "FILE_SIZE")
 	private String fileSize;
@@ -286,12 +286,12 @@ public class AirExpansion implements Serializable {
 		this.fileType_EP = fileType_EP;
 	}
 
-	public Integer getFileId_EP() {
-		return fileId_EP;
+	public Integer getFileIdEP() {
+		return fileIdEP;
 	}
 
-	public void setFileId_EP(Integer fileId_EP) {
-		this.fileId_EP = fileId_EP;
+	public void setFileIdEP(Integer fileIdEP) {
+		this.fileIdEP = fileIdEP;
 	}
 
 	public String getFileSize() {

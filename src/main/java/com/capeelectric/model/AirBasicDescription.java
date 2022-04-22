@@ -1,7 +1,6 @@
 package com.capeelectric.model;
 
 import java.io.Serializable;
-import java.sql.Blob;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -126,14 +125,6 @@ public class AirBasicDescription implements Serializable {
 	
 	@Column(name = "FILE_SIZE")
 	private String fileSize;
-
-	public String getFileSize() {
-		return fileSize;
-	}
-
-	public void setFileSize(String fileSize) {
-		this.fileSize = fileSize;
-	}
 
 	@Column(name = "FILE_TYPE")
 	private String fileType;
@@ -459,6 +450,12 @@ public class AirBasicDescription implements Serializable {
 		this.fileIndex = fileIndex;
 	}
 	
-	
+	public String getFileSize() {
+		return fileSize;
+	}
+
+	public void setFileSize(String fileSize) {
+		this.fileSize = fileSize;
+	}
 
 }
