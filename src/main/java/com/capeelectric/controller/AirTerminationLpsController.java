@@ -56,7 +56,7 @@ public class AirTerminationLpsController {
 				airTermination.getAirTerminationId());
 		airTerminationLpsService.updateAirTerminationLps(airTermination);
 		logger.info("Ended updateAirTerminationLps function");
-	   return new ResponseEntity<String>("Lps Air Terminal successfully Updated", HttpStatus.OK);
+	   return new ResponseEntity<String>("Lps Air Terminal Successfully Updated", HttpStatus.OK);
 	}
 
 }
