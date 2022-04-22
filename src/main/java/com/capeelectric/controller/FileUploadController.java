@@ -32,7 +32,7 @@ import com.capeelectric.model.ResponseFile;
 import com.capeelectric.service.FileStorageService;
 
 @RestController
-@RequestMapping("/api/lps/v2")
+@RequestMapping("/api/lps/v1")
 public class FileUploadController {
 	private static final Logger logger = LoggerFactory.getLogger(FileUploadController.class);
 	@Autowired
