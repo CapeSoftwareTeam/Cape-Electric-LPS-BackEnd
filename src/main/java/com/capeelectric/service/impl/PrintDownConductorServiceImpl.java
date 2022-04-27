@@ -1,5 +1,6 @@
 package com.capeelectric.service.impl;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
@@ -8,8 +9,16 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import com.amazonaws.auth.AWSStaticCredentialsProvider;
+import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.regions.Regions;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+import com.amazonaws.services.s3.model.AmazonS3Exception;
+import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.capeelectric.exception.DownConductorException;
 import com.capeelectric.model.BasicLps;
 import com.capeelectric.model.BridgingDescription;
@@ -21,14 +30,16 @@ import com.capeelectric.model.DownConductorTesting;
 import com.capeelectric.model.Holder;
 import com.capeelectric.model.LightningCounter;
 import com.capeelectric.model.TestingJoint;
-import com.capeelectric.repository.BasicLpsRepository;
 import com.capeelectric.repository.DownConductorRepository;
 import com.capeelectric.service.PrintDownConductorService;
+import com.capeelectric.util.AWSS3Configuration;
+import com.capeelectric.util.Constants;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
+import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
@@ -45,10 +56,16 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 
 //	@Autowired
 //	private BasicLpsRepository basicLpsRepository;
-//
-//	@Autowired
-//	private DownConductorRepository downConductorRepository;
 
+	@Autowired
+	private DownConductorRepository downConductorRepository;
+
+	@Value("${s3.lps.file.upload.bucket.name}")
+	private String s3LpsFileUploadBucketName;
+
+	@Autowired
+	AWSS3Configuration AWSS3configuration;
+	
 	@Override
 	public void printDownConductor(String userName, Integer lpsId, Optional<BasicLps> basicLpsDetails,
 			Optional<DownConductorReport> downConductorDetails) throws DownConductorException {
@@ -62,7 +79,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 
 //				List<BasicLps> basicLps = basicLpsRepository.findByUserNameAndBasicLpsId(userName, lpsId);
 //				BasicLps basicLps1 = basicLps.get(0);
-				BasicLps basicLps1 = basicLpsDetails.get();
+			    BasicLps basicLps1 = basicLpsDetails.get();
 
 				PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("DownConductorLps.pdf"));
 
@@ -70,7 +87,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 //						.findByUserNameAndBasicLpsId(userName, lpsId);
 //				DownConductorReport downConductorReport1 = downConductorDetails.get(0);
 
-				DownConductorReport downConductorReport1 = downConductorDetails.get();
+				 DownConductorReport downConductorReport1 = downConductorDetails.get();
 
 				List<DownConductorDescription> downConductorDesc = downConductorReport1.getDownConductorDescription();
 //				DownConductorDescription downConDesc = downConductorDesc.get(0);
@@ -290,6 +307,62 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 									}
 									document.add(table1);
 								}
+
+								float[] pointColumnWidths30 = { 25F, 150F, 55F, 50F };
+
+								PdfPTable table1 = new PdfPTable(pointColumnWidths30);
+								table1.setWidthPercentage(100); // Width 100%
+								// table1.setSpacingBefore(10f); // Space before table
+								// table1.setSpacingAfter(5f); // Space after table
+								table1.getDefaultCell().setBorder(0);
+
+								try {
+//									// Create a S3 client with in-program credential
+//									BasicAWSCredentials awsCreds = new BasicAWSCredentials(accessKeyId,
+//											accessKeySecret);
+//									AmazonS3 s3Client = AmazonS3ClientBuilder.standard().withRegion(Regions.AP_SOUTH_1)
+//											.withCredentials(new AWSStaticCredentialsProvider(awsCreds)).build();
+									AmazonS3 s3Client=AWSS3configuration.getAmazonS3Client();
+									// Uploading the PDF File in AWS S3 Bucket with folderName + fileNameInS3
+									if (downConDesc.getFileName1().length() > 0) {
+										PutObjectRequest request = new PutObjectRequest(s3LpsFileUploadBucketName,
+												"LPS_DownConductor_DownConductorsNonApplicableUploadedFile Name_"
+														.concat(downConDesc.getFileName1()),
+												new File(downConDesc.getFileName1()));
+										s3Client.putObject(request);
+										logger.info(
+												"DownConductor DownConductorsNonApplicable file Upload done in AWS s3");
+
+										PdfPCell cell7322 = new PdfPCell(new Paragraph(
+												"Paste these url to Browser and download/view the uploaded file in LPS  DownConductor:",
+												font));
+										// cell73.setGrayFill(0.92f);
+										// cell7322.setBorder(PdfPCell.NO_BORDER);
+										cell7322.setColspan(4);
+										table1.addCell(cell7322);
+
+										PdfPCell cell732 = new PdfPCell(new Paragraph(Constants.LPS_FILE_UPLOAD_DOMAIN
+												+ "/"
+												+ "LPS_DownConductor_DownConductorsNonApplicableUploadedFile Name_"
+														.concat(downConDesc.getFileName1()),
+												FontFactory.getFont(FontFactory.HELVETICA, 6, Font.UNDERLINE,
+														BaseColor.BLUE)));
+										cell732.setGrayFill(0.92f);
+										// cell732.setBorder(PdfPCell.NO_BORDER);
+										cell732.setColspan(4);
+										cell732.setFixedHeight(13f);
+										table1.addCell(cell732);
+										document.add(table1);
+									} else {
+										logger.error("DownConductor DownConductorsNonApplicable  no file available");
+										throw new Exception(
+												"DownConductor DownConductorsNonApplicable  no file available");
+									}
+
+								} catch (AmazonS3Exception e) {
+									e.printStackTrace();
+								}
+
 							}
 						}
 
@@ -2140,14 +2213,14 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 		return table1;
 	}
 
-	private PdfPTable DownConductorItr(Font font, DownConductor downConductor11) {
+	private PdfPTable DownConductorItr(Font font, DownConductor downConductor11) throws Exception {
 
 		float[] pointColumnWidths30 = { 25F, 150F, 55F, 50F };
 
 		PdfPTable table1 = new PdfPTable(pointColumnWidths30);
 		table1.setWidthPercentage(100); // Width 100%
 		table1.setSpacingBefore(10f); // Space before table
-		table1.setSpacingAfter(5f); // Space after table
+		// table1.setSpacingAfter(5f); // Space after table
 		table1.getDefaultCell().setBorder(0);
 
 		PdfPCell cell9 = new PdfPCell();
@@ -2174,6 +2247,47 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 			PdfPCell cell39 = new PdfPCell(new Paragraph("Not Available", font));
 			cell39.setHorizontalAlignment(Element.ALIGN_LEFT);
 			table1.addCell(cell39);
+		}
+
+		try {
+			// Create a S3 client with in-program credential
+//			BasicAWSCredentials awsCreds = new BasicAWSCredentials(accessKeyId, accessKeySecret);
+//			AmazonS3 s3Client = AmazonS3ClientBuilder.standard().withRegion(Regions.AP_SOUTH_1)
+//					.withCredentials(new AWSStaticCredentialsProvider(awsCreds)).build();
+			AmazonS3 s3Client=AWSS3configuration.getAmazonS3Client();
+			// Uploading the PDF File in AWS S3 Bucket with folderName + fileNameInS3
+			if (downConductor11.getFileName().length() > 0) {
+				PutObjectRequest request = new PutObjectRequest(s3LpsFileUploadBucketName,
+						"LPS_DownConductor_DownConductorsUploadedFile Name_".concat(downConductor11.getFileName()),
+						new File(downConductor11.getFileName()));
+				s3Client.putObject(request);
+				logger.info("DownConductor DownConductors file Upload done in AWS s3");
+
+				PdfPCell cell7322 = new PdfPCell(new Paragraph(
+						"Paste these url to Browser and download/view the uploaded file in LPS  DownConductor in DownConductors:",
+						font));
+				// cell73.setGrayFill(0.92f);
+				// cell7322.setBorder(PdfPCell.NO_BORDER);
+				cell7322.setColspan(4);
+				table1.addCell(cell7322);
+
+				PdfPCell cell732 = new PdfPCell(new Paragraph(
+						Constants.LPS_FILE_UPLOAD_DOMAIN + "/"
+								+ "LPS_DownConductor_DownConductorsUploadedFile Name_"
+										.concat(downConductor11.getFileName()),
+						FontFactory.getFont(FontFactory.HELVETICA, 6, Font.UNDERLINE, BaseColor.BLUE)));
+				cell732.setGrayFill(0.92f);
+				// cell732.setBorder(PdfPCell.NO_BORDER);
+				cell732.setColspan(4);
+				cell732.setFixedHeight(13f);
+				table1.addCell(cell732);
+			} else {
+				logger.error("DownConductor DownConductors  no file available");
+				throw new Exception("DownConductor DownConductors  no file available");
+			}
+
+		} catch (AmazonS3Exception e) {
+			e.printStackTrace();
 		}
 
 		PdfPCell cell1 = new PdfPCell();
@@ -2577,7 +2691,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 
 	private PdfPTable DownConductorBasicDetails(Document document, float[] pointColumnWidths, Font font,
 			DownConductorDescription downLps1) throws DocumentException, IOException {
-	
+
 //		PdfPTable table100 = new PdfPTable(pointColumnWidths);
 //		table100.setWidthPercentage(100); // Width 100%
 //		table100.setSpacingBefore(10f); // Space before table
