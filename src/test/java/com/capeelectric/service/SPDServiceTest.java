@@ -2,7 +2,6 @@ package com.capeelectric.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -18,6 +17,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+import com.capeelectric.exception.AirTerminationException;
 import com.capeelectric.exception.SPDException;
 import com.capeelectric.model.BasicLps;
 import com.capeelectric.model.SPD;
@@ -26,6 +27,7 @@ import com.capeelectric.model.SpdReport;
 import com.capeelectric.repository.BasicLpsRepository;
 import com.capeelectric.repository.SPDRepository;
 import com.capeelectric.service.impl.SPDServiceImpl;
+import com.capeelectric.util.AddRemovedStatus;
 import com.capeelectric.util.FindNonRemovedObjects;
 import com.capeelectric.util.UserFullName;
 
@@ -54,6 +56,9 @@ public class SPDServiceTest {
 	private UserFullName userFullName;
 
 	private SpdReport spdReport;
+	
+	@MockBean
+	private AddRemovedStatus addRemovedStatus;
 
 	{
 		spdReport = new SpdReport();
@@ -85,7 +90,7 @@ public class SPDServiceTest {
 	}
 
 	@Test
-	public void testAddSPDDetails() throws SPDException {
+	public void testAddSPDDetails() throws SPDException, AirTerminationException {
 
 		when(basicLpsRepository.findByBasicLpsId(1)).thenReturn(Optional.of(basicLps));
 		when(spdRepository.findByBasicLpsId(2)).thenReturn(Optional.of(spdReport));
@@ -145,7 +150,7 @@ public class SPDServiceTest {
 	}
 
 	@Test
-	public void testUpdateSpdDetails() throws SPDException {
+	public void testUpdateSpdDetails() throws SPDException, AirTerminationException {
 		
 		spdReport.setUserName("LVsystem@gmail.com");
 		spdReport.setSpdReportId(1);

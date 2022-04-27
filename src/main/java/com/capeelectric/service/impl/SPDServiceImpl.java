@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.capeelectric.exception.AirTerminationException;
 import com.capeelectric.exception.SPDException;
 import com.capeelectric.model.BasicLps;
 import com.capeelectric.model.SPD;
@@ -22,6 +23,7 @@ import com.capeelectric.model.SpdReport;
 import com.capeelectric.repository.BasicLpsRepository;
 import com.capeelectric.repository.SPDRepository;
 import com.capeelectric.service.SPDService;
+import com.capeelectric.util.AddRemovedStatus;
 import com.capeelectric.util.FindNonRemovedObjects;
 import com.capeelectric.util.UserFullName;
 
@@ -47,10 +49,13 @@ public class SPDServiceImpl implements SPDService{
 	@Autowired
 	private FindNonRemovedObjects findNonRemovedObjects;
 	
+	@Autowired
+	private AddRemovedStatus addRemovedStatus;
+	
 	@Transactional
 	@Override
 	public void addSPDDetails(SpdReport spdReport)
-			throws  SPDException{
+			throws  SPDException, AirTerminationException{
 		logger.info("Called addSPDDetails function");
 
 		if (spdReport != null && spdReport.getUserName() != null
@@ -69,6 +74,7 @@ public class SPDServiceImpl implements SPDService{
 						spdReport.setUpdatedDate(LocalDateTime.now());
 						spdReport.setCreatedBy(userFullName.findByUserName(spdReport.getUserName()));
 						spdReport.setUpdatedBy(userFullName.findByUserName(spdReport.getUserName()));
+						addRemovedStatus.removeSummaryLps(spdReport.getUserName(),spdReport.getBasicLpsId());
 						spdRepository.save(spdReport);
 						logger.debug("SPD Report Details Successfully Saved in DB");
 						userFullName.addUpdatedByandDate(spdReport.getBasicLpsId(),userFullName.findByUserName(spdReport.getUserName()));
@@ -122,7 +128,7 @@ public class SPDServiceImpl implements SPDService{
 	
 	@Transactional
 	@Override
-	public void updateSpdDetails(SpdReport spdReport) throws SPDException {
+	public void updateSpdDetails(SpdReport spdReport) throws SPDException, AirTerminationException {
 		logger.info("Called updateSpdDetails function");
 
 		if (spdReport != null && spdReport.getSpdReportId() != null
@@ -134,6 +140,7 @@ public class SPDServiceImpl implements SPDService{
 					&& spdRepo.get().getBasicLpsId().equals(spdReport.getBasicLpsId())) {
 				spdReport.setUpdatedDate(LocalDateTime.now());
 				spdReport.setUpdatedBy(userFullName.findByUserName(spdReport.getUserName()));
+				addRemovedStatus.removeSummaryLps(spdReport.getUserName(),spdReport.getBasicLpsId());
 				spdRepository.save(spdReport);
 				logger.debug("SPD Report Details Successfully Updated in DB");
 				userFullName.addUpdatedByandDate(spdReport.getBasicLpsId(),userFullName.findByUserName(spdReport.getUserName()));

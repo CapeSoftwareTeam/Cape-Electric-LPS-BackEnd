@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.capeelectric.exception.AirTerminationException;
 import com.capeelectric.exception.DownConductorException;
 import com.capeelectric.model.BasicLps;
 import com.capeelectric.model.DownConductorDescription;
@@ -22,6 +23,7 @@ import com.capeelectric.model.DownConductorReport;
 import com.capeelectric.repository.BasicLpsRepository;
 import com.capeelectric.repository.DownConductorRepository;
 import com.capeelectric.service.DownConductorService;
+import com.capeelectric.util.AddRemovedStatus;
 import com.capeelectric.util.FindNonRemovedObjects;
 import com.capeelectric.util.UserFullName;
 
@@ -50,10 +52,13 @@ public class DownConductorServiceImpl implements DownConductorService{
 	@Autowired
 	private FindNonRemovedObjects findNonRemovedObjects;
 	
+	@Autowired
+	private AddRemovedStatus addRemovedStatus;
+	
 	@Transactional
 	@Override
 	public void addDownConductorsDetails(DownConductorReport downConductorReport)
-			throws  DownConductorException{
+			throws  DownConductorException, AirTerminationException{
 		logger.info("Called addDownConductorsDetails function");
 
 		if (downConductorReport != null && downConductorReport.getUserName() != null
@@ -73,6 +78,8 @@ public class DownConductorServiceImpl implements DownConductorService{
 						downConductorReport.setUpdatedDate(LocalDateTime.now());
 						downConductorReport.setCreatedBy(userFullName.findByUserName(downConductorReport.getUserName()));
 						downConductorReport.setUpdatedBy(userFullName.findByUserName(downConductorReport.getUserName()));
+						addRemovedStatus.removeSummaryLps(downConductorReport.getUserName(),downConductorReport.getBasicLpsId());
+
 						downConductorRepository.save(downConductorReport);
 						logger.debug("Down Conductor Details Successfully Saved in DB");
 						userFullName.addUpdatedByandDate(downConductorReport.getBasicLpsId(),userFullName.findByUserName(downConductorReport.getUserName()));
@@ -126,7 +133,7 @@ public class DownConductorServiceImpl implements DownConductorService{
 	
 	@Transactional
 	@Override
-	public void updateDownConductorDetails(DownConductorReport downConductorReport) throws DownConductorException {
+	public void updateDownConductorDetails(DownConductorReport downConductorReport) throws DownConductorException, AirTerminationException {
 		logger.info("Called updateDownConductorDetails function");
 
 		if (downConductorReport != null && downConductorReport.getDownConductorReportId() != null
@@ -138,6 +145,8 @@ public class DownConductorServiceImpl implements DownConductorService{
 					&& downConductorRepo.get().getBasicLpsId().equals(downConductorReport.getBasicLpsId())) {
 				downConductorReport.setUpdatedDate(LocalDateTime.now());
 				downConductorReport.setUpdatedBy(userFullName.findByUserName(downConductorReport.getUserName()));
+				addRemovedStatus.removeSummaryLps(downConductorReport.getUserName(),downConductorReport.getBasicLpsId());
+
 				downConductorRepository.save(downConductorReport);
 				logger.debug("Down Conductor Details Updated Successfully in DB");
 				userFullName.addUpdatedByandDate(downConductorReport.getBasicLpsId(),userFullName.findByUserName(downConductorReport.getUserName()));

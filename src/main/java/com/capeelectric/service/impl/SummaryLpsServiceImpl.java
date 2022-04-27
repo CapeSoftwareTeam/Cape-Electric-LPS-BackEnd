@@ -48,6 +48,7 @@ import com.capeelectric.service.PrintSDandEarthStudService;
 import com.capeelectric.service.PrintSPDService;
 import com.capeelectric.service.PrintSummaryLpsService;
 import com.capeelectric.service.SummaryLpsService;
+import com.capeelectric.util.AddRemovedStatus;
 import com.capeelectric.util.FindNonRemovedObjects;
 import com.capeelectric.util.UserFullName;
 
@@ -114,6 +115,9 @@ public class SummaryLpsServiceImpl implements SummaryLpsService {
 
 	@Autowired
 	private PrintFinalPDFService printFinalPDFService;
+	
+	@Autowired
+	private AddRemovedStatus addRemovedStatus;
 
 	@Transactional
 	@Override
@@ -189,8 +193,12 @@ public class SummaryLpsServiceImpl implements SummaryLpsService {
 					summaryLps.setUpdatedDate(LocalDateTime.now());
 					summaryLps.setCreatedBy(userFullName.findByUserName(summaryLps.getUserName()));
 					summaryLps.setUpdatedBy(userFullName.findByUserName(summaryLps.getUserName()));
+					summaryLps.setFlag("A");
+					addRemovedStatus.removeSummaryLps(summaryLps.getUserName(),summaryLps.getBasicLpsId());
 					summaryLpsRepository.save(summaryLps);
 					logger.debug("Summary Lps Report Details Successfully Saved in DB");
+					userFullName.addUpdatedByandDate(summaryLps.getBasicLpsId(),userFullName.findByUserName(summaryLps.getUserName()));
+					logger.debug("Basic Lps UpdatedBy and UpdatedDate by Summary");
 
 					if (!isSubmitted) {
 						uploadPdfDetails(summaryLps.getUserName(), summaryLps.getBasicLpsId(), lpsAirDisc,
@@ -253,6 +261,7 @@ public class SummaryLpsServiceImpl implements SummaryLpsService {
 			Optional<SeperationDistanceReport> separateDistanceDetails = seperationDistanceRepository
 					.findByBasicLpsId(summaryLps.getBasicLpsId());
 
+
 			// For Earth Stud data
 			Optional<EarthStudReport> earthStudDetails = earthStudRepository
 					.findByBasicLpsId(summaryLps.getBasicLpsId());
@@ -295,6 +304,8 @@ public class SummaryLpsServiceImpl implements SummaryLpsService {
 					summaryLps.setUpdatedBy(userFullName.findByUserName(summaryLps.getUserName()));
 					summaryLpsRepository.save(summaryLps);
 					logger.debug("Summary Lps Report Details Successfully Updated in DB");
+					userFullName.addUpdatedByandDate(summaryLps.getBasicLpsId(),userFullName.findByUserName(summaryLps.getUserName()));
+					logger.debug("Basic Lps UpdatedBy and UpdatedDate by Summary");
 
 					if (!isSubmitted) {
 						uploadPdfDetails(summaryLps.getUserName(), summaryLps.getBasicLpsId(), lpsAirDisc,
@@ -326,19 +337,23 @@ public class SummaryLpsServiceImpl implements SummaryLpsService {
 	public List<SummaryLps> retrieveSummaryLpsDetails(String userName, Integer basicLpsId) throws SummaryLpsException {
 		if (userName != null) {
 			logger.info("Called retrieveSummaryLpsDetails function");
-
+			List<SummaryLps> summaryList = new ArrayList<SummaryLps>();
 			List<SummaryLps> summaryLpsRepo = summaryLpsRepository.findByUserNameAndBasicLpsId(userName, basicLpsId);
 			if (summaryLpsRepo != null && !summaryLpsRepo.isEmpty()) {
 				for (SummaryLps summaryLpsItr : summaryLpsRepo) {
-					summaryLpsItr.setSummaryLpsBuildings(
-							findNonRemovedObjects.findNonRemovedSummaryBuildings(summaryLpsItr));
-					logger.debug("Successfully done findNonRemovedSummaryBuildings() call");
+					if (!summaryLpsItr.getFlag().equalsIgnoreCase("R")) {
+						summaryLpsItr.setSummaryLpsBuildings(
+								findNonRemovedObjects.findNonRemovedSummaryBuildings(summaryLpsItr));
+						logger.debug("Successfully done findNonRemovedSummaryBuildings() call");
+						summaryList.add(summaryLpsItr);
+					}
 				}
 				logger.info("Ended retrieveSummaryLpsDetails function");
-				return summaryLpsRepo;
+				return summaryList;
 			} else {
 				logger.error("Given UserName & Id doesn't exist in Summary Lps Report Details");
-				return new ArrayList<SummaryLps>();				}
+				return new ArrayList<SummaryLps>();
+			}
 		} else {
 			logger.error("Invalid Inputs");
 			throw new SummaryLpsException("Invalid Inputs");
@@ -376,7 +391,7 @@ public class SummaryLpsServiceImpl implements SummaryLpsService {
 					separateDistanceDetails, earthStudDetails);
 			logger.debug("PDF printSDandEarthStud() function called successfully");
 
-			printSummaryLpsService.printLpsSummaryDetails(userName, basicLpsId);
+			printSummaryLpsService.printLpsSummaryDetails(userName, basicLpsId, basicLpsDetails);
 			logger.debug("PDF printLpsSummaryDetails() function called successfully");
 
 			printFinalPDFService.printFinalPDF(userName, basicLpsId, basicLps.getProjectName());

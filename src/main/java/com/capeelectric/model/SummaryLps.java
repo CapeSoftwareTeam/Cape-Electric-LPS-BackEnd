@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 @Table(name = "SUMMARY_LPS_TABLE")
 @NamedQueries(value = {
 		@NamedQuery(name = "SummaryLpsRepository.findByUserNameAndBasicLpsId", query = "select s from SummaryLps s where s.userName=:userName and s.basicLpsId=:basicLpsId"),
-		@NamedQuery(name = "SummaryLpsRepository.findByBasicLpsId", query = "select s from SummaryLps s where s.basicLpsId=:basicLpsId"),
+		@NamedQuery(name = "SummaryLpsRepository.findByBasicLpsIdAndFlag", query = "select s from SummaryLps s where s.basicLpsId=:basicLpsId and s.flag ='A'"),
 })
 public class SummaryLps implements Serializable  {
 	
@@ -64,6 +64,9 @@ public class SummaryLps implements Serializable  {
 	
 	@Column(name = "UPDATED_DATE")
 	private LocalDateTime updatedDate;
+	
+	@Column(name = "FLAG")
+	private String flag;
 	
 	@JsonManagedReference
 	@OneToMany(mappedBy = "summaryLps", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -165,7 +168,13 @@ public class SummaryLps implements Serializable  {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
-	
+
+	public String getFlag() {
+		return flag;
+	}
+
+	public void setFlag(String flag) {
+		this.flag = flag;
+	}	
 	
 }

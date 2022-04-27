@@ -171,6 +171,7 @@ public class AirTerminationLpsServiceImpl implements AirTerminationLpsService {
 				addRemovedStatus.addRemoveStatusInEarthStud(airTermination.getLpsAirDescription());
 				addRemovedStatus.addRemoveStatusInSummaryLps(airTermination.getLpsAirDescription());
 //				addRemovedStatus.deleteRemovedFileInDownconductorInFileDB(airTermination);
+
 				List<LpsAirDiscription> lpsAirDiscription = airTermination.getLpsAirDescription();
 				for (LpsAirDiscription lpsAirDiscriptionItr : lpsAirDiscription) {
 					logger.debug("Building Count value adding for new buildings");

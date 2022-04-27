@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.capeelectric.exception.AirTerminationException;
 import com.capeelectric.exception.SeperationDistanceException;
 import com.capeelectric.model.SeperationDistanceDescription;
 import com.capeelectric.model.SeperationDistanceReport;
@@ -39,7 +40,7 @@ public class SeperationDistanceController {
 	
 	@PostMapping("/addSeperationDistance")
 	public ResponseEntity<String> addSeperationDistance(@RequestBody  SeperationDistanceReport seperationDistanceReport)
-			throws SeperationDistanceException {
+			throws SeperationDistanceException, AirTerminationException {
 		logger.info("called addSeperationDistance function UserName : {}, BasicLpsId : {}",
 				seperationDistanceReport.getUserName(), seperationDistanceReport.getBasicLpsId());
 		seperationDistanceService.addSeperationDistance(seperationDistanceReport);
@@ -58,7 +59,7 @@ public class SeperationDistanceController {
 	
 	@PutMapping("/updateSeperationDistance")
 	public ResponseEntity<String> updateSeperationDistance(@RequestBody SeperationDistanceReport seperationDistanceReport)
-			throws SeperationDistanceException {
+			throws SeperationDistanceException, AirTerminationException {
 		logger.info("called updateSeperationDistance function UserName : {},BasicLpsId : {},SeperationDistanceReportId : {}",
 				seperationDistanceReport.getUserName(), seperationDistanceReport.getBasicLpsId(),
 				seperationDistanceReport.getSeperationDistanceReportId());

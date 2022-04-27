@@ -20,10 +20,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.capeelectric.exception.AirTerminationException;
 import com.capeelectric.exception.DownConductorException;
-import com.capeelectric.model.DownConductorDescription;
 import com.capeelectric.model.DownConductorReport;
-import com.capeelectric.model.LpsAirDiscription;
-import com.capeelectric.service.impl.BasicLpsServiceImpl;
 import com.capeelectric.service.impl.DownConductorServiceImpl;
 
 @ExtendWith(SpringExtension.class)
@@ -49,7 +46,7 @@ public class DownConductorControllerTest {
 	}
 
 	@Test
-	public void testAddDownConductorsDetails() throws DownConductorException {
+	public void testAddDownConductorsDetails() throws DownConductorException, AirTerminationException {
 		logger.info("testAddDownConductorsDetails Function Started");
 
 		doNothing().when(downConductorServiceImpl).addDownConductorsDetails(downConductorReport);
@@ -76,7 +73,7 @@ public class DownConductorControllerTest {
 	}
 
 	@Test
-	public void testUpdateDownConductor() throws DownConductorException {
+	public void testUpdateDownConductor() throws DownConductorException, AirTerminationException {
 
 		logger.info("testUpdateDownConductor Function Started");
 		ResponseEntity<String> expectedResponseEntity = new ResponseEntity<String>(HttpStatus.OK);
