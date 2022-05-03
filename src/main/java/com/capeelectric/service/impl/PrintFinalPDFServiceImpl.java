@@ -42,6 +42,9 @@ public class PrintFinalPDFServiceImpl implements PrintFinalPDFService {
 	@Value("${s3.bucket.name}")
 	private String s3BucketName;
 
+	@Value("${lps.summaryfile.s3.bucket.name}")
+	private String summaryBucketName;
+
 	@Value("${access.key.id}")
 	private String accessKeyId;
 
@@ -55,11 +58,11 @@ public class PrintFinalPDFServiceImpl implements PrintFinalPDFService {
 
 		if (userName != null && !userName.isEmpty() && lpsId != null && lpsId != 0) {
 			Document document = new Document(PageSize.A4, 68, 68, 62, 68);
-		
+
 			try {
 
 				List<InputStream> inputPdfList = new ArrayList<InputStream>();
-				
+
 				inputPdfList.add(new FileInputStream("BasicLps.pdf"));
 				inputPdfList.add(new FileInputStream("AirTermination.pdf"));
 				inputPdfList.add(new FileInputStream("DownConductorLps.pdf"));
@@ -68,12 +71,11 @@ public class PrintFinalPDFServiceImpl implements PrintFinalPDFService {
 				inputPdfList.add(new FileInputStream("SDandEarthStud.pdf"));
 				inputPdfList.add(new FileInputStream("LpsSummary.pdf"));
 
-				
-				OutputStream outputStream = new FileOutputStream(projectName+".pdf");
+				OutputStream outputStream = new FileOutputStream(projectName + ".pdf");
 				mergePdfFiles(inputPdfList, outputStream, awsS3ServiceImpl);
-				
+
 				try {
-					
+
 //					Create a S3 client with in-program credential
 					BasicAWSCredentials awsCreds = new BasicAWSCredentials(accessKeyId, accessKeySecret);
 					AmazonS3 s3Client = AmazonS3ClientBuilder.standard().withRegion(Regions.AP_SOUTH_1)
@@ -83,9 +85,10 @@ public class PrintFinalPDFServiceImpl implements PrintFinalPDFService {
 
 					if (projectName.length() > 0) {
 						PutObjectRequest request = new PutObjectRequest(s3BucketName,
-								"LPS_Project Name_".concat(projectName) + "/" + (projectName+".pdf"), new File(projectName+".pdf"));
+								"LPS_Project Name_".concat(projectName) + "/" + (projectName + ".pdf"),
+								new File(projectName + ".pdf"));
 						s3Client.putObject(request);
-						
+
 						logger.info("Uploading file done in AWS s3 ");
 					} else {
 						logger.error("There is no basic details available");
@@ -120,7 +123,7 @@ public class PrintFinalPDFServiceImpl implements PrintFinalPDFService {
 		Image image = Image.getInstance(awsS3ServiceImpl.findByName("Original1.png"));
 		image.scaleToFit(125, 155);
 		image.setAbsolutePosition(30, -32);
-		
+
 		HeaderFooterPageEvent event = new HeaderFooterPageEvent();
 		writer.setPageEvent((PdfPageEvent) event);
 		document.open();
@@ -142,5 +145,41 @@ public class PrintFinalPDFServiceImpl implements PrintFinalPDFService {
 		outputStream.flush();
 		document.close();
 		outputStream.close();
+	}
+
+	@Override
+	public void printSummaryPDF(String userName, Integer lpsId, String projectName) throws Exception {
+
+		if (userName != null && !userName.isEmpty() && lpsId != null && lpsId != 0) {
+			Document document = new Document(PageSize.A4, 68, 68, 62, 68);
+
+			try {
+
+				// Create a S3 client with in-program credential
+				BasicAWSCredentials awsCreds = new BasicAWSCredentials(accessKeyId, accessKeySecret);
+				AmazonS3 s3Client = AmazonS3ClientBuilder.standard().withRegion(Regions.AP_SOUTH_1)
+						.withCredentials(new AWSStaticCredentialsProvider(awsCreds)).build();
+
+				// Uploading the PDF File in AWS S3 Bucket with folderName + fileNameInS3
+
+				if (projectName.length() > 0) {
+					PutObjectRequest request = new PutObjectRequest(summaryBucketName,
+							"LPS_Project In SummaryFile Name_".concat(projectName) + "/" + (projectName + ".pdf"),
+							new File(projectName + ".pdf"));
+					s3Client.putObject(request);
+
+					logger.info("Uploading file done in AWS s3 ");
+				} else {
+					logger.error("There is no summary details available");
+					throw new Exception("There is no summary details available");
+				}
+
+			} catch (AmazonS3Exception e) {
+				e.printStackTrace();
+			}
+
+		} else {
+			throw new Exception("Invalid Inputs");
+		}
 	}
 }

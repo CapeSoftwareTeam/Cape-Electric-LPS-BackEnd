@@ -12,6 +12,6 @@ public interface PrintSummaryLpsService {
 	List<SummaryLps> printLpsSummaryDetails(String userName, Integer basicLpsId, Optional<BasicLps> basicLpsDetails)
 			throws SummaryLpsException;
 
-//	List<SummaryLps> printLpsSummaryDetails(String userName, Integer basicLpsId) throws SummaryLpsException;
 
+	List<SummaryLps> printLpsSummaryDetails(String userName, Integer basicLpsId)throws SummaryLpsException;
 }
