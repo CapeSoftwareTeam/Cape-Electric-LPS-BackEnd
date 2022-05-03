@@ -27,7 +27,7 @@ public class ReturnPDFService {
 	@Value("${s3.bucket.name}")
 	private String s3BucketName;
 
-	@Value("${lps.summaryfile.s3.bucket.name}")
+	@Value("${s3.lps.summaryfile.bucket.name}")
 	private String summaryBucketName;
 	
 	@Value("${access.key.id}")
