@@ -24,7 +24,7 @@ public class AirExpansion implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "EXPANSION_ID")
 	private Integer expansionId;
-	
+
 	@Column(name = "FLAG")
 	private String flag;
 
@@ -39,7 +39,7 @@ public class AirExpansion implements Serializable {
 
 	@Column(name = "STRIGHTCONNECTOR_PIECS_REMARKS")
 	private String strightConnectorPiecRe;
-	
+
 	@Column(name = "MATERIAL_OF_CONNECTOR_OBSERVATION")
 	private String materialOfConnectorOb;
 
@@ -51,7 +51,7 @@ public class AirExpansion implements Serializable {
 
 	@Column(name = "MATERIAL_OF_EXPANSIONPIECE_REMARKS")
 	private String materialOfExpansionRe;
-	
+
 	@Column(name = "INTERVAL_BETWEEN_EXPANSION_OBSERVATION")
 	private Integer intervalBwExpansionOb;
 
@@ -81,6 +81,21 @@ public class AirExpansion implements Serializable {
 
 	@Column(name = "INSP_FAILED_NO_REM")
 	private String inspectionFailedNoRe;
+
+	@Column(name = "FILE_NAME_EP")
+	private String fileName_EP;
+
+	@Column(name = "FILE_TYPE_EP")
+	private String fileType_EP;
+
+	@Column(name = "FILE_ID_EP")
+	private Integer fileIdEP;
+	
+	@Column(name = "FILE_SIZE")
+	private String fileSize;
+	
+	@Column(name = "FILE_INDEX_EP")
+	private Integer fileIndex_EP;
 
 	@JsonBackReference
 	@ManyToOne(cascade = CascadeType.ALL)
@@ -175,7 +190,6 @@ public class AirExpansion implements Serializable {
 		this.inspectionFailedNoRe = inspectionFailedNoRe;
 	}
 
-
 	public LpsAirDiscription getLpsAirDescription() {
 		return lpsAirDescription;
 	}
@@ -183,7 +197,6 @@ public class AirExpansion implements Serializable {
 	public void setLpsAirDescription(LpsAirDiscription lpsAirDescription) {
 		this.lpsAirDescription = lpsAirDescription;
 	}
-
 
 	public String getFlag() {
 		return flag;
@@ -256,6 +269,45 @@ public class AirExpansion implements Serializable {
 	public void setInspectionFailedNoOb(Integer inspectionFailedNoOb) {
 		this.inspectionFailedNoOb = inspectionFailedNoOb;
 	}
-	
+
+	public String getFileName_EP() {
+		return fileName_EP;
+	}
+
+	public void setFileName_EP(String fileName_EP) {
+		this.fileName_EP = fileName_EP;
+	}
+
+	public String getFileType_EP() {
+		return fileType_EP;
+	}
+
+	public void setFileType_EP(String fileType_EP) {
+		this.fileType_EP = fileType_EP;
+	}
+
+	public Integer getFileIdEP() {
+		return fileIdEP;
+	}
+
+	public void setFileIdEP(Integer fileIdEP) {
+		this.fileIdEP = fileIdEP;
+	}
+
+	public String getFileSize() {
+		return fileSize;
+	}
+
+	public void setFileSize(String fileSize) {
+		this.fileSize = fileSize;
+	}
+
+	public Integer getFileIndex_EP() {
+		return fileIndex_EP;
+	}
+
+	public void setFileIndex_EP(Integer fileIndex_EP) {
+		this.fileIndex_EP = fileIndex_EP;
+	}
 
 }

@@ -45,6 +45,9 @@ public class ResponseFile implements Serializable {
 
 	@Column(name = "COMPONENT_NAME")
 	private String componentName;
+	
+	@Column(name = "INDEX_NU")
+	private Integer index;
 
 	public Integer getFileId() {
 		return fileId;
@@ -93,5 +96,15 @@ public class ResponseFile implements Serializable {
 	public void setComponentName(String componentName) {
 		this.componentName = componentName;
 	}
+
+	public Integer getIndex() {
+		return index;
+	}
+
+	public void setIndex(Integer index) {
+		this.index = index;
+	}
+	
+	
 
 }

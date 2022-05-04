@@ -63,7 +63,7 @@ public class DownConductor implements Serializable {
 
 	@Column(name = "DOWNCONDUCTOR_GUTTERS_REM")
 	private String downConductGutterRem;
-	
+
 	@Column(name = "INSTALLED_SHAFT_DOWNCONDUCTOR_OB")
 	private String installedShaftDownConductorOb;
 
@@ -117,24 +117,39 @@ public class DownConductor implements Serializable {
 
 	@Column(name = "INSPECTIONFAILED_NO_REM")
 	private String inspectionFailedNoRem;
-	
+
 	@Column(name = "AVG_DANGEROUS_BENDS_OB")
 	private Integer averageBendsOb;
 
 	@Column(name = "AVG_DANGEROUS_BENDS_REM")
 	private String averageBendsRem;
-	
+
 	@Column(name = "TYPE_NATURAL_DOWN_CONDUCTORS_OB")
 	private String naturalDownCondutTypeOb;
 
 	@Column(name = "TYPE_NATURAL_DOWN_CONDUCTORS_REM")
 	private String naturalDownCondutTypeRem;
-	
+
 	@Column(name = "NATURAL_DOWN_CONDUCTORS_DIMENSION_OB")
 	private String naturalDownCondDimensionOb;
 
 	@Column(name = "NATURAL_DOWN_CONDUCTORS_DIMENSION_REM")
 	private String naturalDownCondDimensionRem;
+
+	@Column(name = "ITR_INDEX")
+	private Integer index;
+	
+	@Column(name = "FILE_NAME")
+	private String fileName;
+
+	@Column(name = "FILE_TYPE")
+	private String fileType;
+
+	@Column(name = "FILE_ID")
+	private Integer fileId;
+	
+	@Column(name = "FILE_SIZE")
+	private String fileSize;
 
 	@JsonBackReference
 	@ManyToOne(cascade = CascadeType.ALL)
@@ -277,7 +292,6 @@ public class DownConductor implements Serializable {
 		this.installationDownConductRem = installationDownConductRem;
 	}
 
-
 	public String getMaximumDownConductRem() {
 		return maximumDownConductRem;
 	}
@@ -405,7 +419,6 @@ public class DownConductor implements Serializable {
 	public void setInspectionFailedNoOb(Integer inspectionFailedNoOb) {
 		this.inspectionFailedNoOb = inspectionFailedNoOb;
 	}
-	
 
 	public Integer getAverageBendsOb() {
 		return averageBendsOb;
@@ -459,5 +472,46 @@ public class DownConductor implements Serializable {
 		return serialVersionUID;
 	}
 
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+
+	public String getFileType() {
+		return fileType;
+	}
+
+	public void setFileType(String fileType) {
+		this.fileType = fileType;
+	}
+
+	public Integer getFileId() {
+		return fileId;
+	}
+
+	public void setFileId(Integer fileId) {
+		this.fileId = fileId;
+	}
+
+	public Integer getIndex() {
+		return index;
+	}
+
+	public void setIndex(Integer index) {
+		this.index = index;
+	}
+
+	public String getFileSize() {
+		return fileSize;
+	}
+
+	public void setFileSize(String fileSize) {
+		this.fileSize = fileSize;
+	}
+
+		
 	
 }
