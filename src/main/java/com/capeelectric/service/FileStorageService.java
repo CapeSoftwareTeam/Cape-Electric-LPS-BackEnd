@@ -34,16 +34,15 @@ public class FileStorageService {
 
 	@Autowired
 	private FileDBRepository fileDBRepository;
-	
+
 	@Autowired
 	private LpsVerticalAirTerminationRepository lpsVerticalAirTerminationRepository;
-	
+
 	@Autowired
 	private LpsAirExpansionAirTerminationRepository lpsAirExpansionAirTerminationRepository;
-	
+
 	@Autowired
 	private LpsBasicAirTerminationRepository lpsBasicAirTerminationRepository;
-	
 
 	public void store(MultipartFile file, Integer lpsId, String componentName, Integer index)
 			throws IOException, SerialException, SQLException {
@@ -62,7 +61,8 @@ public class FileStorageService {
 
 	public ResponseFile downloadFile(Integer lpsId, String componentName, String fileName) throws IOException {
 		if (lpsId != null && lpsId != 0 && fileName != null) {
-			ResponseFile fileDB = fileDBRepository.findByLpsIdAndComponentNameAndFileName(lpsId, componentName, fileName);
+			ResponseFile fileDB = fileDBRepository.findByLpsIdAndComponentNameAndFileName(lpsId, componentName,
+					fileName);
 			if (fileDB != null && fileDB.getLpsId().equals(lpsId)) {
 				return fileDB;
 			} else {
@@ -78,27 +78,17 @@ public class FileStorageService {
 
 	public void removeFile(Integer fileId) throws IOException {
 		if (fileId != null && fileId != 0) {
-			ResponseFile fileDB = fileDBRepository.findById(fileId).get();
-			List<ResponseFile> responseFileRepo = fileDBRepository.findByLpsId(fileDB.getLpsId());
+			Optional<ResponseFile> fileDB = fileDBRepository.findById(fileId);
 
-			if (fileDB != null && fileDB.getFileId().equals(fileId)) {
+			if (fileDB != null && fileDB.get().getFileId().equals(fileId)) {
+				List<ResponseFile> responseFileRepo = fileDBRepository.findByLpsId(fileDB.get().getLpsId());
 				for (ResponseFile responseFile : responseFileRepo) {
-					if(fileDB.getIndex() == responseFile.getIndex()) {
+					if (fileDB.get().getIndex() == responseFile.getIndex()) {
 						logger.info("File Deleted");
 						fileDBRepository.delete(responseFile);
-					}
-					else if(fileDB.getIndex()<responseFile.getIndex()) {
-						if (fileDB.getIndex().equals(0)) {
-							responseFile.setIndex(responseFile.getIndex()-1);
-						} else {
-							responseFile.setIndex(responseFile.getIndex()-fileDB.getIndex());
-						}
-						
-						fileDBRepository.save(responseFile);
-					}
-			}
-				
-			 
+					} 
+				}
+
 			} else {
 				logger.error("File Not Preset");
 				throw new IOException("File Not Preset");
@@ -111,7 +101,7 @@ public class FileStorageService {
 
 	}
 
-	public void updateFile(MultipartFile file, String componentName, Integer fileId,Integer index)
+	public void updateFile(MultipartFile file, String componentName, Integer fileId, Integer index)
 			throws SerialException, SQLException, IOException {
 		if (fileId != null && fileId != 0) {
 			Optional<ResponseFile> fileDB = fileDBRepository.findById(fileId);
@@ -206,16 +196,16 @@ public class FileStorageService {
 		if (basicLpsId != null && basicLpsId != 0) {
 			List<ResponseFile> fileDB = fileDBRepository.findByLpsId(basicLpsId);
 			for (ResponseFile responseFile : fileDB) {
-				if(index<responseFile.getIndex()) {
+				if (index < responseFile.getIndex()) {
 					if (index.equals(0)) {
-						responseFile.setIndex(responseFile.getIndex()-1);	
+						responseFile.setIndex(responseFile.getIndex() - 1);
 					} else {
-						responseFile.setIndex(responseFile.getIndex()-index);
+						responseFile.setIndex(responseFile.getIndex() - index);
 					}
-					
+
 //					fileDBRepository.save(responseFile);
 				}
-				}
+			}
 		} else {
 			logger.error("Id Not Present");
 		}
@@ -275,7 +265,7 @@ public class FileStorageService {
 		}
 		return null;
 	}
-	
+
 	private void deleteUnusedFileIds(Set<Integer> removeItem, Integer basicLpsId, List<String> listOfResponseFile) {
 
 		for (Integer integer : removeItem) {
@@ -287,17 +277,17 @@ public class FileStorageService {
 				for (String componentName : listOfResponseFile) {
 					String[] split = componentName.split("-");
 					if (integer.equals(Integer.parseInt(split[0]))) {
-						removeFileDetailsFromAirterminationdata(split[0],split[2]);
+						removeFileDetailsFromAirterminationdata(split[0], split[2]);
 					}
 				}
 			}
 		}
 	}
-	
+
 	private void removeFileDetailsFromAirterminationdata(String fileId, String componetName) {
 
 		if (componetName.equalsIgnoreCase("airUpload")) {
-			 Optional<AirBasicDescription> basicDescription = lpsBasicAirTerminationRepository.findByFileId(fileId);
+			Optional<AirBasicDescription> basicDescription = lpsBasicAirTerminationRepository.findByFileId(fileId);
 			if (basicDescription.isPresent()) {
 				basicDescription.get().setFileId(null);
 				basicDescription.get().setFileIndex(null);
@@ -305,11 +295,13 @@ public class FileStorageService {
 				basicDescription.get().setFileSize(null);
 				basicDescription.get().setFileType(null);
 				lpsBasicAirTerminationRepository.save(basicDescription.get());
-				logger.debug(basicDescription.get().getAirBasicDescriptionId() + " This AirBasicDescription fileDetails data Reseted");
+				logger.debug(basicDescription.get().getAirBasicDescriptionId()
+						+ " This AirBasicDescription fileDetails data Reseted");
 			}
 
 		} else if (componetName.equalsIgnoreCase("airUpload_1")) {
-			Optional<LpsVerticalAirTermination> lpsVertivalAirtermination = lpsVerticalAirTerminationRepository.findByFileIdVAir(fileId);
+			Optional<LpsVerticalAirTermination> lpsVertivalAirtermination = lpsVerticalAirTerminationRepository
+					.findByFileIdVAir(fileId);
 			if (lpsVertivalAirtermination.isPresent()) {
 				lpsVertivalAirtermination.get().setFileIdVAir(null);
 				lpsVertivalAirtermination.get().setFileIndexVAir(null);
@@ -317,11 +309,13 @@ public class FileStorageService {
 				lpsVertivalAirtermination.get().setFileSize(null);
 				lpsVertivalAirtermination.get().setFileTypeVAir(null);
 				lpsVerticalAirTerminationRepository.save(lpsVertivalAirtermination.get());
-				logger.debug(lpsVertivalAirtermination.get().getLpsVerticalAirTerminationId() + " This LpsVerticalAirTermination fileDetails data Reseted");
+				logger.debug(lpsVertivalAirtermination.get().getLpsVerticalAirTerminationId()
+						+ " This LpsVerticalAirTermination fileDetails data Reseted");
 			}
 
 		} else if (componetName.equalsIgnoreCase("airUpload_2")) {
-			Optional<AirExpansion> airExpansion = lpsAirExpansionAirTerminationRepository.findByFileIdEP(Integer.parseInt(fileId));
+			Optional<AirExpansion> airExpansion = lpsAirExpansionAirTerminationRepository
+					.findByFileIdEP(Integer.parseInt(fileId));
 			if (airExpansion.isPresent()) {
 				airExpansion.get().setFileIdEP(null);
 				airExpansion.get().setFileIndex_EP(null);
