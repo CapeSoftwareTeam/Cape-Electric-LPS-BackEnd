@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
+import org.springframework.data.jpa.repository.Query;
 
 /**
  * @author CAPE-SOFTWARE
@@ -24,14 +25,15 @@ import org.hibernate.annotations.NamedQuery;
 @NamedQueries(value = {
 		@NamedQuery(name = "BasicLpsRepository.findByUserNameAndBasicLpsId", query = "select s from BasicLps s where s.userName=:userName and s.basicLpsId=:basicLpsId"),
 		@NamedQuery(name = "BasicLpsRepository.findByBasicLpsId", query = "select s from BasicLps s where s.basicLpsId=:basicLpsId"),
-		@NamedQuery(name = "BasicLpsRepository.findByClientName", query = "select s from BasicLps s where s.clientName=:clientName")
+		@NamedQuery(name = "BasicLpsRepository.findByClientName", query = "select s from BasicLps s where s.clientName=:clientName"),
+		@NamedQuery(name = "BasicLpsRepository.findByClientNameAndStatus", query = "select s from BasicLps s where s.clientName=:clientName and s.status='Active'")
 })
 public class BasicLps implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO) 
 	@Column(name = "BASIC_LPS_ID")
 	private Integer basicLpsId;
 	
