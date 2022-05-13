@@ -15,7 +15,7 @@ public interface FileDBRepository extends CrudRepository<ResponseFile, Integer> 
 	
 	public ResponseFile findByLpsIdAndComponentNameAndFileName(Integer lpsId, String componentName, String fileName);
 	
-	@Query(value = "select * FROM file_upload_lps_table where lps_id=7487 and building_count is NULL", 
+	@Query(value = "select * FROM file_upload_lps_table where building_count is NULL", 
 			  nativeQuery = true)
 	public List<ResponseFile> findByLpsIdBuildingCount(Integer basicLpsId,String buildingCount);
 
