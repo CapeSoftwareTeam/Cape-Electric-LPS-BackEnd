@@ -25,6 +25,7 @@ import com.capeelectric.repository.DownConductorRepository;
 import com.capeelectric.service.DownConductorService;
 import com.capeelectric.util.AddRemovedStatus;
 import com.capeelectric.util.FindNonRemovedObjects;
+import com.capeelectric.util.UpdateBuildingCountToFile;
 import com.capeelectric.util.UserFullName;
 
 /**
@@ -55,6 +56,9 @@ public class DownConductorServiceImpl implements DownConductorService{
 	@Autowired
 	private AddRemovedStatus addRemovedStatus;
 	
+	@Autowired
+	private UpdateBuildingCountToFile updateBuildingCountToFile;
+	
 	@Transactional
 	@Override
 	public void addDownConductorsDetails(DownConductorReport downConductorReport)
@@ -80,8 +84,9 @@ public class DownConductorServiceImpl implements DownConductorService{
 						downConductorReport.setUpdatedBy(userFullName.findByUserName(downConductorReport.getUserName()));
 						addRemovedStatus.removeSummaryLps(downConductorReport.getUserName(),downConductorReport.getBasicLpsId());
 
-						downConductorRepository.save(downConductorReport);
+						DownConductorReport downConductorReportRepo = downConductorRepository.save(downConductorReport);
 						logger.debug("Down Conductor Details Successfully Saved in DB");
+						updateBuildingCountToFile.updateDownConductorBuildingCount(downConductorReportRepo);
 						userFullName.addUpdatedByandDate(downConductorReport.getBasicLpsId(),userFullName.findByUserName(downConductorReport.getUserName()));
 						logger.debug("Basic Lps UpdatedBy and UpdatedDate by DownConductor");
 					} else {
@@ -147,8 +152,9 @@ public class DownConductorServiceImpl implements DownConductorService{
 				downConductorReport.setUpdatedBy(userFullName.findByUserName(downConductorReport.getUserName()));
 				addRemovedStatus.removeSummaryLps(downConductorReport.getUserName(),downConductorReport.getBasicLpsId());
 
-				downConductorRepository.save(downConductorReport);
+				DownConductorReport downConductorReportRepo = downConductorRepository.save(downConductorReport);
 				logger.debug("Down Conductor Details Updated Successfully in DB");
+				updateBuildingCountToFile.updateDownConductorBuildingCount(downConductorReportRepo);
 				userFullName.addUpdatedByandDate(downConductorReport.getBasicLpsId(),userFullName.findByUserName(downConductorReport.getUserName()));
 				logger.debug("Basic Lps UpdatedBy and UpdatedDate by DownConductor");
 			} else {

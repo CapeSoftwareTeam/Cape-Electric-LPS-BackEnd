@@ -19,4 +19,6 @@ public interface FileDBRepository extends CrudRepository<ResponseFile, Integer> 
 			  nativeQuery = true)
 	public List<ResponseFile> findByLpsIdBuildingCount(Integer basicLpsId,String buildingCount);
 
+	public List<ResponseFile> findByBuildingCount(Integer buildingCount);
+
 }

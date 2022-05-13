@@ -85,7 +85,7 @@ public class FileUploadController {
 					hashMap.put("fileLpsId", responseFile.getLpsId().toString());
 					hashMap.put("fileName", responseFile.getFileName());
 					hashMap.put("componentName", responseFile.getComponentName());
-					//hashMap.put("index", responseFile.getIndex().toString());
+					hashMap.put("index", responseFile.getIndex().toString());
 					list.add(hashMap);
 				}
 

@@ -54,7 +54,7 @@ public class FileStorageService {
 		fileDB.setData(blob);
 		fileDB.setFileType(file.getContentType());
 		fileDB.setComponentName(componentName);
-		//fileDB.setIndex(index);
+		fileDB.setIndex(index);
 		fileDB.setStatus("A");
 		logger.debug("File Saved In DB");
 		fileDBRepository.save(fileDB);
@@ -112,7 +112,7 @@ public class FileStorageService {
 				fileDB.get().setData(blob);
 				fileDB.get().setFileType(file.getContentType());
 				fileDB.get().setComponentName(componentName);
-				//fileDB.get().setIndex(index);
+				fileDB.get().setIndex(index);
 				fileDB.get().setStatus("A");
 				logger.debug("File Update In DB");
 				fileDBRepository.save(fileDB.get());

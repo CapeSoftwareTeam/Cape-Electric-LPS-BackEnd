@@ -7,7 +7,6 @@ import java.util.List;
 
 import com.capeelectric.exception.AirTerminationException;
 import com.capeelectric.exception.DownConductorException;
-import com.capeelectric.model.DownConductorDescription;
 import com.capeelectric.model.DownConductorReport;
 
 

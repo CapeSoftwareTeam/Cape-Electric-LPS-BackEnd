@@ -78,7 +78,7 @@ public class AddRemovedStatus {
 		for (LpsAirDiscription lpsAirDiscriptionItr : lpsAirDiscription) {
 			if (lpsAirDiscriptionItr != null && lpsAirDiscriptionItr.getBuildingCount() != null
 					&& lpsAirDiscriptionItr.getFlag().equalsIgnoreCase("R")) {
-
+                removedFileBaseOnBuildingCount(lpsAirDiscriptionItr.getBuildingCount());
 				DownConductorDescription downConductorDescriptionRepo = downConductorListRepository
 						.findByBuildingCount(lpsAirDiscriptionItr.getBuildingCount());
 				if (downConductorDescriptionRepo != null && downConductorDescriptionRepo.getBuildingCount()
@@ -325,5 +325,12 @@ public class AddRemovedStatus {
 		}
 		logger.info("Ended removeSummaryLps function");
 
+	}
+	
+	private void removedFileBaseOnBuildingCount(Integer buildingCount) {
+		List<ResponseFile> removeAllBuildings = fileDBRepository.findByBuildingCount(buildingCount);
+		if (!removeAllBuildings.isEmpty() && removeAllBuildings.size() > 0) {
+			fileDBRepository.deleteAll(removeAllBuildings);
+		}
 	}
 }

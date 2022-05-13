@@ -5,9 +5,6 @@ package com.capeelectric.util;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
-import java.util.TreeSet;
-import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,9 +14,14 @@ import org.springframework.context.annotation.Configuration;
 import com.capeelectric.model.AirBasicDescription;
 import com.capeelectric.model.AirExpansion;
 import com.capeelectric.model.AirTermination;
+import com.capeelectric.model.DownConductor;
+import com.capeelectric.model.DownConductorDescription;
+import com.capeelectric.model.DownConductorReport;
 import com.capeelectric.model.LpsAirDiscription;
 import com.capeelectric.model.LpsVerticalAirTermination;
 import com.capeelectric.model.ResponseFile;
+import com.capeelectric.repository.DownConductorDescriptionRepository;
+import com.capeelectric.repository.DownDescConductorRepository;
 import com.capeelectric.repository.FileDBRepository;
 import com.capeelectric.repository.LpsAirExpansionAirTerminationRepository;
 import com.capeelectric.repository.LpsBasicAirTerminationRepository;
@@ -45,6 +47,12 @@ public class UpdateBuildingCountToFile {
 	
 	@Autowired
 	private LpsAirExpansionAirTerminationRepository lpsAirExpansionAirTerminationRepository;
+	
+	@Autowired
+	private DownDescConductorRepository downDescConductorRepository;
+	
+	@Autowired
+	private DownConductorDescriptionRepository downConductorDescriptionRepository;
   
 	public void updateAirterminationBuildingCount(AirTermination termination) {
 		 
@@ -117,7 +125,38 @@ public class UpdateBuildingCountToFile {
 		if(!responseFileRepo.isEmpty() && responseFileRepo.size()!=0) {
 			//for (ResponseFile responseFile : responseFileRepo) {
 				fileDBRepository.deleteAll(responseFileRepo);
+				logger.debug("Removed which file doesn't have buildingcount");
 			//}
 		}
+	}
+
+
+	public void updateDownConductorBuildingCount(DownConductorReport downConductorReportRepo) {
+		List<ResponseFile> responseFileRepo = fileDBRepository.findByLpsId(downConductorReportRepo.getBasicLpsId());
+		List<DownConductorDescription> downConductorDescription = downConductorReportRepo.getDownConductorDescription();
+		if (!responseFileRepo.isEmpty() && responseFileRepo.size()!=0 &&
+				!downConductorDescription.isEmpty() && downConductorDescription.size()!=0)  {
+			for (DownConductorDescription downConductors : downConductorDescription) {
+				if (downConductors.getFileId1() !=null && 
+						!updateFile(downConductors.getBuildingCount(), downConductors.getFileId1(),downConductors.getIndex())) {
+					downConductors.setFileId1(null);
+					downConductors.setFileName1(null);
+					downConductors.setFileSize(null);
+					downConductors.setFileType1(null);
+					downConductorDescriptionRepository.save(downConductors);
+				}
+				if (!downConductors.getDownConductor().isEmpty() && 
+						downConductors.getDownConductor().size() !=0 && 
+						!updateFile(downConductors.getBuildingCount(), downConductors.getDownConductor().get(0).getFileId() ,downConductors.getDownConductor().get(0).getIndex())) {
+					 DownConductor downConductor = downConductors.getDownConductor().get(0);
+					 downConductor.setFileId(null);
+					 downConductor.setFileName(null);
+					 downConductor.setFileSize(null);
+					 downConductor.setFileType(null);
+					 downDescConductorRepository.save(downConductor);
+				}
+			}
+		}
+		removeUnusedFiles(downConductorReportRepo.getBasicLpsId());
 	}
 }
