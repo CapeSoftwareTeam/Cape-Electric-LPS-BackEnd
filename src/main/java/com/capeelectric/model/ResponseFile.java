@@ -17,7 +17,7 @@ import org.hibernate.annotations.NamedQuery;
 @Table(name = "FILE_UPLOAD_LPS_TABLE")
 @NamedQueries(value = {
 		@NamedQuery(name = "FileDBRepository.findByLpsId", query = "select s from ResponseFile s where s.lpsId=:lpsId"),
-
+ 
 })
 public class ResponseFile implements Serializable {
 
@@ -48,6 +48,12 @@ public class ResponseFile implements Serializable {
 	
 	@Column(name = "INDEX_NU")
 	private Integer index;
+	
+	@Column(name = "BUILDING_COUNT")
+	private Integer buildingCount;
+	
+	@Column(name = "STATUS")
+	private String status;
 
 	public Integer getFileId() {
 		return fileId;
@@ -104,7 +110,20 @@ public class ResponseFile implements Serializable {
 	public void setIndex(Integer index) {
 		this.index = index;
 	}
-	
-	
 
+	public Integer getBuildingCount() {
+		return buildingCount;
+	}
+
+	public void setBuildingCount(Integer buildingCount) {
+		this.buildingCount = buildingCount;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
 }

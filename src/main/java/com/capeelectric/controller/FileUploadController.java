@@ -30,13 +30,18 @@ import org.springframework.web.multipart.MultipartFile;
 import com.amazonaws.util.IOUtils;
 import com.capeelectric.model.ResponseFile;
 import com.capeelectric.service.FileStorageService;
+import com.capeelectric.util.UpdateBuildingCountToFile;
 
 @RestController
 @RequestMapping("/api/lps/v1")
 public class FileUploadController {
 	private static final Logger logger = LoggerFactory.getLogger(FileUploadController.class);
+	
 	@Autowired
 	private FileStorageService storageService;
+	
+	@Autowired
+	private UpdateBuildingCountToFile updateBuildingCountToFile;
 
 	@PostMapping("/upload/{lpsId}/{componentName}/{index}")
 	public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file, @PathVariable Integer lpsId,
@@ -49,11 +54,11 @@ public class FileUploadController {
 		return new ResponseEntity<String>("File  Upload Successfully", HttpStatus.OK);
 	}
 
-	@GetMapping("/downloadFile/{lpsId}/{componentName}/{fileName}")
-	public ResponseEntity<String> downloadFile(@PathVariable Integer lpsId, HttpServletResponse response,
+	@GetMapping("/downloadFile/{fileId}/{componentName}/{fileName}")
+	public ResponseEntity<String> downloadFile(@PathVariable Integer fileId, HttpServletResponse response,
 			@PathVariable String componentName, @PathVariable String fileName) throws IOException, SQLException {
-		logger.debug("DownloadFile File Start lpsId : {}", lpsId, componentName);
-		ResponseFile fileDB = storageService.downloadFile(lpsId, componentName, fileName);
+		logger.debug("DownloadFile File Start FileId : {}", fileId, componentName);
+		ResponseFile fileDB = storageService.downloadFile(fileId, componentName, fileName);
 		response.setHeader("Content-Disposition", "inline; fileDB.getfileId()=\"" + fileDB.getFileId() + "\"");
 		OutputStream out = response.getOutputStream();
 		response.setContentType(fileDB.getFileName());
@@ -80,7 +85,7 @@ public class FileUploadController {
 					hashMap.put("fileLpsId", responseFile.getLpsId().toString());
 					hashMap.put("fileName", responseFile.getFileName());
 					hashMap.put("componentName", responseFile.getComponentName());
-					hashMap.put("index", responseFile.getIndex().toString());
+					//hashMap.put("index", responseFile.getIndex().toString());
 					list.add(hashMap);
 				}
 
@@ -133,11 +138,19 @@ public class FileUploadController {
 		logger.debug("UpdateFile File End");
 	}
 
-	@DeleteMapping("/removeFile/{fileId}")
-	public ResponseEntity<String> removeFile(@PathVariable Integer fileId) throws IOException {
-		logger.debug("Remove File Start");
-		storageService.removeFile(fileId);
-		logger.debug("Remove File End");
+//	@DeleteMapping("/removeFile/{fileId}")
+//	public ResponseEntity<String> removeFile(@PathVariable Integer fileId) throws IOException {
+//		logger.debug("Remove File Start");
+//		storageService.removeFile(fileId);
+//		logger.debug("Remove File End");
+//		return new ResponseEntity<String>("File  Deleted Successfully", HttpStatus.OK);
+//	}
+	
+	@DeleteMapping("/removeFile/{basicLpsId}")
+	public ResponseEntity<String> removeUnusedFile(@PathVariable Integer basicLpsId) throws IOException {
+		logger.debug("UnusedFile Remove Start");
+		updateBuildingCountToFile.removeUnusedFiles(basicLpsId);
+		logger.debug("UnusedFile Remove End");
 		return new ResponseEntity<String>("File  Deleted Successfully", HttpStatus.OK);
 	}
 }

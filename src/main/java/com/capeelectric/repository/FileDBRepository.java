@@ -2,6 +2,7 @@ package com.capeelectric.repository;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -10,7 +11,12 @@ import com.capeelectric.model.ResponseFile;
 @Repository
 
 public interface FileDBRepository extends CrudRepository<ResponseFile, Integer> {
-	List<ResponseFile> findByLpsId(Integer lpsId);
-	ResponseFile findByLpsIdAndComponentNameAndFileName(Integer lpsId, String componentName, String fileName);
+	public List<ResponseFile> findByLpsId(Integer lpsId);
+	
+	public ResponseFile findByLpsIdAndComponentNameAndFileName(Integer lpsId, String componentName, String fileName);
+	
+	@Query(value = "select * FROM file_upload_lps_table where lps_id=7487 and building_count is NULL", 
+			  nativeQuery = true)
+	public List<ResponseFile> findByLpsIdBuildingCount(Integer basicLpsId,String buildingCount);
 
 }

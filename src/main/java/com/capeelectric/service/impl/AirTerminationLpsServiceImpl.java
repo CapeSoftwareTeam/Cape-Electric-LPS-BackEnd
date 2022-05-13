@@ -28,6 +28,7 @@ import com.capeelectric.repository.SummaryLpsListRepository;
 import com.capeelectric.service.AirTerminationLpsService;
 import com.capeelectric.util.AddRemovedStatus;
 import com.capeelectric.util.FindNonRemovedObjects;
+import com.capeelectric.util.UpdateBuildingCountToFile;
 import com.capeelectric.util.UserFullName;
 
 /**
@@ -56,25 +57,10 @@ public class AirTerminationLpsServiceImpl implements AirTerminationLpsService {
 	private FindNonRemovedObjects findNonRemovedObjects;
 	
 	@Autowired
-	private DownConductorListRepository downConductorListRepository;
-	
-	@Autowired
-	private EarthingLpsListRepository earthingLpsListRepository;
-	
-	@Autowired
-	private SPDListRepository spdListRepository;
-	
-	@Autowired
-	private SeperationDistanceListRepository seperationDistanceListRepository;
-	
-	@Autowired
-	private EarthStudListRepository earthStudListRepository;
-	
-	@Autowired
-	private SummaryLpsListRepository summaryLpsListRepository;
-	
-	@Autowired
 	private AddRemovedStatus addRemovedStatus;
+	
+	@Autowired
+	private UpdateBuildingCountToFile updateBuildingCountToFile;
 
 	@Transactional
 	@Override
@@ -98,7 +84,8 @@ public class AirTerminationLpsServiceImpl implements AirTerminationLpsService {
 					airTermination.setCreatedBy(userFullName.findByUserName(airTermination.getUserName()));
 					airTermination.setUpdatedBy(userFullName.findByUserName(airTermination.getUserName()));
 					try {
-						airTerminationLpsRepository.save(airTermination);
+						AirTermination termination = airTerminationLpsRepository.save(airTermination);
+						updateBuildingCountToFile.updateAirterminationBuildingCount(termination);
 						logger.debug("Air Termination Successfully Saved in DB");
 						userFullName.addUpdatedByandDate(airTermination.getBasicLpsId(),airTermination.getUserName());
 						logger.debug("Basic Lps Updated By and Updated Date by AirTermination");
@@ -182,8 +169,9 @@ public class AirTerminationLpsServiceImpl implements AirTerminationLpsService {
 				}				
 				airTermination.setUpdatedDate(LocalDateTime.now());
 				airTermination.setUpdatedBy(userFullName.findByUserName(airTermination.getUserName()));
-			    airTerminationLpsRepository.save(airTermination);
+			    AirTermination termination = airTerminationLpsRepository.save(airTermination);
 				logger.debug("Air Termination successfully updated into DB");
+				updateBuildingCountToFile.updateAirterminationBuildingCount(termination);
 				userFullName.addUpdatedByandDate(airTermination.getBasicLpsId(),userFullName.findByUserName(airTermination.getUserName()));
 				logger.debug("Basic Lps Updated By and Updated Date by AirTermination");
 			} else {
