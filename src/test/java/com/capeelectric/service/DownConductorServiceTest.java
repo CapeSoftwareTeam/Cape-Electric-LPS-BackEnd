@@ -35,6 +35,7 @@ import com.capeelectric.repository.DownConductorRepository;
 import com.capeelectric.service.impl.DownConductorServiceImpl;
 import com.capeelectric.util.AddRemovedStatus;
 import com.capeelectric.util.FindNonRemovedObjects;
+import com.capeelectric.util.UpdateBuildingCountToFile;
 import com.capeelectric.util.UserFullName;
 
 @ExtendWith(SpringExtension.class)
@@ -60,6 +61,9 @@ public class DownConductorServiceTest {
 	
 	@MockBean
 	private AddRemovedStatus addRemovedStatus;
+	
+	@MockBean
+	private UpdateBuildingCountToFile updateBuildingCountToFile;
 
 	private DownConductorReport downConductorReport;
 

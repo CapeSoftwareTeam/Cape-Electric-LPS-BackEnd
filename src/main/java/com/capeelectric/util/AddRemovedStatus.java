@@ -102,7 +102,7 @@ public class AddRemovedStatus {
 			}
 		}
 
-		deleteRemovedFileInDownconductorInFileDB(basicLpsId);
+		//deleteRemovedFileInDownconductorInFileDB(basicLpsId);
 		logger.info("Ended addRemoveStatusInDownConductors function");
 	}
 

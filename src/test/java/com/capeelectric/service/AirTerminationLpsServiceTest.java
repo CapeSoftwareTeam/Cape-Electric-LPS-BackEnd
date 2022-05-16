@@ -37,6 +37,7 @@ import com.capeelectric.repository.BasicLpsRepository;
 import com.capeelectric.service.impl.AirTerminationLpsServiceImpl;
 import com.capeelectric.util.AddRemovedStatus;
 import com.capeelectric.util.FindNonRemovedObjects;
+import com.capeelectric.util.UpdateBuildingCountToFile;
 import com.capeelectric.util.UserFullName;
 
 @ExtendWith(SpringExtension.class)
@@ -62,6 +63,9 @@ public class AirTerminationLpsServiceTest {
 	
 	@MockBean
 	private AddRemovedStatus addRemovedStatus;
+	
+	@MockBean
+	private UpdateBuildingCountToFile updateBuildingCountToFile;
 	
 	@InjectMocks
 	private AirTerminationLpsServiceImpl airTerminationLpsServiceImpl;
@@ -149,12 +153,14 @@ public class AirTerminationLpsServiceTest {
 		lpsAirDiscription.setAirHolderDescription(airHolderDescriptionList);
 		lpsAirDiscription.setAirMeshDescription(airMeshDescriptionList);
 		lpsAirDiscription.setAirBasicDescription(airBasicDescriptionList);
+		lpsAirDiscription.setBuildingCount(123);
 		
 		airTermination.setLpsAirDescription(listofLpsAirDiscription);
 
 		
 		when(basicLpsRepository.findByBasicLpsId(1)).thenReturn(Optional.of(basicLps));
 		when(airTerminationLpsRepository.findByBasicLpsId(2)).thenReturn(Optional.of(airTermination));
+		when(airTerminationLpsRepository.save(airTermination)).thenReturn(airTermination);
 		airTerminationLpsServiceImpl.addAirTerminationLpsDetails(airTermination);
 		
 		when(airTerminationLpsRepository.findByBasicLpsId(1)).thenReturn(Optional.of(airTermination));
