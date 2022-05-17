@@ -12,11 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import com.amazonaws.auth.AWSStaticCredentialsProvider;
-import com.amazonaws.auth.BasicAWSCredentials;
-import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.AmazonS3Exception;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.capeelectric.exception.DownConductorException;
@@ -326,7 +322,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 									// Uploading the PDF File in AWS S3 Bucket with folderName + fileNameInS3
 									if (downConDesc.getFileName1().length() > 0) {
 										PutObjectRequest request = new PutObjectRequest(s3LpsFileUploadBucketName,
-												"LPS_DownConductor_DownConductorsNonApplicableUploadedFile Name_"
+												"LPS_DownConductor_DownConductorsNonApplicableUploadedFile Name_"+downConDesc.getFileId1().toString()
 														.concat(downConDesc.getFileName1()),
 												new File(downConDesc.getFileName1()));
 										s3Client.putObject(request);
@@ -343,7 +339,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 
 										PdfPCell cell732 = new PdfPCell(new Paragraph(Constants.LPS_FILE_UPLOAD_DOMAIN
 												+ "/"
-												+ "LPS_DownConductor_DownConductorsNonApplicableUploadedFile Name_"
+												+ "LPS_DownConductor_DownConductorsNonApplicableUploadedFile Name_"+downConDesc.getFileId1().toString()
 														.concat(downConDesc.getFileName1()),
 												FontFactory.getFont(FontFactory.HELVETICA, 6, Font.UNDERLINE,
 														BaseColor.BLUE)));
@@ -2258,7 +2254,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 			// Uploading the PDF File in AWS S3 Bucket with folderName + fileNameInS3
 			if (downConductor11.getFileName().length() > 0) {
 				PutObjectRequest request = new PutObjectRequest(s3LpsFileUploadBucketName,
-						"LPS_DownConductor_DownConductorsUploadedFile Name_".concat(downConductor11.getFileName()),
+						"LPS_DownConductor_DownConductorsUploadedFile Name_"+downConductor11.getFileId().toString().concat(downConductor11.getFileName()),
 						new File(downConductor11.getFileName()));
 				s3Client.putObject(request);
 				logger.info("DownConductor DownConductors file Upload done in AWS s3");
@@ -2273,7 +2269,7 @@ public class PrintDownConductorServiceImpl implements PrintDownConductorService 
 
 				PdfPCell cell732 = new PdfPCell(new Paragraph(
 						Constants.LPS_FILE_UPLOAD_DOMAIN + "/"
-								+ "LPS_DownConductor_DownConductorsUploadedFile Name_"
+								+ "LPS_DownConductor_DownConductorsUploadedFile Name_"+downConductor11.getFileId().toString()
 										.concat(downConductor11.getFileName()),
 						FontFactory.getFont(FontFactory.HELVETICA, 6, Font.UNDERLINE, BaseColor.BLUE)));
 				cell732.setGrayFill(0.92f);

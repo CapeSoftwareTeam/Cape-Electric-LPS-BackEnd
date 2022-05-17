@@ -13,11 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import com.amazonaws.auth.AWSStaticCredentialsProvider;
-import com.amazonaws.auth.BasicAWSCredentials;
-import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.AmazonS3Exception;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.capeelectric.exception.AirTerminationException;
@@ -74,8 +70,8 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 	private FileDBRepository fileDBRepository;
 
 	@Override
-	public void printAirTermination(String userName, Integer basicLpsId,Optional<BasicLps> basicLpsDetails ,Optional<AirTermination> lpsAirTermination)
-			throws AirTerminationException {
+	public void printAirTermination(String userName, Integer basicLpsId, Optional<BasicLps> basicLpsDetails,
+			Optional<AirTermination> lpsAirTermination) throws AirTerminationException {
 
 //	@Override
 ////	public void printAirTermination(String userName, Integer basicLpsId) throws AirTerminationException {
@@ -611,12 +607,14 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 //										AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
 //												.withRegion(Regions.AP_SOUTH_1)
 //												.withCredentials(new AWSStaticCredentialsProvider(awsCreds)).build();
-										AmazonS3 s3Client=AWSS3configuration.getAmazonS3Client();
+										AmazonS3 s3Client = AWSS3configuration.getAmazonS3Client();
 										// Uploading the PDF File in AWS S3 Bucket with folderName + fileNameInS3
 										if (lpsVerticalAirTermination.getFileNameVAir().length() > 0) {
 											PutObjectRequest request = new PutObjectRequest(s3LpsFileUploadBucketName,
 													"LPS_AirTerminationVerticalAirTerminationUploadedFile Name_"
-															.concat(lpsVerticalAirTermination.getFileNameVAir()),
+															+ lpsVerticalAirTermination.getFileIdVAir().toString()
+																	.concat(lpsVerticalAirTermination
+																			.getFileNameVAir()),
 													new File(lpsVerticalAirTermination.getFileNameVAir()));
 											s3Client.putObject(request);
 											logger.info(
@@ -633,6 +631,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 											PdfPCell cell732 = new PdfPCell(new Paragraph(
 													Constants.LPS_FILE_UPLOAD_DOMAIN + "/"
 															+ "LPS_AirTerminationVerticalAirTerminationUploadedFile Name_"
+															+ lpsVerticalAirTermination.getFileIdVAir().toString()
 																	.concat(lpsVerticalAirTermination
 																			.getFileNameVAir()),
 													FontFactory.getFont(FontFactory.HELVETICA, 6, Font.UNDERLINE,
@@ -2296,12 +2295,13 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 //										AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
 //												.withRegion(Regions.AP_SOUTH_1)
 //												.withCredentials(new AWSStaticCredentialsProvider(awsCreds)).build();
-										AmazonS3 s3Client=AWSS3configuration.getAmazonS3Client();
+										AmazonS3 s3Client = AWSS3configuration.getAmazonS3Client();
 										// Uploading the PDF File in AWS S3 Bucket with folderName + fileNameInS3
 										if (airExpansion.getFileName_EP().length() > 0) {
 											PutObjectRequest request = new PutObjectRequest(s3LpsFileUploadBucketName,
 													"LPS_AirTerminationAirExpansionUploadedFile Name_"
-															.concat(airExpansion.getFileName_EP()),
+															+ airExpansion.getFileIdEP().toString()
+																	.concat(airExpansion.getFileName_EP()),
 													new File(airExpansion.getFileName_EP()));
 											s3Client.putObject(request);
 											logger.info("AirTermination AirExpansion file Upload done in AWS s3");
@@ -2317,6 +2317,7 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 											PdfPCell cell732 = new PdfPCell(new Paragraph(
 													Constants.LPS_FILE_UPLOAD_DOMAIN + "/"
 															+ "LPS_AirTerminationAirExpansionUploadedFile Name_"
+															+ airExpansion.getFileIdEP().toString()
 																	.concat(airExpansion.getFileName_EP()),
 													FontFactory.getFont(FontFactory.HELVETICA, 6, Font.UNDERLINE,
 															BaseColor.BLUE)));
@@ -3476,11 +3477,12 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 //			BasicAWSCredentials awsCreds = new BasicAWSCredentials(accessKeyId, accessKeySecret);
 //			AmazonS3 s3Client = AmazonS3ClientBuilder.standard().withRegion(Regions.AP_SOUTH_1)
 //					.withCredentials(new AWSStaticCredentialsProvider(awsCreds)).build();
-			AmazonS3 s3Client=AWSS3configuration.getAmazonS3Client();
+			AmazonS3 s3Client = AWSS3configuration.getAmazonS3Client();
 			// Uploading the PDF File in AWS S3 Bucket with folderName + fileNameInS3
 			if (airBasicDesciption.getFileName().length() > 0) {
 				PutObjectRequest request = new PutObjectRequest(s3LpsFileUploadBucketName,
-						"LPS_AirTerminationBasicDetailsUploadedFile Name_".concat(airBasicDesciption.getFileName()),
+						"LPS_AirTerminationBasicDetailsUploadedFile Name_"
+								+ airBasicDesciption.getFileId().toString().concat(airBasicDesciption.getFileName()),
 						new File(airBasicDesciption.getFileName()));
 				s3Client.putObject(request);
 				logger.info("AirTermination BasicDetails file Upload done in AWS s3");
@@ -3492,11 +3494,14 @@ public class PrintAirTerminationServiceImplPDF implements PrintAirTerminationSer
 				cell7322.setColspan(4);
 				table3.addCell(cell7322);
 
-				PdfPCell cell732 = new PdfPCell(new Paragraph(
-						Constants.LPS_FILE_UPLOAD_DOMAIN + "/"
-								+ "LPS_AirTerminationBasicDetailsUploadedFile Name_"
-										.concat(airBasicDesciption.getFileName()),
-						FontFactory.getFont(FontFactory.HELVETICA, 6, Font.UNDERLINE, BaseColor.BLUE)));
+				PdfPCell cell732 = new PdfPCell(
+						new Paragraph(
+								Constants.LPS_FILE_UPLOAD_DOMAIN + "/"
+										+ "LPS_AirTerminationBasicDetailsUploadedFile Name_"
+										+ airBasicDesciption.getFileId().toString()
+												.concat(airBasicDesciption.getFileName()),
+
+								FontFactory.getFont(FontFactory.HELVETICA, 6, Font.UNDERLINE, BaseColor.BLUE)));
 				cell732.setGrayFill(0.92f);
 				// cell732.setBorder(PdfPCell.NO_BORDER);
 				cell732.setColspan(4);
