@@ -1026,7 +1026,7 @@ use lv_safety_verification;
 		               DECLARATION_ROLE VARCHAR(225),
 		               LOCATION VARCHAR(225),
 		               NAME VARCHAR(225),
-		               SIGNATURE VARCHAR(225),
+		               SIGNATURE LONGTEXT,
 		               COMPANY VARCHAR(225),
 		               POSITION VARCHAR(225),
 		               SPD_MODEL_REMARKS VARCHAR(500),
