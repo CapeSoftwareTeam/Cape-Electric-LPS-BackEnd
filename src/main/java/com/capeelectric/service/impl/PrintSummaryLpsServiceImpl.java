@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +23,7 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
+import com.itextpdf.text.Image;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
@@ -1846,15 +1848,40 @@ public class PrintSummaryLpsServiceImpl implements PrintSummaryLpsService {
 
 				PdfPTable table = new PdfPTable(pointColumnWidthsSec5); // 3 columns.
 				table.setWidthPercentage(100); // Width 100%
+				
+				PdfPTable table1 = new PdfPTable(pointColumnWidthsSec5); // 3 columns.
+				table1.setWidthPercentage(100); // Width 100%
+
+				PdfPTable table2 = new PdfPTable(pointColumnWidthsSec5); // 3 columns.
+				table2.setWidthPercentage(100); // Width 100%
+
+				// conversin code for signature in Inspeted
+				String signature = declaration.getSignature();
+				Base64 decoder = new Base64();
+				byte[] imageByte = decoder.decode(signature);
+				String s = new String(imageByte);
+				String inspectedSignature_list[] = s.split(",");
+				String inspectedSignature1 = inspectedSignature_list[1];
+				byte[] inspetedImageByte = decoder.decode(inspectedSignature1);
+				// conversion code for signature in Autherized
+				String autherizedsignature = declaration11.getSignature();
+				Base64 autherizeddecoder = new Base64();
+				byte[] autherizedimageByte = autherizeddecoder.decode(autherizedsignature);
+				String autherizedString = new String(autherizedimageByte);
+				String autherizedsignature_list[] = autherizedString.split(",");
+				String autherizedSignature1 = autherizedsignature_list[1];
+				byte[] autherizedImageByte = decoder.decode(autherizedSignature1);
+				
 				addRow(table, "Name", declaration.getName(), "Name", declaration11.getName());
 				addRow(table, "Company", declaration.getCompany(), "Company", declaration11.getCompany());
-				addRow(table, "Signature	", declaration.getSignature(), "Signature	",
-						declaration11.getSignature());
-				addRow(table, "Position", declaration.getPosition(), "Position", declaration11.getPosition());
-				addRow(table, "Address", declaration.getAddress(), "Address", declaration11.getAddress());
-				addRow(table, "Date", declaration.getDate(), "Date", declaration11.getDate());
 				document.add(table38);
 				document.add(table);
+				addRow1(table1, "Signature	", inspetedImageByte, "Signature	", autherizedImageByte);
+				document.add(table1);
+				addRow(table2, "Position", declaration.getPosition(), "Position", declaration11.getPosition());
+				addRow(table2, "Address", declaration.getAddress(), "Address", declaration11.getAddress());
+				addRow(table2, "Date", declaration.getDate(), "Date", declaration11.getDate());
+				document.add(table2);
 
 				document.close();
 				writer.close();
@@ -3745,6 +3772,36 @@ public class PrintSummaryLpsServiceImpl implements PrintSummaryLpsService {
 			throw new SummaryLpsException("Invalid Inputs");
 		}
 		return null;
+	}
+
+
+	private void addRow1(PdfPTable table1, String string, byte[] inspetedImageByte, String string2,
+			byte[] autherizedImageByte) throws DocumentException, IOException {
+		Font font = new Font(BaseFont.createFont(), 10, Font.NORMAL, BaseColor.BLACK);
+		PdfPCell nameCell = new PdfPCell(new Paragraph(string, font));
+
+		Image image = Image.getInstance(inspetedImageByte);
+		image.setAbsolutePosition(0, 0);
+		image.scaleToFit(30, 50);
+
+		Image Autherizedimage = Image.getInstance(autherizedImageByte);
+		Autherizedimage.setAbsolutePosition(0, 0);
+		Autherizedimage.scaleToFit(30, 50);
+		PdfPCell valueCell1 = new PdfPCell(image);
+		PdfPCell valueCell2 = new PdfPCell(new Paragraph(string2, font));
+		PdfPCell valueCell3 = new PdfPCell(Autherizedimage);
+		nameCell.setHorizontalAlignment(Element.ALIGN_CENTER);
+		valueCell1.setHorizontalAlignment(Element.ALIGN_CENTER);
+		valueCell2.setHorizontalAlignment(Element.ALIGN_CENTER);
+		valueCell3.setHorizontalAlignment(Element.ALIGN_CENTER);
+		nameCell.setGrayFill(0.92f);
+		valueCell2.setGrayFill(0.92f);
+		table1.addCell(nameCell);
+		table1.addCell(valueCell1);
+		table1.addCell(valueCell2);
+		table1.addCell(valueCell3);
+
+		
 	}
 
 }
