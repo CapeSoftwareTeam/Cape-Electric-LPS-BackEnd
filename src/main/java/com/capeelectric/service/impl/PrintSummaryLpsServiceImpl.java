@@ -3698,15 +3698,42 @@ public class PrintSummaryLpsServiceImpl implements PrintSummaryLpsService {
 
 				PdfPTable table = new PdfPTable(pointColumnWidthsSec5); // 3 columns.
 				table.setWidthPercentage(100); // Width 100%
+				
+				
+				PdfPTable table1 = new PdfPTable(pointColumnWidthsSec5); // 3 columns.
+				table1.setWidthPercentage(100); // Width 100%
+
+				PdfPTable table2 = new PdfPTable(pointColumnWidthsSec5); // 3 columns.
+				table2.setWidthPercentage(100); // Width 100%
+
+				// conversin code for signature in Inspeted
+				String signature = declaration.getSignature();
+				Base64 decoder = new Base64();
+				byte[] imageByte = decoder.decode(signature);
+				String s = new String(imageByte);
+				String inspectedSignature_list[] = s.split(",");
+				String inspectedSignature1 = inspectedSignature_list[1];
+				byte[] inspetedImageByte = decoder.decode(inspectedSignature1);
+				// conversion code for signature in Autherized
+				String autherizedsignature = declaration11.getSignature();
+				Base64 autherizeddecoder = new Base64();
+				byte[] autherizedimageByte = autherizeddecoder.decode(autherizedsignature);
+				String autherizedString = new String(autherizedimageByte);
+				String autherizedsignature_list[] = autherizedString.split(",");
+				String autherizedSignature1 = autherizedsignature_list[1];
+				byte[] autherizedImageByte = decoder.decode(autherizedSignature1);
+				
 				addRow(table, "Name", declaration.getName(), "Name", declaration11.getName());
 				addRow(table, "Company", declaration.getCompany(), "Company", declaration11.getCompany());
-				addRow(table, "Signature	", declaration.getSignature(), "Signature	",
-						declaration11.getSignature());
-				addRow(table, "Position", declaration.getPosition(), "Position", declaration11.getPosition());
-				addRow(table, "Address", declaration.getAddress(), "Address", declaration11.getAddress());
-				addRow(table, "Date", declaration.getDate(), "Date", declaration11.getDate());
 				document.add(table38);
 				document.add(table);
+				addRow1(table1, "Signature	", inspetedImageByte, "Signature	", autherizedImageByte);
+				document.add(table1);
+				addRow(table2, "Position", declaration.getPosition(), "Position", declaration11.getPosition());
+				addRow(table2, "Address", declaration.getAddress(), "Address", declaration11.getAddress());
+				addRow(table2, "Date", declaration.getDate(), "Date", declaration11.getDate());
+				document.add(table2);
+
 
 				document.close();
 				writer.close();
