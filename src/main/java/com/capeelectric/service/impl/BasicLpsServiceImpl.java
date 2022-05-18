@@ -22,7 +22,9 @@ import com.capeelectric.util.UserFullName;
 import ch.qos.logback.core.status.Status;
 
 /**
- * This BasicLpsServiceImpl service class doing save and retrieve operation related to BasicLpsDetails
+ * This BasicLpsServiceImpl service class doing save and retrieve operation
+ * related to BasicLpsDetails
+ * 
  * @author capeelectricsoftware
  *
  */
@@ -34,54 +36,53 @@ public class BasicLpsServiceImpl implements BasicLpsService {
 
 	@Autowired
 	private BasicLpsRepository basicLpsRepository;
-	
+
 	@Autowired
 	private UserFullName userFullName;
-	
+
 	private BasicLps basicLpsData;
-	
+
 	@Transactional
 	@Override
 	public BasicLps addBasicLpsDetails(BasicLps basicLps) throws BasicLpsException {
 		logger.info("Called addBasicLpsDetails function");
-		
-		if (basicLps != null && basicLps.getClientName() != null ) {
-			Optional<BasicLps> basicLpsDetailsRepo = basicLpsRepository.findByClientNameAndStatus(basicLps.getClientName(),"Active");
+
+		if (basicLps != null && basicLps.getClientName() != null) {
+			Optional<BasicLps> basicLpsDetailsRepo = basicLpsRepository
+					.findByClientNameAndStatus(basicLps.getClientName(), "Active");
 			logger.debug("Basic Client Repo data available");
-			
+
 //			System.out.println("isPresent"+basicLpsDetailsRepo.isPresent());
 //			System.out.println("Active"+basicLpsData.getStatus());
-			
-				if(!basicLpsDetailsRepo.isPresent() || (basicLpsDetailsRepo.isPresent() && basicLpsDetailsRepo.get().getStatus().equals("InActive"))) {
-					basicLps.setStatus("Active");
-					basicLps.setCreatedDate(LocalDateTime.now());
-					basicLps.setUpdatedDate(LocalDateTime.now());
-					basicLps.setCreatedBy(userFullName.findByUserName(basicLps.getUserName()));
-					basicLps.setUpdatedBy(userFullName.findByUserName(basicLps.getUserName()));
-					logger.info("Ended addBasicLpsDetails function");
-					return basicLpsRepository.save(basicLps);
-				}
-				else {
-					logger.error("Client name "+basicLps.getClientName()+" already exists");
-					throw new BasicLpsException("Client name "+basicLps.getClientName()+" already exists");
-				}
-			
+
+			if (!basicLpsDetailsRepo.isPresent()
+					|| (basicLpsDetailsRepo.isPresent() && basicLpsDetailsRepo.get().getStatus().equals("InActive"))) {
+				basicLps.setStatus("Active");
+				basicLps.setCreatedDate(LocalDateTime.now());
+				basicLps.setUpdatedDate(LocalDateTime.now());
+				basicLps.setCreatedBy(userFullName.findByUserName(basicLps.getUserName()));
+				basicLps.setUpdatedBy(userFullName.findByUserName(basicLps.getUserName()));
+				logger.info("Ended addBasicLpsDetails function");
+				return basicLpsRepository.save(basicLps);
+			} else {
+				logger.error("Client name " + basicLps.getClientName() + " already exists");
+				throw new BasicLpsException("Client name " + basicLps.getClientName() + " already exists");
+			}
+
 		} else {
 			logger.error("Invalid Inputs");
 			throw new BasicLpsException("Invalid Inputs");
 		}
-		
+
 	}
-	
+
 	@Override
-	public List<BasicLps> retrieveBasicLpsDetails(String userName, Integer basicLpsId)
-			throws BasicLpsException {
+	public List<BasicLps> retrieveBasicLpsDetails(String userName, Integer basicLpsId) throws BasicLpsException {
 		logger.info("Called retrieveBasicLpsDetails function");
 
 		if (userName != null) {
-			List<BasicLps> basicLpsDetailsRepo = basicLpsRepository.findByUserNameAndBasicLpsId(userName,
-					basicLpsId);
-			if (basicLpsDetailsRepo != null && !basicLpsDetailsRepo.isEmpty()) {	
+			List<BasicLps> basicLpsDetailsRepo = basicLpsRepository.findByUserNameAndBasicLpsId(userName, basicLpsId);
+			if (basicLpsDetailsRepo != null && !basicLpsDetailsRepo.isEmpty()) {
 				logger.debug("Basic Client Repo data available");
 				logger.info("Ended retrieveBasicLpsDetails function");
 				return basicLpsDetailsRepo;
@@ -94,22 +95,23 @@ public class BasicLpsServiceImpl implements BasicLpsService {
 			throw new BasicLpsException("Invalid Inputs");
 		}
 	}
-	
+
 	@Transactional
 	@Override
 	public void updateBasicLpsDetails(BasicLps basicLps) throws BasicLpsException {
 		logger.info("Called updateBasicLpsDetails function");
 
 		if (basicLps != null && basicLps.getBasicLpsId() != null && basicLps.getBasicLpsId() != 0) {
-			
-			Optional<BasicLps> basicLpsRepo1 = basicLpsRepository
-					.findByClientName(basicLps.getClientName());
-			
-			if(!basicLpsRepo1.isPresent()) {
-				Optional<BasicLps> basicLpsRepo = basicLpsRepository
-						.findByBasicLpsId(basicLps.getBasicLpsId());
-				if(basicLpsRepo.isPresent() && basicLpsRepo.get().getBasicLpsId().equals(basicLps.getBasicLpsId()) ) {
-					
+
+			Optional<BasicLps> basicLpsRepo1 = basicLpsRepository.findByClientNameAndStatus(basicLps.getClientName(),
+					"Active");
+			Optional<BasicLps> basicLpsRepo = basicLpsRepository.findByBasicLpsId(basicLps.getBasicLpsId());
+
+			if (!basicLpsRepo1.isPresent()
+					|| basicLpsRepo1.get().getClientName().equals(basicLpsRepo.get().getClientName())) {
+
+				if (basicLpsRepo.isPresent() && basicLpsRepo.get().getBasicLpsId().equals(basicLps.getBasicLpsId())) {
+
 					basicLps.setUpdatedDate(LocalDateTime.now());
 					basicLps.setUpdatedBy(userFullName.findByUserName(basicLps.getUserName()));
 					basicLpsRepository.save(basicLps);
@@ -118,13 +120,11 @@ public class BasicLpsServiceImpl implements BasicLpsService {
 				} else {
 					logger.error("Given Basic LPS Id is Invalid");
 					throw new BasicLpsException("Given Basic LPS Id is Invalid");
-				}	
+				}
+			} else {
+				logger.error("Client name " + basicLps.getClientName() + " already exists");
+				throw new BasicLpsException("Client name " + basicLps.getClientName() + " already exists");
 			}
-			else {
-				logger.error("Client name "+basicLps.getClientName()+" already exists");
-				throw new BasicLpsException("Client name "+basicLps.getClientName()+" already exists");
-			}
-			
 
 		} else {
 			logger.error("Invalid Inputs");
@@ -133,18 +133,15 @@ public class BasicLpsServiceImpl implements BasicLpsService {
 		logger.info("Ended updateBasicLpsDetails function");
 
 	}
-	
-	
+
 	@Transactional
 	@Override
 	public void updateBasicLpsDetailsStatus(BasicLps basicLps) throws BasicLpsException {
 		logger.info("Called updateBasicLpsDetailsStatus function");
 
 		if (basicLps != null && basicLps.getBasicLpsId() != null && basicLps.getBasicLpsId() != 0) {
-			Optional<BasicLps> basicLpsRepo = basicLpsRepository
-					.findByBasicLpsId(basicLps.getBasicLpsId());
-			if (basicLpsRepo.isPresent()
-					&& basicLpsRepo.get().getBasicLpsId().equals(basicLps.getBasicLpsId())) {
+			Optional<BasicLps> basicLpsRepo = basicLpsRepository.findByBasicLpsId(basicLps.getBasicLpsId());
+			if (basicLpsRepo.isPresent() && basicLpsRepo.get().getBasicLpsId().equals(basicLps.getBasicLpsId())) {
 				basicLpsData = basicLpsRepo.get();
 				basicLpsData.setStatus("InActive");
 				basicLpsData.setUpdatedDate(LocalDateTime.now());
@@ -164,6 +161,5 @@ public class BasicLpsServiceImpl implements BasicLpsService {
 		logger.info("Ended updateBasicLpsDetailsStatus function");
 
 	}
-	
+
 }
-	
