@@ -3,7 +3,7 @@
  */
 package com.capeelectric.model;
 
-import java.time.LocalDateTime;
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -13,9 +13,12 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 /**
@@ -25,9 +28,10 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "EARTHING_LPS_DESCRIPTION")
-public class EarthingLpsDescription {
-
+public class EarthingLpsDescription implements Serializable  {
+	
 	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "EARTHING_ID")
@@ -35,12 +39,6 @@ public class EarthingLpsDescription {
 	
 	@Column(name = "EARTHING_TYPEINOB")
 	private String earthingTypeInOb;
-	
-	@Column(name = "USER_NAME")
-	private String userName;
-	
-	@Column(name = "BASIC_LPS_ID")
-	private Integer basicLpsId;
 	
 	@Column(name = "EARTHING_TYPEINREM")
 	private String earthingTypeInRem;
@@ -57,23 +55,47 @@ public class EarthingLpsDescription {
 	@Column(name = "BRAZING_CONNECTIONSINREM")
 	private String brazingConnectInRem;
 	
-	@Column(name = "LOCATION_NUMBER")
-	private Integer locationNumber;
+	@Column(name = "BUILDING_NUMBER")
+	private Integer buildingNumber;
 	
-	@Column(name = "LOCATION_NAME")
-	private String locationName;
+	@Column(name = "BUILDING_NAME")
+	private String buildingName;
 	
-	@Column(name = "CREATED_DATE")
-	private LocalDateTime createdDate;
+	@Column(name = "BUILDING_COUNT")
+	private Integer buildingCount;
 	
-	@Column(name = "CREATED_BY")
-	private String createdBy;
+	@Column(name = "FLAG")
+	private String flag;
 	
-	@Column(name = "UPDATED_BY")
-	private String updatedBy;
+	@Column(name = "EARTHING_DESC_AVAILABILITY_OB")
+	private String earthingDescriptionAvailabilityOb;
 	
-	@Column(name = "UPDATED_DATE")
-	private LocalDateTime updatedDate;
+	@Column(name = "EARTHING_DESC_AVAILABILITY_REM")
+	private String earthingDescriptionAvailabilityRem;
+	
+	@Column(name = "EARTHING_CLAMPS_AVAILABILITY_OB")
+	private String earthingClampsAvailabilityOb;
+	
+	@Column(name = "EARTHING_CLAMPS_AVAILABILITY_REM")
+	private String earthingClampsAvailabilityRem;
+	
+	@Column(name = "EARTHING_ELECTRODE_CHAMBER_AVAILABILITY_OB")
+	private String earthingElectrodeChamberAvailabilityOb;
+	
+	@Column(name = "EARTHING_ELECTRODE_CHAMBER_AVAILABILITY_REM")
+	private String earthingElectrodeChamberAvailabilityRem;
+	
+	@Column(name = "EARTHING_SYSTEM_AVAILABILITY_OB")
+	private String earthingSystemAvailabilityOb;
+	
+	@Column(name = "EARTHING_SYSTEM_AVAILABILITY_REM")
+	private String earthingSystemAvailabilityRem;
+	
+	@Column(name = "EARTHING_ELECTRODE_TESTING_AVAILABILITY_OB")
+	private String earthingElectrodeTestingAvailabilityOb;
+	
+	@Column(name = "EARTHING_ELECTRODE_TESTING_AVAILABILITY_REM")
+	private String earthingElectrodeTestingAvailabilityRem;
 	
 	@JsonManagedReference
 	@OneToMany(mappedBy = "earthingLpsDescription", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -91,62 +113,21 @@ public class EarthingLpsDescription {
 	@OneToMany(mappedBy = "earthingLpsDescription", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<EarthingSystem> earthingSystem;
 	
+	@JsonManagedReference
+	@OneToMany(mappedBy = "earthingLpsDescription", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<EarthElectrodeTesting> earthElectrodeTesting;
+	
 //	@JsonManagedReference
 //	@OneToMany(mappedBy = "earthingLpsDescription", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 //	private List<EarthingInspection> earthingInspection;
+	
+	@JsonBackReference
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "EARTHING_REPORT_ID")
+	private EarthingReport earthingReport;
 
 	public Integer getEarthingId() {
 		return earthingId;
-	}
-	
-	
-
-	public Integer getLocationNumber() {
-		return locationNumber;
-	}
-
-
-
-	public void setLocationNumber(Integer locationNumber) {
-		this.locationNumber = locationNumber;
-	}
-
-
-
-	public String getLocationName() {
-		return locationName;
-	}
-
-
-
-	public void setLocationName(String locationName) {
-		this.locationName = locationName;
-	}
-
-
-
-	public LocalDateTime getCreatedDate() {
-		return createdDate;
-	}
-
-	public void setCreatedDate(LocalDateTime createdDate) {
-		this.createdDate = createdDate;
-	}
-
-	public String getCreatedBy() {
-		return createdBy;
-	}
-
-	public void setCreatedBy(String createdBy) {
-		this.createdBy = createdBy;
-	}
-
-	public String getUpdatedBy() {
-		return updatedBy;
-	}
-
-	public void setUpdatedBy(String updatedBy) {
-		this.updatedBy = updatedBy;
 	}
 
 	public List<EarthingDescription> getEarthingDescription() {
@@ -181,9 +162,6 @@ public class EarthingLpsDescription {
 //		this.earthingInspection = earthingInspection;
 //	}
 
-	public LocalDateTime getUpdatedDate() {
-		return updatedDate;
-	}
 
 	public void setEarthingId(Integer earthingId) {
 		this.earthingId = earthingId;
@@ -195,22 +173,6 @@ public class EarthingLpsDescription {
 
 	public void setEarthingTypeInOb(String earthingTypeInOb) {
 		this.earthingTypeInOb = earthingTypeInOb;
-	}
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
-	public Integer getBasicLpsId() {
-		return basicLpsId;
-	}
-
-	public void setBasicLpsId(Integer basicLpsId) {
-		this.basicLpsId = basicLpsId;
 	}
 
 	public String getEarthingTypeInRem() {
@@ -261,9 +223,137 @@ public class EarthingLpsDescription {
 		this.earthingClamps = earthingClamps;
 	}
 
-	public void setUpdatedDate(LocalDateTime updatedDate) {
-		this.updatedDate = updatedDate;
+	public Integer getBuildingNumber() {
+		return buildingNumber;
 	}
 
+	public void setBuildingNumber(Integer buildingNumber) {
+		this.buildingNumber = buildingNumber;
+	}
+
+	public String getBuildingName() {
+		return buildingName;
+	}
+
+	public void setBuildingName(String buildingName) {
+		this.buildingName = buildingName;
+	}
+
+	public Integer getBuildingCount() {
+		return buildingCount;
+	}
+
+	public void setBuildingCount(Integer buildingCount) {
+		this.buildingCount = buildingCount;
+	}
+
+	public EarthingReport getEarthingReport() {
+		return earthingReport;
+	}
+
+	public void setEarthingReport(EarthingReport earthingReport) {
+		this.earthingReport = earthingReport;
+	}
+
+	public String getFlag() {
+		return flag;
+	}
+
+	public void setFlag(String flag) {
+		this.flag = flag;
+	}
+	
+
+	public String getEarthingDescriptionAvailabilityOb() {
+		return earthingDescriptionAvailabilityOb;
+	}
+
+	public void setEarthingDescriptionAvailabilityOb(String earthingDescriptionAvailabilityOb) {
+		this.earthingDescriptionAvailabilityOb = earthingDescriptionAvailabilityOb;
+	}
+
+	public String getEarthingDescriptionAvailabilityRem() {
+		return earthingDescriptionAvailabilityRem;
+	}
+
+	public void setEarthingDescriptionAvailabilityRem(String earthingDescriptionAvailabilityRem) {
+		this.earthingDescriptionAvailabilityRem = earthingDescriptionAvailabilityRem;
+	}
+
+	public String getEarthingClampsAvailabilityOb() {
+		return earthingClampsAvailabilityOb;
+	}
+
+	public void setEarthingClampsAvailabilityOb(String earthingClampsAvailabilityOb) {
+		this.earthingClampsAvailabilityOb = earthingClampsAvailabilityOb;
+	}
+
+	public String getEarthingClampsAvailabilityRem() {
+		return earthingClampsAvailabilityRem;
+	}
+
+	public void setEarthingClampsAvailabilityRem(String earthingClampsAvailabilityRem) {
+		this.earthingClampsAvailabilityRem = earthingClampsAvailabilityRem;
+	}
+
+	public String getEarthingElectrodeChamberAvailabilityOb() {
+		return earthingElectrodeChamberAvailabilityOb;
+	}
+
+	public void setEarthingElectrodeChamberAvailabilityOb(String earthingElectrodeChamberAvailabilityOb) {
+		this.earthingElectrodeChamberAvailabilityOb = earthingElectrodeChamberAvailabilityOb;
+	}
+
+	public String getEarthingElectrodeChamberAvailabilityRem() {
+		return earthingElectrodeChamberAvailabilityRem;
+	}
+
+	public void setEarthingElectrodeChamberAvailabilityRem(String earthingElectrodeChamberAvailabilityRem) {
+		this.earthingElectrodeChamberAvailabilityRem = earthingElectrodeChamberAvailabilityRem;
+	}
+
+	public String getEarthingSystemAvailabilityOb() {
+		return earthingSystemAvailabilityOb;
+	}
+
+	public void setEarthingSystemAvailabilityOb(String earthingSystemAvailabilityOb) {
+		this.earthingSystemAvailabilityOb = earthingSystemAvailabilityOb;
+	}
+
+	public String getEarthingSystemAvailabilityRem() {
+		return earthingSystemAvailabilityRem;
+	}
+
+	public void setEarthingSystemAvailabilityRem(String earthingSystemAvailabilityRem) {
+		this.earthingSystemAvailabilityRem = earthingSystemAvailabilityRem;
+	}
+
+	public String getEarthingElectrodeTestingAvailabilityOb() {
+		return earthingElectrodeTestingAvailabilityOb;
+	}
+
+	public void setEarthingElectrodeTestingAvailabilityOb(String earthingElectrodeTestingAvailabilityOb) {
+		this.earthingElectrodeTestingAvailabilityOb = earthingElectrodeTestingAvailabilityOb;
+	}
+
+	public String getEarthingElectrodeTestingAvailabilityRem() {
+		return earthingElectrodeTestingAvailabilityRem;
+	}
+
+	public void setEarthingElectrodeTestingAvailabilityRem(String earthingElectrodeTestingAvailabilityRem) {
+		this.earthingElectrodeTestingAvailabilityRem = earthingElectrodeTestingAvailabilityRem;
+	}
+
+	public List<EarthElectrodeTesting> getEarthElectrodeTesting() {
+		return earthElectrodeTesting;
+	}
+
+	public void setEarthElectrodeTesting(List<EarthElectrodeTesting> earthElectrodeTesting) {
+		this.earthElectrodeTesting = earthElectrodeTesting;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 	
 }

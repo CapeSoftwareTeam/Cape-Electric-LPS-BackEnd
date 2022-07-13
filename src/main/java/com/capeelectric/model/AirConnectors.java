@@ -25,13 +25,7 @@ public class AirConnectors implements Serializable {
 	private Integer connectorId;
 	
 	@Column(name = "FLAG")
-	private Boolean flag;
-	
-	@Column(name = "LOCATION_NUMBER")
-	private Integer locationNumber;
-
-	@Column(name = "LOCATION_NAME")
-	private String locationName;
+	private String flag;
 
 	@Column(name = "PHYSICAL_INSPECTION_OBSERVATION")
 	private String physicalInspectionOb;
@@ -70,25 +64,25 @@ public class AirConnectors implements Serializable {
 	private String lConnectorRe;
 
 	@Column(name = "TOTALNO_CONNECTORS_OBSERVATION")
-	private String totalNoConnectorOb;
+	private Integer totalNoConnectorOb;
 
 	@Column(name = "TOTALNO_CONNECTORS_REMARKS")
 	private String totalNoConnectorRe;
 
 	@Column(name = "INSP_NO_OBS")
-	private String inspectionNoOb;
+	private Integer inspectionNoOb;
 
 	@Column(name = "INSP_NO_REM")
 	private String inspectionNoRe;
 
 	@Column(name = "INSP_PASSED_NO_OBS")
-	private String inspectionPassedNoOb;
+	private Integer inspectionPassedNoOb;
 
 	@Column(name = "INSP_PASSED_NO_REM")
 	private String inspectionPassedNoRe;
 
 	@Column(name = "INSP_FAILED_NO_OBS")
-	private String inspectionFailedOb;
+	private Integer inspectionFailedOb;
 
 	@Column(name = "INSP_FAILED_NO_REM")
 	private String inspectionFailedRe;
@@ -96,26 +90,10 @@ public class AirConnectors implements Serializable {
 	@JsonBackReference
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "LPSAIRDESCRIPTION_ID")
-	private LpsAirDiscription lpsAirDes;
+	private LpsAirDiscription lpsAirDescription;
 
 	public Integer getConnectorId() {
 		return connectorId;
-	}
-
-	public Integer getLocationNumber() {
-		return locationNumber;
-	}
-
-	public void setLocationNumber(Integer locationNumber) {
-		this.locationNumber = locationNumber;
-	}
-
-	public String getLocationName() {
-		return locationName;
-	}
-
-	public void setLocationName(String locationName) {
-		this.locationName = locationName;
 	}
 
 	public void setConnectorId(Integer connectorId) {
@@ -218,13 +196,6 @@ public class AirConnectors implements Serializable {
 		this.lConnectorRe = lConnectorRe;
 	}
 
-	public String getTotalNoConnectorOb() {
-		return totalNoConnectorOb;
-	}
-
-	public void setTotalNoConnectorOb(String totalNoConnectorOb) {
-		this.totalNoConnectorOb = totalNoConnectorOb;
-	}
 
 	public String getTotalNoConnectorRe() {
 		return totalNoConnectorRe;
@@ -232,14 +203,6 @@ public class AirConnectors implements Serializable {
 
 	public void setTotalNoConnectorRe(String totalNoConnectorRe) {
 		this.totalNoConnectorRe = totalNoConnectorRe;
-	}
-
-	public String getInspectionNoOb() {
-		return inspectionNoOb;
-	}
-
-	public void setInspectionNoOb(String inspectionNoOb) {
-		this.inspectionNoOb = inspectionNoOb;
 	}
 
 	public String getInspectionNoRe() {
@@ -250,13 +213,6 @@ public class AirConnectors implements Serializable {
 		this.inspectionNoRe = inspectionNoRe;
 	}
 
-	public String getInspectionPassedNoOb() {
-		return inspectionPassedNoOb;
-	}
-
-	public void setInspectionPassedNoOb(String inspectionPassedNoOb) {
-		this.inspectionPassedNoOb = inspectionPassedNoOb;
-	}
 
 	public String getInspectionPassedNoRe() {
 		return inspectionPassedNoRe;
@@ -264,14 +220,6 @@ public class AirConnectors implements Serializable {
 
 	public void setInspectionPassedNoRe(String inspectionPassedNoRe) {
 		this.inspectionPassedNoRe = inspectionPassedNoRe;
-	}
-
-	public String getInspectionFailedOb() {
-		return inspectionFailedOb;
-	}
-
-	public void setInspectionFailedOb(String inspectionFailedOb) {
-		this.inspectionFailedOb = inspectionFailedOb;
 	}
 
 	public String getInspectionFailedRe() {
@@ -282,20 +230,55 @@ public class AirConnectors implements Serializable {
 		this.inspectionFailedRe = inspectionFailedRe;
 	}
 
-	public LpsAirDiscription getLpsAirDes() {
-		return lpsAirDes;
+	public LpsAirDiscription getLpsAirDescription() {
+		return lpsAirDescription;
 	}
 
-	public void setLpsAirDes(LpsAirDiscription lpsAirDes) {
-		this.lpsAirDes = lpsAirDes;
+	public void setLpsAirDescription(LpsAirDiscription lpsAirDescription) {
+		this.lpsAirDescription = lpsAirDescription;
 	}
 
-	public Boolean getFlag() {
+	
+	public String getFlag() {
 		return flag;
 	}
 
-	public void setFlag(Boolean flag) {
+	public void setFlag(String flag) {
 		this.flag = flag;
 	}
+
+	public Integer getTotalNoConnectorOb() {
+		return totalNoConnectorOb;
+	}
+
+	public void setTotalNoConnectorOb(Integer totalNoConnectorOb) {
+		this.totalNoConnectorOb = totalNoConnectorOb;
+	}
+
+	public Integer getInspectionNoOb() {
+		return inspectionNoOb;
+	}
+
+	public void setInspectionNoOb(Integer inspectionNoOb) {
+		this.inspectionNoOb = inspectionNoOb;
+	}
+
+	public Integer getInspectionPassedNoOb() {
+		return inspectionPassedNoOb;
+	}
+
+	public void setInspectionPassedNoOb(Integer inspectionPassedNoOb) {
+		this.inspectionPassedNoOb = inspectionPassedNoOb;
+	}
+
+	public Integer getInspectionFailedOb() {
+		return inspectionFailedOb;
+	}
+
+	public void setInspectionFailedOb(Integer inspectionFailedOb) {
+		this.inspectionFailedOb = inspectionFailedOb;
+	}
+	
+	
 
 }

@@ -5,8 +5,10 @@ package com.capeelectric.service;
 
 import java.util.List;
 
+import com.capeelectric.exception.AirTerminationException;
 import com.capeelectric.exception.SPDException;
 import com.capeelectric.model.SPD;
+import com.capeelectric.model.SpdReport;
 
 
 
@@ -16,12 +18,12 @@ import com.capeelectric.model.SPD;
  */
 public interface SPDService {
 	
-	public void addSPDDetails(SPD SPDDesc)
-			throws SPDException;
+	public void addSPDDetails(SpdReport spdReport)
+			throws SPDException, AirTerminationException;
 
-	public List<SPD> retrieveSPDDetails(String userName, Integer basicLpsId)
+	public List<SpdReport> retrieveSPDDetails(String userName, Integer basicLpsId)
 			throws SPDException;
 	
-	void updateSpdDetails(SPD spdDesc) throws SPDException;
+	void updateSpdDetails(SpdReport spdReport) throws SPDException, AirTerminationException;
 
 }

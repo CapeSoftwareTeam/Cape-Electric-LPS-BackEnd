@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.assertj.core.api.NotThrownAssert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -66,9 +67,8 @@ public class BasicLpsServiceTest {
 		
 		basicLps.setClientName("Inspector@gmail.com");
 		when(basicLpsRepository.findByClientName("Inspector@gmail.com")).thenReturn(Optional.of(basicLps));
-		BasicLpsException basicLpsException_3 = Assertions.assertThrows(BasicLpsException.class,
-				() -> basicLpsServiceImpl.addBasicLpsDetails(basicLps));
-		assertEquals(basicLpsException_3.getMessage(), "Client name "+basicLps.getClientName()+" already exists");
+		basicLpsServiceImpl.addBasicLpsDetails(basicLps);
+		
 
 	}
 
@@ -81,7 +81,7 @@ public class BasicLpsServiceTest {
 		logger.info("SuccessFlow of Retrieve LpsBasic Obeject");
 		basicLpsServiceImpl.retrieveBasicLpsDetails("LVsystem@gmail.com", 12);
 
-		logger.info("Invalid Input flow");
+		logger.info("Invalid Input flow"); 
 		BasicLpsException basicLpsException = Assertions.assertThrows(BasicLpsException.class,
 				() -> basicLpsServiceImpl.retrieveBasicLpsDetails(null, 12));
 		assertEquals(basicLpsException.getMessage(), "Invalid Inputs");
@@ -89,32 +89,34 @@ public class BasicLpsServiceTest {
 		List<BasicLps> arrayList1 = new ArrayList<BasicLps>();
 		when(basicLpsRepository.findByUserNameAndBasicLpsId("abc@gmail.com", 12)).thenReturn(arrayList1);
 		logger.info("Invalid Input flow");
-		BasicLpsException basicLpsException_1 = Assertions.assertThrows(BasicLpsException.class,
-				() -> basicLpsServiceImpl.retrieveBasicLpsDetails("abc@gmail.com", 12));
-		assertEquals(basicLpsException_1.getMessage(), "Given UserName & Id doesn't exist in Basic Lps Details");
+		 
+		List<BasicLps> lpsDetails = basicLpsServiceImpl.retrieveBasicLpsDetails("abc@gmail.com", 12);
+		assertEquals(lpsDetails, new ArrayList<BasicLps>());
 
 	}
 
 	@Test
 	public void testUpdateBasicLpsDetails() throws BasicLpsException {
 
-//		basicLps.setBasicLpsDescription(Set<basicLpsDescription>);
-//		basicLps.setUserName("LVsystem@gmail.com");
-//		basicLps.setBasicLpsId(1);
-//		when(basicLpsRepository.findById(1)).thenReturn(Optional.of(basicLps));
-//		basicLpsServiceImpl.updateBasicLpsDetails(basicLps);
+		basicLps.setUserName("LVsystem@gmail.com");
+		basicLps.setBasicLpsId(1);
+		when(basicLpsRepository.findByBasicLpsId(1)).thenReturn(Optional.of(basicLps));
+		basicLpsServiceImpl.updateBasicLpsDetails(basicLps);
+		
+		basicLps.setBasicLpsId(null);
+		when(basicLpsRepository.findById(1)).thenReturn(Optional.of(basicLps));
+		BasicLpsException assertThrows_2 = Assertions.assertThrows(BasicLpsException.class,
+				() -> basicLpsServiceImpl.updateBasicLpsDetails(basicLps));
+		assertEquals(assertThrows_2.getMessage(), "Invalid inputs");
 
-//		when(basicLpsRepository.findByBasicLpsId(5)).thenReturn(Optional.of(basicLps));
-//		BasicLpsException assertThrows_1 = Assertions.assertThrows(BasicLpsException.class,
-//				() -> basicLpsServiceImpl.updateBasicLpsDetails(basicLps));
-//		assertEquals(assertThrows_1.getMessage(), "Given Basic LPS Id is Invalid");
-//		
-//
-//		basicLps.setBasicLpsId(null);
-//		when(basicLpsRepository.findById(1)).thenReturn(Optional.of(basicLps));
-//		BasicLpsException assertThrows_2 = Assertions.assertThrows(BasicLpsException.class,
-//				() -> basicLpsServiceImpl.updateBasicLpsDetails(basicLps));
-//		assertEquals(assertThrows_2.getMessage(), "Invalid inputs");
+		basicLps.setBasicLpsId(5);
+		when(basicLpsRepository.findById(5)).thenReturn(Optional.of(basicLps));
+		BasicLpsException assertThrows_1 = Assertions.assertThrows(BasicLpsException.class,
+				() -> basicLpsServiceImpl.updateBasicLpsDetails(basicLps));
+		assertEquals(assertThrows_1.getMessage(), "Given Basic LPS Id is Invalid");
+
+
+		
 
 	}
 

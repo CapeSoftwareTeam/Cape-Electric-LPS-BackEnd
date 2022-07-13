@@ -19,6 +19,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.capeelectric.exception.AirTerminationException;
+import com.capeelectric.model.AirTermination;
 import com.capeelectric.model.LpsAirDiscription;
 import com.capeelectric.service.impl.AirTerminationLpsServiceImpl;
 
@@ -33,41 +34,41 @@ public class AirTerminationLpsControllerTest {
 
 	@MockBean
 	private AirTerminationLpsServiceImpl airTerminationLpsServiceImpl;
-
-	private LpsAirDiscription lpsAirDiscription;
-
+	
+	private AirTermination airTermination;
+	
 	{
-		lpsAirDiscription = new LpsAirDiscription();
-		lpsAirDiscription.setBasicLpsId(1);
-		lpsAirDiscription.setUserName("LVsystem@gmail.com");
-		lpsAirDiscription.setUserName("Inspector@gmail.com");
-		lpsAirDiscription.setBasicLpsId(1);
+		airTermination = new AirTermination();
+		airTermination.setBasicLpsId(1);
+		airTermination.setUserName("LVsystem@gmail.com");
+		airTermination.setUserName("Inspector@gmail.com");
+		airTermination.setBasicLpsId(1);
 	}
 
 	@Test
 	public void testAddAirTerminationLpsDetails() throws AirTerminationException {
 		logger.info("testAddAirTerminationLpsDetails Function Started");
 
-		doNothing().when(airTerminationLpsServiceImpl).addAirTerminationLpsDetails(lpsAirDiscription);
+		doNothing().when(airTerminationLpsServiceImpl).addAirTerminationLpsDetails(airTermination);
 		ResponseEntity<String> addAirTerminalsDetails = airTerminationLpsController
-				.addAirTerminationLps(lpsAirDiscription);
+				.addAirTerminationLps(airTermination);
 		equals(addAirTerminalsDetails.getBody());
 		logger.info("testAddAirTerminationLpsDetails Function Ended");
 	}
 
 	@Test
 	public void testretrieveAirTerminationLps() throws AirTerminationException {
-		List<LpsAirDiscription> arrayList = new ArrayList<>();
-		arrayList.add(lpsAirDiscription);
+		List<AirTermination> arrayList = new ArrayList<>();
+		arrayList.add(airTermination);
 
-		logger.info("testAddAirTerminationLpsDetails Function Started");
+		logger.info("testretrieveAirTerminationLps Function Started");
 
 		when(airTerminationLpsServiceImpl.retrieveAirTerminationLps("LVsystem@gmail.com", 12)).thenReturn(arrayList);
-		ResponseEntity<List<LpsAirDiscription>> retrieveBasicLpsDetails = airTerminationLpsController
+		ResponseEntity<List<AirTermination>> retrieveBasicLpsDetails = airTerminationLpsController
 				.retrieveAirTerminationLps("LVsystem@gmail.com", 12);
 		assertEquals(HttpStatus.OK, retrieveBasicLpsDetails.getStatusCode());
 
-		logger.info("testAddAirTerminationLpsDetails Function Ended");
+		logger.info("testretrieveAirTerminationLps Function Ended");
 
 	}
 
@@ -77,7 +78,7 @@ public class AirTerminationLpsControllerTest {
 		logger.info("testUpdateAirTerminationLps Function Started");
 		ResponseEntity<String> expectedResponseEntity = new ResponseEntity<String>(HttpStatus.OK);
 		ResponseEntity<String> actualResponseEntity = airTerminationLpsController
-				.updateAirTerminationLps(lpsAirDiscription);
+				.updateAirTerminationLps(airTermination);
 		assertEquals(actualResponseEntity.getStatusCode(), expectedResponseEntity.getStatusCode());
 		logger.info("testUpdateAirTerminationLps Function Ended");
 	}

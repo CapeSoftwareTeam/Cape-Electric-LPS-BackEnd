@@ -20,9 +20,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.capeelectric.exception.AirTerminationException;
 import com.capeelectric.exception.DownConductorException;
-import com.capeelectric.model.DownConductorDescription;
-import com.capeelectric.model.LpsAirDiscription;
-import com.capeelectric.service.impl.BasicLpsServiceImpl;
+import com.capeelectric.model.DownConductorReport;
 import com.capeelectric.service.impl.DownConductorServiceImpl;
 
 @ExtendWith(SpringExtension.class)
@@ -36,51 +34,51 @@ public class DownConductorControllerTest {
 
 	@MockBean
 	private DownConductorServiceImpl downConductorServiceImpl;
-
-	private DownConductorDescription downConductorDescription;
+	
+	private DownConductorReport downConductorReport;
 
 	{
-		downConductorDescription = new DownConductorDescription();
-		downConductorDescription.setBasicLpsId(1);
-		downConductorDescription.setUserName("LVsystem@gmail.com");
-		downConductorDescription.setUserName("Inspector@gmail.com");
-		downConductorDescription.setBasicLpsId(1);
+		downConductorReport = new DownConductorReport();
+		downConductorReport.setBasicLpsId(1);
+		downConductorReport.setUserName("LVsystem@gmail.com");
+		downConductorReport.setUserName("Inspector@gmail.com");
+		downConductorReport.setBasicLpsId(1);
 	}
 
 	@Test
-	public void testAddDownConductorsDetails() throws DownConductorException {
+	public void testAddDownConductorsDetails() throws DownConductorException, AirTerminationException {
 		logger.info("testAddDownConductorsDetails Function Started");
 
-		doNothing().when(downConductorServiceImpl).addDownConductorsDetails(downConductorDescription);
-		ResponseEntity<String> addAirTerminalsDetails = downConductorController
-				.addDownConductors(downConductorDescription);
-		equals(addAirTerminalsDetails.getBody());
+		doNothing().when(downConductorServiceImpl).addDownConductorsDetails(downConductorReport);
+		ResponseEntity<String> addDownConductorDetails = downConductorController
+				.addDownConductors(downConductorReport);
+		equals(addDownConductorDetails.getBody());
 		logger.info("testAddDownConductorsDetails Function Ended");
 	}
 
 	@Test
 	public void testRetrieveDownConductor() throws DownConductorException {
-		List<DownConductorDescription> arrayList = new ArrayList<>();
-		arrayList.add(downConductorDescription);
+		List<DownConductorReport> arrayList = new ArrayList<>();
+		arrayList.add(downConductorReport);
 
 		logger.info("testRetrieveDownConductor Function Started");
 
 		when(downConductorServiceImpl.retrieveDownConductorDetails("LVsystem@gmail.com", 12)).thenReturn(arrayList);
-		ResponseEntity<List<DownConductorDescription>> retrieveBasicLpsDetails = downConductorController
+		ResponseEntity<List<DownConductorReport>> retrieveDownConductorDetails = downConductorController
 				.retrieveDownConductor("LVsystem@gmail.com", 12);
-		assertEquals(HttpStatus.OK, retrieveBasicLpsDetails.getStatusCode());
+		assertEquals(HttpStatus.OK, retrieveDownConductorDetails.getStatusCode());
 
 		logger.info("testRetrieveDownConductor Function Ended");
 
 	}
 
 	@Test
-	public void testUpdateDownConductor() throws DownConductorException {
+	public void testUpdateDownConductor() throws DownConductorException, AirTerminationException {
 
 		logger.info("testUpdateDownConductor Function Started");
 		ResponseEntity<String> expectedResponseEntity = new ResponseEntity<String>(HttpStatus.OK);
 		ResponseEntity<String> actualResponseEntity = downConductorController
-				.updateDownConductor(downConductorDescription);
+				.updateDownConductor(downConductorReport);
 		assertEquals(actualResponseEntity.getStatusCode(), expectedResponseEntity.getStatusCode());
 		logger.info("testUpdateDownConductor Function Ended");
 	}

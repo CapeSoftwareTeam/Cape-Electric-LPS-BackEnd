@@ -4,10 +4,13 @@ import java.util.Optional;
 
 import com.capeelectric.exception.DownConductorException;
 import com.capeelectric.model.BasicLps;
-import com.capeelectric.model.DownConductorDescription;
+import com.capeelectric.model.DownConductorReport;
 
 public interface PrintDownConductorService {
 
-	void printDownConductor(String userName, Integer lpsId,Optional<BasicLps> basicLpsDetails, Optional<DownConductorDescription> downConductorDetails)throws DownConductorException;
+	public void printDownConductor(String userName, Integer lpsId, Optional<BasicLps> basicLpsDetails,
+			Optional<DownConductorReport> downConductorDetails) throws DownConductorException;
+
+//	public void printDownConductor(String userName, Integer lpsId)throws DownConductorException;
 
 }

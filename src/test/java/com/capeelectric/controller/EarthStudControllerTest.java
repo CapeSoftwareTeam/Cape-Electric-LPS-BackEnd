@@ -24,9 +24,7 @@ import com.capeelectric.exception.DownConductorException;
 import com.capeelectric.exception.EarthStudException;
 import com.capeelectric.exception.EarthingLpsException;
 import com.capeelectric.exception.SPDException;
-import com.capeelectric.model.DownConductorDescription;
-import com.capeelectric.model.EarthStudDescription;
-import com.capeelectric.service.impl.DownConductorServiceImpl;
+import com.capeelectric.model.EarthStudReport;
 import com.capeelectric.service.impl.EarthStudServiceImpl;
 
 @ExtendWith(SpringExtension.class)
@@ -41,48 +39,48 @@ public class EarthStudControllerTest {
 	@MockBean
 	private EarthStudServiceImpl earthStudServiceImpl;
 
-	private EarthStudDescription earthStudDescription;
+	private EarthStudReport earthStudReport;
 
 	{
-		earthStudDescription = new EarthStudDescription();
-		earthStudDescription.setBasicLpsId(1);
-		earthStudDescription.setUserName("LVsystem@gmail.com");
-		earthStudDescription.setUserName("Inspector@gmail.com");
-		earthStudDescription.setBasicLpsId(1);
+		earthStudReport = new EarthStudReport();
+		earthStudReport.setBasicLpsId(1);
+		earthStudReport.setUserName("LVsystem@gmail.com");
+		earthStudReport.setUserName("Inspector@gmail.com");
+		earthStudReport.setBasicLpsId(1);
 	}
 
 	@Test
 	public void testAddEarthStudDetails() throws EarthStudException, BasicLpsException, AirTerminationException, DownConductorException, EarthingLpsException, SPDException, Exception {
 		logger.info("testAddEarthStudDetails Function Started");
 
-		doNothing().when(earthStudServiceImpl).addEarthStudDetails(earthStudDescription);
-		ResponseEntity<String> addAirTerminalsDetails = earthStudController.addEarthStud(earthStudDescription);
-		equals(addAirTerminalsDetails.getBody());
+		doNothing().when(earthStudServiceImpl).addEarthStudDetails(earthStudReport);
+		ResponseEntity<String> addEarthStudDetails = earthStudController.addEarthStud(earthStudReport);
+		equals(addEarthStudDetails.getBody());
 		logger.info("testAddEarthStudDetails Function Ended");
 	}
 
 	@Test
 	public void testRetrieveEarthStudDetails() throws EarthStudException {
-		List<EarthStudDescription> arrayList = new ArrayList<>();
-		arrayList.add(earthStudDescription);
+		List<EarthStudReport> arrayList = new ArrayList<>();
+		arrayList.add(earthStudReport);
 
 		logger.info("testRetrieveEarthStudDetails Function Started");
 
 		when(earthStudServiceImpl.retrieveEarthStudDetails("LVsystem@gmail.com", 12)).thenReturn(arrayList);
-		ResponseEntity<List<EarthStudDescription>> retrieveBasicLpsDetails = earthStudController
+		ResponseEntity<List<EarthStudReport>> retrieveEarthStudDetails = earthStudController
 				.retrieveEarthStudDetails("LVsystem@gmail.com", 12);
-		assertEquals(HttpStatus.OK, retrieveBasicLpsDetails.getStatusCode());
+		assertEquals(HttpStatus.OK, retrieveEarthStudDetails.getStatusCode());
 
 		logger.info("testRetrieveEarthStudDetails Function Ended");
 
 	}
 
 	@Test
-	public void testUpdateEarthStud() throws EarthStudException {
+	public void testUpdateEarthStud() throws EarthStudException, AirTerminationException {
 
 		logger.info("testUpdateEarthStud Function Started");
 		ResponseEntity<String> expectedResponseEntity = new ResponseEntity<String>(HttpStatus.OK);
-		ResponseEntity<String> actualResponseEntity = earthStudController.updateEarthStud(earthStudDescription);
+		ResponseEntity<String> actualResponseEntity = earthStudController.updateEarthStud(earthStudReport);
 		assertEquals(actualResponseEntity.getStatusCode(), expectedResponseEntity.getStatusCode());
 		logger.info("testUpdateEarthStud Function Ended");
 	}

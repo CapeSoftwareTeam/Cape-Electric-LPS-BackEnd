@@ -18,8 +18,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.capeelectric.exception.AirTerminationException;
 import com.capeelectric.exception.EarthingLpsException;
 import com.capeelectric.model.EarthingLpsDescription;
+import com.capeelectric.model.EarthingReport;
 import com.capeelectric.service.EarthingLpsService;
 
 
@@ -37,30 +39,32 @@ private static final Logger logger = LoggerFactory.getLogger(EarthingLpsControll
 	private EarthingLpsService earthingLpsService;
 	
 	@PostMapping("/addEarthingLps")
-	public ResponseEntity<String> addEarthingLps(@RequestBody   EarthingLpsDescription earthingLpsDescription)
-			throws EarthingLpsException {
+	public ResponseEntity<String> addEarthingLps(@RequestBody   EarthingReport earthingReport)
+			throws EarthingLpsException, AirTerminationException {
 		logger.info("called addEarthingLps function UserName : {}, BasicLpsId : {}",
-				earthingLpsDescription.getUserName(), earthingLpsDescription.getBasicLpsId());
-		earthingLpsService.addEarthingLpsDetails(earthingLpsDescription);
+				earthingReport.getUserName(), earthingReport.getBasicLpsId());
+		earthingLpsService.addEarthingLpsDetails(earthingReport);
+		logger.info("Ended addEarthingLps function");
 		return new ResponseEntity<String>("Earthing Details Sucessfully Saved",
 				HttpStatus.CREATED);
 	}
 
 	@GetMapping("/retrieveEarthingLps/{userName}/{basicLpsId}")
-	public ResponseEntity<List<EarthingLpsDescription>> retrieveEarthingLps(@PathVariable String userName,
+	public ResponseEntity<List<EarthingReport>> retrieveEarthingLps(@PathVariable String userName,
 			@PathVariable Integer basicLpsId) throws EarthingLpsException {
 		logger.info("started retrieveEarthingLps function UserName : {}, BasicLpsId : {}", userName, basicLpsId);
-		return new ResponseEntity<List<EarthingLpsDescription>>(
+		return new ResponseEntity<List<EarthingReport>>(
 				earthingLpsService.retrieveEarthingLpsDetails(userName, basicLpsId), HttpStatus.OK);
 	}
 	
 	@PutMapping("/updateEarthingLps")
-	public ResponseEntity<String> updateEarthingLps(@RequestBody EarthingLpsDescription earthingLpsDescription)
-			throws EarthingLpsException {
-		logger.info("called updateEarthingLps function UserName : {},BasicLpsId : {},EarthingLpsDescId : {}",
-				earthingLpsDescription.getUserName(), earthingLpsDescription.getBasicLpsId(),
-				earthingLpsDescription.getEarthingId());
-		earthingLpsService.updateEarthingLpsDetails(earthingLpsDescription);
+	public ResponseEntity<String> updateEarthingLps(@RequestBody EarthingReport earthingReport)
+			throws EarthingLpsException, AirTerminationException {
+		logger.info("called updateEarthingLps function UserName : {},BasicLpsId : {},EarthingReportId : {}",
+				earthingReport.getUserName(), earthingReport.getBasicLpsId(),
+				earthingReport.getEarthingReportId());
+		earthingLpsService.updateEarthingLpsDetails(earthingReport);
+		logger.info("Ended updateEarthingLps function");
 	   return new ResponseEntity<String>("Earthing LPS Details successfully Updated", HttpStatus.OK);
 	}
 }

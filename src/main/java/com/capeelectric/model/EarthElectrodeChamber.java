@@ -26,13 +26,7 @@ public class EarthElectrodeChamber implements Serializable {
 	private Integer earthingElectrodeChamberId;
 
 	@Column(name = "FLAG")
-	private Boolean flag;
-	
-	@Column(name = "LOCATION_NUMBER")
-	private Integer locationNumber;
-
-	@Column(name = "LOCATION_NAME")
-	private String locationName;
+	private String flag;
 
 	@Column(name = "PHYSICAL_INSPECTIONOB")
 	private String physicalInspeOb;
@@ -57,6 +51,12 @@ public class EarthElectrodeChamber implements Serializable {
 
 	@Column(name = "MAXIMUMWITHSTAND_LOADREM")
 	private String maximumWithStandLoadRem;
+	
+	@Column(name = "CHAMBER_LOCATION_OB")
+	private String chamberLocationOb;
+
+	@Column(name = "CHAMBER_LOCATION_REM")
+	private String chamberLocationRem;
 
 	@Column(name = "CHAMBER_PLACED_SOILOB")
 	private String maximumPlacedSoilOb;
@@ -65,25 +65,25 @@ public class EarthElectrodeChamber implements Serializable {
 	private String maximumPlacedSoilRem;
 
 	@Column(name = "TOTAL_CHAMBERSNOOB")
-	private String totalChamberNoOb;
+	private Integer totalChamberNoOb;
 
 	@Column(name = "TOTAL_CHAMBERSNOREM")
 	private String totalChamberNoRem;
 
 	@Column(name = "INSPECTED_CHAMBERINOB")
-	private String inspectedChamberInOb;
+	private Integer inspectedChamberInOb;
 
 	@Column(name = "INSPECTED_CHAMBERINREM")
 	private String inspectedChamberInRem;
 
 	@Column(name = "INSPECTED_PASSEDINOB")
-	private String inspectionPassedInOb;
+	private Integer inspectionPassedInOb;
 
 	@Column(name = "INSPECTED_PASSEDINREM")
 	private String inspectionPassedInRem;
 
 	@Column(name = "INSPECTED_FAILEDINOB")
-	private String inspectionFailedInOb;
+	private Integer inspectionFailedInOb;
 
 	@Column(name = "INSPECTED_FAILEDINREM")
 	private String inspectionFailedInRem;
@@ -95,22 +95,6 @@ public class EarthElectrodeChamber implements Serializable {
 
 	public Integer getEarthingElectrodeChamberId() {
 		return earthingElectrodeChamberId;
-	}
-
-	public Integer getLocationNumber() {
-		return locationNumber;
-	}
-
-	public void setLocationNumber(Integer locationNumber) {
-		this.locationNumber = locationNumber;
-	}
-
-	public String getLocationName() {
-		return locationName;
-	}
-
-	public void setLocationName(String locationName) {
-		this.locationName = locationName;
 	}
 
 	public void setEarthingElectrodeChamberId(Integer earthingElectrodeChamberId) {
@@ -189,13 +173,6 @@ public class EarthElectrodeChamber implements Serializable {
 		this.maximumPlacedSoilRem = maximumPlacedSoilRem;
 	}
 
-	public String getTotalChamberNoOb() {
-		return totalChamberNoOb;
-	}
-
-	public void setTotalChamberNoOb(String totalChamberNoOb) {
-		this.totalChamberNoOb = totalChamberNoOb;
-	}
 
 	public String getTotalChamberNoRem() {
 		return totalChamberNoRem;
@@ -221,28 +198,12 @@ public class EarthElectrodeChamber implements Serializable {
 		this.physicalInspeOb = physicalInspeOb;
 	}
 
-	public String getInspectedChamberInOb() {
-		return inspectedChamberInOb;
-	}
-
-	public void setInspectedChamberInOb(String inspectedChamberInOb) {
-		this.inspectedChamberInOb = inspectedChamberInOb;
-	}
-
 	public String getInspectedChamberInRem() {
 		return inspectedChamberInRem;
 	}
 
 	public void setInspectedChamberInRem(String inspectedChamberInRem) {
 		this.inspectedChamberInRem = inspectedChamberInRem;
-	}
-
-	public String getInspectionPassedInOb() {
-		return inspectionPassedInOb;
-	}
-
-	public void setInspectionPassedInOb(String inspectionPassedInOb) {
-		this.inspectionPassedInOb = inspectionPassedInOb;
 	}
 
 	public String getInspectionPassedInRem() {
@@ -253,14 +214,6 @@ public class EarthElectrodeChamber implements Serializable {
 		this.inspectionPassedInRem = inspectionPassedInRem;
 	}
 
-	public String getInspectionFailedInOb() {
-		return inspectionFailedInOb;
-	}
-
-	public void setInspectionFailedInOb(String inspectionFailedInOb) {
-		this.inspectionFailedInOb = inspectionFailedInOb;
-	}
-
 	public String getInspectionFailedInRem() {
 		return inspectionFailedInRem;
 	}
@@ -269,12 +222,66 @@ public class EarthElectrodeChamber implements Serializable {
 		this.inspectionFailedInRem = inspectionFailedInRem;
 	}
 
-	public Boolean getFlag() {
+	public String getFlag() {
 		return flag;
 	}
 
-	public void setFlag(Boolean flag) {
+	public void setFlag(String flag) {
 		this.flag = flag;
 	}
+
+	public String getChamberLocationOb() {
+		return chamberLocationOb;
+	}
+
+	public void setChamberLocationOb(String chamberLocationOb) {
+		this.chamberLocationOb = chamberLocationOb;
+	}
+
+	public String getChamberLocationRem() {
+		return chamberLocationRem;
+	}
+
+	public void setChamberLocationRem(String chamberLocationRem) {
+		this.chamberLocationRem = chamberLocationRem;
+	}
+
+	public Integer getTotalChamberNoOb() {
+		return totalChamberNoOb;
+	}
+
+	public void setTotalChamberNoOb(Integer totalChamberNoOb) {
+		this.totalChamberNoOb = totalChamberNoOb;
+	}
+
+	public Integer getInspectedChamberInOb() {
+		return inspectedChamberInOb;
+	}
+
+	public void setInspectedChamberInOb(Integer inspectedChamberInOb) {
+		this.inspectedChamberInOb = inspectedChamberInOb;
+	}
+
+	public Integer getInspectionPassedInOb() {
+		return inspectionPassedInOb;
+	}
+
+	public void setInspectionPassedInOb(Integer inspectionPassedInOb) {
+		this.inspectionPassedInOb = inspectionPassedInOb;
+	}
+
+	public Integer getInspectionFailedInOb() {
+		return inspectionFailedInOb;
+	}
+
+	public void setInspectionFailedInOb(Integer inspectionFailedInOb) {
+		this.inspectionFailedInOb = inspectionFailedInOb;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	
 
 }

@@ -6,20 +6,23 @@ public class LpsFinalReport {
 
 	private Integer lpsBasicId;
 
-	private LpsAirDiscription lpsAirDiscription;
+	private AirTermination airTermination;
 
 	private BasicLps basicLps;
 
-	private DownConductorDescription downConductorDesc;
+	private DownConductorReport downConductorReport;
 
-	private EarthingLpsDescription earthingLpsDescription;
+	private EarthingReport earthingReport;
 
-	private EarthStudDescription earthStudDescription;
+	private EarthStudReport earthStudReport;
 
-	private SPD SPDDesc;
+	private SpdReport spdReport;
 
-	private SeperationDistanceDescription seperationDistanceDesc;
+	private SeperationDistanceReport seperationDistanceReport;
 
+	private SummaryLps summaryLps;
+
+	
 	public String getUserName() {
 		return userName;
 	}
@@ -36,14 +39,6 @@ public class LpsFinalReport {
 		this.lpsBasicId = lpsBasicId;
 	}
 
-	public LpsAirDiscription getLpsAirDiscription() {
-		return lpsAirDiscription;
-	}
-
-	public void setLpsAirDiscription(LpsAirDiscription lpsAirDiscription) {
-		this.lpsAirDiscription = lpsAirDiscription;
-	}
-
 	public BasicLps getBasicLps() {
 		return basicLps;
 	}
@@ -52,46 +47,63 @@ public class LpsFinalReport {
 		this.basicLps = basicLps;
 	}
 
-	public DownConductorDescription getDownConductorDesc() {
-		return downConductorDesc;
+	public AirTermination getAirTermination() {
+		return airTermination;
 	}
 
-	public void setDownConductorDesc(DownConductorDescription downConductorDesc) {
-		this.downConductorDesc = downConductorDesc;
+	public void setAirTermination(AirTermination airTermination) {
+		this.airTermination = airTermination;
 	}
 
-	public EarthingLpsDescription getEarthingLpsDescription() {
-		return earthingLpsDescription;
+	public DownConductorReport getDownConductorReport() {
+		return downConductorReport;
 	}
 
-	public void setEarthingLpsDescription(EarthingLpsDescription earthingLpsDescription) {
-		this.earthingLpsDescription = earthingLpsDescription;
+	public void setDownConductorReport(DownConductorReport downConductorReport) {
+		this.downConductorReport = downConductorReport;
 	}
 
-	public EarthStudDescription getEarthStudDescription() {
-		return earthStudDescription;
+	public EarthingReport getEarthingReport() {
+		return earthingReport;
 	}
 
-	public void setEarthStudDescription(EarthStudDescription earthStudDescription) {
-		this.earthStudDescription = earthStudDescription;
+	public void setEarthingReport(EarthingReport earthingReport) {
+		this.earthingReport = earthingReport;
 	}
 
-	public SPD getSPDDesc() {
-		return SPDDesc;
+	public EarthStudReport getEarthStudReport() {
+		return earthStudReport;
 	}
 
-	public void setSPDDesc(SPD sPDDesc) {
-		SPDDesc = sPDDesc;
+	public void setEarthStudReport(EarthStudReport earthStudReport) {
+		this.earthStudReport = earthStudReport;
 	}
 
-	public SeperationDistanceDescription getSeperationDistanceDesc() {
-		return seperationDistanceDesc;
+	public SpdReport getSpdReport() {
+		return spdReport;
 	}
 
-	public void setSeperationDistanceDesc(SeperationDistanceDescription seperationDistanceDesc) {
-		this.seperationDistanceDesc = seperationDistanceDesc;
+	public void setSpdReport(SpdReport spdReport) {
+		this.spdReport = spdReport;
 	}
 
+	public SeperationDistanceReport getSeperationDistanceReport() {
+		return seperationDistanceReport;
+	}
+
+	public void setSeperationDistanceReport(SeperationDistanceReport seperationDistanceReport) {
+		this.seperationDistanceReport = seperationDistanceReport;
+	}
+
+	public SummaryLps getSummaryLps() {
+		return summaryLps;
+	}
+
+	public void setSummaryLps(SummaryLps summaryLps) {
+		this.summaryLps = summaryLps;
+	}
+	
+	
 	
 
 }

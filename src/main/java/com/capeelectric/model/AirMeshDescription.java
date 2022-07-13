@@ -25,7 +25,7 @@ public class AirMeshDescription implements Serializable {
 	private Integer meshDescriptionId;
 
 	@Column(name = "FLAG")
-	private Boolean flag;
+	private String flag;
 	
 	@Column(name = "PHYSICAL_INSPECTION_OB")
 	private String physicalInspectionOb;
@@ -51,34 +51,40 @@ public class AirMeshDescription implements Serializable {
 	@Column(name = "MESH_SIGEREMARKS")
 	private String meshSizeRe;
 
-	@Column(name = "MAXIMUM_DISTANCEOBSERVATION")
-	private String maximumDistanceOb;
+	@Column(name = "MAXIMUM_DISTANCE_X_OBSERVATION")
+	private Integer maximumDistanceXOb;
 
-	@Column(name = "MAXIMUM_DISTANCEREMARKS")
-	private String maximumDistanceRe;
+	@Column(name = "MAXIMUM_DISTANCE_X_REMARKS")
+	private String maximumDistanceXRe;
+	
+	@Column(name = "MAXIMUM_DISTANCE_Y_OBSERVATION")
+	private Integer maximumDistanceYOb;
 
-	@Column(name = "MINIMUM_DISTANCEOBSERVATION")
-	private String minimumDistanceOb;
+	@Column(name = "MAXIMUM_DISTANCE_Y_REMARKS")
+	private String maximumDistanceYRe;
 
-	@Column(name = "MINIMUM_DISTANCEREMARKS")
-	private String minimumDistanceRe;
+	@Column(name = "MINIMUM_DISTANCE_X_OBSERVATION")
+	private Integer minimumDistanceXOb;
+
+	@Column(name = "MINIMUM_DISTANCE_X_REMARKS")
+	private String minimumDistanceXRe;
+	
+	@Column(name = "MINIMUM_DISTANCE_Y_OBSERVATION")
+	private Integer minimumDistanceYOb;
+
+	@Column(name = "MINIMUM_DISTANCE_Y_REMARKS")
+	private String minimumDistanceYRe;
 
 	@Column(name = "HEIGHT_OFCONDUCTOR_FLATSURAFACEOBSERVATION")
-	private String heightOfConductorFlatSurfaceOb;
+	private Integer heightOfConductorFlatSurfaceOb;
 
 	@Column(name = "HEIGHT_OFCONDUCTOR_FLATSURAFACEREMARKS")
 	private String heightOfConductorFlatSurfaceRe;
 
-	@Column(name = "LOCATION_NUMBER")
-	private Integer locationNumber;
-
-	@Column(name = "LOCATION_NAME")
-	private String locationName;
-
 	@JsonBackReference
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "LPSAIRDESCRIPTION_ID")
-	private LpsAirDiscription lpsAirDes;
+	private LpsAirDiscription lpsAirDescription;
 
 	public Integer getMeshDescriptionId() {
 		return meshDescriptionId;
@@ -114,22 +120,6 @@ public class AirMeshDescription implements Serializable {
 
 	public void setMaterailOfConductorRem(String materailOfConductorRem) {
 		this.materailOfConductorRem = materailOfConductorRem;
-	}
-
-	public Integer getLocationNumber() {
-		return locationNumber;
-	}
-
-	public void setLocationNumber(Integer locationNumber) {
-		this.locationNumber = locationNumber;
-	}
-
-	public String getLocationName() {
-		return locationName;
-	}
-
-	public void setLocationName(String locationName) {
-		this.locationName = locationName;
 	}
 
 	public void setMeshDescriptionId(Integer meshDescriptionId) {
@@ -168,43 +158,76 @@ public class AirMeshDescription implements Serializable {
 		this.meshSizeRe = meshSizeRe;
 	}
 
-	public String getMaximumDistanceOb() {
-		return maximumDistanceOb;
+	
+	public Integer getMaximumDistanceXOb() {
+		return maximumDistanceXOb;
 	}
 
-	public void setMaximumDistanceOb(String maximumDistanceOb) {
-		this.maximumDistanceOb = maximumDistanceOb;
+	public void setMaximumDistanceXOb(Integer maximumDistanceXOb) {
+		this.maximumDistanceXOb = maximumDistanceXOb;
 	}
 
-	public String getMaximumDistanceRe() {
-		return maximumDistanceRe;
+	public String getMaximumDistanceXRe() {
+		return maximumDistanceXRe;
 	}
 
-	public void setMaximumDistanceRe(String maximumDistanceRe) {
-		this.maximumDistanceRe = maximumDistanceRe;
+	public void setMaximumDistanceXRe(String maximumDistanceXRe) {
+		this.maximumDistanceXRe = maximumDistanceXRe;
 	}
 
-	public String getMinimumDistanceOb() {
-		return minimumDistanceOb;
+	public Integer getMaximumDistanceYOb() {
+		return maximumDistanceYOb;
 	}
 
-	public void setMinimumDistanceOb(String minimumDistanceOb) {
-		this.minimumDistanceOb = minimumDistanceOb;
+	public void setMaximumDistanceYOb(Integer maximumDistanceYOb) {
+		this.maximumDistanceYOb = maximumDistanceYOb;
 	}
 
-	public String getMinimumDistanceRe() {
-		return minimumDistanceRe;
+	public String getMaximumDistanceYRe() {
+		return maximumDistanceYRe;
 	}
 
-	public void setMinimumDistanceRe(String minimumDistanceRe) {
-		this.minimumDistanceRe = minimumDistanceRe;
+	public void setMaximumDistanceYRe(String maximumDistanceYRe) {
+		this.maximumDistanceYRe = maximumDistanceYRe;
 	}
 
-	public String getHeightOfConductorFlatSurfaceOb() {
+	public Integer getMinimumDistanceXOb() {
+		return minimumDistanceXOb;
+	}
+
+	public void setMinimumDistanceXOb(Integer minimumDistanceXOb) {
+		this.minimumDistanceXOb = minimumDistanceXOb;
+	}
+
+	public String getMinimumDistanceXRe() {
+		return minimumDistanceXRe;
+	}
+
+	public void setMinimumDistanceXRe(String minimumDistanceXRe) {
+		this.minimumDistanceXRe = minimumDistanceXRe;
+	}
+
+	public Integer getMinimumDistanceYOb() {
+		return minimumDistanceYOb;
+	}
+
+	public void setMinimumDistanceYOb(Integer minimumDistanceYOb) {
+		this.minimumDistanceYOb = minimumDistanceYOb;
+	}
+
+	public String getMinimumDistanceYRe() {
+		return minimumDistanceYRe;
+	}
+
+	public void setMinimumDistanceYRe(String minimumDistanceYRe) {
+		this.minimumDistanceYRe = minimumDistanceYRe;
+	}
+
+	public Integer getHeightOfConductorFlatSurfaceOb() {
 		return heightOfConductorFlatSurfaceOb;
 	}
 
-	public void setHeightOfConductorFlatSurfaceOb(String heightOfConductorFlatSurfaceOb) {
+	public void setHeightOfConductorFlatSurfaceOb(Integer heightOfConductorFlatSurfaceOb) {
 		this.heightOfConductorFlatSurfaceOb = heightOfConductorFlatSurfaceOb;
 	}
 
@@ -216,20 +239,23 @@ public class AirMeshDescription implements Serializable {
 		this.heightOfConductorFlatSurfaceRe = heightOfConductorFlatSurfaceRe;
 	}
 
-	public LpsAirDiscription getLpsAirDes() {
-		return lpsAirDes;
+	
+
+	public LpsAirDiscription getLpsAirDescription() {
+		return lpsAirDescription;
 	}
 
-	public void setLpsAirDes(LpsAirDiscription lpsAirDes) {
-		this.lpsAirDes = lpsAirDes;
+	public void setLpsAirDescription(LpsAirDiscription lpsAirDescription) {
+		this.lpsAirDescription = lpsAirDescription;
 	}
 
-	public Boolean getFlag() {
+	public String getFlag() {
 		return flag;
 	}
 
-	public void setFlag(Boolean flag) {
+	public void setFlag(String flag) {
 		this.flag = flag;
 	}
+
 
 }
