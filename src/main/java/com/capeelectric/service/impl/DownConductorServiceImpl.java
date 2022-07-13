@@ -82,7 +82,7 @@ public class DownConductorServiceImpl implements DownConductorService{
 						downConductorReport.setUpdatedDate(LocalDateTime.now());
 						downConductorReport.setCreatedBy(userFullName.findByUserName(downConductorReport.getUserName()));
 						downConductorReport.setUpdatedBy(userFullName.findByUserName(downConductorReport.getUserName()));
-						addRemovedStatus.removeSummaryLps(downConductorReport.getUserName(),downConductorReport.getBasicLpsId());
+						//addRemovedStatus.removeSummaryLps(downConductorReport.getUserName(),downConductorReport.getBasicLpsId());
 
 						DownConductorReport downConductorReportRepo = downConductorRepository.save(downConductorReport);
 						logger.debug("Down Conductor Details Successfully Saved in DB");
@@ -150,7 +150,7 @@ public class DownConductorServiceImpl implements DownConductorService{
 					&& downConductorRepo.get().getBasicLpsId().equals(downConductorReport.getBasicLpsId())) {
 				downConductorReport.setUpdatedDate(LocalDateTime.now());
 				downConductorReport.setUpdatedBy(userFullName.findByUserName(downConductorReport.getUserName()));
-				addRemovedStatus.removeSummaryLps(downConductorReport.getUserName(),downConductorReport.getBasicLpsId());
+				//addRemovedStatus.removeSummaryLps(downConductorReport.getUserName(),downConductorReport.getBasicLpsId());
 
 				DownConductorReport downConductorReportRepo = downConductorRepository.save(downConductorReport);
 				logger.debug("Down Conductor Details Updated Successfully in DB");

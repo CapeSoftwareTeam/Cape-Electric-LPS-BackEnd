@@ -74,7 +74,7 @@ public class SPDServiceImpl implements SPDService{
 						spdReport.setUpdatedDate(LocalDateTime.now());
 						spdReport.setCreatedBy(userFullName.findByUserName(spdReport.getUserName()));
 						spdReport.setUpdatedBy(userFullName.findByUserName(spdReport.getUserName()));
-						addRemovedStatus.removeSummaryLps(spdReport.getUserName(),spdReport.getBasicLpsId());
+						//addRemovedStatus.removeSummaryLps(spdReport.getUserName(),spdReport.getBasicLpsId());
 						spdRepository.save(spdReport);
 						logger.debug("SPD Report Details Successfully Saved in DB");
 						userFullName.addUpdatedByandDate(spdReport.getBasicLpsId(),userFullName.findByUserName(spdReport.getUserName()));
@@ -140,8 +140,9 @@ public class SPDServiceImpl implements SPDService{
 					&& spdRepo.get().getBasicLpsId().equals(spdReport.getBasicLpsId())) {
 				spdReport.setUpdatedDate(LocalDateTime.now());
 				spdReport.setUpdatedBy(userFullName.findByUserName(spdReport.getUserName()));
-				addRemovedStatus.removeSummaryLps(spdReport.getUserName(),spdReport.getBasicLpsId());
-				spdRepository.save(spdReport);
+				//addRemovedStatus.removeSummaryLps(spdReport.getUserName(),spdReport.getBasicLpsId());
+				SpdReport report = spdRepository.save(spdReport);
+				addRemovedStatus.removeSpdSummaryLpsObservation(report);
 				logger.debug("SPD Report Details Successfully Updated in DB");
 				userFullName.addUpdatedByandDate(spdReport.getBasicLpsId(),userFullName.findByUserName(spdReport.getUserName()));
 				logger.debug("Basic Lps UpdatedBy and UpdatedDate by SPD");

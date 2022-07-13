@@ -77,7 +77,7 @@ public class EarthingLpsServiceImpl implements EarthingLpsService {
 						earthingReport.setUpdatedDate(LocalDateTime.now());
 						earthingReport.setCreatedBy(userFullName.findByUserName(earthingReport.getUserName()));
 						earthingReport.setUpdatedBy(userFullName.findByUserName(earthingReport.getUserName()));
-						addRemovedStatus.removeSummaryLps(earthingReport.getUserName(),earthingReport.getBasicLpsId());
+						//addRemovedStatus.removeSummaryLps(earthingReport.getUserName(),earthingReport.getBasicLpsId());
 
 						earthingLpsRepository.save(earthingReport);
 						logger.debug("Earthing Report Details Successfully Saved in DB");
@@ -145,9 +145,10 @@ public class EarthingLpsServiceImpl implements EarthingLpsService {
 					&& earthingLpsRepo.get().getBasicLpsId().equals(earthingReport.getBasicLpsId())) {
 				earthingReport.setUpdatedDate(LocalDateTime.now());
 				earthingReport.setUpdatedBy(userFullName.findByUserName(earthingReport.getUserName()));
-				addRemovedStatus.removeSummaryLps(earthingReport.getUserName(),earthingReport.getBasicLpsId());
 
-				earthingLpsRepository.save(earthingReport);
+				EarthingReport earthingReportRepo = earthingLpsRepository.save(earthingReport);
+				addRemovedStatus.removeEarthingSummaryLpsObservations(earthingReportRepo);
+
 				logger.debug("Earthing Report Details Successfully Updated in DB");
 				userFullName.addUpdatedByandDate(earthingReport.getBasicLpsId(),userFullName.findByUserName(earthingReport.getUserName()));
 				logger.debug("Basic Lps UpdatedBy and UpdatedDate by Earthing");

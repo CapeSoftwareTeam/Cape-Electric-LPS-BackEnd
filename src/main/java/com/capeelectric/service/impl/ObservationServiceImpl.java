@@ -3,6 +3,7 @@
  */
 package com.capeelectric.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import com.capeelectric.model.AllStepsRemarks;
 import com.capeelectric.model.remarks.AirTerminationRemarks;
 import com.capeelectric.model.remarks.DownConductorReportRemarks;
+import com.capeelectric.model.remarks.DownConductorsDescriptionRemarks;
 import com.capeelectric.model.remarks.EarthStudRemarksReport;
 import com.capeelectric.model.remarks.EarthingReportRemarks;
 import com.capeelectric.model.remarks.SPDReportRemarks;
@@ -107,6 +109,16 @@ public class ObservationServiceImpl implements ObservationService {
 						.findNonRemovedDownConductorsBuildings(downConductorReportRemarks.get(0)));
 			}
 			logger.debug("Down Conductors Remarks fetched");
+			allStepsRemarks.setDownConductorReport(downConductorReportRemarks);
+		}
+		else {
+            DownConductorReportRemarks downConductorReportRemark = new DownConductorReportRemarks();
+			downConductorReportRemarks = new ArrayList<DownConductorReportRemarks>();
+			downConductorReportRemarks.add(downConductorReportRemark);
+
+			List<DownConductorsDescriptionRemarks> findNonRemovedDownConductorsBuildings = findNonRemovedRemarksObjects.findNonRemovedDownConductorsBuildings(null);
+			
+			downConductorReportRemarks.get(0).setDownConductorDescription(findNonRemovedDownConductorsBuildings);
 			allStepsRemarks.setDownConductorReport(downConductorReportRemarks);
 		}
 

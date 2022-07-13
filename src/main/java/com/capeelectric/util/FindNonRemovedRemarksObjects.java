@@ -4,9 +4,14 @@
 package com.capeelectric.util;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+
+import javax.swing.text.html.HTMLEditorKit.InsertHTMLTextAction;
+
 import org.springframework.context.annotation.Configuration;
 
+import com.amazonaws.services.kms.model.transform.RetireGrantResultJsonUnmarshaller;
 import com.capeelectric.model.remarks.AirBasicDescRemarks;
 import com.capeelectric.model.remarks.AirClampsRemarks;
 import com.capeelectric.model.remarks.AirConnectorsRemarks;
@@ -44,6 +49,7 @@ import com.capeelectric.model.remarks.SeperationDistanceReportRemarks;
 import com.capeelectric.model.remarks.SpdDescriptionRemarks;
 import com.capeelectric.model.remarks.TestingJointRemarks;
 import com.capeelectric.model.remarks.VerticalAirTerminationListRemarks;
+import com.itextpdf.text.pdf.PdfStructTreeController.returnType;
 
 /**
  * @author CAPE-SOFTWARE
@@ -89,7 +95,17 @@ public class FindNonRemovedRemarksObjects {
 					unRemovedVerticalAirTermination.add(lpsVerticalAirTerminationItr);
 				}
 			}
-			return unRemovedVerticalAirTermination;
+			if (unRemovedVerticalAirTermination.size()==0) {
+				LpsVerticalAirTerminationRemarks verticalAirTerminationRemarks = new LpsVerticalAirTerminationRemarks();
+				List<VerticalAirTerminationListRemarks> arrayList = new ArrayList<VerticalAirTerminationListRemarks>();
+				arrayList.add(new VerticalAirTerminationListRemarks());
+				verticalAirTerminationRemarks.setVerticalAirTerminationList(arrayList);
+				unRemovedVerticalAirTermination.add(verticalAirTerminationRemarks);
+				return unRemovedVerticalAirTermination;
+			} else {
+				return unRemovedVerticalAirTermination;
+			}
+			
 		}
 		
 		public List<VerticalAirTerminationListRemarks> findNonRemovedVATList(List<VerticalAirTerminationListRemarks> verticalAirTerminationList) {
@@ -103,7 +119,13 @@ public class FindNonRemovedRemarksObjects {
 					unRemovedVerticalAirTerminationList.add(lpsVerticalAirTerminationListItr);
 				}
 			}
-			return unRemovedVerticalAirTerminationList;
+			if (unRemovedVerticalAirTerminationList.size()==0) {
+				unRemovedVerticalAirTerminationList.add(new VerticalAirTerminationListRemarks());
+				return unRemovedVerticalAirTerminationList;
+			} else {
+				return unRemovedVerticalAirTerminationList;
+			}
+		
 		}
 		
 		public List<AirClampsRemarks> findNonRemovedAirClamps(List<AirClampsRemarks> listOfAirClamps) {
@@ -117,7 +139,13 @@ public class FindNonRemovedRemarksObjects {
 					unRemovedAirClamps.add(airClamps);
 				}
 			}
-			return unRemovedAirClamps;
+			if (unRemovedAirClamps.size() ==0) {
+				unRemovedAirClamps.add(new AirClampsRemarks());
+				return unRemovedAirClamps;
+			} else {
+				return unRemovedAirClamps;
+			}
+			
 		}
 		
 		public List<AirConnectorsRemarks> findNonRemovedAirConnectors(List<AirConnectorsRemarks> listOfAirConnectors) {
@@ -130,6 +158,10 @@ public class FindNonRemovedRemarksObjects {
 					}
 					unRemovedAirConnectors.add(airConnectors);
 				}
+			}
+			if (unRemovedAirConnectors.size()==0) {
+				unRemovedAirConnectors.add(new AirConnectorsRemarks());
+				return unRemovedAirConnectors;
 			}
 			return unRemovedAirConnectors;
 		}
@@ -144,6 +176,10 @@ public class FindNonRemovedRemarksObjects {
 					}
 					unRemovedAirExpansion.add(airExpansion);
 				}
+			}
+			if (unRemovedAirExpansion.size()==0) {
+				unRemovedAirExpansion.add(new AirExpansionRemarks());
+				return unRemovedAirExpansion;
 			}
 			return unRemovedAirExpansion;
 		}
@@ -160,6 +196,14 @@ public class FindNonRemovedRemarksObjects {
 					unRemovedAirHolderDescription.add(airHolderDescription);
 				}
 			}
+			if (unRemovedAirHolderDescription.size() == 0) {
+				AirHoldersRemarks airHoldersRemarks = new AirHoldersRemarks();
+				List<AirHoldersListRemarks> airHoldersListRemarks = new ArrayList<AirHoldersListRemarks>();
+				airHoldersListRemarks.add(new AirHoldersListRemarks());
+				airHoldersRemarks.setAirHolderList(airHoldersListRemarks);
+				unRemovedAirHolderDescription.add(airHoldersRemarks);
+				return unRemovedAirHolderDescription;
+			}
 			return unRemovedAirHolderDescription;
 		}
 		
@@ -173,6 +217,10 @@ public class FindNonRemovedRemarksObjects {
 					}
 					unRemovedAirHolderList.add(airHolderList);
 				}
+			}
+			if (unRemovedAirHolderList.size()==0) {
+				unRemovedAirHolderList.add(new AirHoldersListRemarks());
+				return unRemovedAirHolderList;
 			}
 			return unRemovedAirHolderList;
 		}
@@ -188,6 +236,10 @@ public class FindNonRemovedRemarksObjects {
 					unRemovedAirMeshDescription.add(airMeshDescription);
 				}
 			}
+			if (unRemovedAirMeshDescription.size()==0) {
+				unRemovedAirMeshDescription.add(new AirMeshRemarks());
+				return unRemovedAirMeshDescription;
+			}
 			return unRemovedAirMeshDescription;
 		}
 		
@@ -199,8 +251,13 @@ public class FindNonRemovedRemarksObjects {
 					if (airBasicDescription.getFlag() == null) {
 						airBasicDescription.setFlag("N");
 					}
+					
 					unRemovedAirBasicDescription.add(airBasicDescription);
 				}
+			}
+			if (unRemovedAirBasicDescription.size() ==0 ) {
+				unRemovedAirBasicDescription.add(new AirBasicDescRemarks());
+				return unRemovedAirBasicDescription;
 			}
 			return unRemovedAirBasicDescription;
 		}
@@ -209,7 +266,38 @@ public class FindNonRemovedRemarksObjects {
 		public List<DownConductorsDescriptionRemarks> findNonRemovedDownConductorsBuildings(DownConductorReportRemarks downConductorReport) {
 
 			ArrayList<DownConductorsDescriptionRemarks> downConductorDescription = new ArrayList<DownConductorsDescriptionRemarks>();
+			
+			//if object is empty
+			if (downConductorReport == null) {
+				DownConductorsDescriptionRemarks downConductorsDescriptionRemarks = new DownConductorsDescriptionRemarks();
+				List<BridgingDescriptionRemarks> findNonRemovedBridgingDescription = findNonRemovedBridgingDescription(null);
+				downConductorsDescriptionRemarks.setBridgingDescription(findNonRemovedBridgingDescription);
+				
+				List<HolderRemarks> findNonRemovedHolder = findNonRemovedHolder(downConductorsDescriptionRemarks.getHolder());
+				downConductorsDescriptionRemarks.setHolder(findNonRemovedHolder);
+				
+				List<ConnectorRemarks> findNonRemovedConnectors = findNonRemovedConnectors(downConductorsDescriptionRemarks.getConnectors());
+				downConductorsDescriptionRemarks.setConnectors(findNonRemovedConnectors);
+				
+				List<LightningCounterRemarks> findNonRemovedLightningCounter = findNonRemovedLightningCounter(downConductorsDescriptionRemarks.getLightningCounter());
+				downConductorsDescriptionRemarks.setLightningCounter(findNonRemovedLightningCounter);
+				
+				List<TestingJointRemarks> findNonRemovedTestingJoint = findNonRemovedTestingJoint(downConductorsDescriptionRemarks.getTestingJoint());
+				downConductorsDescriptionRemarks.setTestingJoint(findNonRemovedTestingJoint);
+				
+				List<DownConductorRemarks> findNonDownConductor = findNonDownConductor(downConductorsDescriptionRemarks.getDownConductor());
+				downConductorsDescriptionRemarks.setDownConductor(findNonDownConductor);
+				
+				List<DownConductorTestingRemarks> findNonRemovedDownConductorTesting = findNonRemovedDownConductorTesting(downConductorsDescriptionRemarks.getDownConductorTesting());
+				downConductorsDescriptionRemarks.setDownConductorTesting(findNonRemovedDownConductorTesting);
+				
+				downConductorDescription.add(downConductorsDescriptionRemarks);
+				
+				return downConductorDescription;
+			}
+			
 			List<DownConductorsDescriptionRemarks> findNonRemoveBuildings = downConductorReport.getDownConductorDescription();
+			
 			for (DownConductorsDescriptionRemarks  downConductorDescriptionItr: findNonRemoveBuildings) {
 				if (downConductorDescriptionItr.getFlag()==null || !downConductorDescriptionItr.getFlag().equalsIgnoreCase("R")) {
 					if(downConductorDescriptionItr.getFlag()==null) {
@@ -230,16 +318,22 @@ public class FindNonRemovedRemarksObjects {
 		}
 		
 		//find non removed values for DOWN CONDUCTORS childs	
-		public List<BridgingDescriptionRemarks> findNonRemovedBridgingDescription(List<BridgingDescriptionRemarks> bridgingDescriptionList) {
+		public List<BridgingDescriptionRemarks> findNonRemovedBridgingDescription(
+				List<BridgingDescriptionRemarks> bridgingDescriptionList) {
 
 			ArrayList<BridgingDescriptionRemarks> unRemovedBridgingDescription = new ArrayList<BridgingDescriptionRemarks>();
-			for (BridgingDescriptionRemarks bridgingDescription : bridgingDescriptionList) {
-				if (bridgingDescription.getFlag() == null || !bridgingDescription.getFlag().equalsIgnoreCase("R")) {
-					if (bridgingDescription.getFlag() == null) {
-						bridgingDescription.setFlag("N");
+			if (bridgingDescriptionList != null) {
+				for (BridgingDescriptionRemarks bridgingDescription : bridgingDescriptionList) {
+					if (bridgingDescription.getFlag() == null || !bridgingDescription.getFlag().equalsIgnoreCase("R")) {
+						if (bridgingDescription.getFlag() == null) {
+							bridgingDescription.setFlag("N");
+						}
+						unRemovedBridgingDescription.add(bridgingDescription);
 					}
-					unRemovedBridgingDescription.add(bridgingDescription);
 				}
+			} if(unRemovedBridgingDescription.size() == 0) {
+				unRemovedBridgingDescription.add(new BridgingDescriptionRemarks());
+				return unRemovedBridgingDescription;
 			}
 			return unRemovedBridgingDescription;
 		}
@@ -247,13 +341,21 @@ public class FindNonRemovedRemarksObjects {
 		public List<HolderRemarks> findNonRemovedHolder(List<HolderRemarks> listOfHolder) {
 
 			ArrayList<HolderRemarks> unRemovedHolder = new ArrayList<HolderRemarks>();
-			for (HolderRemarks holder : listOfHolder) {
-				if (holder.getFlag() == null || !holder.getFlag().equalsIgnoreCase("R")) {
-					if (holder.getFlag() == null) {
-						holder.setFlag("N");
+
+			if (listOfHolder != null) {
+				for (HolderRemarks holder : listOfHolder) {
+					if (holder.getFlag() == null || !holder.getFlag().equalsIgnoreCase("R")) {
+						if (holder.getFlag() == null) {
+							holder.setFlag("N");
+						}
+						unRemovedHolder.add(holder);
 					}
-					unRemovedHolder.add(holder);
 				}
+			}
+
+			if(unRemovedHolder.size() == 0) {
+				unRemovedHolder.add(new HolderRemarks());
+				return unRemovedHolder;
 			}
 			return unRemovedHolder;
 		}
@@ -261,13 +363,20 @@ public class FindNonRemovedRemarksObjects {
 		public List<ConnectorRemarks> findNonRemovedConnectors(List<ConnectorRemarks> listOfConnectors) {
 
 			ArrayList<ConnectorRemarks> unRemovedConnectors = new ArrayList<ConnectorRemarks>();
-			for (ConnectorRemarks connectors : listOfConnectors) {
-				if (connectors.getFlag() == null || !connectors.getFlag().equalsIgnoreCase("R")) {
-					if (connectors.getFlag() == null) {
-						connectors.setFlag("N");
+			if (listOfConnectors != null) {
+				for (ConnectorRemarks connectors : listOfConnectors) {
+					if (connectors.getFlag() == null || !connectors.getFlag().equalsIgnoreCase("R")) {
+						if (connectors.getFlag() == null) {
+							connectors.setFlag("N");
+						}
+						unRemovedConnectors.add(connectors);
 					}
-					unRemovedConnectors.add(connectors);
 				}
+			}
+
+			if (unRemovedConnectors.size()==0)   {
+				unRemovedConnectors.add(new ConnectorRemarks());
+				return unRemovedConnectors;
 			}
 			return unRemovedConnectors;
 		}
@@ -275,13 +384,19 @@ public class FindNonRemovedRemarksObjects {
 		public List<LightningCounterRemarks> findNonRemovedLightningCounter(List<LightningCounterRemarks> listOfLightningCounter) {
 
 			ArrayList<LightningCounterRemarks> unRemovedLightningCounter = new ArrayList<LightningCounterRemarks>();
-			for (LightningCounterRemarks lightningCounter : listOfLightningCounter) {
-				if (lightningCounter.getFlag() == null || !lightningCounter.getFlag().equalsIgnoreCase("R")) {
-					if (lightningCounter.getFlag() == null) {
-						lightningCounter.setFlag("N");
+			if (listOfLightningCounter !=null) {
+				for (LightningCounterRemarks lightningCounter : listOfLightningCounter) {
+					if (lightningCounter.getFlag() == null || !lightningCounter.getFlag().equalsIgnoreCase("R")) {
+						if (lightningCounter.getFlag() == null) {
+							lightningCounter.setFlag("N");
+						}
+						unRemovedLightningCounter.add(lightningCounter);
 					}
-					unRemovedLightningCounter.add(lightningCounter);
 				}
+			}
+			if (unRemovedLightningCounter.size() == 0) {
+				unRemovedLightningCounter.add(new LightningCounterRemarks());
+				return unRemovedLightningCounter;
 			}
 			return unRemovedLightningCounter;
 		}
@@ -289,13 +404,20 @@ public class FindNonRemovedRemarksObjects {
 		public List<TestingJointRemarks> findNonRemovedTestingJoint(List<TestingJointRemarks> listOfTestingJoint) {
 
 			ArrayList<TestingJointRemarks> unRemovedTestingJoint = new ArrayList<TestingJointRemarks>();
-			for (TestingJointRemarks testingJoint : listOfTestingJoint) {
-				if (testingJoint.getFlag() == null || !testingJoint.getFlag().equalsIgnoreCase("R")) {
-					if (testingJoint.getFlag() == null) {
-						testingJoint.setFlag("N");
+			if (listOfTestingJoint !=null) {
+				for (TestingJointRemarks testingJoint : listOfTestingJoint) {
+					if (testingJoint.getFlag() == null || !testingJoint.getFlag().equalsIgnoreCase("R")) {
+						if (testingJoint.getFlag() == null) {
+							testingJoint.setFlag("N");
+						}
+						unRemovedTestingJoint.add(testingJoint);
 					}
-					unRemovedTestingJoint.add(testingJoint);
 				}
+			}
+			
+			if (unRemovedTestingJoint.size() == 0) {
+				unRemovedTestingJoint.add(new TestingJointRemarks());
+				return unRemovedTestingJoint;
 			}
 			return unRemovedTestingJoint;
 		}
@@ -303,13 +425,20 @@ public class FindNonRemovedRemarksObjects {
 		public List<DownConductorRemarks> findNonDownConductor(List<DownConductorRemarks> listOfDownConductor) {
 
 			ArrayList<DownConductorRemarks> unRemovedDownConductor = new ArrayList<DownConductorRemarks>();
-			for (DownConductorRemarks downConductor : listOfDownConductor) {
-				if (downConductor.getFlag() == null || !downConductor.getFlag().equalsIgnoreCase("R")) {
-					if (downConductor.getFlag() == null) {
-						downConductor.setFlag("N");
+			if (listOfDownConductor != null) {
+				for (DownConductorRemarks downConductor : listOfDownConductor) {
+					if (downConductor.getFlag() == null || !downConductor.getFlag().equalsIgnoreCase("R")) {
+						if (downConductor.getFlag() == null) {
+							downConductor.setFlag("N");
+						}
+						unRemovedDownConductor.add(downConductor);
 					}
-					unRemovedDownConductor.add(downConductor);
 				}
+			}
+
+			if (unRemovedDownConductor.size() == 0) {
+				unRemovedDownConductor.add(new DownConductorRemarks());
+				return unRemovedDownConductor;
 			}
 			return unRemovedDownConductor;
 		}
@@ -317,13 +446,20 @@ public class FindNonRemovedRemarksObjects {
 		public List<DownConductorTestingRemarks> findNonRemovedDownConductorTesting(List<DownConductorTestingRemarks> listOfDownConductorTesting) {
 
 			ArrayList<DownConductorTestingRemarks> unRemovedDownConductorTesting = new ArrayList<DownConductorTestingRemarks>();
-			for (DownConductorTestingRemarks downConductorTesting : listOfDownConductorTesting) {
-				if (downConductorTesting.getFlag() == null || !downConductorTesting.getFlag().equalsIgnoreCase("R")) {
-					if (downConductorTesting.getFlag() == null) {
-						downConductorTesting.setFlag("N");
+			if (listOfDownConductorTesting!=null) {
+				for (DownConductorTestingRemarks downConductorTesting : listOfDownConductorTesting) {
+					if (downConductorTesting.getFlag() == null || !downConductorTesting.getFlag().equalsIgnoreCase("R")) {
+						if (downConductorTesting.getFlag() == null) {
+							downConductorTesting.setFlag("N");
+						}
+						unRemovedDownConductorTesting.add(downConductorTesting);
 					}
-					unRemovedDownConductorTesting.add(downConductorTesting);
 				}
+			}
+			
+			if (unRemovedDownConductorTesting.size() ==0 ) {
+				unRemovedDownConductorTesting.add(new DownConductorTestingRemarks());
+				return unRemovedDownConductorTesting;
 			}
 			return unRemovedDownConductorTesting;
 		}
@@ -332,20 +468,46 @@ public class FindNonRemovedRemarksObjects {
 		public List<EarthingLpsDescriptionRemarks> findNonRemovedEarthingLpsBuildings(EarthingReportRemarks earthingReport) {
 
 			ArrayList<EarthingLpsDescriptionRemarks> earthingLpsDescription = new ArrayList<EarthingLpsDescriptionRemarks>();
-			List<EarthingLpsDescriptionRemarks> findNonRemoveBuildings = earthingReport.getEarthingLpsDescription();
-			for (EarthingLpsDescriptionRemarks  earthingLpsDescriptionItr: findNonRemoveBuildings) {
-				if (earthingLpsDescriptionItr.getFlag()==null || !earthingLpsDescriptionItr.getFlag().equalsIgnoreCase("R")) {
-					if(earthingLpsDescriptionItr.getFlag()==null) {
-						earthingLpsDescriptionItr.setFlag("N");
-					}
-					earthingLpsDescriptionItr.setEarthingDescription(findNonRemovedEarthingDescription(earthingLpsDescriptionItr.getEarthingDescription()));
-					earthingLpsDescriptionItr.setEarthingClamps(findNonRemovedEarthingClamps(earthingLpsDescriptionItr.getEarthingClamps()));
-					earthingLpsDescriptionItr.setEarthingElectrodeChamber(findNonRemovedEarthElectrodeChamber(earthingLpsDescriptionItr.getEarthingElectrodeChamber()));
-					earthingLpsDescriptionItr.setEarthingSystem(findNonRemovedEarthingSystem(earthingLpsDescriptionItr.getEarthingSystem()));
-					earthingLpsDescriptionItr.setEarthElectrodeTesting(findNonRemovedEarthElectrodeTesting(earthingLpsDescriptionItr.getEarthElectrodeTesting()));
-					earthingLpsDescription.add(earthingLpsDescriptionItr);			 
-				}
+			
+			//if object is empty
+			if (earthingReport == null) {
+				EarthingLpsDescriptionRemarks earthingLpsDescriptionRemarks = new EarthingLpsDescriptionRemarks();
+				
+				List<EarthingDescriptionRemarks> findNonRemovedEarthingDescription = findNonRemovedEarthingDescription(null);
+				earthingLpsDescriptionRemarks.setEarthingDescription(findNonRemovedEarthingDescription);
+				
+				List<EarthingClampsRemarks> findNonRemovedEarthingClamps = findNonRemovedEarthingClamps(earthingLpsDescriptionRemarks.getEarthingClamps());
+				earthingLpsDescriptionRemarks.setEarthingClamps(findNonRemovedEarthingClamps);
+				
+				List<EarthElectrodeChamberRemarks> findNonRemovedEarthElectrodeChamber = findNonRemovedEarthElectrodeChamber(null);
+				earthingLpsDescriptionRemarks.setEarthingElectrodeChamber(findNonRemovedEarthElectrodeChamber);
+				
+				List<EarthingSystemRemarks> findNonRemovedEarthingSystem = findNonRemovedEarthingSystem(null);
+				earthingLpsDescriptionRemarks.setEarthingSystem(findNonRemovedEarthingSystem);
+				
+				List<EarthElectrodeTestingRemarks> findNonRemovedEarthElectrodeTesting = findNonRemovedEarthElectrodeTesting(null);
+				earthingLpsDescriptionRemarks.setEarthElectrodeTesting(findNonRemovedEarthElectrodeTesting);
+				earthingLpsDescription.add(earthingLpsDescriptionRemarks);	
+				
+				return earthingLpsDescription;
 			}
+			
+			List<EarthingLpsDescriptionRemarks> findNonRemoveBuildings = earthingReport.getEarthingLpsDescription();
+				for (EarthingLpsDescriptionRemarks  earthingLpsDescriptionItr: findNonRemoveBuildings) {
+					if (earthingLpsDescriptionItr.getFlag()==null || !earthingLpsDescriptionItr.getFlag().equalsIgnoreCase("R")) {
+						if(earthingLpsDescriptionItr.getFlag()==null) {
+							earthingLpsDescriptionItr.setFlag("N");
+						}
+						earthingLpsDescriptionItr.setEarthingDescription(findNonRemovedEarthingDescription(earthingLpsDescriptionItr.getEarthingDescription()));
+						earthingLpsDescriptionItr.setEarthingClamps(findNonRemovedEarthingClamps(earthingLpsDescriptionItr.getEarthingClamps()));
+						earthingLpsDescriptionItr.setEarthingElectrodeChamber(findNonRemovedEarthElectrodeChamber(earthingLpsDescriptionItr.getEarthingElectrodeChamber()));
+						earthingLpsDescriptionItr.setEarthingSystem(findNonRemovedEarthingSystem(earthingLpsDescriptionItr.getEarthingSystem()));
+						earthingLpsDescriptionItr.setEarthElectrodeTesting(findNonRemovedEarthElectrodeTesting(earthingLpsDescriptionItr.getEarthElectrodeTesting()));
+						earthingLpsDescription.add(earthingLpsDescriptionItr);			 
+					}
+				}
+			
+			 
 			return earthingLpsDescription;
 		}
 			
@@ -353,14 +515,24 @@ public class FindNonRemovedRemarksObjects {
 			public List<EarthingDescriptionRemarks> findNonRemovedEarthingDescription(List<EarthingDescriptionRemarks> earthingDescriptionList) {
 
 				ArrayList<EarthingDescriptionRemarks> unRemovedEarthingDescription = new ArrayList<EarthingDescriptionRemarks>();
-				for (EarthingDescriptionRemarks earthingDescription : earthingDescriptionList) {
-					if (earthingDescription.getFlag() == null || !earthingDescription.getFlag().equalsIgnoreCase("R")) {
-						if (earthingDescription.getFlag() == null) {
-							earthingDescription.setFlag("N");
+				if (earthingDescriptionList !=null) {
+					for (EarthingDescriptionRemarks earthingDescription : earthingDescriptionList) {
+						if (earthingDescription.getFlag() == null || !earthingDescription.getFlag().equalsIgnoreCase("R")) {
+							if (earthingDescription.getFlag() == null) {
+								earthingDescription.setFlag("N");
+							}
+							earthingDescription.setEarthingDescriptionList(findNonRemovedEarthingDescriptionList(earthingDescription.getEarthingDescriptionList()));
+							unRemovedEarthingDescription.add(earthingDescription);
 						}
-						earthingDescription.setEarthingDescriptionList(findNonRemovedEarthingDescriptionList(earthingDescription.getEarthingDescriptionList()));
-						unRemovedEarthingDescription.add(earthingDescription);
 					}
+				}
+				
+				if (unRemovedEarthingDescription.size() == 0) {
+					EarthingDescriptionRemarks descriptionRemarks = new EarthingDescriptionRemarks();
+ 					List<EarthingDescriptionListRemarks> descriptionList = new ArrayList<EarthingDescriptionListRemarks>();
+					descriptionRemarks.setEarthingDescriptionList(descriptionList);
+					unRemovedEarthingDescription.add(descriptionRemarks);
+					return unRemovedEarthingDescription;
 				}
 				return unRemovedEarthingDescription;
 			}
@@ -368,13 +540,20 @@ public class FindNonRemovedRemarksObjects {
 			public List<EarthingDescriptionListRemarks> findNonRemovedEarthingDescriptionList(List<EarthingDescriptionListRemarks> earthingDescriptionList) {
 
 				ArrayList<EarthingDescriptionListRemarks> unRemovedEarthingDescriptionList = new ArrayList<EarthingDescriptionListRemarks>();
-				for (EarthingDescriptionListRemarks earthingDescriptionListItr : earthingDescriptionList) {
-					if (earthingDescriptionListItr.getFlag() == null || !earthingDescriptionListItr.getFlag().equalsIgnoreCase("R")) {
-						if (earthingDescriptionListItr.getFlag() == null) {
-							earthingDescriptionListItr.setFlag("N");
+				if (earthingDescriptionList !=null) {
+					for (EarthingDescriptionListRemarks earthingDescriptionListItr : earthingDescriptionList) {
+						if (earthingDescriptionListItr.getFlag() == null || !earthingDescriptionListItr.getFlag().equalsIgnoreCase("R")) {
+							if (earthingDescriptionListItr.getFlag() == null) {
+								earthingDescriptionListItr.setFlag("N");
+							}
+							unRemovedEarthingDescriptionList.add(earthingDescriptionListItr);
 						}
-						unRemovedEarthingDescriptionList.add(earthingDescriptionListItr);
 					}
+				}
+				
+				if (unRemovedEarthingDescriptionList.size()==0) {
+					unRemovedEarthingDescriptionList.add(new EarthingDescriptionListRemarks());
+					return unRemovedEarthingDescriptionList;
 				}
 				return unRemovedEarthingDescriptionList;
 			}
@@ -382,13 +561,20 @@ public class FindNonRemovedRemarksObjects {
 			public List<EarthingClampsRemarks> findNonRemovedEarthingClamps(List<EarthingClampsRemarks> listOfEarthingClamps) {
 
 				ArrayList<EarthingClampsRemarks> unRemovedEarthingClamps = new ArrayList<EarthingClampsRemarks>();
-				for (EarthingClampsRemarks earthingClamps : listOfEarthingClamps) {
-					if (earthingClamps.getFlag() == null || !earthingClamps.getFlag().equalsIgnoreCase("R")) {
-						if (earthingClamps.getFlag() == null) {
-							earthingClamps.setFlag("N");
+				if (listOfEarthingClamps !=null) {
+					for (EarthingClampsRemarks earthingClamps : listOfEarthingClamps) {
+						if (earthingClamps.getFlag() == null || !earthingClamps.getFlag().equalsIgnoreCase("R")) {
+							if (earthingClamps.getFlag() == null) {
+								earthingClamps.setFlag("N");
+							}
+							unRemovedEarthingClamps.add(earthingClamps);
 						}
-						unRemovedEarthingClamps.add(earthingClamps);
 					}
+				}
+				
+				if (unRemovedEarthingClamps.size()==0) {
+					unRemovedEarthingClamps.add(new EarthingClampsRemarks());
+					return unRemovedEarthingClamps;
 				}
 				return unRemovedEarthingClamps;
 			}
@@ -396,27 +582,44 @@ public class FindNonRemovedRemarksObjects {
 			public List<EarthElectrodeChamberRemarks> findNonRemovedEarthElectrodeChamber(List<EarthElectrodeChamberRemarks> listOfEarthElectrodeChamber) {
 
 				ArrayList<EarthElectrodeChamberRemarks> unRemovedEarthElectrodeChamber = new ArrayList<EarthElectrodeChamberRemarks>();
-				for (EarthElectrodeChamberRemarks earthElectrodeChamber : listOfEarthElectrodeChamber) {
-					if (earthElectrodeChamber.getFlag() == null || !earthElectrodeChamber.getFlag().equalsIgnoreCase("R")) {
-						if (earthElectrodeChamber.getFlag() == null) {
-							earthElectrodeChamber.setFlag("N");
+				
+				if (listOfEarthElectrodeChamber !=null) {
+					for (EarthElectrodeChamberRemarks earthElectrodeChamber : listOfEarthElectrodeChamber) {
+						if (earthElectrodeChamber.getFlag() == null || !earthElectrodeChamber.getFlag().equalsIgnoreCase("R")) {
+							if (earthElectrodeChamber.getFlag() == null) {
+								earthElectrodeChamber.setFlag("N");
+							}
+							unRemovedEarthElectrodeChamber.add(earthElectrodeChamber);
 						}
-						unRemovedEarthElectrodeChamber.add(earthElectrodeChamber);
-					}
+					}	
 				}
+				
+				
+				if (unRemovedEarthElectrodeChamber.size()==0) {
+					unRemovedEarthElectrodeChamber.add(new EarthElectrodeChamberRemarks());
+					return unRemovedEarthElectrodeChamber;
+				}
+				
 				return unRemovedEarthElectrodeChamber;
 			}
 			
 			public List<EarthingSystemRemarks> findNonRemovedEarthingSystem(List<EarthingSystemRemarks> listOfEarthingSystem) {
 
 				ArrayList<EarthingSystemRemarks> unRemovedEarthingSystem = new ArrayList<EarthingSystemRemarks>();
-				for (EarthingSystemRemarks earthingSystem : listOfEarthingSystem) {
-					if (earthingSystem.getFlag() == null || !earthingSystem.getFlag().equalsIgnoreCase("R")) {
-						if (earthingSystem.getFlag() == null) {
-							earthingSystem.setFlag("N");
+				if (listOfEarthingSystem !=null) {
+					for (EarthingSystemRemarks earthingSystem : listOfEarthingSystem) {
+						if (earthingSystem.getFlag() == null || !earthingSystem.getFlag().equalsIgnoreCase("R")) {
+							if (earthingSystem.getFlag() == null) {
+								earthingSystem.setFlag("N");
+							}
+							unRemovedEarthingSystem.add(earthingSystem);
 						}
-						unRemovedEarthingSystem.add(earthingSystem);
 					}
+				}
+				
+				if (unRemovedEarthingSystem.size() == 0) {
+					unRemovedEarthingSystem.add(new EarthingSystemRemarks());
+					return unRemovedEarthingSystem;
 				}
 				return unRemovedEarthingSystem;
 			}
@@ -424,13 +627,20 @@ public class FindNonRemovedRemarksObjects {
 			public List<EarthElectrodeTestingRemarks> findNonRemovedEarthElectrodeTesting(List<EarthElectrodeTestingRemarks> listOfEarthElectrodeTesting) {
 
 				ArrayList<EarthElectrodeTestingRemarks> unRemovedEarthElectrodeTesting = new ArrayList<EarthElectrodeTestingRemarks>();
-				for (EarthElectrodeTestingRemarks earthElectrodeTesting : listOfEarthElectrodeTesting) {
-					if (earthElectrodeTesting.getFlag() == null || !earthElectrodeTesting.getFlag().equalsIgnoreCase("R")) {
-						if (earthElectrodeTesting.getFlag() == null) {
-							earthElectrodeTesting.setFlag("N");
+				if (listOfEarthElectrodeTesting !=null) {
+					for (EarthElectrodeTestingRemarks earthElectrodeTesting : listOfEarthElectrodeTesting) {
+						if (earthElectrodeTesting.getFlag() == null || !earthElectrodeTesting.getFlag().equalsIgnoreCase("R")) {
+							if (earthElectrodeTesting.getFlag() == null) {
+								earthElectrodeTesting.setFlag("N");
+							}
+							unRemovedEarthElectrodeTesting.add(earthElectrodeTesting);
 						}
-						unRemovedEarthElectrodeTesting.add(earthElectrodeTesting);
 					}
+				}
+				
+				if (unRemovedEarthElectrodeTesting.size()==0) {
+					unRemovedEarthElectrodeTesting.add(new EarthElectrodeTestingRemarks());
+					return unRemovedEarthElectrodeTesting;
 				}
 				return unRemovedEarthElectrodeTesting;
 			}
@@ -439,16 +649,26 @@ public class FindNonRemovedRemarksObjects {
 		public List<SPDRemarks> findNonRemovedSpdBuildings(SPDReportRemarks spdReport) {
 
 			ArrayList<SPDRemarks> spd = new ArrayList<SPDRemarks>();
-			List<SPDRemarks> findNonRemoveBuildings = spdReport.getSpd();
-			for (SPDRemarks spdItr: findNonRemoveBuildings) {
-				if (spdItr.getFlag()==null || !spdItr.getFlag().equalsIgnoreCase("R")) {
-					if(spdItr.getFlag()==null) {
-						spdItr.setFlag("N");
-					}
-					spdItr.setSpdDescription(findNonRemovedSpdDesc(spdItr.getSpdDescription()));
-					spd.add(spdItr);			 
-				}
+			if (spdReport == null) {
+				List<SPDRemarks> spdRemarksList = new ArrayList<SPDRemarks>();
+				SPDRemarks spdRemarks = new SPDRemarks();
+				List<SpdDescriptionRemarks> findNonRemovedSpdDesc = findNonRemovedSpdDesc(null);
+				spdRemarks.setSpdDescription(findNonRemovedSpdDesc);
+				spdRemarksList.add(spdRemarks);
+				return spdRemarksList;
 			}
+			
+			List<SPDRemarks> findNonRemoveBuildings = spdReport.getSpd();
+				for (SPDRemarks spdItr: findNonRemoveBuildings) {
+					if (spdItr.getFlag()==null || !spdItr.getFlag().equalsIgnoreCase("R")) {
+						if(spdItr.getFlag()==null) {
+							spdItr.setFlag("N");
+						}
+						spdItr.setSpdDescription(findNonRemovedSpdDesc(spdItr.getSpdDescription()));
+						spd.add(spdItr);			 
+					}
+			}
+			
 			return spd;
 		}
 		
@@ -456,13 +676,20 @@ public class FindNonRemovedRemarksObjects {
 		public List<SpdDescriptionRemarks> findNonRemovedSpdDesc(List<SpdDescriptionRemarks> spdDescriptionList) {
 
 			ArrayList<SpdDescriptionRemarks> unRemovedSpdDescription = new ArrayList<SpdDescriptionRemarks>();
-			for (SpdDescriptionRemarks spdDescriptionItr : spdDescriptionList) {
-				if (spdDescriptionItr.getFlag() == null || !spdDescriptionItr.getFlag().equalsIgnoreCase("R")) {
-					if (spdDescriptionItr.getFlag() == null) {
-						spdDescriptionItr.setFlag("N");
+			if (spdDescriptionList !=null) {
+				for (SpdDescriptionRemarks spdDescriptionItr : spdDescriptionList) {
+					if (spdDescriptionItr.getFlag() == null || !spdDescriptionItr.getFlag().equalsIgnoreCase("R")) {
+						if (spdDescriptionItr.getFlag() == null) {
+							spdDescriptionItr.setFlag("N");
+						}
+						unRemovedSpdDescription.add(spdDescriptionItr);
 					}
-					unRemovedSpdDescription.add(spdDescriptionItr);
 				}
+			}
+			
+			if (unRemovedSpdDescription.size()==0) {
+				unRemovedSpdDescription.add(new SpdDescriptionRemarks());
+				return unRemovedSpdDescription;
 			}
 			return unRemovedSpdDescription;
 		}
@@ -471,6 +698,19 @@ public class FindNonRemovedRemarksObjects {
 		public List<SeperationDistanceDescriptionRemarks> findNonRemovedSeperationDistanceBuildings(SeperationDistanceReportRemarks seperationDistanceReport) {
 
 			ArrayList<SeperationDistanceDescriptionRemarks> seperationDistanceDescription = new ArrayList<SeperationDistanceDescriptionRemarks>();
+			
+			if (seperationDistanceReport == null) {
+				SeperationDistanceDescriptionRemarks seperationDistanceDescriptionRemarks = new SeperationDistanceDescriptionRemarks();
+				
+				List<SeparateDistanceRemarks> findNonRemovedSeperateDistance = findNonRemovedSeperateDistance(null);
+				seperationDistanceDescriptionRemarks.setSeparateDistance(findNonRemovedSeperateDistance);
+				
+				List<SeparateDistanceDownConductRemarks> findNonRemovedSeperateDistanceDownConduct = findNonRemovedSeperateDistanceDownConduct(null);
+				seperationDistanceDescriptionRemarks.setSeparateDistanceDownConductors(findNonRemovedSeperateDistanceDownConduct);
+				
+				seperationDistanceDescription.add(seperationDistanceDescriptionRemarks);
+				return seperationDistanceDescription;
+			}
 			List<SeperationDistanceDescriptionRemarks> findNonRemoveBuildings = seperationDistanceReport.getSeperationDistanceDescription();
 			for (SeperationDistanceDescriptionRemarks  seperationDistanceDescriptionItr: findNonRemoveBuildings) {
 				if (seperationDistanceDescriptionItr.getFlag()==null || !seperationDistanceDescriptionItr.getFlag().equalsIgnoreCase("R")) {
@@ -485,31 +725,46 @@ public class FindNonRemovedRemarksObjects {
 			return seperationDistanceDescription;
 		}
 		
-		//find non removed values for SEPERATION DISTANCE childs	
+		//find non removed values for SEPERATION DISTANCE 	
 			public List<SeparateDistanceRemarks> findNonRemovedSeperateDistance(List<SeparateDistanceRemarks> separateDistanceList) {
 
 				ArrayList<SeparateDistanceRemarks> unRemovedSeparateDistance = new ArrayList<SeparateDistanceRemarks>();
-				for (SeparateDistanceRemarks separateDistance : separateDistanceList) {
-					if (separateDistance.getFlag() == null || !separateDistance.getFlag().equalsIgnoreCase("R")) {
-						if (separateDistance.getFlag() == null) {
-							separateDistance.setFlag("N");
+				if (separateDistanceList !=null) {
+					for (SeparateDistanceRemarks separateDistance : separateDistanceList) {
+						if (separateDistance.getFlag() == null || !separateDistance.getFlag().equalsIgnoreCase("R")) {
+							if (separateDistance.getFlag() == null) {
+								separateDistance.setFlag("N");
+							}
+							unRemovedSeparateDistance.add(separateDistance);
 						}
-						unRemovedSeparateDistance.add(separateDistance);
-					}
+					}	
 				}
+				if (unRemovedSeparateDistance.size() == 0) {
+					unRemovedSeparateDistance.add(new SeparateDistanceRemarks());
+					return unRemovedSeparateDistance;
+				}
+				
 				return unRemovedSeparateDistance;
 			}
 			
 			public List<SeparateDistanceDownConductRemarks> findNonRemovedSeperateDistanceDownConduct(List<SeparateDistanceDownConductRemarks> separateDistanceDownList) {
 
 				ArrayList<SeparateDistanceDownConductRemarks> unRemovedSeparateDistanceDown = new ArrayList<SeparateDistanceDownConductRemarks>();
-				for (SeparateDistanceDownConductRemarks separateDistanceDownConductors : separateDistanceDownList) {
-					if (separateDistanceDownConductors.getFlag() == null || !separateDistanceDownConductors.getFlag().equalsIgnoreCase("R")) {
-						if (separateDistanceDownConductors.getFlag() == null) {
-							separateDistanceDownConductors.setFlag("N");
+				
+				if (separateDistanceDownList != null) {
+					for (SeparateDistanceDownConductRemarks separateDistanceDownConductors : separateDistanceDownList) {
+						if (separateDistanceDownConductors.getFlag() == null || !separateDistanceDownConductors.getFlag().equalsIgnoreCase("R")) {
+							if (separateDistanceDownConductors.getFlag() == null) {
+								separateDistanceDownConductors.setFlag("N");
+							}
+							unRemovedSeparateDistanceDown.add(separateDistanceDownConductors);
 						}
-						unRemovedSeparateDistanceDown.add(separateDistanceDownConductors);
 					}
+				}
+				
+				if (unRemovedSeparateDistanceDown.size() == 0 ) {
+					unRemovedSeparateDistanceDown.add(new SeparateDistanceDownConductRemarks());
+					return unRemovedSeparateDistanceDown; 
 				}
 				return unRemovedSeparateDistanceDown;
 			}
@@ -518,7 +773,12 @@ public class FindNonRemovedRemarksObjects {
 		public List<EarthStudDescriptionRemarks> findNonRemovedEarthStudRemarksBuildings(EarthStudRemarksReport earthStudReport) {
 
 			ArrayList<EarthStudDescriptionRemarks> earthStudDescription = new ArrayList<EarthStudDescriptionRemarks>();
+			if (earthStudReport == null) {
+				earthStudDescription.add(new EarthStudDescriptionRemarks());
+			}
+			
 			List<EarthStudDescriptionRemarks> findNonRemoveBuildings = earthStudReport.getEarthStudDescription();
+			
 			for (EarthStudDescriptionRemarks  earthStudDescriptionItr: findNonRemoveBuildings) {
 				if (earthStudDescriptionItr.getFlag()==null || !earthStudDescriptionItr.getFlag().equalsIgnoreCase("R")) {
 					if(earthStudDescriptionItr.getFlag()==null) {

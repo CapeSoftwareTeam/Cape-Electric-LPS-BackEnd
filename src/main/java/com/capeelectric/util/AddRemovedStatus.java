@@ -15,12 +15,20 @@ import com.capeelectric.exception.AirTerminationException;
 import com.capeelectric.model.DownConductor;
 import com.capeelectric.model.DownConductorDescription;
 import com.capeelectric.model.DownConductorReport;
+import com.capeelectric.model.EarthElectrodeTesting;
 import com.capeelectric.model.EarthStudDescription;
+import com.capeelectric.model.EarthingDescription;
 import com.capeelectric.model.EarthingLpsDescription;
+import com.capeelectric.model.EarthingReport;
 import com.capeelectric.model.LpsAirDiscription;
 import com.capeelectric.model.ResponseFile;
 import com.capeelectric.model.SPD;
+import com.capeelectric.model.SeparateDistance;
+import com.capeelectric.model.SeparateDistanceDownConductors;
 import com.capeelectric.model.SeperationDistanceDescription;
+import com.capeelectric.model.SeperationDistanceReport;
+import com.capeelectric.model.SpdDescription;
+import com.capeelectric.model.SpdReport;
 import com.capeelectric.model.SummaryLps;
 import com.capeelectric.model.SummaryLpsBuildings;
 import com.capeelectric.repository.DownConductorListRepository;
@@ -69,6 +77,9 @@ public class AddRemovedStatus {
 	
 	@Autowired
 	private SummaryLpsRepository summaryLpsRepository;
+	
+	@Autowired
+	private UpdateBuildingCountToFile updateFile;
 
 	// Method for adding R status in Down Conductors
 	public void addRemoveStatusInDownConductors(List<LpsAirDiscription> lpsAirDiscription, Integer basicLpsId)
@@ -311,19 +322,19 @@ public class AddRemovedStatus {
 	public void removeSummaryLps(String userName, Integer basiclpsId) throws AirTerminationException {
 		logger.info("Called removeSummaryLps function");
 
-		List<SummaryLps> summaryLps = summaryLpsRepository.findByUserNameAndBasicLpsId(userName, basiclpsId);
-		for (SummaryLps summaryLpsData : summaryLps) {
-
-			if (!summaryLpsData.getFlag().equalsIgnoreCase("R")) {
-				for (SummaryLpsBuildings summaryLpsBuildings : summaryLpsData.getSummaryLpsBuildings()) {
-					summaryLpsBuildings.setFlag("R");
-				}
-				summaryLpsData.setFlag("R");
-				summaryLpsRepository.save(summaryLpsData);
-				logger.debug("Summary Lps successfully updated in DB");
-			}
-		}
-		logger.info("Ended removeSummaryLps function");
+//		List<SummaryLps> summaryLps = summaryLpsRepository.findByUserNameAndBasicLpsId(userName, basiclpsId);
+//		for (SummaryLps summaryLpsData : summaryLps) {
+//
+//			if (!summaryLpsData.getFlag().equalsIgnoreCase("R")) {
+//				for (SummaryLpsBuildings summaryLpsBuildings : summaryLpsData.getSummaryLpsBuildings()) {
+//					summaryLpsBuildings.setFlag("R");
+//				}
+//				//summaryLpsData.setFlag("R");
+//				//summaryLpsRepository.save(summaryLpsData);
+//				logger.debug("Summary Lps successfully updated in DB");
+//			}
+//		}
+//		logger.info("Ended removeSummaryLps function");
 
 	}
 	
@@ -331,6 +342,70 @@ public class AddRemovedStatus {
 		List<ResponseFile> removeAllBuildings = fileDBRepository.findByBuildingCount(buildingCount);
 		if (!removeAllBuildings.isEmpty() && removeAllBuildings.size() > 0) {
 			fileDBRepository.deleteAll(removeAllBuildings);
+		}
+	}
+
+	// Remove earthing api related remarks in summaryLPS
+	public void removeEarthingSummaryLpsObservations(EarthingReport earthingReportRepo) {
+		for (EarthingLpsDescription earthingLpsDescription : earthingReportRepo.getEarthingLpsDescription()) {
+			List<EarthingDescription> earthingDescriptionRepo = earthingLpsDescription.getEarthingDescription();
+			for (EarthingDescription earthingDescription : earthingDescriptionRepo) {
+				if (earthingDescription.getFlag().equalsIgnoreCase("R")) {
+					updateFile.remoeSummaryObservationsData(earthingDescription.getEarthDescriptionId());
+				}
+			}
+			List<EarthElectrodeTesting> earthElectrodeTesting = earthingLpsDescription.getEarthElectrodeTesting();
+			for (EarthElectrodeTesting earthElectrodeTestingItr : earthElectrodeTesting) {
+				if (earthElectrodeTestingItr.getFlag().equalsIgnoreCase("R")) {
+					updateFile.remoeSummaryObservationsData(earthElectrodeTestingItr.getEarthingElectrodeTestingId());
+				}
+			}
+		}
+	}
+	
+	// remove spd api remarks in summaryObservation
+	public void removeSpdSummaryLpsObservation(SpdReport spdReport) {
+		List<SPD> spdList = spdReport.getSpd();
+		for(SPD spd:spdList) {
+			if(spd !=null && spd.getSpdDescription().size() !=0) {
+				List<SpdDescription> spdDescription = spd.getSpdDescription();
+				for (SpdDescription spdDescriptionItr : spdDescription) {
+					if (spdDescriptionItr.getFlag().equalsIgnoreCase("R")) {
+						updateFile.remoeSummaryObservationsData(spdDescriptionItr.getSpdDescriptionId());
+					}
+				}
+			}
+			
+		}
+	}
+	
+	//remove seperation API remarks in summaryObservation
+	public void removeSeperationSummaryObservation(SeperationDistanceReport seperationDistanceReport) {
+
+		List<SeperationDistanceDescription> seperationDistanceDescription = seperationDistanceReport
+				.getSeperationDistanceDescription();
+		for (SeperationDistanceDescription seperationDistanceDescriptionItr : seperationDistanceDescription) {
+
+			if (seperationDistanceDescriptionItr.getFlag().equalsIgnoreCase("R")) {
+				List<SeparateDistance> separateDistance = seperationDistanceDescriptionItr.getSeparateDistance();
+				List<SeparateDistanceDownConductors> separateDistanceDownConductors = seperationDistanceDescriptionItr
+						.getSeparateDistanceDownConductors();
+
+				for (SeparateDistance separateDistanceItr : separateDistance) {
+					if (separateDistanceItr.getFlag().equalsIgnoreCase("R")) {
+						updateFile.remoeSummaryObservationsData(separateDistanceItr.getSeperationDistanceDescId());
+
+					}
+				}
+
+				for (SeparateDistanceDownConductors separateDistanceDownConductorItr : separateDistanceDownConductors) {
+					if (separateDistanceDownConductorItr.getFlag().equalsIgnoreCase("R")) {
+						updateFile.remoeSummaryObservationsData(separateDistanceDownConductorItr.getSeperationDistanceDownConductorId());
+
+					}
+				}
+			}
+
 		}
 	}
 }
