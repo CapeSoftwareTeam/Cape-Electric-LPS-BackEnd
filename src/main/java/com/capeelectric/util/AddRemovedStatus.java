@@ -4,7 +4,6 @@
 package com.capeelectric.util;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,22 +11,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 
 import com.capeelectric.exception.AirTerminationException;
-import com.capeelectric.model.DownConductor;
 import com.capeelectric.model.DownConductorDescription;
-import com.capeelectric.model.DownConductorReport;
 import com.capeelectric.model.EarthStudDescription;
 import com.capeelectric.model.EarthingLpsDescription;
 import com.capeelectric.model.LpsAirDiscription;
-import com.capeelectric.model.ResponseFile;
 import com.capeelectric.model.SPD;
 import com.capeelectric.model.SeperationDistanceDescription;
 import com.capeelectric.model.SummaryLps;
 import com.capeelectric.model.SummaryLpsBuildings;
 import com.capeelectric.repository.DownConductorListRepository;
-import com.capeelectric.repository.DownConductorRepository;
 import com.capeelectric.repository.EarthStudListRepository;
 import com.capeelectric.repository.EarthingLpsListRepository;
-import com.capeelectric.repository.FileDBRepository;
 import com.capeelectric.repository.SPDListRepository;
 import com.capeelectric.repository.SeperationDistanceListRepository;
 import com.capeelectric.repository.SummaryLpsListRepository;
@@ -61,48 +55,52 @@ public class AddRemovedStatus {
 	private SummaryLpsListRepository summaryLpsListRepository;
 
 	@Autowired
-
-	private FileDBRepository fileDBRepository;
-
-	@Autowired
-	private DownConductorRepository downConductorRepository;
-	
-	@Autowired
 	private SummaryLpsRepository summaryLpsRepository;
 
 	// Method for adding R status in Down Conductors
-	public void addRemoveStatusInDownConductors(List<LpsAirDiscription> lpsAirDiscription, Integer basicLpsId)
+	public void addRemoveStatusInDownConductors(List<LpsAirDiscription> lpsAirDiscription)
 			throws AirTerminationException {
 		logger.info("Called addRemoveStatusInDownConductors function");
 
 		for (LpsAirDiscription lpsAirDiscriptionItr : lpsAirDiscription) {
-			if (lpsAirDiscriptionItr != null && lpsAirDiscriptionItr.getBuildingCount() != null
-					&& lpsAirDiscriptionItr.getFlag().equalsIgnoreCase("R")) {
-                removedFileBaseOnBuildingCount(lpsAirDiscriptionItr.getBuildingCount());
-				DownConductorDescription downConductorDescriptionRepo = downConductorListRepository
-						.findByBuildingCount(lpsAirDiscriptionItr.getBuildingCount());
-				if (downConductorDescriptionRepo != null && downConductorDescriptionRepo.getBuildingCount()
-						.equals(lpsAirDiscriptionItr.getBuildingCount())) {
-					try {
+			if (lpsAirDiscriptionItr != null && lpsAirDiscriptionItr.getBuildingCount() != null) {
+				try {
+					DownConductorDescription downConductorDescriptionRepo = downConductorListRepository
+							.findByBuildingCount(lpsAirDiscriptionItr.getBuildingCount());
+					if (downConductorDescriptionRepo != null && downConductorDescriptionRepo.getBuildingCount()
+							.equals(lpsAirDiscriptionItr.getBuildingCount())) {
+
 						logger.debug("downConductorDescriptionRepo available for building count:"
 								+ lpsAirDiscriptionItr.getBuildingCount());
-						downConductorDescriptionRepo.setFlag("R");
-						logger.debug("Building count:" + lpsAirDiscriptionItr.getBuildingCount()
-								+ "for Downconductor updated with status R");
-						downConductorListRepository.save(downConductorDescriptionRepo);
-					} catch (Exception e) {
-						logger.error(
-								"Please check removed Air Termination Building data not available in Down Conductor"
-										+ e.getMessage());
-						throw new AirTerminationException(
-								"Please check removed Air Termination Building data not available in Down Conductor"
-										+ e.getMessage());
+						Boolean flagSave = false;
+						if (lpsAirDiscriptionItr.getFlag().equalsIgnoreCase("R")) {
+							downConductorDescriptionRepo.setFlag("R");
+							flagSave = true;
+						} else if (!downConductorDescriptionRepo.getBuildingName()
+								.equalsIgnoreCase(lpsAirDiscriptionItr.getBuildingName())
+								|| !downConductorDescriptionRepo.getBuildingNumber()
+										.equals(lpsAirDiscriptionItr.getBuildingNumber())) {
+							downConductorDescriptionRepo.setBuildingNumber(lpsAirDiscriptionItr.getBuildingNumber());
+							downConductorDescriptionRepo.setBuildingName(lpsAirDiscriptionItr.getBuildingName());
+							flagSave = true;
+						}
+
+						if (flagSave) {
+							logger.debug("Building count:" + lpsAirDiscriptionItr.getBuildingCount()
+									+ "for Downconductor updated with status R");
+							downConductorListRepository.save(downConductorDescriptionRepo);
+						}
+
 					}
+				} catch (Exception e) {
+					logger.error("Please check removed Air Termination Building data not available in Down Conductor"
+							+ e.getMessage());
+					throw new AirTerminationException(
+							"Please check removed Air Termination Building data not available in Down Conductor"
+									+ e.getMessage());
 				}
 			}
 		}
-
-		//deleteRemovedFileInDownconductorInFileDB(basicLpsId);
 		logger.info("Ended addRemoveStatusInDownConductors function");
 	}
 
@@ -111,27 +109,42 @@ public class AddRemovedStatus {
 		logger.info("Called addRemoveStatusInEarthingLps function");
 
 		for (LpsAirDiscription lpsAirDiscriptionItr : lpsAirDiscription) {
-			if (lpsAirDiscriptionItr != null && lpsAirDiscriptionItr.getBuildingCount() != null
-					&& lpsAirDiscriptionItr.getFlag().equalsIgnoreCase("R")) {
+			if (lpsAirDiscriptionItr != null && lpsAirDiscriptionItr.getBuildingCount() != null) {
+				try {
+					EarthingLpsDescription earthingLpsDescriptionRepo = earthingLpsListRepository
+							.findByBuildingCount(lpsAirDiscriptionItr.getBuildingCount());
+					if (earthingLpsDescriptionRepo != null && earthingLpsDescriptionRepo.getBuildingCount()
+							.equals(lpsAirDiscriptionItr.getBuildingCount())) {
 
-				EarthingLpsDescription earthingLpsDescriptionRepo = earthingLpsListRepository
-						.findByBuildingCount(lpsAirDiscriptionItr.getBuildingCount());
-				if (earthingLpsDescriptionRepo != null && earthingLpsDescriptionRepo.getBuildingCount()
-						.equals(lpsAirDiscriptionItr.getBuildingCount())) {
-					try {
-						logger.debug("earthingLpsDescriptionRepo available for building count:"
-								+ lpsAirDiscriptionItr.getBuildingCount());
-						earthingLpsDescriptionRepo.setFlag("R");
-						logger.debug("Building count:" + lpsAirDiscriptionItr.getBuildingCount()
-								+ "for Earthing Lps updated with status R");
-						earthingLpsListRepository.save(earthingLpsDescriptionRepo);
-					} catch (Exception e) {
-						logger.debug("Please check removed Air Termination Building data not available in Earthing Lps"
-								+ e.getMessage());
-						throw new AirTerminationException(
-								"Please check removed Air Termination Building data not available in Earthing Lps"
-										+ e.getMessage());
+						Boolean flagSave = false;
+
+						if (lpsAirDiscriptionItr.getFlag().equalsIgnoreCase("R")) {
+							earthingLpsDescriptionRepo.setFlag("R");
+							flagSave = true;
+						}
+
+						else if (!earthingLpsDescriptionRepo.getBuildingName()
+								.equalsIgnoreCase(lpsAirDiscriptionItr.getBuildingName())
+								|| !earthingLpsDescriptionRepo.getBuildingNumber()
+										.equals(lpsAirDiscriptionItr.getBuildingNumber())) {
+							earthingLpsDescriptionRepo.setBuildingNumber(lpsAirDiscriptionItr.getBuildingNumber());
+							earthingLpsDescriptionRepo.setBuildingName(lpsAirDiscriptionItr.getBuildingName());
+							flagSave = true;
+						}
+
+						if (flagSave) {
+							logger.debug("Building count:" + lpsAirDiscriptionItr.getBuildingCount()
+									+ "for Earthing Lps updated with status R");
+							earthingLpsListRepository.save(earthingLpsDescriptionRepo);
+						}
+
 					}
+				} catch (Exception e) {
+					logger.debug("Please check removed Air Termination Building data not available in Earthing Lps"
+							+ e.getMessage());
+					throw new AirTerminationException(
+							"Please check removed Air Termination Building data not available in Earthing Lps"
+									+ e.getMessage());
 				}
 			}
 		}
@@ -143,24 +156,35 @@ public class AddRemovedStatus {
 		logger.info("Called addRemoveStatusInSpd function");
 
 		for (LpsAirDiscription lpsAirDiscriptionItr : lpsAirDiscription) {
-			if (lpsAirDiscriptionItr != null && lpsAirDiscriptionItr.getBuildingCount() != null
-					&& lpsAirDiscriptionItr.getFlag().equalsIgnoreCase("R")) {
+			if (lpsAirDiscriptionItr != null && lpsAirDiscriptionItr.getBuildingCount() != null) {
+				try {
+					SPD spdRepo = spdListRepository.findByBuildingCount(lpsAirDiscriptionItr.getBuildingCount());
+					if (spdRepo != null && spdRepo.getBuildingCount().equals(lpsAirDiscriptionItr.getBuildingCount())) {
+						Boolean flagSave = false;
 
-				SPD spdRepo = spdListRepository.findByBuildingCount(lpsAirDiscriptionItr.getBuildingCount());
-				if (spdRepo != null && spdRepo.getBuildingCount().equals(lpsAirDiscriptionItr.getBuildingCount())) {
-					try {
-						logger.debug("spdRepo available for building count:" + lpsAirDiscriptionItr.getBuildingCount());
-						spdRepo.setFlag("R");
-						logger.debug("Building count:" + lpsAirDiscriptionItr.getBuildingCount()
-								+ "for SPD updated with status R");
-						spdListRepository.save(spdRepo);
-					} catch (Exception e) {
-						logger.debug("Please check removed Air Termination Building data not available in SPD"
-								+ e.getMessage());
-						throw new AirTerminationException(
-								"Please check removed Air Termination Building data not available in SPD"
-										+ e.getMessage());
+						if (lpsAirDiscriptionItr.getFlag().equalsIgnoreCase("R")) {
+							spdRepo.setFlag("R");
+							flagSave = true;
+						}
+
+						else if (!spdRepo.getBuildingName().equalsIgnoreCase(lpsAirDiscriptionItr.getBuildingName())
+								|| !spdRepo.getBuildingNumber().equals(lpsAirDiscriptionItr.getBuildingNumber())) {
+							spdRepo.setBuildingNumber(lpsAirDiscriptionItr.getBuildingNumber());
+							spdRepo.setBuildingName(lpsAirDiscriptionItr.getBuildingName());
+							flagSave = true;
+						}
+
+						if (flagSave) {
+							logger.debug("Building count:" + lpsAirDiscriptionItr.getBuildingCount()
+									+ "for Earthing Lps updated with status R");
+							spdListRepository.save(spdRepo);
+						}
 					}
+				} catch (Exception e) {
+					logger.debug(
+							"Please check removed Air Termination Building data not available in SPD" + e.getMessage());
+					throw new AirTerminationException(
+							"Please check removed Air Termination Building data not available in SPD" + e.getMessage());
 				}
 			}
 		}
@@ -173,28 +197,42 @@ public class AddRemovedStatus {
 		logger.info("Called addRemoveStatusInSeperationDistance function");
 
 		for (LpsAirDiscription lpsAirDiscriptionItr : lpsAirDiscription) {
-			if (lpsAirDiscriptionItr != null && lpsAirDiscriptionItr.getBuildingCount() != null
-					&& lpsAirDiscriptionItr.getFlag().equalsIgnoreCase("R")) {
-
-				SeperationDistanceDescription seperationDistanceDescriptionRepo = seperationDistanceListRepository
-						.findByBuildingCount(lpsAirDiscriptionItr.getBuildingCount());
-				if (seperationDistanceDescriptionRepo != null && seperationDistanceDescriptionRepo.getBuildingCount()
-						.equals(lpsAirDiscriptionItr.getBuildingCount())) {
-					try {
+			if (lpsAirDiscriptionItr != null && lpsAirDiscriptionItr.getBuildingCount() != null) {
+				try {
+					SeperationDistanceDescription seperationDistanceDescriptionRepo = seperationDistanceListRepository
+							.findByBuildingCount(lpsAirDiscriptionItr.getBuildingCount());
+					if (seperationDistanceDescriptionRepo != null && seperationDistanceDescriptionRepo
+							.getBuildingCount().equals(lpsAirDiscriptionItr.getBuildingCount())) {
 						logger.debug("seperationDistanceDescriptionRepo available for building count:"
 								+ lpsAirDiscriptionItr.getBuildingCount());
-						seperationDistanceDescriptionRepo.setFlag("R");
-						logger.debug("Building count:" + lpsAirDiscriptionItr.getBuildingCount()
-								+ "for Seperation Distance updated with status R");
-						seperationDistanceListRepository.save(seperationDistanceDescriptionRepo);
-					} catch (Exception e) {
-						logger.debug(
-								"Please check removed Air Termination Building data not available in Seperation Distance"
-										+ e.getMessage());
-						throw new AirTerminationException(
-								"Please check removed Air Termination Building data not available in Seperation Distance"
-										+ e.getMessage());
+						Boolean flagSave = false;
+
+						if (lpsAirDiscriptionItr.getFlag().equalsIgnoreCase("R")) {
+							seperationDistanceDescriptionRepo.setFlag("R");
+							flagSave = true;
+						} else if (!seperationDistanceDescriptionRepo.getBuildingName()
+								.equalsIgnoreCase(lpsAirDiscriptionItr.getBuildingName())
+								|| !seperationDistanceDescriptionRepo.getBuildingNumber()
+										.equals(lpsAirDiscriptionItr.getBuildingNumber())) {
+							seperationDistanceDescriptionRepo
+									.setBuildingNumber(lpsAirDiscriptionItr.getBuildingNumber());
+							seperationDistanceDescriptionRepo.setBuildingName(lpsAirDiscriptionItr.getBuildingName());
+							flagSave = true;
+						}
+
+						if (flagSave) {
+							logger.debug("Building count:" + lpsAirDiscriptionItr.getBuildingCount()
+									+ "for Earthing Lps updated with status R");
+							seperationDistanceListRepository.save(seperationDistanceDescriptionRepo);
+						}
 					}
+				} catch (Exception e) {
+					logger.debug(
+							"Please check removed Air Termination Building data not available in Seperation Distance"
+									+ e.getMessage());
+					throw new AirTerminationException(
+							"Please check removed Air Termination Building data not available in Seperation Distance"
+									+ e.getMessage());
 				}
 			}
 		}
@@ -207,27 +245,42 @@ public class AddRemovedStatus {
 		logger.info("Called addRemoveStatusInEarthStud function");
 
 		for (LpsAirDiscription lpsAirDiscriptionItr : lpsAirDiscription) {
-			if (lpsAirDiscriptionItr != null && lpsAirDiscriptionItr.getBuildingCount() != null
-					&& lpsAirDiscriptionItr.getFlag().equalsIgnoreCase("R")) {
-
-				EarthStudDescription earthStudDescriptionRepo = earthStudListRepository
-						.findByBuildingCount(lpsAirDiscriptionItr.getBuildingCount());
-				if (earthStudDescriptionRepo != null && earthStudDescriptionRepo.getBuildingCount()
-						.equals(lpsAirDiscriptionItr.getBuildingCount())) {
-					try {
+			if (lpsAirDiscriptionItr != null && lpsAirDiscriptionItr.getBuildingCount() != null) {
+				try {
+					EarthStudDescription earthStudDescriptionRepo = earthStudListRepository
+							.findByBuildingCount(lpsAirDiscriptionItr.getBuildingCount());
+					if (earthStudDescriptionRepo != null && earthStudDescriptionRepo.getBuildingCount()
+							.equals(lpsAirDiscriptionItr.getBuildingCount())) {
 						logger.debug("earthStudDescriptionRepo available for building count:"
 								+ lpsAirDiscriptionItr.getBuildingCount());
-						earthStudDescriptionRepo.setFlag("R");
-						logger.debug("Building count:" + lpsAirDiscriptionItr.getBuildingCount()
-								+ "for Earth Stud updated with status R");
-						earthStudListRepository.save(earthStudDescriptionRepo);
-					} catch (Exception e) {
-						logger.debug("Please check removed Air Termination Building data not available in Earth Stud"
-								+ e.getMessage());
-						throw new AirTerminationException(
-								"Please check removed Air Termination Building data not available in Earth Stud"
-										+ e.getMessage());
+						Boolean flagSave = false;
+
+						if (lpsAirDiscriptionItr.getFlag().equalsIgnoreCase("R")) {
+							earthStudDescriptionRepo.setFlag("R");
+							flagSave = true;
+						}
+
+						else if (!earthStudDescriptionRepo.getBuildingName()
+								.equalsIgnoreCase(lpsAirDiscriptionItr.getBuildingName())
+								|| !earthStudDescriptionRepo.getBuildingNumber()
+										.equals(lpsAirDiscriptionItr.getBuildingNumber())) {
+							earthStudDescriptionRepo.setBuildingNumber(lpsAirDiscriptionItr.getBuildingNumber());
+							earthStudDescriptionRepo.setBuildingName(lpsAirDiscriptionItr.getBuildingName());
+							flagSave = true;
+						}
+
+						if (flagSave) {
+							logger.debug("Building count:" + lpsAirDiscriptionItr.getBuildingCount()
+									+ "for Earthing Lps updated with status R");
+							earthStudListRepository.save(earthStudDescriptionRepo);
+						}
 					}
+				} catch (Exception e) {
+					logger.debug("Please check removed Air Termination Building data not available in Earth Stud"
+							+ e.getMessage());
+					throw new AirTerminationException(
+							"Please check removed Air Termination Building data not available in Earth Stud"
+									+ e.getMessage());
 				}
 			}
 		}
@@ -236,75 +289,61 @@ public class AddRemovedStatus {
 	}
 
 	// Method for adding R status in Earth Stud
-	public void addRemoveStatusInSummaryLps(List<LpsAirDiscription> lpsAirDiscription) throws AirTerminationException {
- 		logger.info("Called addRemoveStatusInSummaryLps function");
+	public void addRemoveStatusInSummaryLps(List<LpsAirDiscription> lpsAirDiscription, String userName,
+			Integer basiclpsId) throws AirTerminationException {
+		logger.info("Called addRemoveStatusInSummaryLps function");
 
- 		for (LpsAirDiscription lpsAirDiscriptionItr : lpsAirDiscription) {
- 			if (lpsAirDiscriptionItr != null && lpsAirDiscriptionItr.getBuildingCount() != null
- 					&& lpsAirDiscriptionItr.getFlag().equalsIgnoreCase("R")) {
+		for (LpsAirDiscription lpsAirDiscriptionItr : lpsAirDiscription) {
+			if (lpsAirDiscriptionItr != null && lpsAirDiscriptionItr.getBuildingCount() != null
+					&& lpsAirDiscriptionItr.getFlag().equalsIgnoreCase("R")) {
+				try {
+					// SummaryLpsBuildings summaryLpsBuildingsRepo = summaryLpsListRepository
+					// .findByBuildingCount(lpsAirDiscriptionItr.getBuildingCount());
+					List<SummaryLps> summaryLpsRepo = summaryLpsRepository.findByUserNameAndBasicLpsId(userName,
+							basiclpsId);
 
- 				SummaryLpsBuildings summaryLpsBuildingsRepo = summaryLpsListRepository
- 						.findByBuildingCount(lpsAirDiscriptionItr.getBuildingCount());
- 				if (summaryLpsBuildingsRepo != null
- 						&& summaryLpsBuildingsRepo.getBuildingCount().equals(lpsAirDiscriptionItr.getBuildingCount())) {
- 					try {
- 						logger.debug("summaryLpsBuildingsRepo available for building count:"
- 								+ lpsAirDiscriptionItr.getBuildingCount());
- 						summaryLpsBuildingsRepo.setFlag("R");
- 						logger.debug("Building count:" + lpsAirDiscriptionItr.getBuildingCount()
- 								+ "for Summary updated with status R");
- 						summaryLpsListRepository.save(summaryLpsBuildingsRepo);
- 					} catch (Exception e) {
- 						logger.debug("Please check removed Air Termination Building data not available in Summary"
- 								+ e.getMessage());
- 						throw new AirTerminationException(
- 								"Please check removed Air Termination Building data not available in Summary"
- 										+ e.getMessage());
- 					}
- 				}  
- 			}
- 		}
- 		logger.info("Ended addRemoveStatusInSummaryLps function");
-	}
+					for (SummaryLps summaryLps : summaryLpsRepo) {
+						for (SummaryLpsBuildings summaryLpsBuilding : summaryLps.getSummaryLpsBuildings()) {
 
-	// Method for deleteRemovedFileInDownconductorInFileDB
-	public void deleteRemovedFileInDownconductorInFileDB(Integer basicLpsId) throws AirTerminationException {
-		logger.info("Called deleteRemovedFileInDownconductorInFileDB function");
-		Optional<DownConductorReport> downConductorDescriptionRepo = downConductorRepository
-				.findByBasicLpsId(basicLpsId);
-		if (downConductorDescriptionRepo.isPresent()) {
-			List<DownConductorDescription> downConductorDescription = downConductorDescriptionRepo.get()
-					.getDownConductorDescription();
-			for (DownConductorDescription downConductorDescriptioniter : downConductorDescription) {
-				for (DownConductor downConductoriter : downConductorDescriptioniter.getDownConductor()) {
-					List<ResponseFile> fileDB2 = fileDBRepository.findByLpsId(basicLpsId);
-					for (ResponseFile responseFile : fileDB2) {
-						if (downConductorDescriptioniter.getFlag().equals("R")
-								&& downConductorDescriptioniter.getFileId1() != null
-								&& downConductorDescriptioniter.getFileId1().equals(responseFile.getFileId())) {
+							if (lpsAirDiscriptionItr.getBuildingCount().equals(summaryLpsBuilding.getBuildingCount())) {
+								logger.debug("summaryLpsBuildingsRepo available for building count:"
+										+ lpsAirDiscriptionItr.getBuildingCount());
+								Boolean flagSave = false;
 
-							if (downConductorDescriptioniter.getFileId1().equals(responseFile.getFileId())
-									&& downConductorDescriptioniter.getFileName1().equals(responseFile.getFileName())) {
-								logger.debug("Called Removed File in FileDB From DownConductorDescription");
-								fileDBRepository.delete(responseFile);
-								logger.debug("Removed File in FileDB FileID" + responseFile.getFileId()
-										+ "from DownConductorDescription");
-							}
-							if (downConductoriter.getFileId() != null && downConductoriter.getFileName() != null) {
-								if (downConductoriter.getFileId().equals(responseFile.getFileId())
-										&& downConductoriter.getFileName().equals(responseFile.getFileName())) {
-									logger.debug("Called Removed File in FileDB from DownConductor");
-									fileDBRepository.delete(responseFile);
-									logger.debug("Removed File in FileDB FileID" + responseFile.getFileId()
-											+ "from DownConductor");
+								if (lpsAirDiscriptionItr.getFlag().equalsIgnoreCase("R")) {
+									summaryLpsBuilding.setFlag("R");
+									flagSave = true;
+								}
 
+								else if (!summaryLpsBuilding.getBuildingName()
+										.equalsIgnoreCase(lpsAirDiscriptionItr.getBuildingName())
+										|| !summaryLpsBuilding.getBuildingNumber()
+												.equals(lpsAirDiscriptionItr.getBuildingNumber())) {
+									summaryLpsBuilding.setBuildingNumber(lpsAirDiscriptionItr.getBuildingNumber());
+									summaryLpsBuilding.setBuildingName(lpsAirDiscriptionItr.getBuildingName());
+									flagSave = true;
+								}
+
+								if (flagSave) {
+									logger.debug("Building count:" + lpsAirDiscriptionItr.getBuildingCount()
+											+ "for Earthing Lps updated with status R");
+									summaryLpsListRepository.save(summaryLpsBuilding);
 								}
 							}
 						}
+
 					}
+				} catch (Exception e) {
+					logger.debug("Please check removed Air Termination Building data not available in Summary"
+							+ e.getMessage());
+					throw new AirTerminationException(
+							"Please check removed Air Termination Building data not available in Summary"
+									+ e.getMessage());
 				}
 			}
 		}
+		logger.info("Ended addRemoveStatusInSummaryLps function");
+
 	}
 
 	// Method for adding R status in summaryLps
@@ -318,19 +357,12 @@ public class AddRemovedStatus {
 				for (SummaryLpsBuildings summaryLpsBuildings : summaryLpsData.getSummaryLpsBuildings()) {
 					summaryLpsBuildings.setFlag("R");
 				}
+
 				summaryLpsData.setFlag("R");
 				summaryLpsRepository.save(summaryLpsData);
-				logger.debug("Summary Lps successfully updated in DB");
 			}
 		}
 		logger.info("Ended removeSummaryLps function");
 
-	}
-	
-	private void removedFileBaseOnBuildingCount(Integer buildingCount) {
-		List<ResponseFile> removeAllBuildings = fileDBRepository.findByBuildingCount(buildingCount);
-		if (!removeAllBuildings.isEmpty() && removeAllBuildings.size() > 0) {
-			fileDBRepository.deleteAll(removeAllBuildings);
-		}
 	}
 }

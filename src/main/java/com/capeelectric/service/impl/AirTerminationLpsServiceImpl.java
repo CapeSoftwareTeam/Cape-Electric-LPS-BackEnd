@@ -145,12 +145,12 @@ public class AirTerminationLpsServiceImpl implements AirTerminationLpsService {
 					.findById(airTermination.getAirTerminationId());
 			if (airTerminationLpsRepo.isPresent()
 					&& airTerminationLpsRepo.get().getBasicLpsId().equals(airTermination.getBasicLpsId())) {
-				addRemovedStatus.addRemoveStatusInDownConductors(airTermination.getLpsAirDescription(),airTermination.getBasicLpsId());
+				addRemovedStatus.addRemoveStatusInDownConductors(airTermination.getLpsAirDescription());
 				addRemovedStatus.addRemoveStatusInEarthingLps(airTermination.getLpsAirDescription());
 				addRemovedStatus.addRemoveStatusInSpd(airTermination.getLpsAirDescription());
 				addRemovedStatus.addRemoveStatusInSeperationDistance(airTermination.getLpsAirDescription());
 				addRemovedStatus.addRemoveStatusInEarthStud(airTermination.getLpsAirDescription());
-				addRemovedStatus.addRemoveStatusInSummaryLps(airTermination.getLpsAirDescription());
+				addRemovedStatus.addRemoveStatusInSummaryLps(airTermination.getLpsAirDescription(),airTermination.getUserName(),airTermination.getBasicLpsId());
 //				addRemovedStatus.deleteRemovedFileInDownconductorInFileDB(airTermination);
 
 				List<LpsAirDiscription> lpsAirDiscription = airTermination.getLpsAirDescription();
