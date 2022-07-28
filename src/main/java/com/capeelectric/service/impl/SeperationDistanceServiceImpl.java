@@ -75,9 +75,11 @@ public class SeperationDistanceServiceImpl implements SeperationDistanceService{
 						seperationDistanceReport.setUpdatedDate(LocalDateTime.now());
 						seperationDistanceReport.setCreatedBy(userFullName.findByUserName(seperationDistanceReport.getUserName()));
 						seperationDistanceReport.setUpdatedBy(userFullName.findByUserName(seperationDistanceReport.getUserName()));
-						addRemovedStatus.removeSummaryLps(seperationDistanceReport.getUserName(),seperationDistanceReport.getBasicLpsId());
+						//addRemovedStatus.removeSummaryLps(seperationDistanceReport.getUserName(),seperationDistanceReport.getBasicLpsId());
 
-						seperationDistanceRepository.save(seperationDistanceReport);
+						SeperationDistanceReport distanceReport = seperationDistanceRepository.save(seperationDistanceReport);
+						addRemovedStatus.removeSeperationSummaryObservation(distanceReport);
+
 						logger.debug("Seperation Distance Report Details Successfully Saved in DB");
 						userFullName.addUpdatedByandDate(seperationDistanceReport.getBasicLpsId(),userFullName.findByUserName(seperationDistanceReport.getUserName()));
 						logger.debug("Basic Lps UpdatedBy and UpdatedDate by SeperationDistance");

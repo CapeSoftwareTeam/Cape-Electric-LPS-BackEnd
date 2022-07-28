@@ -70,15 +70,19 @@ public class FileUploadController {
 	}
 
 	@GetMapping("/retrieveFileName/{lpsId}")
-	public ResponseEntity<List<Map>> retrieveFileNameByLpsId(@PathVariable Integer lpsId)
+	public ResponseEntity<List<Map<String,String>>> retrieveFileNameByLpsId(@PathVariable Integer lpsId)
 			throws IOException, SQLException {
 		logger.debug("Retrieve File Start lpsId : {}", lpsId);
 		List<ResponseFile> fileDB = storageService.retrieveFileNameByLpsId(lpsId);
 
 		if (null != fileDB) {
-			List<Map> list = new ArrayList();
+			List<Map<String,String>> list = new ArrayList<Map<String,String>>();
 			for (ResponseFile responseFile : fileDB) {
 				if (null != responseFile) {
+					String buildingCount = "";
+					if(responseFile.getBuildingCount() != null) {
+						buildingCount = responseFile.getBuildingCount().toString();
+					}
 					HashMap<String, String> hashMap = new HashMap<>();
 					hashMap.put("fileId", responseFile.getFileId().toString());
 					hashMap.put("fileType", responseFile.getFileType());
@@ -86,11 +90,12 @@ public class FileUploadController {
 					hashMap.put("fileName", responseFile.getFileName());
 					hashMap.put("componentName", responseFile.getComponentName());
 					hashMap.put("index", responseFile.getIndex().toString());
+					hashMap.put("buildingCount", buildingCount);
 					list.add(hashMap);
 				}
 
 			}
-			return new ResponseEntity<List<Map>>(list, HttpStatus.OK);
+			return new ResponseEntity<List<Map<String,String>>>(list, HttpStatus.OK);
 		}
 		return null;
 

@@ -12,9 +12,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 
-import com.capeelectric.exception.DownConductorException;
 import com.capeelectric.model.AirBasicDescription;
 import com.capeelectric.model.AirExpansion;
+import com.capeelectric.model.AirHolderDescription;
+import com.capeelectric.model.AirHolderList;
 import com.capeelectric.model.AirTermination;
 import com.capeelectric.model.DownConductor;
 import com.capeelectric.model.DownConductorDescription;
@@ -22,13 +23,14 @@ import com.capeelectric.model.DownConductorReport;
 import com.capeelectric.model.LpsAirDiscription;
 import com.capeelectric.model.LpsVerticalAirTermination;
 import com.capeelectric.model.ResponseFile;
+import com.capeelectric.model.SummaryLpsObservation;
+import com.capeelectric.model.VerticalAirTerminationList;
 import com.capeelectric.repository.DownConductorDescriptionRepository;
-import com.capeelectric.repository.DownDescConductorRepository;
 import com.capeelectric.repository.FileDBRepository;
 import com.capeelectric.repository.LpsAirExpansionAirTerminationRepository;
 import com.capeelectric.repository.LpsBasicAirTerminationRepository;
 import com.capeelectric.repository.LpsVerticalAirTerminationRepository;
-import com.itextpdf.text.pdf.PdfStructTreeController.returnType;
+import com.capeelectric.repository.SummaryLpsObservationRepository;
 
 /**
  * @author CAPE-SOFTWARE
@@ -52,18 +54,18 @@ public class UpdateBuildingCountToFile {
 	private LpsAirExpansionAirTerminationRepository lpsAirExpansionAirTerminationRepository;
 	
 	@Autowired
-	private DownDescConductorRepository downDescConductorRepository;
+	private SummaryLpsObservationRepository summaryLpsObservationRepository;
 	
 	@Autowired
 	private DownConductorDescriptionRepository downConductorDescriptionRepository;
   
 	public void updateAirterminationBuildingCount(AirTermination termination) {
-		 
 		List<ResponseFile> responseFileRepo = fileDBRepository.findByLpsId(termination.getBasicLpsId());
 		List<LpsAirDiscription> lpsAirDescription = termination.getLpsAirDescription();
 		if (responseFileRepo != null && !responseFileRepo.isEmpty() && lpsAirDescription !=null && !lpsAirDescription.isEmpty()) {
 			for (LpsAirDiscription lpsAirDiscription : lpsAirDescription) {
-			 
+			 setRemovedVerticalAirterminationListToSummaryObservation(lpsAirDiscription);
+			 setRemovedHolderListToSummaryObservation(lpsAirDiscription);
 				if (lpsAirDiscription.getAirBasicDescription() !=null && !lpsAirDiscription.getAirBasicDescription().isEmpty()) {
 					for (AirBasicDescription airBasicDescription : lpsAirDiscription.getAirBasicDescription()) {
 						if (airBasicDescription.getFileId() != null
@@ -107,6 +109,8 @@ public class UpdateBuildingCountToFile {
 		removeUnusedFiles(termination.getBasicLpsId());
 	}
 
+
+	
 
 	private boolean updateFile(Integer buildingCount, Integer fileId,Integer index) {
 		if(fileId!=null &&buildingCount!=null) {
@@ -180,4 +184,55 @@ public class UpdateBuildingCountToFile {
 		}
 		
 	}
+	
+	private void setRemovedHolderListToSummaryObservation(LpsAirDiscription lpsAirDiscription) {
+		List<AirHolderDescription> airHolderDescription = lpsAirDiscription.getAirHolderDescription();
+		for (AirHolderDescription airHolderDescriptionItr : airHolderDescription) {
+			List<AirHolderList> airHolderListRepo = airHolderDescriptionItr.getAirHolderList();
+
+			if (airHolderListRepo != null && airHolderListRepo.size() != 0) {
+				for (AirHolderList airHolderListItr : airHolderListRepo) {
+					if (airHolderListItr.getFlag().equalsIgnoreCase("R")) {
+						remoeSummaryObservationsData(airHolderListItr.getHolderListId());
+					}
+					
+				}
+
+			}
+
+		}
+
+	}
+
+	// removing summary observation
+	private void setRemovedVerticalAirterminationListToSummaryObservation(LpsAirDiscription lpsAirDiscription) {
+		if (lpsAirDiscription.getLpsVerticalAirTermination() != null) {
+			List<LpsVerticalAirTermination> lpsVerticalAirTermination = lpsAirDiscription
+					.getLpsVerticalAirTermination();
+			for (LpsVerticalAirTermination verticalAirTermination : lpsVerticalAirTermination) {
+				List<VerticalAirTerminationList> airTerminationList = verticalAirTermination
+						.getVerticalAirTerminationList();
+				for (int i = 0; i < airTerminationList.size(); i++) {
+					if (airTerminationList.get(i).getFlag().equalsIgnoreCase("R")) {
+						remoeSummaryObservationsData(airTerminationList.get(i).getVerticalAirTerminationListId());
+					}
+
+				}
+
+			}
+		}
+	}
+	
+
+	public void remoeSummaryObservationsData(Integer remarksId){
+		List<SummaryLpsObservation> summaryLpsObservationRepo = summaryLpsObservationRepository
+				.findByRemarksId(remarksId);
+
+		if (summaryLpsObservationRepo != null && summaryLpsObservationRepo.size() != 0) {
+			summaryLpsObservationRepository.deleteAll(summaryLpsObservationRepo);
+
+		}
+	}
+
+
 }

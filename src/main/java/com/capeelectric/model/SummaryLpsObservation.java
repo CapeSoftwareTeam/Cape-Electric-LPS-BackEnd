@@ -51,6 +51,12 @@ public class SummaryLpsObservation implements Serializable  {
 	@Column(name = "OBSERVATION_COMPONENT_DETAILS")
 	private String observationComponentDetails;
 	
+	@Column(name = "REMARKS_NAME")
+	private String remarksName;
+	
+	@Column(name = "REMARKS_ID")
+	private Integer remarksId;
+	
 	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "SUMMARY_LPS_BUILDINGS_ID")
@@ -112,9 +118,19 @@ public class SummaryLpsObservation implements Serializable  {
 		this.summaryLpsBuildings = summaryLpsBuildings;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public String getRemarksName() {
+		return remarksName;
 	}
-	
-	
+
+	public void setRemarksName(String remarksName) {
+		this.remarksName = remarksName;
+	}
+
+	public Integer getRemarksId() {
+		return remarksId;
+	}
+
+	public void setRemarksId(Integer remarksId) {
+		this.remarksId = remarksId;
+	}
 }
